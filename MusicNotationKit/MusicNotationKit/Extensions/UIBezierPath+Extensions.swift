@@ -1,0 +1,37 @@
+//
+//  UIBezierPath+Extensions.swift
+//  MusicNotationKit
+//
+//  Created by Steve Barnegren on 15/12/2018.
+//  Copyright © 2018 Steve Barnegren. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+extension UIBezierPath {
+    
+    func move(to point: Point) {
+        self.move(to: CGPoint(point))
+    }
+    
+    func addCurve(to point: Point, controlPoint1: Point, controlPoint2: Point) {
+        self.addCurve(to: CGPoint(point), controlPoint1: CGPoint(controlPoint1), controlPoint2: CGPoint(controlPoint2))
+    }
+
+    func moveTo(_ x: CGFloat, _ y: CGFloat) {
+        self.move(to: CGPoint(x: x, y: y))
+    }
+    
+    func lineTo(_ x: CGFloat, y: CGFloat) {
+        self.addLine(to: CGPoint(x: x, y: y))
+    }
+    
+    func moveTo(_ x: Double, _ y: Double) {
+        self.move(to: CGPoint(x: x, y: y))
+    }
+    
+    func lineTo(_ x: Double, y: Double) {
+        self.addLine(to: CGPoint(x: x, y: y))
+    }
+}
