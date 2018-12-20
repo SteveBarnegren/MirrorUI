@@ -48,7 +48,7 @@ class Path {
         commands.append(.line(point))
     }
     
-    func addCuve(to point: Point, c1: Point, c2: Point) {
+    func addCurve(to point: Point, c1: Point, c2: Point) {
         commands.append(.curve(point, c1: c1, c2: c2))
     }
     
