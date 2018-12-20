@@ -22,14 +22,38 @@ class Path {
     
     enum Command {
         case move(Point)
+        case line(Point)
         case curve(Point, c1: Point, c2: Point)
         case close
     }
     
-    let commands: [Command]
+    enum DrawStyle {
+        case stroke
+        case fill
+    }
     
-    init(commands:[ Command]) {
+    var commands = [Command]()
+    var drawStyle: DrawStyle
+    
+    init(style: DrawStyle = .stroke, commands: [Command] = []) {
         self.commands = commands
+        self.drawStyle = style
+    }
+    
+    func move(to point: Point) {
+        commands.append(.move(point))
+    }
+    
+    func addLine(to point: Point) {
+        commands.append(.line(point))
+    }
+    
+    func addCuve(to point: Point, c1: Point, c2: Point) {
+        commands.append(.curve(point, c1: c1, c2: c2))
+    }
+    
+    func close() {
+        commands.append(.close)
     }
 }
 

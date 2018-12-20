@@ -8,27 +8,25 @@
 
 import Foundation
 
-class Note {
+public class Note {
     
-    enum Value {
+    public enum Value {
         case whole
-        case half
-        case quarter
-        case eighth
-        case sixteenth
-        case thirtysecond
-        case sixthFourth
     }
     
     let value: Value
-    init(value: Value) {
+    public init(value: Value) {
         self.value = value
     }
 }
 
-class Composition {
+public class Composition {
     
     var notes = [Note]()
+    
+    public init(notes: [Note]) {
+        self.notes = notes
+    }
     
     func add(note: Note) {
         notes.append(note)
