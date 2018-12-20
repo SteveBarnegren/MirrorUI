@@ -39,7 +39,8 @@ class MusicRenderer {
         var y = midY - staveHeight/2
         for _ in (0..<numberOfLines) {
             
-            let path = Path(style: .stroke)
+            let path = Path()
+            path.drawStyle = .stroke
             path.move(to: Point(0, y))
             path.addLine(to: Point(displaySize.width, y))
             paths.append(path)
@@ -66,6 +67,7 @@ class MusicRenderer {
         rightPath.addLine(to: Point(displaySize.width, midY + staveHeight/2))
         
         return [leftPath, rightPath]
+        
     }
     
     private func makeCompositionPaths(forDisplaySize displaySize: DisplaySize) -> [Path] {
@@ -77,6 +79,10 @@ class MusicRenderer {
             case .whole:
                 paths.append(
                     makeNotePath(fromSymbolPath: SymbolPaths.semibreve, displaySize: displaySize, staveOffset: 0, xPos: 0)
+                )
+            case .quarter:
+                paths.append(
+                    makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead, displaySize: displaySize, staveOffset: 0, xPos: 0)
                 )
             }
         }
@@ -93,6 +99,13 @@ class MusicRenderer {
             return Point(xPos + (p.x * scale), centerY + (p.y * scale))
         }
         
+        func transformRect(_ r: Rect) -> Rect {
+            return Rect(x: xPos + (r.x * scale),
+                        y: centerY + (r.y * scale),
+                        width: r.width * scale,
+                        height: r.height * scale)
+        }
+        
         var newCommands = [Path.Command]()
         
         for command in symbolPath.commands {
@@ -105,10 +118,14 @@ class MusicRenderer {
                 newCommands.append(.curve(transformPoint(p), c1: transformPoint(c1), c2: transformPoint(c2)))
             case .close:
                 newCommands.append(.close)
+            case .oval(let rect, let rotation):
+                newCommands.append(.oval(transformRect(rect), rotation))
             }
         }
         
-        return Path(style: symbolPath.drawStyle, commands: newCommands)
+        let newPath = Path(commands: newCommands)
+        newPath.drawStyle = symbolPath.drawStyle
+        return newPath
     }
     
 }

@@ -12,6 +12,7 @@ public class Note {
     
     public enum Value {
         case whole
+        case quarter
     }
     
     let value: Value

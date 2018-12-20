@@ -18,6 +18,17 @@ struct Point {
     }
 }
 
+struct Rect {
+    var x: Double
+    var y: Double
+    var width: Double
+    var height: Double
+    
+    var center: Point {
+        return Point(x + width/2, y + height/2)
+    }
+}
+
 class Path {
     
     enum Command {
@@ -25,6 +36,7 @@ class Path {
         case line(Point)
         case curve(Point, c1: Point, c2: Point)
         case close
+        case oval(Rect, Double)
     }
     
     enum DrawStyle {
@@ -33,11 +45,10 @@ class Path {
     }
     
     var commands = [Command]()
-    var drawStyle: DrawStyle
+    var drawStyle = DrawStyle.stroke
     
-    init(style: DrawStyle = .stroke, commands: [Command] = []) {
+    init(commands: [Command] = []) {
         self.commands = commands
-        self.drawStyle = style
     }
     
     func move(to point: Point) {
@@ -50,6 +61,10 @@ class Path {
     
     func addCurve(to point: Point, c1: Point, c2: Point) {
         commands.append(.curve(point, c1: c1, c2: c2))
+    }
+    
+    func addOval(inRect rect: Rect, rotation: Double) {
+        commands.append(.oval(rect, rotation))
     }
     
     func close() {
