@@ -26,7 +26,7 @@ class SymbolPaths {
             .close,
             ]
         
-        let path = Path(commands: commands)
+        var path = Path(commands: commands)
         path.drawStyle = .fill
         return path
     }()
@@ -39,7 +39,7 @@ class SymbolPaths {
         let size = Size(width: 1.5 * scaler, height: 1 * scaler)
         let point = Point(size.width/2, 0.5)
         
-        let path = Path()
+        var path = Path()
         path.addOval(atPoint: point, withSize: size, rotation: -0.3)
         return path
     }()

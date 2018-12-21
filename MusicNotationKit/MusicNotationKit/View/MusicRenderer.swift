@@ -39,7 +39,7 @@ class MusicRenderer {
         var y = midY - staveHeight/2
         for _ in (0..<numberOfLines) {
             
-            let path = Path()
+            var path = Path()
             path.drawStyle = .stroke
             path.move(to: Point(0, y))
             path.addLine(to: Point(displaySize.width, y))
@@ -57,12 +57,12 @@ class MusicRenderer {
         let staveHeight = Double(numberOfLines-1) * staveSpacing
         
         // Draw the left line
-        let leftPath = Path()
+        var leftPath = Path()
         leftPath.move(to: Point(0, midY - staveHeight/2))
         leftPath.addLine(to: Point(0, midY + staveHeight/2))
         
         // Draw the right line
-        let rightPath = Path()
+        var rightPath = Path()
         rightPath.move(to: Point(displaySize.width, midY - staveHeight/2))
         rightPath.addLine(to: Point(displaySize.width, midY + staveHeight/2))
         
@@ -93,43 +93,11 @@ class MusicRenderer {
     func makeNotePath(fromSymbolPath symbolPath: Path, displaySize: DisplaySize, staveOffset: Int, xPos: Double) -> Path {
         
         let centerY = displaySize.height/2 + (Double(staveOffset) * staveSpacing/2)
-        let scale = staveSpacing
         
-        func transformPoint(_ p: Point) -> Point {
-            return Point(xPos + (p.x * scale), centerY + (p.y * scale))
-        }
-        
-        func transformRect(_ r: Rect) -> Rect {
-            return Rect(x: xPos + (r.x * scale),
-                        y: centerY + (r.y * scale),
-                        width: r.width * scale,
-                        height: r.height * scale)
-        }
-        
-        func transformSize(_ s: Size) -> Size {
-            return Size(width: s.width * scale, height: s.height * scale)
-        }
-        
-        var newCommands = [Path.Command]()
-        
-        for command in symbolPath.commands {
-            switch command {
-            case .move(let p):
-                newCommands.append(.move(transformPoint(p)))
-            case .line(let p):
-                newCommands.append(.line(transformPoint(p)))
-            case .curve(let p, let c1, let c2):
-                newCommands.append(.curve(transformPoint(p), c1: transformPoint(c1), c2: transformPoint(c2)))
-            case .close:
-                newCommands.append(.close)
-            case .oval(let point, let size, let rotation):
-                newCommands.append(.oval(transformPoint(point), transformSize(size), rotation))
-            }
-        }
-        
-        let newPath = Path(commands: newCommands)
-        newPath.drawStyle = symbolPath.drawStyle
-        return newPath
+        var notePath = symbolPath
+        notePath.scale(staveSpacing)
+        notePath.translate(x: xPos, y: centerY)
+        return notePath
     }
     
 }
