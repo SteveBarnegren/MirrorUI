@@ -11,6 +11,9 @@
 		67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7D21CC04550078A575 /* MusicRenderer.swift */; };
 		67494C8021CC06740078A575 /* Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7F21CC06740078A575 /* Vector2.swift */; };
 		67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8121CC06940078A575 /* Vector2Tests.swift */; };
+		67494C8421CD62710078A575 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8321CD62710078A575 /* Tokenizer.swift */; };
+		67494C8621CD69FB0078A575 /* LayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8521CD69FB0078A575 /* LayoutSolver.swift */; };
+		67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */; };
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
 		67A15F9321C5129500C3C03F /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A15F8921C5129500C3C03F /* MusicNotationKit.framework */; };
@@ -36,6 +39,9 @@
 		67494C7D21CC04550078A575 /* MusicRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRenderer.swift; sourceTree = "<group>"; };
 		67494C7F21CC06740078A575 /* Vector2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector2.swift; sourceTree = "<group>"; };
 		67494C8121CC06940078A575 /* Vector2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector2Tests.swift; sourceTree = "<group>"; };
+		67494C8321CD62710078A575 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		67494C8521CD69FB0078A575 /* LayoutSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSolver.swift; sourceTree = "<group>"; };
+		67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array_Numeric+Extensions.swift"; sourceTree = "<group>"; };
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		67A15F8921C5129500C3C03F /* MusicNotationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicNotationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +88,8 @@
 			children = (
 				677C9C8021C5172100C7A16E /* MusicView.swift */,
 				67494C7D21CC04550078A575 /* MusicRenderer.swift */,
+				67494C8321CD62710078A575 /* Tokenizer.swift */,
+				67494C8521CD69FB0078A575 /* LayoutSolver.swift */,
 				67C7CC1521C6D1B200A020D0 /* Path.swift */,
 				67494C7B21CC02D40078A575 /* SymbolPaths.swift */,
 			);
@@ -93,6 +101,7 @@
 			children = (
 				677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */,
 				67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */,
+				67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -248,11 +257,14 @@
 			files = (
 				677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */,
 				67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */,
+				67494C8621CD69FB0078A575 /* LayoutSolver.swift in Sources */,
 				677C9C8121C5172100C7A16E /* MusicView.swift in Sources */,
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
 				67494C8021CC06740078A575 /* Vector2.swift in Sources */,
+				67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */,
 				67A15FA421C512E800C3C03F /* Note.swift in Sources */,
+				67494C8421CD62710078A575 /* Tokenizer.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

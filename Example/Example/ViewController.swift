@@ -21,13 +21,11 @@ class ViewController: UIViewController {
     
     func makeComposition() -> Composition {
         
-        var notes = [Note]()
+        let values: [Note.Value] = [
+            .quarter, .quarter, .half, .quarter,
+        ]
         
-        notes.append(
-            Note(value: .half)
-        )
-        
-        return Composition(notes: notes)
+        return Composition(notes: values.map(Note.init))
     }
     
     override func viewDidLayoutSubviews() {

@@ -21,10 +21,16 @@ class MusicRenderer {
     
     func paths(forDisplaySize displaySize: DisplaySize) -> [Path] {
         
+        let layoutWidth = displaySize.width / staveSpacing
+        
+        let tokens = Tokenizer().tokenize(composition: composition)
+        let positionedTokens = LayoutSolver().solve(tokens: tokens, layoutWidth: layoutWidth)
+        
         var paths = [Path]()
         paths += makeStavePaths(forDisplaySize: displaySize)
-        paths += makeBarEndPaths(forDisplaySize: displaySize)
-        paths += makeCompositionPaths(forDisplaySize: displaySize)
+        paths += makePaths(forTokens: positionedTokens, displaySize: displaySize)
+        //paths += makeBarEndPaths(forDisplaySize: displaySize)
+        //paths += makeCompositionPaths(forDisplaySize: displaySize)
         return paths
     }
     
@@ -70,28 +76,38 @@ class MusicRenderer {
         
     }
     
-    private func makeCompositionPaths(forDisplaySize displaySize: DisplaySize) -> [Path] {
+    private func makePaths(forTokens positionedTokens: [PositionedToken], displaySize: DisplaySize) -> [Path] {
         
         var paths = [Path]()
         
-        for note in composition.notes {
-            switch note.value {
-            case .whole:
-                paths.append(
-                    makeNotePath(fromSymbolPath: SymbolPaths.semibreve, displaySize: displaySize, staveOffset: 0, xPos: 0)
-                )
-            case .quarter:
-                paths.append(
-                    makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead, displaySize: displaySize, staveOffset: 0, xPos: 0)
-                )
-            case .half:
-                paths.append(
-                    makeNotePath(fromSymbolPath: SymbolPaths.openNoteHead, displaySize: displaySize, staveOffset: 0, xPos: 0)
-                )
-            }
+        for positionedToken in positionedTokens {
+            paths.append(makePath(forToken: positionedToken.token,
+                                  displaySize: displaySize,
+                                  xPos: positionedToken.xPos * staveSpacing))
         }
         
         return paths
+    }
+    
+    func makePath(forToken token: Token, displaySize: DisplaySize, xPos: Double) -> Path {
+        
+        switch token {
+        case .semibreve:
+            return makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
+                                displaySize: displaySize,
+                                staveOffset: 0,
+                                xPos: xPos)
+        case .crotchet:
+            return makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
+                                displaySize: displaySize,
+                                staveOffset: 0,
+                                xPos: xPos)
+        case .minim:
+            return makeNotePath(fromSymbolPath: SymbolPaths.openNoteHead,
+                                displaySize: displaySize,
+                                staveOffset: 0,
+                                xPos: xPos)
+        }
     }
     
     func makeNotePath(fromSymbolPath symbolPath: Path, displaySize: DisplaySize, staveOffset: Int, xPos: Double) -> Path {

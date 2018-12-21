@@ -20,11 +20,23 @@ public class Note {
     public init(value: Value) {
         self.value = value
     }
+    
+    var duration: Double {
+        switch self.value {
+        case .whole: return 1.0
+        case .half: return 1.0 / 2
+        case .quarter: return 1.0 / 4
+        }
+    }
 }
 
 public class Composition {
     
     var notes = [Note]()
+    
+    var duration: Double {
+        return notes.reduce(0) { $0 + $1.duration }
+    }
     
     public init(notes: [Note]) {
         self.notes = notes
