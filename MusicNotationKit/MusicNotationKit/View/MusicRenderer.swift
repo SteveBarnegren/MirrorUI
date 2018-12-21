@@ -84,6 +84,10 @@ class MusicRenderer {
                 paths.append(
                     makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead, displaySize: displaySize, staveOffset: 0, xPos: 0)
                 )
+            case .half:
+                paths.append(
+                    makeNotePath(fromSymbolPath: SymbolPaths.openNoteHead, displaySize: displaySize, staveOffset: 0, xPos: 0)
+                )
             }
         }
         
@@ -99,5 +103,7 @@ class MusicRenderer {
         notePath.translate(x: xPos, y: centerY)
         return notePath
     }
+    
+    
     
 }

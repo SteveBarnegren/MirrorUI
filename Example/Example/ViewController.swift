@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         var notes = [Note]()
         
         notes.append(
-            Note(value: .quarter)
+            Note(value: .half)
         )
         
         return Composition(notes: notes)

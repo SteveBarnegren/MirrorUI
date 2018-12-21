@@ -41,6 +41,21 @@ class SymbolPaths {
         
         var path = Path()
         path.addOval(atPoint: point, withSize: size, rotation: -0.3)
+        path.drawStyle = .fill
+        return path
+    }()
+    
+    static let openNoteHead: Path = {
+        
+        // A filled note head, for a crotchet, quaver, semiquaver
+        
+        let scaler = 0.9
+        let size = Size(width: 1.5 * scaler, height: 1 * scaler)
+        let point = Point(size.width/2, 0.5)
+        
+        var path = Path()
+        path.addOval(atPoint: point, withSize: size, rotation: -0.3)
+        path.drawStyle = .stroke
         return path
     }()
 }
