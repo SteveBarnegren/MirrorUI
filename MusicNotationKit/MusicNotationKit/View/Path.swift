@@ -18,6 +18,11 @@ struct Point {
     }
 }
 
+struct Size {
+    var width: Double
+    var height: Double
+}
+
 struct Rect {
     var x: Double
     var y: Double
@@ -36,7 +41,7 @@ class Path {
         case line(Point)
         case curve(Point, c1: Point, c2: Point)
         case close
-        case oval(Rect, Double)
+        case oval(Point, Size, Double)
     }
     
     enum DrawStyle {
@@ -63,8 +68,8 @@ class Path {
         commands.append(.curve(point, c1: c1, c2: c2))
     }
     
-    func addOval(inRect rect: Rect, rotation: Double) {
-        commands.append(.oval(rect, rotation))
+    func addOval(atPoint point: Point, withSize size: Size, rotation: Double) {
+        commands.append(.oval(point, size, rotation))
     }
     
     func close() {

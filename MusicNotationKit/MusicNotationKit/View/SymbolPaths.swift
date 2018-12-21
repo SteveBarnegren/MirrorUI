@@ -36,10 +36,11 @@ class SymbolPaths {
         // A filled note head, for a crotchet, quaver, semiquaver
         
         let scaler = 0.9
-        let rect = Rect(x: 0, y: 0, width: 1.5 * scaler, height: 1 * scaler)
+        let size = Size(width: 1.5 * scaler, height: 1 * scaler)
+        let point = Point(size.width/2, 0.5)
         
         let path = Path()
-        path.addOval(inRect: rect, rotation: -0.3)
+        path.addOval(atPoint: point, withSize: size, rotation: -0.3)
         return path
     }()
 }

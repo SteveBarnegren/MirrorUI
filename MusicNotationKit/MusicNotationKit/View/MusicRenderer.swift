@@ -106,6 +106,10 @@ class MusicRenderer {
                         height: r.height * scale)
         }
         
+        func transformSize(_ s: Size) -> Size {
+            return Size(width: s.width * scale, height: s.height * scale)
+        }
+        
         var newCommands = [Path.Command]()
         
         for command in symbolPath.commands {
@@ -118,8 +122,8 @@ class MusicRenderer {
                 newCommands.append(.curve(transformPoint(p), c1: transformPoint(c1), c2: transformPoint(c2)))
             case .close:
                 newCommands.append(.close)
-            case .oval(let rect, let rotation):
-                newCommands.append(.oval(transformRect(rect), rotation))
+            case .oval(let point, let size, let rotation):
+                newCommands.append(.oval(transformPoint(point), transformSize(size), rotation))
             }
         }
         
