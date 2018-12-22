@@ -8,6 +8,20 @@
 
 import Foundation
 
+enum CompositionItem {
+    case note(Note)
+    case barline
+
+    var duration: Double {
+        switch self {
+        case .note(let note):
+            return note.duration
+        case .barline:
+            return 0
+        }
+    }
+}
+
 public class Note {
     
     public enum Value {
@@ -34,17 +48,22 @@ public class Note {
 
 public class Composition {
     
-    var notes = [Note]()
+    var items = [CompositionItem]()
     
     var duration: Double {
-        return notes.reduce(0) { $0 + $1.duration }
+        return items.reduce(0) { $0 + $1.duration }
     }
     
-    public init(notes: [Note] = []) {
-        self.notes = notes
+    public init() {
     }
+    
+    // MARK: - Add Items
     
     public func add(note: Note) {
-        notes.append(note)
+        items.append(.note(note))
+    }
+    
+    public func addBarline() {
+        items.append(.barline)
     }
 }

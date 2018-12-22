@@ -49,6 +49,8 @@ class LayoutSolver {
             case .minim:
                 spacedTokens.append(.token(token))
                 spacedTokens.append(.space(0.5))
+            case .barline:
+                spacedTokens.append(.token(token))
             }
         }
         
@@ -114,6 +116,8 @@ class LayoutSolver {
             return 1
         case .minim:
             return 1
+        case .barline:
+            return 0
         }
     }
 }

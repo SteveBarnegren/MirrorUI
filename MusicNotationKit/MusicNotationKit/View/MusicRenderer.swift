@@ -107,6 +107,8 @@ class MusicRenderer {
                                 centerY: centerY,
                                 staveOffset: pitch.staveOffset,
                                 xPos: xPos)
+        case .barline:
+            return makeBarlinePath(centerY: centerY, xPos: xPos)
         }
     }
     
@@ -124,6 +126,12 @@ class MusicRenderer {
         return notePath
     }
     
-    
-    
+    func makeBarlinePath(centerY: Double, xPos: Double) -> Path {
+        
+        var path = Path()
+        path.move(to: Point(xPos, centerY + staveSpacing*2))
+        path.addLine(to: Point(xPos, centerY - staveSpacing*2))
+        path.drawStyle = .stroke
+        return path
+    }
 }

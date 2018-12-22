@@ -9,6 +9,7 @@
 import Foundation
 
 enum Token {
+    case barline
     case semibreve(Pitch)
     case crotchet(Pitch)
     case minim(Pitch)
@@ -20,19 +21,32 @@ class Tokenizer {
         
         var tokens = [Token]()
         
-        for note in composition.notes {
-            
-            switch note.value {
-            case .whole:
-                tokens.append(.semibreve(note.pitch))
-            case .half:
-                tokens.append(.minim(note.pitch))
-            case .quarter:
-                tokens.append(.crotchet(note.pitch))
+        tokens.append(.barline)
+        
+        for item in composition.items {
+            switch item {
+            case .note(let note):
+                tokens += makeTokens(forNote: note)
+            case .barline:
+                tokens.append(.barline)
             }
         }
         
+        tokens.append(.barline)
+        
         return tokens
+    }
+    
+    private func makeTokens(forNote note: Note) -> [Token] {
+        
+        switch note.value {
+        case .whole:
+            return [.semibreve(note.pitch)]
+        case .half:
+            return [.minim(note.pitch)]
+        case .quarter:
+            return [.crotchet(note.pitch)]
+        }
     }
 
 }
