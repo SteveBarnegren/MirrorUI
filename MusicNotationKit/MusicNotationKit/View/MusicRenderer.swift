@@ -28,7 +28,7 @@ class MusicRenderer {
         
         var paths = [Path]()
         paths += makeStavePaths(forDisplaySize: displaySize)
-        paths += makePaths(forTokens: positionedTokens, displaySize: displaySize)
+        paths += makePaths(forTokens: positionedTokens, centerY: displaySize.height/2)
         //paths += makeBarEndPaths(forDisplaySize: displaySize)
         //paths += makeCompositionPaths(forDisplaySize: displaySize)
         return paths
@@ -76,44 +76,44 @@ class MusicRenderer {
         
     }
     
-    private func makePaths(forTokens positionedTokens: [PositionedToken], displaySize: DisplaySize) -> [Path] {
+    private func makePaths(forTokens positionedTokens: [PositionedToken], centerY: Double) -> [Path] {
         
         var paths = [Path]()
         
         for positionedToken in positionedTokens {
             paths.append(makePath(forToken: positionedToken.token,
-                                  displaySize: displaySize,
+                                  centerY: centerY,
                                   xPos: positionedToken.xPos * staveSpacing))
         }
         
         return paths
     }
     
-    func makePath(forToken token: Token, displaySize: DisplaySize, xPos: Double) -> Path {
+    func makePath(forToken token: Token, centerY: Double, xPos: Double) -> Path {
         
         switch token {
         case .semibreve(let pitch):
             return makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
-                                displaySize: displaySize,
+                                centerY: centerY,
                                 staveOffset: pitch.staveOffset,
                                 xPos: xPos)
         case .crotchet(let pitch):
             return makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
-                                displaySize: displaySize,
+                                centerY: centerY,
                                 staveOffset: pitch.staveOffset,
                                 xPos: xPos)
         case .minim(let pitch):
             return makeNotePath(fromSymbolPath: SymbolPaths.openNoteHead,
-                                displaySize: displaySize,
+                                centerY: centerY,
                                 staveOffset: pitch.staveOffset,
                                 xPos: xPos)
         }
     }
     
-    func makeNotePath(fromSymbolPath symbolPath: Path, displaySize: DisplaySize, staveOffset: Int, xPos: Double) -> Path {
+    func makeNotePath(fromSymbolPath symbolPath: Path, centerY: Double, staveOffset: Int, xPos: Double) -> Path {
         
         // Stave offset must be negative on iOS as y starts at top
-        var centerY = displaySize.height/2 - (Double(staveOffset) * staveSpacing/2)
+        var centerY = centerY - (Double(staveOffset) * staveSpacing/2)
         
         // Subtract half a stave spacing so that the note centered on the pitch line
         centerY -= staveSpacing/2
