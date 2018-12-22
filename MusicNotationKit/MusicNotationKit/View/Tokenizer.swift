@@ -9,9 +9,9 @@
 import Foundation
 
 enum Token {
-    case semibreve
-    case crotchet
-    case minim
+    case semibreve(Pitch)
+    case crotchet(Pitch)
+    case minim(Pitch)
 }
 
 class Tokenizer {
@@ -24,11 +24,11 @@ class Tokenizer {
             
             switch note.value {
             case .whole:
-                tokens.append(.semibreve)
+                tokens.append(.semibreve(note.pitch))
             case .half:
-                tokens.append(.minim)
+                tokens.append(.minim(note.pitch))
             case .quarter:
-                tokens.append(.crotchet)
+                tokens.append(.crotchet(note.pitch))
             }
         }
         

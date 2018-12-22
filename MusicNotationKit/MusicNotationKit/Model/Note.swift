@@ -17,8 +17,10 @@ public class Note {
     }
     
     let value: Value
-    public init(value: Value) {
+    let pitch: Pitch
+    public init(value: Value, pitch: Pitch) {
         self.value = value
+        self.pitch = pitch
     }
     
     var duration: Double {
@@ -38,11 +40,11 @@ public class Composition {
         return notes.reduce(0) { $0 + $1.duration }
     }
     
-    public init(notes: [Note]) {
+    public init(notes: [Note] = []) {
         self.notes = notes
     }
     
-    func add(note: Note) {
+    public func add(note: Note) {
         notes.append(note)
     }
 }

@@ -13,7 +13,7 @@ typealias DisplaySize = Vector2<Double>
 class MusicRenderer {
     
     let composition: Composition
-    let staveSpacing: Double = 40
+    let staveSpacing: Double = 30
     
     init(composition: Composition) {
         self.composition = composition
@@ -92,27 +92,31 @@ class MusicRenderer {
     func makePath(forToken token: Token, displaySize: DisplaySize, xPos: Double) -> Path {
         
         switch token {
-        case .semibreve:
+        case .semibreve(let pitch):
             return makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
                                 displaySize: displaySize,
-                                staveOffset: 0,
+                                staveOffset: pitch.staveOffset,
                                 xPos: xPos)
-        case .crotchet:
+        case .crotchet(let pitch):
             return makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
                                 displaySize: displaySize,
-                                staveOffset: 0,
+                                staveOffset: pitch.staveOffset,
                                 xPos: xPos)
-        case .minim:
+        case .minim(let pitch):
             return makeNotePath(fromSymbolPath: SymbolPaths.openNoteHead,
                                 displaySize: displaySize,
-                                staveOffset: 0,
+                                staveOffset: pitch.staveOffset,
                                 xPos: xPos)
         }
     }
     
     func makeNotePath(fromSymbolPath symbolPath: Path, displaySize: DisplaySize, staveOffset: Int, xPos: Double) -> Path {
         
-        let centerY = displaySize.height/2 + (Double(staveOffset) * staveSpacing/2)
+        // Stave offset must be negative on iOS as y starts at top
+        var centerY = displaySize.height/2 - (Double(staveOffset) * staveSpacing/2)
+        
+        // Subtract half a stave spacing so that the note centered on the pitch line
+        centerY -= staveSpacing/2
         
         var notePath = symbolPath
         notePath.scale(staveSpacing)
