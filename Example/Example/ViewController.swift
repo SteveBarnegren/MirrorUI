@@ -11,12 +11,23 @@ import MusicNotationKit
 
 class ViewController: UIViewController {
     
-    let musicView = MusicView(frame: .zero)
+    var musicView: MusicView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        musicView = MusicView(composition: makeComposition())
         view.addSubview(musicView)
+    }
+    
+    func makeComposition() -> Composition {
+        
+        let composition = Composition()
+        composition.add(note: Note(value: .quarter, pitch: .b4))
+        composition.add(note: Note(value: .quarter, pitch: .a4))
+        composition.add(note: Note(value: .quarter, pitch: .c4))
+        composition.add(note: Note(value: .quarter, pitch: .e4))
+
+        return composition
     }
     
     override func viewDidLayoutSubviews() {

@@ -18,32 +18,129 @@ struct Point {
     }
 }
 
-class Path {
+struct Size {
+    var width: Double
+    var height: Double
+}
+
+struct Rect {
+    var x: Double
+    var y: Double
+    var width: Double
+    var height: Double
     
-    enum Command {
-        case move(Point)
-        case curve(Point, c1: Point, c2: Point)
-        case close
-    }
-    
-    let commands: [Command]
-    
-    init(commands:[ Command]) {
-        self.commands = commands
+    var center: Point {
+        return Point(x + width/2, y + height/2)
     }
 }
 
-let commands: [Path.Command] = [
-    .move(Point(0.413928835515255, 0.9381036983933635)),
-    .curve(Point(0.0, 0.4993177924123759), c1: Point(0.18255583105417203, 0.8668909590179441), c2: Point(0.0, 0.6733724253936261)),
-    .curve(Point(1.4951518414575147, 0.2238534674672675), c1: Point(0.0, 0.006670522917724008), c2: Point(1.0581598705256332, -0.188283116654489)),
-    .curve(Point(0.413928835515255, 0.938103698393364), c1: Point(1.9677059861174255, 0.669529060557074), c2: Point(1.1965184791581092, 1.1789713419181946)),
-    .close,
-    .move(Point(1.1197252632737626, 0.8143423838723374)),
-    .curve(Point(0.9023939465738651, 0.1269826584711547), c1: Point(1.248463463768658, 0.6178631418633614), c2: Point(1.1253793997154897, 0.22858146705105295)),
-    .curve(Point(0.5105959221829393, 0.6232739900698971), c1: Point(0.5749321911460537, -0.022219029000600073), c2: Point(0.3742097160938965, 0.23203628626493328)),
-    .curve(Point(1.1197252632737626, 0.8143423838723374), c1: Point(0.6049311458351261, 0.8938841675348765), c2: Point(0.9887267551266623, 1.0142715204025434)),
-    .close,
-]
+struct Path {
+    
+    enum Command {
+        case move(Point)
+        case line(Point)
+        case curve(Point, c1: Point, c2: Point)
+        case close
+        case oval(Point, Size, Double)
+    }
+    
+    enum DrawStyle {
+        case stroke
+        case fill
+    }
+    
+    var commands = [Command]()
+    var drawStyle = DrawStyle.stroke
+    
+    init(commands: [Command] = []) {
+        self.commands = commands
+    }
+    
+    mutating func move(to point: Point) {
+        commands.append(.move(point))
+    }
+    
+    mutating func addLine(to point: Point) {
+        commands.append(.line(point))
+    }
+    
+    mutating func addCurve(to point: Point, c1: Point, c2: Point) {
+        commands.append(.curve(point, c1: c1, c2: c2))
+    }
+    
+    mutating func addOval(atPoint point: Point, withSize size: Size, rotation: Double) {
+        commands.append(.oval(point, size, rotation))
+    }
+    
+    mutating func close() {
+        commands.append(.close)
+    }
+}
 
-let semibrevePath = Path(commands: commands)
+extension Path {
+    
+    enum Transformation {
+        case translate(x: Double, y: Double)
+        case scale(x: Double, y: Double)
+    }
+    
+    mutating func translate(x xOffset: Double, y yOffset: Double) {
+        
+        func translatePoint(_ p: Point) -> Point {
+            return Point(xOffset + p.x, yOffset + p.y)
+        }
+        
+        var newCommands = [Path.Command]()
+        
+        for command in commands {
+            switch command {
+            case .move(let p):
+                newCommands.append(.move(translatePoint(p)))
+            case .line(let p):
+                newCommands.append(.line(translatePoint(p)))
+            case .curve(let p, let c1, let c2):
+                newCommands.append(.curve(translatePoint(p), c1: translatePoint(c1), c2: translatePoint(c2)))
+            case .close:
+                newCommands.append(.close)
+            case .oval(let point, let size, let rotation):
+                newCommands.append(.oval(translatePoint(point), size, rotation))
+            }
+        }
+        
+        commands = newCommands
+    }
+    
+    mutating func scale(_ scale: Double) {
+        self.scale(x: scale, y: scale)
+    }
+    
+    mutating func scale(x xScale: Double, y yScale: Double) {
+        
+        func scalePoint(_ p: Point) -> Point {
+            return Point(p.x * xScale, p.y * yScale)
+        }
+        
+        func scaleSize(_ s: Size) -> Size {
+            return Size(width: s.width * xScale, height: s.height * yScale)
+        }
+        
+        var newCommands = [Path.Command]()
+        
+        for command in commands {
+            switch command {
+            case .move(let p):
+                newCommands.append(.move(scalePoint(p)))
+            case .line(let p):
+                newCommands.append(.line(scalePoint(p)))
+            case .curve(let p, let c1, let c2):
+                newCommands.append(.curve(scalePoint(p), c1: scalePoint(c1), c2: scalePoint(c2)))
+            case .close:
+                newCommands.append(.close)
+            case .oval(let point, let size, let rotation):
+                newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
+            }
+        }
+        
+        commands = newCommands
+    }
+}
