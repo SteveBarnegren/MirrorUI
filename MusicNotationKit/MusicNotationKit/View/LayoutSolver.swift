@@ -27,8 +27,6 @@ class LayoutSolver {
         var spacedTokens = generateSpacedTokens(fromTokens: tokens)
 
         // Scale the space to fill the layout width
-        //let tokensWidth = tokens.map { self.width(forToken: $0) }.sum()
-        //let layoutSpace = layoutWidth - tokensWidth
         spacedTokens = scaleSpacedTokens(spacedTokens, layoutWidth: layoutWidth, staveSpacing: staveSpacing)
         
         // Create Positioned Tokens

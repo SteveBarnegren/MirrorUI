@@ -31,8 +31,6 @@ class MusicRenderer {
         var paths = [Path]()
         paths += makeStavePaths(forDisplaySize: displaySize)
         paths += makePaths(forTokens: positionedTokens, centerY: displaySize.height/2)
-        //paths += makeBarEndPaths(forDisplaySize: displaySize)
-        //paths += makeCompositionPaths(forDisplaySize: displaySize)
         return paths
     }
     
