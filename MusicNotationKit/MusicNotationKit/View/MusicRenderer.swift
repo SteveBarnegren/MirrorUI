@@ -13,7 +13,7 @@ typealias DisplaySize = Vector2<Double>
 class MusicRenderer {
     
     let composition: Composition
-    let staveSpacing: Double = 30
+    let staveSpacing: Double = 20
     
     init(composition: Composition) {
         self.composition = composition
@@ -24,7 +24,9 @@ class MusicRenderer {
         let layoutWidth = displaySize.width / staveSpacing
         
         let tokens = Tokenizer().tokenize(composition: composition)
-        let positionedTokens = LayoutSolver().solve(tokens: tokens, layoutWidth: layoutWidth)
+        let positionedTokens = LayoutSolver().solve(tokens: tokens,
+                                                    layoutWidth: layoutWidth,
+                                                    staveSpacing: staveSpacing)
         
         var paths = [Path]()
         paths += makeStavePaths(forDisplaySize: displaySize)
