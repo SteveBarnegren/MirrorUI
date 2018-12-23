@@ -43,15 +43,21 @@ public class MusicView: UIView {
         
         for command in path.commands {
             switch command {
-            case .move(let p):
+            case .move(var p):
+                p = invertY(p)
                 uiBezierPath.move(to: p)
-            case .line(let p):
+            case .line(var p):
+                p = invertY(p)
                 uiBezierPath.addLine(to: CGPoint(x: p.x, y: p.y))
-            case .curve(let p, let c1, let c2):
+            case .curve(var p, var c1, var c2):
+                p = invertY(p)
+                c1 = invertY(c1)
+                c2 = invertY(c2)
                 uiBezierPath.addCurve(to: p, controlPoint1: c1, controlPoint2: c2)
             case .close:
                 uiBezierPath.close()
-            case .oval(let point, let size, let rotation):
+            case .oval(var point, let size, let rotation):
+                point = invertY(point)
                 let cgRect = CGRect(x: CGFloat(point.x - size.width/2),
                                     y: CGFloat(point.y - size.height/2),
                                     width: CGFloat(size.width),
@@ -84,5 +90,9 @@ public class MusicView: UIView {
                 uiBezierPath.fill()
             }
         }
+    }
+    
+    private func invertY(_ p: Point) -> Point {
+        return Point(p.x, Double(bounds.height) - p.y)
     }
 }

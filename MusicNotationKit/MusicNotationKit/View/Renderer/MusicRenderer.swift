@@ -13,7 +13,7 @@ typealias DisplaySize = Vector2<Double>
 class MusicRenderer {
     
     let composition: Composition
-    let staveSpacing: Double = 30
+    let staveSpacing: Double = 20
     
     init(composition: Composition) {
         self.composition = composition
@@ -24,13 +24,13 @@ class MusicRenderer {
         let layoutWidth = displaySize.width / staveSpacing
         
         let tokens = Tokenizer().tokenize(composition: composition)
-        let positionedTokens = LayoutSolver().solve(tokens: tokens, layoutWidth: layoutWidth)
+        let positionedTokens = LayoutSolver().solve(tokens: tokens,
+                                                    layoutWidth: layoutWidth,
+                                                    staveSpacing: staveSpacing)
         
         var paths = [Path]()
         paths += makeStavePaths(forDisplaySize: displaySize)
         paths += makePaths(forTokens: positionedTokens, centerY: displaySize.height/2)
-        //paths += makeBarEndPaths(forDisplaySize: displaySize)
-        //paths += makeCompositionPaths(forDisplaySize: displaySize)
         return paths
     }
     
@@ -56,57 +56,39 @@ class MusicRenderer {
         return paths
     }
     
-    private func makeBarEndPaths(forDisplaySize displaySize: DisplaySize) -> [Path] {
-        
-        let midY = displaySize.height/2
-        let numberOfLines = 5
-        let staveHeight = Double(numberOfLines-1) * staveSpacing
-        
-        // Draw the left line
-        var leftPath = Path()
-        leftPath.move(to: Point(0, midY - staveHeight/2))
-        leftPath.addLine(to: Point(0, midY + staveHeight/2))
-        
-        // Draw the right line
-        var rightPath = Path()
-        rightPath.move(to: Point(displaySize.width, midY - staveHeight/2))
-        rightPath.addLine(to: Point(displaySize.width, midY + staveHeight/2))
-        
-        return [leftPath, rightPath]
-        
-    }
-    
     private func makePaths(forTokens positionedTokens: [PositionedToken], centerY: Double) -> [Path] {
         
         var paths = [Path]()
         
         for positionedToken in positionedTokens {
-            paths.append(makePath(forToken: positionedToken.token,
-                                  centerY: centerY,
-                                  xPos: positionedToken.xPos * staveSpacing))
+            paths += makePaths(forToken: positionedToken.token,
+                               centerY: centerY,
+                               xPos: positionedToken.xPos * staveSpacing)
         }
         
         return paths
     }
     
-    func makePath(forToken token: Token, centerY: Double, xPos: Double) -> Path {
+    func makePaths(forToken token: Token, centerY: Double, xPos: Double) -> [Path] {
         
         switch token {
         case .semibreve(let pitch):
-            return makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
-                                centerY: centerY,
-                                staveOffset: pitch.staveOffset,
-                                xPos: xPos)
+            return [makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
+                                 centerY: centerY,
+                                 staveOffset: pitch.staveOffset,
+                                 xPos: xPos)]
         case .crotchet(let pitch):
-            return makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
-                                centerY: centerY,
-                                staveOffset: pitch.staveOffset,
-                                xPos: xPos)
+            return CrotchetRenderer.crotchetPaths(withPitch: pitch,
+                                                  staveCenterY: centerY,
+                                                  xPos: xPos,
+                                                  staveSpacing: staveSpacing)
         case .minim(let pitch):
-            return makeNotePath(fromSymbolPath: SymbolPaths.openNoteHead,
-                                centerY: centerY,
-                                staveOffset: pitch.staveOffset,
-                                xPos: xPos)
+            return [makeNotePath(fromSymbolPath: SymbolPaths.openNoteHead,
+                                 centerY: centerY,
+                                 staveOffset: pitch.staveOffset,
+                                 xPos: xPos)]
+        case .barline:
+            return [makeBarlinePath(centerY: centerY, xPos: xPos)]
         }
     }
     
@@ -124,6 +106,12 @@ class MusicRenderer {
         return notePath
     }
     
-    
-    
+    func makeBarlinePath(centerY: Double, xPos: Double) -> Path {
+        
+        var path = Path()
+        path.move(to: Point(xPos, centerY + staveSpacing*2))
+        path.addLine(to: Point(xPos, centerY - staveSpacing*2))
+        path.drawStyle = .stroke
+        return path
+    }
 }

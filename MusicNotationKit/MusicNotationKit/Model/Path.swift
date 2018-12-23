@@ -29,6 +29,22 @@ struct Rect {
     var width: Double
     var height: Double
     
+    var bottomLeft: Point {
+        return Point(x, y)
+    }
+    
+    var bottomRight: Point {
+        return Point(x + width, y)
+    }
+    
+    var topLeft: Point {
+        return Point(x, y + height)
+    }
+    
+    var topRight: Point {
+        return Point(x + width, y + height)
+    }
+    
     var center: Point {
         return Point(x + width/2, y + height/2)
     }
@@ -72,6 +88,14 @@ struct Path {
         commands.append(.oval(point, size, rotation))
     }
     
+    mutating func addRect(_ r: Rect) {
+        commands.append(.move(r.bottomLeft))
+        commands.append(.line(r.topLeft))
+        commands.append(.line(r.topRight))
+        commands.append(.line(r.bottomRight))
+        commands.append(.close)
+    }
+
     mutating func close() {
         commands.append(.close)
     }
