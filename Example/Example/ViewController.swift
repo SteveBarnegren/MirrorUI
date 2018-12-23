@@ -12,11 +12,15 @@ import MusicNotationKit
 class ViewController: UIViewController {
     
     var musicView: MusicView!
+    var gridOverlayView: GridOverlayView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         musicView = MusicView(composition: makeComposition())
         view.addSubview(musicView)
+        
+        gridOverlayView = GridOverlayView(frame: .zero)
+        view.addSubview(gridOverlayView)
     }
     
     func makeComposition() -> Composition {
@@ -41,6 +45,8 @@ class ViewController: UIViewController {
         musicView.frame = view.bounds.inset(by: UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50))
         musicView.clipsToBounds = false
         musicView.layer.masksToBounds = false
+        
+        gridOverlayView.frame = musicView.frame
     }
 }
 
