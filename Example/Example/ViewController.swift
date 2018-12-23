@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         
         composition.add(note: Note(value: .half, pitch: .b4))
         composition.add(note: Note(value: .quarter, pitch: .c4))
-        composition.add(note: Note(value: .quarter, pitch: .e4))
+        composition.add(note: Note(value: .whole, pitch: .e4))
 
         return composition
     }

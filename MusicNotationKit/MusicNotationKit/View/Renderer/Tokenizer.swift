@@ -8,11 +8,25 @@
 
 import Foundation
 
+struct NoteToken {
+    
+    enum HeadStyle {
+        case semibreve
+        case open
+        case filled
+    }
+    
+    let headStyle: HeadStyle
+    let pitch: Pitch
+    let duration: Double
+    let numberOfBeams: Int
+    let hasStem: Bool
+    let connectBeamsToPreviousNote: Bool
+}
+
 enum Token {
     case barline
-    case semibreve(Pitch)
-    case crotchet(Pitch)
-    case minim(Pitch)
+    case note(NoteToken)
 }
 
 class Tokenizer {
@@ -41,12 +55,30 @@ class Tokenizer {
         
         switch note.value {
         case .whole:
-            return [.semibreve(note.pitch)]
+            let token = NoteToken(headStyle: .semibreve,
+                                  pitch: note.pitch,
+                                  duration: 1,
+                                  numberOfBeams: 0,
+                                  hasStem: false,
+                                  connectBeamsToPreviousNote: false)
+            return [.note(token)]
         case .half:
-            return [.minim(note.pitch)]
+            let token = NoteToken(headStyle: .open,
+                                  pitch: note.pitch,
+                                  duration: 0.5,
+                                  numberOfBeams: 0,
+                                  hasStem: true,
+                                  connectBeamsToPreviousNote: false)
+            return [.note(token)]
         case .quarter:
-            return [.crotchet(note.pitch)]
+            let token = NoteToken(headStyle: .filled,
+                                  pitch: note.pitch,
+                                  duration: 0.25,
+                                  numberOfBeams: 0,
+                                  hasStem: true,
+                                  connectBeamsToPreviousNote: false)
+            return [.note(token)]
         }
     }
-
+    
 }

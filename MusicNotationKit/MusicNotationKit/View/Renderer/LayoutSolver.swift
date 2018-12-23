@@ -41,15 +41,9 @@ class LayoutSolver {
             let isLast = index == tokens.count-1
             
             switch token {
-            case .semibreve:
+            case .note(let noteToken):
                 spacedTokens.append(.token(token))
-                spacedTokens.append(.rhythmicSpace(1))
-            case .crotchet:
-                spacedTokens.append(.token(token))
-                spacedTokens.append(.rhythmicSpace(0.25))
-            case .minim:
-                spacedTokens.append(.token(token))
-                spacedTokens.append(.rhythmicSpace(0.5))
+                spacedTokens.append(.rhythmicSpace(noteToken.duration))
             case .barline:
                 spacedTokens.append(.token(token))
                 if !isLast {
@@ -134,11 +128,7 @@ class LayoutSolver {
     private func width(forToken token: Token) -> Double {
         
         switch token {
-        case .semibreve:
-            return 1
-        case .crotchet:
-            return 1
-        case .minim:
+        case .note:
             return 1
         case .barline:
             return 0

@@ -51,20 +51,9 @@ class MusicRenderer {
     func makePaths(forToken token: Token, centerY: Double, xPos: Double) -> [Path] {
         
         switch token {
-        case .semibreve(let pitch):
-            return [makeNotePath(fromSymbolPath: SymbolPaths.filledNoteHead,
-                                 centerY: centerY,
-                                 staveOffset: pitch.staveOffset,
-                                 xPos: xPos)]
-        case .crotchet(let pitch):
-            return CrotchetRenderer.crotchetPaths(withPitch: pitch,
-                                                  staveCenterY: centerY,
-                                                  xPos: xPos)
-        case .minim(let pitch):
-            return [makeNotePath(fromSymbolPath: SymbolPaths.openNoteHead,
-                                 centerY: centerY,
-                                 staveOffset: pitch.staveOffset,
-                                 xPos: xPos)]
+        case .note(let noteToken):
+            let paths = NoteRenderer.paths(forNoteToken: noteToken, centerY: centerY)
+            return paths.map { $0.translated(x: xPos, y: 0) }
         case .barline:
             return [makeBarlinePath(staveCenterY: centerY, xPos: xPos)]
         }
