@@ -10,6 +10,37 @@ import Foundation
 
 class CrotchetRenderer {
     
+    static func crotchetPaths(withPitch pitch: Pitch, staveCenterY: Double, xPos: Double) -> [Path] {
+        
+        var yPos = staveCenterY + Double(pitch.staveOffset)/2
+        
+        // Subtract half a stave spacing so that the note centered on the pitch line
+        yPos -= 0.5
+        
+        var notePath = SymbolPaths.filledNoteHead
+        notePath.translate(x: xPos, y: yPos)
+        
+        
+        // Stem path
+        
+        let stemWidth = 0.1
+        let stemHeight = 3.0
+        
+        let stemX = 1.25
+        let stemY = 0.6
+        
+        let stemRect = Rect(x: xPos + stemX,
+                            y: yPos + stemY,
+                            width: stemWidth,
+                            height: stemHeight)
+        
+        var stemPath = Path()
+        stemPath.addRect(stemRect)
+        stemPath.drawStyle = .fill
+        
+        return [notePath, stemPath]
+    }
+    /*
     static func crotchetPaths(withPitch pitch: Pitch, staveCenterY: Double, xPos: Double, staveSpacing: Double) -> [Path] {
         
         var yPos = staveCenterY + (Double(pitch.staveOffset) * staveSpacing/2)
@@ -41,4 +72,5 @@ class CrotchetRenderer {
         
         return [notePath, stemPath]
     }
+ */
 }

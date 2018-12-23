@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */; };
 		677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C5F21C5158C00C7A16E /* AppDelegate.swift */; };
 		677C9C6221C5158C00C7A16E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C6121C5158C00C7A16E /* ViewController.swift */; };
 		677C9C6521C5158C00C7A16E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 677C9C6321C5158C00C7A16E /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlayView.swift; sourceTree = "<group>"; };
 		677C9C5C21C5158C00C7A16E /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677C9C5F21C5158C00C7A16E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		677C9C6121C5158C00C7A16E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				677C9C7121C515DC00C7A16E /* MusicNotationKit.xcodeproj */,
 				677C9C5F21C5158C00C7A16E /* AppDelegate.swift */,
 				677C9C6121C5158C00C7A16E /* ViewController.swift */,
+				672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */,
 				677C9C6321C5158C00C7A16E /* Main.storyboard */,
 				677C9C6621C5158D00C7A16E /* Assets.xcassets */,
 				677C9C6821C5158D00C7A16E /* LaunchScreen.storyboard */,
@@ -206,6 +209,7 @@
 			files = (
 				677C9C6221C5158C00C7A16E /* ViewController.swift in Sources */,
 				677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */,
+				672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

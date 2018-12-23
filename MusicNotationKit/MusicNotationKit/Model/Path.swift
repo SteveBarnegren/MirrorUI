@@ -103,10 +103,7 @@ struct Path {
 
 extension Path {
     
-    enum Transformation {
-        case translate(x: Double, y: Double)
-        case scale(x: Double, y: Double)
-    }
+    // MARK: - Translate
     
     mutating func translate(x xOffset: Double, y yOffset: Double) {
         
@@ -133,6 +130,15 @@ extension Path {
         
         commands = newCommands
     }
+    
+    func translated(x: Double, y: Double) -> Path {
+        
+        var copy = self
+        copy.translate(x: x, y: y)
+        return copy
+    }
+    
+    // MARK: - Scale
     
     mutating func scale(_ scale: Double) {
         self.scale(x: scale, y: scale)
@@ -167,4 +173,19 @@ extension Path {
         
         commands = newCommands
     }
+    
+    func scaled(x xScale: Double, y yScale: Double) -> Path {
+        
+        var copy = self
+        copy.scale(x: xScale, y: yScale)
+        return copy
+    }
+    
+    func scaled(_ scale: Double) -> Path {
+        
+        var copy = self
+        copy.scale(x: scale, y: scale)
+        return copy
+    }
+    
 }

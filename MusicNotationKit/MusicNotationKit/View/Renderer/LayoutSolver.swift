@@ -21,13 +21,13 @@ class LayoutSolver {
         case fixedSpace(Double)
     }
     
-    func solve(tokens: [Token], layoutWidth: Double, staveSpacing: Double) -> [PositionedToken] {
+    func solve(tokens: [Token], layoutWidth: Double) -> [PositionedToken] {
         
         // Generate the initial tokens
         var spacedTokens = generateSpacedTokens(fromTokens: tokens)
 
         // Scale the space to fill the layout width
-        spacedTokens = scaleSpacedTokens(spacedTokens, layoutWidth: layoutWidth, staveSpacing: staveSpacing)
+        spacedTokens = scaleSpacedTokens(spacedTokens, layoutWidth: layoutWidth)
         
         // Create Positioned Tokens
         return generatePositionedTokens(fromSpacedTokens: spacedTokens)
@@ -62,8 +62,7 @@ class LayoutSolver {
     }
     
     private func scaleSpacedTokens(_ spacedTokens: [SpacedToken],
-                                   layoutWidth: Double,
-                                   staveSpacing: Double) -> [SpacedToken] {
+                                   layoutWidth: Double) -> [SpacedToken] {
         
         // Get the space taken up bu tokens and fixed spaces
         var fixedSpace: Double = 0
