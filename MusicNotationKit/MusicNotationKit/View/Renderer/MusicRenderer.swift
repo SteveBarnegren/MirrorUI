@@ -35,29 +35,42 @@ class MusicRenderer {
         return paths.map { $0.scaled(staveSpacing) }
     }
     
-    private func makePaths(forTokens positionedTokens: [PositionedToken], centerY: Double) -> [Path] {
+    private func makePaths(forTokens positionedTokens: [PositionedItem<Token>], centerY: Double) -> [Path] {
         
         var paths = [Path]()
+        var noteTokens = [PositionedItem<NoteToken>]()
         
         for positionedToken in positionedTokens {
-            paths += makePaths(forToken: positionedToken.token,
-                               centerY: centerY,
-                               xPos: positionedToken.xPos)
+            switch positionedToken.item {
+            case .barline:
+                paths.append(makeBarlinePath(staveCenterY: centerY, xPos: positionedToken.xPos))
+            case .note(let noteToken):
+                noteTokens.append(PositionedItem(item: noteToken, xPos: positionedToken.xPos))
+            }
+            
+            
+            
+            
+//            paths += makePaths(forToken: positionedToken.token,
+//                               centerY: centerY,
+//                               xPos: positionedToken.xPos)
         }
+        
+        paths += NoteRenderer.paths(forPositionedTokens: noteTokens, centerY: centerY)
         
         return paths
     }
     
-    func makePaths(forToken token: Token, centerY: Double, xPos: Double) -> [Path] {
-        
-        switch token {
-        case .note(let noteToken):
-            let paths = NoteRenderer.paths(forNoteToken: noteToken, centerY: centerY)
-            return paths.map { $0.translated(x: xPos, y: 0) }
-        case .barline:
-            return [makeBarlinePath(staveCenterY: centerY, xPos: xPos)]
-        }
-    }
+//    func makePaths(forToken token: Token, centerY: Double, xPos: Double) -> [Path] {
+//
+//        switch token {
+//        case .note(let noteToken):
+//            let paths = NoteRenderer.paths(forNoteToken: noteToken, centerY: centerY)
+//            return paths.map { $0.translated(x: xPos, y: 0) }
+//        case .barline:
+//            return [makeBarlinePath(staveCenterY: centerY, xPos: xPos)]
+//        }
+//    }
     
     func makeNotePath(fromSymbolPath symbolPath: Path, centerY: Double, staveOffset: Int, xPos: Double) -> Path {
         

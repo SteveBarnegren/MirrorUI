@@ -28,6 +28,7 @@ public class Note {
         case whole
         case half
         case quarter
+        case eighth
     }
     
     let value: Value
@@ -42,6 +43,7 @@ public class Note {
         case .whole: return 1.0
         case .half: return 1.0 / 2
         case .quarter: return 1.0 / 4
+        case .eighth: return 1.0 / 8
         }
     }
 }

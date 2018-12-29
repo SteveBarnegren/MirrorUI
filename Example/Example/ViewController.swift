@@ -28,14 +28,10 @@ class ViewController: UIViewController {
         let composition = Composition()
         composition.add(note: Note(value: .quarter, pitch: .b4))
         composition.add(note: Note(value: .quarter, pitch: .a4))
-        composition.add(note: Note(value: .quarter, pitch: .c4))
-        composition.add(note: Note(value: .quarter, pitch: .e4))
-        
-        composition.addBarline()
-        
-        composition.add(note: Note(value: .half, pitch: .b4))
-        composition.add(note: Note(value: .quarter, pitch: .c4))
-        composition.add(note: Note(value: .whole, pitch: .e4))
+        composition.add(note: Note(value: .eighth, pitch: .c4))
+        composition.add(note: Note(value: .eighth, pitch: .e4))
+        composition.add(note: Note(value: .eighth, pitch: .b4))
+        composition.add(note: Note(value: .eighth, pitch: .g3))
 
         return composition
     }

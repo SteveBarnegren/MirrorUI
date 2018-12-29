@@ -13,6 +13,11 @@ struct PositionedToken {
     let xPos: Double
 }
 
+struct PositionedItem<T> {
+    let item: T
+    let xPos: Double
+}
+
 class LayoutSolver {
     
     private enum SpacedToken {
@@ -21,7 +26,7 @@ class LayoutSolver {
         case fixedSpace(Double)
     }
     
-    func solve(tokens: [Token], layoutWidth: Double) -> [PositionedToken] {
+    func solve(tokens: [Token], layoutWidth: Double) -> [PositionedItem<Token>] {
         
         // Generate the initial tokens
         var spacedTokens = generateSpacedTokens(fromTokens: tokens)
@@ -103,16 +108,16 @@ class LayoutSolver {
         return scaledTokens
     }
     
-    private func generatePositionedTokens(fromSpacedTokens spacedTokens: [SpacedToken]) -> [PositionedToken] {
+    private func generatePositionedTokens(fromSpacedTokens spacedTokens: [SpacedToken]) -> [PositionedItem<Token>] {
         
         var xPos: Double = 0
         
-        var positionedTokens = [PositionedToken]()
+        var positionedTokens = [PositionedItem<Token>]()
         
         for spacedToken in spacedTokens {
             switch spacedToken {
             case .token(let token):
-                let positionedToken = PositionedToken(token: token, xPos: xPos)
+                let positionedToken = PositionedItem(item: token, xPos: xPos)
                 positionedTokens.append(positionedToken)
                 xPos += width(forToken: token)
             case .rhythmicSpace(let space):

@@ -10,17 +10,52 @@ import Foundation
 
 class NoteRenderer {
     
-    static func paths(forNoteToken noteToken: NoteToken, centerY: Double) -> [Path] {
+//    static func paths(forNoteToken noteToken: NoteToken, centerY: Double) -> [Path] {
+//
+//        var paths = [Path]()
+//
+//        paths.append(makeHeadPath(forToken: noteToken))
+//
+//        if noteToken.hasStem {
+//            paths.append(makeStemPath())
+//        }
+//
+//        return paths.map { $0.translated(x: 0, y: centerY + Double(noteToken.pitch.staveOffset)/2 - 0.5) }
+//    }
+    
+    static func paths(forPositionedTokens positionedTokens: [PositionedItem<NoteToken>], centerY: Double) -> [Path] {
         
         var paths = [Path]()
         
-        paths.append(makeHeadPath(forToken: noteToken))
+        var noteCluster = [PositionedItem<NoteToken>]()
         
-        if noteToken.hasStem {
-            paths.append(makeStemPath())
+        func renderNoteCluster() {
+            for positionedNote in noteCluster {
+                
+                var notePaths = [Path]()
+                
+                notePaths.append(
+                    makeHeadPath(forToken: positionedNote.item)
+                )
+                if let stemPath = makeStemPath(forToken: positionedNote.item) {
+                    notePaths.append(stemPath)
+                }
+                paths += notePaths.map { $0.translated(x: positionedNote.xPos, y: centerY + Double(positionedNote.item.pitch.staveOffset)/2 - 0.5) }
+            }
+            noteCluster.removeAll()
         }
         
-        return paths.map { $0.translated(x: 0, y: centerY + Double(noteToken.pitch.staveOffset)/2 - 0.5) }
+        for positionedNote in positionedTokens {
+            if positionedNote.item.connectBeamsToPreviousNote {
+                noteCluster.append(positionedNote)
+            } else {
+                renderNoteCluster()
+                noteCluster.append(positionedNote)
+            }
+        }
+        renderNoteCluster()
+        
+        return paths
     }
     
     static private func makeHeadPath(forToken token: NoteToken) -> Path {
@@ -39,7 +74,11 @@ class NoteRenderer {
         return path
     }
     
-    static private func makeStemPath() -> Path {
+    static private func makeStemPath(forToken token: NoteToken) -> Path? {
+        
+        if token.hasStem == false {
+            return nil
+        }
         
         let stemWidth = 0.1
         let stemHeight = 3.0

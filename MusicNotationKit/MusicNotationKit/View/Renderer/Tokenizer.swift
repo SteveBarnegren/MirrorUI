@@ -78,6 +78,14 @@ class Tokenizer {
                                   hasStem: true,
                                   connectBeamsToPreviousNote: false)
             return [.note(token)]
+        case .eighth:
+            let token = NoteToken(headStyle: .filled,
+                                  pitch: note.pitch,
+                                  duration: 0.125,
+                                  numberOfBeams: 1,
+                                  hasStem: true,
+                                  connectBeamsToPreviousNote: true)
+            return [.note(token)]
         }
     }
     
