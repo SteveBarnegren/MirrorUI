@@ -10,7 +10,7 @@ import Foundation
 
 class NoteRenderer {
     
-    static func paths(forPositionedSymbols positionedSymbols: [PositionedItem<NoteSymbol>], centerY: Double) -> [Path] {
+    static func paths(forPositionedSymbols positionedSymbols: [PositionedItem<NoteSymbol>]) -> [Path] {
         
         var paths = [Path]()
         
@@ -22,7 +22,7 @@ class NoteRenderer {
                 return
             }
             
-            paths += makePaths(forNoteCluster: noteCluster, centerY: centerY)
+            paths += makePaths(forNoteCluster: noteCluster)
             noteCluster.removeAll()
         }
         
@@ -39,31 +39,31 @@ class NoteRenderer {
         return paths
     }
     
-    static private func makePaths(forNote item: PositionedItem<NoteSymbol>, centerY: Double) -> [Path] {
+    static private func makePaths(forNote item: PositionedItem<NoteSymbol>) -> [Path] {
         
         var paths = [Path]()
         
-        let headPath = makeHeadPath(forNote: item, centerY: centerY)
+        let headPath = makeHeadPath(forNote: item)
         paths.append(headPath)
         
-        if let stemPath = makeStemPath(forNote: item, centerY: centerY) {
+        if let stemPath = makeStemPath(forNote: item) {
             paths.append(stemPath)
         }
         
-        return paths.map { $0.translated(x: item.xPos, y: centerY + Double(item.item.pitch.staveOffset)/2 - 0.5) }
+        return paths
     }
     
-    static private func makePaths(forNoteCluster items: [PositionedItem<NoteSymbol>], centerY: Double) -> [Path] {
+    static private func makePaths(forNoteCluster items: [PositionedItem<NoteSymbol>]) -> [Path] {
         
         var paths = [Path]()
         
         for item in items {
             var notePaths = [Path]()
             
-            let headPath = makeHeadPath(forNote: item, centerY: centerY)
+            let headPath = makeHeadPath(forNote: item)
             notePaths.append(headPath)
             
-            if let stemPath = makeStemPath(forNote: item, centerY: centerY) {
+            if let stemPath = makeStemPath(forNote: item) {
                 notePaths.append(stemPath)
             }
             
@@ -71,7 +71,7 @@ class NoteRenderer {
         }
         
         let stemRects = items
-            .compactMap { self.stemRect(forNote: $0, centerY: centerY) }
+            .compactMap { self.stemRect(forNote: $0) }
 
         var beamPath = Path()
         beamPath.move(to: stemRects.first!.topLeft)
@@ -81,7 +81,7 @@ class NoteRenderer {
         return paths
     }
     
-    static private func makeHeadPath(forNote note: PositionedItem<NoteSymbol>, centerY: Double) -> Path {
+    static private func makeHeadPath(forNote note: PositionedItem<NoteSymbol>) -> Path {
         
         let path: Path
         
@@ -94,16 +94,16 @@ class NoteRenderer {
             path = SymbolPaths.filledNoteHead
         }
         
-        return path.translated(x: note.xPos, y: centerY + Double(note.item.pitch.staveOffset)/2 - 0.5)
+        return path.translated(x: note.position.x, y: note.position.y)
     }
     
-    static private func makeStemPath(forNote note: PositionedItem<NoteSymbol>, centerY: Double) -> Path? {
+    static private func makeStemPath(forNote note: PositionedItem<NoteSymbol>) -> Path? {
         
         if note.item.hasStem == false {
             return nil
         }
         
-        guard let stemRect = self.stemRect(forNote: note, centerY: centerY) else {
+        guard let stemRect = self.stemRect(forNote: note) else {
             return nil
         }
         
@@ -113,7 +113,7 @@ class NoteRenderer {
         return stemPath
     }
     
-    static private func stemRect(forNote note: PositionedItem<NoteSymbol>, centerY: Double) -> Rect? {
+    static private func stemRect(forNote note: PositionedItem<NoteSymbol>) -> Rect? {
         
         if note.item.hasStem == false {
             return nil
@@ -129,6 +129,6 @@ class NoteRenderer {
                     y: stemY,
                     width: stemWidth,
                     height: stemHeight)
-            .translated(x: note.xPos, y: centerY + Double(note.item.pitch.staveOffset)/2 - 0.5)
+            .translated(x: note.position.x, y: note.position.y)
     }
 }

@@ -27,7 +27,8 @@ class MusicRenderer {
         
         let symbols = Symbolizer().symbolize(composition: composition)
         let positionedSymbols = LayoutSolver().solve(symbols: symbols,
-                                                    layoutWidth: layoutWidth)
+                                                     layoutWidth: layoutWidth,
+                                                     staveCentreY: canvasSize.height/2)
         
         var paths = [Path]()
         paths += StaveRenderer.stavePaths(forCanvasSize: canvasSize)
@@ -43,13 +44,13 @@ class MusicRenderer {
         for positionedSymbol in positionedSymbols {
             switch positionedSymbol.item {
             case .barline:
-                paths.append(makeBarlinePath(staveCenterY: centerY, xPos: positionedSymbol.xPos))
+                paths.append(makeBarlinePath(staveCenterY: centerY, xPos: positionedSymbol.position.x))
             case .note(let noteSymbol):
-                noteSymbols.append(PositionedItem(item: noteSymbol, xPos: positionedSymbol.xPos))
+                noteSymbols.append(PositionedItem(item: noteSymbol, position: positionedSymbol.position))
             }
         }
         
-        paths += NoteRenderer.paths(forPositionedSymbols: noteSymbols, centerY: centerY)
+        paths += NoteRenderer.paths(forPositionedSymbols: noteSymbols)
         
         return paths
     }
