@@ -25,52 +25,34 @@ class MusicRenderer {
         
         let layoutWidth = displaySize.width / staveSpacing
         
-        let tokens = Tokenizer().tokenize(composition: composition)
-        let positionedTokens = LayoutSolver().solve(tokens: tokens,
+        let symbols = Symbolizer().symbolize(composition: composition)
+        let positionedSymbols = LayoutSolver().solve(symbols: symbols,
                                                     layoutWidth: layoutWidth)
         
         var paths = [Path]()
         paths += StaveRenderer.stavePaths(forCanvasSize: canvasSize)
-        paths += makePaths(forTokens: positionedTokens, centerY: canvasSize.height/2)
+        paths += makePaths(forSymbols: positionedSymbols, centerY: canvasSize.height/2)
         return paths.map { $0.scaled(staveSpacing) }
     }
     
-    private func makePaths(forTokens positionedTokens: [PositionedItem<Token>], centerY: Double) -> [Path] {
+    private func makePaths(forSymbols positionedSymbols: [PositionedItem<Symbol>], centerY: Double) -> [Path] {
         
         var paths = [Path]()
-        var noteTokens = [PositionedItem<NoteToken>]()
+        var noteSymbols = [PositionedItem<NoteSymbol>]()
         
-        for positionedToken in positionedTokens {
-            switch positionedToken.item {
+        for positionedSymbol in positionedSymbols {
+            switch positionedSymbol.item {
             case .barline:
-                paths.append(makeBarlinePath(staveCenterY: centerY, xPos: positionedToken.xPos))
-            case .note(let noteToken):
-                noteTokens.append(PositionedItem(item: noteToken, xPos: positionedToken.xPos))
+                paths.append(makeBarlinePath(staveCenterY: centerY, xPos: positionedSymbol.xPos))
+            case .note(let noteSymbol):
+                noteSymbols.append(PositionedItem(item: noteSymbol, xPos: positionedSymbol.xPos))
             }
-            
-            
-            
-            
-//            paths += makePaths(forToken: positionedToken.token,
-//                               centerY: centerY,
-//                               xPos: positionedToken.xPos)
         }
         
-        paths += NoteRenderer.paths(forPositionedTokens: noteTokens, centerY: centerY)
+        paths += NoteRenderer.paths(forPositionedSymbols: noteSymbols, centerY: centerY)
         
         return paths
     }
-    
-//    func makePaths(forToken token: Token, centerY: Double, xPos: Double) -> [Path] {
-//
-//        switch token {
-//        case .note(let noteToken):
-//            let paths = NoteRenderer.paths(forNoteToken: noteToken, centerY: centerY)
-//            return paths.map { $0.translated(x: xPos, y: 0) }
-//        case .barline:
-//            return [makeBarlinePath(staveCenterY: centerY, xPos: xPos)]
-//        }
-//    }
     
     func makeNotePath(fromSymbolPath symbolPath: Path, centerY: Double, staveOffset: Int, xPos: Double) -> Path {
         

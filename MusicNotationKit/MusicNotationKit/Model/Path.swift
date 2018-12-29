@@ -48,6 +48,10 @@ struct Rect {
     var center: Point {
         return Point(x + width/2, y + height/2)
     }
+    
+    func translated(x: Double, y: Double) -> Rect {
+        return Rect(x: self.x + x, y: self.y + y, width: width, height: height)
+    }
 }
 
 struct Path {

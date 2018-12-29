@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct PositionedToken {
-    let token: Token
+struct PositionedSymbol {
+    let symbol: Symbol
     let xPos: Double
 }
 
@@ -20,56 +20,56 @@ struct PositionedItem<T> {
 
 class LayoutSolver {
     
-    private enum SpacedToken {
-        case token(Token)
+    private enum SpacedSymbol {
+        case symbol(Symbol)
         case rhythmicSpace(Double)
         case fixedSpace(Double)
     }
     
-    func solve(tokens: [Token], layoutWidth: Double) -> [PositionedItem<Token>] {
+    func solve(symbols: [Symbol], layoutWidth: Double) -> [PositionedItem<Symbol>] {
         
-        // Generate the initial tokens
-        var spacedTokens = generateSpacedTokens(fromTokens: tokens)
+        // Generate the initial symbols
+        var spacedSymbols = generateSpacedSymbols(fromSymbols: symbols)
 
         // Scale the space to fill the layout width
-        spacedTokens = scaleSpacedTokens(spacedTokens, layoutWidth: layoutWidth)
+        spacedSymbols = scaleSpacedSymbols(spacedSymbols, layoutWidth: layoutWidth)
         
-        // Create Positioned Tokens
-        return generatePositionedTokens(fromSpacedTokens: spacedTokens)
+        // Create Positioned Symbols
+        return generatePositionedSymbols(fromSpacedSymbols: spacedSymbols)
     }
     
-    private func generateSpacedTokens(fromTokens tokens: [Token]) -> [SpacedToken] {
+    private func generateSpacedSymbols(fromSymbols symbols: [Symbol]) -> [SpacedSymbol] {
         
-        var spacedTokens = [SpacedToken]()
+        var spacedSymbols = [SpacedSymbol]()
         
-        for (index, token) in tokens.enumerated() {
-            let isLast = index == tokens.count-1
+        for (index, symbol) in symbols.enumerated() {
+            let isLast = index == symbols.count-1
             
-            switch token {
-            case .note(let noteToken):
-                spacedTokens.append(.token(token))
-                spacedTokens.append(.rhythmicSpace(noteToken.duration))
+            switch symbol {
+            case .note(let noteSymbol):
+                spacedSymbols.append(.symbol(symbol))
+                spacedSymbols.append(.rhythmicSpace(noteSymbol.duration))
             case .barline:
-                spacedTokens.append(.token(token))
+                spacedSymbols.append(.symbol(symbol))
                 if !isLast {
-                    spacedTokens.append(.fixedSpace(1))
+                    spacedSymbols.append(.fixedSpace(1))
                 }
             }
         }
         
-        return spacedTokens
+        return spacedSymbols
     }
     
-    private func scaleSpacedTokens(_ spacedTokens: [SpacedToken],
-                                   layoutWidth: Double) -> [SpacedToken] {
+    private func scaleSpacedSymbols(_ spacedSymbols: [SpacedSymbol],
+                                    layoutWidth: Double) -> [SpacedSymbol] {
         
-        // Get the space taken up bu tokens and fixed spaces
+        // Get the space taken up by symbols and fixed spaces
         var fixedSpace: Double = 0
         
-        for spacedToken in spacedTokens {
-            switch spacedToken {
-            case .token(let token):
-                fixedSpace += width(forToken: token)
+        for spacedSymbol in spacedSymbols {
+            switch spacedSymbol {
+            case .symbol(let symbol):
+                fixedSpace += width(forSymbol: symbol)
             case .fixedSpace(let space):
                 fixedSpace += space
             case .rhythmicSpace:
@@ -80,9 +80,9 @@ class LayoutSolver {
         // Total up the available scalable space
         var scalableSpace: Double = 0
         
-        for spacedToken in spacedTokens {
-            switch spacedToken {
-            case .token, .fixedSpace:
+        for spacedSymbol in spacedSymbols {
+            switch spacedSymbol {
+            case .symbol, .fixedSpace:
                 break
             case .rhythmicSpace(let space):
                 scalableSpace += space
@@ -90,36 +90,36 @@ class LayoutSolver {
         }
         
         // Scale each space to fill the available space
-        var scaledTokens = [SpacedToken]()
+        var scaledSymbols = [SpacedSymbol]()
         let availableSpace = layoutWidth - fixedSpace
         let scale = availableSpace / scalableSpace
 
-        for spacedToken in spacedTokens {
-            switch spacedToken {
-            case .token:
-                scaledTokens.append(spacedToken)
+        for spacedSymbol in spacedSymbols {
+            switch spacedSymbol {
+            case .symbol:
+                scaledSymbols.append(spacedSymbol)
             case .rhythmicSpace(let space):
-                scaledTokens.append(.rhythmicSpace(space * scale))
+                scaledSymbols.append(.rhythmicSpace(space * scale))
             case .fixedSpace(let space):
-                scaledTokens.append(.fixedSpace(space))
+                scaledSymbols.append(.fixedSpace(space))
             }
         }
         
-        return scaledTokens
+        return scaledSymbols
     }
     
-    private func generatePositionedTokens(fromSpacedTokens spacedTokens: [SpacedToken]) -> [PositionedItem<Token>] {
+    private func generatePositionedSymbols(fromSpacedSymbols spacedSymbols: [SpacedSymbol]) -> [PositionedItem<Symbol>] {
         
         var xPos: Double = 0
         
-        var positionedTokens = [PositionedItem<Token>]()
+        var positionedSymbols = [PositionedItem<Symbol>]()
         
-        for spacedToken in spacedTokens {
-            switch spacedToken {
-            case .token(let token):
-                let positionedToken = PositionedItem(item: token, xPos: xPos)
-                positionedTokens.append(positionedToken)
-                xPos += width(forToken: token)
+        for spacedSymbol in spacedSymbols {
+            switch spacedSymbol {
+            case .symbol(let symbol):
+                let positionedSymbol = PositionedItem(item: symbol, xPos: xPos)
+                positionedSymbols.append(positionedSymbol)
+                xPos += width(forSymbol: symbol)
             case .rhythmicSpace(let space):
                 xPos += space
             case .fixedSpace(let space):
@@ -127,12 +127,12 @@ class LayoutSolver {
             }
         }
         
-        return positionedTokens
+        return positionedSymbols
     }
     
-    private func width(forToken token: Token) -> Double {
+    private func width(forSymbol symbol: Symbol) -> Double {
         
-        switch token {
+        switch symbol {
         case .note:
             return 1
         case .barline:

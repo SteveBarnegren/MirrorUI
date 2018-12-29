@@ -10,43 +10,24 @@ import Foundation
 
 class NoteRenderer {
     
-//    static func paths(forNoteToken noteToken: NoteToken, centerY: Double) -> [Path] {
-//
-//        var paths = [Path]()
-//
-//        paths.append(makeHeadPath(forToken: noteToken))
-//
-//        if noteToken.hasStem {
-//            paths.append(makeStemPath())
-//        }
-//
-//        return paths.map { $0.translated(x: 0, y: centerY + Double(noteToken.pitch.staveOffset)/2 - 0.5) }
-//    }
-    
-    static func paths(forPositionedTokens positionedTokens: [PositionedItem<NoteToken>], centerY: Double) -> [Path] {
+    static func paths(forPositionedSymbols positionedSymbols: [PositionedItem<NoteSymbol>], centerY: Double) -> [Path] {
         
         var paths = [Path]()
         
-        var noteCluster = [PositionedItem<NoteToken>]()
+        var noteCluster = [PositionedItem<NoteSymbol>]()
         
         func renderNoteCluster() {
-            for positionedNote in noteCluster {
-                
-                var notePaths = [Path]()
-                
-                notePaths.append(
-                    makeHeadPath(forToken: positionedNote.item)
-                )
-                if let stemPath = makeStemPath(forToken: positionedNote.item) {
-                    notePaths.append(stemPath)
-                }
-                paths += notePaths.map { $0.translated(x: positionedNote.xPos, y: centerY + Double(positionedNote.item.pitch.staveOffset)/2 - 0.5) }
+            
+            guard noteCluster.isEmpty == false else {
+                return
             }
+            
+            paths += makePaths(forNoteCluster: noteCluster, centerY: centerY)
             noteCluster.removeAll()
         }
         
-        for positionedNote in positionedTokens {
-            if positionedNote.item.connectBeamsToPreviousNote {
+        for positionedNote in positionedSymbols {
+            if positionedNote.item.numberOfBeams > 0 && positionedNote.item.connectBeamsToPreviousNote {
                 noteCluster.append(positionedNote)
             } else {
                 renderNoteCluster()
@@ -58,11 +39,53 @@ class NoteRenderer {
         return paths
     }
     
-    static private func makeHeadPath(forToken token: NoteToken) -> Path {
+    static private func makePaths(forNote item: PositionedItem<NoteSymbol>, centerY: Double) -> [Path] {
+        
+        var paths = [Path]()
+        
+        let headPath = makeHeadPath(forNote: item, centerY: centerY)
+        paths.append(headPath)
+        
+        if let stemPath = makeStemPath(forNote: item, centerY: centerY) {
+            paths.append(stemPath)
+        }
+        
+        return paths.map { $0.translated(x: item.xPos, y: centerY + Double(item.item.pitch.staveOffset)/2 - 0.5) }
+    }
+    
+    static private func makePaths(forNoteCluster items: [PositionedItem<NoteSymbol>], centerY: Double) -> [Path] {
+        
+        var paths = [Path]()
+        
+        for item in items {
+            var notePaths = [Path]()
+            
+            let headPath = makeHeadPath(forNote: item, centerY: centerY)
+            notePaths.append(headPath)
+            
+            if let stemPath = makeStemPath(forNote: item, centerY: centerY) {
+                notePaths.append(stemPath)
+            }
+            
+            paths += notePaths
+        }
+        
+        let stemRects = items
+            .compactMap { self.stemRect(forNote: $0, centerY: centerY) }
+
+        var beamPath = Path()
+        beamPath.move(to: stemRects.first!.topLeft)
+        stemRects.dropFirst().forEach { beamPath.addLine(to: $0.topLeft) }
+        paths.append(beamPath)
+        
+        return paths
+    }
+    
+    static private func makeHeadPath(forNote note: PositionedItem<NoteSymbol>, centerY: Double) -> Path {
         
         let path: Path
         
-        switch token.headStyle {
+        switch note.item.headStyle {
         case .semibreve:
             path = SymbolPaths.semibreve
         case .open:
@@ -71,12 +94,28 @@ class NoteRenderer {
             path = SymbolPaths.filledNoteHead
         }
         
-        return path
+        return path.translated(x: note.xPos, y: centerY + Double(note.item.pitch.staveOffset)/2 - 0.5)
     }
     
-    static private func makeStemPath(forToken token: NoteToken) -> Path? {
+    static private func makeStemPath(forNote note: PositionedItem<NoteSymbol>, centerY: Double) -> Path? {
         
-        if token.hasStem == false {
+        if note.item.hasStem == false {
+            return nil
+        }
+        
+        guard let stemRect = self.stemRect(forNote: note, centerY: centerY) else {
+            return nil
+        }
+        
+        var stemPath = Path()
+        stemPath.addRect(stemRect)
+        stemPath.drawStyle = .fill
+        return stemPath
+    }
+    
+    static private func stemRect(forNote note: PositionedItem<NoteSymbol>, centerY: Double) -> Rect? {
+        
+        if note.item.hasStem == false {
             return nil
         }
         
@@ -86,14 +125,10 @@ class NoteRenderer {
         let stemX = 1.25
         let stemY = 0.6
         
-        let stemRect = Rect(x: stemX,
-                            y: stemY,
-                            width: stemWidth,
-                            height: stemHeight)
-        
-        var stemPath = Path()
-        stemPath.addRect(stemRect)
-        stemPath.drawStyle = .fill
-        return stemPath
+        return Rect(x: stemX,
+                    y: stemY,
+                    width: stemWidth,
+                    height: stemHeight)
+            .translated(x: note.xPos, y: centerY + Double(note.item.pitch.staveOffset)/2 - 0.5)
     }
 }

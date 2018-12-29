@@ -12,7 +12,7 @@
 		67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7D21CC04550078A575 /* MusicRenderer.swift */; };
 		67494C8021CC06740078A575 /* Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7F21CC06740078A575 /* Vector2.swift */; };
 		67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8121CC06940078A575 /* Vector2Tests.swift */; };
-		67494C8421CD62710078A575 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8321CD62710078A575 /* Tokenizer.swift */; };
+		67494C8421CD62710078A575 /* Symbolizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8321CD62710078A575 /* Symbolizer.swift */; };
 		67494C8621CD69FB0078A575 /* LayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8521CD69FB0078A575 /* LayoutSolver.swift */; };
 		67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */; };
 		67494C8A21CD84520078A575 /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8921CD84520078A575 /* Pitch.swift */; };
@@ -43,7 +43,7 @@
 		67494C7D21CC04550078A575 /* MusicRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRenderer.swift; sourceTree = "<group>"; };
 		67494C7F21CC06740078A575 /* Vector2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector2.swift; sourceTree = "<group>"; };
 		67494C8121CC06940078A575 /* Vector2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector2Tests.swift; sourceTree = "<group>"; };
-		67494C8321CD62710078A575 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		67494C8321CD62710078A575 /* Symbolizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbolizer.swift; sourceTree = "<group>"; };
 		67494C8521CD69FB0078A575 /* LayoutSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSolver.swift; sourceTree = "<group>"; };
 		67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array_Numeric+Extensions.swift"; sourceTree = "<group>"; };
 		67494C8921CD84520078A575 /* Pitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				67494C7D21CC04550078A575 /* MusicRenderer.swift */,
-				67494C8321CD62710078A575 /* Tokenizer.swift */,
+				67494C8321CD62710078A575 /* Symbolizer.swift */,
 				67494C8521CD69FB0078A575 /* LayoutSolver.swift */,
 				6749365021CF8861005BA334 /* StaveRenderer.swift */,
 				67AE184121CF9DE800F3545D /* NoteRenderer.swift */,
@@ -284,7 +284,7 @@
 				67494C8021CC06740078A575 /* Vector2.swift in Sources */,
 				67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */,
 				67A15FA421C512E800C3C03F /* Note.swift in Sources */,
-				67494C8421CD62710078A575 /* Tokenizer.swift in Sources */,
+				67494C8421CD62710078A575 /* Symbolizer.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
