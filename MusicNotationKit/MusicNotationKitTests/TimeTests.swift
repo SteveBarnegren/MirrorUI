@@ -1,0 +1,69 @@
+//
+//  TimeTests.swift
+//  MusicNotationKitTests
+//
+//  Created by Steve Barnegren on 30/12/2018.
+//  Copyright © 2018 Steve Barnegren. All rights reserved.
+//
+
+import XCTest
+@testable import MusicNotationKit
+
+class TimeTests: XCTestCase {
+    
+    // MARK: - Initialisation
+    
+    func test_TimeInitialisation() {
+        
+        let time = Time(value: 2, division: 4)
+        XCTAssertEqual(time.value, 2)
+        XCTAssertEqual(time.division, 4)
+    }
+    
+    func test_TimeInitialisationWithCrotchets() {
+        
+        let time = Time(crotchets: 5)
+        XCTAssertEqual(time.value, 5)
+        XCTAssertEqual(time.division, 4)
+    }
+    
+    func test_TimeInitialisationWithQuavers() {
+        
+        let time = Time(quavers: 5)
+        XCTAssertEqual(time.value, 5)
+        XCTAssertEqual(time.division, 8)
+    }
+    
+    func test_TimeInitialisationWithSemiquavers() {
+        
+        let time = Time(semiquavers: 5)
+        XCTAssertEqual(time.value, 5)
+        XCTAssertEqual(time.division, 16)
+    }
+    
+    // MARK: - Equatable
+
+    func test_Equatable() {
+        
+        XCTAssertEqual(Time(crotchets: 4), Time(crotchets: 4))
+        XCTAssertNotEqual(Time(crotchets: 4), Time(crotchets: 3))
+        
+        XCTAssertEqual(Time(quavers: 4), Time(quavers: 4))
+        XCTAssertNotEqual(Time(quavers: 4), Time(quavers: 3))
+
+        XCTAssertEqual(Time(crotchets: 4), Time(quavers: 8))
+        XCTAssertEqual(Time(crotchets: 4), Time(semiquavers: 16))
+        XCTAssertEqual(Time(quavers: 3), Time(semiquavers: 6))
+        XCTAssertNotEqual(Time(crotchets: 4), Time(quavers: 7))
+        XCTAssertNotEqual(Time(crotchets: 4), Time(quavers: 9))
+    }
+    
+    // MARK: - Comparable
+    
+    func test_Comparable() {
+        
+        XCTAssertTrue(Time(crotchets: 3) < Time(crotchets: 4))
+        XCTAssertTrue(Time(semiquavers: 15) < Time(crotchets: 4))
+        XCTAssertTrue(Time(semiquavers: 17) > Time(crotchets: 4))
+    }
+}
