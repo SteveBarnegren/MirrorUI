@@ -13,7 +13,7 @@ typealias DisplaySize = Vector2<Double>
 class MusicRenderer {
     
     let composition: Composition
-    let staveSpacing: Double = 20
+    let staveSpacing: Double = 8
     
     init(composition: Composition) {
         self.composition = composition

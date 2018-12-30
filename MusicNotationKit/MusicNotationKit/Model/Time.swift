@@ -12,6 +12,8 @@ struct Time {
     var value: Int
     var division: Int
     
+    static let zero = Time(crotchets: 0)
+    
     init(value: Int, division: Int) {
         self.value = value
         self.division = division
@@ -72,3 +74,12 @@ extension Time: Comparable {
     }
 }
 
+// Math
+func +(lhs: Time, rhs: Time) -> Time {
+    let values = makeDivisionSame(lhs, rhs)
+    return Time(value: values.0.value + values.1.value, division: values.0.division)
+}
+
+func += (lhs: inout Time, rhs: Time) {
+    lhs = lhs + rhs
+}

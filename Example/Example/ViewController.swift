@@ -26,14 +26,28 @@ class ViewController: UIViewController {
     func makeComposition() -> Composition {
         
         let composition = Composition()
-        composition.add(note: Note(value: .quarter, pitch: .b4))
-        composition.add(note: Note(value: .quarter, pitch: .a4))
-        composition.add(note: Note(value: .eighth, pitch: .c4))
-        composition.add(note: Note(value: .eighth, pitch: .e4))
-        composition.add(note: Note(value: .sixteenth, pitch: .b4))
-        composition.add(note: Note(value: .sixteenth, pitch: .g3))
-        composition.add(note: Note(value: .sixteenth, pitch: .b4))
-        composition.add(note: Note(value: .sixteenth, pitch: .g3))
+        // bar 0
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        
+        // bar 1
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
 
         return composition
     }
