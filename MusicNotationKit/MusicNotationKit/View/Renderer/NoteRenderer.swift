@@ -63,7 +63,7 @@ class NoteRenderer {
         var paths = [Path]()
         
         // Work out the beam height
-        let beamY = (notes.map { $0.position.y }.max() ?? 0) + preferredStemHeight
+        let beamY = notes.map { $0.position.y }.max().orZero() + preferredStemHeight
         
         // Draw notes with stems
         for note in notes {
@@ -93,7 +93,6 @@ class NoteRenderer {
         beamPath.addRect(beamRect)
         beamPath.drawStyle = .fill
         paths.append(beamPath)
-        
         
         return paths
     }
