@@ -79,20 +79,29 @@ class NoteRenderer {
         }
         
         // Draw the beams
-        let firstNote = notes.first!
-        let lastNote = notes.last!
+        let maximumNumberOfBeams = notes.map { $0.numberOfBeams }.max().orOne()
         
-        let beamStartX = firstNote.position.x + stemXOffet
-        let beamEndX = lastNote.position.x + stemXOffet + stemWidth
-        let beamRect = Rect(x: beamStartX,
-                            y: beamY,
-                            width: beamEndX - beamStartX,
-                            height: -beamWidth)
-        
-        var beamPath = Path()
-        beamPath.addRect(beamRect)
-        beamPath.drawStyle = .fill
-        paths.append(beamPath)
+        for beamIndex in 0..<maximumNumberOfBeams {
+            
+            var beamedNotes = [NoteSymbol]()
+            
+            func renderBeamedNotes() {
+                if beamedNotes.count >= 2 {
+                    paths.append(makeBeamPath(fromNote: beamedNotes.first!, toNote: beamedNotes.last!, beamYPosition: beamY, beamIndex: beamIndex))
+                } else if beamedNotes.isEmpty == false {
+                    fatalError("Single beamed notes are not supported")
+                }
+            }
+            
+            for note in notes {
+                if note.numberOfBeams > beamIndex {
+                    beamedNotes.append(note)
+                } else {
+                    renderBeamedNotes()
+                }
+            }
+            renderBeamedNotes()
+        }
         
         return paths
     }
@@ -141,5 +150,22 @@ class NoteRenderer {
                     y: note.position.y + stemYOffset,
                     width: stemWidth,
                     height: stemEndY - note.position.y - stemYOffset)
+    }
+    
+    static private func makeBeamPath(fromNote: NoteSymbol, toNote: NoteSymbol, beamYPosition: Double, beamIndex: Int) -> Path {
+        
+        let beamSeparation = 0.5
+        
+        let beamStartX = fromNote.position.x + stemXOffet
+        let beamEndX = toNote.position.x + stemXOffet + stemWidth
+        let beamRect = Rect(x: beamStartX,
+                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
+                            width: beamEndX - beamStartX,
+                            height: -beamWidth)
+        
+        var path = Path()
+        path.addRect(beamRect)
+        path.drawStyle = .fill
+        return path
     }
 }

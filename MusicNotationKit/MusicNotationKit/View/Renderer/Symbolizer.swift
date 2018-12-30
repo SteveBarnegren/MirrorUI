@@ -107,6 +107,16 @@ class Symbolizer {
                                     position: .zero)
             lastSymbolCanConnectBeams = true
             return [.note(symbol)]
+        case .sixteenth:
+            let symbol = NoteSymbol(headStyle: .filled,
+                                    pitch: note.pitch,
+                                    duration: 1.0 / 16,
+                                    numberOfBeams: 2,
+                                    hasStem: true,
+                                    connectBeamsToPreviousNote: lastSymbolCanConnectBeams,
+                                    position: .zero)
+            lastSymbolCanConnectBeams = true
+            return [.note(symbol)]
         }
     }
     

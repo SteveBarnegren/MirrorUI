@@ -30,8 +30,10 @@ class ViewController: UIViewController {
         composition.add(note: Note(value: .quarter, pitch: .a4))
         composition.add(note: Note(value: .eighth, pitch: .c4))
         composition.add(note: Note(value: .eighth, pitch: .e4))
-        composition.add(note: Note(value: .eighth, pitch: .b4))
-        composition.add(note: Note(value: .eighth, pitch: .g3))
+        composition.add(note: Note(value: .sixteenth, pitch: .b4))
+        composition.add(note: Note(value: .sixteenth, pitch: .g3))
+        composition.add(note: Note(value: .sixteenth, pitch: .b4))
+        composition.add(note: Note(value: .sixteenth, pitch: .g3))
 
         return composition
     }
