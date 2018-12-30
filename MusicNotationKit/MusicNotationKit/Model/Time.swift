@@ -33,6 +33,10 @@ struct Time {
         self.division = 16
         self.value = semiquavers
     }
+    
+    func convertedTruncating(toDivision newDivision: Int) -> Time {
+        return Time(value: self.value * newDivision/division, division: newDivision)
+    }
 }
 
 private func makeDivisionSame(_ a: Time, _ b: Time) -> (Time, Time) {

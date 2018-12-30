@@ -136,24 +136,28 @@ class Symbolizer {
     
     private func breakIllegalNoteBeams(inBarSymbols symbols: [Symbol]) -> [Symbol] {
         
+        // THIS METHOD CURRENTLY ASSUMES 4/4 TIME!
+        
         var symbols = symbols
         
         // Break quavers at the middle
         symbols = breakNoteBeams(inBarSymbols: symbols,
                                  withDuration: Time(quavers: 1),
-                                 atPoints: [Time(crotchets: 2)])
+                                 every: 2)
         
         // Break semiquavers on the beat
         symbols = breakNoteBeams(inBarSymbols: symbols,
                                  withDuration: Time(semiquavers: 1),
-                                 atPoints: [Time(crotchets: 1), Time(crotchets: 2), Time(crotchets: 3), Time(crotchets: 4)])
+                                 every: 1)
+        
+        // Break quavers where there are semiquavers on either side
 
         return symbols
     }
     
     func breakNoteBeams(inBarSymbols symbols: [Symbol],
                         withDuration targetDuration: Time,
-                        atPoints breakPoints: [Time]) -> [Symbol] {
+                        every breakDivision: Int) -> [Symbol] {
         
         var newSymbols = [Symbol]()
         
@@ -164,13 +168,12 @@ class Symbolizer {
         for symbol in symbols {
             switch symbol {
             case .note(var noteSymbol):
-                currentTime += noteSymbol.t_duration
-                if noteSymbol.t_duration <= targetDuration,
-                    let nextBreakIndex = breakPoints.firstIndex(where: { $0 < currentTime }),
-                    nextBreakIndex != lastBreakIndex {
+                let nextBreakIndex = currentTime.convertedTruncating(toDivision: breakDivision).value
+                if noteSymbol.t_duration <= targetDuration && nextBreakIndex != lastBreakIndex {
                     lastBreakIndex = nextBreakIndex
                     noteSymbol.connectBeamsToPreviousNote = false
                 }
+                currentTime += noteSymbol.t_duration
                 newSymbols.append(.note(noteSymbol))
             default:
                 newSymbols.append(symbol)
