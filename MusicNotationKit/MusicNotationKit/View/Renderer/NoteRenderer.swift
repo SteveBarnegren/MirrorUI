@@ -10,6 +10,11 @@ import Foundation
 
 class NoteRenderer {
     
+    static let preferredStemHeight = 3.5
+    static let stemXOffet = 1.25
+    static let stemWidth = 0.1
+    static let beamWidth = 0.3
+
     static func paths(forNotes notes: [NoteSymbol]) -> [Path] {
         
         var paths = [Path]()
@@ -46,7 +51,7 @@ class NoteRenderer {
         let headPath = makeHeadPath(forNote: note)
         paths.append(headPath)
         
-        if let stemPath = makeStemPath(forNote: note) {
+        if let stemPath = makeStemPath(fromNote: note, to: note.position.y + preferredStemHeight) {
             paths.append(stemPath)
         }
         
@@ -57,26 +62,38 @@ class NoteRenderer {
         
         var paths = [Path]()
         
+        // Work out the beam height
+        let beamY = (notes.map { $0.position.y }.max() ?? 0) + preferredStemHeight
+        
+        // Draw notes with stems
         for note in notes {
             var notePaths = [Path]()
             
             let headPath = makeHeadPath(forNote: note)
             notePaths.append(headPath)
             
-            if let stemPath = makeStemPath(forNote: note) {
-                notePaths.append(stemPath)
-            }
-            
+            let stemPath = makeStemPath(fromNote: note, to: beamY)
+            notePaths.append(maybe: stemPath)
+
             paths += notePaths
         }
         
-        let stemRects = notes
-            .compactMap { self.stemRect(forNote: $0) }
-
+        // Draw the beams
+        let firstNote = notes.first!
+        let lastNote = notes.last!
+        
+        let beamStartX = firstNote.position.x + stemXOffet
+        let beamEndX = lastNote.position.x + stemXOffet + stemWidth
+        let beamRect = Rect(x: beamStartX,
+                            y: beamY,
+                            width: beamEndX - beamStartX,
+                            height: -beamWidth)
+        
         var beamPath = Path()
-        beamPath.move(to: stemRects.first!.topLeft)
-        stemRects.dropFirst().forEach { beamPath.addLine(to: $0.topLeft) }
+        beamPath.addRect(beamRect)
+        beamPath.drawStyle = .fill
         paths.append(beamPath)
+        
         
         return paths
     }
@@ -97,13 +114,13 @@ class NoteRenderer {
         return path.translated(x: note.position.x, y: note.position.y)
     }
     
-    static private func makeStemPath(forNote note: NoteSymbol) -> Path? {
+    static private func makeStemPath(fromNote note: NoteSymbol, to stemEndY: Double) -> Path? {
         
         if note.hasStem == false {
             return nil
         }
         
-        guard let stemRect = self.stemRect(forNote: note) else {
+        guard let stemRect = self.stemRect(fromNote: note, to: stemEndY) else {
             return nil
         }
         
@@ -113,22 +130,17 @@ class NoteRenderer {
         return stemPath
     }
     
-    static private func stemRect(forNote note: NoteSymbol) -> Rect? {
+    static private func stemRect(fromNote note: NoteSymbol, to stemEndY: Double) -> Rect? {
         
         if note.hasStem == false {
             return nil
         }
         
-        let stemWidth = 0.1
-        let stemHeight = 3.0
+        let stemYOffset = 0.6
         
-        let stemX = 1.25
-        let stemY = 0.6
-        
-        return Rect(x: stemX,
-                    y: stemY,
+        return Rect(x: note.position.x + stemXOffet,
+                    y: note.position.y + stemYOffset,
                     width: stemWidth,
-                    height: stemHeight)
-            .translated(x: note.position.x, y: note.position.y)
+                    height: stemEndY - note.position.y - stemYOffset)
     }
 }
