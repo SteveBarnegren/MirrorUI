@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct PositionedItem<T> {
-    let item: T
-    var position: Point
-}
-
 class LayoutSolver {
     
     private enum SpacedSymbol {
@@ -21,7 +16,7 @@ class LayoutSolver {
         case fixedSpace(Double)
     }
     
-    func solve(symbols: [Symbol], layoutWidth: Double, staveCentreY: Double) -> [PositionedItem<Symbol>] {
+    func solve(symbols: [Symbol], layoutWidth: Double, staveCentreY: Double) -> [Symbol] {
         
         // Generate the initial symbols
         var spacedSymbols = generateSpacedSymbols(fromSymbols: symbols)
@@ -107,17 +102,18 @@ class LayoutSolver {
         return scaledSymbols
     }
     
-    private func generatePositionedSymbols(fromSpacedSymbols spacedSymbols: [SpacedSymbol]) -> [PositionedItem<Symbol>] {
+    // MARK: - Horizontal Positioning
+    
+    private func generatePositionedSymbols(fromSpacedSymbols spacedSymbols: [SpacedSymbol]) -> [Symbol] {
         
         var xPos: Double = 0
         
-        var positionedSymbols = [PositionedItem<Symbol>]()
+        var positionedSymbols = [Symbol]()
         
         for spacedSymbol in spacedSymbols {
             switch spacedSymbol {
             case .symbol(let symbol):
-                let position = Point(xPos, 0)
-                let positionedSymbol = PositionedItem(item: symbol, position: position)
+                let positionedSymbol = applyHorizontalPosition(xPos, toSymbol: symbol)
                 positionedSymbols.append(positionedSymbol)
                 xPos += width(forSymbol: symbol)
             case .rhythmicSpace(let space):
@@ -130,26 +126,37 @@ class LayoutSolver {
         return positionedSymbols
     }
     
-    private func applyVerticalPositions(toSymbols symbols: [PositionedItem<Symbol>], staveCenterY: Double) -> [PositionedItem<Symbol>] {
+    func applyHorizontalPosition(_ xPos: Double, toSymbol symbol: Symbol) -> Symbol {
         
-        var verticallyPositionedItems = [PositionedItem<Symbol>]()
+        switch symbol {
+        case .barline(var barlineSymbol):
+            barlineSymbol.xPosition = xPos
+            return .barline(barlineSymbol)
+        case .note(var noteSymbol):
+            noteSymbol.position.x = xPos
+            return .note(noteSymbol)
+        }
+    }
+    
+    // MARK: - Vertical Positioning
+    
+    private func applyVerticalPositions(toSymbols symbols: [Symbol], staveCenterY: Double) -> [Symbol] {
         
-        for positionedItem in symbols {
+        var positionedSymbols = [Symbol]()
+        
+        for symbol in symbols {
             
-            var copy = positionedItem
-            
-            switch positionedItem.item {
-            case .note(let noteSymbol):
+            switch symbol {
+            case .note(var noteSymbol):
                 let yPosition = staveCenterY + Double(noteSymbol.pitch.staveOffset)/2 - 0.5
-                copy.position.y = yPosition
-            case .barline:
-                break
+                noteSymbol.position.y = yPosition
+                positionedSymbols.append(.note(noteSymbol))
+            case .barline(let barlineSymbol):
+                positionedSymbols.append(.barline(barlineSymbol))
             }
-            
-            verticallyPositionedItems.append(copy)
         }
         
-        return verticallyPositionedItems
+        return positionedSymbols
     }
     
     private func width(forSymbol symbol: Symbol) -> Double {

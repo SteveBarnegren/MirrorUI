@@ -22,10 +22,15 @@ struct NoteSymbol {
     let numberOfBeams: Int
     let hasStem: Bool
     let connectBeamsToPreviousNote: Bool
+    var position: Point
+}
+
+struct BarlineSymbol {
+    var xPosition: Double
 }
 
 enum Symbol {
-    case barline
+    case barline(BarlineSymbol)
     case note(NoteSymbol)
 }
 
@@ -39,20 +44,24 @@ class Symbolizer {
         
         var symbols = [Symbol]()
         
-        symbols.append(.barline)
+        symbols.append(.barline(makeBarlineSymbol()))
         
         for item in composition.items {
             switch item {
             case .note(let note):
                 symbols += makeSymbols(forNote: note)
             case .barline:
-                symbols.append(.barline)
+                symbols.append(.barline(makeBarlineSymbol()))
             }
         }
         
-        symbols.append(.barline)
-        
+        symbols.append(.barline(makeBarlineSymbol()))
+
         return symbols
+    }
+    
+    private func makeBarlineSymbol() -> BarlineSymbol {
+        return BarlineSymbol(xPosition: 0)
     }
     
     private func makeSymbols(forNote note: Note) -> [Symbol] {
@@ -64,7 +73,8 @@ class Symbolizer {
                                     duration: 1,
                                     numberOfBeams: 0,
                                     hasStem: false,
-                                    connectBeamsToPreviousNote: false)
+                                    connectBeamsToPreviousNote: false,
+                                    position: .zero)
             lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .half:
@@ -73,7 +83,8 @@ class Symbolizer {
                                     duration: 0.5,
                                     numberOfBeams: 0,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: false)
+                                    connectBeamsToPreviousNote: false,
+                                    position: .zero)
             lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .quarter:
@@ -82,7 +93,8 @@ class Symbolizer {
                                     duration: 0.25,
                                     numberOfBeams: 0,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: false)
+                                    connectBeamsToPreviousNote: false,
+                                    position: .zero)
             lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .eighth:
@@ -91,7 +103,8 @@ class Symbolizer {
                                     duration: 0.125,
                                     numberOfBeams: 1,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: lastSymbolCanConnectBeams)
+                                    connectBeamsToPreviousNote: lastSymbolCanConnectBeams,
+                                    position: .zero)
             lastSymbolCanConnectBeams = true
             return [.note(symbol)]
         }

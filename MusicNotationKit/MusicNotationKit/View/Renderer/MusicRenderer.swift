@@ -36,21 +36,21 @@ class MusicRenderer {
         return paths.map { $0.scaled(staveSpacing) }
     }
     
-    private func makePaths(forSymbols positionedSymbols: [PositionedItem<Symbol>], centerY: Double) -> [Path] {
+    private func makePaths(forSymbols symbols: [Symbol], centerY: Double) -> [Path] {
         
         var paths = [Path]()
-        var noteSymbols = [PositionedItem<NoteSymbol>]()
+        var noteSymbols = [NoteSymbol]()
         
-        for positionedSymbol in positionedSymbols {
-            switch positionedSymbol.item {
-            case .barline:
-                paths.append(makeBarlinePath(staveCenterY: centerY, xPos: positionedSymbol.position.x))
+        for symbol in symbols {
+            switch symbol {
+            case .barline(let barlineSymbol):
+                paths.append(makeBarlinePath(staveCenterY: centerY, xPos: barlineSymbol.xPosition))
             case .note(let noteSymbol):
-                noteSymbols.append(PositionedItem(item: noteSymbol, position: positionedSymbol.position))
+                noteSymbols.append(noteSymbol)
             }
         }
         
-        paths += NoteRenderer.paths(forPositionedSymbols: noteSymbols)
+        paths += NoteRenderer.paths(forNotes: noteSymbols)
         
         return paths
     }

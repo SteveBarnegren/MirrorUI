@@ -12,6 +12,8 @@ struct Point {
     var x: Double
     var y: Double
     
+    static let zero = Point(0, 0)
+    
     init(_ x: Double, _ y: Double) {
         self.x = x
         self.y = y

@@ -10,11 +10,11 @@ import Foundation
 
 class NoteRenderer {
     
-    static func paths(forPositionedSymbols positionedSymbols: [PositionedItem<NoteSymbol>]) -> [Path] {
+    static func paths(forNotes notes: [NoteSymbol]) -> [Path] {
         
         var paths = [Path]()
         
-        var noteCluster = [PositionedItem<NoteSymbol>]()
+        var noteCluster = [NoteSymbol]()
         
         func renderNoteCluster() {
             
@@ -26,12 +26,12 @@ class NoteRenderer {
             noteCluster.removeAll()
         }
         
-        for positionedNote in positionedSymbols {
-            if positionedNote.item.numberOfBeams > 0 && positionedNote.item.connectBeamsToPreviousNote {
-                noteCluster.append(positionedNote)
+        for note in notes {
+            if note.numberOfBeams > 0 && note.connectBeamsToPreviousNote {
+                noteCluster.append(note)
             } else {
                 renderNoteCluster()
-                noteCluster.append(positionedNote)
+                noteCluster.append(note)
             }
         }
         renderNoteCluster()
@@ -39,38 +39,38 @@ class NoteRenderer {
         return paths
     }
     
-    static private func makePaths(forNote item: PositionedItem<NoteSymbol>) -> [Path] {
+    static private func makePaths(forNote note: NoteSymbol) -> [Path] {
         
         var paths = [Path]()
         
-        let headPath = makeHeadPath(forNote: item)
+        let headPath = makeHeadPath(forNote: note)
         paths.append(headPath)
         
-        if let stemPath = makeStemPath(forNote: item) {
+        if let stemPath = makeStemPath(forNote: note) {
             paths.append(stemPath)
         }
         
         return paths
     }
     
-    static private func makePaths(forNoteCluster items: [PositionedItem<NoteSymbol>]) -> [Path] {
+    static private func makePaths(forNoteCluster notes: [NoteSymbol]) -> [Path] {
         
         var paths = [Path]()
         
-        for item in items {
+        for note in notes {
             var notePaths = [Path]()
             
-            let headPath = makeHeadPath(forNote: item)
+            let headPath = makeHeadPath(forNote: note)
             notePaths.append(headPath)
             
-            if let stemPath = makeStemPath(forNote: item) {
+            if let stemPath = makeStemPath(forNote: note) {
                 notePaths.append(stemPath)
             }
             
             paths += notePaths
         }
         
-        let stemRects = items
+        let stemRects = notes
             .compactMap { self.stemRect(forNote: $0) }
 
         var beamPath = Path()
@@ -81,11 +81,11 @@ class NoteRenderer {
         return paths
     }
     
-    static private func makeHeadPath(forNote note: PositionedItem<NoteSymbol>) -> Path {
+    static private func makeHeadPath(forNote note: NoteSymbol) -> Path {
         
         let path: Path
         
-        switch note.item.headStyle {
+        switch note.headStyle {
         case .semibreve:
             path = SymbolPaths.semibreve
         case .open:
@@ -97,9 +97,9 @@ class NoteRenderer {
         return path.translated(x: note.position.x, y: note.position.y)
     }
     
-    static private func makeStemPath(forNote note: PositionedItem<NoteSymbol>) -> Path? {
+    static private func makeStemPath(forNote note: NoteSymbol) -> Path? {
         
-        if note.item.hasStem == false {
+        if note.hasStem == false {
             return nil
         }
         
@@ -113,9 +113,9 @@ class NoteRenderer {
         return stemPath
     }
     
-    static private func stemRect(forNote note: PositionedItem<NoteSymbol>) -> Rect? {
+    static private func stemRect(forNote note: NoteSymbol) -> Rect? {
         
-        if note.item.hasStem == false {
+        if note.hasStem == false {
             return nil
         }
         
