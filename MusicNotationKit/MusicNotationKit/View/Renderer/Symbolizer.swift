@@ -24,6 +24,8 @@ struct NoteSymbol {
     let hasStem: Bool
     var connectBeamsToPreviousNote: Bool
     var position: Point
+    
+    var time = Time.zero
 }
 
 struct BarlineSymbol {
@@ -40,8 +42,6 @@ class Symbolizer {
     var lastSymbolCanConnectBeams = false
     
     func symbolize(composition: Composition) -> [Symbol] {
-        
-        lastSymbolCanConnectBeams = false
         
         var symbols = [Symbol]()
         
@@ -62,13 +62,16 @@ class Symbolizer {
     private func makeSymbols(forBar bar: Bar) -> [Symbol] {
         
         var symbols = [Symbol]()
-        lastSymbolCanConnectBeams = false
         
         for note in bar.notes {
             symbols += makeSymbols(forNote: note)
         }
         
-        symbols = breakIllegalNoteBeams(inBarSymbols: symbols)
+        symbols = addTimeInformation(toSymbols: symbols)
+        
+        symbols.processNoteSymbols {
+            return self.applyNoteBeams(toSymbols: $0)
+        }
         
         return symbols
     }
@@ -84,7 +87,8 @@ class Symbolizer {
                                     numberOfBeams: 0,
                                     hasStem: false,
                                     connectBeamsToPreviousNote: false,
-                                    position: .zero)
+                                    position: .zero,
+                                    time: .zero)
             lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .half:
@@ -95,7 +99,8 @@ class Symbolizer {
                                     numberOfBeams: 0,
                                     hasStem: true,
                                     connectBeamsToPreviousNote: false,
-                                    position: .zero)
+                                    position: .zero,
+                                    time: .zero)
             lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .quarter:
@@ -106,7 +111,8 @@ class Symbolizer {
                                     numberOfBeams: 0,
                                     hasStem: true,
                                     connectBeamsToPreviousNote: false,
-                                    position: .zero)
+                                    position: .zero,
+                                    time: .zero)
             lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .eighth:
@@ -116,8 +122,9 @@ class Symbolizer {
                                     t_duration: Time(quavers: 1),
                                     numberOfBeams: 1,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: lastSymbolCanConnectBeams,
-                                    position: .zero)
+                                    connectBeamsToPreviousNote: false,
+                                    position: .zero,
+                                    time: .zero)
             lastSymbolCanConnectBeams = true
             return [.note(symbol)]
         case .sixteenth:
@@ -127,60 +134,80 @@ class Symbolizer {
                                     t_duration: Time(semiquavers: 1),
                                     numberOfBeams: 2,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: lastSymbolCanConnectBeams,
-                                    position: .zero)
+                                    connectBeamsToPreviousNote: false,
+                                    position: .zero,
+                                    time: .zero)
             lastSymbolCanConnectBeams = true
             return [.note(symbol)]
         }
     }
     
-    private func breakIllegalNoteBeams(inBarSymbols symbols: [Symbol]) -> [Symbol] {
-        
-        // THIS METHOD CURRENTLY ASSUMES 4/4 TIME!
-        
-        var symbols = symbols
-        
-        // Break quavers at the middle
-        symbols = breakNoteBeams(inBarSymbols: symbols,
-                                 withDuration: Time(quavers: 1),
-                                 every: 2)
-        
-        // Break semiquavers on the beat
-        symbols = breakNoteBeams(inBarSymbols: symbols,
-                                 withDuration: Time(semiquavers: 1),
-                                 every: 1)
-        
-        // Break quavers where there are semiquavers on either side
-
-        return symbols
-    }
+    // MARK: - Time Information
     
-    func breakNoteBeams(inBarSymbols symbols: [Symbol],
-                        withDuration targetDuration: Time,
-                        every breakDivision: Int) -> [Symbol] {
+    private func addTimeInformation(toSymbols symbols: [Symbol]) -> [Symbol] {
         
-        var newSymbols = [Symbol]()
+        var time = Time.zero
         
-        var lastBreakIndex = -1
-        
-        var currentTime = Time.zero
+        var processedSymbols = [Symbol]()
         
         for symbol in symbols {
             switch symbol {
             case .note(var noteSymbol):
-                let nextBreakIndex = currentTime.convertedTruncating(toDivision: breakDivision).value
-                if noteSymbol.t_duration <= targetDuration && nextBreakIndex != lastBreakIndex {
-                    lastBreakIndex = nextBreakIndex
-                    noteSymbol.connectBeamsToPreviousNote = false
-                }
-                currentTime += noteSymbol.t_duration
-                newSymbols.append(.note(noteSymbol))
-            default:
-                newSymbols.append(symbol)
+                noteSymbol.time = time
+                time += noteSymbol.t_duration
+                processedSymbols.append(.note(noteSymbol))
+            case .barline:
+                break
             }
         }
         
-        return newSymbols
+        return processedSymbols
     }
     
+    // MARK: - Beaming
+    
+    func applyNoteBeams(toSymbols noteSymbols: [NoteSymbol]) -> [NoteSymbol] {
+        // THIS METHOD ASSUMES 4/4 TIME!
+        
+        var lastBeat = -1
+        var processedNotes = [NoteSymbol]()
+        
+        for note in noteSymbols {
+            var note = note
+            let beat = note.time.convertedTruncating(toDivision: 4).value
+            note.connectBeamsToPreviousNote = beat == lastBeat
+            lastBeat = beat
+            processedNotes.append(note)
+        }
+        
+        return processedNotes
+    }
+}
+
+// MARK: - Array Extensions
+
+extension Array where Element == Symbol {
+    
+    mutating func processNoteSymbols(process: ([NoteSymbol]) -> [NoteSymbol]) {
+        
+        var noteSymbols = [NoteSymbol]()
+        var noteIndexes = [Int]()
+        
+        for (index, symbol) in self.enumerated() {
+            switch symbol {
+            case .note(let noteSymbol):
+                noteSymbols.append(noteSymbol)
+                noteIndexes.append(index)
+            default:
+                break
+            }
+        }
+        
+        let processedNoteSymbols = process(noteSymbols)
+        precondition(processedNoteSymbols.count == noteIndexes.count)
+        
+        for (newNoteSymbol, index) in zip(processedNoteSymbols, noteIndexes) {
+            self[index] = .note(newNoteSymbol)
+        }
+    }
 }

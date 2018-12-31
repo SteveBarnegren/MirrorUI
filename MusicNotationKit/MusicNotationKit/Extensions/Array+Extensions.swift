@@ -16,3 +16,35 @@ extension Array {
         }
     }
 }
+
+extension Array {
+    
+    func chunked<T: Equatable>(atChangeTo key: (Element) -> T) -> [[Element]] {
+        
+        var groups = [[Element]]()
+        
+        func addGroup(_ groupToAdd: [Element]) {
+            if groupToAdd.isEmpty == false {
+                groups.append(groupToAdd)
+            }
+        }
+        
+        var lastKey: T?
+        var currentGroup = [Element]()
+        
+        for item in self {
+            let itemKey = key(item)
+            if itemKey == lastKey {
+                currentGroup.append(item)
+            } else {
+                addGroup(currentGroup)
+                currentGroup.removeAll()
+                currentGroup.append(item)
+            }
+            lastKey = itemKey
+        }
+        
+        addGroup(currentGroup)
+        return groups
+    }
+}
