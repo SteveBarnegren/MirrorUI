@@ -29,25 +29,25 @@ class ViewController: UIViewController {
         // bar 0
         composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
         composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .quarter, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 0)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 0)
         composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
         composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
         composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
         
         // bar 1
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
         composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
         composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
         composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
         composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
         composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
         composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
         composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
+        composition.add(note: Note(value: .quarter, pitch: .c4), toBar: 1)
 
         return composition
     }

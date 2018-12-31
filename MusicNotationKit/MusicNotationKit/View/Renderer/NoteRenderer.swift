@@ -31,13 +31,27 @@ class NoteRenderer {
             noteCluster.removeAll()
         }
         
+        var lastNoteWasConnected = false
         for note in notes {
-            if note.numberOfBeams > 0 && note.connectBeamsToPreviousNote {
-                noteCluster.append(note)
-            } else {
+            // Is is the first note of the cluster?
+            if note.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == false {
                 renderNoteCluster()
                 noteCluster.append(note)
             }
+            // Is it the middle of the cluster?
+            else if note.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == true {
+                noteCluster.append(note)
+            }
+            // Is the end of the cluster?
+            else if note.numberOfForwardBeamConnections == 0 && lastNoteWasConnected == true {
+                noteCluster.append(note)
+                renderNoteCluster()
+            }
+            // Otherwise it's an unconnected note
+            else {
+                paths += makePaths(forNote: note)
+            }
+            lastNoteWasConnected = note.numberOfForwardBeamConnections > 0
         }
         renderNoteCluster()
         
@@ -65,6 +79,8 @@ class NoteRenderer {
         // Work out the beam height
         let beamY = notes.map { $0.position.y }.max().orZero() + preferredStemHeight
         
+        var previousNote: NoteSymbol?
+        
         // Draw notes with stems
         for note in notes {
             var notePaths = [Path]()
@@ -74,33 +90,25 @@ class NoteRenderer {
             
             let stemPath = makeStemPath(fromNote: note, to: beamY)
             notePaths.append(maybe: stemPath)
+            
+            // Draw beam connections from the previous note
+            if let previousNote = previousNote {
+                for beam in previousNote.beams where beam.style == .connectedToNext {
+                    notePaths.append(makeBeamPath(fromNote: previousNote, toNote: note, beamYPosition: beamY, beamIndex: beam.index))
+                }
+            }
+            
+            // Draw cutoff beam connections
+            for beam in note.beams where beam.style == .cutOffLeft {
+                notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beam.index, rightSide: false))
+            }
+            for beam in note.beams where beam.style == .cutOffRight {
+                notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beam.index, rightSide: true))
+            }
 
             paths += notePaths
-        }
-        
-        // Draw the beams
-        let maximumNumberOfBeams = notes.map { $0.numberOfBeams }.max().orOne()
-        
-        for beamIndex in 0..<maximumNumberOfBeams {
             
-            var beamedNotes = [NoteSymbol]()
-            
-            func renderBeamedNotes() {
-                if beamedNotes.count >= 2 {
-                    paths.append(makeBeamPath(fromNote: beamedNotes.first!, toNote: beamedNotes.last!, beamYPosition: beamY, beamIndex: beamIndex))
-                } else if beamedNotes.isEmpty == false {
-                    fatalError("Single beamed notes are not supported")
-                }
-            }
-            
-            for note in notes {
-                if note.numberOfBeams > beamIndex {
-                    beamedNotes.append(note)
-                } else {
-                    renderBeamedNotes()
-                }
-            }
-            renderBeamedNotes()
+            previousNote = note
         }
         
         return paths
@@ -161,6 +169,28 @@ class NoteRenderer {
         let beamRect = Rect(x: beamStartX,
                             y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
                             width: beamEndX - beamStartX,
+                            height: -beamWidth)
+        
+        var path = Path()
+        path.addRect(beamRect)
+        path.drawStyle = .fill
+        return path
+    }
+    
+    static private func makeCutOffBeamPath(forNote note: NoteSymbol, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
+        
+        let beamSeparation = 0.5
+        
+        let x: Double
+        if rightSide {
+            x = note.position.x + stemXOffet + stemWidth
+        } else {
+            x = note.position.x + stemXOffet - 1
+        }
+
+        let beamRect = Rect(x: x,
+                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
+                            width: 1,
                             height: -beamWidth)
         
         var path = Path()

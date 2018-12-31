@@ -16,15 +16,48 @@ struct NoteSymbol {
         case filled
     }
     
+    enum BeamStyle {
+        case connectedToNext
+        case cutOffLeft
+        case cutOffRight
+    }
+    
+    struct Beam {
+        let index: Int
+        let style: BeamStyle
+    }
+    
     let headStyle: HeadStyle
     let pitch: Pitch
     let duration: Time
-    let numberOfBeams: Int
     let hasStem: Bool
-    var connectBeamsToPreviousNote: Bool
-    var position: Point
+    let numberOfBeams: Int
     
+    var position = Point.zero
     var time = Time.zero
+    var beams = [Beam]()
+    
+    var numberOfForwardBeamConnections: Int {
+        
+        var num = 0
+        
+        for beam in beams {
+            if beam.style == .connectedToNext {
+                num += 1
+            }
+        }
+        
+        return num
+    }
+    
+    init(headStyle: HeadStyle, pitch: Pitch, duration: Time, hasStem: Bool, numberOfBeams: Int) {
+        self.headStyle = headStyle
+        self.pitch = pitch
+        self.duration = duration
+        self.hasStem = hasStem
+        self.numberOfBeams = numberOfBeams
+    }
+    
 }
 
 struct BarlineSymbol {
@@ -80,51 +113,36 @@ class Symbolizer {
             let symbol = NoteSymbol(headStyle: .semibreve,
                                     pitch: note.pitch,
                                     duration: Time(crotchets: 4),
-                                    numberOfBeams: 0,
                                     hasStem: false,
-                                    connectBeamsToPreviousNote: false,
-                                    position: .zero,
-                                    time: .zero)
+                                    numberOfBeams: 0)
             return [.note(symbol)]
         case .half:
             let symbol = NoteSymbol(headStyle: .open,
                                     pitch: note.pitch,
                                     duration: Time(crotchets: 2),
-                                    numberOfBeams: 0,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: false,
-                                    position: .zero,
-                                    time: .zero)
+                                    numberOfBeams: 0)
             return [.note(symbol)]
         case .quarter:
             let symbol = NoteSymbol(headStyle: .filled,
                                     pitch: note.pitch,
                                     duration: Time(crotchets: 1),
-                                    numberOfBeams: 0,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: false,
-                                    position: .zero,
-                                    time: .zero)
+                                    numberOfBeams: 0)
             return [.note(symbol)]
         case .eighth:
             let symbol = NoteSymbol(headStyle: .filled,
                                     pitch: note.pitch,
                                     duration: Time(quavers: 1),
-                                    numberOfBeams: 1,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: false,
-                                    position: .zero,
-                                    time: .zero)
+                                    numberOfBeams: 1)
             return [.note(symbol)]
         case .sixteenth:
             let symbol = NoteSymbol(headStyle: .filled,
                                     pitch: note.pitch,
                                     duration: Time(semiquavers: 1),
-                                    numberOfBeams: 2,
                                     hasStem: true,
-                                    connectBeamsToPreviousNote: false,
-                                    position: .zero,
-                                    time: .zero)
+                                    numberOfBeams: 2)
             return [.note(symbol)]
         }
     }
@@ -156,19 +174,68 @@ class Symbolizer {
     func applyNoteBeams(toSymbols noteSymbols: [NoteSymbol]) -> [NoteSymbol] {
         // THIS METHOD ASSUMES 4/4 TIME!
         
-        var lastBeat = -1
-        var processedNotes = [NoteSymbol]()
+        let notesByBeat = noteSymbols.chunked(atChangeTo: { $0.time.convertedTruncating(toDivision: 4).value })
+        return Array(notesByBeat.map { applyBeams(toNoteCluster: $0) }.joined())
+    }
+    
+    func applyBeams(toNoteCluster noteCluster: [NoteSymbol]) -> [NoteSymbol] {
         
-        for note in noteSymbols {
-            var note = note
-            let beat = note.time.convertedTruncating(toDivision: 4).value
-            note.connectBeamsToPreviousNote = beat == lastBeat
-            lastBeat = beat
+        print("\n\n*********************\n\n")
+        dump(noteCluster)
+        
+        var processedNotes = [NoteSymbol]()
+     
+        var lastNumberOfForwardConnections = 0
+        
+        for (index, note) in noteCluster.enumerated() {
+            var note = note            
+            var beamsLeft = note.numberOfBeams
+            
+            // forward beam connections
+            var numberOfForwardBeams = 0
+            if let next = noteCluster[maybe: index+1] {
+                numberOfForwardBeams = min(note.numberOfBeams, next.numberOfBeams)
+            }
+            
+            note.beams = (0..<numberOfForwardBeams).map { NoteSymbol.Beam(index: $0, style: .connectedToNext) }
+
+            // Remove accounted for beams by forward or backward connections
+            beamsLeft -= max(lastNumberOfForwardConnections, numberOfForwardBeams)
+            
+            // Add remaining beams as cut-offs
+            while beamsLeft > 0 {
+                let beamStyle: NoteSymbol.BeamStyle = (index == noteCluster.count - 1) ? .cutOffLeft : .cutOffRight
+                let beam = NoteSymbol.Beam(index: note.numberOfBeams - beamsLeft, style: beamStyle)
+                note.beams.append(beam)
+                beamsLeft -= 1
+            }
+            
+            lastNumberOfForwardConnections = note.numberOfForwardBeamConnections
             processedNotes.append(note)
         }
         
+        //print("\n\n*********************\n\n")
+        //dump(processedNotes)
+        
         return processedNotes
     }
+    
+//    func applyNoteBeams(toSymbols noteSymbols: [NoteSymbol]) -> [NoteSymbol] {
+//        // THIS METHOD ASSUMES 4/4 TIME!
+//
+//        var lastBeat = -1
+//        var processedNotes = [NoteSymbol]()
+//
+//        for note in noteSymbols {
+//            var note = note
+//            let beat = note.time.convertedTruncating(toDivision: 4).value
+//            note.connectBeamsToPreviousNote = beat == lastBeat
+//            lastBeat = beat
+//            processedNotes.append(note)
+//        }
+//
+//        return processedNotes
+//    }
 }
 
 // MARK: - Array Extensions
@@ -197,4 +264,9 @@ extension Array where Element == Symbol {
             self[index] = .note(newNoteSymbol)
         }
     }
+}
+
+struct BeamingRule {
+    let chunkSize: Time
+    let minimumNoteDuration: Time
 }
