@@ -58,6 +58,27 @@ class TimeTests: XCTestCase {
         XCTAssertEqual(Time(quavers: 7).convertedTruncating(toDivision: 4).value, 3)
     }
     
+    // MARK: - Bar pct
+    
+    func test_BarPct() {
+        
+        XCTAssertEqual(Time(crotchets: 0).barPct, 0)
+        XCTAssertEqual(Time(crotchets: 1).barPct, 0.25)
+        XCTAssertEqual(Time(crotchets: 2).barPct, 0.50)
+        XCTAssertEqual(Time(crotchets: 3).barPct, 0.75)
+        XCTAssertEqual(Time(crotchets: 4).barPct, 1)
+        
+        XCTAssertEqual(Time(quavers: 0).barPct, 0)
+        XCTAssertEqual(Time(quavers: 1).barPct, 0.125)
+        XCTAssertEqual(Time(quavers: 2).barPct, 0.25)
+        XCTAssertEqual(Time(quavers: 3).barPct, 0.375)
+        XCTAssertEqual(Time(quavers: 4).barPct, 0.5)
+        XCTAssertEqual(Time(quavers: 5).barPct, 0.625)
+        XCTAssertEqual(Time(quavers: 6).barPct, 0.75)
+        XCTAssertEqual(Time(quavers: 7).barPct, 0.875)
+        XCTAssertEqual(Time(quavers: 8).barPct, 1)
+    }
+    
     // MARK: - Equatable
 
     func test_Equatable() {

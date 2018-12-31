@@ -11,8 +11,8 @@ import Foundation
 class Bar {
     var notes = [Note]()
     
-    var duration: Double {
-        return notes.reduce(0) { $0 + $1.duration }
+    var duration: Time {
+        return notes.reduce(Time.zero) { $0 + $1.duration }
     }
 }
 
@@ -34,13 +34,13 @@ public class Note {
         self.pitch = pitch
     }
     
-    var duration: Double {
+    var duration: Time {
         switch self.value {
-        case .whole: return 1.0
-        case .half: return 1.0 / 2
-        case .quarter: return 1.0 / 4
-        case .eighth: return 1.0 / 8
-        case .sixteenth: return 1.0 / 16
+        case .whole: return Time(crotchets: 4)
+        case .half: return Time(crotchets: 2)
+        case .quarter: return Time(crotchets: 1)
+        case .eighth: return Time(quavers: 1)
+        case .sixteenth: return Time(semiquavers: 1)
         }
     }
 }
@@ -49,8 +49,8 @@ public class Composition {
     
     var bars = [Bar]()
     
-    var duration: Double {
-        return bars.reduce(0) { $0 + $1.duration }
+    var duration: Time {
+        return bars.reduce(Time.zero) { $0 + $1.duration }
     }
     
     public init() {

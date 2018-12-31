@@ -42,7 +42,7 @@ class LayoutSolver {
             switch symbol {
             case .note(let noteSymbol):
                 spacedSymbols.append(.symbol(symbol))
-                spacedSymbols.append(.rhythmicSpace(noteSymbol.duration))
+                spacedSymbols.append(.rhythmicSpace(noteSymbol.duration.barPct))
             case .barline:
                 spacedSymbols.append(.symbol(symbol))
                 if !isLast {

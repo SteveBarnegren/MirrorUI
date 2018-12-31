@@ -37,6 +37,10 @@ struct Time {
     func convertedTruncating(toDivision newDivision: Int) -> Time {
         return Time(value: self.value * newDivision/division, division: newDivision)
     }
+    
+    var barPct: Double {
+        return 1.0 / Double(self.division) * Double(self.value)
+    }
 }
 
 private func makeDivisionSame(_ a: Time, _ b: Time) -> (Time, Time) {

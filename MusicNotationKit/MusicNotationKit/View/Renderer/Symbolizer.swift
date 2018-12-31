@@ -18,8 +18,7 @@ struct NoteSymbol {
     
     let headStyle: HeadStyle
     let pitch: Pitch
-    let duration: Double
-    let t_duration: Time
+    let duration: Time
     let numberOfBeams: Int
     let hasStem: Bool
     var connectBeamsToPreviousNote: Bool
@@ -38,8 +37,6 @@ enum Symbol {
 }
 
 class Symbolizer {
-    
-    var lastSymbolCanConnectBeams = false
     
     func symbolize(composition: Composition) -> [Symbol] {
         
@@ -82,62 +79,52 @@ class Symbolizer {
         case .whole:
             let symbol = NoteSymbol(headStyle: .semibreve,
                                     pitch: note.pitch,
-                                    duration: 1,
-                                    t_duration: Time(crotchets: 4),
+                                    duration: Time(crotchets: 4),
                                     numberOfBeams: 0,
                                     hasStem: false,
                                     connectBeamsToPreviousNote: false,
                                     position: .zero,
                                     time: .zero)
-            lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .half:
             let symbol = NoteSymbol(headStyle: .open,
                                     pitch: note.pitch,
-                                    duration: 0.5,
-                                    t_duration: Time(crotchets: 2),
+                                    duration: Time(crotchets: 2),
                                     numberOfBeams: 0,
                                     hasStem: true,
                                     connectBeamsToPreviousNote: false,
                                     position: .zero,
                                     time: .zero)
-            lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .quarter:
             let symbol = NoteSymbol(headStyle: .filled,
                                     pitch: note.pitch,
-                                    duration: 0.25,
-                                    t_duration: Time(crotchets: 1),
+                                    duration: Time(crotchets: 1),
                                     numberOfBeams: 0,
                                     hasStem: true,
                                     connectBeamsToPreviousNote: false,
                                     position: .zero,
                                     time: .zero)
-            lastSymbolCanConnectBeams = false
             return [.note(symbol)]
         case .eighth:
             let symbol = NoteSymbol(headStyle: .filled,
                                     pitch: note.pitch,
-                                    duration: 0.125,
-                                    t_duration: Time(quavers: 1),
+                                    duration: Time(quavers: 1),
                                     numberOfBeams: 1,
                                     hasStem: true,
                                     connectBeamsToPreviousNote: false,
                                     position: .zero,
                                     time: .zero)
-            lastSymbolCanConnectBeams = true
             return [.note(symbol)]
         case .sixteenth:
             let symbol = NoteSymbol(headStyle: .filled,
                                     pitch: note.pitch,
-                                    duration: 1.0 / 16,
-                                    t_duration: Time(semiquavers: 1),
+                                    duration: Time(semiquavers: 1),
                                     numberOfBeams: 2,
                                     hasStem: true,
                                     connectBeamsToPreviousNote: false,
                                     position: .zero,
                                     time: .zero)
-            lastSymbolCanConnectBeams = true
             return [.note(symbol)]
         }
     }
@@ -154,7 +141,7 @@ class Symbolizer {
             switch symbol {
             case .note(var noteSymbol):
                 noteSymbol.time = time
-                time += noteSymbol.t_duration
+                time += noteSymbol.duration
                 processedSymbols.append(.note(noteSymbol))
             case .barline:
                 break
