@@ -162,7 +162,7 @@ class NoteRenderer {
     
     static private func makeBeamPath(fromNote: NoteSymbol, toNote: NoteSymbol, beamYPosition: Double, beamIndex: Int) -> Path {
         
-        let beamSeparation = 0.5
+        let beamSeparation = 0.4
         
         let beamStartX = fromNote.position.x + stemXOffet
         let beamEndX = toNote.position.x + stemXOffet + stemWidth
@@ -179,7 +179,7 @@ class NoteRenderer {
     
     static private func makeCutOffBeamPath(forNote note: NoteSymbol, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
         
-        let beamSeparation = 0.5
+        let beamSeparation = 0.4
         
         let x: Double
         if rightSide {
