@@ -21,21 +21,44 @@ class MusicRenderer {
     
     func paths(forDisplaySize displaySize: DisplaySize) -> [Path] {
         
-        let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
-        
-        let layoutWidth = displaySize.width / staveSpacing
-        
-        let symbols = Symbolizer().symbolize(composition: composition)
-        let positionedSymbols = LayoutSolver().solve(symbols: symbols,
-                                                     layoutWidth: layoutWidth,
-                                                     staveCentreY: canvasSize.height/2)
-        
         var paths = [Path]()
+
+        // Calculate layout sizes
+        let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
+        let layoutWidth = displaySize.width / staveSpacing
+    
+        // Populate note symbols
+        NoteSymbolDescriber().process(composition: composition)
+        
+        // Calculate note times
+        NoteTimeCalculator().process(composition: composition)
+        
+        
+        
+        
+        dump(composition)
+        
+        
+        // Render the stave
         paths += StaveRenderer.stavePaths(forCanvasSize: canvasSize)
-        paths += makePaths(forSymbols: positionedSymbols, centerY: canvasSize.height/2)
+
         return paths.map { $0.scaled(staveSpacing) }
+
+        
+        
+        // OLD
+//        let symbols = Symbolizer().symbolize(composition: composition)
+//        let positionedSymbols = LayoutSolver().solve(symbols: symbols,
+//                                                     layoutWidth: layoutWidth,
+//                                                     staveCentreY: canvasSize.height/2)
+//
+//        var paths = [Path]()
+//        paths += StaveRenderer.stavePaths(forCanvasSize: canvasSize)
+//        paths += makePaths(forSymbols: positionedSymbols, centerY: canvasSize.height/2)
+//        return paths.map { $0.scaled(staveSpacing) }
     }
     
+    /*
     private func makePaths(forSymbols symbols: [Symbol], centerY: Double) -> [Path] {
         
         var paths = [Path]()
@@ -76,4 +99,5 @@ class MusicRenderer {
         path.drawStyle = .stroke
         return path
     }
+ */
 }

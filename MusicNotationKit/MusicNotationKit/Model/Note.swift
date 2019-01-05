@@ -8,14 +8,6 @@
 
 import Foundation
 
-class Bar {
-    var notes = [Note]()
-    
-    var duration: Time {
-        return notes.reduce(Time.zero) { $0 + $1.duration }
-    }
-}
-
 public class Note {
     
     public enum Value {
@@ -28,11 +20,8 @@ public class Note {
     
     let value: Value
     let pitch: Pitch
-    
-    public init(value: Value, pitch: Pitch) {
-        self.value = value
-        self.pitch = pitch
-    }
+    var symbolDescription = NoteSymbolDescription.standard
+    var time = Time.zero
     
     var duration: Time {
         switch self.value {
@@ -43,27 +32,58 @@ public class Note {
         case .sixteenth: return Time(semiquavers: 1)
         }
     }
+    
+    public init(value: Value, pitch: Pitch) {
+        self.value = value
+        self.pitch = pitch
+    }
 }
 
-public class Composition {
+class NoteSymbolDescription {
     
-    var bars = [Bar]()
-    
-    var duration: Time {
-        return bars.reduce(Time.zero) { $0 + $1.duration }
+    enum HeadStyle {
+        case none
+        case semibreve
+        case open
+        case filled
     }
     
-    public init() {
+    enum BeamStyle {
+        case connectedToNext
+        case cutOffLeft
+        case cutOffRight
     }
     
-    // MARK: - Add Items
+    struct Beam {
+        let index: Int
+        let style: BeamStyle
+    }
     
-    public func add(note: Note, toBar barIndex: Int) {
+    let headStyle: HeadStyle
+    let hasStem: Bool
+    let numberOfBeams: Int
+    var beams = [Beam]()
+    
+    init(headStyle: HeadStyle, hasStem: Bool, numberOfBeams: Int) {
+        self.headStyle = headStyle
+        self.hasStem = hasStem
+        self.numberOfBeams = numberOfBeams
+    }
+    
+    static var standard: NoteSymbolDescription {
+        return NoteSymbolDescription(headStyle: .none, hasStem: false, numberOfBeams: 0)
+    }
+    
+    var numberOfForwardBeamConnections: Int {
         
-        while bars.count <= barIndex {
-            bars.append(Bar())
+        var num = 0
+        
+        for beam in beams {
+            if beam.style == .connectedToNext {
+                num += 1
+            }
         }
         
-        bars[barIndex].notes.append(note)
+        return num
     }
 }
