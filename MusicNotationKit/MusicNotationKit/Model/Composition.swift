@@ -38,4 +38,13 @@ public class Composition {
             }
         }
     }
+    
+    func enumerateNoteSequences(_ handler: (NoteSequence) -> Void) {
+        
+        for bar in bars {
+            for noteSequence in bar.sequences {
+                handler(noteSequence)
+            }
+        }
+    }
 }

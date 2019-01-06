@@ -33,6 +33,9 @@ class MusicRenderer {
         // Calculate note times
         NoteTimeCalculator().process(composition: composition)
         
+        // Populate note beams
+        NoteBeamDescriber().process(composition: composition)
+        
         // Calculate width constraints
         WidthConstraintsCalculator().process(composition: composition)
         
@@ -42,17 +45,12 @@ class MusicRenderer {
         // Apply Veritical positions
         VerticalPositioner().process(composition: composition, staveCenterY: canvasSize.height/2)
         
-        // TODO: Render paths
+        // Make paths
         var paths = makePaths(forComposition: composition)
-        
-        dump(composition)
-        
-        
-        // Render the stave
         paths += StaveRenderer.stavePaths(forCanvasSize: canvasSize)
 
+        dump(composition)
         return paths.map { $0.scaled(staveSpacing) }
-
     }
     
     private func makePaths(forComposition composition: Composition) -> [Path] {

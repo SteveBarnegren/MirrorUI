@@ -37,9 +37,18 @@ class ViewController: UIViewController {
         let sequenceOne = NoteSequence()
         
         sequenceOne.add(note: Note(value: .quarter, pitch: .b4))
-        sequenceOne.add(note: Note(value: .quarter, pitch: .b4))
-        sequenceOne.add(note: Note(value: .quarter, pitch: .b4))
-        sequenceOne.add(note: Note(value: .quarter, pitch: .b4))
+        
+        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
+
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
 
         let bar = Bar()
         bar.add(sequence: sequenceOne)
