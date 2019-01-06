@@ -57,8 +57,6 @@
 		67494C7D21CC04550078A575 /* MusicRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRenderer.swift; sourceTree = "<group>"; };
 		67494C7F21CC06740078A575 /* Vector2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector2.swift; sourceTree = "<group>"; };
 		67494C8121CC06940078A575 /* Vector2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector2Tests.swift; sourceTree = "<group>"; };
-		67494C8321CD62710078A575 /* Symbolizer_OLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbolizer_OLD.swift; sourceTree = "<group>"; };
-		67494C8521CD69FB0078A575 /* LayoutSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSolver.swift; sourceTree = "<group>"; };
 		67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array_Numeric+Extensions.swift"; sourceTree = "<group>"; };
 		67494C8921CD84520078A575 /* Pitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
 		674D503821DD50C8009E5AFE /* Composition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composition.swift; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 		67A15F9721C5129500C3C03F /* MusicNotationKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicNotationKitTests.swift; sourceTree = "<group>"; };
 		67A15F9921C5129500C3C03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67A15FA321C512E800C3C03F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		67AE184121CF9DE800F3545D /* NoteRendererOLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRendererOLD.swift; sourceTree = "<group>"; };
 		67AE184321D9305700F3545D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		67AE184521D9387900F3545D /* Optional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
 		67AE184721D9462C00F3545D /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -115,17 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				67494C7D21CC04550078A575 /* MusicRenderer.swift */,
-				674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */,
-				67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */,
-				674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */,
-				674D504321E10504009E5AFE /* HorizontalConstraintsCalculator.swift */,
-				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
-				67678DF721E245DB00E7FD71 /* VerticalPositioner.swift */,
-				674D504A21E23CD8009E5AFE /* NoteRenderer.swift */,
-				6749365021CF8861005BA334 /* StaveRenderer.swift */,
-				67494C8321CD62710078A575 /* Symbolizer_OLD.swift */,
-				67494C8521CD69FB0078A575 /* LayoutSolver.swift */,
-				67AE184121CF9DE800F3545D /* NoteRendererOLD.swift */,
+				67678DFB21E259E500E7FD71 /* Process Composition Model */,
+				67678DFC21E25A1400E7FD71 /* Renderers */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -147,6 +135,28 @@
 				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
 			);
 			path = "Horizontal Positioner";
+			sourceTree = "<group>";
+		};
+		67678DFB21E259E500E7FD71 /* Process Composition Model */ = {
+			isa = PBXGroup;
+			children = (
+				674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */,
+				67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */,
+				674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */,
+				674D504321E10504009E5AFE /* HorizontalConstraintsCalculator.swift */,
+				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
+				67678DF721E245DB00E7FD71 /* VerticalPositioner.swift */,
+			);
+			path = "Process Composition Model";
+			sourceTree = "<group>";
+		};
+		67678DFC21E25A1400E7FD71 /* Renderers */ = {
+			isa = PBXGroup;
+			children = (
+				674D504A21E23CD8009E5AFE /* NoteRenderer.swift */,
+				6749365021CF8861005BA334 /* StaveRenderer.swift */,
+			);
+			path = Renderers;
 			sourceTree = "<group>";
 		};
 		677C9C7E21C5168500C7A16E /* Model */ = {
