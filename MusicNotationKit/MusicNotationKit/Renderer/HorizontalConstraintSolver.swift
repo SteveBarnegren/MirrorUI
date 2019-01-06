@@ -9,7 +9,7 @@
 import Foundation
 
 protocol HorizontallyConstrained {
-    var time: Time { get }
+    var duration: Time { get }
     var leadingWidth: Double { get set }
     var trailingWidth: Double { get set }
 }
@@ -22,6 +22,38 @@ class HorizontalConstraintSolver {
         var preferredPercent: Double?
         var solvedDistance = Double(0)
         var isSolved = false
+    }
+    
+    func process(composition: Composition) {
+        for bar in composition.bars {
+            process(bar: bar)
+        }
+    }
+    
+    private func process(bar: Bar) {
+        for noteSequence in bar.sequences {
+            process(noteSequence: noteSequence)
+        }
+    }
+    
+    private func process(noteSequence: NoteSequence) {
+        for note in noteSequence.notes {
+            process(note: note)
+        }
+    }
+    
+    private func process(note: Note) {
+        
+        // Leading - 0.5 for the note head
+        var leadingWidth = Double(0)
+        leadingWidth += 0.5
+        
+        // Trailing - 0.5 for the note head
+        var trailingWidth = Double(0)
+        trailingWidth += 0.5
+        
+        note.leadingWidth = leadingWidth
+        note.trailingWidth = trailingWidth
     }
     
     func solve(_ horizontallyConstrainedItems: [HorizontallyConstrained], layoutWidth: Double) -> [Double] {
@@ -62,7 +94,7 @@ class HorizontalConstraintSolver {
         // Work out the x positions
         var results = [Double]()
         var xPos = Double(0)
-        for distance in distances {
+        for distance in distances where distance.toItem != nil {
             xPos += distance.solvedDistance
             results.append(xPos)
         }
@@ -84,7 +116,7 @@ class HorizontalConstraintSolver {
             }
             distance.requiredWidth += item.leadingWidth
             distance.toItem = item
-            distance.preferredPercent = item.time.barPct
+            distance.preferredPercent = lastItem?.duration.barPct
             distances.append(distance)
             
             lastItem = item
