@@ -21,7 +21,6 @@ class MusicRenderer {
     
     func paths(forDisplaySize displaySize: DisplaySize) -> [Path] {
         
-
         // Calculate layout sizes
         let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
         let layoutWidth = displaySize.width / staveSpacing
