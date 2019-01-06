@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Note {
+public class Note: HorizontallyConstrained {
     
     public enum Value {
         case whole
@@ -22,6 +22,12 @@ public class Note {
     let pitch: Pitch
     var symbolDescription = NoteSymbolDescription.standard
     var time = Time.zero
+    
+    // Width
+    var leadingWidth = Double(0)
+    var trailingWidth = Double(0)
+  
+    let position = Point.zero
     
     var duration: Time {
         switch self.value {

@@ -33,10 +33,20 @@ class MusicRenderer {
         // Calculate note times
         NoteTimeCalculator().process(composition: composition)
         
+        // Calculate width constraints
+        WidthConstraintsCalculator().process(composition: composition)
+        
+        // Solve X Positions
+        let notes = composition.bars[0].sequences[0].notes
+        let xPositions = HorizontalConstraintSolver().solve(notes, layoutWidth: layoutWidth)
+        dump(xPositions)
+        // TODO: Render paths
         
         
         
-        dump(composition)
+        
+        
+        //dump(composition)
         
         
         // Render the stave

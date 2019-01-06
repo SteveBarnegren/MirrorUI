@@ -19,6 +19,9 @@
 		674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749365021CF8861005BA334 /* StaveRenderer.swift */; };
 		674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */; };
 		674D504221DD5774009E5AFE /* NoteTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */; };
+		674D504421E10504009E5AFE /* HorizontalConstraintsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504321E10504009E5AFE /* HorizontalConstraintsCalculator.swift */; };
+		674D504621E10C80009E5AFE /* NotePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504521E10C80009E5AFE /* NotePositioner.swift */; };
+		674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */; };
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
 		67A15F9321C5129500C3C03F /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A15F8921C5129500C3C03F /* MusicNotationKit.framework */; };
@@ -59,6 +62,9 @@
 		674D503C21DD50F8009E5AFE /* NoteSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSequence.swift; sourceTree = "<group>"; };
 		674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSymbolDescriber.swift; sourceTree = "<group>"; };
 		674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTimeCalculator.swift; sourceTree = "<group>"; };
+		674D504321E10504009E5AFE /* HorizontalConstraintsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalConstraintsCalculator.swift; sourceTree = "<group>"; };
+		674D504521E10C80009E5AFE /* NotePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePositioner.swift; sourceTree = "<group>"; };
+		674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalConstraintSolver.swift; sourceTree = "<group>"; };
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		67A15F8921C5129500C3C03F /* MusicNotationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicNotationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,7 +74,7 @@
 		67A15F9721C5129500C3C03F /* MusicNotationKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicNotationKitTests.swift; sourceTree = "<group>"; };
 		67A15F9921C5129500C3C03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67A15FA321C512E800C3C03F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		67AE184121CF9DE800F3545D /* NoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRenderer.swift; sourceTree = "<group>"; };
+		67AE184121CF9DE800F3545D /* NoteRendererOLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRendererOLD.swift; sourceTree = "<group>"; };
 		67AE184321D9305700F3545D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		67AE184521D9387900F3545D /* Optional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
 		67AE184721D9462C00F3545D /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -103,10 +109,13 @@
 				67494C7D21CC04550078A575 /* MusicRenderer.swift */,
 				674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */,
 				674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */,
+				674D504321E10504009E5AFE /* HorizontalConstraintsCalculator.swift */,
+				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
+				674D504521E10C80009E5AFE /* NotePositioner.swift */,
 				6749365021CF8861005BA334 /* StaveRenderer.swift */,
 				67494C8321CD62710078A575 /* Symbolizer_OLD.swift */,
 				67494C8521CD69FB0078A575 /* LayoutSolver.swift */,
-				67AE184121CF9DE800F3545D /* NoteRenderer.swift */,
+				67AE184121CF9DE800F3545D /* NoteRendererOLD.swift */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -125,11 +134,10 @@
 			isa = PBXGroup;
 			children = (
 				674D503821DD50C8009E5AFE /* Composition.swift */,
-				67A15FA321C512E800C3C03F /* Note.swift */,
 				674D503A21DD50E6009E5AFE /* Bar.swift */,
 				674D503C21DD50F8009E5AFE /* NoteSequence.swift */,
+				67A15FA321C512E800C3C03F /* Note.swift */,
 				67494C8921CD84520078A575 /* Pitch.swift */,
-				67494C7B21CC02D40078A575 /* SymbolPaths.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				67A15F8C21C5129500C3C03F /* MusicNotationKit.h */,
+				67494C7B21CC02D40078A575 /* SymbolPaths.swift */,
 				674D503721DD50B2009E5AFE /* Basic Types */,
 				677C9C8221C518F800C7A16E /* Extensions */,
 				677C9C7E21C5168500C7A16E /* Model */,
@@ -312,6 +321,7 @@
 				67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */,
 				67AE184821D9462C00F3545D /* Time.swift in Sources */,
 				67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */,
+				674D504421E10504009E5AFE /* HorizontalConstraintsCalculator.swift in Sources */,
 				67AE184621D9387900F3545D /* Optional+Extensions.swift in Sources */,
 				677C9C8121C5172100C7A16E /* MusicView.swift in Sources */,
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,
@@ -319,8 +329,10 @@
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
 				674D504221DD5774009E5AFE /* NoteTimeCalculator.swift in Sources */,
 				674D503921DD50C8009E5AFE /* Composition.swift in Sources */,
+				674D504621E10C80009E5AFE /* NotePositioner.swift in Sources */,
 				67494C8A21CD84520078A575 /* Pitch.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
+				674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */,
 				674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */,
 				67494C8021CC06740078A575 /* Vector2.swift in Sources */,
 				674D503D21DD50F8009E5AFE /* NoteSequence.swift in Sources */,
