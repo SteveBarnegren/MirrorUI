@@ -35,15 +35,5 @@ class NotePositioner {
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }

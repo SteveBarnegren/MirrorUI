@@ -27,7 +27,7 @@ public class Note: HorizontallyConstrained {
     var leadingWidth = Double(0)
     var trailingWidth = Double(0)
   
-    let position = Point.zero
+    var position = Point.zero
     
     var duration: Time {
         switch self.value {

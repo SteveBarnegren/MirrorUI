@@ -21,11 +21,11 @@ class MusicRenderer {
     
     func paths(forDisplaySize displaySize: DisplaySize) -> [Path] {
         
-        var paths = [Path]()
 
         // Calculate layout sizes
         let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
         let layoutWidth = displaySize.width / staveSpacing
+        print("Layout width: \(layoutWidth)")
     
         // Populate note symbols
         NoteSymbolDescriber().process(composition: composition)
@@ -37,16 +37,12 @@ class MusicRenderer {
         WidthConstraintsCalculator().process(composition: composition)
         
         // Solve X Positions
-        let notes = composition.bars[0].sequences[0].notes
-        let xPositions = HorizontalConstraintSolver().solve(notes, layoutWidth: layoutWidth)
-        dump(xPositions)
+        HorizontalPositioner().process(composition: composition, layoutWidth: layoutWidth)
+        
         // TODO: Render paths
+        var paths = makePaths(forComposition: composition)
         
-        
-        
-        
-        
-        //dump(composition)
+        dump(composition)
         
         
         // Render the stave
@@ -54,60 +50,22 @@ class MusicRenderer {
 
         return paths.map { $0.scaled(staveSpacing) }
 
-        
-        
-        // OLD
-//        let symbols = Symbolizer().symbolize(composition: composition)
-//        let positionedSymbols = LayoutSolver().solve(symbols: symbols,
-//                                                     layoutWidth: layoutWidth,
-//                                                     staveCentreY: canvasSize.height/2)
-//
-//        var paths = [Path]()
-//        paths += StaveRenderer.stavePaths(forCanvasSize: canvasSize)
-//        paths += makePaths(forSymbols: positionedSymbols, centerY: canvasSize.height/2)
-//        return paths.map { $0.scaled(staveSpacing) }
     }
     
-    /*
-    private func makePaths(forSymbols symbols: [Symbol], centerY: Double) -> [Path] {
-        
-        var paths = [Path]()
-        var noteSymbols = [NoteSymbol]()
-        
-        for symbol in symbols {
-            switch symbol {
-            case .barline(let barlineSymbol):
-                paths.append(makeBarlinePath(staveCenterY: centerY, xPos: barlineSymbol.xPosition))
-            case .note(let noteSymbol):
-                noteSymbols.append(noteSymbol)
-            }
-        }
-        
-        paths += NoteRenderer.paths(forNotes: noteSymbols)
-        
-        return paths
+    private func makePaths(forComposition composition: Composition) -> [Path] {
+        return composition.bars.map(makePaths(forBar:)).joined().toArray()
     }
     
-    func makeNotePath(fromSymbolPath symbolPath: Path, centerY: Double, staveOffset: Int, xPos: Double) -> Path {
-        
-        // Stave offset must be negative on iOS as y starts at top
-        var centerY = centerY - Double(staveOffset)/2
-        
-        // Subtract half a stave spacing so that the note centered on the pitch line
-        centerY -= 0.5
-        
-        var notePath = symbolPath
-        notePath.translate(x: xPos, y: centerY)
-        return notePath
+    private func makePaths(forBar bar: Bar) -> [Path] {
+        return bar.sequences.map(makePaths(forNoteSequence:)).joined().toArray()
     }
     
-    func makeBarlinePath(staveCenterY: Double, xPos: Double) -> Path {
-        
-        var path = Path()
-        path.move(to: Point(xPos, staveCenterY + 2))
-        path.addLine(to: Point(xPos, staveCenterY - 2))
-        path.drawStyle = .stroke
-        return path
+    private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
+        return NoteRenderer().paths(forNotes: noteSequence.notes)
     }
- */
+    
+    
+    
+    
+    
 }

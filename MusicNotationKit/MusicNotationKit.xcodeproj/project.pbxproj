@@ -22,6 +22,9 @@
 		674D504421E10504009E5AFE /* HorizontalConstraintsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504321E10504009E5AFE /* HorizontalConstraintsCalculator.swift */; };
 		674D504621E10C80009E5AFE /* NotePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504521E10C80009E5AFE /* NotePositioner.swift */; };
 		674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */; };
+		674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504A21E23CD8009E5AFE /* NoteRenderer.swift */; };
+		674D504E21E23D72009E5AFE /* HorizontalPositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504D21E23D72009E5AFE /* HorizontalPositioner.swift */; };
+		67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */; };
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
 		67A15F9321C5129500C3C03F /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A15F8921C5129500C3C03F /* MusicNotationKit.framework */; };
@@ -65,6 +68,9 @@
 		674D504321E10504009E5AFE /* HorizontalConstraintsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalConstraintsCalculator.swift; sourceTree = "<group>"; };
 		674D504521E10C80009E5AFE /* NotePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePositioner.swift; sourceTree = "<group>"; };
 		674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalConstraintSolver.swift; sourceTree = "<group>"; };
+		674D504A21E23CD8009E5AFE /* NoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRenderer.swift; sourceTree = "<group>"; };
+		674D504D21E23D72009E5AFE /* HorizontalPositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPositioner.swift; sourceTree = "<group>"; };
+		67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		67A15F8921C5129500C3C03F /* MusicNotationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicNotationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +116,8 @@
 				674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */,
 				674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */,
 				674D504321E10504009E5AFE /* HorizontalConstraintsCalculator.swift */,
-				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
+				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
+				674D504A21E23CD8009E5AFE /* NoteRenderer.swift */,
 				674D504521E10C80009E5AFE /* NotePositioner.swift */,
 				6749365021CF8861005BA334 /* StaveRenderer.swift */,
 				67494C8321CD62710078A575 /* Symbolizer_OLD.swift */,
@@ -128,6 +135,15 @@
 				67AE184721D9462C00F3545D /* Time.swift */,
 			);
 			path = "Basic Types";
+			sourceTree = "<group>";
+		};
+		674D504C21E23D52009E5AFE /* Horizontal Positioner */ = {
+			isa = PBXGroup;
+			children = (
+				674D504D21E23D72009E5AFE /* HorizontalPositioner.swift */,
+				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
+			);
+			path = "Horizontal Positioner";
 			sourceTree = "<group>";
 		};
 		677C9C7E21C5168500C7A16E /* Model */ = {
@@ -159,6 +175,7 @@
 				67AE184321D9305700F3545D /* Array+Extensions.swift */,
 				67AE184521D9387900F3545D /* Optional+Extensions.swift */,
 				67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */,
+				67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,10 +335,12 @@
 			files = (
 				677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */,
 				67AE184421D9305700F3545D /* Array+Extensions.swift in Sources */,
+				674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */,
 				67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */,
 				67AE184821D9462C00F3545D /* Time.swift in Sources */,
 				67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */,
 				674D504421E10504009E5AFE /* HorizontalConstraintsCalculator.swift in Sources */,
+				67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */,
 				67AE184621D9387900F3545D /* Optional+Extensions.swift in Sources */,
 				677C9C8121C5172100C7A16E /* MusicView.swift in Sources */,
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,
@@ -338,6 +357,7 @@
 				674D503D21DD50F8009E5AFE /* NoteSequence.swift in Sources */,
 				67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */,
 				67A15FA421C512E800C3C03F /* Note.swift in Sources */,
+				674D504E21E23D72009E5AFE /* HorizontalPositioner.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

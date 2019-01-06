@@ -12,6 +12,10 @@ public class Composition {
     
     var bars = [Bar]()
     
+    var numberOfBars: Int {
+        return bars.count
+    }
+    
     var duration: Time {
         return bars.reduce(Time.zero) { $0 + $1.duration }
     }

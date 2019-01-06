@@ -125,6 +125,7 @@ class HorizontalConstraintSolver {
         if let last = items.last {
             let distance = ConstrainedDistance()
             distance.requiredWidth +=  last.trailingWidth
+            distance.preferredPercent = lastItem?.duration.barPct
             distances.append(distance)
         }
         
