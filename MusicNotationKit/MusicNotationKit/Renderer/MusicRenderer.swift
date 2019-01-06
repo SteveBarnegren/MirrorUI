@@ -39,6 +39,9 @@ class MusicRenderer {
         // Solve X Positions
         HorizontalPositioner().process(composition: composition, layoutWidth: layoutWidth)
         
+        // Apply Veritical positions
+        VerticalPositioner().process(composition: composition, staveCenterY: canvasSize.height/2)
+        
         // TODO: Render paths
         var paths = makePaths(forComposition: composition)
         

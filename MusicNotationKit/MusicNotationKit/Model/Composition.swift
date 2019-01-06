@@ -25,4 +25,17 @@ public class Composition {
     public func add(bar: Bar) {
         self.bars.append(bar)
     }
+    
+    // MARK: - Enumeration conviniences
+    
+    func enumerateNotes(_ handler: (Note) -> Void) {
+        
+        for bar in bars {
+            for noteSequence in bar.sequences {
+                for note in noteSequence.notes {
+                    handler(note)
+                }
+            }
+        }
+    }
 }
