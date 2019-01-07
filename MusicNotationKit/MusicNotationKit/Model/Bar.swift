@@ -11,6 +11,7 @@ import Foundation
 public class Bar {
     var sequences = [NoteSequence]()
     
+
     var duration: Time {
         return sequences.reduce(Time.zero) { $0 + $1.duration }
     }

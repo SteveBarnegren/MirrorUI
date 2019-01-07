@@ -12,7 +12,6 @@ class HorizontalPositioner {
     
     func process(composition: Composition, layoutWidth: Double) {
         let barWidth = layoutWidth / Double(composition.numberOfBars)
-        
         for (index, bar) in composition.bars.enumerated() {
             process(bar: bar, width: barWidth, offset: barWidth * Double(index))
         }
