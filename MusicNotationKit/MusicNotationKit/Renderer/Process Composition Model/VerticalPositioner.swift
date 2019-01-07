@@ -10,14 +10,12 @@ import Foundation
 
 class VerticalPositioner {
     
-    func process(composition: Composition, staveCenterY: Double) {
-        composition.enumerateNotes { self.position(note: $0, staveCenterY: staveCenterY) }
+    func process(composition: Composition) {
+        composition.enumerateNotes { self.position(note: $0) }
     }
     
-    func position(note: Note, staveCenterY: Double) {
-        
-        let yOffset = Double(note.pitch.staveOffset)/2
-        note.position.y = staveCenterY + yOffset - 0.5
+    func position(note: Note) {
+        note.position.y = note.pitch.staveOffset - 0.5
     }
 
 }
