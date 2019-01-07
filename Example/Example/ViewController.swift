@@ -13,14 +13,29 @@ class ViewController: UIViewController {
     
     var musicView: MusicView!
     var gridOverlayView: GridOverlayView!
+    var handleView = UIView(frame: .zero)
+    var musicViewWidth = CGFloat(0)
+    var panTranslation = CGFloat(0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        musicViewWidth = UIScreen.main.bounds.width - 100
+        
         musicView = MusicView(composition: makeComposition())
         view.addSubview(musicView)
         
         gridOverlayView = GridOverlayView(frame: .zero)
         view.addSubview(gridOverlayView)
+        
+        handleView.backgroundColor = UIColor.red
+        view.addSubview(handleView)
+        
+        [musicView, gridOverlayView].forEach { $0?.isUserInteractionEnabled = false }
+        
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
+        handleView.addGestureRecognizer(panRecognizer)
+
     }
     
     func makeComposition() -> Composition {
@@ -83,13 +98,49 @@ class ViewController: UIViewController {
         return bar
     }
     
+    // MARK: - Layout
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        musicView.frame = view.bounds.inset(by: UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50))
+        print("Layout subviews")
+        musicView.frame = CGRect(x: 50,
+                                 y: 0,
+                                 width: musicViewWidth + panTranslation,
+                                 height: view.bounds.height)
         musicView.clipsToBounds = false
         musicView.layer.masksToBounds = false
         
         gridOverlayView.frame = musicView.frame
+        
+        layoutHandleView()
+    }
+    
+    private func layoutHandleView() {
+        
+        let y = CGFloat(20)
+        let size = CGFloat(30)
+        let x = musicView.frame.maxX - size/2
+        
+        handleView.frame = CGRect(x: x, y: y, width: size, height: size)
+    }
+    
+    // MARK: - Panning
+    
+    @objc func didPan(recognizer: UIPanGestureRecognizer) {
+        
+        let translation = recognizer.translation(in: view).x
+        panTranslation = translation
+        
+        if recognizer.state == .ended {
+            panTranslation = 0
+            musicViewWidth += translation
+        }
+        
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+        musicView.setNeedsDisplay()
+        
+        print("TRANS: \(translation)")
     }
 }
 
