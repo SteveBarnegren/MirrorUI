@@ -2,24 +2,24 @@
 //  NoteRenderer.swift
 //  MusicNotationKit
 //
-//  Created by Steve Barnegren on 23/12/2018.
-//  Copyright © 2018 Steve Barnegren. All rights reserved.
+//  Created by Steve Barnegren on 06/01/2019.
+//  Copyright © 2019 Steve Barnegren. All rights reserved.
 //
 
 import Foundation
 
 class NoteRenderer {
     
-    static let preferredStemHeight = 3.5
-    static let stemXOffet = 1.25
-    static let stemWidth = 0.1
-    static let beamWidth = 0.3
-
-    static func paths(forNotes notes: [NoteSymbol]) -> [Path] {
+    private let preferredStemHeight = 3.5
+    private let stemXOffet = 1.25
+    private let stemWidth = 0.1
+    private let beamWidth = 0.3
+    
+    func paths(forNotes notes: [Note]) -> [Path] {
         
         var paths = [Path]()
         
-        var noteCluster = [NoteSymbol]()
+        var noteCluster = [Note]()
         
         func renderNoteCluster() {
             
@@ -34,78 +34,69 @@ class NoteRenderer {
         var lastNoteWasConnected = false
         for note in notes {
             // Is is the first note of the cluster?
-            if note.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == false {
+            if note.symbolDescription.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == false {
                 renderNoteCluster()
                 noteCluster.append(note)
             }
-            // Is it the middle of the cluster?
-            else if note.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == true {
+                // Is it the middle of the cluster?
+            else if note.symbolDescription.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == true {
                 noteCluster.append(note)
             }
-            // Is the end of the cluster?
-            else if note.numberOfForwardBeamConnections == 0 && lastNoteWasConnected == true {
+                // Is the end of the cluster?
+            else if note.symbolDescription.numberOfForwardBeamConnections == 0 && lastNoteWasConnected == true {
                 noteCluster.append(note)
                 renderNoteCluster()
             }
-            // Otherwise it's an unconnected note
+                // Otherwise it's an unconnected note
             else {
                 paths += makePaths(forNote: note)
             }
-            lastNoteWasConnected = note.numberOfForwardBeamConnections > 0
+            lastNoteWasConnected = note.symbolDescription.numberOfForwardBeamConnections > 0
         }
         renderNoteCluster()
         
         return paths
     }
     
-    static private func makePaths(forNote note: NoteSymbol) -> [Path] {
+    private func makePaths(forNote note: Note) -> [Path] {
         
         var paths = [Path]()
-        
-        let headPath = makeHeadPath(forNote: note)
-        paths.append(headPath)
-        
-        if let stemPath = makeStemPath(fromNote: note, to: note.position.y + preferredStemHeight) {
-            paths.append(stemPath)
-        }
-        
+        paths.append(maybe: makeHeadPath(forNote: note))
+        paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + preferredStemHeight))
         return paths
     }
     
-    static private func makePaths(forNoteCluster notes: [NoteSymbol]) -> [Path] {
+    private func makePaths(forNoteCluster notes: [Note]) -> [Path] {
         
         var paths = [Path]()
         
         // Work out the beam height
         let beamY = notes.map { $0.position.y }.max().orZero() + preferredStemHeight
         
-        var previousNote: NoteSymbol?
+        var previousNote: Note?
         
         // Draw notes with stems
         for note in notes {
             var notePaths = [Path]()
             
-            let headPath = makeHeadPath(forNote: note)
-            notePaths.append(headPath)
-            
-            let stemPath = makeStemPath(fromNote: note, to: beamY)
-            notePaths.append(maybe: stemPath)
+            notePaths.append(maybe: makeHeadPath(forNote: note))
+            notePaths.append(maybe: makeStemPath(forNote: note, to: beamY))
             
             // Draw beam connections from the previous note
             if let previousNote = previousNote {
-                for beam in previousNote.beams where beam.style == .connectedToNext {
+                for beam in previousNote.symbolDescription.beams where beam.style == .connectedToNext {
                     notePaths.append(makeBeamPath(fromNote: previousNote, toNote: note, beamYPosition: beamY, beamIndex: beam.index))
                 }
             }
             
             // Draw cutoff beam connections
-            for beam in note.beams where beam.style == .cutOffLeft {
+            for beam in note.symbolDescription.beams where beam.style == .cutOffLeft {
                 notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beam.index, rightSide: false))
             }
-            for beam in note.beams where beam.style == .cutOffRight {
+            for beam in note.symbolDescription.beams where beam.style == .cutOffRight {
                 notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beam.index, rightSide: true))
             }
-
+            
             paths += notePaths
             
             previousNote = note
@@ -114,25 +105,27 @@ class NoteRenderer {
         return paths
     }
     
-    static private func makeHeadPath(forNote note: NoteSymbol) -> Path {
+    private func makeHeadPath(forNote note: Note) -> Path? {
         
         let path: Path
         
-        switch note.headStyle {
+        switch note.symbolDescription.headStyle {
         case .semibreve:
             path = SymbolPaths.semibreve
         case .open:
             path = SymbolPaths.openNoteHead
         case .filled:
             path = SymbolPaths.filledNoteHead
+        case .none:
+            return nil
         }
         
         return path.translated(x: note.position.x, y: note.position.y)
     }
     
-    static private func makeStemPath(fromNote note: NoteSymbol, to stemEndY: Double) -> Path? {
+    private func makeStemPath(forNote note: Note, to stemEndY: Double) -> Path? {
         
-        if note.hasStem == false {
+        if note.symbolDescription.hasStem == false {
             return nil
         }
         
@@ -146,9 +139,9 @@ class NoteRenderer {
         return stemPath
     }
     
-    static private func stemRect(fromNote note: NoteSymbol, to stemEndY: Double) -> Rect? {
+    private func stemRect(fromNote note: Note, to stemEndY: Double) -> Rect? {
         
-        if note.hasStem == false {
+        if note.symbolDescription.hasStem == false {
             return nil
         }
         
@@ -160,7 +153,7 @@ class NoteRenderer {
                     height: stemEndY - note.position.y - stemYOffset)
     }
     
-    static private func makeBeamPath(fromNote: NoteSymbol, toNote: NoteSymbol, beamYPosition: Double, beamIndex: Int) -> Path {
+    private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
         
         let beamSeparation = 0.4
         
@@ -177,7 +170,7 @@ class NoteRenderer {
         return path
     }
     
-    static private func makeCutOffBeamPath(forNote note: NoteSymbol, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
+    private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
         
         let beamSeparation = 0.4
         
@@ -187,7 +180,7 @@ class NoteRenderer {
         } else {
             x = note.position.x + stemXOffet - 1
         }
-
+        
         let beamRect = Rect(x: x,
                             y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
                             width: 1,

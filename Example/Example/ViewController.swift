@@ -26,30 +26,61 @@ class ViewController: UIViewController {
     func makeComposition() -> Composition {
         
         let composition = Composition()
-        // bar 0
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .quarter, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 0)
         
-        // bar 1
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .eighth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .sixteenth, pitch: .c4), toBar: 1)
-        composition.add(note: Note(value: .quarter, pitch: .c4), toBar: 1)
+        composition.add(bar: makeFirstBar())
+        composition.add(bar: makeSecondBar())
 
         return composition
+    }
+    
+    func makeFirstBar() -> Bar {
+        
+        let sequenceOne = NoteSequence()
+        
+        sequenceOne.add(note: Note(value: .quarter, pitch: .b4))
+        
+        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
+
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+
+        let bar = Bar()
+        bar.add(sequence: sequenceOne)
+        
+        return bar        
+    }
+    
+    func makeSecondBar() -> Bar {
+        
+        let sequence = NoteSequence()
+        
+        sequence.add(note: Note(value: .eighth, pitch: .b4))
+        sequence.add(note: Note(value: .eighth, pitch: .b4))
+        
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .eighth, pitch: .b4))
+        
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        
+        sequence.add(note: Note(value: .eighth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        
+        let bar = Bar()
+        bar.add(sequence: sequence)
+        
+        return bar
     }
     
     override func viewDidLayoutSubviews() {
