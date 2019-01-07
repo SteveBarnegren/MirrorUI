@@ -8,9 +8,19 @@
 
 import Foundation
 
+class Barline: HorizontallyConstrained {
+    
+    let duration = Time.zero
+    var leadingWidth = 0.1
+    var trailingWidth = 0.1
+    
+    var xPosition = Double(0)
+}
+
 public class Bar {
     var sequences = [NoteSequence]()
     
+    let leadingBarline = Barline()
 
     var duration: Time {
         return sequences.reduce(Time.zero) { $0 + $1.duration }
@@ -22,4 +32,3 @@ public class Bar {
         self.sequences.append(sequence)
     }
 }
-

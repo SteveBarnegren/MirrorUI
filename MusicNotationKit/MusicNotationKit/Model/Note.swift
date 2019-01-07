@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Note: HorizontallyConstrained {
+public class Note: Positionable, HorizontallyConstrained {
     
     public enum Value {
         case whole

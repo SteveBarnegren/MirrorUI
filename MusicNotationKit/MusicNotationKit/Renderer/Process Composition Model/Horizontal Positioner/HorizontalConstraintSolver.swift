@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HorizontallyConstrained {
+protocol HorizontallyConstrained: class, HorizontallyPositionable {
     var duration: Time { get }
     var leadingWidth: Double { get set }
     var trailingWidth: Double { get set }

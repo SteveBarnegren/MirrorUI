@@ -57,15 +57,13 @@ class MusicRenderer {
     }
     
     private func makePaths(forBar bar: Bar) -> [Path] {
-        return bar.sequences.map(makePaths(forNoteSequence:)).joined().toArray()
+        
+        let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline, staveCenterY: 10)
+        let notePaths =  bar.sequences.map(makePaths(forNoteSequence:)).joined().toArray()
+        return barlinePath + notePaths
     }
     
     private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
         return NoteRenderer().paths(forNotes: noteSequence.notes)
     }
-    
-    
-    
-    
-    
 }

@@ -19,7 +19,5 @@ class VerticalPositioner {
         let yOffset = Double(note.pitch.staveOffset)/2
         note.position.y = staveCenterY + yOffset - 0.5
     }
-    
-    
-    
+
 }

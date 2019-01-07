@@ -18,9 +18,20 @@ class HorizontalPositioner {
     }
     
     private func process(bar: Bar, width: Double, offset: Double) {
-        for noteSequence in bar.sequences {
-            process(noteSequence: noteSequence, width: width, offset: offset)
+        
+        // We'll just process a single note sequence for now
+        var items = [HorizontallyConstrained]()
+        items.append(bar.leadingBarline)
+        items.append(contentsOf: bar.sequences[0].notes)
+        
+        let positions = HorizontalConstraintSolver().solve(items, layoutWidth: width)
+        for (index, position) in zip(items.indices, positions) {
+            items[index].xPosition = position + offset
         }
+        
+//        for noteSequence in bar.sequences {
+//            process(noteSequence: noteSequence, width: width, offset: offset)
+//        }
     }
     
     private func process(noteSequence: NoteSequence, width: Double, offset: Double) {
