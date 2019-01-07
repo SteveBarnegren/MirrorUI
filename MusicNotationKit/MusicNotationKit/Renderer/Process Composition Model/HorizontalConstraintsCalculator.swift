@@ -32,11 +32,11 @@ class WidthConstraintsCalculator {
         
         // Leading - 0.5 for the note head
         var leadingWidth = Double(0)
-        leadingWidth += 0.5
+        leadingWidth += 0.7
     
         // Trailing - 0.5 for the note head
         var trailingWidth = Double(0)
-        trailingWidth += 0.5
+        trailingWidth += 0.7
     
         note.leadingWidth = leadingWidth
         note.trailingWidth = trailingWidth

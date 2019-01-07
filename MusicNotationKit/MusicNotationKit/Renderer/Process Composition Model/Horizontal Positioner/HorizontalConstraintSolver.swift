@@ -75,7 +75,7 @@ class HorizontalConstraintSolver {
             let unsolvedDistances = distances.filter { !$0.isSolved }
             let availableTime = unsolvedDistances.compactMap { $0.preferredPercent }.sum()
 
-            if doDistancesFitTime(unsolvedDistances, availableTime: availableTime, layoutWidth: layoutWidth) {
+            if doDistancesFitTime(unsolvedDistances, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) {
                 unsolvedDistances.forEach {
                     let percentage = $0.preferredPercent! / availableTime
                     $0.solvedDistance = unsolvedLayoutWidth * percentage
@@ -83,7 +83,7 @@ class HorizontalConstraintSolver {
                 }
             } else {
                 unsolvedDistances.forEach {
-                    if preferredWidth(forDistance: $0, availableTime: availableTime, layoutWidth: layoutWidth) < $0.requiredWidth {
+                    if preferredWidth(forDistance: $0, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) < $0.requiredWidth {
                         $0.solvedDistance = $0.requiredWidth
                         $0.isSolved = true
                     }
@@ -134,19 +134,19 @@ class HorizontalConstraintSolver {
     
     func preferredWidth(forDistance distance: ConstrainedDistance,
                         availableTime: Double,
-                        layoutWidth: Double) -> Double {
+                        availableWidth: Double) -> Double {
         
         guard let preferredPct = distance.preferredPercent else {
             return distance.requiredWidth
         }
         
-        return layoutWidth * (preferredPct / availableTime)
+        return availableWidth * (preferredPct / availableTime)
     }
     
-    func doDistancesFitTime(_ distances: [ConstrainedDistance], availableTime: Double, layoutWidth: Double) -> Bool {
+    func doDistancesFitTime(_ distances: [ConstrainedDistance], availableTime: Double, availableWidth: Double) -> Bool {
         
         for distance in distances {
-            let preferedWidth = preferredWidth(forDistance: distance, availableTime: availableTime, layoutWidth: layoutWidth)
+            let preferedWidth = preferredWidth(forDistance: distance, availableTime: availableTime, availableWidth: availableWidth)
             if preferedWidth < distance.requiredWidth {
                 return false
             }
