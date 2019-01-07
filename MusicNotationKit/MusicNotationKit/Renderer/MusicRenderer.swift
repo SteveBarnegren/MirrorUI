@@ -42,14 +42,14 @@ class MusicRenderer {
         HorizontalPositioner().process(composition: composition, layoutWidth: layoutWidth)
         
         // Apply Veritical positions
-        VerticalPositioner().process(composition: composition, staveCenterY: canvasSize.height/2)
+        VerticalPositioner().process(composition: composition)
         
         // Make paths
         var paths = makePaths(forComposition: composition)
-        paths += StaveRenderer.stavePaths(forCanvasSize: canvasSize)
+        paths += StaveRenderer.stavePaths(withWidth: canvasSize.width)
 
         dump(composition)
-        return paths.map { $0.scaled(staveSpacing) }
+        return paths.map { $0.scaled(staveSpacing) }.map { $0.translated(x: 0, y: displaySize.height/2) }
     }
     
     private func makePaths(forComposition composition: Composition) -> [Path] {
@@ -58,7 +58,7 @@ class MusicRenderer {
     
     private func makePaths(forBar bar: Bar) -> [Path] {
         
-        let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline, staveCenterY: 10)
+        let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
         let notePaths =  bar.sequences.map(makePaths(forNoteSequence:)).joined().toArray()
         return barlinePath + notePaths
     }

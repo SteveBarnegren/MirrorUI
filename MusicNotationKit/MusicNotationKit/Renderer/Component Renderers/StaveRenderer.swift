@@ -10,21 +10,20 @@ import Foundation
 
 class StaveRenderer {
     
-    static func stavePaths(forCanvasSize canvasSize: Size) -> [Path] {
+    static func stavePaths(withWidth staveWidth: Double) -> [Path] {
      
-        let midY = canvasSize.height/2
         let numberOfLines = 5
         let totalStaveHeight = Double(numberOfLines-1)
     
         var paths = [Path]()
         
-        var y = midY - totalStaveHeight/2
+        var y = -totalStaveHeight/2
         for _ in (0..<numberOfLines) {
             
             var path = Path()
             path.drawStyle = .stroke
             path.move(to: Point(0, y))
-            path.addLine(to: Point(canvasSize.width, y))
+            path.addLine(to: Point(staveWidth, y))
             paths.append(path)
             y += 1
         }
