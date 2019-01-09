@@ -48,7 +48,7 @@ class MusicRenderer {
         var paths = makePaths(forComposition: composition)
         paths += StaveRenderer.stavePaths(withWidth: canvasSize.width)
 
-        dump(composition)
+        //dump(composition)
         return paths.map { $0.scaled(staveSpacing) }.map { $0.translated(x: 0, y: displaySize.height/2) }
     }
     

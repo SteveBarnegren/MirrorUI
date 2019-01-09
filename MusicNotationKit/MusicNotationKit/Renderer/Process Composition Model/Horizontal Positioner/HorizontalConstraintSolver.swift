@@ -9,7 +9,7 @@
 import Foundation
 
 protocol HorizontallyConstrained: class, HorizontallyPositionable {
-    var duration: Time { get }
+    var layoutDuration: Time? { get }
     var leadingWidth: Double { get set }
     var trailingWidth: Double { get set }
 }
@@ -21,6 +21,7 @@ class HorizontalConstraintSolver {
         var requiredWidth = Double(0)
         var preferredPercent: Double?
         var solvedDistance = Double(0)
+        var xPosition = Double(0)
         var isSolved = false
     }
     
@@ -61,6 +62,8 @@ class HorizontalConstraintSolver {
         // Make distances
         let distances = makeConstrainedDistances(fromConstrainedItems: horizontallyConstrainedItems)
         
+        dump(distances)
+        
         // Solve any fixed distances
         for distance in distances {
             if distance.preferredPercent == nil {
@@ -74,7 +77,7 @@ class HorizontalConstraintSolver {
             let unsolvedLayoutWidth = layoutWidth - distances.filter { $0.isSolved }.map { $0.solvedDistance }.sum()
             let unsolvedDistances = distances.filter { !$0.isSolved }
             let availableTime = unsolvedDistances.compactMap { $0.preferredPercent }.sum()
-
+            
             if doDistancesFitTime(unsolvedDistances, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) {
                 unsolvedDistances.forEach {
                     let percentage = $0.preferredPercent! / availableTime
@@ -90,18 +93,20 @@ class HorizontalConstraintSolver {
                 }
             }
         }
-
+        
         // Work out the x positions
-        var results = [Double]()
         var xPos = Double(0)
-        for distance in distances where distance.toItem != nil {
+        for distance in distances {
             xPos += distance.solvedDistance
-            results.append(xPos)
+            distance.xPosition = xPos
         }
         
-        return results
+        debug_printDistances(distances)
+        debug_printDistancePositions(distances)
+        
+        return distances.filter { $0.toItem != nil }.map { $0.xPosition }
     }
-
+    
     func makeConstrainedDistances(fromConstrainedItems items: [HorizontallyConstrained]) -> [ConstrainedDistance] {
         
         var distances = [ConstrainedDistance]()
@@ -110,13 +115,13 @@ class HorizontalConstraintSolver {
         
         for item in items {
             let distance = ConstrainedDistance()
-
+            
             if let last = lastItem {
                 distance.requiredWidth += last.trailingWidth
             }
             distance.requiredWidth += item.leadingWidth
             distance.toItem = item
-            distance.preferredPercent = lastItem?.duration.barPct
+            distance.preferredPercent = lastItem?.layoutDuration?.barPct
             distances.append(distance)
             
             lastItem = item
@@ -125,7 +130,7 @@ class HorizontalConstraintSolver {
         if let last = items.last {
             let distance = ConstrainedDistance()
             distance.requiredWidth +=  last.trailingWidth
-            distance.preferredPercent = lastItem?.duration.barPct
+            distance.preferredPercent = lastItem?.layoutDuration?.barPct
             distances.append(distance)
         }
         
@@ -153,5 +158,40 @@ class HorizontalConstraintSolver {
         }
         
         return true
+    }
+    
+    func debug_printDistances(_ distances: [ConstrainedDistance]) {
+        
+        print("**** DISTANCE solved distances ****")
+        for distance in distances {
+            var string = ""
+            if distance.toItem is Barline {
+                string += "Barline: "
+            } else if distance.toItem is Note {
+                string += "Note: "
+            } else {
+                string += "Unknown: "
+            }
+            
+            print(string + "\(distance.solvedDistance)")
+        }
+    }
+    
+    func debug_printDistancePositions(_ distances: [ConstrainedDistance]) {
+        
+        print("**** DISTANCE positions ****")
+        for distance in distances {
+            var string = ""
+            if distance.toItem is Barline {
+                string += "Barline: "
+            } else if distance.toItem is Note {
+                string += "Note: "
+            } else {
+                string += "Unknown: "
+            }
+            
+            print(string + "\(distance.xPosition)")
+        }
+        
     }
 }

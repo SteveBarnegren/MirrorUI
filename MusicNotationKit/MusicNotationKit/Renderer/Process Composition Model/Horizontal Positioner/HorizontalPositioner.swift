@@ -25,7 +25,21 @@ class HorizontalPositioner {
         // We'll just process a single note sequence for now
         var items = [HorizontallyConstrained]()
         items.append(bar.leadingBarline)
+        items.append(Spacer(width: 1))
         items.append(contentsOf: bar.sequences[0].notes)
         return items
+    }
+}
+
+fileprivate class Spacer: HorizontallyConstrained {
+    var layoutDuration: Time?
+    var leadingWidth: Double
+    var trailingWidth: Double
+    var xPosition: Double = 0
+    
+    init(width: Double) {
+        self.leadingWidth = width/2
+        self.trailingWidth = width/2
+        self.layoutDuration = nil
     }
 }

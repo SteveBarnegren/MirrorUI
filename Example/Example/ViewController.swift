@@ -49,11 +49,10 @@ class ViewController: UIViewController {
     }
     
     func makeFirstBar() -> Bar {
-        
         let sequenceOne = NoteSequence()
-        
+
         sequenceOne.add(note: Note(value: .quarter, pitch: .b4))
-        
+
         sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
         sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
 
@@ -68,8 +67,8 @@ class ViewController: UIViewController {
 
         let bar = Bar()
         bar.add(sequence: sequenceOne)
-        
-        return bar        
+
+        return bar
     }
     
     func makeSecondBar() -> Bar {
