@@ -26,7 +26,12 @@ class HorizontalPositioner {
         var items = [HorizontallyConstrained]()
         items.append(bar.leadingBarline)
         items.append(Spacer(width: 1))
-        items.append(contentsOf: bar.sequences[0].notes)
+        
+        for note in bar.sequences[0].notes {
+            items.append(note)
+            items.append(Spacer(width: 1))
+        }
+        
         return items
     }
 }
