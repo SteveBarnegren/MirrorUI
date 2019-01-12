@@ -8,10 +8,22 @@
 
 import Foundation
 
+struct ConstraintPriority {
+    static let required = 0
+    static let regular = 50
+}
+
+struct HorizontalConstraint {
+    var length: Double
+    var priority: Int
+}
+
 protocol HorizontallyConstrained: class, HorizontallyPositionable {
     var layoutDuration: Time? { get }
     var leadingWidth: Double { get set }
     var trailingWidth: Double { get set }
+    var leadingConstraints: [HorizontalConstraint] { get }
+    var trailingConstraints: [HorizontalConstraint] { get }
 }
 
 class HorizontalConstraintSolver {

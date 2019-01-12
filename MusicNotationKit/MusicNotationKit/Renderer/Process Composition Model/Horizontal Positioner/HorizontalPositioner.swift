@@ -35,14 +35,23 @@ class HorizontalPositioner {
 }
 
 fileprivate class Spacer: HorizontallyConstrained {
+ 
+    
     var layoutDuration: Time?
     var leadingWidth: Double
     var trailingWidth: Double
     var xPosition: Double = 0
     
+    let leadingConstraints = [HorizontalConstraint]()
+    let trailingConstraints: [HorizontalConstraint]
+    
     init(width: Double) {
         self.leadingWidth = width/2
         self.trailingWidth = width/2
+        
+        let constraint = HorizontalConstraint(length: width, priority: ConstraintPriority.required)
+        self.trailingConstraints = [constraint]
+        
         self.layoutDuration = nil
     }
 }

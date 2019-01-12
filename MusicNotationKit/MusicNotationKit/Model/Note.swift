@@ -9,7 +9,7 @@
 import Foundation
 
 public class Note: Positionable, HorizontallyConstrained {
-    
+  
     public enum Value {
         case whole
         case half
@@ -29,7 +29,9 @@ public class Note: Positionable, HorizontallyConstrained {
     var layoutDuration: Time? {
         return self.duration
     }
-  
+    var leadingConstraints = [HorizontalConstraint]()
+    var trailingConstraints = [HorizontalConstraint]()
+    
     var position = Point.zero
     
     var duration: Time {
