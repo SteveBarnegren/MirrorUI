@@ -11,9 +11,10 @@ import Foundation
 class NoteRenderer {
     
     private let preferredStemHeight = 3.5
-    private let stemXOffet = 1.25
+    private let stemXOffet = 1.25/2
     private let stemWidth = 0.1
     private let beamWidth = 0.3
+    private let noteHeadWidth = 1.4
     
     func paths(forNotes notes: [Note]) -> [Path] {
         
@@ -120,7 +121,7 @@ class NoteRenderer {
             return nil
         }
         
-        return path.translated(x: note.position.x, y: note.position.y)
+        return path.translated(x: note.position.x - noteHeadWidth/2, y: note.position.y)
     }
     
     private func makeStemPath(forNote note: Note, to stemEndY: Double) -> Path? {

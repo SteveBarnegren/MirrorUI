@@ -26,6 +26,9 @@ public class Note: Positionable, HorizontallyConstrained {
     // Width
     var leadingWidth = Double(0)
     var trailingWidth = Double(0)
+    var layoutDuration: Time? {
+        return self.duration
+    }
   
     var position = Point.zero
     

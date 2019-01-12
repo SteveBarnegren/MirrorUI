@@ -10,7 +10,7 @@ import Foundation
 
 class Barline: HorizontallyConstrained {
     
-    let duration = Time.zero
+    let layoutDuration: Time? = Time.init(value: 1, division: 64)
     var leadingWidth = 0.1
     var trailingWidth = 0.1
     
