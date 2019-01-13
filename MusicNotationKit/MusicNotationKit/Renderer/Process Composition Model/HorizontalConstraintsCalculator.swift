@@ -40,5 +40,12 @@ class WidthConstraintsCalculator {
     
         note.leadingWidth = leadingWidth
         note.trailingWidth = trailingWidth
+        
+        let leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.7, priority: .required)])
+        note.leadingConstraints = [leadingConstraint]
+        
+        let trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.7, priority: .required)])
+        note.trailingConstraints = [trailingConstraint]
+        
     }
 }

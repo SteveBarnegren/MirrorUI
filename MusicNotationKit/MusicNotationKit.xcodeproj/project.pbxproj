@@ -43,6 +43,9 @@
 		67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */; };
 		67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1521C6D1B200A020D0 /* Path.swift */; };
 		67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */; };
+		67F6880421EA6D32003707DD /* HorizontallyConstrained.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */; };
+		67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880521EA6E0C003707DD /* Array+Sorting.swift */; };
+		67F6880921EA71AD003707DD /* HorizontalConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880821EA71AD003707DD /* HorizontalConstraintTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +98,9 @@
 		67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Accessors.swift"; sourceTree = "<group>"; };
 		67C7CC1521C6D1B200A020D0 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyConstrained.swift; sourceTree = "<group>"; };
+		67F6880521EA6E0C003707DD /* Array+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sorting.swift"; sourceTree = "<group>"; };
+		67F6880821EA71AD003707DD /* HorizontalConstraintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalConstraintTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,7 @@
 		674D504C21E23D52009E5AFE /* Horizontal Positioner */ = {
 			isa = PBXGroup;
 			children = (
+				67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */,
 				674D504D21E23D72009E5AFE /* HorizontalPositioner.swift */,
 				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
 			);
@@ -204,6 +211,7 @@
 				67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */,
 				67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */,
 				67AE184321D9305700F3545D /* Array+Extensions.swift */,
+				67F6880521EA6E0C003707DD /* Array+Sorting.swift */,
 				67AE184521D9387900F3545D /* Optional+Extensions.swift */,
 				67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */,
 				67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */,
@@ -248,6 +256,7 @@
 		67A15F9621C5129500C3C03F /* MusicNotationKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				67F6880821EA71AD003707DD /* HorizontalConstraintTests.swift */,
 				67A15F9721C5129500C3C03F /* MusicNotationKitTests.swift */,
 				67494C8121CC06940078A575 /* Vector2Tests.swift */,
 				67AE184921D9465C00F3545D /* TimeTests.swift */,
@@ -394,7 +403,9 @@
 				67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */,
 				67678DF821E245DB00E7FD71 /* VerticalPositioner.swift in Sources */,
 				67A15FA421C512E800C3C03F /* Note.swift in Sources */,
+				67F6880421EA6D32003707DD /* HorizontallyConstrained.swift in Sources */,
 				674D504E21E23D72009E5AFE /* HorizontalPositioner.swift in Sources */,
+				67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +416,7 @@
 			files = (
 				67AE184A21D9465C00F3545D /* TimeTests.swift in Sources */,
 				67A15F9821C5129500C3C03F /* MusicNotationKitTests.swift in Sources */,
+				67F6880921EA71AD003707DD /* HorizontalConstraintTests.swift in Sources */,
 				67678E0221E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */,
 			);

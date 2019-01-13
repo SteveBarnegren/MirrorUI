@@ -49,7 +49,7 @@ fileprivate class Spacer: HorizontallyConstrained {
         self.leadingWidth = width/2
         self.trailingWidth = width/2
         
-        let constraint = HorizontalConstraint(length: width, priority: ConstraintPriority.required)
+        let constraint = HorizontalConstraint(values: [ConstraintValue(length: width, priority: ConstraintPriority.required)])
         self.trailingConstraints = [constraint]
         
         self.layoutDuration = nil

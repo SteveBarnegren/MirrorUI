@@ -8,34 +8,20 @@
 
 import Foundation
 
-struct ConstraintPriority {
-    static let required = 0
-    static let regular = 50
-}
-
-struct HorizontalConstraint {
-    var length: Double
-    var priority: Int
-}
-
-protocol HorizontallyConstrained: class, HorizontallyPositionable {
-    var layoutDuration: Time? { get }
-    var leadingWidth: Double { get set }
-    var trailingWidth: Double { get set }
-    var leadingConstraints: [HorizontalConstraint] { get }
-    var trailingConstraints: [HorizontalConstraint] { get }
+class ConstrainedDistance {
+    var toItem: HorizontallyConstrained? = nil
+    var constraints = [HorizontalConstraint]()
+    var preferredPercent: Double?
+    var solvedDistance = Double(0)
+    var xPosition = Double(0)
+    var isSolved = false
+    
+    func minimumDistance(atPriority priority: ConstraintPriority) -> Double {
+        return constraints.map { $0.minimumDistance(atPriority: priority) }.sum()
+    }
 }
 
 class HorizontalConstraintSolver {
-    
-    class ConstrainedDistance {
-        var toItem: HorizontallyConstrained? = nil
-        var requiredWidth = Double(0)
-        var preferredPercent: Double?
-        var solvedDistance = Double(0)
-        var xPosition = Double(0)
-        var isSolved = false
-    }
     
     func process(composition: Composition) {
         for bar in composition.bars {
@@ -71,15 +57,60 @@ class HorizontalConstraintSolver {
     
     func solve(_ horizontallyConstrainedItems: [HorizontallyConstrained], layoutWidth: Double) -> [Double] {
         
+        print("*************************")
+        
         // Make distances
         let distances = makeConstrainedDistances(fromConstrainedItems: horizontallyConstrainedItems)
         
-        dump(distances)
+        print("Minimum width = \(minimumWidth(forDistances: distances, atPriority: .regular))")
+        print("Layout width = \(layoutWidth)")
+        if minimumWidth(forDistances: distances, atPriority: .regular) <= layoutWidth {
+            print("Solve with timing")
+            solveWithTiming(distances: distances, layoutWidth: layoutWidth)
+        } else {
+            print("Solve with minimum distance")
+            solveWithMinimumDistances(distances: distances, layoutWidth: layoutWidth)
+        }
+        
+        // Work out the x positions
+        var xPos = Double(0)
+        for distance in distances {
+            xPos += distance.solvedDistance
+            distance.xPosition = xPos
+        }
+        
+        //debug_printDistances(distances)
+        //debug_printDistancePositions(distances)
+        
+        return distances.filter { $0.toItem != nil }.map { $0.xPosition }
+    }
+    
+    private func solveWithMinimumDistances(distances: [ConstrainedDistance], layoutWidth: Double) {
+        
+        // Work out the priority that we're solving for
+        var priority = ConstraintPriority.required
+        
+        for p in ConstraintPriority.allCasesIncreasing {
+            priority = p
+            if minimumWidth(forDistances: distances, atPriority: p) <= layoutWidth {
+                break
+            }
+        }
+        print("priority: \(priority)")
+        
+        // TODO: We need to be able to layout with values between 2 priorities
+        for distance in distances {
+            distance.solvedDistance = distance.minimumDistance(atPriority: priority)
+            distance.isSolved = true
+        }
+    }
+    
+    private func solveWithTiming(distances: [ConstrainedDistance], layoutWidth: Double) {
         
         // Solve any fixed distances
         for distance in distances {
             if distance.preferredPercent == nil {
-                distance.solvedDistance = distance.requiredWidth
+                distance.solvedDistance = distance.minimumDistance(atPriority: .regular)
                 distance.isSolved = true
             }
         }
@@ -90,7 +121,7 @@ class HorizontalConstraintSolver {
             let unsolvedDistances = distances.filter { !$0.isSolved }
             let availableTime = unsolvedDistances.compactMap { $0.preferredPercent }.sum()
             
-            if doDistancesFitTime(unsolvedDistances, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) {
+            if doDistancesFitTime(unsolvedDistances, availableTime: availableTime, availableWidth: unsolvedLayoutWidth, priority: .regular) {
                 unsolvedDistances.forEach {
                     let percentage = $0.preferredPercent! / availableTime
                     $0.solvedDistance = unsolvedLayoutWidth * percentage
@@ -98,8 +129,9 @@ class HorizontalConstraintSolver {
                 }
             } else {
                 unsolvedDistances.forEach {
-                    if preferredWidth(forDistance: $0, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) < $0.requiredWidth {
-                        $0.solvedDistance = $0.requiredWidth
+                    let minimumDistance = $0.minimumDistance(atPriority: .regular)
+                    if preferredWidth(forDistance: $0, availableTime: availableTime, availableWidth: unsolvedLayoutWidth, priority: .regular) < minimumDistance {
+                        $0.solvedDistance = minimumDistance
                         $0.isSolved = true
                     }
                 }
@@ -112,12 +144,64 @@ class HorizontalConstraintSolver {
             xPos += distance.solvedDistance
             distance.xPosition = xPos
         }
-        
-        debug_printDistances(distances)
-        debug_printDistancePositions(distances)
-        
-        return distances.filter { $0.toItem != nil }.map { $0.xPosition }
     }
+    
+    private func minimumWidth(forDistances distances: [ConstrainedDistance], atPriority priority: ConstraintPriority) -> Double {
+        return distances.map { $0.minimumDistance(atPriority: priority) }.sum()
+    }
+    
+    /*
+     func solve(_ horizontallyConstrainedItems: [HorizontallyConstrained], layoutWidth: Double) -> [Double] {
+     
+     // Make distances
+     let distances = makeConstrainedDistances(fromConstrainedItems: horizontallyConstrainedItems)
+     
+     dump(distances)
+     
+     // Solve any fixed distances
+     for distance in distances {
+     if distance.preferredPercent == nil {
+     distance.solvedDistance = distance.requiredWidth
+     distance.isSolved = true
+     }
+     }
+     
+     // Solve the remaining distances
+     while distances.contains(where: { $0.isSolved == false }) {
+     let unsolvedLayoutWidth = layoutWidth - distances.filter { $0.isSolved }.map { $0.solvedDistance }.sum()
+     let unsolvedDistances = distances.filter { !$0.isSolved }
+     let availableTime = unsolvedDistances.compactMap { $0.preferredPercent }.sum()
+     
+     if doDistancesFitTime(unsolvedDistances, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) {
+     unsolvedDistances.forEach {
+     let percentage = $0.preferredPercent! / availableTime
+     $0.solvedDistance = unsolvedLayoutWidth * percentage
+     $0.isSolved = true
+     }
+     } else {
+     unsolvedDistances.forEach {
+     if preferredWidth(forDistance: $0, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) < $0.requiredWidth {
+     $0.solvedDistance = $0.requiredWidth
+     $0.isSolved = true
+     }
+     }
+     }
+     }
+     
+     // Work out the x positions
+     var xPos = Double(0)
+     for distance in distances {
+     xPos += distance.solvedDistance
+     distance.xPosition = xPos
+     }
+     
+     debug_printDistances(distances)
+     debug_printDistancePositions(distances)
+     
+     return distances.filter { $0.toItem != nil }.map { $0.xPosition }
+     }
+ 
+ */
     
     func makeConstrainedDistances(fromConstrainedItems items: [HorizontallyConstrained]) -> [ConstrainedDistance] {
         
@@ -129,9 +213,9 @@ class HorizontalConstraintSolver {
             let distance = ConstrainedDistance()
             
             if let last = lastItem {
-                distance.requiredWidth += last.trailingWidth
+                distance.constraints += last.trailingConstraints
             }
-            distance.requiredWidth += item.leadingWidth
+            distance.constraints += item.leadingConstraints
             distance.toItem = item
             distance.preferredPercent = lastItem?.layoutDuration?.barPct
             distances.append(distance)
@@ -141,7 +225,7 @@ class HorizontalConstraintSolver {
         
         if let last = items.last {
             let distance = ConstrainedDistance()
-            distance.requiredWidth +=  last.trailingWidth
+            distance.constraints +=  last.trailingConstraints
             distance.preferredPercent = lastItem?.layoutDuration?.barPct
             distances.append(distance)
         }
@@ -151,20 +235,21 @@ class HorizontalConstraintSolver {
     
     func preferredWidth(forDistance distance: ConstrainedDistance,
                         availableTime: Double,
-                        availableWidth: Double) -> Double {
+                        availableWidth: Double,
+                        priority: ConstraintPriority) -> Double {
         
         guard let preferredPct = distance.preferredPercent else {
-            return distance.requiredWidth
+            return distance.minimumDistance(atPriority: priority)
         }
         
         return availableWidth * (preferredPct / availableTime)
     }
     
-    func doDistancesFitTime(_ distances: [ConstrainedDistance], availableTime: Double, availableWidth: Double) -> Bool {
+    func doDistancesFitTime(_ distances: [ConstrainedDistance], availableTime: Double, availableWidth: Double, priority: ConstraintPriority) -> Bool {
         
         for distance in distances {
-            let preferedWidth = preferredWidth(forDistance: distance, availableTime: availableTime, availableWidth: availableWidth)
-            if preferedWidth < distance.requiredWidth {
+            let preferedWidth = preferredWidth(forDistance: distance, availableTime: availableTime, availableWidth: availableWidth, priority: priority)
+            if preferedWidth < distance.minimumDistance(atPriority: priority) {
                 return false
             }
         }
