@@ -23,52 +23,14 @@ class ConstrainedDistance {
 
 class HorizontalConstraintSolver {
     
-    func process(composition: Composition) {
-        for bar in composition.bars {
-            process(bar: bar)
-        }
-    }
-    
-    private func process(bar: Bar) {
-        for noteSequence in bar.sequences {
-            process(noteSequence: noteSequence)
-        }
-    }
-    
-    private func process(noteSequence: NoteSequence) {
-        for note in noteSequence.notes {
-            process(note: note)
-        }
-    }
-    
-    private func process(note: Note) {
-        
-        // Leading - 0.5 for the note head
-        var leadingWidth = Double(0)
-        leadingWidth += 0.5
-        
-        // Trailing - 0.5 for the note head
-        var trailingWidth = Double(0)
-        trailingWidth += 0.5
-        
-        note.leadingWidth = leadingWidth
-        note.trailingWidth = trailingWidth
-    }
-    
     func solve(_ horizontallyConstrainedItems: [HorizontallyConstrained], layoutWidth: Double) -> [Double] {
-        
-        print("*************************")
         
         // Make distances
         let distances = makeConstrainedDistances(fromConstrainedItems: horizontallyConstrainedItems)
         
-        print("Minimum width = \(minimumWidth(forDistances: distances, atPriority: .regular))")
-        print("Layout width = \(layoutWidth)")
         if minimumWidth(forDistances: distances, atPriority: .regular) <= layoutWidth {
-            print("Solve with timing")
             solveWithTiming(distances: distances, layoutWidth: layoutWidth)
         } else {
-            print("Solve with minimum distance")
             solveWithMinimumDistances(distances: distances, layoutWidth: layoutWidth)
         }
         
@@ -78,9 +40,6 @@ class HorizontalConstraintSolver {
             xPos += distance.solvedDistance
             distance.xPosition = xPos
         }
-        
-        //debug_printDistances(distances)
-        //debug_printDistancePositions(distances)
         
         return distances.filter { $0.toItem != nil }.map { $0.xPosition }
     }
@@ -102,9 +61,7 @@ class HorizontalConstraintSolver {
             previousPriorityWidth = width
             previousPriority = p
         }
-        print("priority: \(priority)")
         
-        // TODO: We need to be able to layout with values between 2 priorities
         for distance in distances {
             if let previousPriority = previousPriority, let previousPriorityWidth = previousPriorityWidth {
                 let ratio = layoutWidth.pct(between: width, and: previousPriorityWidth).constrained(min: 0, max: 1)
@@ -164,59 +121,6 @@ class HorizontalConstraintSolver {
     private func minimumWidth(forDistances distances: [ConstrainedDistance], atPriority priority: ConstraintPriority) -> Double {
         return distances.map { $0.minimumDistance(atPriority: priority) }.sum()
     }
-    
-    /*
-     func solve(_ horizontallyConstrainedItems: [HorizontallyConstrained], layoutWidth: Double) -> [Double] {
-     
-     // Make distances
-     let distances = makeConstrainedDistances(fromConstrainedItems: horizontallyConstrainedItems)
-     
-     dump(distances)
-     
-     // Solve any fixed distances
-     for distance in distances {
-     if distance.preferredPercent == nil {
-     distance.solvedDistance = distance.requiredWidth
-     distance.isSolved = true
-     }
-     }
-     
-     // Solve the remaining distances
-     while distances.contains(where: { $0.isSolved == false }) {
-     let unsolvedLayoutWidth = layoutWidth - distances.filter { $0.isSolved }.map { $0.solvedDistance }.sum()
-     let unsolvedDistances = distances.filter { !$0.isSolved }
-     let availableTime = unsolvedDistances.compactMap { $0.preferredPercent }.sum()
-     
-     if doDistancesFitTime(unsolvedDistances, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) {
-     unsolvedDistances.forEach {
-     let percentage = $0.preferredPercent! / availableTime
-     $0.solvedDistance = unsolvedLayoutWidth * percentage
-     $0.isSolved = true
-     }
-     } else {
-     unsolvedDistances.forEach {
-     if preferredWidth(forDistance: $0, availableTime: availableTime, availableWidth: unsolvedLayoutWidth) < $0.requiredWidth {
-     $0.solvedDistance = $0.requiredWidth
-     $0.isSolved = true
-     }
-     }
-     }
-     }
-     
-     // Work out the x positions
-     var xPos = Double(0)
-     for distance in distances {
-     xPos += distance.solvedDistance
-     distance.xPosition = xPos
-     }
-     
-     debug_printDistances(distances)
-     debug_printDistancePositions(distances)
-     
-     return distances.filter { $0.toItem != nil }.map { $0.xPosition }
-     }
- 
- */
     
     func makeConstrainedDistances(fromConstrainedItems items: [HorizontallyConstrained]) -> [ConstrainedDistance] {
         
