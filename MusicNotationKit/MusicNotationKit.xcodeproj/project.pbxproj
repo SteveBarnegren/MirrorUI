@@ -46,6 +46,9 @@
 		67F6880421EA6D32003707DD /* HorizontallyConstrained.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */; };
 		67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880521EA6E0C003707DD /* Array+Sorting.swift */; };
 		67F6880921EA71AD003707DD /* HorizontalConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880821EA71AD003707DD /* HorizontalConstraintTests.swift */; };
+		67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */; };
+		67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */; };
+		67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880F21EB5597003707DD /* Numeric+Constrained.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +104,9 @@
 		67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyConstrained.swift; sourceTree = "<group>"; };
 		67F6880521EA6E0C003707DD /* Array+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sorting.swift"; sourceTree = "<group>"; };
 		67F6880821EA71AD003707DD /* HorizontalConstraintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalConstraintTests.swift; sourceTree = "<group>"; };
+		67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
+		67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+ExtensionsTests.swift"; sourceTree = "<group>"; };
+		67F6880F21EB5597003707DD /* Numeric+Constrained.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Constrained.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +221,8 @@
 				67AE184521D9387900F3545D /* Optional+Extensions.swift */,
 				67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */,
 				67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */,
+				67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */,
+				67F6880F21EB5597003707DD /* Numeric+Constrained.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -256,6 +264,7 @@
 		67A15F9621C5129500C3C03F /* MusicNotationKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				67F6880C21EB529F003707DD /* Extensions */,
 				67F6880821EA71AD003707DD /* HorizontalConstraintTests.swift */,
 				67A15F9721C5129500C3C03F /* MusicNotationKitTests.swift */,
 				67494C8121CC06940078A575 /* Vector2Tests.swift */,
@@ -264,6 +273,14 @@
 				67A15F9921C5129500C3C03F /* Info.plist */,
 			);
 			path = MusicNotationKitTests;
+			sourceTree = "<group>";
+		};
+		67F6880C21EB529F003707DD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,12 +405,14 @@
 				677C9C8121C5172100C7A16E /* MusicView.swift in Sources */,
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,
 				67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */,
+				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
 				67678E0021E2865400E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
 				674D504221DD5774009E5AFE /* NoteTimeCalculator.swift in Sources */,
 				674D503921DD50C8009E5AFE /* Composition.swift in Sources */,
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
+				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
 				67494C8A21CD84520078A575 /* Pitch.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
 				674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */,
@@ -418,6 +437,7 @@
 				67A15F9821C5129500C3C03F /* MusicNotationKitTests.swift in Sources */,
 				67F6880921EA71AD003707DD /* HorizontalConstraintTests.swift in Sources */,
 				67678E0221E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
+				67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */,
 				67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

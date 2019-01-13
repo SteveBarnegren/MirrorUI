@@ -88,19 +88,34 @@ class HorizontalConstraintSolver {
     private func solveWithMinimumDistances(distances: [ConstrainedDistance], layoutWidth: Double) {
         
         // Work out the priority that we're solving for
-        var priority = ConstraintPriority.required
+        var priority = ConstraintPriority.regular
+        var width = minimumWidth(forDistances: distances, atPriority: ConstraintPriority.regular)
+        var previousPriorityWidth: Double? = nil
+        var previousPriority: ConstraintPriority?
         
-        for p in ConstraintPriority.allCasesIncreasing {
+        for (p, isLast) in ConstraintPriority.allCasesIncreasing.enumeratedWithLastItemFlag() {
             priority = p
-            if minimumWidth(forDistances: distances, atPriority: p) <= layoutWidth {
+            width = minimumWidth(forDistances: distances, atPriority: p)
+            if width <= layoutWidth || isLast {
                 break
             }
+            previousPriorityWidth = width
+            previousPriority = p
         }
         print("priority: \(priority)")
         
         // TODO: We need to be able to layout with values between 2 priorities
         for distance in distances {
-            distance.solvedDistance = distance.minimumDistance(atPriority: priority)
+            if let previousPriority = previousPriority, let previousPriorityWidth = previousPriorityWidth {
+                let ratio = layoutWidth.pct(between: width, and: previousPriorityWidth).constrained(min: 0, max: 1)
+                let previousDist = distance.minimumDistance(atPriority: previousPriority)
+                let dist = distance.minimumDistance(atPriority: priority)
+                distance.solvedDistance = dist.interpolate(to: previousDist, t: ratio)
+                
+            } else {
+                distance.solvedDistance = distance.minimumDistance(atPriority: priority)
+            }
+            
             distance.isSolved = true
         }
     }
