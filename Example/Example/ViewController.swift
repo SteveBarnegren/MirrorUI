@@ -51,19 +51,19 @@ class ViewController: UIViewController {
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
 
-        sequenceOne.add(note: Note(value: .quarter, pitch: .b4))
+        sequenceOne.add(note: Note(value: .quarter, pitch: .c4))
 
-        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
 
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .b4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
 
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
 
         let bar = Bar()
         bar.add(sequence: sequenceOne)
@@ -75,21 +75,21 @@ class ViewController: UIViewController {
         
         let sequence = NoteSequence()
         
-        sequence.add(note: Note(value: .eighth, pitch: .b4))
-        sequence.add(note: Note(value: .eighth, pitch: .b4))
+        sequence.add(note: Note(value: .eighth, pitch: .c4))
+        sequence.add(note: Note(value: .eighth, pitch: .c4))
         
-        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequence.add(note: Note(value: .eighth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence.add(note: Note(value: .eighth, pitch: .c4))
         
-        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
         
-        sequence.add(note: Note(value: .eighth, pitch: .b4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .eighth, pitch: .c4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
         
         let bar = Bar()
         bar.add(sequence: sequence)

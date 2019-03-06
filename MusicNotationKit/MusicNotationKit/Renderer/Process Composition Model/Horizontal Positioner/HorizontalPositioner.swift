@@ -25,33 +25,52 @@ class HorizontalPositioner {
         // We'll just process a single note sequence for now
         var items = [HorizontallyConstrained]()
         items.append(bar.leadingBarline)
+        items.append(makePostBarlineSpacer())
         
-        for note in bar.sequences[0].notes {
+        for (note, isLast) in bar.sequences[0].notes.enumeratedWithLastItemFlag() {
             items.append(note)
+            items.append(isLast ? makeLastNoteSpacer() : makePostNoteSpacer())
         }
         
         return items
+    }
+    
+    private func makePostBarlineSpacer() -> Spacer {
+        
+        let spacer = Spacer()
+        spacer.add(value: ConstraintValue(length: 1, priority: ConstraintPriority.regular))
+        return spacer
+    }
+    
+    private func makePostNoteSpacer() -> Spacer {
+        
+        let spacer = Spacer()
+        spacer.add(value: ConstraintValue(length: 0.5, priority: ConstraintPriority.regular))
+        return spacer
+    }
+    
+    private func makeLastNoteSpacer() -> Spacer {
+        
+        let spacer = Spacer()
+        spacer.add(value: ConstraintValue(length: 1, priority: ConstraintPriority.regular))
+        return spacer
     }
 }
 
 fileprivate class Spacer: HorizontallyConstrained {
  
-    
-    var layoutDuration: Time?
-    var leadingWidth: Double
-    var trailingWidth: Double
+    var layoutDuration: Time? = nil
     var xPosition: Double = 0
     
     let leadingConstraints = [HorizontalConstraint]()
-    let trailingConstraints: [HorizontalConstraint]
+    var trailingConstraints: [HorizontalConstraint] {
+        let constraint = HorizontalConstraint(values: constraintValues)
+        return [constraint]
+    }
     
-    init(width: Double) {
-        self.leadingWidth = width/2
-        self.trailingWidth = width/2
-        
-        let constraint = HorizontalConstraint(values: [ConstraintValue(length: width, priority: ConstraintPriority.required)])
-        self.trailingConstraints = [constraint]
-        
-        self.layoutDuration = nil
+    private var constraintValues = [ConstraintValue]()
+    
+    func add(value: ConstraintValue) {
+        constraintValues.append(value)
     }
 }

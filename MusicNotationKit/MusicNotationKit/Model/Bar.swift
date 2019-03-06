@@ -22,10 +22,7 @@ class Barline: HorizontallyConstrained {
         let leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.1, priority: ConstraintPriority.required)])
         self.leadingConstraints = [leadingConstraint]
         
-        let requiredTrailingValue = ConstraintValue(length: 0.1, priority: ConstraintPriority.required)
-        let paddedTrailingValue = ConstraintValue(length: 0.1 + 1, priority: ConstraintPriority.regular)
-        
-        let trailingConstraint = HorizontalConstraint(values: [requiredTrailingValue, paddedTrailingValue])
+        let trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.1, priority: ConstraintPriority.required)])
         self.trailingConstraints = [trailingConstraint]
     }
 }
