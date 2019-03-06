@@ -27,7 +27,7 @@ class MusicRenderer {
         print("Layout width: \(layoutWidth)")
     
         // Populate note symbols
-        NoteSymbolDescriber().process(composition: composition)
+        GenerateSymbolDescriptionsRenderOperation().process(composition: composition)
         
         // Calculate note times
         NoteTimeCalculator().process(composition: composition)

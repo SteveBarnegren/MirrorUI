@@ -10,25 +10,7 @@ import Foundation
 
 class NoteSymbolDescriber {
     
-    func process(composition: Composition) {
-        for bar in composition.bars {
-            process(bar: bar)
-        }
-    }
-    
-    private func process(bar: Bar) {
-        for noteSequence in bar.sequences {
-            process(noteSequence: noteSequence)
-        }
-    }
-    
-    private func process(noteSequence: NoteSequence) {
-        for note in noteSequence.notes {
-            process(note: note)
-        }
-    }
-    
-    private func process(note: Note) {
+    func symbolDescription(forNote note: Note) -> NoteSymbolDescription {
         
         let description: NoteSymbolDescription
         
@@ -45,6 +27,6 @@ class NoteSymbolDescriber {
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: 2)
         }
         
-        note.symbolDescription = description
+        return description
     }
 }
