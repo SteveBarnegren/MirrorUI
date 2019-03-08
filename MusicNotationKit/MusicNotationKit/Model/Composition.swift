@@ -20,7 +20,11 @@ public class Composition {
         return bars.reduce(Time.zero) { $0 + $1.duration }
     }
     
+    // MARK: - Init
+    
     public init() {}
+    
+    // MARK: - Add bars
     
     public func add(bar: Bar) {
         self.bars.append(bar)

@@ -23,17 +23,6 @@ public class Note: Positionable, HorizontallyConstrained {
     var symbolDescription = NoteSymbolDescription.standard
     var time = Time.zero
     
-    // Width
-    var leadingWidth = Double(0)
-    var trailingWidth = Double(0)
-    var layoutDuration: Time? {
-        return self.duration
-    }
-    var leadingConstraints = [HorizontalConstraint]()
-    var trailingConstraints = [HorizontalConstraint]()
-    
-    var position = Point.zero
-    
     var duration: Time {
         switch self.value {
         case .whole: return Time(crotchets: 4)
@@ -43,6 +32,22 @@ public class Note: Positionable, HorizontallyConstrained {
         case .sixteenth: return Time(semiquavers: 1)
         }
     }
+    
+    // Width
+    var leadingWidth = Double(0)
+    var trailingWidth = Double(0)
+    var layoutDuration: Time? {
+        return self.duration
+    }
+    
+    // HorizontallyConstrained
+    var leadingConstraints = [HorizontalConstraint]()
+    var trailingConstraints = [HorizontalConstraint]()
+    
+    // Positionable
+    var position = Point.zero
+    
+    // MARK: - Init
     
     public init(value: Value, pitch: Pitch) {
         self.value = value

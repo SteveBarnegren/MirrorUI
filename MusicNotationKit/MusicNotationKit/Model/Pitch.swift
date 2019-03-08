@@ -39,8 +39,8 @@ public enum Pitch: Int {
         case .f3: return -1.5
         case .g3: return -1
         case .a4: return -0.5 // ↑ Below the middle of the stave
-        case .b4: return 0 // Middle of the stave
-        case .c4: return 0.5 // ↓ Above the middle of the stave
+        case .b4: return 0    // - Middle of the stave
+        case .c4: return 0.5  // ↓ Above the middle of the stave
         case .d4: return 1
         case .e4: return 1.5
         case .f4: return 2

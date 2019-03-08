@@ -28,6 +28,7 @@
 		6751A8352232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8342232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift */; };
 		6751A8382232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8372232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift */; };
 		6751A83B22330023000B0D08 /* GenerateNoteConstraintsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83A22330022000B0D08 /* GenerateNoteConstraintsRenderOperation.swift */; };
+		6751A83E223304E7000B0D08 /* Barline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83D223304E7000B0D08 /* Barline.swift */; };
 		67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */; };
 		67678DF821E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */; };
 		67678DFA21E250A200E7FD71 /* NoteBeamDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */; };
@@ -88,6 +89,7 @@
 		6751A8342232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateBeamDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
 		6751A8372232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateNoteTimesRenderOperation.swift; sourceTree = "<group>"; };
 		6751A83A22330022000B0D08 /* GenerateNoteConstraintsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNoteConstraintsRenderOperation.swift; sourceTree = "<group>"; };
+		6751A83D223304E7000B0D08 /* Barline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barline.swift; sourceTree = "<group>"; };
 		67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPositionerRenderOperation.swift; sourceTree = "<group>"; };
 		67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriber.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				674D503A21DD50E6009E5AFE /* Bar.swift */,
 				674D503C21DD50F8009E5AFE /* NoteSequence.swift */,
 				67A15FA321C512E800C3C03F /* Note.swift */,
+				6751A83D223304E7000B0D08 /* Barline.swift */,
 				67494C8921CD84520078A575 /* Pitch.swift */,
 			);
 			path = Model;
@@ -484,6 +487,7 @@
 				67F6880421EA6D32003707DD /* HorizontallyConstrained.swift in Sources */,
 				674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */,
 				67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */,
+				6751A83E223304E7000B0D08 /* Barline.swift in Sources */,
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
 			);
