@@ -9,5 +9,5 @@
 import Foundation
 
 protocol RenderOperation {
-    func process(composition: Composition)
+    func process(composition: Composition, layoutWidth: Double)
 }

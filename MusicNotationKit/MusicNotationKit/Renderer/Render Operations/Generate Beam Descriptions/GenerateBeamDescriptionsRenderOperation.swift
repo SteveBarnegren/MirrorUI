@@ -12,7 +12,7 @@ class GenerateBeamDescriptionsRenderOperation: RenderOperation {
     
     private let noteBeamDescriber = NoteBeamDescriber()
     
-    func process(composition: Composition) {
+    func process(composition: Composition, layoutWidth: Double) {
         composition.enumerateNoteSequences { noteBeamDescriber.applyBeams(toNoteSequence: $0) }
     }
 }

@@ -27,19 +27,19 @@ class MusicRenderer {
         print("Layout width: \(layoutWidth)")
     
         // Populate note symbols
-        GenerateSymbolDescriptionsRenderOperation().process(composition: composition)
+        GenerateSymbolDescriptionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Calculate note times
-        CalculateNoteTimesRenderOperation().process(composition: composition)
+        CalculateNoteTimesRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Populate note beams
-        GenerateBeamDescriptionsRenderOperation().process(composition: composition)
+        GenerateBeamDescriptionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Calculate width constraints
-        GenerateNoteConstraintsRenderOperation().process(composition: composition)
+        GenerateNoteConstraintsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Solve X Positions
-        HorizontalPositioner().process(composition: composition, layoutWidth: layoutWidth)
+        HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Apply Veritical positions
         VerticalPositioner().process(composition: composition)

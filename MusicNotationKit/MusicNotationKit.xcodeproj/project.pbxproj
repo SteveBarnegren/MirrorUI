@@ -24,7 +24,7 @@
 		674D504421E10504009E5AFE /* NoteConstraintsDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504321E10504009E5AFE /* NoteConstraintsDescriber.swift */; };
 		674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */; };
 		674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504A21E23CD8009E5AFE /* NoteRenderer.swift */; };
-		674D504E21E23D72009E5AFE /* HorizontalPositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504D21E23D72009E5AFE /* HorizontalPositioner.swift */; };
+		674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */; };
 		6751A8352232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8342232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift */; };
 		6751A8382232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8372232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift */; };
 		6751A83B22330023000B0D08 /* GenerateNoteConstraintsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83A22330022000B0D08 /* GenerateNoteConstraintsRenderOperation.swift */; };
@@ -84,7 +84,7 @@
 		674D504321E10504009E5AFE /* NoteConstraintsDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteConstraintsDescriber.swift; sourceTree = "<group>"; };
 		674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalConstraintSolver.swift; sourceTree = "<group>"; };
 		674D504A21E23CD8009E5AFE /* NoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRenderer.swift; sourceTree = "<group>"; };
-		674D504D21E23D72009E5AFE /* HorizontalPositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPositioner.swift; sourceTree = "<group>"; };
+		674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPositionerRenderOperation.swift; sourceTree = "<group>"; };
 		6751A8342232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateBeamDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
 		6751A8372232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateNoteTimesRenderOperation.swift; sourceTree = "<group>"; };
 		6751A83A22330022000B0D08 /* GenerateNoteConstraintsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNoteConstraintsRenderOperation.swift; sourceTree = "<group>"; };
@@ -172,8 +172,8 @@
 		674D504C21E23D52009E5AFE /* Horizontal Positioner */ = {
 			isa = PBXGroup;
 			children = (
+				674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */,
 				67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */,
-				674D504D21E23D72009E5AFE /* HorizontalPositioner.swift */,
 				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
 			);
 			path = "Horizontal Positioner";
@@ -474,7 +474,7 @@
 				67A15FA421C512E800C3C03F /* Note.swift in Sources */,
 				6751A83B22330023000B0D08 /* GenerateNoteConstraintsRenderOperation.swift in Sources */,
 				67F6880421EA6D32003707DD /* HorizontallyConstrained.swift in Sources */,
-				674D504E21E23D72009E5AFE /* HorizontalPositioner.swift in Sources */,
+				674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */,
 				67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */,
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,

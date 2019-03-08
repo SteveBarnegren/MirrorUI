@@ -12,7 +12,7 @@ class GenerateSymbolDescriptionsRenderOperation: RenderOperation {
     
     private let noteSymbolDescriber = NoteSymbolDescriber()
     
-    func process(composition: Composition) {
+    func process(composition: Composition, layoutWidth: Double) {
         for bar in composition.bars {
             process(bar: bar)
         }

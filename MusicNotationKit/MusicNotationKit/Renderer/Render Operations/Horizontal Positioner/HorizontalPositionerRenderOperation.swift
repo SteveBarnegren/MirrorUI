@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HorizontalPositioner {
+class HorizontalPositionerRenderOperation: RenderOperation {
     
     func process(composition: Composition, layoutWidth: Double) {
         

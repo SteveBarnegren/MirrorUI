@@ -12,7 +12,7 @@ class CalculateNoteTimesRenderOperation: RenderOperation {
     
     private let noteTimeCalculator = NoteTimeCalculator()
     
-    func process(composition: Composition) {
+    func process(composition: Composition, layoutWidth: Double) {
         for bar in composition.bars {
             process(bar: bar)
         }
