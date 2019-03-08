@@ -33,7 +33,7 @@ class MusicRenderer {
         NoteTimeCalculator().process(composition: composition)
         
         // Populate note beams
-        NoteBeamDescriber().process(composition: composition)
+        GenerateBeamDescriptionsRenderOperation().process(composition: composition)
         
         // Calculate width constraints
         WidthConstraintsCalculator().process(composition: composition)

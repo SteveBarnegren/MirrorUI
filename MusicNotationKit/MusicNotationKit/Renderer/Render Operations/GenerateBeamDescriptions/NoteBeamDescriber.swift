@@ -10,17 +10,13 @@ import Foundation
 
 class NoteBeamDescriber {
     
-    func process(composition: Composition) {
-        composition.enumerateNoteSequences { applyBeams(toNoteSequence: $0) }
-    }
-    
     func applyBeams(toNoteSequence noteSequence: NoteSequence) {
         
         let notesByBeat = noteSequence.notes.chunked(atChangeTo: { $0.time.convertedTruncating(toDivision: 4).value })
         notesByBeat.forEach { applyBeams(toNoteCluster: $0) }
     }
     
-    func applyBeams(toNoteCluster noteCluster: [Note]) {
+    private func applyBeams(toNoteCluster noteCluster: [Note]) {
         
         var lastNumberOfForwardConnections = 0
         
