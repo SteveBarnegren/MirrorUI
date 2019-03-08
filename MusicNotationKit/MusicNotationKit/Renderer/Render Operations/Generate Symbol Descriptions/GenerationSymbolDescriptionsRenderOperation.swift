@@ -10,7 +10,7 @@ import Foundation
 
 class GenerateSymbolDescriptionsRenderOperation: RenderOperation {
     
-    let noteSymbolDescriber = NoteSymbolDescriber()
+    private let noteSymbolDescriber = NoteSymbolDescriber()
     
     func process(composition: Composition) {
         for bar in composition.bars {

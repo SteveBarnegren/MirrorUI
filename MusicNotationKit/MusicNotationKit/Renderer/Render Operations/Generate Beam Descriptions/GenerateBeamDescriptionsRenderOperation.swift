@@ -10,7 +10,7 @@ import Foundation
 
 class GenerateBeamDescriptionsRenderOperation: RenderOperation {
     
-    let noteBeamDescriber = NoteBeamDescriber()
+    private let noteBeamDescriber = NoteBeamDescriber()
     
     func process(composition: Composition) {
         composition.enumerateNoteSequences { noteBeamDescriber.applyBeams(toNoteSequence: $0) }

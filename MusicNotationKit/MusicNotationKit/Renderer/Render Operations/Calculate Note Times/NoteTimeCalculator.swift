@@ -10,19 +10,7 @@ import Foundation
 
 class NoteTimeCalculator {
     
-    func process(composition: Composition) {
-        for bar in composition.bars {
-            process(bar: bar)
-        }
-    }
-    
-    private func process(bar: Bar) {
-        for noteSequence in bar.sequences {
-            process(noteSequence: noteSequence)
-        }
-    }
-    
-    private func process(noteSequence: NoteSequence) {
+    func process(noteSequence: NoteSequence) {
         
         var currentTime = Time.zero
         

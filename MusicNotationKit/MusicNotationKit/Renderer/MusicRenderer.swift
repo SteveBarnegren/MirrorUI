@@ -30,7 +30,7 @@ class MusicRenderer {
         GenerateSymbolDescriptionsRenderOperation().process(composition: composition)
         
         // Calculate note times
-        NoteTimeCalculator().process(composition: composition)
+        CalculateNoteTimesRenderOperation().process(composition: composition)
         
         // Populate note beams
         GenerateBeamDescriptionsRenderOperation().process(composition: composition)
