@@ -42,7 +42,7 @@ class MusicRenderer {
         HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Apply Veritical positions
-        VerticalPositioner().process(composition: composition)
+        VerticalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Make paths
         var paths = makePaths(forComposition: composition)

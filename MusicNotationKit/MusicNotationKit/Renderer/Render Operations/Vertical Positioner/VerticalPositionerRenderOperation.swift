@@ -8,13 +8,13 @@
 
 import Foundation
 
-class VerticalPositioner {
+class VerticalPositionerRenderOperation: RenderOperation {
     
-    func process(composition: Composition) {
+    func process(composition: Composition, layoutWidth: Double) {
         composition.enumerateNotes { self.position(note: $0) }
     }
     
-    func position(note: Note) {
+    private func position(note: Note) {
         note.position.y = note.pitch.staveOffset - 0.5
     }
 
