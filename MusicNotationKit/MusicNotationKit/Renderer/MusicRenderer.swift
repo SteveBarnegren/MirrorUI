@@ -64,6 +64,6 @@ class MusicRenderer {
     }
     
     private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
-        return NoteRenderer().paths(forNotes: noteSequence.notes)
+        return NoteRenderer().paths(forNotes: noteSequence.notes) + RestRenderer().paths(forRests: noteSequence.rests)
     }
 }

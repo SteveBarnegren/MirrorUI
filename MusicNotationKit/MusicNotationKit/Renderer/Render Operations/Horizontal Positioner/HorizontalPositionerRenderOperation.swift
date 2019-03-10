@@ -27,8 +27,8 @@ class HorizontalPositionerRenderOperation: RenderOperation {
         items.append(bar.leadingBarline)
         items.append(makePostBarlineSpacer())
         
-        for (note, isLast) in bar.sequences[0].notes.enumeratedWithLastItemFlag() {
-            items.append(note)
+        for (playableItem, isLast) in bar.sequences[0].playables.enumeratedWithLastItemFlag() {
+            items.append(playableItem)
             items.append(isLast ? makeLastNoteSpacer() : makePostNoteSpacer())
         }
         
