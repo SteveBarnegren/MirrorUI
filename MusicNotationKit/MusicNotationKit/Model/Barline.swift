@@ -10,13 +10,15 @@ import Foundation
 
 class Barline: HorizontallyConstrained {
     
+    // HorizontallyConstrained
     let layoutDuration: Time? = Time.init(value: 1, division: 64)
-    var leadingWidth = 0.1
-    var trailingWidth = 0.1
     var leadingConstraints: [HorizontalConstraint]
     var trailingConstraints: [HorizontalConstraint]
     
+    // HorizontallyPositionable
     var xPosition = Double(0)
+    
+    // Init
     
     init() {
         let leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.1, priority: ConstraintPriority.required)])

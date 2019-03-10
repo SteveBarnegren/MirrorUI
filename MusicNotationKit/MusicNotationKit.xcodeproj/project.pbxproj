@@ -177,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */,
-				67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */,
 				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
 			);
 			path = "Horizontal Positioner";
@@ -244,6 +243,7 @@
 		67678E0521E3E9BA00E7FD71 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */,
 				67678E0621E3E9CB00E7FD71 /* Positionable.swift */,
 			);
 			path = Protocols;
@@ -252,6 +252,7 @@
 		677C9C7E21C5168500C7A16E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				67678E0521E3E9BA00E7FD71 /* Protocols */,
 				674D503821DD50C8009E5AFE /* Composition.swift */,
 				674D503A21DD50E6009E5AFE /* Bar.swift */,
 				674D503C21DD50F8009E5AFE /* NoteSequence.swift */,
@@ -311,7 +312,6 @@
 			children = (
 				67A15F8C21C5129500C3C03F /* MusicNotationKit.h */,
 				67494C7B21CC02D40078A575 /* SymbolPaths.swift */,
-				67678E0521E3E9BA00E7FD71 /* Protocols */,
 				674D503721DD50B2009E5AFE /* Basic Types */,
 				677C9C8221C518F800C7A16E /* Extensions */,
 				677C9C7E21C5168500C7A16E /* Model */,
