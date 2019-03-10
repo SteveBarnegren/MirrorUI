@@ -1,5 +1,5 @@
 //
-//  GenerateNoteConstraintsRenderOperation.swift
+//  CalculateNoteTimesRenderOperation.swift
 //  MusicNotationKit
 //
 //  Created by Steve Barnegren on 08/03/2019.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class GenerateNoteConstraintsRenderOperation: RenderOperation {
+class CalculatePlayableItemTimesRenderOperation: RenderOperation {
     
-    private let noteConstraintsDescriber = NoteConstraintsDescriber()
+    private let playableItemTimeCalculator = PlayableItemTimeCalculator()
     
     func process(composition: Composition, layoutWidth: Double) {
         for bar in composition.bars {
@@ -20,14 +20,7 @@ class GenerateNoteConstraintsRenderOperation: RenderOperation {
     
     private func process(bar: Bar) {
         for noteSequence in bar.sequences {
-            process(noteSequence: noteSequence)
+            playableItemTimeCalculator.process(noteSequence: noteSequence)
         }
     }
-    
-    private func process(noteSequence: NoteSequence) {
-        for note in noteSequence.notes {
-            noteConstraintsDescriber.process(note: note)
-        }
-    }
-    
 }

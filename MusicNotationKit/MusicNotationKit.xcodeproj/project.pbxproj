@@ -20,16 +20,20 @@
 		674D503D21DD50F8009E5AFE /* NoteSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D503C21DD50F8009E5AFE /* NoteSequence.swift */; };
 		674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749365021CF8861005BA334 /* StaveRenderer.swift */; };
 		674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */; };
-		674D504221DD5774009E5AFE /* NoteTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */; };
+		674D504221DD5774009E5AFE /* PlayableItemTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504121DD5774009E5AFE /* PlayableItemTimeCalculator.swift */; };
 		674D504421E10504009E5AFE /* NoteConstraintsDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504321E10504009E5AFE /* NoteConstraintsDescriber.swift */; };
 		674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */; };
 		674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504A21E23CD8009E5AFE /* NoteRenderer.swift */; };
 		674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */; };
 		6751A8352232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8342232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift */; };
-		6751A8382232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8372232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift */; };
-		6751A83B22330023000B0D08 /* GenerateNoteConstraintsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83A22330022000B0D08 /* GenerateNoteConstraintsRenderOperation.swift */; };
+		6751A8382232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8372232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift */; };
+		6751A83B22330023000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83A22330022000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift */; };
 		6751A83E223304E7000B0D08 /* Barline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83D223304E7000B0D08 /* Barline.swift */; };
 		6751A84022350475000B0D08 /* NoteValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83F22350475000B0D08 /* NoteValue.swift */; };
+		6751A84222357AE3000B0D08 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84122357AE3000B0D08 /* Rest.swift */; };
+		6751A84422357AFA000B0D08 /* Playable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84322357AFA000B0D08 /* Playable.swift */; };
+		6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */; };
+		6751A848223583EF000B0D08 /* RestConstraintsDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A847223583EF000B0D08 /* RestConstraintsDescriber.swift */; };
 		67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */; };
 		67678DF821E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */; };
 		67678DFA21E250A200E7FD71 /* NoteBeamDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */; };
@@ -82,16 +86,20 @@
 		674D503A21DD50E6009E5AFE /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
 		674D503C21DD50F8009E5AFE /* NoteSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSequence.swift; sourceTree = "<group>"; };
 		674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSymbolDescriber.swift; sourceTree = "<group>"; };
-		674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTimeCalculator.swift; sourceTree = "<group>"; };
+		674D504121DD5774009E5AFE /* PlayableItemTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayableItemTimeCalculator.swift; sourceTree = "<group>"; };
 		674D504321E10504009E5AFE /* NoteConstraintsDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteConstraintsDescriber.swift; sourceTree = "<group>"; };
 		674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalConstraintSolver.swift; sourceTree = "<group>"; };
 		674D504A21E23CD8009E5AFE /* NoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRenderer.swift; sourceTree = "<group>"; };
 		674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPositionerRenderOperation.swift; sourceTree = "<group>"; };
 		6751A8342232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateBeamDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
-		6751A8372232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateNoteTimesRenderOperation.swift; sourceTree = "<group>"; };
-		6751A83A22330022000B0D08 /* GenerateNoteConstraintsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNoteConstraintsRenderOperation.swift; sourceTree = "<group>"; };
+		6751A8372232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatePlayableItemTimesRenderOperation.swift; sourceTree = "<group>"; };
+		6751A83A22330022000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateHorizontalConstraintsRenderOperation.swift; sourceTree = "<group>"; };
 		6751A83D223304E7000B0D08 /* Barline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barline.swift; sourceTree = "<group>"; };
 		6751A83F22350475000B0D08 /* NoteValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteValue.swift; sourceTree = "<group>"; };
+		6751A84122357AE3000B0D08 /* Rest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
+		6751A84322357AFA000B0D08 /* Playable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playable.swift; sourceTree = "<group>"; };
+		6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestSymbolDescriber.swift; sourceTree = "<group>"; };
+		6751A847223583EF000B0D08 /* RestConstraintsDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestConstraintsDescriber.swift; sourceTree = "<group>"; };
 		67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPositionerRenderOperation.swift; sourceTree = "<group>"; };
 		67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriber.swift; sourceTree = "<group>"; };
@@ -147,6 +155,7 @@
 			children = (
 				6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */,
 				674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */,
+				6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */,
 			);
 			path = "Generate Symbol Descriptions";
 			sourceTree = "<group>";
@@ -191,22 +200,23 @@
 			path = "Generate Beam Descriptions";
 			sourceTree = "<group>";
 		};
-		6751A8362232FDBF000B0D08 /* Calculate Note Times */ = {
+		6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */ = {
 			isa = PBXGroup;
 			children = (
-				6751A8372232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift */,
-				674D504121DD5774009E5AFE /* NoteTimeCalculator.swift */,
+				6751A8372232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift */,
+				674D504121DD5774009E5AFE /* PlayableItemTimeCalculator.swift */,
 			);
-			path = "Calculate Note Times";
+			path = "Calculate Playable Item Times";
 			sourceTree = "<group>";
 		};
-		6751A8392232FFF8000B0D08 /* Generate Note Constraints */ = {
+		6751A8392232FFF8000B0D08 /* Generate Horizontal Constraints */ = {
 			isa = PBXGroup;
 			children = (
-				6751A83A22330022000B0D08 /* GenerateNoteConstraintsRenderOperation.swift */,
+				6751A83A22330022000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift */,
 				674D504321E10504009E5AFE /* NoteConstraintsDescriber.swift */,
+				6751A847223583EF000B0D08 /* RestConstraintsDescriber.swift */,
 			);
-			path = "Generate Note Constraints";
+			path = "Generate Horizontal Constraints";
 			sourceTree = "<group>";
 		};
 		6751A83C22330289000B0D08 /* Vertical Positioner */ = {
@@ -221,9 +231,9 @@
 			isa = PBXGroup;
 			children = (
 				6726FB01223067BC002EFE4D /* Generate Symbol Descriptions */,
-				6751A8362232FDBF000B0D08 /* Calculate Note Times */,
+				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
-				6751A8392232FFF8000B0D08 /* Generate Note Constraints */,
+				6751A8392232FFF8000B0D08 /* Generate Horizontal Constraints */,
 				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
 				6751A83C22330289000B0D08 /* Vertical Positioner */,
 			);
@@ -245,6 +255,7 @@
 			children = (
 				67F6880321EA6D32003707DD /* HorizontallyConstrained.swift */,
 				67678E0621E3E9CB00E7FD71 /* Positionable.swift */,
+				6751A84322357AFA000B0D08 /* Playable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -257,6 +268,7 @@
 				674D503A21DD50E6009E5AFE /* Bar.swift */,
 				674D503C21DD50F8009E5AFE /* NoteSequence.swift */,
 				67A15FA321C512E800C3C03F /* Note.swift */,
+				6751A84122357AE3000B0D08 /* Rest.swift */,
 				6751A83D223304E7000B0D08 /* Barline.swift */,
 				67494C8921CD84520078A575 /* Pitch.swift */,
 				6751A83F22350475000B0D08 /* NoteValue.swift */,
@@ -454,8 +466,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */,
-				6751A8382232FE9F000B0D08 /* CalculateNoteTimesRenderOperation.swift in Sources */,
+				6751A8382232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift in Sources */,
 				67AE184421D9305700F3545D /* Array+Extensions.swift in Sources */,
+				6751A84222357AE3000B0D08 /* Rest.swift in Sources */,
 				6726FB0322306840002EFE4D /* RenderOperation.swift in Sources */,
 				674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */,
 				67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */,
@@ -467,13 +480,14 @@
 				67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */,
 				67AE184621D9387900F3545D /* Optional+Extensions.swift in Sources */,
 				677C9C8121C5172100C7A16E /* MusicView.swift in Sources */,
+				6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */,
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,
 				67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */,
 				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
 				67678E0021E2865400E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
-				674D504221DD5774009E5AFE /* NoteTimeCalculator.swift in Sources */,
+				674D504221DD5774009E5AFE /* PlayableItemTimeCalculator.swift in Sources */,
 				674D503921DD50C8009E5AFE /* Composition.swift in Sources */,
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
 				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
@@ -486,14 +500,16 @@
 				67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */,
 				6751A84022350475000B0D08 /* NoteValue.swift in Sources */,
 				67678DF821E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift in Sources */,
+				6751A84422357AFA000B0D08 /* Playable.swift in Sources */,
 				67A15FA421C512E800C3C03F /* Note.swift in Sources */,
-				6751A83B22330023000B0D08 /* GenerateNoteConstraintsRenderOperation.swift in Sources */,
+				6751A83B22330023000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift in Sources */,
 				67F6880421EA6D32003707DD /* HorizontallyConstrained.swift in Sources */,
 				674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */,
 				67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */,
 				6751A83E223304E7000B0D08 /* Barline.swift in Sources */,
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
+				6751A848223583EF000B0D08 /* RestConstraintsDescriber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

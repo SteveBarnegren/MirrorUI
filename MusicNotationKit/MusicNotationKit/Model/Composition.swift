@@ -43,6 +43,17 @@ public class Composition {
         }
     }
     
+    func enumerateRests(_ handler: (Rest) -> Void) {
+        
+        for bar in bars {
+            for noteSequence in bar.sequences {
+                for rest in noteSequence.rests {
+                    handler(rest)
+                }
+            }
+        }
+    }
+    
     func enumerateNoteSequences(_ handler: (NoteSequence) -> Void) {
         
         for bar in bars {

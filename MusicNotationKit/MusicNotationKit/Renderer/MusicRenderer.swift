@@ -30,13 +30,13 @@ class MusicRenderer {
         GenerateSymbolDescriptionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Calculate note times
-        CalculateNoteTimesRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        CalculatePlayableItemTimesRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Populate note beams
         GenerateBeamDescriptionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Calculate width constraints
-        GenerateNoteConstraintsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        GenerateHorizontalConstraintsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)

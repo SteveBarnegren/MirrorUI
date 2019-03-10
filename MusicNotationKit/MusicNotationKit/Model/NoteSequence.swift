@@ -9,7 +9,14 @@
 import Foundation
 
 public class NoteSequence {
-    var notes = [Note]()
+    
+    var playables = [Playable]()
+    var notes: [Note] {
+        return playables.compactMap { $0 as? Note }
+    }
+    var rests: [Rest] {
+        return playables.compactMap { $0 as? Rest }
+    }
     
     var duration: Time {
         return notes.reduce(Time.zero) { $0 + $1.duration }
@@ -18,6 +25,10 @@ public class NoteSequence {
     public init() {}
     
     public func add(note: Note) {
-        self.notes.append(note)
+        self.playables.append(note)
+    }
+    
+    public func add(rest: Rest) {
+        self.playables.append(rest)
     }
 }

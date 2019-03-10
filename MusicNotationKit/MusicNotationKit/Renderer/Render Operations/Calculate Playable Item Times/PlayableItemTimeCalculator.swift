@@ -8,15 +8,15 @@
 
 import Foundation
 
-class NoteTimeCalculator {
+class PlayableItemTimeCalculator {
     
     func process(noteSequence: NoteSequence) {
         
         var currentTime = Time.zero
         
-        for note in noteSequence.notes {
-            note.time = currentTime
-            currentTime += note.duration
+        for playable in noteSequence.playables {
+            playable.time = currentTime
+            currentTime += playable.duration
         }
     }
 }

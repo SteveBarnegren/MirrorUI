@@ -11,22 +11,12 @@ import Foundation
 class GenerateSymbolDescriptionsRenderOperation: RenderOperation {
     
     private let noteSymbolDescriber = NoteSymbolDescriber()
+    private let restSymbolDescriber = RestSymbolDescriber()
     
     func process(composition: Composition, layoutWidth: Double) {
-        for bar in composition.bars {
-            process(bar: bar)
-        }
-    }
-    
-    private func process(bar: Bar) {
-        for noteSequence in bar.sequences {
-            process(noteSequence: noteSequence)
-        }
-    }
-    
-    private func process(noteSequence: NoteSequence) {
-        for note in noteSequence.notes {
-            note.symbolDescription = noteSymbolDescriber.symbolDescription(forNote: note)
-        }
+        
+        composition.enumerateNotes { $0.symbolDescription = noteSymbolDescriber.symbolDescription(forNote: $0) }
+        composition.enumerateRests { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
+        
     }
 }

@@ -8,16 +8,10 @@
 
 import Foundation
 
-public class Note: Positionable, HorizontallyConstrained {
+public class Note: Playable {
     
-    let value: NoteValue
     let pitch: Pitch
     var symbolDescription = NoteSymbolDescription.standard
-    var time = Time.zero
-    
-    var duration: Time {
-        return value.duration
-    }
     
     // Width
     var leadingWidth = Double(0)
@@ -25,6 +19,10 @@ public class Note: Positionable, HorizontallyConstrained {
     var layoutDuration: Time? {
         return self.duration
     }
+    
+    // Playable
+    let value: NoteValue
+    var time = Time.zero
     
     // HorizontallyConstrained
     var leadingConstraints = [HorizontalConstraint]()
