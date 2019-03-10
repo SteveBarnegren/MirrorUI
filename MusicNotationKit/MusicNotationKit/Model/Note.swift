@@ -9,28 +9,14 @@
 import Foundation
 
 public class Note: Positionable, HorizontallyConstrained {
-  
-    public enum Value {
-        case whole
-        case half
-        case quarter
-        case eighth
-        case sixteenth
-    }
     
-    let value: Value
+    let value: NoteValue
     let pitch: Pitch
     var symbolDescription = NoteSymbolDescription.standard
     var time = Time.zero
     
     var duration: Time {
-        switch self.value {
-        case .whole: return Time(crotchets: 4)
-        case .half: return Time(crotchets: 2)
-        case .quarter: return Time(crotchets: 1)
-        case .eighth: return Time(quavers: 1)
-        case .sixteenth: return Time(semiquavers: 1)
-        }
+        return value.duration
     }
     
     // Width
@@ -49,7 +35,7 @@ public class Note: Positionable, HorizontallyConstrained {
     
     // MARK: - Init
     
-    public init(value: Value, pitch: Pitch) {
+    public init(value: NoteValue, pitch: Pitch) {
         self.value = value
         self.pitch = pitch
     }
