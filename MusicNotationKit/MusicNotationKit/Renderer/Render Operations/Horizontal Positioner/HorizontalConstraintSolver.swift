@@ -176,6 +176,8 @@ class HorizontalConstraintSolver {
         return true
     }
     
+    // MARK: - Debug
+    
     func debug_printDistances(_ distances: [ConstrainedDistance]) {
         
         print("**** DISTANCE solved distances ****")
