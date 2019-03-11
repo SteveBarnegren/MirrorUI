@@ -20,6 +20,15 @@ class ConstraintsDebugDrawer {
             path.move(to: CGPoint(x: CGFloat(itemDescription.xPosition), y: canvasSize.height))
             path.addLine(to: CGPoint(x: CGFloat(itemDescription.xPosition), y: 0))
             path.stroke()
+            
+            for constraintZone in itemDescription.constraintZones {
+                constraintZone.color.set()
+                let path = UIBezierPath(rect: CGRect(x: constraintZone.startX,
+                                                     y: 0.0,
+                                                     width: constraintZone.endX - constraintZone.startX,
+                                                     height: Double(canvasSize.height)))
+                path.fill()
+            }
         }
     }
 }
