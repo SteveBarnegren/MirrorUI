@@ -12,6 +12,13 @@ public class MusicView: UIView {
 
     private var musicRenderer: MusicRenderer
     
+    public var _showConstraintsDebug = false {
+        didSet {
+            musicRenderer._generateConstraintsDebugInformation = _showConstraintsDebug
+            self.setNeedsDisplay()
+        }
+    }
+    
     // MARK: - Init
     
     public init(composition: Composition) {
@@ -32,6 +39,11 @@ public class MusicView: UIView {
         
         for path in musicRenderer.paths(forDisplaySize: displaySize) {
             self.draw(path: path)
+        }
+        
+        // Debug
+        if _showConstraintsDebug, let debugInformation = musicRenderer._constraintsDebugInformation {
+            ConstraintsDebugDrawer().draw(debugInformation: debugInformation, canvasSize: bounds.size)
         }
     }
     
@@ -95,4 +107,7 @@ public class MusicView: UIView {
     private func invertY(_ p: Point) -> Point {
         return Point(p.x, Double(bounds.height) - p.y)
     }
+    
 }
+
+

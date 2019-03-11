@@ -15,6 +15,9 @@ class MusicRenderer {
     let composition: Composition
     let staveSpacing: Double = 8
     
+    var _generateConstraintsDebugInformation = false
+    var _constraintsDebugInformation: ConstraintsDebugInformation?
+    
     init(composition: Composition) {
         self.composition = composition
     }
@@ -49,7 +52,13 @@ class MusicRenderer {
         paths += StaveRenderer.stavePaths(withWidth: canvasSize.width)
 
         //dump(composition)
-        return paths.map { $0.scaled(staveSpacing) }.map { $0.translated(x: 0, y: displaySize.height/2) }
+        paths = paths.map { $0.scaled(staveSpacing) }.map { $0.translated(x: 0, y: displaySize.height/2) }
+        
+        if _generateConstraintsDebugInformation {
+            _constraintsDebugInformation = ConstraintsDebugInformationGenerator().debugInformation(fromComposition: composition, scale: staveSpacing)
+        }
+        
+        return paths
     }
     
     private func makePaths(forComposition composition: Composition) -> [Path] {

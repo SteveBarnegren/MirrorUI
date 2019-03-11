@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6726FB0322306840002EFE4D /* RenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB0222306840002EFE4D /* RenderOperation.swift */; };
 		6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */; };
+		6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */; };
+		6728B2C22236FE6000382D92 /* ConstraintsDebugDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2C12236FE6000382D92 /* ConstraintsDebugDrawer.swift */; };
 		67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7B21CC02D40078A575 /* SymbolPaths.swift */; };
 		67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7D21CC04550078A575 /* MusicRenderer.swift */; };
 		67494C8021CC06740078A575 /* Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7F21CC06740078A575 /* Vector2.swift */; };
@@ -76,6 +78,8 @@
 /* Begin PBXFileReference section */
 		6726FB0222306840002EFE4D /* RenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderOperation.swift; sourceTree = "<group>"; };
 		6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationSymbolDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
+		6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsDebugInformationGenerator.swift; sourceTree = "<group>"; };
+		6728B2C12236FE6000382D92 /* ConstraintsDebugDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsDebugDrawer.swift; sourceTree = "<group>"; };
 		6749365021CF8861005BA334 /* StaveRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveRenderer.swift; sourceTree = "<group>"; };
 		67494C7B21CC02D40078A575 /* SymbolPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolPaths.swift; sourceTree = "<group>"; };
 		67494C7D21CC04550078A575 /* MusicRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRenderer.swift; sourceTree = "<group>"; };
@@ -162,6 +166,14 @@
 			path = "Generate Symbol Descriptions";
 			sourceTree = "<group>";
 		};
+		6728B2BE22358AC900382D92 /* Debug Information */ = {
+			isa = PBXGroup;
+			children = (
+				6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */,
+			);
+			path = "Debug Information";
+			sourceTree = "<group>";
+		};
 		67494C8C21CEB0220078A575 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +181,7 @@
 				6726FB0222306840002EFE4D /* RenderOperation.swift */,
 				67678DFB21E259E500E7FD71 /* Render Operations */,
 				67678DFC21E25A1400E7FD71 /* Component Renderers */,
+				6728B2BE22358AC900382D92 /* Debug Information */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -283,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				677C9C8021C5172100C7A16E /* MusicView.swift */,
+				6728B2C12236FE6000382D92 /* ConstraintsDebugDrawer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -496,6 +510,7 @@
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
 				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
 				67494C8A21CD84520078A575 /* Pitch.swift in Sources */,
+				6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
 				674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */,
 				674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */,
@@ -514,6 +529,7 @@
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
 				6751A848223583EF000B0D08 /* RestConstraintsDescriber.swift in Sources */,
+				6728B2C22236FE6000382D92 /* ConstraintsDebugDrawer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
