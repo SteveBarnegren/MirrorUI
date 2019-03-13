@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         musicViewWidth = UIScreen.main.bounds.width - 100
         
         musicView = MusicView(composition: makeComposition())
-        musicView._showConstraintsDebug = true
+        musicView._showConstraintsDebug = false
         view.addSubview(musicView)
         
         gridOverlayView = GridOverlayView(frame: .zero)

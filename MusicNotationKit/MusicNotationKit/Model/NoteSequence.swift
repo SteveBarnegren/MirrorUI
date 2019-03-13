@@ -19,10 +19,14 @@ public class NoteSequence {
     }
     
     var duration: Time {
-        return notes.reduce(Time.zero) { $0 + $1.duration }
+        return playables.reduce(Time.zero) { $0 + $1.duration }
     }
     
+    // MARK: - Init
+    
     public init() {}
+    
+    // MARK: - Add Playable items
     
     public func add(note: Note) {
         self.playables.append(note)
