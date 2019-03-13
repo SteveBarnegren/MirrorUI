@@ -32,6 +32,11 @@ class RestRenderer {
             path.close()
             path.drawStyle = .fill
             return path
+        case .crotchet:
+            
+            var path = SymbolPaths.crotchetRest
+            path.translate(x: rest.position.x, y: 0)
+            return path
         }
     }
 }

@@ -20,7 +20,7 @@ class RestSymbolDescriber {
         case .half:
             description = RestSymbolDescription(style: .minim)
         case .quarter:
-            fatalError("Whole note rests are not supported yet")
+            description = RestSymbolDescription(style: .crotchet)
         case .eighth:
             fatalError("Whole note rests are not supported yet")
         case .sixteenth:

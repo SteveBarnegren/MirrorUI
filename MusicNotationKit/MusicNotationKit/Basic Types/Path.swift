@@ -78,6 +78,10 @@ struct Path {
         self.commands = commands
     }
     
+    mutating func add(commands: [Command]) {
+        self.commands.append(contentsOf: commands)
+    }
+    
     mutating func move(to point: Point) {
         commands.append(.move(point))
     }

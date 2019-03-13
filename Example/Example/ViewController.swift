@@ -102,8 +102,9 @@ class ViewController: UIViewController {
         
         let sequence = NoteSequence()
         
-        sequence.add(rest: Rest(value: .half))
-        
+        sequence.add(rest: Rest(value: .quarter))
+        sequence.add(rest: Rest(value: .quarter))
+
         sequence.add(note: Note(value: .sixteenth, pitch: .c4))
         sequence.add(note: Note(value: .sixteenth, pitch: .c4))
         sequence.add(note: Note(value: .sixteenth, pitch: .c4))

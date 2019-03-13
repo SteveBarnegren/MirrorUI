@@ -34,6 +34,7 @@ class RestSymbolDescription {
     
     enum Style {
         case none
+        case crotchet
         case minim
     }
     
