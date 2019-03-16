@@ -18,6 +18,10 @@ struct Point {
         self.x = x
         self.y = y
     }
+    
+    func adding(x: Double, y: Double) -> Point {
+        return Point(self.x + x, self.y + y)
+    }
 }
 
 struct Size {

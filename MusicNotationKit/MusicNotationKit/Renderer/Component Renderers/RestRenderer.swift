@@ -57,7 +57,9 @@ class RestRenderer {
 //            .curve(Point(0.08064516129032256, 0.28924731182795704), c1: Point(0.02688172043010756, 0.3559139784946237), c2: Point(0.018279569892473146, 0.28924731182795704)),
 //            .curve(Point(0.21182795698924733, 0.4247311827956989), c1: Point(0.11505376344086021, 0.28924731182795704), c2: Point(0.1967741935483871, 0.3924731182795699)),
 //            .curve(Point(0.27204301075268816, 0.4247311827956989), c1: Point(0.22473118279569892, 0.4505376344086022), c2: Point(0.26129032258064516, 0.4505376344086022)),
+            // bottom right
 //            .line(Point(0.00752688172043009, -0.478494623655914)),
+            // double curve through bottom
 //            .curve(Point(-0.05053763440860215, -0.5), c1: Point(-0.009677419354838679, -0.4935483870967742), c2: Point(-0.02903225806451612, -0.5)),
 //            .curve(Point(-0.110752688172043, -0.478494623655914), c1: Point(-0.07204301075268815, -0.5), c2: Point(-0.09354838709677418, -0.4935483870967742)),
 //            .close,
@@ -74,7 +76,7 @@ class RestRenderer {
         let stemRightSideAngle = -Double.pi/2 - 0.28489090065227207
 
         //let stemLength = 0.9411618564085439
-        let stemLength = 2.0
+        let stemLength = 5.0
 
         let stemRightXLength = cos(stemRightSideAngle) * stemLength
         let stemRightYLength = sin(stemRightSideAngle) * stemLength
@@ -95,8 +97,12 @@ class RestRenderer {
             .line(stemRightBottom),
             //.line(Point(0.00752688172043009, -0.478494623655914 - stemLength)),
             // Double curve through bottom
-            .curve(Point(-0.05053763440860215, -0.5), c1: Point(-0.009677419354838679, -0.4935483870967742), c2: Point(-0.02903225806451612, -0.5)),
-            .curve(Point(-0.110752688172043, -0.478494623655914), c1: Point(-0.07204301075268815, -0.5), c2: Point(-0.09354838709677418, -0.4935483870967742)),
+            .curve(stemRightBottom.adding(x: -0.05806451612903224, y: -0.021505376344086002),
+                   c1: stemRightBottom.adding(x: -0.01720430107526877, y: -0.01505376344086018),
+                   c2: stemRightBottom.adding(x: -0.03655913978494621, y: -0.021505376344086002)),
+            .curve(stemRightBottom.adding(x: -0.1182795698924731, y: 0.0),
+                   c1: stemRightBottom.adding(x: -0.07956989247311824, y: -0.021505376344086002),
+                   c2: stemRightBottom.adding(x: -0.10107526881720427, y: -0.01505376344086018)),
             // Close stem buttom left to top left
             .close,
             ]
