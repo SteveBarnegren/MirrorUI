@@ -36,6 +36,7 @@ class RestSymbolDescription {
         case none
         case crotchet
         case minim
+        case quaver
     }
     
     var style: Style

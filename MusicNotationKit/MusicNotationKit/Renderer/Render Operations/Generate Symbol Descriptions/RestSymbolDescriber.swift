@@ -22,7 +22,7 @@ class RestSymbolDescriber {
         case .quarter:
             description = RestSymbolDescription(style: .crotchet)
         case .eighth:
-            fatalError("Whole note rests are not supported yet")
+            description = RestSymbolDescription(style: .quaver)
         case .sixteenth:
             fatalError("Whole note rests are not supported yet")
         }

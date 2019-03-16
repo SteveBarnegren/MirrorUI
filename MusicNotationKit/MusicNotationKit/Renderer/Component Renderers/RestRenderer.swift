@@ -37,6 +37,11 @@ class RestRenderer {
             var path = SymbolPaths.crotchetRest
             path.translate(x: rest.position.x, y: 0)
             return path
+        case .quaver:
+            
+            var path = SymbolPaths.quaverRest
+            path.translate(x: rest.position.x, y: 0)
+            return path
         }
     }
 }
