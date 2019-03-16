@@ -39,7 +39,7 @@ class RestRenderer {
             return path
         case .tailed(let tailedRest):
             
-            var path = self.path(forTailedRest: tailedRest)
+            var path = self.path(forTailedRestStyle: tailedRest)
             path.translate(x: rest.position.x, y: 0)
             return path
         }
@@ -70,7 +70,7 @@ class RestRenderer {
 //        return path.scaled(2)
 //    }
     
-    private func path(forTailedRest tailedRest: TailedRest) -> Path {
+    private func path(forTailedRestStyle tailedRest: TailedRestStyle) -> Path {
         
         let additionalTailsToRender = (tailedRest.numberOfTails-1).constrained(min: 0)
         let additionalTailOffset = 0.5

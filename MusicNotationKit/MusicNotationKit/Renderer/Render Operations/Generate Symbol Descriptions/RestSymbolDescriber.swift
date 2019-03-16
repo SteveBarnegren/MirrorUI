@@ -34,7 +34,7 @@ class RestSymbolDescriber {
                 }
             }
             
-            let tailedRest = TailedRest(numberOfTails: tails)
+            let tailedRest = TailedRestStyle(numberOfTails: tails)
             description = RestSymbolDescription(style: .tailed(tailedRest))
         }
         

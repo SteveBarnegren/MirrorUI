@@ -36,7 +36,7 @@ class RestSymbolDescription {
         case none
         case crotchet
         case minim
-        case tailed(TailedRest)
+        case tailed(TailedRestStyle)
     }
     
     var style: Style
@@ -50,6 +50,6 @@ class RestSymbolDescription {
     }
 }
 
-struct TailedRest {
+struct TailedRestStyle {
     let numberOfTails: Int
 }
