@@ -39,14 +39,6 @@ class ViewController: UIViewController {
 
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { (_) in
-//            self.musicView.setNeedsDisplay()
-//        }
-    }
-    
     func makeComposition() -> Composition {
         
         let composition = Composition()
@@ -75,6 +67,7 @@ class ViewController: UIViewController {
         sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
         
         sequenceOne.add(rest: Rest(value: .eighth))
+        sequenceOne.add(rest: Rest(value: .sixteenth))
 
         let bar = Bar()
         bar.add(sequence: sequenceOne)

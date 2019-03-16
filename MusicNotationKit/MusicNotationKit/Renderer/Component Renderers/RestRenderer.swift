@@ -72,8 +72,8 @@ class RestRenderer {
     
     private func path(forTailedRest tailedRest: TailedRest) -> Path {
         
-        //let additionalTailsToRender = (tailedRest.numberOfTails-1).constrained(min: 0)
-        let additionalTailsToRender = 2
+        print("Number of tails: \(tailedRest.numberOfTails)")
+        let additionalTailsToRender = (tailedRest.numberOfTails-1).constrained(min: 0)
         let additionalTailOffset = 0.5
         
         let stemTopRight = Point(0.27204301075268816, 0.4247311827956989)
@@ -124,7 +124,7 @@ class RestRenderer {
         var path = Path(commands: stemCommands)
         
         // Add additional tails
-        if additionalTailsToRender > 1 {
+        if additionalTailsToRender > 0 {
             
             for i in 1...additionalTailsToRender {
                 let translationX = cos(stemRightSideAngle) * additionalTailOffset * Double(i)
@@ -141,6 +141,6 @@ class RestRenderer {
         }
         
         path.drawStyle = .fill
-        return path.scaled(2) //2
+        return path.scaled(2)
     }
 }

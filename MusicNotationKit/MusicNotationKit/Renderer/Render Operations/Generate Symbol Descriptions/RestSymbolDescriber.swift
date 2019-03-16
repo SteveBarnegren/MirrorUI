@@ -25,7 +25,8 @@ class RestSymbolDescriber {
             let tailedRest = TailedRest(numberOfTails: 1)
             description = RestSymbolDescription(style: .tailed(tailedRest))
         case .sixteenth:
-            fatalError("Whole note rests are not supported yet")
+            let tailedRest = TailedRest(numberOfTails: 2)
+            description = RestSymbolDescription(style: .tailed(tailedRest))
         }
         
         return description
