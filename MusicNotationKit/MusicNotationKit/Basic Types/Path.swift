@@ -203,3 +203,33 @@ extension Path {
     }
     
 }
+
+extension Array where Element == Path.Command {
+    
+    func translated(x: Double, y: Double) -> [Path.Command] {
+     
+        var newCommands = [Path.Command]()
+        
+        func translatePoint(_ p: Point) -> Point {
+            return Point(p.x + x, p.y + y)
+        }
+        
+        for command in self {
+            switch command {
+                
+            case .move(let p):
+                newCommands.append(.move(translatePoint(p)))
+            case .line(let p):
+                newCommands.append(.line(translatePoint(p)))
+            case .curve(let p, let c1, let c2):
+                newCommands.append(.curve(translatePoint(p), c1: translatePoint(c1), c2: translatePoint(c2)))
+            case .close:
+                newCommands.append(.close)
+            case .oval(let p, let size, let rotation):
+                newCommands.append(.oval(translatePoint(p), size, rotation))
+            }
+        }
+    
+        return newCommands
+    }
+}
