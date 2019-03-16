@@ -35,7 +35,7 @@ class RestSymbolDescription {
     enum Style {
         case none
         case crotchet
-        case minim
+        case block(BlockRestStyle)
         case tailed(TailedRestStyle)
     }
     
@@ -52,4 +52,14 @@ class RestSymbolDescription {
 
 struct TailedRestStyle {
     let numberOfTails: Int
+}
+
+struct BlockRestStyle {
+    
+    // startY should be relative to the line that the rest should be attached to.
+    // eg. A minim rest should start at 0 because it sits on the line
+    // A whole rest should start at 0.5, because it hangs from the line above the one that it's attached to
+    
+    let startY: Double
+    let height: Double
 }

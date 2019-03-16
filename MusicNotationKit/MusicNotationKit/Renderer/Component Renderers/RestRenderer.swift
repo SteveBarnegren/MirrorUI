@@ -19,16 +19,17 @@ class RestRenderer {
         switch rest.symbolDescription.style {
         case .none:
             return nil
-        case .minim:
+        case .block(let blockStyle):
             
             let width: Double = 1
-            let height: Double = 0.5
+            let height = blockStyle.height
+            let blockStartY = blockStyle.startY
             
             var path = Path()
-            path.move(to: Point(rest.position.x - width/2, 0))
-            path.addLine(to: Point(rest.position.x - width/2, height))
-            path.addLine(to: Point(rest.position.x + width/2, height))
-            path.addLine(to: Point(rest.position.x + width/2, 0))
+            path.move(to: Point(rest.position.x - width/2, blockStartY))
+            path.addLine(to: Point(rest.position.x - width/2, blockStartY + height))
+            path.addLine(to: Point(rest.position.x + width/2, blockStartY + height))
+            path.addLine(to: Point(rest.position.x + width/2, blockStartY))
             path.close()
             path.drawStyle = .fill
             return path

@@ -17,9 +17,11 @@ class RestSymbolDescriber {
         let division = rest.value.division
         switch division {
         case 1:
-            fatalError("Whole note rests are not supported yet")
+            let blockStyle = BlockRestStyle(startY: 0.5, height: 0.5)
+            description = RestSymbolDescription(style: .block(blockStyle))
         case 2:
-            description = RestSymbolDescription(style: .minim)
+            let blockStyle = BlockRestStyle(startY: 0, height: 0.5)
+            description = RestSymbolDescription(style: .block(blockStyle))
         case 4:
             description = RestSymbolDescription(style: .crotchet)
         default:
