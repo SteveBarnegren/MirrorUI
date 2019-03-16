@@ -71,6 +71,8 @@ class ViewController: UIViewController {
         sequenceOne.add(rest: Rest(value: .sixteenth))
         sequenceOne.add(rest: Rest(value: .half))
         sequenceOne.add(rest: Rest(value: .whole))
+        
+        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
 
         let bar = Bar()
         bar.add(sequence: sequenceOne)

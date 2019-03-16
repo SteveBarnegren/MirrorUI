@@ -11,7 +11,7 @@ import Foundation
 class NoteRenderer {
     
     private let preferredStemHeight = 3.5
-    private let stemXOffet = 1.25/2
+    private let stemXOffet = 0.55
     private let stemWidth = 0.1
     private let beamWidth = 0.3
     private let noteHeadWidth = 1.4
@@ -59,6 +59,8 @@ class NoteRenderer {
         return paths
     }
     
+    // MARK: - Isolated Notes
+    
     private func makePaths(forNote note: Note) -> [Path] {
         
         var paths = [Path]()
@@ -66,6 +68,8 @@ class NoteRenderer {
         paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + preferredStemHeight))
         return paths
     }
+    
+    // MARK: - Note Clusters (connected with beams)
     
     private func makePaths(forNoteCluster notes: [Note]) -> [Path] {
         
@@ -105,6 +109,47 @@ class NoteRenderer {
         
         return paths
     }
+    
+    private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
+        
+        let beamSeparation = 0.4
+        
+        let beamStartX = fromNote.position.x + stemXOffet
+        let beamEndX = toNote.position.x + stemXOffet + stemWidth
+        let beamRect = Rect(x: beamStartX,
+                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
+                            width: beamEndX - beamStartX,
+                            height: -beamWidth)
+        
+        var path = Path()
+        path.addRect(beamRect)
+        path.drawStyle = .fill
+        return path
+    }
+    
+    private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
+        
+        let beamSeparation = 0.4
+        
+        let x: Double
+        if rightSide {
+            x = note.position.x + stemXOffet + stemWidth
+        } else {
+            x = note.position.x + stemXOffet - 1
+        }
+        
+        let beamRect = Rect(x: x,
+                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
+                            width: 1,
+                            height: -beamWidth)
+        
+        var path = Path()
+        path.addRect(beamRect)
+        path.drawStyle = .fill
+        return path
+    }
+    
+    // MARK: - Components
     
     private func makeHeadPath(forNote note: Note) -> Path? {
         
@@ -154,42 +199,4 @@ class NoteRenderer {
                     height: stemEndY - note.position.y - stemYOffset)
     }
     
-    private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
-        
-        let beamSeparation = 0.4
-        
-        let beamStartX = fromNote.position.x + stemXOffet
-        let beamEndX = toNote.position.x + stemXOffet + stemWidth
-        let beamRect = Rect(x: beamStartX,
-                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
-                            width: beamEndX - beamStartX,
-                            height: -beamWidth)
-        
-        var path = Path()
-        path.addRect(beamRect)
-        path.drawStyle = .fill
-        return path
-    }
-    
-    private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
-        
-        let beamSeparation = 0.4
-        
-        let x: Double
-        if rightSide {
-            x = note.position.x + stemXOffet + stemWidth
-        } else {
-            x = note.position.x + stemXOffet - 1
-        }
-        
-        let beamRect = Rect(x: x,
-                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
-                            width: 1,
-                            height: -beamWidth)
-        
-        var path = Path()
-        path.addRect(beamRect)
-        path.drawStyle = .fill
-        return path
-    }
 }
