@@ -39,6 +39,14 @@ class ViewController: UIViewController {
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { (_) in
+//            self.musicView.setNeedsDisplay()
+//        }
+    }
+    
     func makeComposition() -> Composition {
         
         let composition = Composition()

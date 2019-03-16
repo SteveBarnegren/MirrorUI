@@ -36,7 +36,7 @@ class RestSymbolDescription {
         case none
         case crotchet
         case minim
-        case quaver
+        case tailed(TailedRest)
     }
     
     var style: Style
@@ -48,4 +48,8 @@ class RestSymbolDescription {
     init(style: Style) {
         self.style = style
     }
+}
+
+struct TailedRest {
+    let numberOfTails: Int
 }

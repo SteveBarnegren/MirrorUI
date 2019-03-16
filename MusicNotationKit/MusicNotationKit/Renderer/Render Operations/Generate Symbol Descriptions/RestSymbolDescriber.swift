@@ -22,7 +22,8 @@ class RestSymbolDescriber {
         case .quarter:
             description = RestSymbolDescription(style: .crotchet)
         case .eighth:
-            description = RestSymbolDescription(style: .quaver)
+            let tailedRest = TailedRest(numberOfTails: 1)
+            description = RestSymbolDescription(style: .tailed(tailedRest))
         case .sixteenth:
             fatalError("Whole note rests are not supported yet")
         }
