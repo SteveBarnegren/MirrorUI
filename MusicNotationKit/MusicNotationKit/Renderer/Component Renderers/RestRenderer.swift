@@ -72,7 +72,6 @@ class RestRenderer {
     
     private func path(forTailedRest tailedRest: TailedRest) -> Path {
         
-        print("Number of tails: \(tailedRest.numberOfTails)")
         let additionalTailsToRender = (tailedRest.numberOfTails-1).constrained(min: 0)
         let additionalTailOffset = 0.5
         

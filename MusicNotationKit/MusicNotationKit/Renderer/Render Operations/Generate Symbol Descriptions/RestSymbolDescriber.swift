@@ -14,18 +14,27 @@ class RestSymbolDescriber {
         
         let description: RestSymbolDescription
         
-        switch rest.value {
-        case .whole:
+        let division = rest.value.division
+        switch division {
+        case 1:
             fatalError("Whole note rests are not supported yet")
-        case .half:
+        case 2:
             description = RestSymbolDescription(style: .minim)
-        case .quarter:
+        case 4:
             description = RestSymbolDescription(style: .crotchet)
-        case .eighth:
-            let tailedRest = TailedRest(numberOfTails: 1)
-            description = RestSymbolDescription(style: .tailed(tailedRest))
-        case .sixteenth:
-            let tailedRest = TailedRest(numberOfTails: 2)
+        default:
+            var value = 8
+            var tails = 1
+            while value != division {
+                value += value
+                tails += 1
+                
+                if value > division {
+                    fatalError("Unsupported division \(division)")
+                }
+            }
+            
+            let tailedRest = TailedRest(numberOfTails: tails)
             description = RestSymbolDescription(style: .tailed(tailedRest))
         }
         

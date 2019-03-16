@@ -14,17 +14,20 @@ class NoteSymbolDescriber {
         
         let description: NoteSymbolDescription
         
-        switch note.value {
-        case .whole:
+        let division = note.value.division
+        switch division {
+        case 1:
             description = NoteSymbolDescription(headStyle: .semibreve, hasStem: false, numberOfBeams: 0)
-        case .half:
+        case 2:
             description = NoteSymbolDescription(headStyle: .open, hasStem: true, numberOfBeams: 0)
-        case .quarter:
+        case 4:
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: 0)
-        case .eighth:
+        case 8:
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: 1)
-        case .sixteenth:
+        case 16:
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: 2)
+        default:
+            fatalError("Unsupported division: \(division)")
         }
         
         return description
