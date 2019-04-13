@@ -66,7 +66,25 @@ class NoteRenderer {
         var paths = [Path]()
         paths.append(maybe: makeHeadPath(forNote: note))
         paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + preferredStemHeight))
+        
+        if note.symbolDescription.numberOfBeams == 1 {
+            var noteTailPath = Path(commands: makeQuaverTailCommands()).translated(x: note.xPosition + stemXOffet, y: note.yPosition + 1.75)
+            noteTailPath.drawStyle = .fill
+            paths.append(noteTailPath)
+        }
+      
         return paths
+    }
+    
+    private func makeQuaverTailCommands() -> [Path.Command] {
+        // A note tail, anchored to the left
+        let commands: [Path.Command] = [
+            .move(Point(0.028177234195949308, 0.22361714423650725)),
+            .curve(Point(0.1796576688116412, -0.26326044118239594), c1: Point(0.36589881412387104, 0.13806570405953167), c2: Point(0.21003653045372273, -0.15850308628952214)),
+            .curve(Point(0.028177234195949308, 0.5), c1: Point(0.4571075440584742, 0.11569020480229597), c2: Point(0.03196085061274678, 0.27025900632689404)),
+            .close,
+        ].scaled(3.5)
+        return commands
     }
     
     // MARK: - Note Clusters (connected with beams)

@@ -86,9 +86,9 @@ class ConstraintsDebugInformationGenerator {
     private func color(forPriority priority: ConstraintPriority) -> UIColor {
         switch priority {
         case .required:
-            return UIColor.red.withAlphaComponent(0.5)
+            return UIColor.red
         case .regular:
-            return UIColor.yellow.withAlphaComponent(0.5)
+            return UIColor.yellow
         }
     }
 }

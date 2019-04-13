@@ -10,15 +10,36 @@ import Foundation
 
 class NoteConstraintsDescriber {
     
+    private let noteHeadWidth = Double(1.4)
+    
     func process(note: Note) {
         
-        // Leading - 0.5 for the note head
-        let leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.7, priority: .required)])
+        // Leading
+        let leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: leadingDistance(forNote: note), priority: .required)])
         note.leadingConstraints = [leadingConstraint]
         
-        // Trailing - 0.5 for the note head
-        let trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.7, priority: .required)])
+        // Trailing
+        let trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: trailingDistance(forNote: note), priority: .required)])
         note.trailingConstraints = [trailingConstraint]
-        
     }
+    
+    private func leadingDistance(forNote note: Note) -> Double {
+        return noteHeadWidth/2
+    }
+    
+    private func trailingDistance(forNote note: Note) -> Double {
+        
+        if note.symbolDescription.numberOfBeams == 0 {
+            return noteHeadWidth/2
+        }
+        
+        // Quaver
+        if note.symbolDescription.numberOfBeams == 1 {
+            return noteHeadWidth/2 + 0.8
+        }
+        
+        // Other, not really supported yet
+        return noteHeadWidth/2
+    }
+    
 }

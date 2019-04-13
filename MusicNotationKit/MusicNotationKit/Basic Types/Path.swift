@@ -206,6 +206,40 @@ extension Path {
 
 extension Array where Element == Path.Command {
     
+    func scaled(_ scale: Double) -> [Path.Command] {
+        return self.scaled(x: scale, y: scale)
+    }
+    
+    func scaled(x xScale: Double, y yScale: Double) -> [Path.Command] {
+        
+        func scalePoint(_ p: Point) -> Point {
+            return Point(p.x * xScale, p.y * yScale)
+        }
+        
+        func scaleSize(_ s: Size) -> Size {
+            return Size(width: s.width * xScale, height: s.height * yScale)
+        }
+        
+        var newCommands = [Path.Command]()
+        
+        for command in self {
+            switch command {
+            case .move(let p):
+                newCommands.append(.move(scalePoint(p)))
+            case .line(let p):
+                newCommands.append(.line(scalePoint(p)))
+            case .curve(let p, let c1, let c2):
+                newCommands.append(.curve(scalePoint(p), c1: scalePoint(c1), c2: scalePoint(c2)))
+            case .close:
+                newCommands.append(.close)
+            case .oval(let point, let size, let rotation):
+                newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
+            }
+        }
+        
+        return newCommands
+    }
+    
     func translated(x: Double, y: Double) -> [Path.Command] {
      
         var newCommands = [Path.Command]()

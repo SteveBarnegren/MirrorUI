@@ -22,7 +22,7 @@ class ConstraintsDebugDrawer {
             path.stroke()
             
             for constraintZone in itemDescription.constraintZones {
-                constraintZone.color.set()
+                constraintZone.color.withAlphaComponent(0.2).set()
                 let path = UIBezierPath(rect: CGRect(x: constraintZone.startX,
                                                      y: 0.0,
                                                      width: constraintZone.endX - constraintZone.startX,
