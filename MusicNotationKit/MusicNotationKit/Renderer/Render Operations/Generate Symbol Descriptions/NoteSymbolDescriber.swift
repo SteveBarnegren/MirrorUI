@@ -25,9 +25,7 @@ class NoteSymbolDescriber {
         default:
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: numberOfBeams(forDivision: division))
         }
-        
-        print("Number of beams: \(description.numberOfBeams)")
-        
+                
         return description
     }
     
