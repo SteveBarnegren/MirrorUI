@@ -29,16 +29,17 @@ class NoteConstraintsDescriber {
     
     private func trailingDistance(forNote note: Note) -> Double {
         
-        if note.symbolDescription.numberOfBeams == 0 {
-            return noteHeadWidth/2
-        }
-        
         // Quaver
         if note.symbolDescription.numberOfBeams == 1 {
             return noteHeadWidth/2 + 0.8
         }
         
-        // Other, not really supported yet
+        // Semiquaver or faster
+        if note.symbolDescription.numberOfBeams >= 2 {
+            return noteHeadWidth/2 + 0.9
+        }
+        
+        // Other
         return noteHeadWidth/2
     }
     

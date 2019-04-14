@@ -22,14 +22,34 @@ class NoteSymbolDescriber {
             description = NoteSymbolDescription(headStyle: .open, hasStem: true, numberOfBeams: 0)
         case 4:
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: 0)
-        case 8:
-            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: 1)
-        case 16:
-            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: 2)
         default:
-            fatalError("Unsupported division: \(division)")
+            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: numberOfBeams(forDivision: division))
         }
         
+        print("Number of beams: \(description.numberOfBeams)")
+        
         return description
+    }
+    
+    private func numberOfBeams(forDivision division: Int) -> Int {
+        
+        switch division {
+        case 1: return 0
+        case 2: return 0
+        case 4: return 0
+        case 8: return 1
+        case 16: return 2
+        case 32: return 3
+        case 64: return 4
+        case 128: return 5
+        case 256: return 6
+        case 512: return 7
+        case 1024: return 8
+        case 2048: return 9
+        case 4096: return 10
+        case 8192: return 11
+        default:
+            fatalError("division \(division) not supported!")
+        }
     }
 }

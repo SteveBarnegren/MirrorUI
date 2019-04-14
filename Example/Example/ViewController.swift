@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         musicViewWidth = UIScreen.main.bounds.width - 100
         
         musicView = MusicView(composition: makeComposition())
-        musicView._showConstraintsDebug = true
+        musicView._showConstraintsDebug = false
         view.addSubview(musicView)
         
         gridOverlayView = GridOverlayView(frame: .zero)
@@ -45,38 +45,83 @@ class ViewController: UIViewController {
         let composition = Composition()
         
         composition.add(bar: makeFirstBar())
-        composition.add(bar: makeSecondBar())
+        //composition.add(bar: makeSecondBar())
 
         return composition
     }
     
+//    func makeFirstBar() -> Bar {
+//        let sequenceOne = NoteSequence()
+//
+//        sequenceOne.add(note: Note(value: .quarter, pitch: .c4))
+//
+//        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+//
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        sequenceOne.add(rest: Rest(value: .eighth))
+//        sequenceOne.add(rest: Rest(value: .sixteenth))
+//        sequenceOne.add(rest: Rest(value: .half))
+//        sequenceOne.add(rest: Rest(value: .whole))
+//
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        let bar = Bar()
+//        bar.add(sequence: sequenceOne)
+//
+//        return bar
+//    }
+
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
-
+        
         sequenceOne.add(note: Note(value: .quarter, pitch: .c4))
-
-        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
-
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        
-        sequenceOne.add(rest: Rest(value: .eighth))
-        sequenceOne.add(rest: Rest(value: .sixteenth))
-        sequenceOne.add(rest: Rest(value: .half))
-        sequenceOne.add(rest: Rest(value: .whole))
+        sequenceOne.add(rest: Rest(value: .quarter))
         
         sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
-
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 32), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 64), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 128), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 256), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 512), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 1024), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 1024 * 2), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 1024 * 2 * 2), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
+        sequenceOne.add(note: Note(value: .init(division: 1024 * 2 * 2 * 2), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .quarter))
+        
         let bar = Bar()
         bar.add(sequence: sequenceOne)
-
+        
         return bar
     }
     
