@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		671A4D252287524E002C56E8 /* NoteSymbolDescription+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D242287524E002C56E8 /* NoteSymbolDescription+Verify.swift */; };
+		671A4D2C228752E7002C56E8 /* NoteSymbolDescriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2B228752E7002C56E8 /* NoteSymbolDescriberTests.swift */; };
 		6726FB0322306840002EFE4D /* RenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB0222306840002EFE4D /* RenderOperation.swift */; };
 		6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */; };
 		6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */; };
@@ -80,6 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		671A4D242287524E002C56E8 /* NoteSymbolDescription+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteSymbolDescription+Verify.swift"; sourceTree = "<group>"; };
+		671A4D2B228752E7002C56E8 /* NoteSymbolDescriberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSymbolDescriberTests.swift; sourceTree = "<group>"; };
 		6726FB0222306840002EFE4D /* RenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderOperation.swift; sourceTree = "<group>"; };
 		6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationSymbolDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
 		6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsDebugInformationGenerator.swift; sourceTree = "<group>"; };
@@ -164,6 +168,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		671A4D2322875211002C56E8 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				6728B2C82239984B00382D92 /* Verification */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		671A4D2622875296002C56E8 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				671A4D27228752A8002C56E8 /* Render Operations */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		671A4D27228752A8002C56E8 /* Render Operations */ = {
+			isa = PBXGroup;
+			children = (
+				671A4D2A228752CC002C56E8 /* Generate Symbol Descriptions */,
+			);
+			path = "Render Operations";
+			sourceTree = "<group>";
+		};
+		671A4D2A228752CC002C56E8 /* Generate Symbol Descriptions */ = {
+			isa = PBXGroup;
+			children = (
+				671A4D2B228752E7002C56E8 /* NoteSymbolDescriberTests.swift */,
+			);
+			path = "Generate Symbol Descriptions";
+			sourceTree = "<group>";
+		};
 		6726FB01223067BC002EFE4D /* Generate Symbol Descriptions */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +232,7 @@
 			children = (
 				6728B2C92239986000382D92 /* NoteSequence+Verify.swift */,
 				6728B2CB2239989100382D92 /* Array+Verify.swift */,
+				671A4D242287524E002C56E8 /* NoteSymbolDescription+Verify.swift */,
 			);
 			path = Verification;
 			sourceTree = "<group>";
@@ -388,9 +425,10 @@
 		67A15F9621C5129500C3C03F /* MusicNotationKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				6728B2C82239984B00382D92 /* Verification */,
+				671A4D2322875211002C56E8 /* Supporting */,
 				67F6880C21EB529F003707DD /* Extensions */,
 				6728B2C3223996E300382D92 /* Model */,
+				671A4D2622875296002C56E8 /* Renderer */,
 				67F6880821EA71AD003707DD /* HorizontalConstraintTests.swift */,
 				67A15F9721C5129500C3C03F /* MusicNotationKitTests.swift */,
 				67494C8121CC06940078A575 /* Vector2Tests.swift */,
@@ -576,11 +614,13 @@
 				67AE184A21D9465C00F3545D /* TimeTests.swift in Sources */,
 				67A15F9821C5129500C3C03F /* MusicNotationKitTests.swift in Sources */,
 				6728B2CC2239989100382D92 /* Array+Verify.swift in Sources */,
+				671A4D2C228752E7002C56E8 /* NoteSymbolDescriberTests.swift in Sources */,
 				67F6880921EA71AD003707DD /* HorizontalConstraintTests.swift in Sources */,
 				67678E0221E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				6728B2C72239975700382D92 /* NoteSequenceTests.swift in Sources */,
 				67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */,
 				6728B2CA2239986000382D92 /* NoteSequence+Verify.swift in Sources */,
+				671A4D252287524E002C56E8 /* NoteSymbolDescription+Verify.swift in Sources */,
 				6728B2C52239972C00382D92 /* NoteTests.swift in Sources */,
 				67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */,
 			);
