@@ -10,11 +10,6 @@ import Foundation
 
 struct Time {
     
-//    struct TimeValue {
-//        var value: Int
-//        var division: Int
-//    }
-    
     var value: Int
     var division: Int
     
