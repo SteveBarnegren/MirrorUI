@@ -51,27 +51,13 @@ struct Time {
 
 extension Time: Equatable {
     static func == (lhs: Time, rhs: Time) -> Bool {
-        
-        let comparsionDivision = max(lhs.division, rhs.division)
-        
-        func value(forTime time: Time) -> Int {
-            return time.division == comparsionDivision ? time.value : time.value * (comparsionDivision / time.division)
-        }
-        
-        return value(forTime: lhs) == value(forTime: rhs)
+        return lhs.division * rhs.value == rhs.division * lhs.value
     }
 }
 
 extension Time: Comparable {
     static func < (lhs: Time, rhs: Time) -> Bool {
-        
-        let comparsionDivision = max(lhs.division, rhs.division)
-        
-        func value(forTime time: Time) -> Int {
-            return time.division == comparsionDivision ? time.value : time.value * (comparsionDivision / time.division)
-        }
-        
-        return value(forTime: lhs) < value(forTime: rhs)
+        return lhs.value * rhs.division < rhs.value * lhs.division
     }
 }
 
