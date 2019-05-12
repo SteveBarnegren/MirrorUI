@@ -23,6 +23,9 @@ public class Note: Playable {
     // Playable
     let value: NoteValue
     var time = Time.zero
+    var horizontallyConstrainedItems: [HorizontallyConstrained] {
+        return [self] + self.symbolDescription.trailingSymbols
+    }
     
     // HorizontallyConstrained
     var leadingConstraints = [HorizontalConstraint]()
@@ -63,6 +66,7 @@ class NoteSymbolDescription {
     let hasStem: Bool
     let numberOfBeams: Int
     var beams = [Beam]()
+    var trailingSymbols = [HorizontallyPlacedSymbol]()
     
     init(headStyle: HeadStyle, hasStem: Bool, numberOfBeams: Int) {
         self.headStyle = headStyle

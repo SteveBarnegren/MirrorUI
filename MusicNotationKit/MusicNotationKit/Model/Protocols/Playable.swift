@@ -11,6 +11,7 @@ import Foundation
 protocol Playable: Positionable, HorizontallyConstrained {
     var value: NoteValue { get }
     var time: Time { get set }
+    var horizontallyConstrainedItems: [HorizontallyConstrained] { get }
 }
 
 extension Playable {

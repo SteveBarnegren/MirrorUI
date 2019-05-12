@@ -15,6 +15,9 @@ public class Rest: Playable {
     // Playable
     var value: NoteValue
     var time = Time.zero
+    var horizontallyConstrainedItems: [HorizontallyConstrained] {
+        return [self]
+    }
     
     // Positionable
     var position = Point.zero

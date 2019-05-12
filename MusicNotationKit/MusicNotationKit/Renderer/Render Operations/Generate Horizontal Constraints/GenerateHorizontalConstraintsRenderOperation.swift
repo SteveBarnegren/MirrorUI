@@ -12,9 +12,23 @@ class GenerateHorizontalConstraintsRenderOperation: RenderOperation {
     
     private let noteConstraintsDescriber = NoteConstraintsDescriber()
     private let restConstraintsDescriber = RestConstraintsDescriber()
+    private let dotConstraintsDescriber = DotConstraintsDescriber()
     
     func process(composition: Composition, layoutWidth: Double) {
-        composition.enumerateNotes(noteConstraintsDescriber.process)
+        composition.enumerateNotes { note in
+            noteConstraintsDescriber.process(note: note)
+            note.symbolDescription.trailingSymbols.forEach(addConstraints)
+        }
         composition.enumerateRests(restConstraintsDescriber.process)
+    }
+    
+    private func addConstraints(toSymbol symbol: HorizontallyPlacedSymbol) {
+        
+        switch symbol {
+        case let dot as DotSymbol:
+            dotConstraintsDescriber.process(dotSymbol: dot)
+        default:
+            fatalError("Unknown symbol type: \(symbol)")
+        }
     }
 }

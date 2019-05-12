@@ -324,5 +324,4 @@ class NoteRenderer {
                     width: stemWidth,
                     height: stemEndY - note.position.y - stemYOffset)
     }
-    
 }

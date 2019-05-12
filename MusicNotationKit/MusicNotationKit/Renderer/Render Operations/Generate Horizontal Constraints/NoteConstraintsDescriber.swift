@@ -42,5 +42,4 @@ class NoteConstraintsDescriber {
         // Other
         return noteHeadWidth/2
     }
-    
 }

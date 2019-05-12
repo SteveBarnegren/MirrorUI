@@ -54,6 +54,8 @@ class ViewController: UIViewController {
         let sequenceOne = NoteSequence()
 
         sequenceOne.add(note: Note(value: .quarter, pitch: .c4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 4, dots: .dotted), pitch: .c4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 4, dots: .doubleDotted), pitch: .c4))
 
         sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
         sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
