@@ -10,7 +10,7 @@ import Foundation
 
 class NoteConstraintsDescriber {
     
-    private let noteHeadWidth = Double(1.4)
+    private let noteHeadWidth = Double(1.3)
     
     func process(note: Note) {
         

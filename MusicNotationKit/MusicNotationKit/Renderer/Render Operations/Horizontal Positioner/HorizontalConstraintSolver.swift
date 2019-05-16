@@ -10,26 +10,37 @@ import Foundation
 
 class HorizontalConstraintSolver {
     
-    func solve(_ distances: [ConstrainedDistance], layoutWidth: Double) {
+    func solve(_ distances: [ConstrainedDistance], layoutWidth: Double, offset: Double = 0) {
         
         if minimumWidth(forDistances: distances, atPriority: .regular) <= layoutWidth {
             solveWithTiming(distances: distances, layoutWidth: layoutWidth)
         } else {
-            solveWithMinimumDistances(distances: distances, layoutWidth: layoutWidth)
+            solveWithFixedDistances(distances: distances, layoutWidth: layoutWidth)
         }
         
         // Work out the x positions
         var xPos = Double(0)
         for distance in distances {
             xPos += distance.solvedDistance
-            distance.xPosition = xPos
+            distance.xPosition = xPos + offset
         }
         
-        // Position the items
+        // Solve the distances
         distances.forEach { $0.toItem?.xPosition = $0.xPosition }
+        
+        // Solve sub-layouts
+        var previousXPosition = Double(0)
+        for distance in distances {
+            if distance.leadingDistances.isEmpty == false {
+                solve(distance.leadingDistances,
+                      layoutWidth: distance.xPosition - previousXPosition - distance.leadingLayoutOffset - distance.trailingLayoutOffset,
+                      offset: previousXPosition + distance.leadingLayoutOffset)
+            }
+            previousXPosition = distance.xPosition
+        }
     }
     
-    private func solveWithMinimumDistances(distances: [ConstrainedDistance], layoutWidth: Double) {
+    private func solveWithFixedDistances(distances: [ConstrainedDistance], layoutWidth: Double) {
         
         // Work out the priority that we're solving for
         var priority = ConstraintPriority.regular

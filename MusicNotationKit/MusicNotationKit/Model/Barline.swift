@@ -14,6 +14,7 @@ class Barline: HorizontalLayoutItem {
     let layoutDuration: Time? = Time.init(value: 1, division: 64)
     var leadingConstraint: HorizontalConstraint
     var trailingConstraint: HorizontalConstraint
+    let trailingLayoutItems = [HorizontalLayoutItem]()
     
     // HorizontallyPositionable
     var xPosition = Double(0)

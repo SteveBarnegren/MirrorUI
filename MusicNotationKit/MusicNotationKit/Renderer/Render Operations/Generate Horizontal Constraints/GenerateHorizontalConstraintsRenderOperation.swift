@@ -17,12 +17,12 @@ class GenerateHorizontalConstraintsRenderOperation: RenderOperation {
     func process(composition: Composition, layoutWidth: Double) {
         composition.enumerateNotes { note in
             noteConstraintsDescriber.process(note: note)
-            note.symbolDescription.trailingSymbols.forEach(addConstraints)
+            note.symbolDescription.trailingLayoutItems.forEach(addConstraints)
         }
         composition.enumerateRests(restConstraintsDescriber.process)
     }
     
-    private func addConstraints(toSymbol symbol: HorizontalLayoutItem) {
+    private func addConstraints(toTrailingItem symbol: HorizontalLayoutItem) {
         
         switch symbol {
         case let dot as DotSymbol:

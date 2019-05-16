@@ -23,6 +23,7 @@ public class Rest: Playable {
     var layoutDuration: Time? { return self.duration }
     var leadingConstraint = HorizontalConstraint.zero
     var trailingConstraint = HorizontalConstraint.zero
+    let trailingLayoutItems = [HorizontalLayoutItem]()
     
     // MARK: - Init
     public init(value: NoteValue) {

@@ -57,6 +57,7 @@ class HorizontalPositionerRenderOperation: RenderOperation {
 }
 
 fileprivate class Spacer: HorizontalLayoutItem {
+    
  
     var layoutDuration: Time? = nil
     var xPosition: Double = 0
@@ -65,6 +66,7 @@ fileprivate class Spacer: HorizontalLayoutItem {
     var trailingConstraint: HorizontalConstraint {
         return HorizontalConstraint(values: constraintValues)
     }
+    let trailingLayoutItems = [HorizontalLayoutItem]()
     
     private var constraintValues = [ConstraintValue]()
     

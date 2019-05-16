@@ -16,12 +16,12 @@ class DotConstraintsDescriber {
         let dotSeparation = 0.25
 
         dotSymbol.leadingConstraint = HorizontalConstraint(values: [
-            ConstraintValue(length: dotSize, priority: .required),
-            ConstraintValue(length: dotSize + dotSeparation, priority: .regular)
+            ConstraintValue(length: dotSize/2, priority: .required),
+            ConstraintValue(length: dotSize/2 + dotSeparation, priority: .regular)
             ])
         
         dotSymbol.trailingConstraint = HorizontalConstraint(values: [
-            ConstraintValue(length: dotSize, priority: .required)
+            ConstraintValue(length: dotSize/2, priority: .required)
             ])
     }
 }

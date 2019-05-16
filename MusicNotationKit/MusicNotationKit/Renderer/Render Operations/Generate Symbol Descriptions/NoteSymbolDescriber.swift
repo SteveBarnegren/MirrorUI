@@ -26,7 +26,7 @@ class NoteSymbolDescriber {
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: numberOfBeams(forDivision: division))
         }
         
-        description.trailingSymbols = trailingDotSymbols(forNote: note)
+        description.trailingLayoutItems = trailingDotSymbols(forNote: note)
         
         return description
     }
@@ -53,7 +53,7 @@ class NoteSymbolDescriber {
         }
     }
     
-    private func trailingDotSymbols(forNote note: Note) -> [HorizontalLayoutItem] {
+    private func trailingDotSymbols(forNote note: Note) -> [DotSymbol] {
         
         let numberOfDots: Int
         
@@ -63,6 +63,12 @@ class NoteSymbolDescriber {
         case .doubleDotted: numberOfDots = 2
         }
         
-        return Array(repeating: DotSymbol(), count: numberOfDots)
+        var dots = Array<DotSymbol>()
+        
+        repeated(times: numberOfDots) {
+            dots.append(DotSymbol())
+        }
+        
+        return dots
     }
 }

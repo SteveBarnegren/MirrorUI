@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ConstraintPriority: Comparable {
+enum ConstraintPriority:Comparable {
    
     case required
     case regular
@@ -53,4 +53,19 @@ protocol HorizontalLayoutItem: class, HorizontallyPositionable {
     var layoutDuration: Time? { get }
     var leadingConstraint: HorizontalConstraint { get }
     var trailingConstraint: HorizontalConstraint { get }
+    
+    var trailingLayoutItems: [HorizontalLayoutItem] { get }
+    var trailingLayoutOffset: Double { get }
+    var leadingLayoutOffset: Double { get }
+}
+
+extension HorizontalLayoutItem {
+    
+    var leadingLayoutOffset: Double {
+        return 0
+    }
+    
+    var trailingLayoutOffset: Double {
+        return 0
+    }
 }
