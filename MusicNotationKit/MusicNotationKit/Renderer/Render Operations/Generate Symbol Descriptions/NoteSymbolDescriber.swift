@@ -55,6 +55,12 @@ class NoteSymbolDescriber {
     
     private func trailingDotSymbols(forNote note: Note) -> [DotSymbol] {
         
+        func makeDotSymbol(forNote note: Note) -> DotSymbol {
+            let symbol = DotSymbol()
+            symbol.pitch = note.pitch
+            return symbol
+        }
+        
         let numberOfDots: Int
         
         switch note.value.dots {
@@ -66,7 +72,7 @@ class NoteSymbolDescriber {
         var dots = Array<DotSymbol>()
         
         repeated(times: numberOfDots) {
-            dots.append(DotSymbol())
+            dots.append(makeDotSymbol(forNote: note))
         }
         
         return dots
