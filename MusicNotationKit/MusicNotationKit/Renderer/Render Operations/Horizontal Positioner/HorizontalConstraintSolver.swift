@@ -9,7 +9,7 @@
 import Foundation
 
 class ConstrainedDistance {
-    var toItem: HorizontallyConstrained? = nil
+    var toItem: HorizontalLayoutItem? = nil
     var constraints = [HorizontalConstraint]()
     var preferredPercent: Double?
     var solvedDistance = Double(0)
@@ -23,10 +23,10 @@ class ConstrainedDistance {
 
 class HorizontalConstraintSolver {
     
-    func solve(_ horizontallyConstrainedItems: [HorizontallyConstrained], layoutWidth: Double) {
+    func solve(_ items: [HorizontalLayoutItem], layoutWidth: Double) {
         
         // Make distances
-        let distances = makeConstrainedDistances(fromConstrainedItems: horizontallyConstrainedItems)
+        let distances = makeConstrainedDistances(fromItems: items)
         
         if minimumWidth(forDistances: distances, atPriority: .regular) <= layoutWidth {
             solveWithTiming(distances: distances, layoutWidth: layoutWidth)
@@ -123,11 +123,11 @@ class HorizontalConstraintSolver {
         return distances.map { $0.minimumDistance(atPriority: priority) }.sum()
     }
     
-    func makeConstrainedDistances(fromConstrainedItems items: [HorizontallyConstrained]) -> [ConstrainedDistance] {
+    func makeConstrainedDistances(fromItems items: [HorizontalLayoutItem]) -> [ConstrainedDistance] {
         
         var distances = [ConstrainedDistance]()
         
-        var lastItem: HorizontallyConstrained?
+        var lastItem: HorizontalLayoutItem?
         
         for item in items {
             let distance = ConstrainedDistance()

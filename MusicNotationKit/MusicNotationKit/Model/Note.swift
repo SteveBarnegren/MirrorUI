@@ -63,7 +63,7 @@ class NoteSymbolDescription {
     let hasStem: Bool
     let numberOfBeams: Int
     var beams = [Beam]()
-    var trailingSymbols = [HorizontallyPlacedSymbol]()
+    var trailingSymbols = [HorizontalLayoutItem]()
     
     init(headStyle: HeadStyle, hasStem: Bool, numberOfBeams: Int) {
         self.headStyle = headStyle

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Barline: HorizontallyConstrained {
+class Barline: HorizontalLayoutItem {
     
     // HorizontallyConstrained
     let layoutDuration: Time? = Time.init(value: 1, division: 64)

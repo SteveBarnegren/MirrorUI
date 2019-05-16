@@ -53,7 +53,7 @@ class NoteSymbolDescriber {
         }
     }
     
-    private func trailingDotSymbols(forNote note: Note) -> [HorizontallyPlacedSymbol] {
+    private func trailingDotSymbols(forNote note: Note) -> [HorizontalLayoutItem] {
         
         let numberOfDots: Int
         

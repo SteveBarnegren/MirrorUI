@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DotSymbol: HorizontallyPlacedSymbol {
+class DotSymbol: HorizontalLayoutItem {
     
     // Horizontally Constrained
     var layoutDuration: Time? = nil

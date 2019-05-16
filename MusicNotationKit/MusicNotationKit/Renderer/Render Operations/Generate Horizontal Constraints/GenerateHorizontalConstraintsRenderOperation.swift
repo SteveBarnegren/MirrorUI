@@ -22,7 +22,7 @@ class GenerateHorizontalConstraintsRenderOperation: RenderOperation {
         composition.enumerateRests(restConstraintsDescriber.process)
     }
     
-    private func addConstraints(toSymbol symbol: HorizontallyPlacedSymbol) {
+    private func addConstraints(toSymbol symbol: HorizontalLayoutItem) {
         
         switch symbol {
         case let dot as DotSymbol:

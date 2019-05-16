@@ -43,7 +43,7 @@ class ConstraintsDebugInformationGenerator {
         return ConstraintsDebugInformation(descriptions: descriptions)
     }
     
-    private func itemDescription(for item: HorizontallyConstrained, scale: Double) -> ConstraintsDebugInformation.ItemDescription {
+    private func itemDescription(for item: HorizontalLayoutItem, scale: Double) -> ConstraintsDebugInformation.ItemDescription {
         
         let xPosition = item.xPosition * scale
         var constraintZones = [ConstraintsDebugInformation.ConstraintZone]()

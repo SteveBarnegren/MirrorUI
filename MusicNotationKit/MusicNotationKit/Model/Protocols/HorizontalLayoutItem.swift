@@ -1,5 +1,5 @@
 //
-//  HorizontallyConstrained.swift
+//  HorizontalLayoutItem.swift
 //  MusicNotationKit
 //
 //  Created by Steve Barnegren on 12/01/2019.
@@ -49,7 +49,7 @@ struct HorizontalConstraint {
     }
 }
 
-protocol HorizontallyConstrained: class, HorizontallyPositionable {
+protocol HorizontalLayoutItem: class, HorizontallyPositionable {
     var layoutDuration: Time? { get }
     var leadingConstraint: HorizontalConstraint { get }
     var trailingConstraint: HorizontalConstraint { get }

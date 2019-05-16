@@ -20,10 +20,10 @@ class HorizontalPositionerRenderOperation: RenderOperation {
 //        }
     }
     
-    private func constrainedItems(forBar bar: Bar) -> [HorizontallyConstrained] {
+    private func constrainedItems(forBar bar: Bar) -> [HorizontalLayoutItem] {
         
         // We'll just process a single note sequence for now
-        var items = [HorizontallyConstrained]()
+        var items = [HorizontalLayoutItem]()
         items.append(bar.leadingBarline)
         items.append(makePostBarlineSpacer())
         
@@ -58,7 +58,7 @@ class HorizontalPositionerRenderOperation: RenderOperation {
     }
 }
 
-fileprivate class Spacer: HorizontallyConstrained {
+fileprivate class Spacer: HorizontalLayoutItem {
  
     var layoutDuration: Time? = nil
     var xPosition: Double = 0
