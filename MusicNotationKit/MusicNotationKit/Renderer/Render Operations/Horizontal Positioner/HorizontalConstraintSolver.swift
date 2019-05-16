@@ -8,25 +8,9 @@
 
 import Foundation
 
-class ConstrainedDistance {
-    var toItem: HorizontalLayoutItem? = nil
-    var constraints = [HorizontalConstraint]()
-    var preferredPercent: Double?
-    var solvedDistance = Double(0)
-    var xPosition = Double(0)
-    var isSolved = false
-    
-    func minimumDistance(atPriority priority: ConstraintPriority) -> Double {
-        return constraints.map { $0.minimumDistance(atPriority: priority) }.sum()
-    }
-}
-
 class HorizontalConstraintSolver {
     
-    func solve(_ items: [HorizontalLayoutItem], layoutWidth: Double) {
-        
-        // Make distances
-        let distances = makeConstrainedDistances(fromItems: items)
+    func solve(_ distances: [ConstrainedDistance], layoutWidth: Double) {
         
         if minimumWidth(forDistances: distances, atPriority: .regular) <= layoutWidth {
             solveWithTiming(distances: distances, layoutWidth: layoutWidth)
@@ -121,36 +105,6 @@ class HorizontalConstraintSolver {
     
     private func minimumWidth(forDistances distances: [ConstrainedDistance], atPriority priority: ConstraintPriority) -> Double {
         return distances.map { $0.minimumDistance(atPriority: priority) }.sum()
-    }
-    
-    func makeConstrainedDistances(fromItems items: [HorizontalLayoutItem]) -> [ConstrainedDistance] {
-        
-        var distances = [ConstrainedDistance]()
-        
-        var lastItem: HorizontalLayoutItem?
-        
-        for item in items {
-            let distance = ConstrainedDistance()
-            
-            if let last = lastItem {
-                distance.constraints.append(last.trailingConstraint)
-            }
-            distance.constraints.append(item.leadingConstraint)
-            distance.toItem = item
-            distance.preferredPercent = lastItem?.layoutDuration?.barPct
-            distances.append(distance)
-            
-            lastItem = item
-        }
-        
-        if let last = items.last {
-            let distance = ConstrainedDistance()
-            distance.constraints.append(last.trailingConstraint)
-            distance.preferredPercent = lastItem?.layoutDuration?.barPct
-            distances.append(distance)
-        }
-        
-        return distances
     }
     
     func preferredWidth(forDistance distance: ConstrainedDistance,

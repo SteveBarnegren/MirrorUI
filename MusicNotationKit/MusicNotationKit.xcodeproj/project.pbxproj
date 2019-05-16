@@ -55,6 +55,7 @@
 		67678E0221E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0121E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift */; };
 		67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0621E3E9CB00E7FD71 /* Positionable.swift */; };
 		67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */; };
+		677643F1228DED26000683FF /* HorizontalDistancesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */; };
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
 		67A15F9321C5129500C3C03F /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A15F8921C5129500C3C03F /* MusicNotationKit.framework */; };
@@ -135,6 +136,7 @@
 		67678E0121E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumeratedWithLastItemFlagBidirectionalCollection.swift; sourceTree = "<group>"; };
 		67678E0621E3E9CB00E7FD71 /* Positionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positionable.swift; sourceTree = "<group>"; };
 		67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineRender.swift; sourceTree = "<group>"; };
+		677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalDistancesGenerator.swift; sourceTree = "<group>"; };
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		67A15F8921C5129500C3C03F /* MusicNotationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicNotationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */,
+				677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */,
 				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
 			);
 			path = "Horizontal Positioner";
@@ -599,6 +602,7 @@
 				67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */,
 				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
 				67678E0021E2865400E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
+				677643F1228DED26000683FF /* HorizontalDistancesGenerator.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
 				671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */,
