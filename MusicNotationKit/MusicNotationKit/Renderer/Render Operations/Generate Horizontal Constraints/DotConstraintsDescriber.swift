@@ -15,15 +15,13 @@ class DotConstraintsDescriber {
         let dotSize = 0.5
         let dotSeparation = 0.25
 
-        let leadingConstraint = HorizontalConstraint(values: [
+        dotSymbol.leadingConstraint = HorizontalConstraint(values: [
             ConstraintValue(length: dotSize, priority: .required),
             ConstraintValue(length: dotSize + dotSeparation, priority: .regular)
             ])
-        dotSymbol.leadingConstraints = [leadingConstraint]
         
-        let trailingConstraint = HorizontalConstraint(values: [
+        dotSymbol.trailingConstraint = HorizontalConstraint(values: [
             ConstraintValue(length: dotSize, priority: .required)
             ])
-        dotSymbol.trailingConstraints = [trailingConstraint]
     }
 }

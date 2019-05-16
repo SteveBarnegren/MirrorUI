@@ -15,12 +15,10 @@ class NoteConstraintsDescriber {
     func process(note: Note) {
         
         // Leading
-        let leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: leadingDistance(forNote: note), priority: .required)])
-        note.leadingConstraints = [leadingConstraint]
+        note.leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: leadingDistance(forNote: note), priority: .required)])
         
         // Trailing
-        let trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: trailingDistance(forNote: note), priority: .required)])
-        note.trailingConstraints = [trailingConstraint]
+        note.trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: trailingDistance(forNote: note), priority: .required)])
     }
     
     private func leadingDistance(forNote note: Note) -> Double {

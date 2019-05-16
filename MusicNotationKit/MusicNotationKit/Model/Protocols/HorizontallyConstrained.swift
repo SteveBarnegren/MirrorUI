@@ -35,6 +35,9 @@ struct ConstraintValue {
 }
 
 struct HorizontalConstraint {
+    
+    static let zero = HorizontalConstraint(values: [ConstraintValue(length: 0, priority: .required)])
+    
     var values: [ConstraintValue]
     
     func minimumDistance(atPriority priority: ConstraintPriority) -> Double {
@@ -48,8 +51,6 @@ struct HorizontalConstraint {
 
 protocol HorizontallyConstrained: class, HorizontallyPositionable {
     var layoutDuration: Time? { get }
-    //var leadingWidth: Double { get set }
-    //var trailingWidth: Double { get set }
-    var leadingConstraints: [HorizontalConstraint] { get }
-    var trailingConstraints: [HorizontalConstraint] { get }
+    var leadingConstraint: HorizontalConstraint { get }
+    var trailingConstraint: HorizontalConstraint { get }
 }

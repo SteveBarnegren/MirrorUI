@@ -12,12 +12,12 @@ class HorizontalPositionerRenderOperation: RenderOperation {
     
     func process(composition: Composition, layoutWidth: Double) {
         
-        var items = composition.bars.map { constrainedItems(forBar: $0) }.joined().toArray()
+        let items = composition.bars.map { constrainedItems(forBar: $0) }.joined().toArray()
         
-        let positions = HorizontalConstraintSolver().solve(items, layoutWidth: layoutWidth)
-        for (index, position) in zip(items.indices, positions) {
-            items[index].xPosition = position
-        }
+        HorizontalConstraintSolver().solve(items, layoutWidth: layoutWidth)
+//        for (index, position) in zip(items.indices, positions) {
+//            items[index].xPosition = position
+//        }
     }
     
     private func constrainedItems(forBar bar: Bar) -> [HorizontallyConstrained] {
@@ -28,7 +28,8 @@ class HorizontalPositionerRenderOperation: RenderOperation {
         items.append(makePostBarlineSpacer())
         
         for (playableItem, isLast) in bar.sequences[0].playables.enumeratedWithLastItemFlag() {
-            items.append(contentsOf: playableItem.horizontallyConstrainedItems)
+            //items.append(contentsOf: playableItem.horizontallyConstrainedItems)
+            items.append(playableItem)
             items.append(isLast ? makeLastNoteSpacer() : makePostNoteSpacer())
         }
         
@@ -62,10 +63,9 @@ fileprivate class Spacer: HorizontallyConstrained {
     var layoutDuration: Time? = nil
     var xPosition: Double = 0
     
-    let leadingConstraints = [HorizontalConstraint]()
-    var trailingConstraints: [HorizontalConstraint] {
-        let constraint = HorizontalConstraint(values: constraintValues)
-        return [constraint]
+    let leadingConstraint = HorizontalConstraint.zero
+    var trailingConstraint: HorizontalConstraint {
+        return HorizontalConstraint(values: constraintValues)
     }
     
     private var constraintValues = [ConstraintValue]()

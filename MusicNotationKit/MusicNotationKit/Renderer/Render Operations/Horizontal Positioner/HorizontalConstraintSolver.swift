@@ -23,7 +23,7 @@ class ConstrainedDistance {
 
 class HorizontalConstraintSolver {
     
-    func solve(_ horizontallyConstrainedItems: [HorizontallyConstrained], layoutWidth: Double) -> [Double] {
+    func solve(_ horizontallyConstrainedItems: [HorizontallyConstrained], layoutWidth: Double) {
         
         // Make distances
         let distances = makeConstrainedDistances(fromConstrainedItems: horizontallyConstrainedItems)
@@ -41,7 +41,8 @@ class HorizontalConstraintSolver {
             distance.xPosition = xPos
         }
         
-        return distances.filter { $0.toItem != nil }.map { $0.xPosition }
+        // Position the items
+        distances.forEach { $0.toItem?.xPosition = $0.xPosition }
     }
     
     private func solveWithMinimumDistances(distances: [ConstrainedDistance], layoutWidth: Double) {
@@ -132,9 +133,9 @@ class HorizontalConstraintSolver {
             let distance = ConstrainedDistance()
             
             if let last = lastItem {
-                distance.constraints += last.trailingConstraints
+                distance.constraints.append(last.trailingConstraint)
             }
-            distance.constraints += item.leadingConstraints
+            distance.constraints.append(item.leadingConstraint)
             distance.toItem = item
             distance.preferredPercent = lastItem?.layoutDuration?.barPct
             distances.append(distance)
@@ -144,7 +145,7 @@ class HorizontalConstraintSolver {
         
         if let last = items.last {
             let distance = ConstrainedDistance()
-            distance.constraints +=  last.trailingConstraints
+            distance.constraints.append(last.trailingConstraint)
             distance.preferredPercent = lastItem?.layoutDuration?.barPct
             distances.append(distance)
         }

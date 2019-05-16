@@ -50,10 +50,10 @@ class ConstraintsDebugInformationGenerator {
         
         // Leading
         var leadingX = xPosition
-        for leadingConstraint in item.leadingConstraints {
-            
+        
+        do {
             var maxValueLength = 0.0
-            for value in leadingConstraint.values.sortedAscendingBy({ $0.priority }) {
+            for value in item.leadingConstraint.values.sortedAscendingBy({ $0.priority }) {
                 let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
                                                                       startX: leadingX - value.length*scale,
                                                                       endX: leadingX)
@@ -63,12 +63,13 @@ class ConstraintsDebugInformationGenerator {
             leadingX -= maxValueLength
         }
         
+    
         // Trailing
         var trailingX = xPosition
-        for trailingConstraint in item.trailingConstraints {
-            
+        
+        do {
             var maxValueLength = 0.0
-            for value in trailingConstraint.values.sortedAscendingBy({ $0.priority }) {
+            for value in item.trailingConstraint.values.sortedAscendingBy({ $0.priority }) {
                 let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
                                                                       startX: trailingX + value.length*scale,
                                                                       endX: trailingX)

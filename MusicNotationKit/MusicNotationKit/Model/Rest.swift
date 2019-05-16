@@ -15,17 +15,14 @@ public class Rest: Playable {
     // Playable
     var value: NoteValue
     var time = Time.zero
-    var horizontallyConstrainedItems: [HorizontallyConstrained] {
-        return [self]
-    }
     
     // Positionable
     var position = Point.zero
     
     // Horizontally Constrained
     var layoutDuration: Time? { return self.duration }
-    var leadingConstraints = [HorizontalConstraint]()
-    var trailingConstraints = [HorizontalConstraint]()
+    var leadingConstraint = HorizontalConstraint.zero
+    var trailingConstraint = HorizontalConstraint.zero
     
     // MARK: - Init
     public init(value: NoteValue) {

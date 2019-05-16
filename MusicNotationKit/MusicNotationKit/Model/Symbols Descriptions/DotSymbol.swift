@@ -12,7 +12,7 @@ class DotSymbol: HorizontallyPlacedSymbol {
     
     // Horizontally Constrained
     var layoutDuration: Time? = nil
-    var leadingConstraints = [HorizontalConstraint]()
-    var trailingConstraints = [HorizontalConstraint]()
+    var leadingConstraint = HorizontalConstraint.zero
+    var trailingConstraint = HorizontalConstraint.zero
     var xPosition: Double = 0
 }

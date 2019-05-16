@@ -23,13 +23,10 @@ public class Note: Playable {
     // Playable
     let value: NoteValue
     var time = Time.zero
-    var horizontallyConstrainedItems: [HorizontallyConstrained] {
-        return [self] + self.symbolDescription.trailingSymbols
-    }
     
     // HorizontallyConstrained
-    var leadingConstraints = [HorizontalConstraint]()
-    var trailingConstraints = [HorizontalConstraint]()
+    var leadingConstraint = HorizontalConstraint.zero
+    var trailingConstraint = HorizontalConstraint.zero
     
     // Positionable
     var position = Point.zero
