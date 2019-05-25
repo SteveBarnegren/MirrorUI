@@ -13,11 +13,7 @@ class RestConstraintsDescriber {
     func process(rest: Rest) {
         
         // Assumes that all rests are 1 unit wide (0.5 leading and 0.5 trailing)
-        let leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.5, priority: .required)])
-        rest.leadingConstraints = [leadingConstraint]
-        
-        let trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.5, priority: .required)])
-        rest.trailingConstraints = [trailingConstraint]
-        
+        rest.leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.5, priority: .required)])
+        rest.trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.5, priority: .required)])
     }
 }

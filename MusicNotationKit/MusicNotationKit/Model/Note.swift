@@ -25,14 +25,24 @@ public class Note: Playable {
     var time = Time.zero
     
     // HorizontallyConstrained
-    var leadingConstraints = [HorizontalConstraint]()
-    var trailingConstraints = [HorizontalConstraint]()
+    var leadingConstraint = HorizontalConstraint.zero
+    var trailingConstraint = HorizontalConstraint.zero
+    var trailingLayoutItems: [HorizontalLayoutItem] {
+        return self.symbolDescription.trailingLayoutItems
+    }
+    
+    var leadingLayoutOffset: Double {
+        return self.leadingConstraint.minimumDistance(atPriority: .required)
+    }
+    
+    var trailingLayoutOffset: Double {
+        return self.trailingConstraint.minimumDistance(atPriority: .required)
+    }
     
     // Positionable
     var position = Point.zero
     
     // MARK: - Init
-    
     public init(value: NoteValue, pitch: Pitch) {
         self.value = value
         self.pitch = pitch
@@ -63,6 +73,7 @@ class NoteSymbolDescription {
     let hasStem: Bool
     let numberOfBeams: Int
     var beams = [Beam]()
+    var trailingLayoutItems = [HorizontalLayoutItem]()
     
     init(headStyle: HeadStyle, hasStem: Bool, numberOfBeams: Int) {
         self.headStyle = headStyle

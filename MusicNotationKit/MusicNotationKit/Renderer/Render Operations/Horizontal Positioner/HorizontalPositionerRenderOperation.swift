@@ -12,22 +12,21 @@ class HorizontalPositionerRenderOperation: RenderOperation {
     
     func process(composition: Composition, layoutWidth: Double) {
         
-        var items = composition.bars.map { constrainedItems(forBar: $0) }.joined().toArray()
+        let items = composition.bars.map { constrainedItems(forBar: $0) }.joined().toArray()
         
-        let positions = HorizontalConstraintSolver().solve(items, layoutWidth: layoutWidth)
-        for (index, position) in zip(items.indices, positions) {
-            items[index].xPosition = position
-        }
+        let distances = HorizontalDistancesGenerator().makeConstrainedDistances(fromItems: items)
+        HorizontalConstraintSolver().solve(distances, layoutWidth: layoutWidth)
     }
     
-    private func constrainedItems(forBar bar: Bar) -> [HorizontallyConstrained] {
+    private func constrainedItems(forBar bar: Bar) -> [HorizontalLayoutItem] {
         
         // We'll just process a single note sequence for now
-        var items = [HorizontallyConstrained]()
+        var items = [HorizontalLayoutItem]()
         items.append(bar.leadingBarline)
         items.append(makePostBarlineSpacer())
         
         for (playableItem, isLast) in bar.sequences[0].playables.enumeratedWithLastItemFlag() {
+            //items.append(contentsOf: playableItem.horizontallyConstrainedItems)
             items.append(playableItem)
             items.append(isLast ? makeLastNoteSpacer() : makePostNoteSpacer())
         }
@@ -57,16 +56,17 @@ class HorizontalPositionerRenderOperation: RenderOperation {
     }
 }
 
-fileprivate class Spacer: HorizontallyConstrained {
+fileprivate class Spacer: HorizontalLayoutItem {
+    
  
     var layoutDuration: Time? = nil
     var xPosition: Double = 0
     
-    let leadingConstraints = [HorizontalConstraint]()
-    var trailingConstraints: [HorizontalConstraint] {
-        let constraint = HorizontalConstraint(values: constraintValues)
-        return [constraint]
+    let leadingConstraint = HorizontalConstraint.zero
+    var trailingConstraint: HorizontalConstraint {
+        return HorizontalConstraint(values: constraintValues)
     }
+    let trailingLayoutItems = [HorizontalLayoutItem]()
     
     private var constraintValues = [ConstraintValue]()
     

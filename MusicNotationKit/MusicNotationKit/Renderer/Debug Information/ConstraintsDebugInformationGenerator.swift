@@ -43,17 +43,17 @@ class ConstraintsDebugInformationGenerator {
         return ConstraintsDebugInformation(descriptions: descriptions)
     }
     
-    private func itemDescription(for item: HorizontallyConstrained, scale: Double) -> ConstraintsDebugInformation.ItemDescription {
+    private func itemDescription(for item: HorizontalLayoutItem, scale: Double) -> ConstraintsDebugInformation.ItemDescription {
         
         let xPosition = item.xPosition * scale
         var constraintZones = [ConstraintsDebugInformation.ConstraintZone]()
         
         // Leading
         var leadingX = xPosition
-        for leadingConstraint in item.leadingConstraints {
-            
+        
+        do {
             var maxValueLength = 0.0
-            for value in leadingConstraint.values.sortedAscendingBy({ $0.priority }) {
+            for value in item.leadingConstraint.values.sortedAscendingBy({ $0.priority }) {
                 let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
                                                                       startX: leadingX - value.length*scale,
                                                                       endX: leadingX)
@@ -63,12 +63,13 @@ class ConstraintsDebugInformationGenerator {
             leadingX -= maxValueLength
         }
         
+    
         // Trailing
         var trailingX = xPosition
-        for trailingConstraint in item.trailingConstraints {
-            
+        
+        do {
             var maxValueLength = 0.0
-            for value in trailingConstraint.values.sortedAscendingBy({ $0.priority }) {
+            for value in item.trailingConstraint.values.sortedAscendingBy({ $0.priority }) {
                 let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
                                                                       startX: trailingX + value.length*scale,
                                                                       endX: trailingX)

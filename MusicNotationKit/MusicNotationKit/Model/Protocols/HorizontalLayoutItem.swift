@@ -1,5 +1,5 @@
 //
-//  HorizontallyConstrained.swift
+//  HorizontalLayoutItem.swift
 //  MusicNotationKit
 //
 //  Created by Steve Barnegren on 12/01/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ConstraintPriority: Comparable {
+enum ConstraintPriority:Comparable {
    
     case required
     case regular
@@ -35,6 +35,9 @@ struct ConstraintValue {
 }
 
 struct HorizontalConstraint {
+    
+    static let zero = HorizontalConstraint(values: [ConstraintValue(length: 0, priority: .required)])
+    
     var values: [ConstraintValue]
     
     func minimumDistance(atPriority priority: ConstraintPriority) -> Double {
@@ -46,10 +49,23 @@ struct HorizontalConstraint {
     }
 }
 
-protocol HorizontallyConstrained: class, HorizontallyPositionable {
+protocol HorizontalLayoutItem: class, HorizontallyPositionable {
     var layoutDuration: Time? { get }
-    //var leadingWidth: Double { get set }
-    //var trailingWidth: Double { get set }
-    var leadingConstraints: [HorizontalConstraint] { get }
-    var trailingConstraints: [HorizontalConstraint] { get }
+    var leadingConstraint: HorizontalConstraint { get }
+    var trailingConstraint: HorizontalConstraint { get }
+    
+    var trailingLayoutItems: [HorizontalLayoutItem] { get }
+    var trailingLayoutOffset: Double { get }
+    var leadingLayoutOffset: Double { get }
+}
+
+extension HorizontalLayoutItem {
+    
+    var leadingLayoutOffset: Double {
+        return 0
+    }
+    
+    var trailingLayoutOffset: Double {
+        return 0
+    }
 }

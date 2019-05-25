@@ -10,43 +10,42 @@ import Foundation
 
 public struct NoteValue {
     
+    // MARK: - Static conviniences
+    
     public static let whole = NoteValue(division: 1)
     public static let half = NoteValue(division: 2)
     public static let quarter = NoteValue(division: 4)
     public static let eighth = NoteValue(division: 8)
     public static let sixteenth = NoteValue(division: 16)
     
-    var division: Int
+    // MARK: - Types
     
-    public init(division: Int) {
-        self.division = division
+    public enum Dots {
+        case none
+        case dotted
+        case doubleDotted
     }
+    
+    // MARK: - Properties
+    
+    var division: Int
+    var dots: Dots
     
     var duration: Time {
-        return Time(value: 1, division: division)
+        switch dots {
+        case .none:
+            return Time(value: 1, division: division)
+        case .dotted:
+            return Time(value: 3, division: division * 2)
+        case .doubleDotted:
+            return Time(value: 7, division: division * 2 * 2)
+        }
+    }
+    
+    // MARK: - Init
+    
+    public init(division: Int, dots: Dots = .none) {
+        self.division = division
+        self.dots = dots
     }
 }
-
-//public enum NoteValue {
-//    case whole
-//    case half
-//    case quarter
-//    case eighth
-//    case sixteenth
-//    case division(Int)
-//
-//    var duration: Time {
-//        switch self {
-//        case .whole: return Time(crotchets: 4)
-//        case .half: return Time(crotchets: 2)
-//        case .quarter: return Time(crotchets: 1)
-//        case .eighth: return Time(quavers: 1)
-//        case .sixteenth: return Time(semiquavers: 1)
-//        case .division(let division):
-//
-//
-//
-//            return Time(value: 1, division: division)
-//        }
-//    }
-//}

@@ -9,6 +9,7 @@
 import Foundation
 
 struct Time {
+    
     var value: Int
     var division: Int
     
@@ -43,49 +44,28 @@ struct Time {
     }
 }
 
-private func makeDivisionSame(_ a: Time, _ b: Time) -> (Time, Time) {
-    
-    if a.division == b.division {
-        return (a, b)
-    }
-    
-    var a = a, b = b
-    
-    let comparisionDivision = max(a.division, b.division)
-    
-    if a.division != comparisionDivision {
-        a.value = a.value * (comparisionDivision / a.division)
-        a.division = comparisionDivision
-    }
-    
-    if b.division != comparisionDivision {
-        b.value = b.value * (comparisionDivision / b.division)
-        b.division = comparisionDivision
-    }
-    
-    return (a, b)
-}
-
 extension Time: Equatable {
     static func == (lhs: Time, rhs: Time) -> Bool {
-        
-        let values = makeDivisionSame(lhs, rhs)
-        return values.0.value == values.1.value
+        return lhs.division * rhs.value == rhs.division * lhs.value
     }
 }
 
 extension Time: Comparable {
     static func < (lhs: Time, rhs: Time) -> Bool {
-        
-        let values = makeDivisionSame(lhs, rhs)
-        return values.0.value < values.1.value
+        return lhs.value * rhs.division < rhs.value * lhs.division
     }
 }
 
 // Math
 func +(lhs: Time, rhs: Time) -> Time {
-    let values = makeDivisionSame(lhs, rhs)
-    return Time(value: values.0.value + values.1.value, division: values.0.division)
+    
+    let newDivision = max(lhs.division, rhs.division)
+    
+    func value(forTime time: Time) -> Int {
+        return time.division == newDivision ? time.value : time.value * (newDivision / time.division)
+    }
+    
+    return Time(value: value(forTime: lhs) + value(forTime: rhs), division: newDivision)
 }
 
 func += (lhs: inout Time, rhs: Time) {

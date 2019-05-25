@@ -8,12 +8,13 @@
 
 import Foundation
 
-class Barline: HorizontallyConstrained {
+class Barline: HorizontalLayoutItem {
     
     // HorizontallyConstrained
     let layoutDuration: Time? = Time.init(value: 1, division: 64)
-    var leadingConstraints: [HorizontalConstraint]
-    var trailingConstraints: [HorizontalConstraint]
+    var leadingConstraint: HorizontalConstraint
+    var trailingConstraint: HorizontalConstraint
+    let trailingLayoutItems = [HorizontalLayoutItem]()
     
     // HorizontallyPositionable
     var xPosition = Double(0)
@@ -21,10 +22,8 @@ class Barline: HorizontallyConstrained {
     // Init
     
     init() {
-        let leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.1, priority: ConstraintPriority.required)])
-        self.leadingConstraints = [leadingConstraint]
+        self.leadingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.1, priority: ConstraintPriority.required)])
         
-        let trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.1, priority: ConstraintPriority.required)])
-        self.trailingConstraints = [trailingConstraint]
+        self.trailingConstraint = HorizontalConstraint(values: [ConstraintValue(length: 0.1, priority: ConstraintPriority.required)])
     }
 }

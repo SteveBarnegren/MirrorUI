@@ -25,7 +25,9 @@ class NoteSymbolDescriber {
         default:
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: numberOfBeams(forDivision: division))
         }
-                
+        
+        description.trailingLayoutItems = trailingDotSymbols(forNote: note)
+        
         return description
     }
     
@@ -49,5 +51,30 @@ class NoteSymbolDescriber {
         default:
             fatalError("division \(division) not supported!")
         }
+    }
+    
+    private func trailingDotSymbols(forNote note: Note) -> [DotSymbol] {
+        
+        func makeDotSymbol(forNote note: Note) -> DotSymbol {
+            let symbol = DotSymbol()
+            symbol.pitch = note.pitch
+            return symbol
+        }
+        
+        let numberOfDots: Int
+        
+        switch note.value.dots {
+        case .none: numberOfDots = 0
+        case .dotted: numberOfDots = 1
+        case .doubleDotted: numberOfDots = 2
+        }
+        
+        var dots = Array<DotSymbol>()
+        
+        repeated(times: numberOfDots) {
+            dots.append(makeDotSymbol(forNote: note))
+        }
+        
+        return dots
     }
 }

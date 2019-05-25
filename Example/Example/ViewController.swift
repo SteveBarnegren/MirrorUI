@@ -11,11 +11,14 @@ import MusicNotationKit
 
 class ViewController: UIViewController {
     
-    var musicView: MusicView!
-    var gridOverlayView: GridOverlayView!
-    var handleView = UIView(frame: .zero)
-    var musicViewWidth = CGFloat(0)
-    var panTranslation = CGFloat(0)
+    @IBOutlet private var debugConstraintsStackView: UIStackView!
+    @IBOutlet private var debugConstraintsSwitch: UISwitch!
+    
+    private var musicView: MusicView!
+    private var gridOverlayView: GridOverlayView!
+    private var handleView = UIView(frame: .zero)
+    private var musicViewWidth = CGFloat(0)
+    private var panTranslation = CGFloat(0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +26,6 @@ class ViewController: UIViewController {
         musicViewWidth = UIScreen.main.bounds.width - 100
         
         musicView = MusicView(composition: makeComposition())
-        musicView._showConstraintsDebug = false
         view.addSubview(musicView)
         
         gridOverlayView = GridOverlayView(frame: .zero)
@@ -37,7 +39,11 @@ class ViewController: UIViewController {
         
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
         handleView.addGestureRecognizer(panRecognizer)
-
+        
+        // Debug Constraints
+        debugConstraintsStackView.superview?.bringSubviewToFront(debugConstraintsStackView)
+        musicView._showConstraintsDebug = debugConstraintsEnabled
+        debugConstraintsSwitch.isOn = debugConstraintsEnabled
     }
     
     func makeComposition() -> Composition {
@@ -52,33 +58,66 @@ class ViewController: UIViewController {
     
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
-
-        sequenceOne.add(note: Note(value: .quarter, pitch: .c4))
-
-        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
-
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-
-        sequenceOne.add(rest: Rest(value: .eighth))
-        sequenceOne.add(rest: Rest(value: .sixteenth))
-        sequenceOne.add(rest: Rest(value: .half))
-        sequenceOne.add(rest: Rest(value: .whole))
-
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
-
+        
+        sequenceOne.add(note: Note(value: NoteValue(division: 4, dots: .dotted), pitch: .c4))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .d4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 8, dots: .dotted), pitch: .b4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .a4))
+        sequenceOne.add(note: Note(value: .quarter, pitch: .g3))
+        
         let bar = Bar()
         bar.add(sequence: sequenceOne)
-
+        
         return bar
     }
+    
+    func makeSecondBar() -> Bar {
+        let sequenceOne = NoteSequence()
+        
+        sequenceOne.add(note: Note(value: NoteValue(division: 4, dots: .dotted), pitch: .f3))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .g3))
+        sequenceOne.add(note: Note(value: NoteValue(division: 8, dots: .dotted), pitch: .g4))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .e4))
+        sequenceOne.add(note: Note(value: .quarter, pitch: .c4))
+        
+        let bar = Bar()
+        bar.add(sequence: sequenceOne)
+        
+        return bar
+    }
+
+    
+//    func makeFirstBar() -> Bar {
+//        let sequenceOne = NoteSequence()
+//
+//        sequenceOne.add(note: Note(value: .quarter, pitch: .c4))
+//        sequenceOne.add(note: Note(value: NoteValue(division: 4, dots: .dotted), pitch: .c4))
+//        sequenceOne.add(note: Note(value: NoteValue(division: 4, dots: .doubleDotted), pitch: .c4))
+//
+//        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+//
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        sequenceOne.add(rest: Rest(value: .eighth))
+//        sequenceOne.add(rest: Rest(value: .sixteenth))
+//        sequenceOne.add(rest: Rest(value: .half))
+//        sequenceOne.add(rest: Rest(value: .whole))
+//
+//        sequenceOne.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        let bar = Bar()
+//        bar.add(sequence: sequenceOne)
+//
+//        return bar
+//    }
     
 //    func makeSecondBar() -> Bar {
 //
@@ -106,27 +145,27 @@ class ViewController: UIViewController {
 //        return bar
 //    }
     
-    func makeSecondBar() -> Bar {
-        
-        let sequence = NoteSequence()
-        
-        sequence.add(rest: Rest(value: .quarter))
-        sequence.add(rest: Rest(value: .quarter))
-
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        
-        sequence.add(note: Note(value: .eighth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        
-        let bar = Bar()
-        bar.add(sequence: sequence)
-        
-        return bar
-    }
+//    func makeSecondBar() -> Bar {
+//
+//        let sequence = NoteSequence()
+//
+//        sequence.add(rest: Rest(value: .quarter))
+//        sequence.add(rest: Rest(value: .quarter))
+//
+//        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        sequence.add(note: Note(value: .eighth, pitch: .c4))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        let bar = Bar()
+//        bar.add(sequence: sequence)
+//
+//        return bar
+//    }
     
     // MARK: - Layout
     
@@ -171,6 +210,18 @@ class ViewController: UIViewController {
         musicView.setNeedsDisplay()
         
         print("TRANS: \(translation)")
+    }
+    
+    // MARK: - Debug Constraints
+    
+    var debugConstraintsEnabled: Bool {
+        get { return UserDefaults.standard.bool(forKey: "debug_constraints") }
+        set { UserDefaults.standard.set(newValue, forKey: "debug_constraints") }
+    }
+    
+    @IBAction private func debugConstraintsSwitchChanges(sender: UISwitch) {
+        debugConstraintsEnabled = debugConstraintsSwitch.isOn
+        musicView._showConstraintsDebug = debugConstraintsEnabled
     }
 }
 

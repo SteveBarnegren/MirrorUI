@@ -73,6 +73,22 @@ class MusicRenderer {
     }
     
     private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
-        return NoteRenderer().paths(forNotes: noteSequence.notes) + RestRenderer().paths(forRests: noteSequence.rests)
+        let notePaths = NoteRenderer().paths(forNotes: noteSequence.notes)
+        let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems }.joined().map(makePaths).joined().toArray()
+        let restPaths = RestRenderer().paths(forRests: noteSequence.rests)
+        
+        return notePaths + noteSymbolPaths + restPaths
+    }
+    
+    // Render Symbols
+    
+    private func makePaths(forSymbol symbol: HorizontalLayoutItem) -> [Path] {
+        
+        switch symbol {
+        case let dot as DotSymbol:
+            return DotRenderer().paths(forDot: dot)
+        default:
+            fatalError("Unknown symbol type: \(symbol)")
+        }
     }
 }
