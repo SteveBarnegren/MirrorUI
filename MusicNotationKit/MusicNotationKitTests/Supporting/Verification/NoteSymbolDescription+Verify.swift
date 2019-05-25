@@ -26,4 +26,12 @@ extension NoteSymbolDescription {
         XCTAssertEqual(self.numberOfBeams, numberOfBeams, file: file, line: line)
         return self
     }
+    
+    @discardableResult func verify(numberOfDotSymbols: Int, file: StaticString = #file, line: UInt = #line) -> Self {
+        XCTAssertEqual(self.trailingLayoutItems.compactMap({ $0 as? DotSymbol }).count,
+                       numberOfDotSymbols,
+                       file: file,
+                       line: line)
+        return self
+    }
 }

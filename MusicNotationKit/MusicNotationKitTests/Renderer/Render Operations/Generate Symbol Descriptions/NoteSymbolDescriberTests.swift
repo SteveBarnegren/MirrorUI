@@ -17,6 +17,8 @@ class NoteSymbolDescriberTests: XCTestCase {
         super.setUp()
     }
     
+    // MARK: - Basic Notes
+    
     func test_SymbolDescriptionForSemibreve() {
         
         let note = Note(value: .whole, pitch: .a3)
@@ -69,5 +71,27 @@ class NoteSymbolDescriberTests: XCTestCase {
             .verify(headStyle: .filled)
             .verify(hasStem: true)
             .verify(numberOfBeams: 3)
+    }
+    
+    // MARK: - Dotted Notes
+    
+    func test_SymbolDescriptionForDottedCrotchet() {
+        
+        let note = Note(value: .init(division: 4, dots: .dotted), pitch: .a3)
+        describer.symbolDescription(forNote: note)
+            .verify(hasStem: true)
+            .verify(headStyle: .filled)
+            .verify(numberOfDotSymbols: 1)
+    }
+    
+    // MARK: - Double Dotted Notes
+    
+    func test_SymbolDescriptionForDoubleDottedCrotchet() {
+        
+        let note = Note(value: .init(division: 4, dots: .doubleDotted), pitch: .a3)
+        describer.symbolDescription(forNote: note)
+            .verify(hasStem: true)
+            .verify(headStyle: .filled)
+            .verify(numberOfDotSymbols: 2)
     }
 }
