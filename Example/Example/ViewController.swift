@@ -11,11 +11,14 @@ import MusicNotationKit
 
 class ViewController: UIViewController {
     
-    var musicView: MusicView!
-    var gridOverlayView: GridOverlayView!
-    var handleView = UIView(frame: .zero)
-    var musicViewWidth = CGFloat(0)
-    var panTranslation = CGFloat(0)
+    @IBOutlet private var debugConstraintsStackView: UIStackView!
+    @IBOutlet private var debugConstraintsSwitch: UISwitch!
+    
+    private var musicView: MusicView!
+    private var gridOverlayView: GridOverlayView!
+    private var handleView = UIView(frame: .zero)
+    private var musicViewWidth = CGFloat(0)
+    private var panTranslation = CGFloat(0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +26,6 @@ class ViewController: UIViewController {
         musicViewWidth = UIScreen.main.bounds.width - 100
         
         musicView = MusicView(composition: makeComposition())
-        musicView._showConstraintsDebug = true
         view.addSubview(musicView)
         
         gridOverlayView = GridOverlayView(frame: .zero)
@@ -37,7 +39,11 @@ class ViewController: UIViewController {
         
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
         handleView.addGestureRecognizer(panRecognizer)
-
+        
+        // Debug Constraints
+        debugConstraintsStackView.superview?.bringSubviewToFront(debugConstraintsStackView)
+        musicView._showConstraintsDebug = debugConstraintsEnabled
+        debugConstraintsSwitch.isOn = debugConstraintsEnabled
     }
     
     func makeComposition() -> Composition {
@@ -204,6 +210,18 @@ class ViewController: UIViewController {
         musicView.setNeedsDisplay()
         
         print("TRANS: \(translation)")
+    }
+    
+    // MARK: - Debug Constraints
+    
+    var debugConstraintsEnabled: Bool {
+        get { return UserDefaults.standard.bool(forKey: "debug_constraints") }
+        set { UserDefaults.standard.set(newValue, forKey: "debug_constraints") }
+    }
+    
+    @IBAction private func debugConstraintsSwitchChanges(sender: UISwitch) {
+        debugConstraintsEnabled = debugConstraintsSwitch.isOn
+        musicView._showConstraintsDebug = debugConstraintsEnabled
     }
 }
 
