@@ -35,16 +35,16 @@ class NoteRenderer {
         var lastNoteWasConnected = false
         for note in notes {
             // Is is the first note of the cluster?
-            if note.symbolDescription.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == false {
+            if note.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == false {
                 renderNoteCluster()
                 noteCluster.append(note)
             }
                 // Is it the middle of the cluster?
-            else if note.symbolDescription.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == true {
+            else if note.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == true {
                 noteCluster.append(note)
             }
                 // Is the end of the cluster?
-            else if note.symbolDescription.numberOfForwardBeamConnections == 0 && lastNoteWasConnected == true {
+            else if note.numberOfForwardBeamConnections == 0 && lastNoteWasConnected == true {
                 noteCluster.append(note)
                 renderNoteCluster()
             }
@@ -52,7 +52,7 @@ class NoteRenderer {
             else {
                 paths += makePaths(forNote: note)
             }
-            lastNoteWasConnected = note.symbolDescription.numberOfForwardBeamConnections > 0
+            lastNoteWasConnected = note.numberOfForwardBeamConnections > 0
         }
         renderNoteCluster()
         

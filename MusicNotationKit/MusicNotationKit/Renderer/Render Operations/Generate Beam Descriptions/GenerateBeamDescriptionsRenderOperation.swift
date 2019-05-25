@@ -13,6 +13,6 @@ class GenerateBeamDescriptionsRenderOperation: RenderOperation {
     private let noteBeamDescriber = NoteBeamDescriber()
     
     func process(composition: Composition, layoutWidth: Double) {
-        composition.enumerateNoteSequences { noteBeamDescriber.applyBeams(toNoteSequence: $0) }
+        composition.enumerateNoteSequences { noteBeamDescriber.applyBeams(to: $0.notes) }
     }
 }
