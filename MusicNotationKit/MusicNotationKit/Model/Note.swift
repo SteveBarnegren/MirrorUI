@@ -42,11 +42,21 @@ public class Note: Playable {
     // Positionable
     var position = Point.zero
     
+    var beams = [Beam]()
+    
     // MARK: - Init
     public init(value: NoteValue, pitch: Pitch) {
         self.value = value
         self.pitch = pitch
     }
+}
+
+enum Beam {
+    case connectedNext
+    case connectedPrevious
+    case connectedBoth
+    case cutOffLeft
+    case cutOffRight
 }
 
 class NoteSymbolDescription {
@@ -58,43 +68,18 @@ class NoteSymbolDescription {
         case filled
     }
     
-    enum BeamStyle {
-        case connectedToNext
-        case cutOffLeft
-        case cutOffRight
-    }
-    
-    struct Beam {
-        let index: Int
-        let style: BeamStyle
-    }
-    
     let headStyle: HeadStyle
     let hasStem: Bool
-    let numberOfBeams: Int
-    var beams = [Beam]()
+    let numberOfTails: Int
     var trailingLayoutItems = [HorizontalLayoutItem]()
     
-    init(headStyle: HeadStyle, hasStem: Bool, numberOfBeams: Int) {
+    init(headStyle: HeadStyle, hasStem: Bool, numberOfTails: Int) {
         self.headStyle = headStyle
         self.hasStem = hasStem
-        self.numberOfBeams = numberOfBeams
+        self.numberOfTails = numberOfTails
     }
     
     static var standard: NoteSymbolDescription {
-        return NoteSymbolDescription(headStyle: .none, hasStem: false, numberOfBeams: 0)
-    }
-    
-    var numberOfForwardBeamConnections: Int {
-        
-        var num = 0
-        
-        for beam in beams {
-            if beam.style == .connectedToNext {
-                num += 1
-            }
-        }
-        
-        return num
+        return NoteSymbolDescription(headStyle: .none, hasStem: false, numberOfTails: 0)
     }
 }

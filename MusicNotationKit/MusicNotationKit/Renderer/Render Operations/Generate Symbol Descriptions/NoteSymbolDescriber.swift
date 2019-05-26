@@ -17,13 +17,13 @@ class NoteSymbolDescriber {
         let division = note.value.division
         switch division {
         case 1:
-            description = NoteSymbolDescription(headStyle: .semibreve, hasStem: false, numberOfBeams: 0)
+            description = NoteSymbolDescription(headStyle: .semibreve, hasStem: false, numberOfTails: 0)
         case 2:
-            description = NoteSymbolDescription(headStyle: .open, hasStem: true, numberOfBeams: 0)
+            description = NoteSymbolDescription(headStyle: .open, hasStem: true, numberOfTails: 0)
         case 4:
-            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: 0)
+            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfTails: 0)
         default:
-            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfBeams: numberOfBeams(forDivision: division))
+            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfTails: numberOfTails(forDivision: division))
         }
         
         description.trailingLayoutItems = trailingDotSymbols(forNote: note)
@@ -31,7 +31,7 @@ class NoteSymbolDescriber {
         return description
     }
     
-    private func numberOfBeams(forDivision division: Int) -> Int {
+    private func numberOfTails(forDivision division: Int) -> Int {
         
         switch division {
         case 1: return 0

@@ -8,94 +8,73 @@
 
 import Foundation
 
-class NoteBeamDescriber {
+struct Beaming<T> {
     
-    func applyBeams(toNoteSequence noteSequence: NoteSequence) {
+    // Inputs
+    var time: (T) -> Time
+    var numberOfTails: (T) -> Int
+    
+    // Outputs
+    var setBeams: (T, [Beam]) -> Void
+}
+
+extension Beaming where T == Note {
+    
+    static var notes: Beaming<Note> {
+        return Beaming(time: { return $0.time },
+                       numberOfTails: { return $0.symbolDescription.numberOfTails },
+                       setBeams: { note, beams in note.beams = beams})
+    }
+}
+
+class NoteBeamDescriber<T> {
+    
+    let beaming: Beaming<T>
+    
+    init(beaming: Beaming<T>) {
+        self.beaming = beaming
+    }
+    
+    func applyBeams(to notes: [T]) {
         
-        let notesByBeat = noteSequence.notes.chunked(atChangeTo: { $0.time.convertedTruncating(toDivision: 4).value })
+        let notesByBeat = notes.chunked(atChangeTo: { beaming.time($0).convertedTruncating(toDivision: 4).value })
         notesByBeat.forEach { applyBeams(toNoteCluster: $0) }
     }
-    
-    private func applyBeams(toNoteCluster noteCluster: [Note]) {
-        
-        var lastNumberOfForwardConnections = 0
-        
-        for (index, note) in noteCluster.enumerated() {
-            var beamsLeft = note.symbolDescription.numberOfBeams
-            
-            // forward beam connections
-            var numberOfForwardBeams = 0
-            if let next = noteCluster[maybe: index+1] {
-                numberOfForwardBeams = min(note.symbolDescription.numberOfBeams, next.symbolDescription.numberOfBeams)
-            }
-            
-            note.symbolDescription.beams = (0..<numberOfForwardBeams).map { NoteSymbolDescription.Beam(index: $0, style: .connectedToNext) }
-            
-            // Remove accounted for beams by forward or backward connections
-            beamsLeft -= max(lastNumberOfForwardConnections, numberOfForwardBeams)
-            
-            // Add remaining beams as cut-offs
-            while beamsLeft > 0 {
-                let beamStyle: NoteSymbolDescription.BeamStyle = (index == noteCluster.count - 1) ? .cutOffLeft : .cutOffRight
-                let beam = NoteSymbolDescription.Beam(index: note.symbolDescription.numberOfBeams - beamsLeft, style: beamStyle)
-                note.symbolDescription.beams.append(beam)
-                beamsLeft -= 1
-            }
-            
-            lastNumberOfForwardConnections = note.symbolDescription.numberOfForwardBeamConnections
-            
-        }
-    }
-    
 
-    /*
-    func applyNoteBeams(toSymbols noteSymbols: [NoteSymbol]) -> [NoteSymbol] {
-        // THIS METHOD ASSUMES 4/4 TIME!
+    private func applyBeams(toNoteCluster noteCluster: [T]) {
         
-        let notesByBeat = noteSymbols.chunked(atChangeTo: { $0.time.convertedTruncating(toDivision: 4).value })
-        return Array(notesByBeat.map { applyBeams(toNoteCluster: $0) }.joined())
-    }
-    
-    func applyBeams(toNoteCluster noteCluster: [NoteSymbol]) -> [NoteSymbol] {
-        
-        print("\n\n*********************\n\n")
-        dump(noteCluster)
-        
-        var processedNotes = [NoteSymbol]()
-        
-        var lastNumberOfForwardConnections = 0
-        
-        for (index, note) in noteCluster.enumerated() {
-            var note = note
-            var beamsLeft = note.numberOfBeams
-            
-            // forward beam connections
-            var numberOfForwardBeams = 0
-            if let next = noteCluster[maybe: index+1] {
-                numberOfForwardBeams = min(note.numberOfBeams, next.numberOfBeams)
-            }
-            
-            note.beams = (0..<numberOfForwardBeams).map { NoteSymbol.Beam(index: $0, style: .connectedToNext) }
-            
-            // Remove accounted for beams by forward or backward connections
-            beamsLeft -= max(lastNumberOfForwardConnections, numberOfForwardBeams)
-            
-            // Add remaining beams as cut-offs
-            while beamsLeft > 0 {
-                let beamStyle: NoteSymbol.BeamStyle = (index == noteCluster.count - 1) ? .cutOffLeft : .cutOffRight
-                let beam = NoteSymbol.Beam(index: note.numberOfBeams - beamsLeft, style: beamStyle)
-                note.beams.append(beam)
-                beamsLeft -= 1
-            }
-            
-            lastNumberOfForwardConnections = note.numberOfForwardBeamConnections
-            processedNotes.append(note)
+        // Don't apply beams to a single note
+        if noteCluster.count == 1 {
+            return
         }
         
-        //print("\n\n*********************\n\n")
-        //dump(processedNotes)
+        var prevNumberOfBeams = 0
         
-        return processedNotes
+        for (noteIndex, item) in noteCluster.enumerated() {
+            let numberOfBeams = beaming.numberOfTails(item)
+            
+            var nextNumberOfBeams = Int(0)
+            if let next = noteCluster[maybe: noteIndex+1] {
+                nextNumberOfBeams = beaming.numberOfTails(next)
+            }
+            
+            var beams = [Beam]()
+            for beamIndex in 0..<numberOfBeams {
+                if beamIndex < prevNumberOfBeams && beamIndex < nextNumberOfBeams {
+                    beams.append(.connectedBoth)
+                } else if beamIndex < prevNumberOfBeams {
+                    beams.append(.connectedPrevious)
+                } else if beamIndex < nextNumberOfBeams {
+                    beams.append(.connectedNext)
+                } else if noteIndex == noteCluster.count-1 {
+                    beams.append(.cutOffLeft)
+                } else {
+                    beams.append(.cutOffRight)
+                }
+            }
+            
+            beaming.setBeams(item, beams)
+            prevNumberOfBeams = numberOfBeams
+        }
     }
- */
 }

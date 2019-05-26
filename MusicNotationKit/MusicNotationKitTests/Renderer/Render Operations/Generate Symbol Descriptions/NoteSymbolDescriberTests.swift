@@ -17,13 +17,15 @@ class NoteSymbolDescriberTests: XCTestCase {
         super.setUp()
     }
     
+    // MARK: - Basic Notes
+    
     func test_SymbolDescriptionForSemibreve() {
         
         let note = Note(value: .whole, pitch: .a3)
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .semibreve)
             .verify(hasStem: false)
-            .verify(numberOfBeams: 0)
+            .verify(numberOfTails: 0)
     }
     
     func test_SymbolDescriptionForMinim() {
@@ -32,7 +34,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .open)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 0)
+            .verify(numberOfTails: 0)
     }
     
     func test_SymbolDescriptionForCrotchet() {
@@ -41,7 +43,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .filled)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 0)
+            .verify(numberOfTails: 0)
     }
     
     func test_SymbolDescriptionForQuaver() {
@@ -50,7 +52,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .filled)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 1)
+            .verify(numberOfTails: 1)
     }
     
     func test_SymbolDescriptionForSemiquaver() {
@@ -59,7 +61,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .filled)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 2)
+            .verify(numberOfTails: 2)
     }
     
     func test_SymbolDescriptionForDemiSemiquaver() {
@@ -68,6 +70,28 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .filled)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 3)
+            .verify(numberOfTails: 3)
+    }
+    
+    // MARK: - Dotted Notes
+    
+    func test_SymbolDescriptionForDottedCrotchet() {
+        
+        let note = Note(value: .init(division: 4, dots: .dotted), pitch: .a3)
+        describer.symbolDescription(forNote: note)
+            .verify(hasStem: true)
+            .verify(headStyle: .filled)
+            .verify(numberOfDotSymbols: 1)
+    }
+    
+    // MARK: - Double Dotted Notes
+    
+    func test_SymbolDescriptionForDoubleDottedCrotchet() {
+        
+        let note = Note(value: .init(division: 4, dots: .doubleDotted), pitch: .a3)
+        describer.symbolDescription(forNote: note)
+            .verify(hasStem: true)
+            .verify(headStyle: .filled)
+            .verify(numberOfDotSymbols: 2)
     }
 }
