@@ -79,7 +79,6 @@ struct Beam: Equatable {
         case cutOffRight
     }
     
-    let index: Int
     let style: BeamStyle
 }
 

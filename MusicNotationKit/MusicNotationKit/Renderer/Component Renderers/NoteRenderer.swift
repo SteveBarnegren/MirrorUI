@@ -215,17 +215,17 @@ class NoteRenderer {
             
             // Draw beam connections from the previous note
             if let previousNote = previousNote {
-                for beam in previousNote.symbolDescription.beams where beam.style == .connectedToNext {
-                    notePaths.append(makeBeamPath(fromNote: previousNote, toNote: note, beamYPosition: beamY, beamIndex: beam.index))
+                for (index, beam) in previousNote.symbolDescription.beams.enumerated() where beam.style == .connectedToNext {
+                    notePaths.append(makeBeamPath(fromNote: previousNote, toNote: note, beamYPosition: beamY, beamIndex: index))
                 }
             }
             
             // Draw cutoff beam connections
-            for beam in note.symbolDescription.beams where beam.style == .cutOffLeft {
-                notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beam.index, rightSide: false))
+            for (index, beam) in note.symbolDescription.beams.enumerated() where beam.style == .cutOffLeft {
+                notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: index, rightSide: false))
             }
-            for beam in note.symbolDescription.beams where beam.style == .cutOffRight {
-                notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beam.index, rightSide: true))
+            for (index, beam) in note.symbolDescription.beams.enumerated() where beam.style == .cutOffRight {
+                notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: index, rightSide: true))
             }
             
             paths += notePaths

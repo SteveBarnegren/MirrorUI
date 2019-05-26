@@ -69,7 +69,7 @@ class NoteBeamDescriber<T> {
             if let next = noteCluster[maybe: index+1] {
                 numberOfForwardBeams = min(beaming.numberOfBeams(item), beaming.numberOfBeams(next))
             }
-            var noteBeams: [Beam] = (0..<numberOfForwardBeams).map { Beam(index: $0, style: .connectedToNext) }
+            var noteBeams: [Beam] = (0..<numberOfForwardBeams).map { _ in Beam(style: .connectedToNext) }
             
             // Remove accounted for beams by forward or backward connections
             beamsLeft -= max(lastNumberOfForwardConnections, numberOfForwardBeams)
@@ -77,7 +77,7 @@ class NoteBeamDescriber<T> {
             // Add remaining beams as cut-offs
             while beamsLeft > 0 {
                 let beamStyle: Beam.BeamStyle = (index == noteCluster.count - 1) ? .cutOffLeft : .cutOffRight
-                let beam = Beam(index: beaming.numberOfBeams(item) - beamsLeft, style: beamStyle)
+                let beam = Beam(style: beamStyle)
                 noteBeams.append(beam)
                 beamsLeft -= 1
             }

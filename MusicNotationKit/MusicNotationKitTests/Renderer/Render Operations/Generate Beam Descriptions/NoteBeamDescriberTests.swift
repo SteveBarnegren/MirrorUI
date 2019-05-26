@@ -48,7 +48,7 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .zero, numberOfBeams: 1),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [Beam(index: 0, style: .cutOffLeft)])
+        notes[0].verify(beams: [Beam(style: .cutOffLeft)])
     }
     
     func test_TwoQuaversAreBeamed() {
@@ -58,7 +58,7 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .init(quavers: 1), numberOfBeams: 1),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [Beam(index: 0, style: .connectedToNext)])
+        notes[0].verify(beams: [Beam(style: .connectedToNext)])
         notes[1].verify(beams: [])
     }
     
@@ -70,9 +70,9 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .init(quavers: 2), numberOfBeams: 1),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [Beam(index: 0, style: .connectedToNext)])
+        notes[0].verify(beams: [Beam(style: .connectedToNext)])
         notes[1].verify(beams: [])
-        notes[2].verify(beams: [Beam(index: 0, style: .cutOffLeft)])
+        notes[2].verify(beams: [Beam(style: .cutOffLeft)])
     }
     
     func test_FourQuaversAreBeamedInGroupsOfTwo() {
@@ -84,9 +84,9 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .init(quavers: 3), numberOfBeams: 1),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [Beam(index: 0, style: .connectedToNext)])
+        notes[0].verify(beams: [Beam(style: .connectedToNext)])
         notes[1].verify(beams: [])
-        notes[2].verify(beams: [Beam(index: 0, style: .connectedToNext)])
+        notes[2].verify(beams: [Beam(style: .connectedToNext)])
         notes[3].verify(beams: [])
     }
     
@@ -101,9 +101,9 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .init(semiquavers: 3), numberOfBeams: 2),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [Beam(index: 0, style: .connectedToNext), Beam(index: 0, style: .connectedToNext)])
-        notes[1].verify(beams: [Beam(index: 0, style: .connectedToNext), Beam(index: 0, style: .connectedToNext)])
-        notes[2].verify(beams: [Beam(index: 0, style: .connectedToNext), Beam(index: 0, style: .connectedToNext)])
+        notes[0].verify(beams: [Beam(style: .connectedToNext), Beam(style: .connectedToNext)])
+        notes[1].verify(beams: [Beam(style: .connectedToNext), Beam(style: .connectedToNext)])
+        notes[2].verify(beams: [Beam(style: .connectedToNext), Beam(style: .connectedToNext)])
         notes[3].verify(beams: [])
     }
 }
