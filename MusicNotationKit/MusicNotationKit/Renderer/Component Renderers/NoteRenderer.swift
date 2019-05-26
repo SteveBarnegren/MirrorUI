@@ -215,16 +215,16 @@ class NoteRenderer {
             
             // Draw beam connections from the previous note
             if let previousNote = previousNote {
-                for (index, beam) in previousNote.symbolDescription.beams.enumerated() where beam.style == .connectedToNext {
+                for (index, beam) in previousNote.symbolDescription.beams.enumerated() where beam == .connectedToNext {
                     notePaths.append(makeBeamPath(fromNote: previousNote, toNote: note, beamYPosition: beamY, beamIndex: index))
                 }
             }
             
             // Draw cutoff beam connections
-            for (index, beam) in note.symbolDescription.beams.enumerated() where beam.style == .cutOffLeft {
+            for (index, beam) in note.symbolDescription.beams.enumerated() where beam == .cutOffLeft {
                 notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: index, rightSide: false))
             }
-            for (index, beam) in note.symbolDescription.beams.enumerated() where beam.style == .cutOffRight {
+            for (index, beam) in note.symbolDescription.beams.enumerated() where beam == .cutOffRight {
                 notePaths.append(makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: index, rightSide: true))
             }
             

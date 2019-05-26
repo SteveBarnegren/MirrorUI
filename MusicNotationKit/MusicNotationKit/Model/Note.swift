@@ -62,7 +62,7 @@ public class Note: Playable {
         var num = 0
         
         for beam in self.beams {
-            if beam.style == .connectedToNext {
+            if beam == .connectedToNext {
                 num += 1
             }
         }
@@ -71,15 +71,10 @@ public class Note: Playable {
     }
 }
 
-struct Beam: Equatable {
-    
-    enum BeamStyle {
-        case connectedToNext
-        case cutOffLeft
-        case cutOffRight
-    }
-    
-    let style: BeamStyle
+enum Beam {
+    case connectedToNext
+    case cutOffLeft
+    case cutOffRight
 }
 
 class NoteSymbolDescription {

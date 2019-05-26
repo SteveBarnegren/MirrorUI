@@ -34,7 +34,7 @@ extension Array where Element == Beam {
         var num = 0
         
         for beam in self {
-            if beam.style == .connectedToNext {
+            if beam == .connectedToNext {
                 num += 1
             }
         }
@@ -69,22 +69,20 @@ class NoteBeamDescriber<T> {
             if let next = noteCluster[maybe: index+1] {
                 numberOfForwardBeams = min(beaming.numberOfBeams(item), beaming.numberOfBeams(next))
             }
-            var noteBeams: [Beam] = (0..<numberOfForwardBeams).map { _ in Beam(style: .connectedToNext) }
+            var noteBeams: [Beam] = (0..<numberOfForwardBeams).map { _ in Beam.connectedToNext }
             
             // Remove accounted for beams by forward or backward connections
             beamsLeft -= max(lastNumberOfForwardConnections, numberOfForwardBeams)
 
             // Add remaining beams as cut-offs
             while beamsLeft > 0 {
-                let beamStyle: Beam.BeamStyle = (index == noteCluster.count - 1) ? .cutOffLeft : .cutOffRight
-                let beam = Beam(style: beamStyle)
+                let beam: Beam = (index == noteCluster.count - 1) ? .cutOffLeft : .cutOffRight
                 noteBeams.append(beam)
                 beamsLeft -= 1
             }
 
             beaming.setBeams(item, noteBeams)
             lastNumberOfForwardConnections = noteBeams.numberOfForwardBeamConnections
-            
         }
     }
 }
