@@ -23,36 +23,25 @@ class NoteRenderer {
         var noteCluster = [Note]()
         
         func renderNoteCluster() {
-            
-            guard noteCluster.isEmpty == false else {
-                return
-            }
-            
+            guard noteCluster.isEmpty == false else { return }
             paths += makePaths(forNoteCluster: noteCluster)
             noteCluster.removeAll()
         }
         
-        var lastNoteWasConnected = false
+        func isNoteLastInCluster(_ note: Note) -> Bool {
+            return !note.beams.contains { $0 == .connectedNext || $0 == .connectedBoth }
+        }
+        
         for note in notes {
-            // Is is the first note of the cluster?
-            if note.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == false {
+            if note.beams.isEmpty {
                 renderNoteCluster()
-                noteCluster.append(note)
-            }
-                // Is it the middle of the cluster?
-            else if note.numberOfForwardBeamConnections > 0 && lastNoteWasConnected == true {
-                noteCluster.append(note)
-            }
-                // Is the end of the cluster?
-            else if note.numberOfForwardBeamConnections == 0 && lastNoteWasConnected == true {
-                noteCluster.append(note)
-                renderNoteCluster()
-            }
-                // Otherwise it's an unconnected note
-            else {
                 paths += makePaths(forNote: note)
+            } else {
+                noteCluster.append(note)
+                if isNoteLastInCluster(note) {
+                    renderNoteCluster()
+                }
             }
-            lastNoteWasConnected = note.numberOfForwardBeamConnections > 0
         }
         renderNoteCluster()
         
@@ -204,6 +193,50 @@ class NoteRenderer {
         // Work out the beam height
         let beamY = notes.map { $0.position.y }.max().orZero() + preferredStemHeight
         
+        // Draw notes with stems
+        for note in notes {
+            paths.append(maybe: makeHeadPath(forNote: note))
+            paths.append(maybe: makeStemPath(forNote: note, to: beamY))
+        }
+        
+        // Draw beams
+        let maxBeams = notes.map { $0.beams.count }.max() ?? 0
+        var beamStartNotes = Array<Note?>(repeating: nil, count: maxBeams)
+        
+        for note in notes {
+            for (beamIndex, beam) in note.beams.enumerated() {
+                switch beam {
+                case .connectedNext:
+                    beamStartNotes[beamIndex] = note
+                case .connectedPrevious:
+                    if let startNote = beamStartNotes[beamIndex] {
+                        let path = makeBeamPath(fromNote: startNote, toNote: note, beamYPosition: beamY, beamIndex: beamIndex)
+                        paths.append(path)
+                    }
+                    beamStartNotes[beamIndex] = nil
+                case .connectedBoth:
+                    break
+                case .cutOffLeft:
+                    let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: false)
+                    paths.append(path)
+                case .cutOffRight:
+                    let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: true)
+                    paths.append(path)
+                }
+            }
+        }
+        
+        return paths
+    }
+    
+    /*
+    private func makePaths(forNoteCluster notes: [Note]) -> [Path] {
+        
+        var paths = [Path]()
+        
+        // Work out the beam height
+        let beamY = notes.map { $0.position.y }.max().orZero() + preferredStemHeight
+        
         var previousNote: Note?
         
         // Draw notes with stems
@@ -215,7 +248,7 @@ class NoteRenderer {
             
             // Draw beam connections from the previous note
             if let previousNote = previousNote {
-                for (index, beam) in previousNote.symbolDescription.beams.enumerated() where beam == .connectedToNext {
+                for (index, beam) in previousNote.symbolDescription.beams.enumerated() where beam == .connectedNext {
                     notePaths.append(makeBeamPath(fromNote: previousNote, toNote: note, beamYPosition: beamY, beamIndex: index))
                 }
             }
@@ -235,6 +268,7 @@ class NoteRenderer {
         
         return paths
     }
+    */
     
     private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
         

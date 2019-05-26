@@ -50,10 +50,24 @@ class ViewController: UIViewController {
         
         let composition = Composition()
         
+        //composition.add(bar: makeBar())
         composition.add(bar: makeFirstBar())
         composition.add(bar: makeSecondBar())
 
         return composition
+    }
+    
+    func makeBar() -> Bar {
+        let sequenceOne = NoteSequence()
+        
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .f3))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .f3))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .f3))
+        
+        let bar = Bar()
+        bar.add(sequence: sequenceOne)
+        
+        return bar
     }
     
     func makeFirstBar() -> Bar {

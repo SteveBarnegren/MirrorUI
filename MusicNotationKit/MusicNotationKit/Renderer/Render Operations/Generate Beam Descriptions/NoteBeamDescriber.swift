@@ -34,7 +34,7 @@ extension Array where Element == Beam {
         var num = 0
         
         for beam in self {
-            if beam == .connectedToNext {
+            if beam == .connectedNext {
                 num += 1
             }
         }
@@ -56,33 +56,41 @@ class NoteBeamDescriber<T> {
         let notesByBeat = notes.chunked(atChangeTo: { beaming.time($0).convertedTruncating(toDivision: 4).value })
         notesByBeat.forEach { applyBeams(toNoteCluster: $0) }
     }
-    
+
     private func applyBeams(toNoteCluster noteCluster: [T]) {
         
-        var lastNumberOfForwardConnections = 0
+        // Don't apply beams to a single note
+        if noteCluster.count == 1 {
+            return
+        }
         
-        for (index, item) in noteCluster.enumerated() {
-            var beamsLeft = beaming.numberOfBeams(item) 
+        var prevNumberOfBeams = 0
+        
+        for (noteIndex, item) in noteCluster.enumerated() {
+            let numberOfBeams = beaming.numberOfBeams(item)
             
-            // forward beam connections
-            var numberOfForwardBeams = 0
-            if let next = noteCluster[maybe: index+1] {
-                numberOfForwardBeams = min(beaming.numberOfBeams(item), beaming.numberOfBeams(next))
+            var nextNumberOfBeams = Int(0)
+            if let next = noteCluster[maybe: noteIndex+1] {
+                nextNumberOfBeams = beaming.numberOfBeams(next)
             }
-            var noteBeams: [Beam] = (0..<numberOfForwardBeams).map { _ in Beam.connectedToNext }
             
-            // Remove accounted for beams by forward or backward connections
-            beamsLeft -= max(lastNumberOfForwardConnections, numberOfForwardBeams)
-
-            // Add remaining beams as cut-offs
-            while beamsLeft > 0 {
-                let beam: Beam = (index == noteCluster.count - 1) ? .cutOffLeft : .cutOffRight
-                noteBeams.append(beam)
-                beamsLeft -= 1
+            var beams = [Beam]()
+            for beamIndex in 0..<numberOfBeams {
+                if beamIndex < prevNumberOfBeams && beamIndex < nextNumberOfBeams {
+                    beams.append(.connectedBoth)
+                } else if beamIndex < prevNumberOfBeams {
+                    beams.append(.connectedPrevious)
+                } else if beamIndex < nextNumberOfBeams {
+                    beams.append(.connectedNext)
+                } else if noteIndex == noteCluster.count-1 {
+                    beams.append(.cutOffLeft)
+                } else {
+                    beams.append(.cutOffRight)
+                }
             }
-
-            beaming.setBeams(item, noteBeams)
-            lastNumberOfForwardConnections = noteBeams.numberOfForwardBeamConnections
+            
+            beaming.setBeams(item, beams)
+            prevNumberOfBeams = numberOfBeams
         }
     }
 }

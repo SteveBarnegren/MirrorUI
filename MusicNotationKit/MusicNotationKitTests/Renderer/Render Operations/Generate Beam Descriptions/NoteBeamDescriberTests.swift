@@ -48,7 +48,7 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .zero, numberOfBeams: 1),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [.cutOffLeft])
+        notes[0].verify(beams: [])
     }
     
     func test_TwoQuaversAreBeamed() {
@@ -58,8 +58,8 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .init(quavers: 1), numberOfBeams: 1),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [.connectedToNext])
-        notes[1].verify(beams: [])
+        notes[0].verify(beams: [.connectedNext])
+        notes[1].verify(beams: [.connectedPrevious])
     }
     
     func test_ThreeQuaversAreBeamedCorrectly() {
@@ -70,9 +70,9 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .init(quavers: 2), numberOfBeams: 1),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [.connectedToNext])
-        notes[1].verify(beams: [])
-        notes[2].verify(beams: [.cutOffLeft])
+        notes[0].verify(beams: [.connectedNext])
+        notes[1].verify(beams: [.connectedPrevious])
+        notes[2].verify(beams: [])
     }
     
     func test_FourQuaversAreBeamedInGroupsOfTwo() {
@@ -84,10 +84,10 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .init(quavers: 3), numberOfBeams: 1),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [.connectedToNext])
-        notes[1].verify(beams: [])
-        notes[2].verify(beams: [.connectedToNext])
-        notes[3].verify(beams: [])
+        notes[0].verify(beams: [.connectedNext])
+        notes[1].verify(beams: [.connectedPrevious])
+        notes[2].verify(beams: [.connectedNext])
+        notes[3].verify(beams: [.connectedPrevious])
     }
     
     // MARK: - Semiquavers
@@ -101,11 +101,54 @@ class NoteBeamDescriberTests: XCTestCase {
             Note(time: .init(semiquavers: 3), numberOfBeams: 2),
         ]
         beamDescriber.applyBeams(to: notes)
-        notes[0].verify(beams: [.connectedToNext, .connectedToNext])
-        notes[1].verify(beams: [.connectedToNext, .connectedToNext])
-        notes[2].verify(beams: [.connectedToNext, .connectedToNext])
-        notes[3].verify(beams: [])
+        notes[0].verify(beams: [.connectedNext, .connectedNext])
+        notes[1].verify(beams: [.connectedBoth, .connectedBoth])
+        notes[2].verify(beams: [.connectedBoth, .connectedBoth])
+        notes[3].verify(beams: [.connectedPrevious, .connectedPrevious])
     }
+    
+    // MARK: - Quaver / SemiQuaver groupings
+    
+    func test_8th_16th_16th() {
+        
+        let notes = [
+            Note(time: .init(semiquavers: 0), numberOfBeams: 1), // 8th
+            Note(time: .init(semiquavers: 2), numberOfBeams: 2), // 16th
+            Note(time: .init(semiquavers: 3), numberOfBeams: 2)  // 16th
+        ]
+        beamDescriber.applyBeams(to: notes)
+        notes[0].verify(beams: [.connectedNext])
+        notes[1].verify(beams: [.connectedBoth, .connectedNext])
+        notes[2].verify(beams: [.connectedPrevious, .connectedPrevious])
+    }
+    
+    func test_16th_8th_16th() {
+        
+        let notes = [
+            Note(time: .init(semiquavers: 0), numberOfBeams: 2), // 16th
+            Note(time: .init(semiquavers: 1), numberOfBeams: 1), // 8th
+            Note(time: .init(semiquavers: 3), numberOfBeams: 2)  // 16th
+        ]
+        beamDescriber.applyBeams(to: notes)
+        notes[0].verify(beams: [.connectedNext, .cutOffRight])
+        notes[1].verify(beams: [.connectedBoth])
+        notes[2].verify(beams: [.connectedPrevious, .cutOffLeft])
+    }
+    
+    func test_16th_16th_8th() {
+        
+        let notes = [
+            Note(time: .init(semiquavers: 0), numberOfBeams: 2), // 16th
+            Note(time: .init(semiquavers: 1), numberOfBeams: 2), // 16th
+            Note(time: .init(semiquavers: 2), numberOfBeams: 1)  // 8th
+        ]
+        beamDescriber.applyBeams(to: notes)
+        notes[0].verify(beams: [.connectedNext, .connectedNext])
+        notes[1].verify(beams: [.connectedBoth, .connectedPrevious])
+        notes[2].verify(beams: [.connectedPrevious])
+    }
+    
+    
 }
 
 // MARK: - Test Type

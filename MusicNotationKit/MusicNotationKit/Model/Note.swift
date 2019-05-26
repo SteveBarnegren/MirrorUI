@@ -62,7 +62,7 @@ public class Note: Playable {
         var num = 0
         
         for beam in self.beams {
-            if beam == .connectedToNext {
+            if beam == .connectedNext {
                 num += 1
             }
         }
@@ -72,7 +72,9 @@ public class Note: Playable {
 }
 
 enum Beam {
-    case connectedToNext
+    case connectedNext
+    case connectedPrevious
+    case connectedBoth
     case cutOffLeft
     case cutOffRight
 }
