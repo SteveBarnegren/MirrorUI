@@ -25,7 +25,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .semibreve)
             .verify(hasStem: false)
-            .verify(numberOfBeams: 0)
+            .verify(numberOfTails: 0)
     }
     
     func test_SymbolDescriptionForMinim() {
@@ -34,7 +34,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .open)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 0)
+            .verify(numberOfTails: 0)
     }
     
     func test_SymbolDescriptionForCrotchet() {
@@ -43,7 +43,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .filled)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 0)
+            .verify(numberOfTails: 0)
     }
     
     func test_SymbolDescriptionForQuaver() {
@@ -52,7 +52,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .filled)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 1)
+            .verify(numberOfTails: 1)
     }
     
     func test_SymbolDescriptionForSemiquaver() {
@@ -61,7 +61,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .filled)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 2)
+            .verify(numberOfTails: 2)
     }
     
     func test_SymbolDescriptionForDemiSemiquaver() {
@@ -70,7 +70,7 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(headStyle: .filled)
             .verify(hasStem: true)
-            .verify(numberOfBeams: 3)
+            .verify(numberOfTails: 3)
     }
     
     // MARK: - Dotted Notes

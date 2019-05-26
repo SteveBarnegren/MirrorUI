@@ -12,8 +12,7 @@ struct Beaming<T> {
     
     // Inputs
     var time: (T) -> Time
-    var numberOfBeams: (T) -> Int
-    var beams: (T) -> [Beam]
+    var numberOfTails: (T) -> Int
     
     // Outputs
     var setBeams: (T, [Beam]) -> Void
@@ -23,23 +22,8 @@ extension Beaming where T == Note {
     
     static var notes: Beaming<Note> {
         return Beaming(time: { return $0.time },
-                       numberOfBeams: { return $0.numberOfBeams  },
-                       beams: { return $0.beams },
+                       numberOfTails: { return $0.symbolDescription.numberOfTails },
                        setBeams: { note, beams in note.beams = beams})
-    }
-}
-
-extension Array where Element == Beam {
-    var numberOfForwardBeamConnections: Int {
-        var num = 0
-        
-        for beam in self {
-            if beam == .connectedNext {
-                num += 1
-            }
-        }
-        
-        return num
     }
 }
 
@@ -67,11 +51,11 @@ class NoteBeamDescriber<T> {
         var prevNumberOfBeams = 0
         
         for (noteIndex, item) in noteCluster.enumerated() {
-            let numberOfBeams = beaming.numberOfBeams(item)
+            let numberOfBeams = beaming.numberOfTails(item)
             
             var nextNumberOfBeams = Int(0)
             if let next = noteCluster[maybe: noteIndex+1] {
-                nextNumberOfBeams = beaming.numberOfBeams(next)
+                nextNumberOfBeams = beaming.numberOfTails(next)
             }
             
             var beams = [Beam]()

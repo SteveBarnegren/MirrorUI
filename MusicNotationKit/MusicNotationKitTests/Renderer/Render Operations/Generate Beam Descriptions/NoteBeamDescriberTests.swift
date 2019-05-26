@@ -17,8 +17,7 @@ class NoteBeamDescriberTests: XCTestCase {
         super.setUp()
         
         let beaming = Beaming<Note>(time: { $0.time },
-                                    numberOfBeams: { $0.numberOfBeams },
-                                    beams: { $0.beams },
+                                    numberOfTails: { $0.numberOfTails },
                                     setBeams: { note, beams in note.beams = beams})
         self.beamDescriber = NoteBeamDescriber(beaming: beaming)
     }
@@ -28,10 +27,10 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_FourCrotchetsHaveNoBeams() {
         
         let notes = [
-            Note(time: .zero, numberOfBeams: 0),
-            Note(time: .init(crotchets: 1), numberOfBeams: 0),
-            Note(time: .init(crotchets: 2), numberOfBeams: 0),
-            Note(time: .init(crotchets: 3), numberOfBeams: 0)
+            Note(time: .zero, numberOfTails: 0),
+            Note(time: .init(crotchets: 1), numberOfTails: 0),
+            Note(time: .init(crotchets: 2), numberOfTails: 0),
+            Note(time: .init(crotchets: 3), numberOfTails: 0)
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [])
@@ -45,7 +44,7 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_OneQuaverIsNotBeamed() {
         
         let notes = [
-            Note(time: .zero, numberOfBeams: 1),
+            Note(time: .zero, numberOfTails: 1),
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [])
@@ -54,8 +53,8 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_TwoQuaversAreBeamed() {
         
         let notes = [
-            Note(time: .zero, numberOfBeams: 1),
-            Note(time: .init(quavers: 1), numberOfBeams: 1),
+            Note(time: .zero, numberOfTails: 1),
+            Note(time: .init(quavers: 1), numberOfTails: 1),
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [.connectedNext])
@@ -65,9 +64,9 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_ThreeQuaversAreBeamedCorrectly() {
         
         let notes = [
-            Note(time: .zero, numberOfBeams: 1),
-            Note(time: .init(quavers: 1), numberOfBeams: 1),
-            Note(time: .init(quavers: 2), numberOfBeams: 1),
+            Note(time: .zero, numberOfTails: 1),
+            Note(time: .init(quavers: 1), numberOfTails: 1),
+            Note(time: .init(quavers: 2), numberOfTails: 1),
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [.connectedNext])
@@ -78,10 +77,10 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_FourQuaversAreBeamedInGroupsOfTwo() {
         
         let notes = [
-            Note(time: .zero, numberOfBeams: 1),
-            Note(time: .init(quavers: 1), numberOfBeams: 1),
-            Note(time: .init(quavers: 2), numberOfBeams: 1),
-            Note(time: .init(quavers: 3), numberOfBeams: 1),
+            Note(time: .zero, numberOfTails: 1),
+            Note(time: .init(quavers: 1), numberOfTails: 1),
+            Note(time: .init(quavers: 2), numberOfTails: 1),
+            Note(time: .init(quavers: 3), numberOfTails: 1),
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [.connectedNext])
@@ -95,10 +94,10 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_FourSemiQuaversAreBeamed() {
         
         let notes = [
-            Note(time: .zero, numberOfBeams: 2),
-            Note(time: .init(semiquavers: 1), numberOfBeams: 2),
-            Note(time: .init(semiquavers: 2), numberOfBeams: 2),
-            Note(time: .init(semiquavers: 3), numberOfBeams: 2),
+            Note(time: .zero, numberOfTails: 2),
+            Note(time: .init(semiquavers: 1), numberOfTails: 2),
+            Note(time: .init(semiquavers: 2), numberOfTails: 2),
+            Note(time: .init(semiquavers: 3), numberOfTails: 2),
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [.connectedNext, .connectedNext])
@@ -112,9 +111,9 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_8th_16th_16th() {
         
         let notes = [
-            Note(time: .init(semiquavers: 0), numberOfBeams: 1), // 8th
-            Note(time: .init(semiquavers: 2), numberOfBeams: 2), // 16th
-            Note(time: .init(semiquavers: 3), numberOfBeams: 2)  // 16th
+            Note(time: .init(semiquavers: 0), numberOfTails: 1), // 8th
+            Note(time: .init(semiquavers: 2), numberOfTails: 2), // 16th
+            Note(time: .init(semiquavers: 3), numberOfTails: 2)  // 16th
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [.connectedNext])
@@ -125,9 +124,9 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_16th_8th_16th() {
         
         let notes = [
-            Note(time: .init(semiquavers: 0), numberOfBeams: 2), // 16th
-            Note(time: .init(semiquavers: 1), numberOfBeams: 1), // 8th
-            Note(time: .init(semiquavers: 3), numberOfBeams: 2)  // 16th
+            Note(time: .init(semiquavers: 0), numberOfTails: 2), // 16th
+            Note(time: .init(semiquavers: 1), numberOfTails: 1), // 8th
+            Note(time: .init(semiquavers: 3), numberOfTails: 2)  // 16th
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [.connectedNext, .cutOffRight])
@@ -138,9 +137,9 @@ class NoteBeamDescriberTests: XCTestCase {
     func test_16th_16th_8th() {
         
         let notes = [
-            Note(time: .init(semiquavers: 0), numberOfBeams: 2), // 16th
-            Note(time: .init(semiquavers: 1), numberOfBeams: 2), // 16th
-            Note(time: .init(semiquavers: 2), numberOfBeams: 1)  // 8th
+            Note(time: .init(semiquavers: 0), numberOfTails: 2), // 16th
+            Note(time: .init(semiquavers: 1), numberOfTails: 2), // 16th
+            Note(time: .init(semiquavers: 2), numberOfTails: 1)  // 8th
         ]
         beamDescriber.applyBeams(to: notes)
         notes[0].verify(beams: [.connectedNext, .connectedNext])
@@ -155,12 +154,12 @@ class NoteBeamDescriberTests: XCTestCase {
 
 fileprivate class Note {
     var time: Time
-    var numberOfBeams: Int
+    var numberOfTails: Int
     var beams = [Beam]()
     
-    init(time: Time, numberOfBeams: Int) {
+    init(time: Time, numberOfTails: Int) {
         self.time = time
-        self.numberOfBeams = numberOfBeams
+        self.numberOfTails = numberOfTails
     }
 }
 

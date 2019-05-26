@@ -56,12 +56,12 @@ class NoteRenderer {
         paths.append(maybe: makeHeadPath(forNote: note))
         
         // Crotchet
-        if note.symbolDescription.numberOfBeams == 0 {
+        if note.symbolDescription.numberOfTails == 0 {
             paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + preferredStemHeight))
         }
         
         // Quaver
-        if note.symbolDescription.numberOfBeams == 1 {
+        if note.symbolDescription.numberOfTails == 1 {
             paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + preferredStemHeight))
 
             var noteTailPath = Path(commands: makeQuaverTailCommands()).translated(x: note.xPosition + stemXOffet, y: note.yPosition + 1.75)
@@ -70,16 +70,16 @@ class NoteRenderer {
         }
         
         // Semiquaver or faster
-        if note.symbolDescription.numberOfBeams >= 2 {
+        if note.symbolDescription.numberOfTails >= 2 {
             
             let bottomOffset = 2.2
             let eachTailYOffset = 0.5
-            let tailsHeight = eachTailYOffset * Double(note.symbolDescription.numberOfBeams)
+            let tailsHeight = eachTailYOffset * Double(note.symbolDescription.numberOfTails)
             let stemHeight = max(preferredStemHeight, tailsHeight + bottomOffset)
 
             paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + stemHeight))
             
-            for (tailNumber, isLast) in (0..<note.symbolDescription.numberOfBeams).enumeratedWithLastItemFlag() {
+            for (tailNumber, isLast) in (0..<note.symbolDescription.numberOfTails).enumeratedWithLastItemFlag() {
                 let yOffset = Double(tailNumber) * eachTailYOffset
                 let commands = isLast ? makeFastNoteBottomTailCommands() : makeFastNoteTailCommands()
                 var noteTailPath = Path(commands: commands).translated(x: note.xPosition + stemXOffet,

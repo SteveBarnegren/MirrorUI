@@ -22,8 +22,8 @@ extension NoteSymbolDescription {
         return self
     }
     
-    @discardableResult func verify(numberOfBeams: Int, file: StaticString = #file, line: UInt = #line) -> Self {
-        XCTAssertEqual(self.numberOfBeams, numberOfBeams, file: file, line: line)
+    @discardableResult func verify(numberOfTails: Int, file: StaticString = #file, line: UInt = #line) -> Self {
+        XCTAssertEqual(self.numberOfTails, numberOfTails, file: file, line: line)
         return self
     }
     

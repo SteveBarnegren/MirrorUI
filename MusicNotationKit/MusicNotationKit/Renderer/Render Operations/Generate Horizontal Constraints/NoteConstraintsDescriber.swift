@@ -28,12 +28,12 @@ class NoteConstraintsDescriber {
     private func trailingDistance(forNote note: Note) -> Double {
         
         // Isolated quaver
-        if note.symbolDescription.numberOfBeams == 1 && note.symbolDescription.beams.allSatisfy({ $0 == .cutOffRight }) {
+        if note.symbolDescription.numberOfTails == 1 && note.beams.allSatisfy({ $0 == .cutOffRight }) {
             return noteHeadWidth/2 + 0.8
         }
         
         // Isolated Semiquaver or faster
-        if note.symbolDescription.numberOfBeams >= 2 && note.symbolDescription.beams.allSatisfy({ $0 == .cutOffRight }) {
+        if note.symbolDescription.numberOfTails >= 2 && note.beams.allSatisfy({ $0 == .cutOffRight }) {
             return noteHeadWidth/2 + 0.9
         }
         

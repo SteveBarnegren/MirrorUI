@@ -42,32 +42,12 @@ public class Note: Playable {
     // Positionable
     var position = Point.zero
     
-    // Beamable
-    var numberOfBeams: Int {
-        return symbolDescription.numberOfBeams
-    }
-    
-    var beams: [Beam] {
-        get { return symbolDescription.beams }
-        set { symbolDescription.beams = newValue }
-    }
+    var beams = [Beam]()
     
     // MARK: - Init
     public init(value: NoteValue, pitch: Pitch) {
         self.value = value
         self.pitch = pitch
-    }
-    
-    var numberOfForwardBeamConnections: Int {
-        var num = 0
-        
-        for beam in self.beams {
-            if beam == .connectedNext {
-                num += 1
-            }
-        }
-        
-        return num
     }
 }
 
@@ -90,19 +70,16 @@ class NoteSymbolDescription {
     
     let headStyle: HeadStyle
     let hasStem: Bool
+    let numberOfTails: Int
     var trailingLayoutItems = [HorizontalLayoutItem]()
     
-    // Beamable
-    let numberOfBeams: Int
-    var beams = [Beam]()
-    
-    init(headStyle: HeadStyle, hasStem: Bool, numberOfBeams: Int) {
+    init(headStyle: HeadStyle, hasStem: Bool, numberOfTails: Int) {
         self.headStyle = headStyle
         self.hasStem = hasStem
-        self.numberOfBeams = numberOfBeams
+        self.numberOfTails = numberOfTails
     }
     
     static var standard: NoteSymbolDescription {
-        return NoteSymbolDescription(headStyle: .none, hasStem: false, numberOfBeams: 0)
+        return NoteSymbolDescription(headStyle: .none, hasStem: false, numberOfTails: 0)
     }
 }
