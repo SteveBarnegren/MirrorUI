@@ -8,17 +8,32 @@
 
 import Foundation
 
-protocol Beamable: class {
-    var time: Time { get }
-    var numberOfBeams: Int { get }
-    var beams: [Beam] { get set }
+struct Beaming<T> {
+    
+    // Inputs
+    var time: (T) -> Time
+    var numberOfBeams: (T) -> Int
+    var beams: (T) -> [Beam]
+    
+    // Outputs
+    var setBeams: (T, [Beam]) -> Void
 }
 
-extension Beamable {
+extension Beaming where T == Note {
+    
+    static var notes: Beaming<Note> {
+        return Beaming(time: { return $0.time },
+                       numberOfBeams: { return $0.numberOfBeams  },
+                       beams: { return $0.beams },
+                       setBeams: { note, beams in note.beams = beams})
+    }
+}
+
+extension Array where Element == Beam {
     var numberOfForwardBeamConnections: Int {
         var num = 0
         
-        for beam in beams {
+        for beam in self {
             if beam.style == .connectedToNext {
                 num += 1
             }
@@ -28,41 +43,47 @@ extension Beamable {
     }
 }
 
-class NoteBeamDescriber {
+class NoteBeamDescriber<T> {
     
-    func applyBeams(to notes: [Beamable]) {
+    let beaming: Beaming<T>
+    
+    init(beaming: Beaming<T>) {
+        self.beaming = beaming
+    }
+    
+    func applyBeams(to notes: [T]) {
         
-        let notesByBeat = notes.chunked(atChangeTo: { $0.time.convertedTruncating(toDivision: 4).value })
+        let notesByBeat = notes.chunked(atChangeTo: { beaming.time($0).convertedTruncating(toDivision: 4).value })
         notesByBeat.forEach { applyBeams(toNoteCluster: $0) }
     }
     
-    private func applyBeams(toNoteCluster noteCluster: [Beamable]) {
+    private func applyBeams(toNoteCluster noteCluster: [T]) {
         
         var lastNumberOfForwardConnections = 0
         
         for (index, item) in noteCluster.enumerated() {
-            var beamsLeft = item.numberOfBeams
+            var beamsLeft = beaming.numberOfBeams(item) 
             
             // forward beam connections
             var numberOfForwardBeams = 0
             if let next = noteCluster[maybe: index+1] {
-                numberOfForwardBeams = min(item.numberOfBeams, item.numberOfBeams)
+                numberOfForwardBeams = min(beaming.numberOfBeams(item), beaming.numberOfBeams(next))
             }
-            
-            item.beams = (0..<numberOfForwardBeams).map { Beam(index: $0, style: .connectedToNext) }
+            var noteBeams: [Beam] = (0..<numberOfForwardBeams).map { Beam(index: $0, style: .connectedToNext) }
             
             // Remove accounted for beams by forward or backward connections
             beamsLeft -= max(lastNumberOfForwardConnections, numberOfForwardBeams)
-            
+
             // Add remaining beams as cut-offs
             while beamsLeft > 0 {
                 let beamStyle: Beam.BeamStyle = (index == noteCluster.count - 1) ? .cutOffLeft : .cutOffRight
-                let beam = Beam(index: item.numberOfBeams - beamsLeft, style: beamStyle)
-                item.beams.append(beam)
+                let beam = Beam(index: beaming.numberOfBeams(item) - beamsLeft, style: beamStyle)
+                noteBeams.append(beam)
                 beamsLeft -= 1
             }
-            
-            lastNumberOfForwardConnections = item.numberOfForwardBeamConnections
+
+            beaming.setBeams(item, noteBeams)
+            lastNumberOfForwardConnections = noteBeams.numberOfForwardBeamConnections
             
         }
     }

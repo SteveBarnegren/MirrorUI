@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Note: Playable, Beamable {
+public class Note: Playable {
     
     let pitch: Pitch
     var symbolDescription = NoteSymbolDescription.standard
@@ -57,9 +57,21 @@ public class Note: Playable, Beamable {
         self.value = value
         self.pitch = pitch
     }
+    
+    var numberOfForwardBeamConnections: Int {
+        var num = 0
+        
+        for beam in self.beams {
+            if beam.style == .connectedToNext {
+                num += 1
+            }
+        }
+        
+        return num
+    }
 }
 
-struct Beam {
+struct Beam: Equatable {
     
     enum BeamStyle {
         case connectedToNext
