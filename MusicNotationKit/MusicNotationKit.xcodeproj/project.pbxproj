@@ -55,6 +55,7 @@
 		67678E0221E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0121E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift */; };
 		67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0621E3E9CB00E7FD71 /* Positionable.swift */; };
 		67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */; };
+		6767E31D229EF5EE00E9964D /* ConstrainedDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6767E31C229EF5EE00E9964D /* ConstrainedDistance.swift */; };
 		677643F1228DED26000683FF /* HorizontalDistancesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */; };
 		677643F3228E0D18000683FF /* FreeFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677643F2228E0D18000683FF /* FreeFunctions.swift */; };
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
@@ -139,6 +140,7 @@
 		67678E0121E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumeratedWithLastItemFlagBidirectionalCollection.swift; sourceTree = "<group>"; };
 		67678E0621E3E9CB00E7FD71 /* Positionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positionable.swift; sourceTree = "<group>"; };
 		67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineRender.swift; sourceTree = "<group>"; };
+		6767E31C229EF5EE00E9964D /* ConstrainedDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstrainedDistance.swift; sourceTree = "<group>"; };
 		677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalDistancesGenerator.swift; sourceTree = "<group>"; };
 		677643F2228E0D18000683FF /* FreeFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFunctions.swift; sourceTree = "<group>"; };
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			children = (
 				674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */,
 				677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */,
+				6767E31C229EF5EE00E9964D /* ConstrainedDistance.swift */,
 				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
 			);
 			path = "Horizontal Positioner";
@@ -638,6 +641,7 @@
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
 				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
 				671A4D3722886C1E002C56E8 /* DotConstraintsDescriber.swift in Sources */,
+				6767E31D229EF5EE00E9964D /* ConstrainedDistance.swift in Sources */,
 				67494C8A21CD84520078A575 /* Pitch.swift in Sources */,
 				6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,

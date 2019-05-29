@@ -8,29 +8,7 @@
 
 import Foundation
 
-class ConstrainedDistance {
-    var toItem: HorizontalLayoutItem? = nil
-    var constraints = [HorizontalConstraint]()
-    var preferredPercent: Double?
-    var solvedDistance = Double(0)
-    var xPosition = Double(0)
-    var isSolved = false
-    var leadingDistances = [ConstrainedDistance]()
-    var leadingLayoutOffset = Double(0)
-    var trailingLayoutOffset = Double(0)
-    
-    func minimumDistance(atPriority priority: ConstraintPriority) -> Double {
-        if leadingDistances.isEmpty {
-            return constraints.map { $0.minimumDistance(atPriority: priority) }.sum()
-        } else {
-            return leadingLayoutOffset + leadingDistances.map { $0.minimumDistance(atPriority: priority) }.sum()
-        }
-        
-//        let constraintsDist = constraints.map { $0.minimumDistance(atPriority: priority) }.sum()
-//        let leadingDist = leadingDistances.map { $0.minimumDistance(atPriority: priority) }.sum()
-//        return constraintsDist + leadingDist
-    }
-}
+
 
 class HorizontalDistancesGenerator {
     

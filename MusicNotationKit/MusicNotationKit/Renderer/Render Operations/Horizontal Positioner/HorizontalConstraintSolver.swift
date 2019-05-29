@@ -12,7 +12,7 @@ class HorizontalConstraintSolver {
     
     func solve(_ distances: [ConstrainedDistance], layoutWidth: Double, offset: Double = 0) {
         
-        if minimumWidth(forDistances: distances, atPriority: .regular) <= layoutWidth {
+        if distances.minimumWidth(atPriority: .regular) <= layoutWidth {
             solveWithTiming(distances: distances, layoutWidth: layoutWidth)
         } else {
             solveWithFixedDistances(distances: distances, layoutWidth: layoutWidth)
@@ -44,13 +44,13 @@ class HorizontalConstraintSolver {
         
         // Work out the priority that we're solving for
         var priority = ConstraintPriority.regular
-        var width = minimumWidth(forDistances: distances, atPriority: ConstraintPriority.regular)
+        var width = distances.minimumWidth(atPriority: ConstraintPriority.regular)
         var previousPriorityWidth: Double? = nil
         var previousPriority: ConstraintPriority?
         
         for (p, isLast) in ConstraintPriority.allCasesIncreasing.enumeratedWithLastItemFlag() {
             priority = p
-            width = minimumWidth(forDistances: distances, atPriority: p)
+            width = distances.minimumWidth(atPriority: p)
             if width <= layoutWidth || isLast {
                 break
             }
@@ -112,10 +112,6 @@ class HorizontalConstraintSolver {
             xPos += distance.solvedDistance
             distance.xPosition = xPos
         }
-    }
-    
-    private func minimumWidth(forDistances distances: [ConstrainedDistance], atPriority priority: ConstraintPriority) -> Double {
-        return distances.map { $0.minimumDistance(atPriority: priority) }.sum()
     }
     
     func preferredWidth(forDistance distance: ConstrainedDistance,
