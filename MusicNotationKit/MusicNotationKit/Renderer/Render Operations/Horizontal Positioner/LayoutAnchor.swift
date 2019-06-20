@@ -19,6 +19,13 @@ class LayoutConstraint {
     weak var to: LayoutAnchor?
     var value = LayoutConstraintValue.greaterThan(0)
     var resolvedValue = Double(0)
+    
+    var minimumValue: Double {
+        switch self.value {
+        case .greaterThan(let v):
+            return v
+        }
+    }
 }
 
 class LayoutAnchor {
@@ -28,6 +35,7 @@ class LayoutAnchor {
     var trailingConstraints = [LayoutConstraint]()
     var resolvedPosition: Double = 0
     var item: HorizontallyPositionable
+    var minimumTrailingDistance = Double(0)
     
     init(item: HorizontallyPositionable) {
         self.item = item

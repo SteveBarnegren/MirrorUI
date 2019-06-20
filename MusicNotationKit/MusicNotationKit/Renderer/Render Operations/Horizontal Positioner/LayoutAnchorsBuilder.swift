@@ -27,7 +27,7 @@ class LayoutAnchorsBuilder {
                 let constraint = LayoutConstraint()
                 constraint.from = prevAnchor
                 constraint.to = anchor
-                constraint.value = .greaterThan(0.5)
+                constraint.value = .greaterThan(2)
                 prevAnchor.add(trailingConstraint: constraint)
                 anchor.add(leadingConstraint: constraint)
             }
