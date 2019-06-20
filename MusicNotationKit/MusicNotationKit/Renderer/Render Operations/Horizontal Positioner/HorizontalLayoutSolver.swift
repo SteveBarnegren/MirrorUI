@@ -13,7 +13,7 @@ class HorizontalLayoutSolver {
     func solve(anchors: [LayoutAnchor], layoutWidth: Double) {
         
         func applyAnchorPositions() {
-            anchors.forEach { $0.item.xPosition = $0.resolvedPosition }
+            anchors.forEach { $0.apply() }
         }
         
         solveMinimumDistances(anchors: anchors)

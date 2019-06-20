@@ -63,6 +63,7 @@
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
 		679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93522BC1AF300A22778 /* LayoutAnchor.swift */; };
+		679EB93922BC3AB800A22778 /* Array+Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93822BC3AB800A22778 /* Array+Chunked.swift */; };
 		67A15F9321C5129500C3C03F /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A15F8921C5129500C3C03F /* MusicNotationKit.framework */; };
 		67A15F9821C5129500C3C03F /* MusicNotationKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A15F9721C5129500C3C03F /* MusicNotationKitTests.swift */; };
 		67A15F9A21C5129500C3C03F /* MusicNotationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 67A15F8C21C5129500C3C03F /* MusicNotationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,6 +152,7 @@
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		679EB93522BC1AF300A22778 /* LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutAnchor.swift; sourceTree = "<group>"; };
+		679EB93822BC3AB800A22778 /* Array+Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunked.swift"; sourceTree = "<group>"; };
 		67A15F8921C5129500C3C03F /* MusicNotationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicNotationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A15F8C21C5129500C3C03F /* MusicNotationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicNotationKit.h; sourceTree = "<group>"; };
 		67A15F8D21C5129500C3C03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -278,9 +280,7 @@
 		6728B2CD22399C0800382D92 /* Swift Standard Library */ = {
 			isa = PBXGroup;
 			children = (
-				67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */,
-				67AE184321D9305700F3545D /* Array+Extensions.swift */,
-				67F6880521EA6E0C003707DD /* Array+Sorting.swift */,
+				679EB93722BC3AA400A22778 /* Array */,
 				67AE184521D9387900F3545D /* Optional+Extensions.swift */,
 				67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */,
 				67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */,
@@ -442,6 +442,17 @@
 				67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		679EB93722BC3AA400A22778 /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */,
+				67AE184321D9305700F3545D /* Array+Extensions.swift */,
+				67F6880521EA6E0C003707DD /* Array+Sorting.swift */,
+				679EB93822BC3AB800A22778 /* Array+Chunked.swift */,
+			);
+			path = Array;
 			sourceTree = "<group>";
 		};
 		67A15F7F21C5129500C3C03F = {
@@ -665,6 +676,7 @@
 				6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
 				674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */,
+				679EB93922BC3AB800A22778 /* Array+Chunked.swift in Sources */,
 				6767E322229F182E00E9964D /* LayoutAnchorsBuilder.swift in Sources */,
 				674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */,
 				67494C8021CC06740078A575 /* Vector2.swift in Sources */,

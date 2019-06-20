@@ -58,20 +58,28 @@ class ViewController: UIViewController {
     }
     
     func makeBasicBar() -> Bar {
-        let sequence = NoteSequence()
-        
-        sequence.add(note: Note(value: .quarter, pitch: .c4))
-        sequence.add(note: Note(value: .eighth, pitch: .c4))
-        sequence.add(note: Note(value: .eighth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-        sequence.add(note: Note(value: .eighth, pitch: .c4))
-        sequence.add(note: Note(value: .eighth, pitch: .c4))
         
         let bar = Bar()
-        bar.add(sequence: sequence)
+
+        let sequence1 = NoteSequence()
+        sequence1.add(note: Note(value: .quarter, pitch: .c4))
+        sequence1.add(note: Note(value: .eighth, pitch: .c4))
+        sequence1.add(note: Note(value: .eighth, pitch: .c4))
+        sequence1.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence1.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence1.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence1.add(note: Note(value: .sixteenth, pitch: .c4))
+        sequence1.add(note: Note(value: .eighth, pitch: .c4))
+        sequence1.add(note: Note(value: .eighth, pitch: .c4))
+        bar.add(sequence: sequence1)
+
+        let sequence2 = NoteSequence()
+        sequence2.add(note: Note(value: .eighth, pitch: .f3))
+        sequence2.add(note: Note(value: .eighth, pitch: .f3))
+        sequence2.add(note: Note(value: .quarter, pitch: .f3))
+        sequence2.add(note: Note(value: .quarter, pitch: .f3))
+        sequence2.add(note: Note(value: .quarter, pitch: .f3))
+        bar.add(sequence: sequence2)
         
         return bar
     }

@@ -11,16 +11,27 @@ import Foundation
 class LayoutAnchorsBuilder {
     
     func makeAnchors(from composition: Composition) -> [LayoutAnchor] {
+        
+        let firstBar = composition.bars[0]
+        
+        let anchorsForSequences = firstBar.sequences.map(self.anchors(forNoteSequence:)).joined().toArray()
+        let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
+        
+        return combinedAnchors
+    }
     
-        var anchors = [LayoutAnchor]()
+    private func anchors(forNoteSequence sequence: NoteSequence) -> [SingleItemLayoutAnchor] {
+        
+        var anchors = [SingleItemLayoutAnchor]()
         
         var previousNote: Note?
-        var previousAnchor: LayoutAnchor?
+        var previousAnchor: SingleItemLayoutAnchor?
         
-        for note in composition.bars.map({ $0.sequences }).joined().map({ $0.notes }).joined() {
+        for note in sequence.notes {
             
-            let anchor = LayoutAnchor(item: note)
+            let anchor = SingleItemLayoutAnchor(item: note)
             anchor.width = 1.4
+            anchor.time = note.time
             
             // Assign fixed constraint from the previous anchor
             if let prevAnchor = previousAnchor {
@@ -48,5 +59,28 @@ class LayoutAnchorsBuilder {
         }
         
         return anchors
+    }
+    
+    func sortAndCombine(anchors: [SingleItemLayoutAnchor]) -> [LayoutAnchor] {
+        
+        let chunkedAnchors = anchors
+            .sortedAscendingBy { $0.time }
+            .chunked(atChangeTo: { $0.time })
+        
+        var combinedAnchors = [LayoutAnchor]()
+        
+        for anchors in chunkedAnchors {
+            
+            if anchors.count == 1 {
+                combinedAnchors.append(anchors[0])
+            } else if anchors.count > 1 {
+                let combined = CombinedItemsLayoutAnchor(anchors: anchors)
+                combinedAnchors.append(combined)
+            } else {
+                fatalError("Should never happen")
+            }
+        }
+        
+        return combinedAnchors
     }
 }
