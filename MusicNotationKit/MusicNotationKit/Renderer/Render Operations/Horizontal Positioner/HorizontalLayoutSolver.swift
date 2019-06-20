@@ -28,23 +28,38 @@ class HorizontalLayoutSolver {
         
         print("Using timed layout")
         
-        // Resolve anchor postions with minimum distances
+        // Resolve the trailing distances with minimum values
+        for anchor in anchors {
+            anchor.resolvedTrailingDistance = anchor.minimumTrailingDistance
+        }
+        
+        // Work out how much timed distance we have to work with
+        var totalFixedDistance = Double(0)
+        for anchor in anchors {
+            totalFixedDistance += anchor.width
+            totalFixedDistance += anchor.minimumTrailingDistance
+        }
+        var timedDistance = layoutWidth - totalFixedDistance
+        
+        // Apply note timing distance (naive for the moment, just divides proportionately)
+        var totalTime = anchors.compactMap { $0.trailingTimeValue }.sum()
+        for anchor in anchors {
+            if let time = anchor.trailingTimeValue {
+                anchor.resolvedTrailingDistance += timedDistance / totalTime * time
+            }
+        }
+        
+        // Resolve anchor positions
         var xPos = Double(0)
         for anchor in anchors {
             xPos += anchor.width/2
             anchor.resolvedPosition = xPos
             xPos += anchor.width/2
-            xPos += anchor.minimumTrailingDistance
+            xPos += anchor.resolvedTrailingDistance
         }
         
         // Apply anchor positions to items
         applyAnchorPositions()
-        
-        // DEBUG - print anchor positions
-//        print("Anchor positions")
-//        for anchor in anchors {
-//            print("\(anchor.item.xPosition)")
-//        }
     }
     
     private func solveMinimumDistances(anchors: [LayoutAnchor]) {
@@ -52,13 +67,13 @@ class HorizontalLayoutSolver {
         for anchor in anchors {
             var minimumDistance = Double(0)
             for constraint in anchor.trailingConstraints {
-                minimumDistance = max(minimumDistance, constraint.minimumValue)
+                if let minimum = constraint.minimumValue {
+                    minimumDistance = max(minimumDistance, minimum)
+                }
             }
             anchor.minimumTrailingDistance = minimumDistance
         }
     }
-    
-    
     
     private func minimumOptimalWidth(forAnchors anchors: [LayoutAnchor]) -> Double {
         return anchors.map { $0.minimumTrailingDistance + $0.width }.sum()

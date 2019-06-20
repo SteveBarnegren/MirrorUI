@@ -22,12 +22,22 @@ class LayoutAnchorsBuilder {
             let anchor = LayoutAnchor(item: note)
             anchor.width = 1.4
             
-            // Assign constraint from the previous anchor
-            if let prevNote = previousNote, let prevAnchor = previousAnchor {
+            // Assign fixed constraint from the previous anchor
+            if let prevAnchor = previousAnchor {
                 let constraint = LayoutConstraint()
                 constraint.from = prevAnchor
                 constraint.to = anchor
                 constraint.value = .greaterThan(2)
+                prevAnchor.add(trailingConstraint: constraint)
+                anchor.add(leadingConstraint: constraint)
+            }
+            
+            // Assign time constraint for the previous anchor
+            if let prevNote = previousNote, let prevAnchor = previousAnchor, let time = prevNote.layoutDuration {
+                let constraint = LayoutConstraint()
+                constraint.from = prevAnchor
+                constraint.to = anchor
+                constraint.value = .time(time.barPct)
                 prevAnchor.add(trailingConstraint: constraint)
                 anchor.add(leadingConstraint: constraint)
             }

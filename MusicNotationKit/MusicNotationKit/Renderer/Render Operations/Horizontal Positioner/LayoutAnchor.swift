@@ -9,7 +9,7 @@
 import Foundation
 
 enum LayoutConstraintValue {
-    //case time(Double)
+    case time(Double)
     case greaterThan(Double)
     //case flexible
 }
@@ -20,10 +20,21 @@ class LayoutConstraint {
     var value = LayoutConstraintValue.greaterThan(0)
     var resolvedValue = Double(0)
     
-    var minimumValue: Double {
+    var minimumValue: Double? {
         switch self.value {
         case .greaterThan(let v):
             return v
+        case .time:
+            return nil
+        }
+    }
+    
+    var timeValue: Double? {
+        switch self.value {
+        case .time(let t):
+            return t
+        default:
+            return nil
         }
     }
 }
@@ -36,6 +47,8 @@ class LayoutAnchor {
     var resolvedPosition: Double = 0
     var item: HorizontallyPositionable
     var minimumTrailingDistance = Double(0)
+    var resolvedTrailingDistance = Double(0)
+    var isSolved = false
     
     init(item: HorizontallyPositionable) {
         self.item = item
@@ -47,5 +60,9 @@ class LayoutAnchor {
     
     func add(trailingConstraint: LayoutConstraint) {
         self.trailingConstraints.append(trailingConstraint)
+    }
+    
+    var trailingTimeValue: Double? {
+        return self.trailingConstraints.compactMap { $0.timeValue }.max()
     }
 }
