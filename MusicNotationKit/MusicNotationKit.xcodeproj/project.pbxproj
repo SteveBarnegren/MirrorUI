@@ -56,10 +56,13 @@
 		67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0621E3E9CB00E7FD71 /* Positionable.swift */; };
 		67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */; };
 		6767E31D229EF5EE00E9964D /* ConstrainedDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6767E31C229EF5EE00E9964D /* ConstrainedDistance.swift */; };
+		6767E320229F143D00E9964D /* HorizontalLayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6767E31F229F143D00E9964D /* HorizontalLayoutSolver.swift */; };
+		6767E322229F182E00E9964D /* LayoutAnchorsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6767E321229F182E00E9964D /* LayoutAnchorsBuilder.swift */; };
 		677643F1228DED26000683FF /* HorizontalDistancesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */; };
 		677643F3228E0D18000683FF /* FreeFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677643F2228E0D18000683FF /* FreeFunctions.swift */; };
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
+		679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93522BC1AF300A22778 /* LayoutAnchor.swift */; };
 		67A15F9321C5129500C3C03F /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A15F8921C5129500C3C03F /* MusicNotationKit.framework */; };
 		67A15F9821C5129500C3C03F /* MusicNotationKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A15F9721C5129500C3C03F /* MusicNotationKitTests.swift */; };
 		67A15F9A21C5129500C3C03F /* MusicNotationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 67A15F8C21C5129500C3C03F /* MusicNotationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -141,10 +144,13 @@
 		67678E0621E3E9CB00E7FD71 /* Positionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positionable.swift; sourceTree = "<group>"; };
 		67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineRender.swift; sourceTree = "<group>"; };
 		6767E31C229EF5EE00E9964D /* ConstrainedDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstrainedDistance.swift; sourceTree = "<group>"; };
+		6767E31F229F143D00E9964D /* HorizontalLayoutSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLayoutSolver.swift; sourceTree = "<group>"; };
+		6767E321229F182E00E9964D /* LayoutAnchorsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutAnchorsBuilder.swift; sourceTree = "<group>"; };
 		677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalDistancesGenerator.swift; sourceTree = "<group>"; };
 		677643F2228E0D18000683FF /* FreeFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFunctions.swift; sourceTree = "<group>"; };
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
+		679EB93522BC1AF300A22778 /* LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutAnchor.swift; sourceTree = "<group>"; };
 		67A15F8921C5129500C3C03F /* MusicNotationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicNotationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A15F8C21C5129500C3C03F /* MusicNotationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicNotationKit.h; sourceTree = "<group>"; };
 		67A15F8D21C5129500C3C03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -310,10 +316,11 @@
 		674D504C21E23D52009E5AFE /* Horizontal Positioner */ = {
 			isa = PBXGroup;
 			children = (
+				6767E31E229F141E00E9964D /* OLD */,
 				674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */,
-				677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */,
-				6767E31C229EF5EE00E9964D /* ConstrainedDistance.swift */,
-				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
+				679EB93522BC1AF300A22778 /* LayoutAnchor.swift */,
+				6767E321229F182E00E9964D /* LayoutAnchorsBuilder.swift */,
+				6767E31F229F143D00E9964D /* HorizontalLayoutSolver.swift */,
 			);
 			path = "Horizontal Positioner";
 			sourceTree = "<group>";
@@ -388,6 +395,16 @@
 				6751A84322357AFA000B0D08 /* Playable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6767E31E229F141E00E9964D /* OLD */ = {
+			isa = PBXGroup;
+			children = (
+				677643F0228DED26000683FF /* HorizontalDistancesGenerator.swift */,
+				6767E31C229EF5EE00E9964D /* ConstrainedDistance.swift */,
+				674D504721E123DB009E5AFE /* HorizontalConstraintSolver.swift */,
+			);
+			path = OLD;
 			sourceTree = "<group>";
 		};
 		677C9C7E21C5168500C7A16E /* Model */ = {
@@ -613,6 +630,7 @@
 				677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */,
 				6751A8382232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift in Sources */,
 				67AE184421D9305700F3545D /* Array+Extensions.swift in Sources */,
+				6767E320229F143D00E9964D /* HorizontalLayoutSolver.swift in Sources */,
 				6751A84222357AE3000B0D08 /* Rest.swift in Sources */,
 				6726FB0322306840002EFE4D /* RenderOperation.swift in Sources */,
 				674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */,
@@ -634,6 +652,7 @@
 				677643F1228DED26000683FF /* HorizontalDistancesGenerator.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
+				679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */,
 				671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */,
 				6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */,
 				674D504221DD5774009E5AFE /* PlayableItemTimeCalculator.swift in Sources */,
@@ -646,6 +665,7 @@
 				6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
 				674D504821E123DB009E5AFE /* HorizontalConstraintSolver.swift in Sources */,
+				6767E322229F182E00E9964D /* LayoutAnchorsBuilder.swift in Sources */,
 				674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */,
 				67494C8021CC06740078A575 /* Vector2.swift in Sources */,
 				674D503D21DD50F8009E5AFE /* NoteSequence.swift in Sources */,

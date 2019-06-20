@@ -12,10 +12,14 @@ class HorizontalPositionerRenderOperation: RenderOperation {
     
     func process(composition: Composition, layoutWidth: Double) {
         
+        // Make the Items
         let items = composition.bars.map { constrainedItems(forBar: $0) }.joined().toArray()
         
-        let distances = HorizontalDistancesGenerator().makeConstrainedDistances(fromItems: items)
-        HorizontalConstraintSolver().solve(distances, layoutWidth: layoutWidth)
+        let anchors = LayoutAnchorsBuilder().makeAnchors(from: composition)
+        HorizontalLayoutSolver().solve(anchors: anchors, layoutWidth: layoutWidth)
+        
+        //let distances = HorizontalDistancesGenerator().makeConstrainedDistances(fromItems: items)
+        //HorizontalConstraintSolver().solve(distances, layoutWidth: layoutWidth)
     }
     
     private func constrainedItems(forBar bar: Bar) -> [HorizontalLayoutItem] {
