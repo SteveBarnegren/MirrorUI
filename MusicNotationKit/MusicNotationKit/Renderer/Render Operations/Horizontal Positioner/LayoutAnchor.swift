@@ -27,7 +27,7 @@ protocol LayoutAnchor: class {
     var trailingConstraints: [LayoutConstraint] { get set }
     var position: Double { get set }
     var trailingEdge: Double { get }
-    var duration: Time { get }
+    var duration: Time? { get set }
     var time: Time { get }
     
     func apply()
@@ -52,7 +52,7 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     var position: Double = 0
     var isSolved = false
     var time: Time = .zero
-    var duration: Time = .zero
+    var duration: Time?
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
     
@@ -115,8 +115,10 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
             anchors.forEach { $0.position = position }
         }
     }
-    var time: Time = .zero
-    var duration: Time = .zero
+    var time: Time {
+        return anchors.first!.time
+    }
+    var duration: Time?
     var trailingEdge: Double {
         let lastAnchors = anchors.compactMap { $0.trailingLayoutItems.last }
         if lastAnchors.isEmpty == false {

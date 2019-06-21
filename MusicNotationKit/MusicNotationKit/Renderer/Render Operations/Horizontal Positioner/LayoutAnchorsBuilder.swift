@@ -26,6 +26,8 @@ class LayoutAnchorsBuilder {
                 .toArray()
             
             let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
+            applyDurations(toAnchors: combinedAnchors, barDuration: bar.duration)
+            
             anchors.append(contentsOf: combinedAnchors)
         }
         
@@ -106,5 +108,21 @@ class LayoutAnchorsBuilder {
         }
         
         return combinedAnchors
+    }
+    
+    func applyDurations(toAnchors anchors: [LayoutAnchor], barDuration: Time) {
+     
+        var previous: LayoutAnchor?
+        for (anchor, isLast) in anchors.enumeratedWithLastItemFlag() {
+            
+            if let previous = previous {
+                previous.duration = anchor.time - previous.time
+            }
+            
+            if isLast {
+                anchor.duration = barDuration - anchor.time
+            }
+            previous = anchor
+        }
     }
 }

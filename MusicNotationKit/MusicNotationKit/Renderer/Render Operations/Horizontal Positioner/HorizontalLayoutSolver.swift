@@ -10,6 +10,8 @@ import Foundation
 
 class HorizontalLayoutSolver {
     
+    let layoutTimingSolver = LayoutTimingSolver()
+    
     func solve(anchors: [LayoutAnchor], layoutWidth: Double) {
         
         func applyAnchorPositions() {
@@ -17,7 +19,9 @@ class HorizontalLayoutSolver {
         }
         
         solveUsingFixedDistances(anchors: anchors)
+        layoutTimingSolver.distributeTime(toAnchors: anchors, layoutWidth: layoutWidth)
         applyAnchorPositions()
+        
         
 //        solveMinimumDistances(anchors: anchors)
 //
@@ -65,6 +69,8 @@ class HorizontalLayoutSolver {
 //        applyAnchorPositions()
     }
     
+    // MARK: - Fixed distance solving
+    
     private func solveUsingFixedDistances(anchors: [LayoutAnchor]) {
         
         for anchor in anchors {
@@ -97,7 +103,7 @@ class HorizontalLayoutSolver {
         solveTrailingLayoutItems(forAnchor: anchor)
     }
     
-    func solveTrailingLayoutItems(forAnchor anchor: LayoutAnchor) {
+    private func solveTrailingLayoutItems(forAnchor anchor: LayoutAnchor) {
         
         if let singleAnchor = anchor as? SingleItemLayoutAnchor {
             solveTrailingLayoutItems(forSingleItemAnchor: singleAnchor)
@@ -108,7 +114,7 @@ class HorizontalLayoutSolver {
         }
     }
     
-    func solveTrailingLayoutItems(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
+    private func solveTrailingLayoutItems(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
         
         var xPos = anchor.position + anchor.width/2
         
@@ -119,6 +125,84 @@ class HorizontalLayoutSolver {
             xPos += trailingItem.width/2
         }
     }
+    
+    // MARK: - Time solving
+    
+//    private func distributeTime(toAnchors anchors: [LayoutAnchor], layoutWidth: Double) {
+//
+//        // Last anchor may not be accounted for!
+//
+//        class SpaceableAnchor {
+//            var index: Int = 0
+//            var anchor: LayoutAnchor
+//            var distanceToNextAnchor: Double = 0
+//            var idealPct: Double = 0
+//            var currentPct: Double = 0
+//
+//            init(anchor: LayoutAnchor) {
+//                self.anchor = anchor
+//            }
+//        }
+//
+//        func _print(spaceableAnchors: [SpaceableAnchor]) {
+//            print("----- Spaceable Anchors")
+//            for spaceable in spaceableAnchors {
+//                let current = String(format: "%.03f", spaceable.currentPct)
+//                let ideal = String(format: "%.03f", spaceable.idealPct)
+//                let diff = String(format: "%.03f", spaceable.idealPct - spaceable.currentPct)
+//                print("[\(spaceable.index)] (\(current) -> \(ideal)) (\(diff))")
+//            }
+//            print("All currents: \(spaceableAnchors.map { $0.currentPct }.sum())")
+//            print("All ideals: \(spaceableAnchors.map { $0.idealPct }.sum())")
+//            print("------")
+//        }
+//
+//
+//
+//
+//        // Create array of spaceable anchors
+//        var spaceableAnchors = [SpaceableAnchor]()
+//        for (index, anchor) in anchors.enumerated() where anchor.duration != nil {
+//            let spaceableAnchor = SpaceableAnchor(anchor: anchor)
+//            spaceableAnchor.index = index
+//            spaceableAnchors.append(spaceableAnchor)
+//        }
+//
+//        // Work out the ideal percentages
+//        var totalDuration = Double(0)
+//        for spaceable in spaceableAnchors {
+//            totalDuration += spaceable.anchor.duration!.barPct
+//        }
+//
+//        for spaceable in spaceableAnchors {
+//            spaceable.idealPct = spaceable.anchor.duration!.barPct / totalDuration
+//        }
+//
+//        // Work out the current percentages
+//        for spaceable in spaceableAnchors {
+//            if let nextAnchor = anchors[maybe: spaceable.index+1] {
+//                spaceable.distanceToNextAnchor = nextAnchor.position - spaceable.anchor.position
+//            } else {
+//                spaceable.distanceToNextAnchor = layoutWidth - spaceable.anchor.position
+//            }
+//        }
+//        let totalAnchorDistances = spaceableAnchors.map { $0.distanceToNextAnchor }.sum()
+//
+//        for spaceable in spaceableAnchors {
+//            spaceable.currentPct = spaceable.distanceToNextAnchor / totalAnchorDistances
+//        }
+//
+//        // Sort By largest compared to ideal
+//        spaceableAnchors = spaceableAnchors.sortedAscendingBy { $0.idealPct - $0.currentPct }
+//
+//        // Add the space to the anchors
+//        let availableSpace = layoutWidth - anchors.last!.trailingEdge
+//
+//
+//
+//        // Just print out the values
+//        _print(spaceableAnchors: spaceableAnchors)
+//    }
     
     
     /*
