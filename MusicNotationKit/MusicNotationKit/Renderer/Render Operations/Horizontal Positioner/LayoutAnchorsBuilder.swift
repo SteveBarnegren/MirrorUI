@@ -20,7 +20,7 @@ class LayoutAnchorsBuilder {
         return combinedAnchors
     }
     
-    private func anchors(forNoteSequence sequence: NoteSequence) -> [SingleItemLayoutAnchor] {
+    private func anchors(forNoteSequence sequence: NoteSequence) -> [LayoutAnchor] {
         
         var anchors = [SingleItemLayoutAnchor]()
         
@@ -61,7 +61,7 @@ class LayoutAnchorsBuilder {
         return anchors
     }
     
-    func sortAndCombine(anchors: [SingleItemLayoutAnchor]) -> [LayoutAnchor] {
+    func sortAndCombine(anchors: [LayoutAnchor]) -> [LayoutAnchor] {
         
         let chunkedAnchors = anchors
             .sortedAscendingBy { $0.time }
