@@ -20,7 +20,7 @@ class LayoutAnchorsBuilder {
         return combinedAnchors
     }
     
-    private func anchors(forNoteSequence sequence: NoteSequence) -> [LayoutAnchor] {
+    private func anchors(forNoteSequence sequence: NoteSequence) -> [SingleItemLayoutAnchor] {
         
         var anchors = [SingleItemLayoutAnchor]()
         
@@ -33,25 +33,33 @@ class LayoutAnchorsBuilder {
             anchor.width = 1.4
             anchor.time = note.time
             
+            // Create Adjacent items for dots
+            for dot in note.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
+                let adjacentItem = AdjacentLayoutItem(item: dot)
+                adjacentItem.width = 0.35
+                adjacentItem.distanceFromAnchor = 0.1
+                anchor.add(trailingItem: adjacentItem)
+            }
+            
             // Assign fixed constraint from the previous anchor
             if let prevAnchor = previousAnchor {
                 let constraint = LayoutConstraint()
                 constraint.from = prevAnchor
                 constraint.to = anchor
-                constraint.value = .greaterThan(2)
+                constraint.value = .greaterThan(0.5)
                 prevAnchor.add(trailingConstraint: constraint)
                 anchor.add(leadingConstraint: constraint)
             }
             
             // Assign time constraint for the previous anchor
-            if let prevNote = previousNote, let prevAnchor = previousAnchor, let time = prevNote.layoutDuration {
-                let constraint = LayoutConstraint()
-                constraint.from = prevAnchor
-                constraint.to = anchor
-                constraint.value = .time(time.barPct)
-                prevAnchor.add(trailingConstraint: constraint)
-                anchor.add(leadingConstraint: constraint)
-            }
+//            if let prevNote = previousNote, let prevAnchor = previousAnchor, let time = prevNote.layoutDuration {
+//                let constraint = LayoutConstraint()
+//                constraint.from = prevAnchor
+//                constraint.to = anchor
+//                constraint.value = .time(time.barPct)
+//                prevAnchor.add(trailingConstraint: constraint)
+//                anchor.add(leadingConstraint: constraint)
+//            }
             
             previousNote = note
             previousAnchor = anchor
@@ -61,7 +69,7 @@ class LayoutAnchorsBuilder {
         return anchors
     }
     
-    func sortAndCombine(anchors: [LayoutAnchor]) -> [LayoutAnchor] {
+    func sortAndCombine(anchors: [SingleItemLayoutAnchor]) -> [LayoutAnchor] {
         
         let chunkedAnchors = anchors
             .sortedAscendingBy { $0.time }

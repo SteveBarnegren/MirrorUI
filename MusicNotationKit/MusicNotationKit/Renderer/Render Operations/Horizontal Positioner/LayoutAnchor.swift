@@ -9,49 +9,25 @@
 import Foundation
 
 enum LayoutConstraintValue {
-    case time(Double)
+    case fixed(Double)
     case greaterThan(Double)
-    //case flexible
 }
 
 class LayoutConstraint {
     weak var from: LayoutAnchor?
     weak var to: LayoutAnchor?
     var value = LayoutConstraintValue.greaterThan(0)
-    var resolvedValue = Double(0)
-    
-    var minimumValue: Double? {
-        switch self.value {
-        case .greaterThan(let v):
-            return v
-        case .time:
-            return nil
-        }
-    }
-    
-    var timeValue: Double? {
-        switch self.value {
-        case .time(let t):
-            return t
-        default:
-            return nil
-        }
-    }
 }
 
 // MARK: - ******* Layout Anchor ********
 
 protocol LayoutAnchor: class {
     var width: Double { get }
-    var time: Time { get set }
     var leadingConstraints: [LayoutConstraint] { get }
     var trailingConstraints: [LayoutConstraint] { get }
-    var resolvedPosition: Double { get set }
-    var minimumTrailingDistance: Double { get set }
-    var resolvedTrailingDistance: Double { get set }
+    var position: Double { get set }
     var isSolved: Bool { get set }
-    var trailingTimeValue: Double? { get }
-
+    var trailingEdge: Double { get }
     
     func apply()
 }
@@ -62,14 +38,20 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     var width = Double(0)
     var leadingConstraints = [LayoutConstraint]()
     var trailingConstraints = [LayoutConstraint]()
-    var resolvedPosition: Double = 0
+    var position: Double = 0
     var minimumTrailingDistance = Double(0)
     var resolvedTrailingDistance = Double(0)
     var isSolved = false
     var time: Time = .zero
+    var leadingLayoutItems = [AdjacentLayoutItem]()
+    var trailingLayoutItems = [AdjacentLayoutItem]()
     
-    var trailingTimeValue: Double? {
-        return self.trailingConstraints.compactMap { $0.timeValue }.max()
+    var trailingEdge: Double {
+        if let lastTrailingItem = trailingLayoutItems.last {
+            return lastTrailingItem.trailingEdge
+        } else {
+            return position + width/2
+        }
     }
     
     var item: HorizontallyPositionable
@@ -86,10 +68,72 @@ class SingleItemLayoutAnchor: LayoutAnchor {
         self.trailingConstraints.append(trailingConstraint)
     }
     
+    func add(trailingItem: AdjacentLayoutItem) {
+        self.trailingLayoutItems.append(trailingItem)
+    }
+    
+    func add(leadingItem: AdjacentLayoutItem) {
+        self.leadingLayoutItems.append(leadingItem)
+    }
+    
     func apply() {
-        self.item.xPosition = self.resolvedPosition
+        self.item.xPosition = self.position
+        leadingLayoutItems.forEach { $0.apply() }
+        trailingLayoutItems.forEach { $0.apply() }
     }
 }
+
+class AdjacentLayoutItem {
+    
+    var width = Double(0)
+    var distanceFromAnchor = Double(0)
+    var position: Double = 0
+    var item: HorizontallyPositionable
+    
+    var trailingEdge: Double {
+        return position + width/2
+    }
+    
+    init(item: HorizontallyPositionable) {
+        self.item = item
+    }
+    
+    func apply() {
+        self.item.xPosition = position
+    }
+}
+
+/*
+class HorizontalStackLayoutAnchor: LayoutAnchor {
+    var width: Double
+    var time: Time
+    var leadingConstraints: [LayoutConstraint]
+    var trailingConstraints: [LayoutConstraint]
+    var resolvedPosition = Double(0)
+    var minimumTrailingDistance = Double(0)
+    var resolvedTrailingDistance = Double(0)
+    var isSolved = false
+    var trailingTimeValue: Double? {
+        return mainAnchor.trailingTimeValue
+    }
+    
+    var mainAnchor: LayoutAnchor
+    var leadingAnchors: [LayoutAnchor]
+    var trailingAnchors: [LayoutAnchor]
+    
+    init(mainAnchor: LayoutAnchor, leadingAnchors: [SingleItemLayoutAnchor], trailingAnchors: [SingleItemLayoutAnchor]) {
+        self.mainAnchor = mainAnchor
+        self.leadingAnchors = leadingAnchors
+        self.trailingAnchors = trailingAnchors
+        
+        // work out the trailing constraints
+    }
+    
+    func apply() {
+        <#code#>
+    }
+}
+ */
 
 class CombinedItemsLayoutAnchor: LayoutAnchor {
     
@@ -99,19 +143,16 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     }
     var leadingConstraints: [LayoutConstraint]
     var trailingConstraints: [LayoutConstraint]
-    var resolvedPosition: Double = 0
-    var minimumTrailingDistance = Double(0)
-    var resolvedTrailingDistance = Double(0)
+    var position: Double = 0
     var isSolved = false
-    var time: Time = .zero
     
-    var trailingTimeValue: Double? {
-        return self.trailingConstraints.compactMap { $0.timeValue }.min()
+    var trailingEdge: Double {
+        return position + width/2
     }
     
-    private let anchors: [LayoutAnchor]
+    let anchors: [SingleItemLayoutAnchor]
     
-    init(anchors: [LayoutAnchor]) {
+    init(anchors: [SingleItemLayoutAnchor]) {
         self.anchors = anchors
         self.leadingConstraints = anchors.map { $0.leadingConstraints }.joined().toArray()
         self.trailingConstraints = anchors.map { $0.trailingConstraints }.joined().toArray()
@@ -119,7 +160,7 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     
     func apply() {
         for anchor in anchors {
-            anchor.resolvedPosition = resolvedPosition
+            anchor.position = position
             anchor.apply()
         }
     }
