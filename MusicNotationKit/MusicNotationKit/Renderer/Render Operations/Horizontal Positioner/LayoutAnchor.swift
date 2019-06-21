@@ -26,8 +26,8 @@ protocol LayoutAnchor: class {
     var leadingConstraints: [LayoutConstraint] { get }
     var trailingConstraints: [LayoutConstraint] { get }
     var position: Double { get set }
-    var isSolved: Bool { get set }
     var trailingEdge: Double { get }
+    var time: Time { get }
     
     func apply()
 }
@@ -39,8 +39,6 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     var leadingConstraints = [LayoutConstraint]()
     var trailingConstraints = [LayoutConstraint]()
     var position: Double = 0
-    var minimumTrailingDistance = Double(0)
-    var resolvedTrailingDistance = Double(0)
     var isSolved = false
     var time: Time = .zero
     var leadingLayoutItems = [AdjacentLayoutItem]()
@@ -78,7 +76,6 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     
     func apply() {
         self.item.xPosition = self.position
-        leadingLayoutItems.forEach { $0.apply() }
         trailingLayoutItems.forEach { $0.apply() }
     }
 }
@@ -103,51 +100,25 @@ class AdjacentLayoutItem {
     }
 }
 
-/*
-class HorizontalStackLayoutAnchor: LayoutAnchor {
-    var width: Double
-    var time: Time
-    var leadingConstraints: [LayoutConstraint]
-    var trailingConstraints: [LayoutConstraint]
-    var resolvedPosition = Double(0)
-    var minimumTrailingDistance = Double(0)
-    var resolvedTrailingDistance = Double(0)
-    var isSolved = false
-    var trailingTimeValue: Double? {
-        return mainAnchor.trailingTimeValue
-    }
-    
-    var mainAnchor: LayoutAnchor
-    var leadingAnchors: [LayoutAnchor]
-    var trailingAnchors: [LayoutAnchor]
-    
-    init(mainAnchor: LayoutAnchor, leadingAnchors: [SingleItemLayoutAnchor], trailingAnchors: [SingleItemLayoutAnchor]) {
-        self.mainAnchor = mainAnchor
-        self.leadingAnchors = leadingAnchors
-        self.trailingAnchors = trailingAnchors
-        
-        // work out the trailing constraints
-    }
-    
-    func apply() {
-        <#code#>
-    }
-}
- */
-
 class CombinedItemsLayoutAnchor: LayoutAnchor {
     
     // LayoutAnchor
-    var width: Double {
-        return anchors.map { $0.width }.max() ?? 0
-    }
-    var leadingConstraints: [LayoutConstraint]
+    var width: Double { return anchors.map { $0.width }.max()! }
     var trailingConstraints: [LayoutConstraint]
-    var position: Double = 0
-    var isSolved = false
-    
+    var leadingConstraints: [LayoutConstraint]
+    var position: Double = 0 {
+        didSet {
+            anchors.forEach { $0.position = position }
+        }
+    }
+    var time: Time = .zero
     var trailingEdge: Double {
-        return position + width/2
+        let lastAnchors = anchors.compactMap { $0.trailingLayoutItems.last }
+        if lastAnchors.isEmpty == false {
+            return lastAnchors.map { $0.trailingEdge }.max()!
+        } else {
+            return position + width/2
+        }
     }
     
     let anchors: [SingleItemLayoutAnchor]

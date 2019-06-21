@@ -74,13 +74,6 @@ class HorizontalLayoutSolver {
     
     private func solveAnchor(anchor: LayoutAnchor) {
         
-        if let singleItemAnchor = anchor as? SingleItemLayoutAnchor {
-            solve(singleItemAnchor: singleItemAnchor)
-        }
-    }
-    
-    private func solve(singleItemAnchor anchor: SingleItemLayoutAnchor) {
-        
         var leadingEdgePos = Double(0)
         
         for constraint in anchor.leadingConstraints {
@@ -104,7 +97,18 @@ class HorizontalLayoutSolver {
         solveTrailingLayoutItems(forAnchor: anchor)
     }
     
-    func solveTrailingLayoutItems(forAnchor anchor: SingleItemLayoutAnchor) {
+    func solveTrailingLayoutItems(forAnchor anchor: LayoutAnchor) {
+        
+        if let singleAnchor = anchor as? SingleItemLayoutAnchor {
+            solveTrailingLayoutItems(forSingleItemAnchor: singleAnchor)
+        } else if let combinedAnchor = anchor as? CombinedItemsLayoutAnchor {
+            combinedAnchor.anchors.forEach {
+                self.solveTrailingLayoutItems(forSingleItemAnchor: $0)
+            }
+        }
+    }
+    
+    func solveTrailingLayoutItems(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
         
         var xPos = anchor.position + anchor.width/2
         
@@ -150,14 +154,11 @@ class HorizontalLayoutSolver {
     }
  */
     
-    func _print(anchors: [SingleItemLayoutAnchor]) {
+    func _print(anchors: [LayoutAnchor]) {
         
         print("**************")
         for anchor in anchors {
             print("\(anchor.position)")
-            for trailingItem in anchor.trailingLayoutItems {
-                print("  - \(trailingItem.position)")
-            }
         }
     }
 }
