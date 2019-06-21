@@ -12,20 +12,47 @@ class LayoutAnchorsBuilder {
     
     func makeAnchors(from composition: Composition) -> [LayoutAnchor] {
         
-        let firstBar = composition.bars[0]
+        var anchors = [LayoutAnchor]()
         
-        let anchorsForSequences = firstBar.sequences.map(self.anchors(forNoteSequence:)).joined().toArray()
-        let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
+        for bar in composition.bars {
+            // Barline
+            let barlineAnchor = makeAnchor(forBarline: bar.leadingBarline, fromPrevious: anchors.last)
+            anchors.append(barlineAnchor)
+            
+            // Notes
+            let anchorsForSequences = bar.sequences
+                .map { makeAnchors(forNoteSequence: $0, fromPrevious: barlineAnchor)}
+                .joined()
+                .toArray()
+            
+            let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
+            anchors.append(contentsOf: combinedAnchors)
+        }
         
-        return combinedAnchors
+        return anchors
     }
     
-    private func anchors(forNoteSequence sequence: NoteSequence) -> [SingleItemLayoutAnchor] {
+    private func makeAnchor(forBarline barline: Barline, fromPrevious previousAnchor: LayoutAnchor?) -> LayoutAnchor {
+        
+        let anchor = SingleItemLayoutAnchor(item: barline)
+        anchor.width = 0.2
+        
+        if let previousAnchor = previousAnchor {
+            let constraint = LayoutConstraint()
+            constraint.from = previousAnchor
+            constraint.to = anchor
+            constraint.value = .greaterThan(0.5)
+            previousAnchor.add(trailingConstraint: constraint)
+            anchor.add(leadingConstraint: constraint)
+        }
+        
+        return anchor
+    }
+    
+    private func makeAnchors(forNoteSequence sequence: NoteSequence, fromPrevious startingAnchor: LayoutAnchor?) -> [SingleItemLayoutAnchor] {
         
         var anchors = [SingleItemLayoutAnchor]()
-        
-        var previousNote: Note?
-        var previousAnchor: SingleItemLayoutAnchor?
+        var previousAnchor: LayoutAnchor? = startingAnchor
         
         for note in sequence.notes {
             
@@ -51,17 +78,6 @@ class LayoutAnchorsBuilder {
                 anchor.add(leadingConstraint: constraint)
             }
             
-            // Assign time constraint for the previous anchor
-//            if let prevNote = previousNote, let prevAnchor = previousAnchor, let time = prevNote.layoutDuration {
-//                let constraint = LayoutConstraint()
-//                constraint.from = prevAnchor
-//                constraint.to = anchor
-//                constraint.value = .time(time.barPct)
-//                prevAnchor.add(trailingConstraint: constraint)
-//                anchor.add(leadingConstraint: constraint)
-//            }
-            
-            previousNote = note
             previousAnchor = anchor
             anchors.append(anchor)
         }

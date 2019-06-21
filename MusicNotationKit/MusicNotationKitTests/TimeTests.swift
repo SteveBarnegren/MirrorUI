@@ -122,4 +122,11 @@ class TimeTests: XCTestCase {
         time += Time(crotchets: 1)
         XCTAssertEqual(time, Time(crotchets: 3))
     }
+    
+    func test_Subtraction() {
+        XCTAssertEqual(Time(crotchets: 3) - Time(crotchets: 1), Time(crotchets: 2))
+        XCTAssertEqual(Time(crotchets: 3) - Time(quavers: 1), Time(quavers: 5))
+        
+        XCTAssertNotEqual(Time(crotchets: 4) - Time(crotchets: 1), Time(quavers: 1))
+    }
 }

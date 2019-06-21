@@ -71,3 +71,19 @@ func +(lhs: Time, rhs: Time) -> Time {
 func += (lhs: inout Time, rhs: Time) {
     lhs = lhs + rhs
 }
+
+func -(lhs: Time, rhs: Time) -> Time {
+    
+    let newDivision = max(lhs.division, rhs.division)
+    
+    func value(forTime time: Time) -> Int {
+        return time.division == newDivision ? time.value : time.value * (newDivision / time.division)
+    }
+    
+    return Time(value: value(forTime: lhs) - value(forTime: rhs), division: newDivision)
+}
+
+func -= (lhs: inout Time, rhs: Time) {
+    lhs = lhs - rhs
+}
+

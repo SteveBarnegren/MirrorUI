@@ -50,9 +50,10 @@ class ViewController: UIViewController {
         
         let composition = Composition()
         
-        //composition.add(bar: makeBar())
+        composition.add(bar: makeFirstBar())
+       // composition.add(bar: makeSecondBar())
+        
         composition.add(bar: makeBasicBar())
-        //composition.add(bar: makeSecondBar())
 
         return composition
     }

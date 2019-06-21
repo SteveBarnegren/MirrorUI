@@ -23,13 +23,24 @@ class LayoutConstraint {
 
 protocol LayoutAnchor: class {
     var width: Double { get }
-    var leadingConstraints: [LayoutConstraint] { get }
-    var trailingConstraints: [LayoutConstraint] { get }
+    var leadingConstraints: [LayoutConstraint] { get set }
+    var trailingConstraints: [LayoutConstraint] { get set }
     var position: Double { get set }
     var trailingEdge: Double { get }
+    var duration: Time { get }
     var time: Time { get }
     
     func apply()
+}
+
+extension LayoutAnchor {
+    func add(leadingConstraint: LayoutConstraint) {
+        self.leadingConstraints.append(leadingConstraint)
+    }
+    
+    func add(trailingConstraint: LayoutConstraint) {
+        self.trailingConstraints.append(trailingConstraint)
+    }
 }
 
 class SingleItemLayoutAnchor: LayoutAnchor {
@@ -41,6 +52,7 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     var position: Double = 0
     var isSolved = false
     var time: Time = .zero
+    var duration: Time = .zero
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
     
@@ -56,14 +68,6 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     
     init(item: HorizontallyPositionable) {
         self.item = item
-    }
-    
-    func add(leadingConstraint: LayoutConstraint) {
-        self.leadingConstraints.append(leadingConstraint)
-    }
-    
-    func add(trailingConstraint: LayoutConstraint) {
-        self.trailingConstraints.append(trailingConstraint)
     }
     
     func add(trailingItem: AdjacentLayoutItem) {
@@ -112,6 +116,7 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
         }
     }
     var time: Time = .zero
+    var duration: Time = .zero
     var trailingEdge: Double {
         let lastAnchors = anchors.compactMap { $0.trailingLayoutItems.last }
         if lastAnchors.isEmpty == false {
