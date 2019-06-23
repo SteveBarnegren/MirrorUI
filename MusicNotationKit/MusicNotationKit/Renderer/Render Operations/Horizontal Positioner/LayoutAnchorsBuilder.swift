@@ -120,7 +120,7 @@ class LayoutAnchorsBuilder {
             }
             
             if isLast {
-                anchor.duration = barDuration - anchor.time
+//                anchor.duration = barDuration - anchor.time
             }
             previous = anchor
         }

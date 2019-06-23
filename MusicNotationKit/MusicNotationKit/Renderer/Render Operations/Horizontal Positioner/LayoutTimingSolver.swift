@@ -32,9 +32,9 @@ class LayoutTimingSolver {
         var stationaryAnchors = allAnchors
         var expandingAnchors = [SpaceableAnchor]()
 
-        let availableSpace = layoutWidth - anchors.last!.trailingEdge
+        var availableSpace = layoutWidth - anchors.last!.trailingEdge
         
-        while availableSpace > 0 {
+        while availableSpace > 0 && stationaryAnchors.isEmpty == false {
             updateCurrentPercentages(forAnchors: allAnchors, layoutWidth: layoutWidth)
             print("****** LOOP START ******")
             print("------")
@@ -54,21 +54,21 @@ class LayoutTimingSolver {
             print("**** Select anchors")
             _print(spaceableAnchors: anchorsToExpand)
             expandingAnchors.append(contentsOf: anchorsToExpand)
+            
+            if stationaryAnchors.count <= 1 {
+                break;
+            }
 
             // Find the target delta to match
             print("**** Find target delta")
             let currentDelta = anchorRequiringExpansion.deltaToIdealPct
-            //let targetDelta = stationaryAnchors.map { $0.deltaToIdealPct }.max()!
-            if stationaryAnchors.count <= 1 {
-                return
-            }
-            
-            let targetAnchor = stationaryAnchors.max(by: { $0.deltaToIdealPct < $1.deltaToIdealPct })!
-            let targetDelta = targetAnchor.deltaToIdealPct
-            _print(spaceableAnchor: targetAnchor)
+            let targetAnchors = stationaryAnchors.sortedDescendingBy { $0.deltaToIdealPct }
+                .chunked(atChangeTo: { $0.deltaToIdealPct})
+                .first!
+            let targetDelta = targetAnchors.first!.deltaToIdealPct
+            _print(spaceableAnchors: targetAnchors)
             print("Current delta: \(currentDelta)")
             print("Target delta: \(targetDelta)")
-            
             
             // Get the total required expansion
             print("**** Space out anchors")
@@ -85,18 +85,25 @@ class LayoutTimingSolver {
             
             // Apply the additional space (scaled if not enough available)
             let requiredSpace = expandingAnchors.map { $0.proposedAdditionalSpace }.sum()
-            
-            if requiredSpace <= availableSpace {
-                for spaceable in expandingAnchors {
-                    if spaceable.index < allAnchors.count {
-                        offset(anchors: anchors[(spaceable.index+1)...].toArray(),
-                               by: spaceable.proposedAdditionalSpace)
-                    }
-                }
-            } else {
-                break;
-                //fatalError("Run out of available space to expand")
+            var scale = Double(1)
+            if availableSpace < requiredSpace {
+                scale = availableSpace / requiredSpace
             }
+            print("Scale: \(scale)")
+            
+            for spaceable in expandingAnchors {
+                if spaceable.index < allAnchors.count {
+                    offset(anchors: anchors[(spaceable.index+1)...].toArray(),
+                           by: spaceable.proposedAdditionalSpace * scale)
+                }
+            }
+            availableSpace -= requiredSpace * scale
+            
+            // Move anchors matching the target size to expanding
+            stationaryAnchors.removeAll { (anchor) -> Bool in
+                targetAnchors.contains(where: { $0 === anchor })
+            }
+            expandingAnchors.append(contentsOf: targetAnchors)
         }
     }
     
@@ -110,6 +117,7 @@ class LayoutTimingSolver {
     
     private func makeSpaceableAnchors(fromAnchors anchors: [LayoutAnchor]) -> [SpaceableAnchor] {
         
+        print("***** MAKE ANCHORS *****")
         // Create array of spaceable anchors
         var spaceableAnchors = [SpaceableAnchor]()
         for (index, anchor) in anchors.enumerated() where anchor.duration != nil {
@@ -122,6 +130,7 @@ class LayoutTimingSolver {
         // Work out the ideal percentages
         var totalDuration = Double(0)
         for spaceable in spaceableAnchors {
+            print("Anchor duration: \(spaceable.anchor.duration!.barPct)")
             totalDuration += spaceable.anchor.duration!.barPct
         }
         
