@@ -14,7 +14,7 @@ public class Bar {
     let leadingBarline = Barline()
 
     var duration: Time {
-        return sequences.reduce(Time.zero) { $0 + $1.duration }
+        return sequences.map { $0.duration }.max() ?? .zero
     }
     
     public init() {}
