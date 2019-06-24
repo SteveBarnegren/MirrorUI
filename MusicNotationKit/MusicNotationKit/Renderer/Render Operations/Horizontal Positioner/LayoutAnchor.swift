@@ -58,7 +58,7 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     
     var trailingEdge: Double {
         if let lastTrailingItem = trailingLayoutItems.last {
-            return lastTrailingItem.trailingEdge
+            return lastTrailingItem.trailingEdge(anchorPosition: position)
         } else {
             return position + width/2
         }
@@ -80,7 +80,7 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     
     func apply() {
         self.item.xPosition = self.position
-        trailingLayoutItems.forEach { $0.apply() }
+        trailingLayoutItems.forEach { $0.apply(anchorPosition: position) }
     }
 }
 
@@ -88,19 +88,19 @@ class AdjacentLayoutItem {
     
     var width = Double(0)
     var distanceFromAnchor = Double(0)
-    var position: Double = 0
+    var offset = Double(0)
     var item: HorizontallyPositionable
-    
-    var trailingEdge: Double {
-        return position + width/2
-    }
     
     init(item: HorizontallyPositionable) {
         self.item = item
     }
     
-    func apply() {
-        self.item.xPosition = position
+    func trailingEdge(anchorPosition: Double) -> Double {
+        return anchorPosition + offset + width/2
+    }
+    
+    func apply(anchorPosition: Double) {
+        self.item.xPosition = anchorPosition + offset
     }
 }
 
@@ -122,7 +122,7 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     var trailingEdge: Double {
         let lastAnchors = anchors.compactMap { $0.trailingLayoutItems.last }
         if lastAnchors.isEmpty == false {
-            return lastAnchors.map { $0.trailingEdge }.max()!
+            return lastAnchors.map { $0.trailingEdge(anchorPosition: position) }.max()!
         } else {
             return position + width/2
         }

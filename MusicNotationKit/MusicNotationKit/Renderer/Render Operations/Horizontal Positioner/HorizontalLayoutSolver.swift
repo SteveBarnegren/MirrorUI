@@ -116,13 +116,13 @@ class HorizontalLayoutSolver {
     
     private func solveTrailingLayoutItems(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
         
-        var xPos = anchor.position + anchor.width/2
+        var offset = anchor.width/2
         
         for trailingItem in anchor.trailingLayoutItems {
-            xPos += trailingItem.distanceFromAnchor
-            xPos += trailingItem.width/2
-            trailingItem.position = xPos
-            xPos += trailingItem.width/2
+            offset += trailingItem.distanceFromAnchor
+            offset += trailingItem.width/2
+            trailingItem.offset = offset
+            offset += trailingItem.width/2
         }
     }
     
