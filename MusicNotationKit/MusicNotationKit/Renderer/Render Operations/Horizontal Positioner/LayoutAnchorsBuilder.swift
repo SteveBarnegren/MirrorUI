@@ -12,6 +12,10 @@ class LayoutAnchorsBuilder {
     
     func makeAnchors(from composition: Composition) -> [LayoutAnchor] {
         
+        // Add a trailing bar line - this should definitely not be done here!
+        composition.bars.last?.trailingBarline = Barline()
+        
+        
         var anchors = [LayoutAnchor]()
         
         for bar in composition.bars {
@@ -29,6 +33,10 @@ class LayoutAnchorsBuilder {
             applyDurations(toAnchors: combinedAnchors, barDuration: bar.duration)
             
             anchors.append(contentsOf: combinedAnchors)
+        }
+        
+        if let lastBarline = composition.bars.last?.trailingBarline {
+            anchors.append(makeAnchor(forBarline: lastBarline, fromPrevious: anchors.last))
         }
         
         return anchors

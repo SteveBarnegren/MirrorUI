@@ -89,6 +89,8 @@ class LayoutTimingSolver {
             if availableSpace < requiredSpace {
                 scale = availableSpace / requiredSpace
             }
+            print("Required space: \(requiredSpace)")
+            print("Available space: \(availableSpace)")
             print("Scale: \(scale)")
             
             for spaceable in expandingAnchors {
@@ -148,7 +150,7 @@ class LayoutTimingSolver {
             if let nextAnchor = spaceable.nextAnchor {
                 spaceable.distanceToNextAnchor = nextAnchor.position - spaceable.anchor.position
             } else {
-                spaceable.distanceToNextAnchor = layoutWidth - spaceable.anchor.position
+                spaceable.distanceToNextAnchor = 0//layoutWidth - spaceable.anchor.position
             }
         }
         let totalAnchorDistances = spaceableAnchors.map { $0.distanceToNextAnchor }.sum()

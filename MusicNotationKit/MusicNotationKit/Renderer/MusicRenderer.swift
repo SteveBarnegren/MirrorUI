@@ -69,7 +69,13 @@ class MusicRenderer {
         
         let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
         let notePaths =  bar.sequences.map(makePaths(forNoteSequence:)).joined().toArray()
-        return barlinePath + notePaths
+        var paths = barlinePath + notePaths
+        
+        if let trailingBarline = bar.trailingBarline {
+            paths += BarlineRenderer().paths(forBarline: trailingBarline)
+        }
+        
+        return paths
     }
     
     private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
