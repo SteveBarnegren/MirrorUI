@@ -12,6 +12,7 @@ private class SpaceableAnchor {
     var index: Int = 0
     var anchor: LayoutAnchor
     var nextAnchor: LayoutAnchor?
+    var barPct: Double = 0
     var distanceToNextAnchor: Double = 0
     var idealPct: Double = 0
     var currentPct: Double = 0
@@ -44,16 +45,18 @@ class LayoutTimingSolver {
             print("------")
 
             // Find anchors to expand
-            var anchorsToExpand = [SpaceableAnchor]()
-            guard let anchorRequiringExpansion = stationaryAnchors.extract(maximumBy: { $0.deltaToIdealPct }) else {
-                fatalError("no anchors to expand")
+            if expandingAnchors.isEmpty {
+                var anchorsToExpand = [SpaceableAnchor]()
+                guard let anchorRequiringExpansion = stationaryAnchors.extract(maximumBy: { $0.deltaToIdealPct }) else {
+                    fatalError("no anchors to expand")
+                }
+                anchorsToExpand.append(anchorRequiringExpansion)
+                let additionalAnchors = stationaryAnchors.extract { $0.deltaToIdealPct == anchorRequiringExpansion.deltaToIdealPct }
+                anchorsToExpand.append(contentsOf: additionalAnchors)
+                print("**** Select anchors")
+                _print(spaceableAnchors: anchorsToExpand)
+                expandingAnchors.append(contentsOf: anchorsToExpand)
             }
-            anchorsToExpand.append(anchorRequiringExpansion)
-            let additionalAnchors = stationaryAnchors.extract { $0.deltaToIdealPct == anchorRequiringExpansion.deltaToIdealPct }
-            anchorsToExpand.append(contentsOf: additionalAnchors)
-            print("**** Select anchors")
-            _print(spaceableAnchors: anchorsToExpand)
-            expandingAnchors.append(contentsOf: anchorsToExpand)
             
             if stationaryAnchors.count <= 1 {
                 break;
@@ -61,7 +64,7 @@ class LayoutTimingSolver {
 
             // Find the target delta to match
             print("**** Find target delta")
-            let currentDelta = anchorRequiringExpansion.deltaToIdealPct
+            let currentDelta = expandingAnchors[0].deltaToIdealPct
             let targetAnchors = stationaryAnchors.sortedDescendingBy { $0.deltaToIdealPct }
                 .chunked(atChangeTo: { $0.deltaToIdealPct})
                 .first!
@@ -94,10 +97,9 @@ class LayoutTimingSolver {
             print("Scale: \(scale)")
             
             for spaceable in expandingAnchors {
-                if spaceable.index < allAnchors.count {
-                    offset(anchors: anchors[(spaceable.index+1)...].toArray(),
-                           by: spaceable.proposedAdditionalSpace * scale)
-                }
+                offset(anchors: anchors[(spaceable.index+1)...].toArray(),
+                       by: spaceable.proposedAdditionalSpace * scale)
+                
             }
             availableSpace -= requiredSpace * scale
             
@@ -107,6 +109,17 @@ class LayoutTimingSolver {
             }
             expandingAnchors.append(contentsOf: targetAnchors)
         }
+        
+        // If there's still remaining space, keep expanding proportionatly to time
+        if availableSpace > 0 {
+            let totalDuration = allAnchors.map { $0.barPct }.sum()
+            let multiplier = availableSpace / totalDuration
+            for spaceable in allAnchors {
+                offset(anchors: anchors[(spaceable.index+1)...].toArray(),
+                       by: spaceable.barPct * multiplier)
+            }
+        }
+    
     }
     
     private func offset(anchors: [LayoutAnchor], by offset: Double) {
@@ -126,6 +139,7 @@ class LayoutTimingSolver {
             let spaceableAnchor = SpaceableAnchor(anchor: anchor)
             spaceableAnchor.nextAnchor = anchors[maybe: index+1]
             spaceableAnchor.index = index
+            spaceableAnchor.barPct = anchor.duration!.barPct
             spaceableAnchors.append(spaceableAnchor)
         }
         
