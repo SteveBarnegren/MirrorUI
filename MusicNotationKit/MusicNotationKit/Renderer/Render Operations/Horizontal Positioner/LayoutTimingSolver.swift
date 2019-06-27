@@ -17,6 +17,7 @@ private class SpaceableAnchor {
     var idealPct: Double = 0
     var currentPct: Double = 0
     var deltaToIdealPct: Double = 0
+    var pctExpanded: Double = 0
     
     var proposedAdditionalSpace: Double = 0
     
@@ -47,11 +48,11 @@ class LayoutTimingSolver {
             // Find anchors to expand
             if expandingAnchors.isEmpty {
                 var anchorsToExpand = [SpaceableAnchor]()
-                guard let anchorRequiringExpansion = stationaryAnchors.extract(maximumBy: { $0.deltaToIdealPct }) else {
+                guard let anchorRequiringExpansion = stationaryAnchors.extract(minimumBy: { $0.pctExpanded }) else {
                     fatalError("no anchors to expand")
                 }
                 anchorsToExpand.append(anchorRequiringExpansion)
-                let additionalAnchors = stationaryAnchors.extract { $0.deltaToIdealPct == anchorRequiringExpansion.deltaToIdealPct }
+                let additionalAnchors = stationaryAnchors.extract { $0.pctExpanded == anchorRequiringExpansion.pctExpanded }
                 anchorsToExpand.append(contentsOf: additionalAnchors)
                 print("**** Select anchors")
                 _print(spaceableAnchors: anchorsToExpand)
@@ -64,14 +65,14 @@ class LayoutTimingSolver {
 
             // Find the target delta to match
             print("**** Find target delta")
-            let currentDelta = expandingAnchors[0].deltaToIdealPct
-            let targetAnchors = stationaryAnchors.sortedDescendingBy { $0.deltaToIdealPct }
-                .chunked(atChangeTo: { $0.deltaToIdealPct})
+            let currentPct = expandingAnchors[0].pctExpanded
+            let targetAnchors = stationaryAnchors.sortedAscendingBy { $0.pctExpanded }
+                .chunked(atChangeTo: { $0.pctExpanded})
                 .first!
-            let targetDelta = targetAnchors.first!.deltaToIdealPct
+            let targetPct = targetAnchors.first!.pctExpanded
             _print(spaceableAnchors: targetAnchors)
-            print("Current delta: \(currentDelta)")
-            print("Target delta: \(targetDelta)")
+            print("Current pct: \(currentPct)")
+            print("Target pct: \(targetPct)")
             
             // Get the total required expansion
             print("**** Space out anchors")
@@ -79,8 +80,7 @@ class LayoutTimingSolver {
             print("Total spaceable distance: \(totalSpaceableDistance)")
             
             for anchor in expandingAnchors {
-                let pctToExpandTo = anchor.idealPct - targetDelta
-                let proposedNewValue = anchor.distanceToNextAnchor / anchor.currentPct * pctToExpandTo
+                let proposedNewValue = anchor.distanceToNextAnchor / anchor.pctExpanded * targetPct
                 anchor.proposedAdditionalSpace = proposedNewValue - anchor.distanceToNextAnchor
                 _print(spaceableAnchor: anchor)
                 print("  - Proposed additional space: \(anchor.proposedAdditionalSpace)")
@@ -172,6 +172,7 @@ class LayoutTimingSolver {
         for spaceable in spaceableAnchors {
             spaceable.currentPct = spaceable.distanceToNextAnchor / totalAnchorDistances
             spaceable.deltaToIdealPct = spaceable.idealPct - spaceable.currentPct
+            spaceable.pctExpanded = spaceable.currentPct / spaceable.idealPct
         }
     }
     
@@ -187,7 +188,8 @@ class LayoutTimingSolver {
         let current = String(format: "%.03f", spaceable.currentPct)
         let ideal = String(format: "%.03f", spaceable.idealPct)
         let diff = String(format: "%.03f", spaceable.idealPct - spaceable.currentPct)
-        print("[\(spaceable.index)] (\(current) -> \(ideal)) (\(diff))")
+        let pctExpanded = String(format: "%.03f", spaceable.pctExpanded)
+        print("[\(spaceable.index)] (\(current) -> \(ideal)) (\(diff)) (abs: \(spaceable.distanceToNextAnchor)) (%ex: \(pctExpanded))")
     }
 
 }
