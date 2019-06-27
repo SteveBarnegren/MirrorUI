@@ -16,7 +16,6 @@ private class SpaceableAnchor {
     var distanceToNextAnchor: Double = 0
     var idealPct: Double = 0
     var currentPct: Double = 0
-    var deltaToIdealPct: Double = 0
     var pctExpanded: Double = 0
     
     var proposedAdditionalSpace: Double = 0
@@ -30,101 +29,76 @@ class LayoutTimingSolver {
     
     func distributeTime(toAnchors anchors: [LayoutAnchor], layoutWidth: Double) {
         
-        var allAnchors = makeSpaceableAnchors(fromAnchors: anchors)
+        let allAnchors = makeSpaceableAnchors(fromAnchors: anchors)
         var stationaryAnchors = allAnchors
         var expandingAnchors = [SpaceableAnchor]()
 
         var availableSpace = layoutWidth - anchors.last!.trailingEdge
-        
+    
+        // ****** Expand anchors until space empty ******
         while availableSpace > 0 && stationaryAnchors.isEmpty == false {
-            updateCurrentPercentages(forAnchors: allAnchors, layoutWidth: layoutWidth)
-            print("****** LOOP START ******")
-            print("------")
-            _print(spaceableAnchors: expandingAnchors)
-            print("------")
-            _print(spaceableAnchors: stationaryAnchors)
-            print("------")
-
-            // Find anchors to expand
-            if expandingAnchors.isEmpty {
-                var anchorsToExpand = [SpaceableAnchor]()
-                guard let anchorRequiringExpansion = stationaryAnchors.extract(minimumBy: { $0.pctExpanded }) else {
-                    fatalError("no anchors to expand")
-                }
-                anchorsToExpand.append(anchorRequiringExpansion)
-                let additionalAnchors = stationaryAnchors.extract { $0.pctExpanded == anchorRequiringExpansion.pctExpanded }
-                anchorsToExpand.append(contentsOf: additionalAnchors)
-                print("**** Select anchors")
-                _print(spaceableAnchors: anchorsToExpand)
-                expandingAnchors.append(contentsOf: anchorsToExpand)
-            }
             
-            if stationaryAnchors.count <= 1 {
-                break;
+            // Update anchor information
+            updateCurrentPercentages(forAnchors: allAnchors, layoutWidth: layoutWidth)
+            print("-- Expanding --")
+            _print(spaceableAnchors: expandingAnchors)
+            print("-- Stationary --")
+            _print(spaceableAnchors: stationaryAnchors)
+            print("---------------")
+            
+            // Find initial anchors to expand
+            if expandingAnchors.isEmpty {
+                updateCurrentPercentages(forAnchors: allAnchors, layoutWidth: layoutWidth)
+                expandingAnchors = stationaryAnchors.extractLeastExpandedAnchors()
+                if expandingAnchors.isEmpty { break }
             }
 
-            // Find the target delta to match
-            print("**** Find target delta")
-            let currentPct = expandingAnchors[0].pctExpanded
-            let targetAnchors = stationaryAnchors.sortedAscendingBy { $0.pctExpanded }
-                .chunked(atChangeTo: { $0.pctExpanded})
-                .first!
+            // Find the target pct to match
+            let targetAnchors = stationaryAnchors.extractLeastExpandedAnchors()
+            if targetAnchors.isEmpty {
+                break
+            }
             let targetPct = targetAnchors.first!.pctExpanded
             _print(spaceableAnchors: targetAnchors)
-            print("Current pct: \(currentPct)")
-            print("Target pct: \(targetPct)")
             
-            // Get the total required expansion
-            print("**** Space out anchors")
-            let totalSpaceableDistance = allAnchors.map { $0.distanceToNextAnchor }.sum()
-            print("Total spaceable distance: \(totalSpaceableDistance)")
-            
+            // Figure out required expansion per anchor
             for anchor in expandingAnchors {
                 let proposedNewValue = anchor.distanceToNextAnchor / anchor.pctExpanded * targetPct
                 anchor.proposedAdditionalSpace = proposedNewValue - anchor.distanceToNextAnchor
-                _print(spaceableAnchor: anchor)
-                print("  - Proposed additional space: \(anchor.proposedAdditionalSpace)")
             }
             
-            // Apply the additional space (scaled if not enough available)
-            let requiredSpace = expandingAnchors.map { $0.proposedAdditionalSpace }.sum()
+            // Figure out the scale the space should be applied (<1 if not enough available)
+            let requiredSpace = expandingAnchors.sum(\.proposedAdditionalSpace)
             var scale = Double(1)
             if availableSpace < requiredSpace {
                 scale = availableSpace / requiredSpace
             }
-            print("Required space: \(requiredSpace)")
-            print("Available space: \(availableSpace)")
-            print("Scale: \(scale)")
             
+            // Apply the additional space, moving all anchors to the right
             for spaceable in expandingAnchors {
-                offset(anchors: anchors[(spaceable.index+1)...].toArray(),
+                offset(anchors: anchors[(spaceable.index+1)...].toAnySequence(),
                        by: spaceable.proposedAdditionalSpace * scale)
                 
             }
             availableSpace -= requiredSpace * scale
             
-            // Move anchors matching the target size to expanding
-            stationaryAnchors.removeAll { (anchor) -> Bool in
-                targetAnchors.contains(where: { $0 === anchor })
-            }
+            // Target anchors are now expanding
             expandingAnchors.append(contentsOf: targetAnchors)
         }
         
         // If there's still remaining space, keep expanding proportionatly to time
         if availableSpace > 0 {
-            let totalDuration = allAnchors.map { $0.barPct }.sum()
+            let totalDuration = allAnchors.sum(\.barPct)
             let multiplier = availableSpace / totalDuration
             for spaceable in allAnchors {
-                offset(anchors: anchors[(spaceable.index+1)...].toArray(),
+                offset(anchors: anchors[(spaceable.index+1)...].toAnySequence(),
                        by: spaceable.barPct * multiplier)
             }
         }
     
     }
     
-    private func offset(anchors: [LayoutAnchor], by offset: Double) {
-        print("***** Offset anchors")
-        //_print(spaceableAnchors: anchors)
+    private func offset(anchors: AnySequence<LayoutAnchor>, by offset: Double) {
         for anchor in anchors {
             anchor.position += offset
         }
@@ -132,7 +106,6 @@ class LayoutTimingSolver {
     
     private func makeSpaceableAnchors(fromAnchors anchors: [LayoutAnchor]) -> [SpaceableAnchor] {
         
-        print("***** MAKE ANCHORS *****")
         // Create array of spaceable anchors
         var spaceableAnchors = [SpaceableAnchor]()
         for (index, anchor) in anchors.enumerated() where anchor.duration != nil {
@@ -146,7 +119,6 @@ class LayoutTimingSolver {
         // Work out the ideal percentages
         var totalDuration = Double(0)
         for spaceable in spaceableAnchors {
-            print("Anchor duration: \(spaceable.anchor.duration!.barPct)")
             totalDuration += spaceable.anchor.duration!.barPct
         }
         
@@ -171,7 +143,6 @@ class LayoutTimingSolver {
         
         for spaceable in spaceableAnchors {
             spaceable.currentPct = spaceable.distanceToNextAnchor / totalAnchorDistances
-            spaceable.deltaToIdealPct = spaceable.idealPct - spaceable.currentPct
             spaceable.pctExpanded = spaceable.currentPct / spaceable.idealPct
         }
     }
@@ -180,8 +151,6 @@ class LayoutTimingSolver {
         for spaceable in spaceableAnchors {
             _print(spaceableAnchor: spaceable)
         }
-        //print("All currents: \(spaceableAnchors.map { $0.currentPct }.sum())")
-        //print("All ideals: \(spaceableAnchors.map { $0.idealPct }.sum())")
     }
     
     private func _print(spaceableAnchor spaceable: SpaceableAnchor) {
@@ -192,4 +161,34 @@ class LayoutTimingSolver {
         print("[\(spaceable.index)] (\(current) -> \(ideal)) (\(diff)) (abs: \(spaceable.distanceToNextAnchor)) (%ex: \(pctExpanded))")
     }
 
+}
+
+extension Array where Element: SpaceableAnchor {
+    
+    mutating func extractLeastExpandedAnchors() -> [SpaceableAnchor] {
+        
+        var value: Double?
+        var anchors = [SpaceableAnchor]()
+        var indexesToRemove = [Int]()
+        
+        for (index, anchor) in self.enumerated() {
+            guard let v = value else {
+                value = anchor.pctExpanded
+                anchors.append(anchor)
+                indexesToRemove.append(index)
+                continue
+            }
+            
+            if anchor.pctExpanded < v {
+                value = anchor.pctExpanded
+                anchors = [anchor]
+                indexesToRemove = [index]
+            } else if anchor.pctExpanded == v {
+                anchors.append(anchor)
+                indexesToRemove.append(index)
+            }
+        }
+        indexesToRemove.reversed().forEach { self.remove(at: $0) }
+        return anchors
+    }
 }
