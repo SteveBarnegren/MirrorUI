@@ -15,7 +15,6 @@ private class SpaceableAnchor {
     var barPct: Double = 0
     var distanceToNextAnchor: Double = 0
     var idealPct: Double = 0
-    var currentPct: Double = 0
     var pctExpanded: Double = 0
     
     var proposedAdditionalSpace: Double = 0
@@ -40,11 +39,6 @@ class LayoutTimingSolver {
             
             // Update anchor information
             updateCurrentPercentages(forAnchors: allAnchors, layoutWidth: layoutWidth)
-            print("-- Expanding --")
-            _print(spaceableAnchors: expandingAnchors)
-            print("-- Stationary --")
-            _print(spaceableAnchors: stationaryAnchors)
-            print("---------------")
             
             // Find initial anchors to expand
             if expandingAnchors.isEmpty {
@@ -59,7 +53,6 @@ class LayoutTimingSolver {
                 break
             }
             let targetPct = targetAnchors.first!.pctExpanded
-            _print(spaceableAnchors: targetAnchors)
             
             // Figure out required expansion per anchor
             for anchor in expandingAnchors {
@@ -142,25 +135,10 @@ class LayoutTimingSolver {
         let totalAnchorDistances = spaceableAnchors.map { $0.distanceToNextAnchor }.sum()
         
         for spaceable in spaceableAnchors {
-            spaceable.currentPct = spaceable.distanceToNextAnchor / totalAnchorDistances
-            spaceable.pctExpanded = spaceable.currentPct / spaceable.idealPct
+            let currentPct = spaceable.distanceToNextAnchor / totalAnchorDistances
+            spaceable.pctExpanded = currentPct / spaceable.idealPct
         }
     }
-    
-    private func _print(spaceableAnchors: [SpaceableAnchor]) {
-        for spaceable in spaceableAnchors {
-            _print(spaceableAnchor: spaceable)
-        }
-    }
-    
-    private func _print(spaceableAnchor spaceable: SpaceableAnchor) {
-        let current = String(format: "%.03f", spaceable.currentPct)
-        let ideal = String(format: "%.03f", spaceable.idealPct)
-        let diff = String(format: "%.03f", spaceable.idealPct - spaceable.currentPct)
-        let pctExpanded = String(format: "%.03f", spaceable.pctExpanded)
-        print("[\(spaceable.index)] (\(current) -> \(ideal)) (\(diff)) (abs: \(spaceable.distanceToNextAnchor)) (%ex: \(pctExpanded))")
-    }
-
 }
 
 extension Array where Element: SpaceableAnchor {
