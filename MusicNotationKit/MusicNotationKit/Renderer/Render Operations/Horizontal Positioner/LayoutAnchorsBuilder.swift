@@ -73,7 +73,7 @@ class LayoutAnchorsBuilder {
             // Create Adjacent items for dots
             for dot in note.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
                 let adjacentItem = AdjacentLayoutItem(item: dot)
-                adjacentItem.width = 0.35
+                adjacentItem.width = 0.5
                 adjacentItem.distanceFromAnchor = 0.1
                 anchor.add(trailingItem: adjacentItem)
             }
