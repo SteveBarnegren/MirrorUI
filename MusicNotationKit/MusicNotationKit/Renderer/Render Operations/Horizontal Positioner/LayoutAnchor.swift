@@ -26,6 +26,7 @@ protocol LayoutAnchor: class {
     var leadingConstraints: [LayoutConstraint] { get set }
     var trailingConstraints: [LayoutConstraint] { get set }
     var position: Double { get set }
+    var leadingEdgeOffset: Double { get }
     var trailingEdge: Double { get }
     var duration: Time? { get set }
     var time: Time { get }
@@ -56,6 +57,14 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
     
+    var leadingEdgeOffset: Double {
+        if let leftMostLeadingItem = leadingLayoutItems.last {
+            return leftMostLeadingItem.offset - leftMostLeadingItem.width/2
+        } else {
+            return -width/2
+        }
+    }
+    
     var trailingEdge: Double {
         if let lastTrailingItem = trailingLayoutItems.last {
             return lastTrailingItem.trailingEdge(anchorPosition: position)
@@ -80,6 +89,7 @@ class SingleItemLayoutAnchor: LayoutAnchor {
     
     func apply() {
         self.item.xPosition = self.position
+        leadingLayoutItems.forEach { $0.apply(anchorPosition: position) }
         trailingLayoutItems.forEach { $0.apply(anchorPosition: position) }
     }
 }
@@ -119,6 +129,16 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
         return anchors.first!.time
     }
     var duration: Time?
+    
+    var leadingEdgeOffset: Double {
+        let leftMostAnchors = anchors.compactMap { $0.leadingLayoutItems.last }
+        if leftMostAnchors.isEmpty == false {
+            return leftMostAnchors.map { $0.offset - width/2 }.min()!
+        } else {
+            return -width/2
+        }
+    }
+    
     var trailingEdge: Double {
         let lastAnchors = anchors.compactMap { $0.trailingLayoutItems.last }
         if lastAnchors.isEmpty == false {

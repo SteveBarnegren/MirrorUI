@@ -18,6 +18,8 @@ class FixedDistanceLayoutSolver {
     }
     
     private func solveAnchor(anchor: LayoutAnchor) {
+
+        solveAdjacentLayoutItemOffsets(forAnchor: anchor)
         
         var leadingEdgePos = Double(0)
         
@@ -36,24 +38,35 @@ class FixedDistanceLayoutSolver {
             leadingEdgePos = max(leadingEdgePos, fromAnchor.trailingEdge + constraintDistance)
         }
         
-        anchor.position = leadingEdgePos + anchor.width/2
-        
-        // Solve trailing layout items
-        solveTrailingLayoutItems(forAnchor: anchor)
+        anchor.position = leadingEdgePos - anchor.leadingEdgeOffset
     }
     
-    private func solveTrailingLayoutItems(forAnchor anchor: LayoutAnchor) {
+    private func solveAdjacentLayoutItemOffsets(forAnchor anchor: LayoutAnchor) {
         
         if let singleAnchor = anchor as? SingleItemLayoutAnchor {
-            solveTrailingLayoutItems(forSingleItemAnchor: singleAnchor)
+            solveLeadingLayoutItemOffsets(forSingleItemAnchor: singleAnchor)
+            solveTrailingLayoutItemOffsets(forSingleItemAnchor: singleAnchor)
         } else if let combinedAnchor = anchor as? CombinedItemsLayoutAnchor {
             combinedAnchor.anchors.forEach {
-                self.solveTrailingLayoutItems(forSingleItemAnchor: $0)
+                self.solveLeadingLayoutItemOffsets(forSingleItemAnchor: $0)
+                self.solveTrailingLayoutItemOffsets(forSingleItemAnchor: $0)
             }
         }
     }
     
-    private func solveTrailingLayoutItems(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
+    private func solveLeadingLayoutItemOffsets(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
+        
+        var offset = -anchor.width/2
+        
+        for leadingItem in anchor.leadingLayoutItems {
+            offset -= leadingItem.distanceFromAnchor
+            offset -= leadingItem.width/2
+            leadingItem.offset = offset
+            offset -= leadingItem.width/2
+        }
+    }
+    
+    private func solveTrailingLayoutItemOffsets(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
         
         var offset = anchor.width/2
         

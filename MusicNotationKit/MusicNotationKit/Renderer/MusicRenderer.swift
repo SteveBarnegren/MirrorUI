@@ -80,7 +80,7 @@ class MusicRenderer {
     
     private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
         let notePaths = NoteRenderer().paths(forNotes: noteSequence.notes)
-        let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems }.joined().map(makePaths).joined().toArray()
+        let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let restPaths = RestRenderer().paths(forRests: noteSequence.rests)
         
         return notePaths + noteSymbolPaths + restPaths
@@ -93,6 +93,8 @@ class MusicRenderer {
         switch symbol {
         case let dot as DotSymbol:
             return DotRenderer().paths(forDot: dot)
+        case let sharp as SharpSymbol:
+            return SharpRenderer().paths(forSharp: sharp)
         default:
             fatalError("Unknown symbol type: \(symbol)")
         }

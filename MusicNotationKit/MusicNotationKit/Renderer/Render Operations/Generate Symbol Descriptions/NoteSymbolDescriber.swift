@@ -27,6 +27,7 @@ class NoteSymbolDescriber {
         }
         
         description.trailingLayoutItems = trailingDotSymbols(forNote: note)
+        description.leadingLayoutItems = leadingSymbols(forNote: note)
         
         return description
     }
@@ -50,6 +51,16 @@ class NoteSymbolDescriber {
         case 8192: return 11
         default:
             fatalError("division \(division) not supported!")
+        }
+    }
+    
+    private func leadingSymbols(forNote note: Note) -> [SharpSymbol] {
+        
+        if note.accidental == .sharp {
+            let sharp = SharpSymbol()
+            return [sharp]
+        } else {
+            return []
         }
     }
     

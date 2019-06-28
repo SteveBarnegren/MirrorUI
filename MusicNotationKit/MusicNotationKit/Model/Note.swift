@@ -11,6 +11,7 @@ import Foundation
 public class Note: Playable {
     
     let pitch: Pitch
+    public var accidental = Accidental.none
     var symbolDescription = NoteSymbolDescription.standard
     
     // Width
@@ -27,6 +28,9 @@ public class Note: Playable {
     // HorizontallyConstrained
     var leadingConstraint = HorizontalConstraint.zero
     var trailingConstraint = HorizontalConstraint.zero
+    var leadingLayoutItems: [HorizontalLayoutItem] {
+        return self.symbolDescription.leadingLayoutItems
+    }
     var trailingLayoutItems: [HorizontalLayoutItem] {
         return self.symbolDescription.trailingLayoutItems
     }
@@ -51,6 +55,11 @@ public class Note: Playable {
     }
 }
 
+public enum Accidental {
+    case none
+    case sharp
+}
+
 enum Beam {
     case connectedNext
     case connectedPrevious
@@ -71,6 +80,7 @@ class NoteSymbolDescription {
     let headStyle: HeadStyle
     let hasStem: Bool
     let numberOfTails: Int
+    var leadingLayoutItems = [HorizontalLayoutItem]()
     var trailingLayoutItems = [HorizontalLayoutItem]()
     
     init(headStyle: HeadStyle, hasStem: Bool, numberOfTails: Int) {

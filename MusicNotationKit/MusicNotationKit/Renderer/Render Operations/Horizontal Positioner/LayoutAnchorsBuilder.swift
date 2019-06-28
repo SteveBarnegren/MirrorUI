@@ -70,6 +70,14 @@ class LayoutAnchorsBuilder {
             anchor.width = 1.4
             anchor.time = note.time
             
+            // Create adjacent items for accidental
+            for sharp in note.leadingLayoutItems.compactMap({ $0 as? SharpSymbol }) {
+                let adjacentItem = AdjacentLayoutItem(item: sharp)
+                adjacentItem.width = 1
+                adjacentItem.distanceFromAnchor = 0.1
+                anchor.add(leadingItem: adjacentItem)
+            }
+            
             // Create Adjacent items for dots
             for dot in note.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
                 let adjacentItem = AdjacentLayoutItem(item: dot)

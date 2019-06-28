@@ -13,7 +13,8 @@ class VerticalPositionerRenderOperation: RenderOperation {
     func process(composition: Composition, layoutWidth: Double) {
         composition.enumerateNotes { note in
             self.position(note: note)
-            note.trailingLayoutItems.forEach(self.position(trailingLayoutItem:))
+            note.leadingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }
+            note.trailingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }
         }
     }
     
@@ -21,13 +22,15 @@ class VerticalPositionerRenderOperation: RenderOperation {
         note.position.y = note.pitch.staveOffset - 0.5
     }
     
-    private func position(trailingLayoutItem: HorizontalLayoutItem) {
+    private func position(adjacentLayoutItem: HorizontalLayoutItem, forNote note: Note) {
         
-        switch trailingLayoutItem {
+        switch adjacentLayoutItem {
         case let dot as DotSymbol:
             dot.position.y = dot.pitch.staveOffset
+        case let sharp as SharpSymbol:
+            sharp.position.y = note.pitch.staveOffset
         default:
-            fatalError("Unknown trailing item type: \(trailingLayoutItem)")
+            fatalError("Unknown item type: \(adjacentLayoutItem)")
         }
     }
     
