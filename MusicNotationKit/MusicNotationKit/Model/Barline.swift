@@ -10,8 +10,8 @@ import Foundation
 
 class Barline: HorizontalLayoutItem {
     
-    // HorizontallyConstrained
-    let layoutDuration: Time? = Time.init(value: 1, division: 64)
+    // HorizontalLayoutItem
+    let layoutDuration: Time? = nil
     
     // HorizontallyPositionable
     var xPosition = Double(0)

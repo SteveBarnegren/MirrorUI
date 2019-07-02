@@ -10,9 +10,7 @@ import Foundation
 
 class SharpSymbol: HorizontalLayoutItem, Positionable {
     
-    // Do we need this stuff?
+    // HorizontalLayoutItem
     var layoutDuration: Time? = nil
-    var trailingLayoutItems = [HorizontalLayoutItem]()
-    
     var position = Point.zero
 }

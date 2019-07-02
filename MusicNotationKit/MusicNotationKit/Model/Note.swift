@@ -25,7 +25,6 @@ public class Note: Playable {
     let value: NoteValue
     var time = Time.zero
     
-    // HorizontallyConstrained
     var leadingLayoutItems: [HorizontalLayoutItem] {
         return self.symbolDescription.leadingLayoutItems
     }
