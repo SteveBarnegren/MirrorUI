@@ -15,8 +15,6 @@ public class Note: Playable {
     var symbolDescription = NoteSymbolDescription.standard
     
     // Width
-    var leadingWidth = Double(0)
-    var trailingWidth = Double(0)
     var layoutDuration: Time? {
         return self.duration
     }
