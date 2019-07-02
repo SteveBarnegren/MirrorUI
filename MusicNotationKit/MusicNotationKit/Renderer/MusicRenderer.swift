@@ -38,9 +38,6 @@ class MusicRenderer {
         // Populate note beams
         GenerateBeamDescriptionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
-        // Calculate width constraints
-        GenerateHorizontalConstraintsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
-        
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         

@@ -26,21 +26,11 @@ public class Note: Playable {
     var time = Time.zero
     
     // HorizontallyConstrained
-    var leadingConstraint = HorizontalConstraint.zero
-    var trailingConstraint = HorizontalConstraint.zero
     var leadingLayoutItems: [HorizontalLayoutItem] {
         return self.symbolDescription.leadingLayoutItems
     }
     var trailingLayoutItems: [HorizontalLayoutItem] {
         return self.symbolDescription.trailingLayoutItems
-    }
-    
-    var leadingLayoutOffset: Double {
-        return self.leadingConstraint.minimumDistance(atPriority: .required)
-    }
-    
-    var trailingLayoutOffset: Double {
-        return self.trailingConstraint.minimumDistance(atPriority: .required)
     }
     
     // Positionable

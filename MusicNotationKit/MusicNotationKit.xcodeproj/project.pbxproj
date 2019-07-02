@@ -17,7 +17,6 @@
 		671A4D2E22885987002C56E8 /* NoteValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2D22885987002C56E8 /* NoteValueTests.swift */; };
 		671A4D3022885A02002C56E8 /* NoteValue+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */; };
 		671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D34228868B3002C56E8 /* DotSymbol.swift */; };
-		671A4D3722886C1E002C56E8 /* DotConstraintsDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D3622886C1E002C56E8 /* DotConstraintsDescriber.swift */; };
 		671A4D3922886FBD002C56E8 /* DotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D3822886FBD002C56E8 /* DotRenderer.swift */; };
 		6726FB0322306840002EFE4D /* RenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB0222306840002EFE4D /* RenderOperation.swift */; };
 		6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */; };
@@ -39,18 +38,15 @@
 		674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6749365021CF8861005BA334 /* StaveRenderer.swift */; };
 		674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */; };
 		674D504221DD5774009E5AFE /* PlayableItemTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504121DD5774009E5AFE /* PlayableItemTimeCalculator.swift */; };
-		674D504421E10504009E5AFE /* NoteConstraintsDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504321E10504009E5AFE /* NoteConstraintsDescriber.swift */; };
 		674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504A21E23CD8009E5AFE /* NoteRenderer.swift */; };
 		674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */; };
 		6751A8352232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8342232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift */; };
 		6751A8382232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A8372232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift */; };
-		6751A83B22330023000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83A22330022000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift */; };
 		6751A83E223304E7000B0D08 /* Barline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83D223304E7000B0D08 /* Barline.swift */; };
 		6751A84022350475000B0D08 /* NoteValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A83F22350475000B0D08 /* NoteValue.swift */; };
 		6751A84222357AE3000B0D08 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84122357AE3000B0D08 /* Rest.swift */; };
 		6751A84422357AFA000B0D08 /* Playable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84322357AFA000B0D08 /* Playable.swift */; };
 		6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */; };
-		6751A848223583EF000B0D08 /* RestConstraintsDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A847223583EF000B0D08 /* RestConstraintsDescriber.swift */; };
 		6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A849223585D5000B0D08 /* RestRenderer.swift */; };
 		67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */; };
 		67678DF821E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */; };
@@ -111,7 +107,6 @@
 		671A4D2D22885987002C56E8 /* NoteValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteValueTests.swift; sourceTree = "<group>"; };
 		671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteValue+Verify.swift"; sourceTree = "<group>"; };
 		671A4D34228868B3002C56E8 /* DotSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotSymbol.swift; sourceTree = "<group>"; };
-		671A4D3622886C1E002C56E8 /* DotConstraintsDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotConstraintsDescriber.swift; sourceTree = "<group>"; };
 		671A4D3822886FBD002C56E8 /* DotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotRenderer.swift; sourceTree = "<group>"; };
 		6726FB0222306840002EFE4D /* RenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderOperation.swift; sourceTree = "<group>"; };
 		6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationSymbolDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
@@ -133,18 +128,15 @@
 		674D503C21DD50F8009E5AFE /* NoteSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSequence.swift; sourceTree = "<group>"; };
 		674D503F21DD5242009E5AFE /* NoteSymbolDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSymbolDescriber.swift; sourceTree = "<group>"; };
 		674D504121DD5774009E5AFE /* PlayableItemTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayableItemTimeCalculator.swift; sourceTree = "<group>"; };
-		674D504321E10504009E5AFE /* NoteConstraintsDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteConstraintsDescriber.swift; sourceTree = "<group>"; };
 		674D504A21E23CD8009E5AFE /* NoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRenderer.swift; sourceTree = "<group>"; };
 		674D504D21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPositionerRenderOperation.swift; sourceTree = "<group>"; };
 		6751A8342232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateBeamDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
 		6751A8372232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatePlayableItemTimesRenderOperation.swift; sourceTree = "<group>"; };
-		6751A83A22330022000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateHorizontalConstraintsRenderOperation.swift; sourceTree = "<group>"; };
 		6751A83D223304E7000B0D08 /* Barline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barline.swift; sourceTree = "<group>"; };
 		6751A83F22350475000B0D08 /* NoteValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteValue.swift; sourceTree = "<group>"; };
 		6751A84122357AE3000B0D08 /* Rest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
 		6751A84322357AFA000B0D08 /* Playable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playable.swift; sourceTree = "<group>"; };
 		6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestSymbolDescriber.swift; sourceTree = "<group>"; };
-		6751A847223583EF000B0D08 /* RestConstraintsDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestConstraintsDescriber.swift; sourceTree = "<group>"; };
 		6751A849223585D5000B0D08 /* RestRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRenderer.swift; sourceTree = "<group>"; };
 		67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPositionerRenderOperation.swift; sourceTree = "<group>"; };
@@ -365,17 +357,6 @@
 			path = "Calculate Playable Item Times";
 			sourceTree = "<group>";
 		};
-		6751A8392232FFF8000B0D08 /* Generate Horizontal Constraints */ = {
-			isa = PBXGroup;
-			children = (
-				6751A83A22330022000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift */,
-				674D504321E10504009E5AFE /* NoteConstraintsDescriber.swift */,
-				6751A847223583EF000B0D08 /* RestConstraintsDescriber.swift */,
-				671A4D3622886C1E002C56E8 /* DotConstraintsDescriber.swift */,
-			);
-			path = "Generate Horizontal Constraints";
-			sourceTree = "<group>";
-		};
 		6751A83C22330289000B0D08 /* Vertical Positioner */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,7 +371,6 @@
 				6726FB01223067BC002EFE4D /* Generate Symbol Descriptions */,
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
-				6751A8392232FFF8000B0D08 /* Generate Horizontal Constraints */,
 				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
 				6751A83C22330289000B0D08 /* Vertical Positioner */,
 			);
@@ -667,7 +647,6 @@
 				67AE184821D9462C00F3545D /* Time.swift in Sources */,
 				670ABDB222C562CF00BFA678 /* FixedDistanceLayoutSolver.swift in Sources */,
 				67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */,
-				674D504421E10504009E5AFE /* NoteConstraintsDescriber.swift in Sources */,
 				677643F3228E0D18000683FF /* FreeFunctions.swift in Sources */,
 				67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */,
 				67AE184621D9387900F3545D /* Optional+Extensions.swift in Sources */,
@@ -688,7 +667,6 @@
 				674D503921DD50C8009E5AFE /* Composition.swift in Sources */,
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
 				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
-				671A4D3722886C1E002C56E8 /* DotConstraintsDescriber.swift in Sources */,
 				67494C8A21CD84520078A575 /* Pitch.swift in Sources */,
 				6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
@@ -703,7 +681,6 @@
 				67678DF821E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift in Sources */,
 				6751A84422357AFA000B0D08 /* Playable.swift in Sources */,
 				67A15FA421C512E800C3C03F /* Note.swift in Sources */,
-				6751A83B22330023000B0D08 /* GenerateHorizontalConstraintsRenderOperation.swift in Sources */,
 				67F6880421EA6D32003707DD /* HorizontalLayoutItem.swift in Sources */,
 				674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */,
 				670ABDB022C55E7000BFA678 /* Sequence+Extensions.swift in Sources */,
@@ -712,7 +689,6 @@
 				6769B42922BDA52800AAFFF9 /* Array+Extract.swift in Sources */,
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
-				6751A848223583EF000B0D08 /* RestConstraintsDescriber.swift in Sources */,
 				6728B2C22236FE6000382D92 /* ConstraintsDebugDrawer.swift in Sources */,
 				670ABDB622C6AE5A00BFA678 /* SharpSymbol.swift in Sources */,
 			);

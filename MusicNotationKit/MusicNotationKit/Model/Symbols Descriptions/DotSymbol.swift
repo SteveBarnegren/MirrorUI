@@ -15,8 +15,5 @@ class DotSymbol: HorizontalLayoutItem, Positionable {
     
     // Horizontally Constrained
     var layoutDuration: Time? = nil
-    var leadingConstraint = HorizontalConstraint.zero
-    var trailingConstraint = HorizontalConstraint.zero
-    let trailingLayoutItems = [HorizontalLayoutItem]()
     var xPosition: Double = 0
 }

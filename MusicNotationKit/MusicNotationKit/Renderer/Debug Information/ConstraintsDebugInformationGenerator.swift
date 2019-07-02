@@ -26,70 +26,71 @@ struct ConstraintsDebugInformation {
 class ConstraintsDebugInformationGenerator {
     
     func debugInformation(fromComposition composition: Composition, scale: Double) -> ConstraintsDebugInformation {
+        return ConstraintsDebugInformation(descriptions: [])
         
-        var descriptions = [ConstraintsDebugInformation.ItemDescription]()
-        
-        for bar in composition.bars {
-            
-            descriptions.append(itemDescription(for: bar.leadingBarline, scale: scale))
-            
-            for noteSequence in bar.sequences {
-                for playable in noteSequence.playables {
-                    descriptions.append(itemDescription(for: playable, scale: scale))
-                }
-            }
-        }
-        
-        return ConstraintsDebugInformation(descriptions: descriptions)
+//        var descriptions = [ConstraintsDebugInformation.ItemDescription]()
+//
+//        for bar in composition.bars {
+//
+//            descriptions.append(itemDescription(for: bar.leadingBarline, scale: scale))
+//
+//            for noteSequence in bar.sequences {
+//                for playable in noteSequence.playables {
+//                    descriptions.append(itemDescription(for: playable, scale: scale))
+//                }
+//            }
+//        }
+//
+//        return ConstraintsDebugInformation(descriptions: descriptions)
     }
     
-    private func itemDescription(for item: HorizontalLayoutItem, scale: Double) -> ConstraintsDebugInformation.ItemDescription {
-        
-        let xPosition = item.xPosition * scale
-        var constraintZones = [ConstraintsDebugInformation.ConstraintZone]()
-        
-        // Leading
-        var leadingX = xPosition
-        
-        do {
-            var maxValueLength = 0.0
-            for value in item.leadingConstraint.values.sortedAscendingBy({ $0.priority }) {
-                let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
-                                                                      startX: leadingX - value.length*scale,
-                                                                      endX: leadingX)
-                constraintZones.append(zone)
-                maxValueLength = max(maxValueLength, value.length * scale)
-            }
-            leadingX -= maxValueLength
-        }
-        
-    
-        // Trailing
-        var trailingX = xPosition
-        
-        do {
-            var maxValueLength = 0.0
-            for value in item.trailingConstraint.values.sortedAscendingBy({ $0.priority }) {
-                let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
-                                                                      startX: trailingX + value.length*scale,
-                                                                      endX: trailingX)
-                constraintZones.append(zone)
-                maxValueLength = max(maxValueLength, value.length * scale)
-            }
-            trailingX += maxValueLength
-        }
-        
-        let description = ConstraintsDebugInformation.ItemDescription(xPosition: item.xPosition * scale,
-                                                                      constraintZones: constraintZones)
-        return description
-    }
-    
-    private func color(forPriority priority: ConstraintPriority) -> UIColor {
-        switch priority {
-        case .required:
-            return UIColor.red
-        case .regular:
-            return UIColor.yellow
-        }
-    }
+//    private func itemDescription(for item: HorizontalLayoutItem, scale: Double) -> ConstraintsDebugInformation.ItemDescription {
+//        
+//        let xPosition = item.xPosition * scale
+//        var constraintZones = [ConstraintsDebugInformation.ConstraintZone]()
+//        
+//        // Leading
+//        var leadingX = xPosition
+//        
+//        do {
+//            var maxValueLength = 0.0
+//            for value in item.leadingConstraint.values.sortedAscendingBy({ $0.priority }) {
+//                let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
+//                                                                      startX: leadingX - value.length*scale,
+//                                                                      endX: leadingX)
+//                constraintZones.append(zone)
+//                maxValueLength = max(maxValueLength, value.length * scale)
+//            }
+//            leadingX -= maxValueLength
+//        }
+//        
+//    
+//        // Trailing
+//        var trailingX = xPosition
+//        
+//        do {
+//            var maxValueLength = 0.0
+//            for value in item.trailingConstraint.values.sortedAscendingBy({ $0.priority }) {
+//                let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
+//                                                                      startX: trailingX + value.length*scale,
+//                                                                      endX: trailingX)
+//                constraintZones.append(zone)
+//                maxValueLength = max(maxValueLength, value.length * scale)
+//            }
+//            trailingX += maxValueLength
+//        }
+//        
+//        let description = ConstraintsDebugInformation.ItemDescription(xPosition: item.xPosition * scale,
+//                                                                      constraintZones: constraintZones)
+//        return description
+//    }
+//    
+//    private func color(forPriority priority: ConstraintPriority) -> UIColor {
+//        switch priority {
+//        case .required:
+//            return UIColor.red
+//        case .regular:
+//            return UIColor.yellow
+//        }
+//    }
 }
