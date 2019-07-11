@@ -92,6 +92,8 @@ class MusicRenderer {
             return DotRenderer().paths(forDot: dot)
         case let sharp as SharpSymbol:
             return SharpRenderer().paths(forSharp: sharp)
+        case let flat as FlatSymbol:
+            return FlatRenderer().paths(forFlat: flat)
         default:
             fatalError("Unknown symbol type: \(symbol)")
         }

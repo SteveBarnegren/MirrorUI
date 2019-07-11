@@ -44,11 +44,23 @@ public class Note: Playable {
         self.value = value
         self.pitch = pitch
     }
+    
+    // Acidentals
+    public func sharp() -> Note {
+        self.accidental = .sharp
+        return self
+    }
+    
+    public func flat() -> Note {
+        self.accidental = .flat
+        return self
+    }
 }
 
 public enum Accidental {
     case none
     case sharp
+    case flat
 }
 
 enum Beam {

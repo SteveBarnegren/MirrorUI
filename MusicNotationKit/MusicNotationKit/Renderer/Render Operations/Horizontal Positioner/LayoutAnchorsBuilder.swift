@@ -70,11 +70,11 @@ class LayoutAnchorsBuilder {
             anchor.width = playable.horizontalLayoutWidth
             anchor.time = playable.time
             
-            // Create adjacent items for accidental
-            for sharp in playable.leadingLayoutItems.compactMap({ $0 as? SharpSymbol }) {
-                let adjacentAnchor = AdjacentLayoutAnchor(item: sharp)
-                adjacentAnchor.width = sharp.horizontalLayoutWidth
-                adjacentAnchor.distanceFromAnchor = sharp.hoizontalLayoutDistanceFromParentItem
+            // Create leading anchors
+            for item in playable.leadingLayoutItems {
+                let adjacentAnchor = AdjacentLayoutAnchor(item: item)
+                adjacentAnchor.width = item.horizontalLayoutWidth
+                adjacentAnchor.distanceFromAnchor = item.hoizontalLayoutDistanceFromParentItem
                 anchor.add(leadingAnchor: adjacentAnchor)
             }
             

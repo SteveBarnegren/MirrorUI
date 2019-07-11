@@ -56,12 +56,18 @@ class NoteSymbolDescriber {
     
     private func leadingLayoutItems(forNote note: Note) -> [AdjacentLayoutItem] {
         
-        if note.accidental == .sharp {
-            let sharp = SharpSymbol()
-            return [sharp]
-        } else {
-            return []
+        var items = [AdjacentLayoutItem]()
+        
+        switch note.accidental {
+        case .none:
+            break
+        case .sharp:
+            items.append(SharpSymbol())
+        case .flat:
+            items.append(FlatSymbol())
         }
+        
+        return items
     }
     
     private func trailingLayoutItems(forNote note: Note) -> [AdjacentLayoutItem] {
