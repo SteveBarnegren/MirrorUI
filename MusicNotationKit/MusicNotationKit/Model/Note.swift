@@ -77,6 +77,11 @@ enum Beam {
     case cutOffRight
 }
 
+enum StemDirection {
+    case up
+    case down
+}
+
 class NoteSymbolDescription {
     
     enum HeadStyle {
@@ -91,6 +96,7 @@ class NoteSymbolDescription {
     let numberOfTails: Int
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
+    var stemDirection = StemDirection.up
     
     init(headStyle: HeadStyle, hasStem: Bool, numberOfTails: Int) {
         self.headStyle = headStyle
