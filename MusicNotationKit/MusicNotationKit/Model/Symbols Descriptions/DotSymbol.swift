@@ -10,6 +10,11 @@ import Foundation
 
 class DotSymbol: AdjacentLayoutItem, Positionable {
     
+    // AdjacentLayoutItem
+    var horizontalLayoutWidth: Double = 0.5
+    var hoizontalLayoutDistanceFromParentItem: Double = 0.1
+    
+    // Positionable
     var position: Point = .zero
     var pitch = Pitch.c4
     

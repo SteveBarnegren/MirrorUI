@@ -8,12 +8,16 @@
 
 import Foundation
 
-protocol HorizontalLayoutItem: class, HorizontallyPositionable {
+protocol HorizontalLayoutItemBase: class, HorizontallyPositionable {
+    var horizontalLayoutWidth: Double { get }
+}
+
+protocol HorizontalLayoutItem: HorizontalLayoutItemBase {
     var layoutDuration: Time? { get }
     var leadingLayoutItems: [AdjacentLayoutItem] { get }
     var trailingLayoutItems: [AdjacentLayoutItem] { get }
 }
 
-protocol AdjacentLayoutItem: class, HorizontallyPositionable {
+protocol AdjacentLayoutItem: HorizontalLayoutItemBase {
+    var hoizontalLayoutDistanceFromParentItem: Double { get }
 }
-

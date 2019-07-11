@@ -9,11 +9,12 @@
 import Foundation
 
 class Barline: HorizontalLayoutItem {
-
+    
     // HorizontalLayoutItem
     let layoutDuration: Time? = nil
     let leadingLayoutItems = [AdjacentLayoutItem]()
     let trailingLayoutItems = [AdjacentLayoutItem]()
+    let horizontalLayoutWidth = 0.2
     
     // HorizontallyPositionable
     var xPosition = Double(0)

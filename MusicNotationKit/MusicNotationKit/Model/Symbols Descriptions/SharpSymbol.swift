@@ -8,6 +8,12 @@
 
 import Foundation
 
-class SharpSymbol: AdjacentLayoutItem, Positionable {    
+class SharpSymbol: AdjacentLayoutItem, Positionable {
+    
+    // AdjacentLayoutItem
+    let horizontalLayoutWidth: Double = 1
+    var hoizontalLayoutDistanceFromParentItem: Double = 0.1
+    
+    // Positionable
     var position = Point.zero
 }
