@@ -8,12 +8,6 @@
 
 import Foundation
 
-class SharpSymbol: HorizontalLayoutItem, Positionable {    
-    
-    // HorizontalLayoutItem
-    var layoutDuration: Time? = nil
-    let leadingLayoutItems = [HorizontalLayoutItem]()
-    let trailingLayoutItems = [HorizontalLayoutItem]()
-    
+class SharpSymbol: AdjacentLayoutItem, Positionable {    
     var position = Point.zero
 }

@@ -23,10 +23,10 @@ public class Note: Playable {
     let value: NoteValue
     var time = Time.zero
     
-    var leadingLayoutItems: [HorizontalLayoutItem] {
+    var leadingLayoutItems: [AdjacentLayoutItem] {
         return self.symbolDescription.leadingLayoutItems
     }
-    var trailingLayoutItems: [HorizontalLayoutItem] {
+    var trailingLayoutItems: [AdjacentLayoutItem] {
         return self.symbolDescription.trailingLayoutItems
     }
     
@@ -67,8 +67,8 @@ class NoteSymbolDescription {
     let headStyle: HeadStyle
     let hasStem: Bool
     let numberOfTails: Int
-    var leadingLayoutItems = [HorizontalLayoutItem]()
-    var trailingLayoutItems = [HorizontalLayoutItem]()
+    var leadingLayoutItems = [AdjacentLayoutItem]()
+    var trailingLayoutItems = [AdjacentLayoutItem]()
     
     init(headStyle: HeadStyle, hasStem: Bool, numberOfTails: Int) {
         self.headStyle = headStyle

@@ -85,7 +85,7 @@ class MusicRenderer {
     
     // Render Symbols
     
-    private func makePaths(forSymbol symbol: HorizontalLayoutItem) -> [Path] {
+    private func makePaths(forSymbol symbol: AdjacentLayoutItem) -> [Path] {
         
         switch symbol {
         case let dot as DotSymbol:

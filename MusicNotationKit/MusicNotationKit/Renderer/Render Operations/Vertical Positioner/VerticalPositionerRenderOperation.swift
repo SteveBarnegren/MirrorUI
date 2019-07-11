@@ -22,7 +22,7 @@ class VerticalPositionerRenderOperation: RenderOperation {
         note.position.y = note.pitch.staveOffset - 0.5
     }
     
-    private func position(adjacentLayoutItem: HorizontalLayoutItem, forNote note: Note) {
+    private func position(adjacentLayoutItem: AdjacentLayoutItem, forNote note: Note) {
         
         switch adjacentLayoutItem {
         case let dot as DotSymbol:

@@ -17,8 +17,8 @@ public class Rest: Playable {
     
     // HorizontalLayoutItem
     var time = Time.zero
-    let leadingLayoutItems = [HorizontalLayoutItem]()
-    let trailingLayoutItems = [HorizontalLayoutItem]()
+    let leadingLayoutItems = [AdjacentLayoutItem]()
+    let trailingLayoutItems = [AdjacentLayoutItem]()
     
     // Positionable
     var position = Point.zero

@@ -54,7 +54,7 @@ class NoteSymbolDescriber {
         }
     }
     
-    private func leadingLayoutItems(forNote note: Note) -> [HorizontalLayoutItem] {
+    private func leadingLayoutItems(forNote note: Note) -> [AdjacentLayoutItem] {
         
         if note.accidental == .sharp {
             let sharp = SharpSymbol()
@@ -64,7 +64,7 @@ class NoteSymbolDescriber {
         }
     }
     
-    private func trailingLayoutItems(forNote note: Note) -> [HorizontalLayoutItem] {
+    private func trailingLayoutItems(forNote note: Note) -> [AdjacentLayoutItem] {
         
         func makeDotSymbol(forNote note: Note) -> DotSymbol {
             let symbol = DotSymbol()

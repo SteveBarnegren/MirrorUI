@@ -8,15 +8,10 @@
 
 import Foundation
 
-class DotSymbol: HorizontalLayoutItem, Positionable {
+class DotSymbol: AdjacentLayoutItem, Positionable {
     
     var position: Point = .zero
     var pitch = Pitch.c4
-    
-    // HorizontalLayoutItem
-    let leadingLayoutItems = [HorizontalLayoutItem]()
-    let trailingLayoutItems = [HorizontalLayoutItem]()
-    var hoizontalLayoutWidth: Double = 0.5
     
     // Horizontally Constrained
     var layoutDuration: Time? = nil
