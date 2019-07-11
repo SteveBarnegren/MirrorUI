@@ -10,8 +10,8 @@ import Foundation
 
 class NoteRenderer {
     
-    private let preferredStemHeight = 3.5
-    private let stemXOffet = 0.55
+    private let preferredStemHeight = 3.0
+    private let stemXOffset = 0.55
     private let stemWidth = 0.1
     private let beamWidth = 0.3
     private let noteHeadWidth = 1.4
@@ -57,14 +57,14 @@ class NoteRenderer {
         
         // Crotchet
         if note.symbolDescription.numberOfTails == 0 {
-            paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + preferredStemHeight))
+            paths.append(maybe: makeStemPath(forNote: note))
         }
         
         // Quaver
         if note.symbolDescription.numberOfTails == 1 {
-            paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + preferredStemHeight))
+            paths.append(maybe: makeStemPath(forNote: note))
 
-            var noteTailPath = Path(commands: makeQuaverTailCommands()).translated(x: note.xPosition + stemXOffet, y: note.yPosition + 1.75)
+            var noteTailPath = Path(commands: makeQuaverTailCommands()).translated(x: note.xPosition + stemXOffset, y: note.yPosition + 1.75)
             noteTailPath.drawStyle = .fill
             paths.append(noteTailPath)
         }
@@ -77,12 +77,12 @@ class NoteRenderer {
             let tailsHeight = eachTailYOffset * Double(note.symbolDescription.numberOfTails)
             let stemHeight = max(preferredStemHeight, tailsHeight + bottomOffset)
 
-            paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + stemHeight))
+            paths.append(maybe: makeStemPath(forNote: note))
             
             for (tailNumber, isLast) in (0..<note.symbolDescription.numberOfTails).enumeratedWithLastItemFlag() {
                 let yOffset = Double(tailNumber) * eachTailYOffset
                 let commands = isLast ? makeFastNoteBottomTailCommands() : makeFastNoteTailCommands()
-                var noteTailPath = Path(commands: commands).translated(x: note.xPosition + stemXOffet,
+                var noteTailPath = Path(commands: commands).translated(x: note.xPosition + stemXOffset,
                                                                        y: note.yPosition + stemHeight - yOffset)
                 noteTailPath.drawStyle = .fill
                 paths.append(noteTailPath)
@@ -136,7 +136,7 @@ class NoteRenderer {
         var paths = [Path]()
         
         // Work out the beam height
-        let beamY = notes.map { $0.position.y }.max().orZero() + preferredStemHeight
+        let beamY = notes.map { $0.position.y }.max().orZero() + preferredStemOffset(for: notes[0].symbolDescription.stemDirection)
         
         // Draw notes with stems
         for note in notes {
@@ -176,10 +176,11 @@ class NoteRenderer {
     
     private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
         
-        let beamSeparation = 0.4
+        let stemDirection = fromNote.symbolDescription.stemDirection
+        let beamSeparation = 0.4.inverted(if: { stemDirection == .down })
         
-        let beamStartX = fromNote.position.x + stemXOffet
-        let beamEndX = toNote.position.x + stemXOffet + stemWidth
+        let beamStartX = fromNote.position.x + stemXOffset(for: stemDirection)
+        let beamEndX = toNote.position.x + stemXOffset(for: stemDirection) + stemWidth
         let beamRect = Rect(x: beamStartX,
                             y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
                             width: beamEndX - beamStartX,
@@ -193,19 +194,21 @@ class NoteRenderer {
     
     private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
         
-        let beamSeparation = 0.4
+        let stemDirection = note.symbolDescription.stemDirection
+        let beamSeparation = 0.4.inverted(if: { stemDirection == .down })
+        let height = beamWidth.inverted(if: { stemDirection == .down })
         
         let x: Double
         if rightSide {
-            x = note.position.x + stemXOffet + stemWidth
+            x = note.position.x + stemXOffset(for: stemDirection) + stemWidth
         } else {
-            x = note.position.x + stemXOffet - 1
+            x = note.position.x + stemXOffset(for: stemDirection) - 1
         }
         
         let beamRect = Rect(x: x,
-                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
+                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + height)),
                             width: 1,
-                            height: -beamWidth)
+                            height: -height)
         
         var path = Path()
         path.addRect(beamRect)
@@ -230,13 +233,23 @@ class NoteRenderer {
             return nil
         }
         
-        return path.translated(x: note.position.x - noteHeadWidth/2, y: note.position.y)
+        return path.translated(x: note.position.x - noteHeadWidth/2, y: note.position.y - 0.5)
     }
     
-    private func makeStemPath(forNote note: Note, to stemEndY: Double) -> Path? {
+    // MARK: - Stems
+    
+    private func makeStemPath(forNote note: Note, to customStemEndY: Double? = nil) -> Path? {
         
         if note.symbolDescription.hasStem == false {
             return nil
+        }
+        
+        let stemEndY: Double
+        switch (customStemEndY, note.symbolDescription.stemDirection) {
+        case let (value?, _):
+            stemEndY = value
+        case (nil, let direction):
+            stemEndY = note.position.y + preferredStemOffset(for: direction)
         }
         
         guard let stemRect = self.stemRect(fromNote: note, to: stemEndY) else {
@@ -255,11 +268,39 @@ class NoteRenderer {
             return nil
         }
         
-        let stemYOffset = 0.6
+        let xOffset = stemXOffset(for: note.symbolDescription.stemDirection)
         
-        return Rect(x: note.position.x + stemXOffet,
-                    y: note.position.y + stemYOffset,
+        var stemYOffset = 0.1
+        if stemEndY < note.position.y {
+            stemYOffset = -stemYOffset
+        }
+        
+        let startY = note.position.y + stemYOffset
+        
+        return Rect(x: note.position.x + xOffset,
+                    y: startY,
                     width: stemWidth,
-                    height: stemEndY - note.position.y - stemYOffset)
+                    height: stemEndY - startY)
+    }
+    
+    // MARK: - Helpers
+    
+    private func preferredStemOffset(for direction: StemDirection) -> Double {
+        
+        switch direction {
+        case .up:
+            return preferredStemHeight
+        case .down:
+            return -preferredStemHeight
+        }
+    }
+    
+    private func stemXOffset(for direction: StemDirection) -> Double {
+        switch direction {
+        case .up:
+            return stemXOffset
+        case .down:
+            return -stemXOffset
+        }
     }
 }

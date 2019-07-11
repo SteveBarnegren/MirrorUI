@@ -52,6 +52,7 @@
 		6753D0F722D7D31D0052F27F /* FlatRendereer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0F622D7D31D0052F27F /* FlatRendereer.swift */; };
 		6753D0F922D7D89C0052F27F /* NaturalSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0F822D7D89C0052F27F /* NaturalSymbol.swift */; };
 		6753D0FB22D7D9340052F27F /* NaturalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */; };
+		6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */; };
 		67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */; };
 		67678DF821E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */; };
 		67678DFA21E250A200E7FD71 /* NoteBeamDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */; };
@@ -145,6 +146,7 @@
 		6753D0F622D7D31D0052F27F /* FlatRendereer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatRendereer.swift; sourceTree = "<group>"; };
 		6753D0F822D7D89C0052F27F /* NaturalSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSymbol.swift; sourceTree = "<group>"; };
 		6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalRenderer.swift; sourceTree = "<group>"; };
+		6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
 		67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPositionerRenderOperation.swift; sourceTree = "<group>"; };
 		67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriber.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */,
 				67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */,
 				67F6880F21EB5597003707DD /* Numeric+Constrained.swift */,
+				6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */,
 			);
 			path = "Swift Standard Library";
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
 				6753D0F722D7D31D0052F27F /* FlatRendereer.swift in Sources */,
 				6753D0F922D7D89C0052F27F /* NaturalSymbol.swift in Sources */,
+				6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */,
 				6728B2C22236FE6000382D92 /* ConstraintsDebugDrawer.swift in Sources */,
 				670ABDB622C6AE5A00BFA678 /* SharpSymbol.swift in Sources */,
 			);

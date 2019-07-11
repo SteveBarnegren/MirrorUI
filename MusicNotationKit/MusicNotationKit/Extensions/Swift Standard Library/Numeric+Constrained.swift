@@ -36,4 +36,3 @@ public extension Numeric where Self: Comparable {
         return  Swift.max(Swift.min(self, maximumValue), minimumValue)
     }
 }
-
