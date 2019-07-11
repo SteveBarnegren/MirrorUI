@@ -17,8 +17,4 @@ class DotSymbol: AdjacentLayoutItem, Positionable {
     // Positionable
     var position: Point = .zero
     var pitch = Pitch.c4
-    
-    // Horizontally Constrained
-    var layoutDuration: Time? = nil
-    var xPosition: Double = 0
 }
