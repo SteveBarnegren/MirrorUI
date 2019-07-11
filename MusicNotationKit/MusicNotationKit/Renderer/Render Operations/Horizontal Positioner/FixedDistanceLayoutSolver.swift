@@ -19,7 +19,7 @@ class FixedDistanceLayoutSolver {
     
     private func solveAnchor(anchor: LayoutAnchor) {
 
-        solveAdjacentLayoutItemOffsets(forAnchor: anchor)
+        solveAdjacentLayoutAnchorOffsets(forAnchor: anchor)
         
         var leadingEdgePos = Double(0)
         
@@ -41,40 +41,40 @@ class FixedDistanceLayoutSolver {
         anchor.position = leadingEdgePos - anchor.leadingEdgeOffset
     }
     
-    private func solveAdjacentLayoutItemOffsets(forAnchor anchor: LayoutAnchor) {
+    private func solveAdjacentLayoutAnchorOffsets(forAnchor anchor: LayoutAnchor) {
         
         if let singleAnchor = anchor as? SingleItemLayoutAnchor {
-            solveLeadingLayoutItemOffsets(forSingleItemAnchor: singleAnchor)
-            solveTrailingLayoutItemOffsets(forSingleItemAnchor: singleAnchor)
+            solveLeadingLayoutAnchorOffsets(forSingleItemAnchor: singleAnchor)
+            solveTrailingLayoutAnchorOffsets(forSingleItemAnchor: singleAnchor)
         } else if let combinedAnchor = anchor as? CombinedItemsLayoutAnchor {
             combinedAnchor.anchors.forEach {
-                self.solveLeadingLayoutItemOffsets(forSingleItemAnchor: $0)
-                self.solveTrailingLayoutItemOffsets(forSingleItemAnchor: $0)
+                self.solveLeadingLayoutAnchorOffsets(forSingleItemAnchor: $0)
+                self.solveTrailingLayoutAnchorOffsets(forSingleItemAnchor: $0)
             }
         }
     }
     
-    private func solveLeadingLayoutItemOffsets(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
+    private func solveLeadingLayoutAnchorOffsets(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
         
         var offset = -anchor.width/2
         
-        for leadingItem in anchor.leadingLayoutItems {
-            offset -= leadingItem.distanceFromAnchor
-            offset -= leadingItem.width/2
-            leadingItem.offset = offset
-            offset -= leadingItem.width/2
+        for leadingAnchor in anchor.leadingLayoutAnchors {
+            offset -= leadingAnchor.distanceFromAnchor
+            offset -= leadingAnchor.width/2
+            leadingAnchor.offset = offset
+            offset -= leadingAnchor.width/2
         }
     }
     
-    private func solveTrailingLayoutItemOffsets(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
+    private func solveTrailingLayoutAnchorOffsets(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
         
         var offset = anchor.width/2
         
-        for trailingItem in anchor.trailingLayoutItems {
-            offset += trailingItem.distanceFromAnchor
-            offset += trailingItem.width/2
-            trailingItem.offset = offset
-            offset += trailingItem.width/2
+        for trailingAnchor in anchor.trailingLayoutAnchors {
+            offset += trailingAnchor.distanceFromAnchor
+            offset += trailingAnchor.width/2
+            trailingAnchor.offset = offset
+            offset += trailingAnchor.width/2
         }
     }
 }

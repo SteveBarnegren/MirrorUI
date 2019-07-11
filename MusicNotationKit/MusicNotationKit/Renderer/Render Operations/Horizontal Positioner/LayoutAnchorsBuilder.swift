@@ -72,18 +72,18 @@ class LayoutAnchorsBuilder {
             
             // Create adjacent items for accidental
             for sharp in playable.leadingLayoutItems.compactMap({ $0 as? SharpSymbol }) {
-                let adjacentItem = AdjacentLayoutItem(item: sharp)
-                adjacentItem.width = 1
-                adjacentItem.distanceFromAnchor = 0.1
-                anchor.add(leadingItem: adjacentItem)
+                let adjacentAnchor = AdjacentLayoutAnchor(item: sharp)
+                adjacentAnchor.width = 1
+                adjacentAnchor.distanceFromAnchor = 0.1
+                anchor.add(leadingAnchor: adjacentAnchor)
             }
             
             // Create Adjacent items for dots
             for dot in playable.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
-                let adjacentItem = AdjacentLayoutItem(item: dot)
-                adjacentItem.width = 0.5
-                adjacentItem.distanceFromAnchor = 0.1
-                anchor.add(trailingItem: adjacentItem)
+                let adjacentAnchor = AdjacentLayoutAnchor(item: dot)
+                adjacentAnchor.width = 0.5
+                adjacentAnchor.distanceFromAnchor = 0.1
+                anchor.add(trailingAnchor: adjacentAnchor)
             }
             
             // Assign fixed constraint from the previous anchor

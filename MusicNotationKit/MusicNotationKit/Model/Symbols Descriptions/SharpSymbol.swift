@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SharpSymbol: HorizontalLayoutItem, Positionable {
+class SharpSymbol: HorizontalLayoutItem, Positionable {    
     
     // HorizontalLayoutItem
     var layoutDuration: Time? = nil
