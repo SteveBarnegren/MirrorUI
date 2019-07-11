@@ -31,6 +31,8 @@ class VerticalPositionerRenderOperation: RenderOperation {
             sharp.position.y = note.pitch.staveOffset
         case let flat as FlatSymbol:
             flat.position.y = note.pitch.staveOffset
+        case let natural as NaturalSymbol:
+            natural.position.y = note.pitch.staveOffset
         default:
             fatalError("Unknown item type: \(adjacentLayoutItem)")
         }

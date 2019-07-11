@@ -65,6 +65,8 @@ class NoteSymbolDescriber {
             items.append(SharpSymbol())
         case .flat:
             items.append(FlatSymbol())
+        case .natural:
+            items.append(NaturalSymbol())
         }
         
         return items

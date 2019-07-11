@@ -110,7 +110,7 @@ class ViewController: UIViewController {
         sequence2.add(note: Note(value: .quarter, pitch: .f3))
         sequence2.add(note: Note(value: .dottedQuaver, pitch: .f3))
         sequence2.add(note: Note(value: .sixteenth, pitch: .f3).sharp())
-        sequence2.add(note: Note(value: .quarter, pitch: .f3))
+        sequence2.add(note: Note(value: .quarter, pitch: .f3).natural())
         bar.add(sequence: sequence2)
 
         return bar

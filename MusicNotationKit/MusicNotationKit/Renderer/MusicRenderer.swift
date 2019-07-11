@@ -94,6 +94,8 @@ class MusicRenderer {
             return SharpRenderer().paths(forSharp: sharp)
         case let flat as FlatSymbol:
             return FlatRenderer().paths(forFlat: flat)
+        case let natural as NaturalSymbol:
+            return NaturalRenderer().paths(forNatural: natural)
         default:
             fatalError("Unknown symbol type: \(symbol)")
         }

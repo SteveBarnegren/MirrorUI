@@ -55,12 +55,18 @@ public class Note: Playable {
         self.accidental = .flat
         return self
     }
+    
+    public func natural() -> Note {
+        self.accidental = .natural
+        return self
+    }
 }
 
 public enum Accidental {
     case none
     case sharp
     case flat
+    case natural
 }
 
 enum Beam {
