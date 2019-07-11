@@ -26,8 +26,8 @@ class NoteSymbolDescriber {
             description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfTails: numberOfTails(forDivision: division))
         }
         
-        description.trailingLayoutItems = trailingDotSymbols(forNote: note)
-        description.leadingLayoutItems = leadingSymbols(forNote: note)
+        description.trailingLayoutItems = trailingLayoutItems(forNote: note)
+        description.leadingLayoutItems = leadingLayoutItems(forNote: note)
         
         return description
     }
@@ -54,7 +54,7 @@ class NoteSymbolDescriber {
         }
     }
     
-    private func leadingSymbols(forNote note: Note) -> [SharpSymbol] {
+    private func leadingLayoutItems(forNote note: Note) -> [HorizontalLayoutItem] {
         
         if note.accidental == .sharp {
             let sharp = SharpSymbol()
@@ -64,7 +64,7 @@ class NoteSymbolDescriber {
         }
     }
     
-    private func trailingDotSymbols(forNote note: Note) -> [DotSymbol] {
+    private func trailingLayoutItems(forNote note: Note) -> [HorizontalLayoutItem] {
         
         func makeDotSymbol(forNote note: Note) -> DotSymbol {
             let symbol = DotSymbol()

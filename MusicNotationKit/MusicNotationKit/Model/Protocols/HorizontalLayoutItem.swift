@@ -10,4 +10,6 @@ import Foundation
 
 protocol HorizontalLayoutItem: class, HorizontallyPositionable {
     var layoutDuration: Time? { get }
+    var leadingLayoutItems: [HorizontalLayoutItem] { get }
+    var trailingLayoutItems: [HorizontalLayoutItem] { get }
 }

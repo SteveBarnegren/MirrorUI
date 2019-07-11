@@ -64,14 +64,14 @@ class LayoutAnchorsBuilder {
         var anchors = [SingleItemLayoutAnchor]()
         var previousAnchor: LayoutAnchor? = startingAnchor
         
-        for note in sequence.notes {
+        for playable in sequence.playables {
             
-            let anchor = SingleItemLayoutAnchor(item: note)
+            let anchor = SingleItemLayoutAnchor(item: playable)
             anchor.width = 1.4
-            anchor.time = note.time
+            anchor.time = playable.time
             
             // Create adjacent items for accidental
-            for sharp in note.leadingLayoutItems.compactMap({ $0 as? SharpSymbol }) {
+            for sharp in playable.leadingLayoutItems.compactMap({ $0 as? SharpSymbol }) {
                 let adjacentItem = AdjacentLayoutItem(item: sharp)
                 adjacentItem.width = 1
                 adjacentItem.distanceFromAnchor = 0.1
@@ -79,7 +79,7 @@ class LayoutAnchorsBuilder {
             }
             
             // Create Adjacent items for dots
-            for dot in note.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
+            for dot in playable.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
                 let adjacentItem = AdjacentLayoutItem(item: dot)
                 adjacentItem.width = 0.5
                 adjacentItem.distanceFromAnchor = 0.1

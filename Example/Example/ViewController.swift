@@ -93,7 +93,9 @@ class ViewController: UIViewController {
         let bar = Bar()
 
         let sequence1 = NoteSequence()
-        sequence1.add(note: Note(value: .quarter, pitch: .g4))
+        
+        sequence1.add(rest: Rest(value: .eighth))
+        sequence1.add(note: Note(value: .eighth, pitch: .g4))
         //sequence1.add(note: Note(value: .dottedQuaver, pitch: .g4))
         //sequence1.add(note: Note(value: .sixteenth, pitch: .g4))
         sequence1.add(note: Note(value: .doubleDottedQuaver, pitch: .g4))
@@ -133,7 +135,8 @@ class ViewController: UIViewController {
         let sequenceOne = NoteSequence()
         
         sequenceOne.add(note: Note(value: NoteValue(division: 4, dots: .dotted), pitch: .c4))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .d4))
+        sequenceOne.add(rest: Rest(value: .sixteenth))
+        sequenceOne.add(note: Note(value: .sixteenth, pitch: .d4))
         sequenceOne.add(note: Note(value: NoteValue(division: 8, dots: .dotted), pitch: .b4))
         sequenceOne.add(note: Note(value: .sixteenth, pitch: .a4))
         sequenceOne.add(note: Note(value: .sixteenth, pitch: .f3))

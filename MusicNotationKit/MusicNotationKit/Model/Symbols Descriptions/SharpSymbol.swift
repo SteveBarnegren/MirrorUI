@@ -12,5 +12,8 @@ class SharpSymbol: HorizontalLayoutItem, Positionable {
     
     // HorizontalLayoutItem
     var layoutDuration: Time? = nil
+    let leadingLayoutItems = [HorizontalLayoutItem]()
+    let trailingLayoutItems = [HorizontalLayoutItem]()
+    
     var position = Point.zero
 }

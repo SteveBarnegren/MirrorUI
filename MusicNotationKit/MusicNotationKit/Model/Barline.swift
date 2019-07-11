@@ -12,6 +12,8 @@ class Barline: HorizontalLayoutItem {
     
     // HorizontalLayoutItem
     let layoutDuration: Time? = nil
+    let leadingLayoutItems = [HorizontalLayoutItem]()
+    let trailingLayoutItems = [HorizontalLayoutItem]()
     
     // HorizontallyPositionable
     var xPosition = Double(0)

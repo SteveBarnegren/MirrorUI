@@ -14,7 +14,11 @@ public class Rest: Playable {
     
     // Playable
     var value: NoteValue
+    
+    // HorizontalLayoutItem
     var time = Time.zero
+    let leadingLayoutItems = [HorizontalLayoutItem]()
+    let trailingLayoutItems = [HorizontalLayoutItem]()
     
     // Positionable
     var position = Point.zero
