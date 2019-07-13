@@ -53,6 +53,7 @@
 		6753D0F922D7D89C0052F27F /* NaturalSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0F822D7D89C0052F27F /* NaturalSymbol.swift */; };
 		6753D0FB22D7D9340052F27F /* NaturalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */; };
 		6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */; };
+		6753D10222DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */; };
 		67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */; };
 		67678DF821E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */; };
 		67678DFA21E250A200E7FD71 /* NoteBeamDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */; };
@@ -147,6 +148,7 @@
 		6753D0F822D7D89C0052F27F /* NaturalSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSymbol.swift; sourceTree = "<group>"; };
 		6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalRenderer.swift; sourceTree = "<group>"; };
 		6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
+		6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateStemDirectionsRenderOperation.swift; sourceTree = "<group>"; };
 		67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		67678DF721E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPositionerRenderOperation.swift; sourceTree = "<group>"; };
 		67678DF921E250A200E7FD71 /* NoteBeamDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriber.swift; sourceTree = "<group>"; };
@@ -376,11 +378,20 @@
 			path = "Vertical Positioner";
 			sourceTree = "<group>";
 		};
+		6753D10022DA5E710052F27F /* Calculate Stem DIrections */ = {
+			isa = PBXGroup;
+			children = (
+				6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */,
+			);
+			path = "Calculate Stem DIrections";
+			sourceTree = "<group>";
+		};
 		67678DFB21E259E500E7FD71 /* Render Operations */ = {
 			isa = PBXGroup;
 			children = (
 				6726FB01223067BC002EFE4D /* Generate Symbol Descriptions */,
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
+				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
 				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
 				6751A83C22330289000B0D08 /* Vertical Positioner */,
@@ -664,6 +675,7 @@
 				67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */,
 				67AE184621D9387900F3545D /* Optional+Extensions.swift in Sources */,
 				6769B42722BDA0BC00AAFFF9 /* LayoutTimingSolver.swift in Sources */,
+				6753D10222DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift in Sources */,
 				677C9C8121C5172100C7A16E /* MusicView.swift in Sources */,
 				6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */,
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,

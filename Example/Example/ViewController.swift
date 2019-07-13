@@ -132,9 +132,8 @@ class ViewController: UIViewController {
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
         
-        sequenceOne.add(note: Note(value: NoteValue(division: 4, dots: .dotted), pitch: .c4))
-        sequenceOne.add(rest: Rest(value: .sixteenth))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .d4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 4), pitch: .b4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 4), pitch: .b4))
         sequenceOne.add(note: Note(value: NoteValue(division: 8, dots: .dotted), pitch: .b4))
         sequenceOne.add(note: Note(value: .sixteenth, pitch: .a4))
         sequenceOne.add(note: Note(value: .sixteenth, pitch: .f3))

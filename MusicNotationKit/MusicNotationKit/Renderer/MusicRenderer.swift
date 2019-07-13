@@ -38,6 +38,9 @@ class MusicRenderer {
         // Populate note beams
         GenerateBeamDescriptionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
+        // Calculate stem directions
+        CalculateStemDirectionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         

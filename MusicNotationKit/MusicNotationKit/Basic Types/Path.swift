@@ -202,6 +202,39 @@ extension Path {
         return copy
     }
     
+    // MARK: - Flip Y
+    
+    mutating func invertY() {
+        
+        var newCommands = [Command]()
+        
+        func invert(_ p: Point) -> Point {
+            return Point(p.x, -p.y)
+        }
+        
+        for command in self.commands {
+            switch command {
+            case .move(let p):
+                newCommands.append(.move(invert(p)))
+            case .line(let p):
+                newCommands.append(.line(invert(p)))
+            case .curve(let p, let c1, let c2):
+                newCommands.append(.curve(invert(p), c1: invert(c1), c2: invert(c2)))
+            case .close:
+                newCommands.append(.close)
+            case .oval(let p, let size, let rotation):
+                newCommands.append(.oval(invert(p), size, rotation))
+            }
+        }
+        
+        self.commands = newCommands
+    }
+    
+    func invertedY() -> Path {
+        var copy = self
+        copy.invertY()
+        return copy
+    }
 }
 
 extension Array where Element == Path.Command {

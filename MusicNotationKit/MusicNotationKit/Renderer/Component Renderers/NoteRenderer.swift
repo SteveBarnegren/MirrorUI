@@ -63,10 +63,18 @@ class NoteRenderer {
         // Quaver
         if note.symbolDescription.numberOfTails == 1 {
             paths.append(maybe: makeStemPath(forNote: note))
-
-            var noteTailPath = Path(commands: makeQuaverTailCommands()).translated(x: note.xPosition + stemXOffset, y: note.yPosition + 1.75)
-            noteTailPath.drawStyle = .fill
-            paths.append(noteTailPath)
+            
+            var path = Path(commands: makeQuaverTailCommands())
+            if note.symbolDescription.stemDirection == .down {
+                path.invertY()
+            }
+            
+            let xOffset = stemXOffset.inverted(if: { note.symbolDescription.stemDirection == .down })
+            let yOffset = 1.30.inverted(if: { note.symbolDescription.stemDirection == .down })
+            path.translate(x: note.xPosition + xOffset, y: note.yPosition + yOffset)
+        
+            path.drawStyle = .fill
+            paths.append(path)
         }
         
         // Semiquaver or faster
