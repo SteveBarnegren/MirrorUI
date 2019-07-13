@@ -195,8 +195,8 @@ class NoteRenderer {
     private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
         
         let stemDirection = note.symbolDescription.stemDirection
-        let beamSeparation = 0.4.inverted(if: { stemDirection == .down })
-        let height = beamWidth.inverted(if: { stemDirection == .down })
+        let beamSeparation = 0.4
+        let height = beamWidth
         
         let x: Double
         if rightSide {
@@ -205,8 +205,9 @@ class NoteRenderer {
             x = note.position.x + stemXOffset(for: stemDirection) - 1
         }
         
+        let yOffset = (beamSeparation + height).inverted(if: { stemDirection == .up })
         let beamRect = Rect(x: x,
-                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + height)),
+                            y: beamYPosition + (Double(beamIndex) * yOffset),
                             width: 1,
                             height: -height)
         
