@@ -12,8 +12,8 @@ class NoteRenderer {
     
     private let preferredStemHeight = 3.0
     private let stemXOffset = 0.55
-    private let stemWidth = 0.1
-    private let beamWidth = 0.3
+    private let stemThickness = 0.1
+    private let beamThickness = 0.3
     private let noteHeadWidth = 1.4
     
     func paths(forNotes notes: [Note]) -> [Path] {
@@ -185,14 +185,15 @@ class NoteRenderer {
     private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
         
         let stemDirection = fromNote.symbolDescription.stemDirection
-        let beamSeparation = 0.4.inverted(if: { stemDirection == .down })
+        let beamSeparation = 0.4
         
         let beamStartX = fromNote.position.x + stemXOffset(for: stemDirection)
-        let beamEndX = toNote.position.x + stemXOffset(for: stemDirection) + stemWidth
+        let beamEndX = toNote.position.x + stemXOffset(for: stemDirection) + stemThickness
+        let yOffset = (beamSeparation + beamThickness).inverted(if: { stemDirection == .down })
         let beamRect = Rect(x: beamStartX,
-                            y: beamYPosition - (Double(beamIndex) * (beamSeparation + beamWidth)),
+                            y: beamYPosition - (Double(beamIndex) * yOffset),
                             width: beamEndX - beamStartX,
-                            height: -beamWidth)
+                            height: -beamThickness)
         
         var path = Path()
         path.addRect(beamRect)
@@ -204,11 +205,11 @@ class NoteRenderer {
         
         let stemDirection = note.symbolDescription.stemDirection
         let beamSeparation = 0.4
-        let height = beamWidth
+        let height = beamThickness
         
         let x: Double
         if rightSide {
-            x = note.position.x + stemXOffset(for: stemDirection) + stemWidth
+            x = note.position.x + stemXOffset(for: stemDirection) + stemThickness
         } else {
             x = note.position.x + stemXOffset(for: stemDirection) - 1
         }
@@ -288,7 +289,7 @@ class NoteRenderer {
         
         return Rect(x: note.position.x + xOffset,
                     y: startY,
-                    width: stemWidth,
+                    width: stemThickness,
                     height: stemEndY - startY)
     }
     

@@ -133,7 +133,10 @@ class ViewController: UIViewController {
         let sequenceOne = NoteSequence()
         
         sequenceOne.add(note: Note(value: NoteValue(division: 4), pitch: .b4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 4), pitch: .b4))
+        sequenceOne.add(rest: Rest(value: .sixteenth))
+        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .b4))
+        sequenceOne.add(rest: Rest(value: .sixteenth))
+        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .b4))
         sequenceOne.add(note: Note(value: NoteValue(division: 8, dots: .dotted), pitch: .b4))
         sequenceOne.add(note: Note(value: .sixteenth, pitch: .a4))
         sequenceOne.add(note: Note(value: .sixteenth, pitch: .f3))
