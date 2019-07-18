@@ -11,7 +11,7 @@ import Foundation
 class NoteRenderer {
     
     private let preferredStemHeight = 3.0
-    private let stemXOffset = 0.55
+    private let stemXOffset = 0.52
     private let stemThickness = 0.1
     private let beamThickness = 0.3
     private let noteHeadWidth = 1.4
@@ -251,7 +251,7 @@ class NoteRenderer {
             return nil
         }
         
-        return path.translated(x: note.position.x - noteHeadWidth/2, y: note.position.y - 0.5)
+        return path.translated(x: note.position.x, y: note.position.y)
     }
     
     // MARK: - Stems

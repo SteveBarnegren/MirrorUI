@@ -54,7 +54,7 @@ class ViewController: UIViewController {
        // composition.add(bar: makeSecondBar())
         
         composition.add(bar: makeBasicBar())
-
+        
         return composition
     }
     
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
         
-        sequenceOne.add(note: Note(value: NoteValue(division: 4), pitch: .b4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 2), pitch: .b4))
         sequenceOne.add(rest: Rest(value: .sixteenth))
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .b4))
         sequenceOne.add(rest: Rest(value: .eighth))

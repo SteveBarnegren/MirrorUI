@@ -20,7 +20,7 @@ class CalculateStemDirectionsRenderOperation: RenderOperation {
     
     private func calculateStemDirection(forNote note: Note) {
         
-        note.symbolDescription.stemDirection = isFirstNote ? .up : .down
+        note.symbolDescription.stemDirection = isFirstNote ? .up : .up
         isFirstNote = false
     }
 }

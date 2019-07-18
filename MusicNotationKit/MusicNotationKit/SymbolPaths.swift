@@ -31,16 +31,35 @@ class SymbolPaths {
         return path
     }()
     
+//    static let filledNoteHead: Path = {
+//
+//        // A filled note head, for a crotchet, quaver, semiquaver
+//
+//        let scaler = 0.9
+//        let size = Size(width: 1.5 * scaler, height: 1 * scaler)
+//        let point = Point(size.width/2, 0.5)
+//
+//        var path = Path()
+//        path.addOval(atPoint: point, withSize: size, rotation: -0.3)
+//        path.drawStyle = .fill
+//        return path
+//    }()
+    
     static let filledNoteHead: Path = {
         
-        // A filled note head, for a crotchet, quaver, semiquaver
+        let commands: [Path.Command] = [
+            .move(Point(-0.5921144330682797, -0.15151477041915018)),
+            .curve(Point(-0.34254560215273067, 0.31313129945094453), c1: Point(-0.5921148200272967, 0.023568706314745835), c2: Point(-0.5089252097221132, 0.17845060061843832)),
+            .curve(Point(0.18595334899485438, 0.5), c1: Point(-0.18269012360631914, 0.4377100461912986), c2: Point(-0.0065239355434627555, 0.5)),
+            .curve(Point(0.46977656599411954, 0.4040403551819416), c1: Point(0.2936111518492963, 0.5), c2: Point(0.3882187618627124, 0.4680131937546357)),
+            .curve(Point(0.592114433068279, 0.15151477041914962), c1: Point(0.551335531002576, 0.3367001992451977), c2: Point(0.5921148200272957, 0.25252500432426783)),
+            .curve(Point(0.3425456021527308, -0.3131312994509446), c1: Point(0.5921148200272968, -0.023568706314745835), c2: Point(0.5089252097221137, -0.17845060061843815)),
+            .curve(Point(-0.1859533489948541, -0.5), c1: Point(0.18269012360631964, -0.4377100461912978), c2: Point(0.006523935543463089, -0.5)),
+            .curve(Point(-0.4697765659941189, -0.40404035518194237), c1: Point(-0.29361115184929615, -0.5), c2: Point(-0.3882187618627123, -0.468013193754636)),
+            .curve(Point(-0.5921144330682792, -0.15151477041914968), c1: Point(-0.5513355310025762, -0.3367001992451978), c2: Point(-0.5921148200272961, -0.25252500432426717)),
+        ]
         
-        let scaler = 0.9
-        let size = Size(width: 1.5 * scaler, height: 1 * scaler)
-        let point = Point(size.width/2, 0.5)
-        
-        var path = Path()
-        path.addOval(atPoint: point, withSize: size, rotation: -0.3)
+        var path = Path(commands: commands)
         path.drawStyle = .fill
         return path
     }()
