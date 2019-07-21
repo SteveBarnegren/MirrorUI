@@ -62,4 +62,10 @@ public class Composition {
             }
         }
     }
+    
+    func forEachBar(_ handler: (Bar) -> Void) {
+        for bar in bars {
+            handler(bar)
+        }
+    }
 }

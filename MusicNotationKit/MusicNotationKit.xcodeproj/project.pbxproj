@@ -26,6 +26,7 @@
 		6728B2C72239975700382D92 /* NoteSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2C62239975700382D92 /* NoteSequenceTests.swift */; };
 		6728B2CA2239986000382D92 /* NoteSequence+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2C92239986000382D92 /* NoteSequence+Verify.swift */; };
 		6728B2CC2239989100382D92 /* Array+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2CB2239989100382D92 /* Array+Verify.swift */; };
+		6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739EEAC22E470EA0050950B /* StemDirectionDecider.swift */; };
 		67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7B21CC02D40078A575 /* SymbolPaths.swift */; };
 		67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7D21CC04550078A575 /* MusicRenderer.swift */; };
 		67494C8021CC06740078A575 /* Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7F21CC06740078A575 /* Vector2.swift */; };
@@ -121,6 +122,7 @@
 		6728B2C62239975700382D92 /* NoteSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSequenceTests.swift; sourceTree = "<group>"; };
 		6728B2C92239986000382D92 /* NoteSequence+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteSequence+Verify.swift"; sourceTree = "<group>"; };
 		6728B2CB2239989100382D92 /* Array+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Verify.swift"; sourceTree = "<group>"; };
+		6739EEAC22E470EA0050950B /* StemDirectionDecider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemDirectionDecider.swift; sourceTree = "<group>"; };
 		6749365021CF8861005BA334 /* StaveRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveRenderer.swift; sourceTree = "<group>"; };
 		67494C7B21CC02D40078A575 /* SymbolPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolPaths.swift; sourceTree = "<group>"; };
 		67494C7D21CC04550078A575 /* MusicRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRenderer.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */,
+				6739EEAC22E470EA0050950B /* StemDirectionDecider.swift */,
 			);
 			path = "Calculate Stem DIrections";
 			sourceTree = "<group>";
@@ -391,8 +394,8 @@
 			children = (
 				6726FB01223067BC002EFE4D /* Generate Symbol Descriptions */,
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
-				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
+				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
 				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
 				6751A83C22330289000B0D08 /* Vertical Positioner */,
 			);
@@ -685,6 +688,7 @@
 				670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
+				6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */,
 				679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */,
 				671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */,
 				6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */,

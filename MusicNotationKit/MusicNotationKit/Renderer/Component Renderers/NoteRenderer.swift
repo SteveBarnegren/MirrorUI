@@ -150,9 +150,17 @@ class NoteRenderer {
     private func makePaths(forNoteCluster notes: [Note]) -> [Path] {
         
         var paths = [Path]()
+
+        let stemDirection = notes[0].symbolDescription.stemDirection
         
         // Work out the beam height
-        let beamY = notes.map { $0.position.y }.max().orZero() + preferredStemOffset(for: notes[0].symbolDescription.stemDirection)
+        let beamY: Double
+        switch stemDirection {
+        case .up:
+            beamY = notes.map { $0.position.y }.max()! + preferredStemHeight
+        case .down:
+            beamY = notes.map { $0.position.y }.min()! - preferredStemHeight
+        }
         
         // Draw notes with stems
         for note in notes {

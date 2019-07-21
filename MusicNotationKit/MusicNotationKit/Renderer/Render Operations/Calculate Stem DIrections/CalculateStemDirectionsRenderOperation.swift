@@ -10,17 +10,32 @@ import Foundation
 
 class CalculateStemDirectionsRenderOperation: RenderOperation {
     
-    private var isFirstNote = true
+    private let stemDirectionDecider = StemDirectionDecider()
     
     func process(composition: Composition, layoutWidth: Double) {
-        
-        isFirstNote = true
-        composition.enumerateNotes(calculateStemDirection)
+        composition.forEachBar(process)
     }
     
-    private func calculateStemDirection(forNote note: Note) {
+    private func process(bar: Bar) {
+        bar.sequences.forEach(process)
+    }
+    
+    private func process(noteSequence: NoteSequence) {
         
-        note.symbolDescription.stemDirection = isFirstNote ? .up : .down
-        isFirstNote = false
+        noteSequence.notes
+            .clustered()
+            .forEach(stemDirectionDecider.process)
+    }
+}
+
+
+
+
+// Playables
+
+extension Array where Element: Note {
+    
+    func clustered() -> [[Note]] {
+        return self.chunked(atChangeTo: { $0.time.convertedTruncating(toDivision: 4).value })
     }
 }
