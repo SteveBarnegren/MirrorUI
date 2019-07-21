@@ -204,12 +204,12 @@ class NoteRenderer {
         let beamSeparation = 0.4
         
         let beamStartX = fromNote.position.x + stemXOffset(for: stemDirection)
-        let beamEndX = toNote.position.x + stemXOffset(for: stemDirection) + stemThickness
-        let yOffset = (beamSeparation + beamThickness).inverted(if: { stemDirection == .down })
+        let beamEndX = toNote.position.x + stemXOffset(for: stemDirection)
+        let eachBeamYOffset = (beamSeparation + beamThickness).inverted(if: { stemDirection == .down })
         let beamRect = Rect(x: beamStartX,
-                            y: beamYPosition - (Double(beamIndex) * yOffset),
+                            y: beamYPosition - beamThickness.inverted(if: { stemDirection == .down }) - (Double(beamIndex) * eachBeamYOffset),
                             width: beamEndX - beamStartX,
-                            height: -beamThickness)
+                            height: beamThickness.inverted(if: { stemDirection == .down }))
         
         var path = Path()
         path.addRect(beamRect)
@@ -222,18 +222,30 @@ class NoteRenderer {
         let stemDirection = note.symbolDescription.stemDirection
         let beamSeparation = 0.4
         let height = beamThickness
+        let width = 1.0
         
         let x: Double
         if rightSide {
-            x = note.position.x + stemXOffset(for: stemDirection) + stemThickness
+            switch stemDirection {
+            case .up:
+                x = note.position.x + stemXOffset - stemThickness
+            case .down:
+                x = note.position.x - stemXOffset + stemThickness
+            }
         } else {
-            x = note.position.x + stemXOffset(for: stemDirection) - 1
+            switch stemDirection {
+            case .up:
+                x = note.position.x - stemXOffset + stemThickness
+            case .down:
+                x = note.position.x - stemXOffset - width
+
+            }
         }
         
         let yOffset = (beamSeparation + height).inverted(if: { stemDirection == .up })
         let beamRect = Rect(x: x,
                             y: beamYPosition + (Double(beamIndex) * yOffset),
-                            width: 1,
+                            width: width,
                             height: -height)
         
         var path = Path()
