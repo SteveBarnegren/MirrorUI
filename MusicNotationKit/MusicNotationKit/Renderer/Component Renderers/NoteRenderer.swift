@@ -11,8 +11,8 @@ import Foundation
 class NoteRenderer {
     
     private let preferredStemHeight = 3.0
-    private let stemXOffset = 0.52
-    private let stemThickness = 0.1
+    private let stemXOffset = 0.58
+    private let stemThickness = 0.13
     private let beamThickness = 0.3
     private let noteHeadWidth = 1.4
     
@@ -286,7 +286,12 @@ class NoteRenderer {
             return nil
         }
         
-        let xOffset = stemXOffset(for: note.symbolDescription.stemDirection)
+        let xOffset: Double
+        if note.symbolDescription.stemDirection == .up {
+            xOffset = stemXOffset - stemThickness
+        } else {
+            xOffset = -stemXOffset
+        }
         
         var stemYOffset = 0.1
         if stemEndY < note.position.y {

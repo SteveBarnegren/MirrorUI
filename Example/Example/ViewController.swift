@@ -55,6 +55,13 @@ class ViewController: UIViewController {
         
         composition.add(bar: makeBasicBar())
         
+//        var lastBar = Bar()
+//        let lastSequence = NoteSequence()
+//        lastBar.add(sequence: lastSequence)
+//        lastSequence.add(note: Note(value: .semibreve, pitch: .a4))
+//        composition.add(bar: lastBar)
+        
+        
         return composition
     }
     
