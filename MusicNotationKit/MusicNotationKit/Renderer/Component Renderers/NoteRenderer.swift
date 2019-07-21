@@ -14,6 +14,7 @@ class NoteRenderer {
     private let stemXOffset = 0.58
     private let stemThickness = 0.13
     private let beamThickness = 0.3
+    private let beamSeparation = 0.3
     private let noteHeadWidth = 1.4
     
     func paths(forNotes notes: [Note]) -> [Path] {
@@ -201,7 +202,6 @@ class NoteRenderer {
     private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
         
         let stemDirection = fromNote.symbolDescription.stemDirection
-        let beamSeparation = 0.4
         
         let beamStartX = fromNote.position.x + stemXOffset(for: stemDirection)
         let beamEndX = toNote.position.x + stemXOffset(for: stemDirection)
@@ -220,33 +220,31 @@ class NoteRenderer {
     private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
         
         let stemDirection = note.symbolDescription.stemDirection
-        let beamSeparation = 0.4
         let height = beamThickness
-        let width = 1.0
+        let width = 0.85
         
         let x: Double
         if rightSide {
             switch stemDirection {
             case .up:
-                x = note.position.x + stemXOffset - stemThickness
+                x = note.position.x + stemXOffset
             case .down:
                 x = note.position.x - stemXOffset + stemThickness
             }
         } else {
             switch stemDirection {
             case .up:
-                x = note.position.x - stemXOffset + stemThickness
+                x = note.position.x + stemXOffset - stemThickness - width
             case .down:
                 x = note.position.x - stemXOffset - width
-
             }
         }
         
-        let yOffset = (beamSeparation + height).inverted(if: { stemDirection == .up })
+        let eachBeamYOffset = (beamSeparation + height).inverted(if: { stemDirection == .up })
         let beamRect = Rect(x: x,
-                            y: beamYPosition + (Double(beamIndex) * yOffset),
+                            y: beamYPosition + (Double(beamIndex) * eachBeamYOffset),
                             width: width,
-                            height: -height)
+                            height: height.inverted(if: { stemDirection == .up }))
         
         var path = Path()
         path.addRect(beamRect)
