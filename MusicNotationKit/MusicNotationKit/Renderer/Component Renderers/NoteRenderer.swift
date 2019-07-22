@@ -87,12 +87,14 @@ class NoteRenderer {
         // Semiquaver or faster
         if note.symbolDescription.numberOfTails >= 2 {
             
+            let stemDirection = note.symbolDescription.stemDirection
+            
             let bottomOffset = 2.2
             let eachTailYOffset = 0.5
             let tailsHeight = eachTailYOffset * Double(note.symbolDescription.numberOfTails)
             let stemHeight = max(preferredStemHeight, tailsHeight + bottomOffset)
 
-            paths.append(maybe: makeStemPath(forNote: note))
+            paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + stemHeight.inverted(if: { stemDirection == .down })))
             
             for (tailNumber, isLast) in (0..<note.symbolDescription.numberOfTails).enumeratedWithLastItemFlag() {
                 let xOffset = stemXOffset.inverted(if: { note.symbolDescription.stemDirection == .down })

@@ -139,25 +139,17 @@ class ViewController: UIViewController {
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
         
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .f3))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .dottedQuaver))
+        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .a4))
 
+        sequenceOne.add(rest: Rest(value: .dottedQuaver))
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .f3))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .f3))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .f3))
         
-        sequenceOne.add(rest: Rest(value: .sixteenth))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .b4))
-        sequenceOne.add(rest: Rest(value: .eighth))
+        sequenceOne.add(rest: Rest(value: .doubleDottedQuaver))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
         
-        sequenceOne.add(rest: Rest(value: .eighth))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .f3))
-        
-        sequenceOne.add(rest: Rest(value: .eighth))
-        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
+        sequenceOne.add(rest: Rest(value: .doubleDottedQuaver))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
 
         let bar = Bar()
         bar.add(sequence: sequenceOne)
