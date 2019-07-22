@@ -17,14 +17,33 @@ class CalculateStemDirectionsRenderOperation: RenderOperation {
     }
     
     private func process(bar: Bar) {
-        bar.sequences.forEach(process)
+        process(noteSequences: bar.sequences)
     }
     
-    private func process(noteSequence: NoteSequence) {
+    private func process(noteSequences: [NoteSequence]) {
         
-        noteSequence.notes
-            .clustered()
-            .forEach(stemDirectionDecider.process)
+        if noteSequences.count <= 1 {
+            for sequence in noteSequences {
+                sequence.notes
+                    .clustered()
+                    .forEach(stemDirectionDecider.process)
+            }
+            return
+        }
+        
+        let averagePitches = noteSequences.map(averagePitch)
+        
+        for (sequence, pitch) in zip(noteSequences, averagePitches) {
+            if averagePitches.contains(where: { $0 > pitch }) {
+                sequence.notes.forEach { $0.symbolDescription.stemDirection = .down }
+            } else {
+                sequence.notes.forEach { $0.symbolDescription.stemDirection = .up }
+            }
+        }
+    }
+    
+    private func averagePitch(forNoteSequence noteSequence: NoteSequence) -> Int {
+        return noteSequence.notes.sum { $0.pitch.rawValue }
     }
 }
 
