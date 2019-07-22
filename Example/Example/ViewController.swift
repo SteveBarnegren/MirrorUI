@@ -152,11 +152,12 @@ class ViewController: UIViewController {
         sequenceOne.add(rest: Rest(value: .sixteenth))
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .b4))
         sequenceOne.add(rest: Rest(value: .eighth))
-        sequenceOne.add(note: Note(value: NoteValue(division: 8, dots: .dotted), pitch: .c4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .a4))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .f3))
+        
+        sequenceOne.add(rest: Rest(value: .eighth))
         sequenceOne.add(note: Note(value: .eighth, pitch: .f3))
-        sequenceOne.add(note: Note(value: .sixteenth, pitch: .f3))
+        
+        sequenceOne.add(rest: Rest(value: .eighth))
+        sequenceOne.add(note: Note(value: .eighth, pitch: .c4))
 
         let bar = Bar()
         bar.add(sequence: sequenceOne)

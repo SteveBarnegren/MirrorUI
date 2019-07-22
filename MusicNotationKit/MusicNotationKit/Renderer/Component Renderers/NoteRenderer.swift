@@ -70,7 +70,13 @@ class NoteRenderer {
                 path.invertY()
             }
             
-            let xOffset = stemXOffset.inverted(if: { note.symbolDescription.stemDirection == .down })
+            var xOffset = stemXOffset.inverted(if: { note.symbolDescription.stemDirection == .down })
+            
+            // x nudge
+            if note.symbolDescription.stemDirection == .up {
+                xOffset -= 0.11
+            }
+            
             let yOffset = 1.30.inverted(if: { note.symbolDescription.stemDirection == .down })
             path.translate(x: note.xPosition + xOffset, y: note.yPosition + yOffset)
         
