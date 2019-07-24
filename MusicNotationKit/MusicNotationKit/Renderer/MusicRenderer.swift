@@ -41,6 +41,9 @@ class MusicRenderer {
         // Calculate stem directions
         CalculateStemDirectionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
+        // Calculate stem lengths
+        CalculateStemLengthsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         

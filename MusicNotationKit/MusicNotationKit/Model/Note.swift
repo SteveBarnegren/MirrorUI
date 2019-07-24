@@ -97,6 +97,7 @@ class NoteSymbolDescription {
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
     var stemDirection = StemDirection.up
+    var stemLength = Double(0)
     
     init(headStyle: HeadStyle, hasStem: Bool, numberOfTails: Int) {
         self.headStyle = headStyle

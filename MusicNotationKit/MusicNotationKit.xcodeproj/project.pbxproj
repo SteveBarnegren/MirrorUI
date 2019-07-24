@@ -78,6 +78,7 @@
 		67A15FA421C512E800C3C03F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A15FA321C512E800C3C03F /* Note.swift */; };
 		67A1EF7B22999143009CF58C /* PlayableItemTimeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1EF7A22999143009CF58C /* PlayableItemTimeCalculatorTests.swift */; };
 		67A1EF7D22999974009CF58C /* NoteBeamDescriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1EF7C22999974009CF58C /* NoteBeamDescriberTests.swift */; };
+		67A437A322E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A437A222E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift */; };
 		67AE184421D9305700F3545D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AE184321D9305700F3545D /* Array+Extensions.swift */; };
 		67AE184621D9387900F3545D /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AE184521D9387900F3545D /* Optional+Extensions.swift */; };
 		67AE184821D9462C00F3545D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AE184721D9462C00F3545D /* Time.swift */; };
@@ -177,6 +178,7 @@
 		67A15FA321C512E800C3C03F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		67A1EF7A22999143009CF58C /* PlayableItemTimeCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayableItemTimeCalculatorTests.swift; sourceTree = "<group>"; };
 		67A1EF7C22999974009CF58C /* NoteBeamDescriberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberTests.swift; sourceTree = "<group>"; };
+		67A437A222E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateStemLengthsRenderOperation.swift; sourceTree = "<group>"; };
 		67AE184321D9305700F3545D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		67AE184521D9387900F3545D /* Optional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
 		67AE184721D9462C00F3545D /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
 				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
+				67A437A122E8F8E4008C00E3 /* Calculate Stem Lengths */,
 				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
 				6751A83C22330289000B0D08 /* Vertical Positioner */,
 			);
@@ -541,6 +544,14 @@
 			path = "Calculate Playable Item Times";
 			sourceTree = "<group>";
 		};
+		67A437A122E8F8E4008C00E3 /* Calculate Stem Lengths */ = {
+			isa = PBXGroup;
+			children = (
+				67A437A222E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift */,
+			);
+			path = "Calculate Stem Lengths";
+			sourceTree = "<group>";
+		};
 		67F6880C21EB529F003707DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,6 +675,7 @@
 				6751A8382232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift in Sources */,
 				67AE184421D9305700F3545D /* Array+Extensions.swift in Sources */,
 				6767E320229F143D00E9964D /* HorizontalLayoutSolver.swift in Sources */,
+				67A437A322E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift in Sources */,
 				6751A84222357AE3000B0D08 /* Rest.swift in Sources */,
 				6726FB0322306840002EFE4D /* RenderOperation.swift in Sources */,
 				674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */,

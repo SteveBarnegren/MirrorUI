@@ -92,7 +92,7 @@ class NoteRenderer {
             let bottomOffset = 2.2
             let eachTailYOffset = 0.5
             let tailsHeight = eachTailYOffset * Double(note.symbolDescription.numberOfTails)
-            let stemHeight = max(preferredStemHeight, tailsHeight + bottomOffset)
+            let stemHeight = max(note.symbolDescription.stemLength, tailsHeight + bottomOffset)
 
             paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + stemHeight.inverted(if: { stemDirection == .down })))
             
@@ -166,9 +166,9 @@ class NoteRenderer {
         let beamY: Double
         switch stemDirection {
         case .up:
-            beamY = notes.map { $0.position.y }.max()! + preferredStemHeight
+            beamY = notes.map { $0.position.y + $0.symbolDescription.stemLength }.max()!
         case .down:
-            beamY = notes.map { $0.position.y }.min()! - preferredStemHeight
+            beamY = notes.map { $0.position.y - $0.symbolDescription.stemLength }.min()!
         }
         
         // Draw notes with stems
@@ -293,7 +293,7 @@ class NoteRenderer {
         case let (value?, _):
             stemEndY = value
         case (nil, let direction):
-            stemEndY = note.position.y + preferredStemOffset(for: direction)
+            stemEndY = note.position.y + note.symbolDescription.stemLength.inverted(if: { note.symbolDescription.stemDirection == .down })
         }
         
         guard let stemRect = self.stemRect(fromNote: note, to: stemEndY) else {
@@ -334,15 +334,15 @@ class NoteRenderer {
     
     // MARK: - Helpers
     
-    private func preferredStemOffset(for direction: StemDirection) -> Double {
-        
-        switch direction {
-        case .up:
-            return preferredStemHeight
-        case .down:
-            return -preferredStemHeight
-        }
-    }
+//    private func preferredStemOffset(for direction: StemDirection) -> Double {
+//        
+//        switch direction {
+//        case .up:
+//            return preferredStemHeight
+//        case .down:
+//            return -preferredStemHeight
+//        }
+//    }
     
     private func stemXOffset(for direction: StemDirection) -> Double {
         switch direction {
