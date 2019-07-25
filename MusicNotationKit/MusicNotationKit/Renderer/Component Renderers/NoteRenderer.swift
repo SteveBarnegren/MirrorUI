@@ -162,19 +162,10 @@ class NoteRenderer {
 
         let stemDirection = notes[0].symbolDescription.stemDirection
         
-        // Work out the beam height
-        let beamY: Double
-        switch stemDirection {
-        case .up:
-            beamY = notes.map { $0.position.y + $0.symbolDescription.stemLength }.max()!
-        case .down:
-            beamY = notes.map { $0.position.y - $0.symbolDescription.stemLength }.min()!
-        }
-        
         // Draw notes with stems
         for note in notes {
             paths.append(maybe: makeHeadPath(forNote: note))
-            paths.append(maybe: makeStemPath(forNote: note, to: beamY))
+            paths.append(maybe: makeStemPath(forNote: note))
         }
         
         // Draw beams
@@ -188,18 +179,20 @@ class NoteRenderer {
                     beamStartNotes[beamIndex] = note
                 case .connectedPrevious:
                     if let startNote = beamStartNotes[beamIndex] {
-                        let path = makeBeamPath(fromNote: startNote, toNote: note, beamYPosition: beamY, beamIndex: beamIndex)
+                        let path = makeBeamPath(fromNote: startNote, toNote: note, beamIndex: beamIndex)
                         paths.append(path)
                     }
                     beamStartNotes[beamIndex] = nil
                 case .connectedBoth:
                     break
                 case .cutOffLeft:
-                    let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: false)
-                    paths.append(path)
+                    break
+                    //let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: false)
+                    //paths.append(path)
                 case .cutOffRight:
-                    let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: true)
-                    paths.append(path)
+                    break
+                    //let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: true)
+                    //paths.append(path)
                 }
             }
         }
@@ -207,23 +200,50 @@ class NoteRenderer {
         return paths
     }
     
-    private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
+    private func makeBeamPath(fromNote: Note, toNote: Note, beamIndex: Int) -> Path {
         
         let stemDirection = fromNote.symbolDescription.stemDirection
         
-        let beamStartX = fromNote.position.x + stemXOffset(for: stemDirection)
-        let beamEndX = toNote.position.x + stemXOffset(for: stemDirection)
+        let startX = fromNote.position.x + stemXOffset(for: stemDirection)
+        let endX = toNote.position.x + stemXOffset(for: stemDirection)
         let eachBeamYOffset = (beamSeparation + beamThickness).inverted(if: { stemDirection == .down })
-        let beamRect = Rect(x: beamStartX,
-                            y: beamYPosition - beamThickness.inverted(if: { stemDirection == .down }) - (Double(beamIndex) * eachBeamYOffset),
-                            width: beamEndX - beamStartX,
-                            height: beamThickness.inverted(if: { stemDirection == .down }))
         
+        let thickness = beamThickness.inverted(if: { stemDirection == .down })
+        let startY = fromNote.position.y + fromNote.symbolDescription.stemEndOffset
+        let endY = toNote.position.y + toNote.symbolDescription.stemEndOffset
+        
+        let startPoint = Point(startX, startY - (Double(beamIndex) * eachBeamYOffset))
+        let endPoint = Point(endX, endY - (Double(beamIndex) * eachBeamYOffset))
+
         var path = Path()
-        path.addRect(beamRect)
+        path.move(to: startPoint)
+        path.addLine(to: Point(startPoint.x, startPoint.y - thickness))
+        path.addLine(to: Point(endPoint.x, endPoint.y - thickness))
+        path.addLine(to: endPoint)
+        path.close()
         path.drawStyle = .fill
+        
         return path
     }
+    
+    
+//    private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
+//
+//        let stemDirection = fromNote.symbolDescription.stemDirection
+//
+//        let beamStartX = fromNote.position.x + stemXOffset(for: stemDirection)
+//        let beamEndX = toNote.position.x + stemXOffset(for: stemDirection)
+//        let eachBeamYOffset = (beamSeparation + beamThickness).inverted(if: { stemDirection == .down })
+//        let beamRect = Rect(x: beamStartX,
+//                            y: beamYPosition - beamThickness.inverted(if: { stemDirection == .down }) - (Double(beamIndex) * eachBeamYOffset),
+//                            width: beamEndX - beamStartX,
+//                            height: beamThickness.inverted(if: { stemDirection == .down }))
+//
+//        var path = Path()
+//        path.addRect(beamRect)
+//        path.drawStyle = .fill
+//        return path
+//    }
     
     private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
         

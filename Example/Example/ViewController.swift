@@ -86,28 +86,54 @@ class ViewController: UIViewController {
         return bar
     }
     
+//    func makeSecondBar() -> Bar {
+//
+//        let sequence = NoteSequence()
+//
+//        sequence.add(note: Note(value: .eighth, pitch: .f3))
+//        sequence.add(note: Note(value: .eighth, pitch: .c4))
+//
+//        sequence.add(note: Note(value: .dottedQuaver, pitch: .e4))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .c4))
+//
+//        sequence.add(note: Note(value: .eighth, pitch: .a4))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .g3))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .f3))
+//
+//        sequence.add(note: Note(value: .sixteenth, pitch: .f3))
+//        sequence.add(note: Note(value: .eighth, pitch: .g3))
+//        sequence.add(note: Note(value: .sixteenth, pitch: .a4))
+//
+//
+//        let bar = Bar()
+//        bar.add(sequence: sequence)
+//
+//        return bar
+//    }
+    
     func makeSecondBar() -> Bar {
-
+        
         let sequence = NoteSequence()
-
-        sequence.add(note: Note(value: .eighth, pitch: .f3))
+        
         sequence.add(note: Note(value: .eighth, pitch: .c4))
-
+        sequence.add(note: Note(value: .sixteenth, pitch: .b4))
+        sequence.add(note: Note(value: .sixteenth, pitch: .a4))
+        
         sequence.add(note: Note(value: .dottedQuaver, pitch: .e4))
         sequence.add(note: Note(value: .sixteenth, pitch: .c4))
-
+        
         sequence.add(note: Note(value: .eighth, pitch: .a4))
         sequence.add(note: Note(value: .sixteenth, pitch: .g3))
         sequence.add(note: Note(value: .sixteenth, pitch: .f3))
-
+        
         sequence.add(note: Note(value: .sixteenth, pitch: .f3))
         sequence.add(note: Note(value: .eighth, pitch: .g3))
         sequence.add(note: Note(value: .sixteenth, pitch: .a4))
-
-
+        
+        
         let bar = Bar()
         bar.add(sequence: sequence)
-
+        
         return bar
     }
     

@@ -398,9 +398,9 @@
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
 				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
-				67A437A122E8F8E4008C00E3 /* Calculate Stem Lengths */,
 				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
 				6751A83C22330289000B0D08 /* Vertical Positioner */,
+				67A437A122E8F8E4008C00E3 /* Calculate Stem Lengths */,
 			);
 			path = "Render Operations";
 			sourceTree = "<group>";

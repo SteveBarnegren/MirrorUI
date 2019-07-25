@@ -51,10 +51,11 @@ class CalculateStemDirectionsRenderOperation: RenderOperation {
 
 
 // Playables
-
+/*
 extension Array where Element: Note {
     
     func clustered() -> [[Note]] {
         return self.chunked(atChangeTo: { $0.time.convertedTruncating(toDivision: 4).value })
     }
 }
+*/

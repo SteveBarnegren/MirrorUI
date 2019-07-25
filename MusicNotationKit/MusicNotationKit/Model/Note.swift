@@ -99,6 +99,10 @@ class NoteSymbolDescription {
     var stemDirection = StemDirection.up
     var stemLength = Double(0)
     
+    var stemEndOffset: Double {
+        return stemLength.inverted(if: { stemDirection == .down })
+    }
+    
     init(headStyle: HeadStyle, hasStem: Bool, numberOfTails: Int) {
         self.headStyle = headStyle
         self.hasStem = hasStem
