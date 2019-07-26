@@ -8,9 +8,9 @@
 
 import Foundation
 
-private let preferredStemLength = 3.5 // One octave
-
 class CalculateStemLengthsRenderOperation: RenderOperation {
+    
+    private let stemLengthCalculator = NoteClusterStemLengthCalculator(transformer: .notes)
     
     func process(composition: Composition, layoutWidth: Double) {
         composition.bars.forEach(process)
@@ -25,34 +25,19 @@ class CalculateStemLengthsRenderOperation: RenderOperation {
         noteSequence
             .notes
             .clustered()
-            .forEach(process)
+            .forEach(stemLengthCalculator.process)
     }
-    
-    private func process(noteCluster: [Note]) {
-        
-        if noteCluster.count <= 1 {
-            noteCluster.forEach { $0.symbolDescription.stemLength = preferredStemLength }
-            return
-        }
-
-        // First and last notes should be the preferred length
-        let firstNote = noteCluster.first!
-        let lastNote = noteCluster.last!
-        [firstNote, lastNote].forEach { $0.symbolDescription.stemLength = preferredStemLength }
-        
-        // Middle notes should be between first and last values
-        let firstY = firstNote.position.y + firstNote.symbolDescription.stemEndOffset
-        let lastY = lastNote.position.y + lastNote.symbolDescription.stemEndOffset
-        
-        for note in noteCluster.dropFirst().dropLast() {
-            let xPct = (note.position.x - firstNote.position.x) / (lastNote.position.x - firstNote.position.x)
-            let stemEnd = firstY + (lastY-firstY)*xPct
-            note.symbolDescription.stemLength = (stemEnd - note.position.y).inverted(if: { note.symbolDescription.stemDirection == .down })
-        }
-    }
-    
 }
 
+extension NoteClusterStemLengthCalculator.Transformer {
+    
+    static var notes: NoteClusterStemLengthCalculator.Transformer<Note> {
+        return NoteClusterStemLengthCalculator.Transformer<Note>(position: { $0.position },
+                                                                 stemEndOffset: { $0.symbolDescription.stemEndOffset },
+                                                                 stemDirection: { $0.symbolDescription.stemDirection },
+                                                                 setStemLength: { note, v in note.symbolDescription.stemLength = v })
+    }
+}
 
 extension Array where Element == Note {
     

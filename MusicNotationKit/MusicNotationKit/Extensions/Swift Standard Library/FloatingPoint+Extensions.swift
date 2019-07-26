@@ -21,4 +21,9 @@ extension FloatingPoint {
         let diff = other - self
         return self + (diff * t)
     }
+    
+    func lerp(to other: Self, t: Self) -> Self {
+        let diff = other - self
+        return self + (diff * t)
+    }
 }

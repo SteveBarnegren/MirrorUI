@@ -66,13 +66,13 @@ class ViewController: UIViewController {
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .g4))
         
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .g4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .a4))
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .g4))
         
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .a4))
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .g4))
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
         
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .a4))

@@ -33,6 +33,7 @@
 		67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8121CC06940078A575 /* Vector2Tests.swift */; };
 		67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */; };
 		67494C8A21CD84520078A575 /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C8921CD84520078A575 /* Pitch.swift */; };
+		674B9AAB22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674B9AAA22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift */; };
 		674D503921DD50C8009E5AFE /* Composition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D503821DD50C8009E5AFE /* Composition.swift */; };
 		674D503B21DD50E6009E5AFE /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D503A21DD50E6009E5AFE /* Bar.swift */; };
 		674D503D21DD50F8009E5AFE /* NoteSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674D503C21DD50F8009E5AFE /* NoteSequence.swift */; };
@@ -131,6 +132,7 @@
 		67494C8121CC06940078A575 /* Vector2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector2Tests.swift; sourceTree = "<group>"; };
 		67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array_Numeric+Extensions.swift"; sourceTree = "<group>"; };
 		67494C8921CD84520078A575 /* Pitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
+		674B9AAA22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteClusterStemLengthCalculator.swift; sourceTree = "<group>"; };
 		674D503821DD50C8009E5AFE /* Composition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composition.swift; sourceTree = "<group>"; };
 		674D503A21DD50E6009E5AFE /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
 		674D503C21DD50F8009E5AFE /* NoteSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSequence.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				67A437A222E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift */,
+				674B9AAA22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift */,
 			);
 			path = "Calculate Stem Lengths";
 			sourceTree = "<group>";
@@ -700,6 +703,7 @@
 				670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
+				674B9AAB22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift in Sources */,
 				6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */,
 				679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */,
 				671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */,
