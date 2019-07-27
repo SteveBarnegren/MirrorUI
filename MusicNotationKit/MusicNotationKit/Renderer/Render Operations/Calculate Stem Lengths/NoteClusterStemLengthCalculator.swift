@@ -41,7 +41,7 @@ class NoteClusterStemLengthCalculator<T> {
         }
         
         // If the cluster creates a concave shape, then a horizontal beam should be used
-        if isConcave(cluster: noteCluster) {
+        if true || isConcave(cluster: noteCluster) {
             applyHorizontalBeaming(to: noteCluster)
         } else {
             applySlantedBeaming(to: noteCluster)
@@ -50,10 +50,20 @@ class NoteClusterStemLengthCalculator<T> {
     
     private func applyHorizontalBeaming(to noteCluster: [T]) {
         
-        let minY = noteCluster.map { tf.position($0).y - preferredStemLength }.min()!
-        for note in noteCluster {
-            let length = tf.position(note).y  - minY
-            tf.setStemLength(note, length)
+        let stemDirection = tf.stemDirection(noteCluster.first!)
+        
+        if stemDirection == .down {
+            let minY = noteCluster.map { tf.position($0).y - preferredStemLength }.min()!
+            for note in noteCluster {
+                let length = tf.position(note).y  - minY
+                tf.setStemLength(note, length)
+            }
+        } else {
+            let maxY = noteCluster.map { tf.position($0).y + preferredStemLength }.max()!
+            for note in noteCluster {
+                let length = maxY - tf.position(note).y
+                tf.setStemLength(note, length)
+            }
         }
     }
     

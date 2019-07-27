@@ -186,13 +186,23 @@ class NoteRenderer {
                 case .connectedBoth:
                     break
                 case .cutOffLeft:
-                    break
-                    //let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: false)
-                    //paths.append(path)
+                    let beamY: Double
+                    if stemDirection == .up {
+                        beamY = notes.map { $0.position.y + $0.symbolDescription.stemEndOffset }.max()!
+                    } else {
+                        beamY = notes.map { $0.position.y + $0.symbolDescription.stemEndOffset }.min()!
+                    }
+                    let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: false)
+                    paths.append(path)
                 case .cutOffRight:
-                    break
-                    //let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: true)
-                    //paths.append(path)
+                    let beamY: Double
+                    if stemDirection == .up {
+                        beamY = notes.map { $0.position.y + $0.symbolDescription.stemEndOffset }.max()!
+                    } else {
+                        beamY = notes.map { $0.position.y + $0.symbolDescription.stemEndOffset }.min()!
+                    }
+                    let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: true)
+                    paths.append(path)
                 }
             }
         }
