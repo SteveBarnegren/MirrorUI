@@ -35,13 +35,13 @@ class NoteBeamDescriber<T> {
         self.beaming = beaming
     }
     
-    func applyBeams(to notes: [T]) {
+    func applyBeams(to notes: [T], timeSignature: TimeSignature = TimeSignature(value: 4, division: 4)) {
         
         let notesByBeat = notes.chunked(atChangeTo: { beaming.time($0).convertedTruncating(toDivision: 4).value })
-        notesByBeat.forEach { applyBeams(toNoteCluster: $0) }
+        notesByBeat.forEach { applyBeams(toNoteCluster: $0, timeSignature: timeSignature) }
     }
 
-    private func applyBeams(toNoteCluster noteCluster: [T]) {
+    private func applyBeams(toNoteCluster noteCluster: [T], timeSignature: TimeSignature) {
         
         // Don't apply beams to a single note
         if noteCluster.count == 1 {

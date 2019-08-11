@@ -13,6 +13,7 @@ public class Bar {
     var sequences = [NoteSequence]()
     let leadingBarline = Barline()
     var trailingBarline: Barline?
+    var timeSignature: TimeSignature?
 
     var duration: Time {
         return sequences.map { $0.duration }.max() ?? .zero

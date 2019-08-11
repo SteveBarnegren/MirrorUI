@@ -56,6 +56,10 @@ extension Time: Comparable {
     }
 }
 
+extension Time: AdditiveArithmetic {
+    
+}
+
 // Math
 func +(lhs: Time, rhs: Time) -> Time {
     

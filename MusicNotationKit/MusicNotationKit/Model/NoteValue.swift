@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct NoteValue {
+public struct NoteValue: Equatable {
     
     // MARK: - Static conviniences
     
@@ -65,5 +65,15 @@ public struct NoteValue {
     public init(division: Int, dots: Dots = .none) {
         self.division = division
         self.dots = dots
+    }
+}
+
+// MARK: - ExpressibleByIntegerLiteral
+
+extension NoteValue: ExpressibleByIntegerLiteral {
+   
+    public init(integerLiteral value: Int) {
+        self.division = value
+        self.dots = .none
     }
 }
