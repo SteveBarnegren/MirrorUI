@@ -61,6 +61,9 @@
 		6753D0FB22D7D9340052F27F /* NaturalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */; };
 		6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */; };
 		6753D10222DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */; };
+		6756F61723005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6756F61623005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift */; };
+		6756F6192300C2AE003F1F19 /* ElementPopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6756F6182300C2AE003F1F19 /* ElementPopper.swift */; };
+		6756F61B2300C30C003F1F19 /* ElementPopperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6756F61A2300C30C003F1F19 /* ElementPopperTests.swift */; };
 		67669E5F22EDF668004F1927 /* IncrementingSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67669E5E22EDF668004F1927 /* IncrementingSequenceTests.swift */; };
 		67669E6122EDF9D9004F1927 /* RepeatingPatternSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67669E6022EDF9D9004F1927 /* RepeatingPatternSequence.swift */; };
 		67669E6322EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67669E6222EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift */; };
@@ -168,6 +171,9 @@
 		6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalRenderer.swift; sourceTree = "<group>"; };
 		6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
 		6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateStemDirectionsRenderOperation.swift; sourceTree = "<group>"; };
+		6756F61623005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberFourFourTests.swift; sourceTree = "<group>"; };
+		6756F6182300C2AE003F1F19 /* ElementPopper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementPopper.swift; sourceTree = "<group>"; };
+		6756F61A2300C30C003F1F19 /* ElementPopperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementPopperTests.swift; sourceTree = "<group>"; };
 		67669E5E22EDF668004F1927 /* IncrementingSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementingSequenceTests.swift; sourceTree = "<group>"; };
 		67669E6022EDF9D9004F1927 /* RepeatingPatternSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingPatternSequence.swift; sourceTree = "<group>"; };
 		67669E6222EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingPatternSequenceTests.swift; sourceTree = "<group>"; };
@@ -358,6 +364,7 @@
 			children = (
 				67669E5E22EDF668004F1927 /* IncrementingSequenceTests.swift */,
 				67669E6222EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift */,
+				6756F61A2300C30C003F1F19 /* ElementPopperTests.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -371,6 +378,7 @@
 				67678DFF21E2865400E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift */,
 				674B9AB422EDF6040098D121 /* IncrementingSequence.swift */,
 				67669E6022EDF9D9004F1927 /* RepeatingPatternSequence.swift */,
+				6756F6182300C2AE003F1F19 /* ElementPopper.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -568,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				67A1EF7C22999974009CF58C /* NoteBeamDescriberTests.swift */,
+				6756F61623005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift */,
 				674B9AB022ECBCC80098D121 /* NoteClustererTests.swift */,
 			);
 			path = "Generate Beam Descriptions";
@@ -745,6 +754,7 @@
 				671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */,
 				6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */,
 				674D504221DD5774009E5AFE /* PlayableItemTimeCalculator.swift in Sources */,
+				6756F6192300C2AE003F1F19 /* ElementPopper.swift in Sources */,
 				674D503921DD50C8009E5AFE /* Composition.swift in Sources */,
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
 				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
@@ -799,11 +809,13 @@
 				67A1EF7D22999974009CF58C /* NoteBeamDescriberTests.swift in Sources */,
 				674B9AB322ECC9DF0098D121 /* TimeSignatureTests.swift in Sources */,
 				6769B42B22BDA77C00AAFFF9 /* Array+ExtractTests.swift in Sources */,
+				6756F61723005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift in Sources */,
 				671A4D2E22885987002C56E8 /* NoteValueTests.swift in Sources */,
 				6728B2C72239975700382D92 /* NoteSequenceTests.swift in Sources */,
 				67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */,
 				6728B2CA2239986000382D92 /* NoteSequence+Verify.swift in Sources */,
 				671A4D252287524E002C56E8 /* NoteSymbolDescription+Verify.swift in Sources */,
+				6756F61B2300C30C003F1F19 /* ElementPopperTests.swift in Sources */,
 				6728B2C52239972C00382D92 /* NoteTests.swift in Sources */,
 				67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */,
 				67669E6322EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift in Sources */,

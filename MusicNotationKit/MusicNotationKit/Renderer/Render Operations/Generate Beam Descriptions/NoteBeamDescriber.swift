@@ -11,6 +11,7 @@ import Foundation
 struct Beaming<T> {
     
     // Inputs
+    var duration: (T) -> Time
     var time: (T) -> Time
     var numberOfTails: (T) -> Int
     
@@ -21,7 +22,8 @@ struct Beaming<T> {
 extension Beaming where T == Note {
     
     static var notes: Beaming<Note> {
-        return Beaming(time: { return $0.time },
+        return Beaming(duration: { return $0.duration },
+                       time: { return $0.time },
                        numberOfTails: { return $0.symbolDescription.numberOfTails },
                        setBeams: { note, beams in note.beams = beams})
     }
@@ -37,10 +39,80 @@ class NoteBeamDescriber<T> {
     
     func applyBeams(to notes: [T], timeSignature: TimeSignature = TimeSignature(value: 4, division: 4)) {
         
-        let notesByBeat = notes.chunked(atChangeTo: { beaming.time($0).convertedTruncating(toDivision: 4).value })
-        notesByBeat.forEach { applyBeams(toNoteCluster: $0, timeSignature: timeSignature) }
+        let clusters = notes.chunked(atChangeTo: { beaming.time($0).convertedTruncating(toDivision: timeSignature.division).value })
+        var popper = ElementPopper(array: clusters)
+        
+        while let cluster = popper.popNext() {
+            
+            var extendedCluster = cluster
+            if canClusterSupportExtendedBeaming(extendedCluster, timeSignature: timeSignature) {
+                while let nextCluster = popper.next(),
+                    canClustersSupportExtendedBeaming(extendedCluster, nextCluster, timeSignature: timeSignature) {
+                        extendedCluster += nextCluster
+                        popper.popNext()
+                }
+                applyBeams(toNoteCluster: extendedCluster, timeSignature: timeSignature)
+            } else {
+                applyBeams(toNoteCluster: cluster, timeSignature: timeSignature)
+            }
+        }
     }
-
+    
+    private func canClusterSupportExtendedBeaming(_ cluster: [T], timeSignature: TimeSignature) -> Bool {
+        
+        guard let firstNote = cluster.first else {
+            return false
+        }
+        
+        let duration = beaming.duration(firstNote)
+        guard timeSignature.allowsExtendedBeaming(forDuration: duration) else {
+            return false
+        }
+        
+        var totalClusterTime = duration
+        for note in cluster.dropFirst() {
+            if beaming.duration(note) != duration {
+                return false
+            }
+            totalClusterTime += duration
+        }
+        
+        return totalClusterTime == timeSignature.beatDuration
+    }
+    
+    private func canClustersSupportExtendedBeaming(_ cluster: [T],
+                                                   _ additionalCluster: [T],
+                                                   timeSignature: TimeSignature) -> Bool {
+        
+        guard let firstNote = cluster.first else {
+            return false
+        }
+        let noteDuration = beaming.duration(firstNote)
+        
+        if additionalCluster.allSatisfy({ beaming.duration($0) == noteDuration }) == false {
+            return false
+        }
+        
+        guard let lastNote = additionalCluster.last else {
+            return false
+        }
+        
+        let start = beaming.time(firstNote)
+        let end = beaming.time(lastNote)
+        
+        for beamBreak in timeSignature.beamBreaks() {
+            if end < beamBreak {
+                break
+            }
+            
+            if start < beamBreak && end > beamBreak {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
     private func applyBeams(toNoteCluster noteCluster: [T], timeSignature: TimeSignature) {
         
         // Don't apply beams to a single note

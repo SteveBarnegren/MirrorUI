@@ -21,6 +21,10 @@ struct TimeSignature: Equatable {
         return Time(value: value, division: division)
     }
     
+    var beatDuration: Time {
+        return Time(value: 1, division: division)
+    }
+    
     init(value: Int, division: Int) {
         
         guard division == 4 || division == 8 || division == 16 || division == 2 else {
@@ -33,6 +37,16 @@ struct TimeSignature: Equatable {
     
     init(_ value: Int, _ division: Int) {
         self.init(value: value, division: division)
+    }
+    
+    func allowsExtendedBeaming(forDuration duration: Time) -> Bool {
+    
+        switch duration {
+        case Time(quavers: 1):
+            return self == .fourFour
+        default:
+            return false
+        }
     }
 
     /// The bar times at which beams must not cross

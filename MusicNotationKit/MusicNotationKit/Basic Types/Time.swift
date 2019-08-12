@@ -57,7 +57,13 @@ extension Time: Comparable {
 }
 
 extension Time: AdditiveArithmetic {
+}
+
+extension Time: ExpressibleByIntegerLiteral {
     
+    init(integerLiteral value: Int) {
+        self = Time(value: 1, division: value)
+    }
 }
 
 // Math

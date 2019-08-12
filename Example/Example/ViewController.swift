@@ -70,15 +70,15 @@ class ViewController: UIViewController {
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
         sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .g4))
         
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .a4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .g4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .a4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .e4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .g4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .e4))
         
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .a4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
+//        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .a4))
+//        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
+//        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
+//        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
         
         let bar = Bar()
         bar.add(sequence: sequenceOne)
