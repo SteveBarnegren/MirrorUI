@@ -19,10 +19,8 @@ struct ElementPopper<T> {
     mutating func next() -> T? {
         if index < array.count {
             let item = array[index]
-            print("next: item")
             return item
         } else {
-            print("next: nil")
             return nil
         }
     }
@@ -31,10 +29,8 @@ struct ElementPopper<T> {
         if index < array.count {
             let item = array[index]
             index += 1
-            print("Pop next: item")
             return item
         } else {
-            print("Pop next: nil")
             return nil
         }
     }

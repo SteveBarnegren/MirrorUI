@@ -43,16 +43,23 @@ class NoteBeamDescriber<T> {
         var popper = ElementPopper(array: clusters)
         
         while let cluster = popper.popNext() {
-            
+            print("-> NEW CLUSTER")
+
             var extendedCluster = cluster
+            print("Cluster count: \(extendedCluster.count)")
             if canClusterSupportExtendedBeaming(extendedCluster, timeSignature: timeSignature) {
+                print("Supports extended")
                 while let nextCluster = popper.next(),
                     canClustersSupportExtendedBeaming(extendedCluster, nextCluster, timeSignature: timeSignature) {
+                        print("Next cluster can extend")
                         extendedCluster += nextCluster
                         popper.popNext()
+                        print("new count: \(extendedCluster.count)")
                 }
+                print("Apply beams (count: \(extendedCluster.count))")
                 applyBeams(toNoteCluster: extendedCluster, timeSignature: timeSignature)
             } else {
+                print("Apply beams (count: \(extendedCluster.count))")
                 applyBeams(toNoteCluster: cluster, timeSignature: timeSignature)
             }
         }
@@ -100,16 +107,27 @@ class NoteBeamDescriber<T> {
         let start = beaming.time(firstNote)
         let end = beaming.time(lastNote)
         
+        //print("**********************************")
         for beamBreak in timeSignature.beamBreaks() {
+            print("-------")
+            print("Start: \(start)")
+            print("End: \(end)")
+            print("Break: \(beamBreak)")
+            
             if end < beamBreak {
+              
                 break
             }
             
-            if start < beamBreak && end > beamBreak {
+            if start < beamBreak && end >= beamBreak {
+                print("false")
+                print("-------")
                 return false
             }
         }
         
+        print("true")
+        print("-------")
         return true
     }
     
