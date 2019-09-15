@@ -44,6 +44,8 @@ struct TimeSignature: Equatable {
         switch duration {
         case Time(quavers: 1):
             return self == .fourFour || self == .sixEight
+        case Time(semiquavers: 1):
+            return self == .sixEight
         default:
             return false
         }
