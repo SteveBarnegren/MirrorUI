@@ -122,17 +122,26 @@ class NoteBeamDescriber<T> {
         }
         
         var prevNumberOfBeams = 0
+        var carriedOverBeams = 0
         
         for (noteIndex, item) in noteCluster.enumerated() {
             let numberOfBeams = beaming.numberOfTails(item)
             
             var nextNumberOfBeams = Int(0)
+            var beamsToCarryOver = 0
             if let next = noteCluster[maybe: noteIndex+1] {
                 nextNumberOfBeams = beaming.numberOfTails(next)
+                if numberOfBeams == nextNumberOfBeams {
+                    let num = numberOfBeamsBetweenSameDurationNotes(first: item, second: next, timeSignature: timeSignature)
+                    beamsToCarryOver = nextNumberOfBeams - num
+                    nextNumberOfBeams = num
+                }
             }
             
+            prevNumberOfBeams -= carriedOverBeams
+            
             var beams = [Beam]()
-            for beamIndex in 0..<numberOfBeams {
+            for beamIndex in 0..<(numberOfBeams) {
                 if beamIndex < prevNumberOfBeams && beamIndex < nextNumberOfBeams {
                     beams.append(.connectedBoth)
                 } else if beamIndex < prevNumberOfBeams {
@@ -148,6 +157,30 @@ class NoteBeamDescriber<T> {
             
             beaming.setBeams(item, beams)
             prevNumberOfBeams = numberOfBeams
+            carriedOverBeams = beamsToCarryOver
         }
+    }
+    
+    private func numberOfBeamsBetweenSameDurationNotes(first: T, second: T, timeSignature: TimeSignature) -> Int {
+        
+        assert(beaming.numberOfTails(first) == beaming.numberOfTails(second))
+        assert(beaming.duration(first) == beaming.duration(second))
+        
+        var numberOfBeams = beaming.numberOfTails(first)
+        let duration = beaming.duration(first)
+        
+        let firstTime = beaming.time(first)
+        let secondTime = beaming.time(second)
+        
+        var division = duration.division
+        division /= 2
+        
+        while division >= 16
+            && firstTime.convertedTruncating(toDivision: division/2) != secondTime.convertedTruncating(toDivision: division/2) {
+            numberOfBeams -= 1
+            division /= 2
+        }
+        
+        return numberOfBeams
     }
 }
