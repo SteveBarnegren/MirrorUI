@@ -105,7 +105,7 @@ class TimeTests: XCTestCase {
         XCTAssertTrue(Time(semiquavers: 17) > Time(crotchets: 4))
     }
     
-    // MARK: - Math operators
+    // MARK: - Time / Time Math operators
     
     func test_Addition() {
         
@@ -129,4 +129,14 @@ class TimeTests: XCTestCase {
         
         XCTAssertNotEqual(Time(crotchets: 4) - Time(crotchets: 1), Time(quavers: 1))
     }
+    
+    // MARK: - Time / Int Math operators
+    
+    func test_MultiplicationWithInt() {
+        XCTAssertEqual(Time(crotchets: 2) * 1, Time(crotchets: 2))
+        XCTAssertEqual(Time(crotchets: 2) * 2, Time(crotchets: 4))
+        XCTAssertEqual(Time(crotchets: 2) * 3, Time(crotchets: 6))
+        XCTAssertEqual(Time(crotchets: 2) * 4, Time(crotchets: 8))
+    }
+
 }

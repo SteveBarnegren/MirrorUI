@@ -19,7 +19,7 @@ class NoteBeamDescriberSixEightTests: NoteBeamDescriberTestsBase {
     // MARK: - Half bar groupings
     
     func test_HalfBar_8() {
-        assert(values: [8, 8, 8], beams:
+        assert(values: Array(repeating: 8, count: 3), beams:
             """
             |--|--|
             """
@@ -27,10 +27,70 @@ class NoteBeamDescriberSixEightTests: NoteBeamDescriberTestsBase {
     }
     
     func test_HalfBar_16() {
-        assert(values: [16, 16, 16, 16, 16, 16], beams:
+        assert(values: Array(repeating: 16, count: 6), beams:
             """
             |--|--|--|--|--|
             |--|--|--|--|--|
+            """
+        )
+    }
+    
+    func test_HalfBar_32() {
+        assert(values: Array(repeating: 32, count: 12), beams:
+            """
+            |--|--|--|--|--|--|--|--|--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|
+            """
+        )
+    }
+    
+    func test_HalfBar_64() {
+        // TODO: Current beaming doesn't look to be correct. (should be as this unit test describes)
+        /*
+        assert(values: Array(repeating: 64, count: 24), beams:
+            """
+            |--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+            |--|--|--|--|--|--|--|--|--|--|--|  |--|--|--|--|--|--|--|--|--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|
+            """
+        )
+ */
+    }
+    
+    func test_8_16_16_16_16() {
+        assert(values: [8, 16, 16, 16, 16], beams:
+            """
+            |--|--|--|--|
+            |  |--|--|--|
+            """
+        )
+    }
+    
+    func test_16_16_8_16_16() {
+        assert(values: [16, 16, 8, 16, 16], beams:
+            """
+            |--|--|--|--|
+            |--|  |  |--|
+            """
+        )
+    }
+    
+    func test_16_16_16_16_8() {
+        assert(values: [16, 16, 16, 16, 8], beams:
+            """
+            |--|--|--|--|
+            |--|--|--|  |
+            """
+        )
+    }
+    
+    func test_16_8_16_16_16() {
+        assert(values: [16, 8, 16, 16, 16], beams:
+            """
+            |--|--|--|--|
+            |- |  |--|--|
             """
         )
     }
@@ -38,7 +98,7 @@ class NoteBeamDescriberSixEightTests: NoteBeamDescriberTestsBase {
     // MARK: - Full bar groupings
     
     func test_FullBar_4() {
-        assert(values: [4, 4, 4], beams:
+        assert(values: Array(repeating: 4, count: 3), beams:
             """
             |  |  |
             """
@@ -46,11 +106,29 @@ class NoteBeamDescriberSixEightTests: NoteBeamDescriberTestsBase {
     }
     
     func test_FullBar_8() {
-        assert(values: [8, 8, 8, 8, 8, 8], beams:
+        assert(values: Array(repeating: 8, count: 6), beams:
             """
             |--|--|  |--|--|
             """
         )
     }
-
+    
+    func test_FullBar_16() {
+        assert(values: Array(repeating: 16, count: 12), beams:
+            """
+            |--|--|--|--|--|  |--|--|--|--|--|
+            |--|--|--|--|--|  |--|--|--|--|--|
+            """
+        )
+    }
+    
+    func test_FullBar_32() {
+        assert(values: Array(repeating: 32, count: 24), beams:
+            """
+            |--|--|--|--|--|--|--|--|--|--|--|  |--|--|--|--|--|--|--|--|--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|
+            """
+        )
+    }
 }

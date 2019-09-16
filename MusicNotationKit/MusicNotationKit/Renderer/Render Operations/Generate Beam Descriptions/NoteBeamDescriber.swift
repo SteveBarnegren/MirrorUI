@@ -39,7 +39,7 @@ class NoteBeamDescriber<T> {
     
     func applyBeams(to notes: [T], timeSignature: TimeSignature = TimeSignature(value: 4, division: 4)) {
         
-        let clusters = notes.chunked(atChangeTo: { beaming.time($0).convertedTruncating(toDivision: timeSignature.division).value })
+        let clusters = notes.chunked(atChangeTo: { Int(beaming.time($0).barPct / timeSignature.groupingDuration.barPct) })
         var popper = ElementPopper(array: clusters)
         
         while let cluster = popper.popNext() {

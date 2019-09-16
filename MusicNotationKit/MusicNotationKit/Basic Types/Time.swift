@@ -66,7 +66,8 @@ extension Time: ExpressibleByIntegerLiteral {
     }
 }
 
-// Math
+// Time / Time Math
+
 func +(lhs: Time, rhs: Time) -> Time {
     
     let newDivision = max(lhs.division, rhs.division)
@@ -97,3 +98,8 @@ func -= (lhs: inout Time, rhs: Time) {
     lhs = lhs - rhs
 }
 
+// MARK: - Time / Integer Math
+
+func *(lhs: Time, rhs: Int) -> Time {
+    return Time(value: lhs.value * rhs, division: lhs.division)
+}

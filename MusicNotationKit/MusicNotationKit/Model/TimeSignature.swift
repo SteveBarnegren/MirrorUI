@@ -10,12 +10,24 @@ import Foundation
 
 struct TimeSignature: Equatable {
     
-    static let fourFour = TimeSignature(value: 4, division: 4)
-    
-    static let sixEight = TimeSignature(value: 6, division: 8)
+    enum Style {
+        case straight
+        case triplet
+    }
 
     var value: Int
     var division: Int
+    
+    var style: Style {
+        switch (self.value, self.division) {
+        case (4, 4):
+            return .straight
+        case (6, 8):
+            return .triplet
+        default:
+            fatalError("Unsupported time signature: \(self)")
+        }
+    }
     
     var barDuration: Time {
         return Time(value: value, division: division)
@@ -23,6 +35,15 @@ struct TimeSignature: Equatable {
     
     var beatDuration: Time {
         return Time(value: 1, division: division)
+    }
+    
+    var groupingDuration: Time {
+        switch self.style {
+        case .straight:
+            return self.beatDuration
+        case .triplet:
+            return self.beatDuration * 3
+        }
     }
     
     init(value: Int, division: Int) {
@@ -175,4 +196,13 @@ struct TimeSignature: Equatable {
 //            return AnySequence([])
 //        }
     }
+}
+
+
+
+
+
+extension TimeSignature {
+    static let fourFour = TimeSignature(value: 4, division: 4)
+    static let sixEight = TimeSignature(value: 6, division: 8)
 }
