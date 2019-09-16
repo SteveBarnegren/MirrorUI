@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TimeSignature: Equatable {
+public struct TimeSignature: Equatable {
     
     enum Style {
         case straight
@@ -203,6 +203,6 @@ struct TimeSignature: Equatable {
 
 
 extension TimeSignature {
-    static let fourFour = TimeSignature(value: 4, division: 4)
-    static let sixEight = TimeSignature(value: 6, division: 8)
+    public static let fourFour = TimeSignature(value: 4, division: 4)
+    public static let sixEight = TimeSignature(value: 6, division: 8)
 }

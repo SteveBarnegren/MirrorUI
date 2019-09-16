@@ -60,24 +60,23 @@ class ViewController: UIViewController {
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
         
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .g4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .g4))
-        
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .e4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .e4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
-        
-        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .a4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .e4))
+
+        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .c4))
         sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .g4))
         sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .e4))
+        
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
         
 //        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .a4))
 //        sequenceOne.add(note: Note(value: NoteValue(division: 16), pitch: .e4))
@@ -86,6 +85,7 @@ class ViewController: UIViewController {
         
         let bar = Bar()
         bar.add(sequence: sequenceOne)
+        bar.timeSignature = .sixEight
         
         return bar
     }
