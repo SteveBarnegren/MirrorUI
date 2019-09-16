@@ -61,7 +61,7 @@ class NoteBeamDescriberFourFourTests: NoteBeamDescriberTestsBase {
         )
     }
     
-    func test_16_16_16_16() {
+    func test_QuarterBar_16() {
         assert(values: [16, 16, 16, 16], beams:
             """
             |--|--|--|
@@ -70,12 +70,23 @@ class NoteBeamDescriberFourFourTests: NoteBeamDescriberTestsBase {
         )
     }
     
-    func test_32_32_32_32_32_32_32_32() {
+    func test_QuaterBar_32() {
         assert(values: Array(repeating: 32, count: 8), beams:
             """
             |--|--|--|--|--|--|--|
-            |--|--|--|--|--|--|--|
             |--|--|--|  |--|--|--|
+            |--|--|--|  |--|--|--|
+            """
+        )
+    }
+    
+    func test_QuaterBar_64() {
+        assert(values: Array(repeating: 64, count: 16), beams:
+            """
+            |--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+            |--|--|--|--|--|--|--|  |--|--|--|--|--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|
             """
         )
     }
@@ -111,7 +122,7 @@ class NoteBeamDescriberFourFourTests: NoteBeamDescriberTestsBase {
         assert(values: Array(repeating: 32, count: 16), beams:
             """
             |--|--|--|--|--|--|--|  |--|--|--|--|--|--|--|
-            |--|--|--|--|--|--|--|  |--|--|--|--|--|--|--|
+            |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|
             |--|--|--|  |--|--|--|  |--|--|--|  |--|--|--|
             """
         )

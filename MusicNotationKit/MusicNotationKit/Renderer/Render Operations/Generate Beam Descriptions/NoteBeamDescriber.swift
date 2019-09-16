@@ -175,10 +175,13 @@ class NoteBeamDescriber<T> {
         var division = duration.division
         division /= 2
         
+        var isFirstDivision = true
+        
         while division >= 16
             && firstTime.convertedTruncating(toDivision: division/2) != secondTime.convertedTruncating(toDivision: division/2) {
-            numberOfBeams -= 1
-            division /= 2
+                numberOfBeams -= isFirstDivision ? 2 :  1
+                division /= 2
+                isFirstDivision = false
         }
         
         return numberOfBeams
