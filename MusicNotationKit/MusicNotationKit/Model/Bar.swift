@@ -15,11 +15,14 @@ public class Bar {
     var trailingBarline: Barline?
     public var timeSignature: TimeSignature?
     
-    var layoutAnchors = [LayoutAnchor]()
-    
     var duration: Time {
         return sequences.map { $0.duration }.max() ?? .zero
     }
+    
+    // Cached information
+    var layoutAnchors = [LayoutAnchor]()
+    var minimumWidth = Double(0)
+    
     
     public init() {}
     

@@ -46,6 +46,9 @@ class MusicRenderer {
         // Generate bar layout anchors
         GenerateBarLayoutAnchorsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
+        // Calculate minimum bar widths
+        CalculateMinimumBarWidthsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         

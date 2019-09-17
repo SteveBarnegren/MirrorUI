@@ -44,7 +44,7 @@ extension LayoutAnchor {
     }
 }
 
-class SingleItemLayoutAnchor: LayoutAnchor {
+final class SingleItemLayoutAnchor: LayoutAnchor {
     
     // LayoutAnchor
     var width = Double(0)
@@ -115,7 +115,7 @@ class AdjacentLayoutAnchor {
 }
 
 class CombinedItemsLayoutAnchor: LayoutAnchor {
-    
+  
     // LayoutAnchor
     var width: Double { return anchors.map { $0.width }.max()! }
     var trailingConstraints: [LayoutConstraint]
