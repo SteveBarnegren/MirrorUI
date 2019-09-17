@@ -24,6 +24,8 @@ class MusicRenderer {
     
     func paths(forDisplaySize displaySize: DisplaySize) -> [Path] {
         
+        composition.bars.last?.trailingBarline = Barline()
+    
         // Calculate layout sizes
         let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
         let layoutWidth = displaySize.width / staveSpacing
@@ -40,6 +42,9 @@ class MusicRenderer {
         
         // Calculate stem directions
         CalculateStemDirectionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        
+        // Generate bar layout anchors
+        GenerateBarLayoutAnchorsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)

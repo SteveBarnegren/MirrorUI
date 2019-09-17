@@ -14,7 +14,9 @@ public class Bar {
     let leadingBarline = Barline()
     var trailingBarline: Barline?
     public var timeSignature: TimeSignature?
-
+    
+    var layoutAnchors = [LayoutAnchor]()
+    
     var duration: Time {
         return sequences.map { $0.duration }.max() ?? .zero
     }
