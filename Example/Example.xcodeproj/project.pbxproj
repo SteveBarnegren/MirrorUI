@@ -10,12 +10,18 @@
 		672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */; };
 		6746320E2252A291007626D0 /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 677C9C7721C515DC00C7A16E /* MusicNotationKit.framework */; };
 		6746320F2252A291007626D0 /* MusicNotationKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 677C9C7721C515DC00C7A16E /* MusicNotationKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		676BB600233676D000EA9F9C /* MusicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5FE233676D000EA9F9C /* MusicExampleViewController.swift */; };
+		676BB601233676D000EA9F9C /* MusicExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 676BB5FF233676D000EA9F9C /* MusicExampleViewController.xib */; };
 		677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C5F21C5158C00C7A16E /* AppDelegate.swift */; };
 		677C9C6221C5158C00C7A16E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C6121C5158C00C7A16E /* ViewController.swift */; };
 		677C9C6521C5158C00C7A16E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 677C9C6321C5158C00C7A16E /* Main.storyboard */; };
 		677C9C6721C5158D00C7A16E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 677C9C6621C5158D00C7A16E /* Assets.xcassets */; };
 		677C9C6A21C5158D00C7A16E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 677C9C6821C5158D00C7A16E /* LaunchScreen.storyboard */; };
 		677C9C7D21C515FE00C7A16E /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 677C9C7721C515DC00C7A16E /* MusicNotationKit.framework */; };
+		67BB96A4233677C200119953 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96A2233677C200119953 /* MenuViewController.swift */; };
+		67BB96A5233677C200119953 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BB96A3233677C200119953 /* MenuViewController.xib */; };
+		67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */; };
+		67BB96AA23367A0000119953 /* ScrollingMusicExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +71,8 @@
 
 /* Begin PBXFileReference section */
 		672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlayView.swift; sourceTree = "<group>"; };
+		676BB5FE233676D000EA9F9C /* MusicExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicExampleViewController.swift; sourceTree = "<group>"; };
+		676BB5FF233676D000EA9F9C /* MusicExampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicExampleViewController.xib; sourceTree = "<group>"; };
 		677C9C5C21C5158C00C7A16E /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677C9C5F21C5158C00C7A16E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		677C9C6121C5158C00C7A16E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +81,10 @@
 		677C9C6921C5158D00C7A16E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		677C9C6B21C5158D00C7A16E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		677C9C7121C515DC00C7A16E /* MusicNotationKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MusicNotationKit.xcodeproj; path = ../../MusicNotationKit/MusicNotationKit.xcodeproj; sourceTree = "<group>"; };
+		67BB96A2233677C200119953 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		67BB96A3233677C200119953 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMusicExampleViewController.swift; sourceTree = "<group>"; };
+		67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollingMusicExampleViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		676BB603233676D400EA9F9C /* Music Example */ = {
+			isa = PBXGroup;
+			children = (
+				676BB5FE233676D000EA9F9C /* MusicExampleViewController.swift */,
+				676BB5FF233676D000EA9F9C /* MusicExampleViewController.xib */,
+			);
+			path = "Music Example";
+			sourceTree = "<group>";
+		};
 		677C9C5321C5158B00C7A16E = {
 			isa = PBXGroup;
 			children = (
@@ -110,8 +131,12 @@
 			children = (
 				677C9C7121C515DC00C7A16E /* MusicNotationKit.xcodeproj */,
 				677C9C5F21C5158C00C7A16E /* AppDelegate.swift */,
-				677C9C6121C5158C00C7A16E /* ViewController.swift */,
+				67BB96A2233677C200119953 /* MenuViewController.swift */,
+				67BB96A3233677C200119953 /* MenuViewController.xib */,
+				676BB603233676D400EA9F9C /* Music Example */,
+				67BB96A6233679E200119953 /* Scrolling Music Example */,
 				672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */,
+				677C9C6121C5158C00C7A16E /* ViewController.swift */,
 				677C9C6321C5158C00C7A16E /* Main.storyboard */,
 				677C9C6621C5158D00C7A16E /* Assets.xcassets */,
 				677C9C6821C5158D00C7A16E /* LaunchScreen.storyboard */,
@@ -134,6 +159,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		67BB96A6233679E200119953 /* Scrolling Music Example */ = {
+			isa = PBXGroup;
+			children = (
+				67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */,
+				67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */,
+			);
+			path = "Scrolling Music Example";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,7 +256,10 @@
 			files = (
 				677C9C6A21C5158D00C7A16E /* LaunchScreen.storyboard in Resources */,
 				677C9C6721C5158D00C7A16E /* Assets.xcassets in Resources */,
+				67BB96A5233677C200119953 /* MenuViewController.xib in Resources */,
+				67BB96AA23367A0000119953 /* ScrollingMusicExampleViewController.xib in Resources */,
 				677C9C6521C5158C00C7A16E /* Main.storyboard in Resources */,
+				676BB601233676D000EA9F9C /* MusicExampleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,8 +271,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				677C9C6221C5158C00C7A16E /* ViewController.swift in Sources */,
+				67BB96A4233677C200119953 /* MenuViewController.swift in Sources */,
 				677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */,
+				676BB600233676D000EA9F9C /* MusicExampleViewController.swift in Sources */,
 				672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */,
+				67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
