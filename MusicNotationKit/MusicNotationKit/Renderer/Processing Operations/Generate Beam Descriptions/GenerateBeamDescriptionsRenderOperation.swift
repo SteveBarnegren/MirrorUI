@@ -8,11 +8,11 @@
 
 import Foundation
 
-class GenerateBeamDescriptionsRenderOperation: RenderOperation {
+class GenerateBeamDescriptionsRenderOperation: CompositionProcessingOperation {
     
     private let noteBeamDescriber = NoteBeamDescriber<Note>(beaming: .notes)
     
-    func process(composition: Composition, layoutWidth: Double) {
+    func process(composition: Composition) {
         
         var timeSignature = TimeSignature.fourFour
         

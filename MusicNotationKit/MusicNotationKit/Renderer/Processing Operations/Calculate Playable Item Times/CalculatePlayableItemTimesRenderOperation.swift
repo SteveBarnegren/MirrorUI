@@ -8,11 +8,11 @@
 
 import Foundation
 
-class CalculatePlayableItemTimesRenderOperation: RenderOperation {
+class CalculatePlayableItemTimesRenderOperation: CompositionProcessingOperation {
     
     private let playableItemTimeCalculator = PlayableItemTimeCalculator()
     
-    func process(composition: Composition, layoutWidth: Double) {
+    func process(composition: Composition) {
         for bar in composition.bars {
             process(bar: bar)
         }

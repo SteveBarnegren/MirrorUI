@@ -8,11 +8,11 @@
 
 import Foundation
 
-class CalculateStemDirectionsRenderOperation: RenderOperation {
+class CalculateStemDirectionsRenderOperation: CompositionProcessingOperation {
     
     private let stemDirectionDecider = StemDirectionDecider()
     
-    func process(composition: Composition, layoutWidth: Double) {
+    func process(composition: Composition) {
         composition.forEachBar(process)
     }
     

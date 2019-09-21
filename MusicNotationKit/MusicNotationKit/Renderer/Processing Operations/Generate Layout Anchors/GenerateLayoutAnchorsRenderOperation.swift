@@ -8,11 +8,11 @@
 
 import Foundation
 
-class GenerateBarLayoutAnchorsRenderOperation: RenderOperation {
+class GenerateBarLayoutAnchorsRenderOperation: CompositionProcessingOperation {
     
     private let layoutAnchorsBuilder = BarLayoutAnchorsBuilder()
     
-    func process(composition: Composition, layoutWidth: Double) {
+    func process(composition: Composition) {
         
         for bar in composition.bars {
             let anchors = layoutAnchorsBuilder.buildAnchors(for: bar)

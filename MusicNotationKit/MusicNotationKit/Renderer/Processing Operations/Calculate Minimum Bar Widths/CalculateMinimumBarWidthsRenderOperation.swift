@@ -8,11 +8,11 @@
 
 import Foundation
 
-class CalculateMinimumBarWidthsRenderOperation: RenderOperation {
+class CalculateMinimumBarWidthsRenderOperation: CompositionProcessingOperation {
     
     private let fixedDistanceLayoutSolver = FixedDistanceLayoutSolver()
 
-    func process(composition: Composition, layoutWidth: Double) {
+    func process(composition: Composition) {
         composition.bars.forEach(self.process)
     }
     

@@ -8,12 +8,12 @@
 
 import Foundation
 
-class GenerateSymbolDescriptionsRenderOperation: RenderOperation {
+class GenerateSymbolDescriptionsRenderOperation: CompositionProcessingOperation {
     
     private let noteSymbolDescriber = NoteSymbolDescriber()
     private let restSymbolDescriber = RestSymbolDescriber()
     
-    func process(composition: Composition, layoutWidth: Double) {
+    func process(composition: Composition) {
         
         composition.enumerateNotes { $0.symbolDescription = noteSymbolDescriber.symbolDescription(forNote: $0) }
         composition.enumerateRests { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }

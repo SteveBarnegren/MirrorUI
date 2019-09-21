@@ -18,6 +18,11 @@ class MenuViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        scrollingMusicExampleButtonPressed(sender: UIButton())
+    }
+    
     @IBAction private func musicExampleButtonPressed(sender: UIButton) {
         
         let vc = MusicExampleViewController()

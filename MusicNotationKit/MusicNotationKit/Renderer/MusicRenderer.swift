@@ -12,7 +12,9 @@ typealias DisplaySize = Vector2<Double>
 
 class MusicRenderer {
     
-    let composition: Composition
+    private let composition: Composition
+    private var isPreprocessingComplete = false
+    
     let staveSpacing: Double = 8
     
     var _generateConstraintsDebugInformation = false
@@ -22,33 +24,47 @@ class MusicRenderer {
         self.composition = composition
     }
     
+    func preprocessComposition() {
+        
+        if isPreprocessingComplete {
+            return
+        }
+        
+        // Add final barine (this should definitely be done somewhere else)
+        composition.bars.last?.trailingBarline = Barline()
+        
+        // Populate note symbols
+        GenerateSymbolDescriptionsRenderOperation().process(composition: composition)
+        
+        // Calculate note times
+        CalculatePlayableItemTimesRenderOperation().process(composition: composition)
+        
+        // Populate note beams
+        GenerateBeamDescriptionsRenderOperation().process(composition: composition)
+        
+        // Calculate stem directions
+        CalculateStemDirectionsRenderOperation().process(composition: composition)
+        
+        // Generate bar layout anchors
+        GenerateBarLayoutAnchorsRenderOperation().process(composition: composition)
+        
+        // Calculate minimum bar widths
+        CalculateMinimumBarWidthsRenderOperation().process(composition: composition)
+        
+        isPreprocessingComplete = true
+    }
+    
     func paths(forDisplaySize displaySize: DisplaySize) -> [Path] {
         
-        composition.bars.last?.trailingBarline = Barline()
-    
+        if !isPreprocessingComplete {
+            fatalError("Must preprocess composition first")
+        }
+        
         // Calculate layout sizes
         let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
         let layoutWidth = displaySize.width / staveSpacing
         print("Layout width: \(layoutWidth)")
     
-        // Populate note symbols
-        GenerateSymbolDescriptionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
-        
-        // Calculate note times
-        CalculatePlayableItemTimesRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
-        
-        // Populate note beams
-        GenerateBeamDescriptionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
-        
-        // Calculate stem directions
-        CalculateStemDirectionsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
-        
-        // Generate bar layout anchors
-        GenerateBarLayoutAnchorsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
-        
-        // Calculate minimum bar widths
-        CalculateMinimumBarWidthsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
-        
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
         

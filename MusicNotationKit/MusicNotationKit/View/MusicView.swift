@@ -23,6 +23,7 @@ public class MusicView: UIView {
     
     public init(composition: Composition) {
         self.musicRenderer = MusicRenderer(composition: composition)
+        self.musicRenderer.preprocessComposition()
         super.init(frame: .zero)
         backgroundColor = .white
     }
