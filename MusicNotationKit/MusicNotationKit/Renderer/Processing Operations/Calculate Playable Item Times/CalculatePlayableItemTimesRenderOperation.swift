@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CalculatePlayableItemTimesRenderOperation: CompositionProcessingOperation {
+class CalculatePlayableItemTimesProcessingOperation: CompositionProcessingOperation {
     
     private let playableItemTimeCalculator = PlayableItemTimeCalculator()
     

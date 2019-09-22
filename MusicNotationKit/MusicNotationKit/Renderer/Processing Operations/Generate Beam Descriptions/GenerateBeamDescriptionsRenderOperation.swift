@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GenerateBeamDescriptionsRenderOperation: CompositionProcessingOperation {
+class GenerateBeamDescriptionsProcessingOperation: CompositionProcessingOperation {
     
     private let noteBeamDescriber = NoteBeamDescriber<Note>(beaming: .notes)
     

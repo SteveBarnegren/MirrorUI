@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CalculateStemLengthsRenderOperation: RenderOperation {
+class CalculateStemLengthsRenderOperation {
     
     private let stemLengthCalculator = NoteClusterStemLengthCalculator(transformer: .notes)
     

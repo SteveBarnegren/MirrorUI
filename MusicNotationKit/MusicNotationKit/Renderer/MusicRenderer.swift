@@ -35,22 +35,25 @@ class MusicRenderer {
         composition.bars.last?.trailingBarline = Barline()
         
         // Populate note symbols
-        GenerateSymbolDescriptionsRenderOperation().process(composition: composition)
+        GenerateSymbolDescriptionsProcessingOperation().process(composition: composition)
         
         // Calculate note times
-        CalculatePlayableItemTimesRenderOperation().process(composition: composition)
+        CalculatePlayableItemTimesProcessingOperation().process(composition: composition)
         
         // Populate note beams
-        GenerateBeamDescriptionsRenderOperation().process(composition: composition)
+        GenerateBeamDescriptionsProcessingOperation().process(composition: composition)
         
         // Calculate stem directions
-        CalculateStemDirectionsRenderOperation().process(composition: composition)
+        CalculateStemDirectionsProcessingOperation().process(composition: composition)
         
         // Generate bar layout anchors
-        GenerateBarLayoutAnchorsRenderOperation().process(composition: composition)
+        GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)
         
         // Calculate minimum bar widths
-        CalculateMinimumBarWidthsRenderOperation().process(composition: composition)
+        CalculateMinimumBarWidthsProcessingOperation().process(composition: composition)
+        
+        // Stitch bar layout anchors
+        StitchBarLayoutAnchorsProcessingOperation().process(composition: composition)
         
         // Cache the minimum bar widths
         _minimumBarWidths = composition.bars.map { $0.minimumWidth }
@@ -62,7 +65,7 @@ class MusicRenderer {
         return _minimumBarWidths.map { $0 * staveSpacing }
     }
     
-    func paths(forDisplaySize displaySize: DisplaySize) -> [Path] {
+    func paths(forDisplaySize displaySize: DisplaySize, range: Range<Int>? = nil) -> [Path] {
         
         if !isPreprocessingComplete {
             fatalError("Must preprocess composition first")

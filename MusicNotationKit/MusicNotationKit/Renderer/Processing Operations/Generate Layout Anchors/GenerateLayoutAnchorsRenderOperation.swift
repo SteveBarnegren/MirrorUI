@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GenerateBarLayoutAnchorsRenderOperation: CompositionProcessingOperation {
+class GenerateBarLayoutAnchorsProcessingOperation: CompositionProcessingOperation {
     
     private let layoutAnchorsBuilder = BarLayoutAnchorsBuilder()
     

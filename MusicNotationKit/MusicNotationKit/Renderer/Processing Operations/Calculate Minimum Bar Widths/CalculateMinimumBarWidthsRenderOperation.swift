@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CalculateMinimumBarWidthsRenderOperation: CompositionProcessingOperation {
+class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperation {
     
     private let fixedDistanceLayoutSolver = FixedDistanceLayoutSolver()
 

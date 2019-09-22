@@ -18,7 +18,6 @@
 		671A4D3022885A02002C56E8 /* NoteValue+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */; };
 		671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D34228868B3002C56E8 /* DotSymbol.swift */; };
 		671A4D3922886FBD002C56E8 /* DotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D3822886FBD002C56E8 /* DotRenderer.swift */; };
-		6726FB0322306840002EFE4D /* RenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB0222306840002EFE4D /* RenderOperation.swift */; };
 		6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */; };
 		6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */; };
 		6728B2C22236FE6000382D92 /* ConstraintsDebugDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2C12236FE6000382D92 /* ConstraintsDebugDrawer.swift */; };
@@ -106,6 +105,7 @@
 		67BB96B6233685C700119953 /* MusicCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B5233685C700119953 /* MusicCollectionViewLayout.swift */; };
 		67BB96B823368C7400119953 /* CompositionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B723368C7400119953 /* CompositionLayout.swift */; };
 		67BB96BA2337A82200119953 /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B92337A82200119953 /* MusicCell.swift */; };
+		67BB96BD2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */; };
 		67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1521C6D1B200A020D0 /* Path.swift */; };
 		67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */; };
 		67E863B92303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */; };
@@ -139,7 +139,6 @@
 		671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteValue+Verify.swift"; sourceTree = "<group>"; };
 		671A4D34228868B3002C56E8 /* DotSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotSymbol.swift; sourceTree = "<group>"; };
 		671A4D3822886FBD002C56E8 /* DotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotRenderer.swift; sourceTree = "<group>"; };
-		6726FB0222306840002EFE4D /* RenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderOperation.swift; sourceTree = "<group>"; };
 		6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationSymbolDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
 		6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsDebugInformationGenerator.swift; sourceTree = "<group>"; };
 		6728B2C12236FE6000382D92 /* ConstraintsDebugDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsDebugDrawer.swift; sourceTree = "<group>"; };
@@ -230,6 +229,7 @@
 		67BB96B5233685C700119953 /* MusicCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewLayout.swift; sourceTree = "<group>"; };
 		67BB96B723368C7400119953 /* CompositionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionLayout.swift; sourceTree = "<group>"; };
 		67BB96B92337A82200119953 /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
+		67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchBarLayoutAnchorsProcessingOperation.swift; sourceTree = "<group>"; };
 		67C7CC1521C6D1B200A020D0 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberSixEightTests.swift; sourceTree = "<group>"; };
@@ -457,7 +457,6 @@
 		67678DFB21E259E500E7FD71 /* Render Operations */ = {
 			isa = PBXGroup;
 			children = (
-				6726FB0222306840002EFE4D /* RenderOperation.swift */,
 				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
 				6751A83C22330289000B0D08 /* Vertical Positioner */,
 				67A437A122E8F8E4008C00E3 /* Calculate Stem Lengths */,
@@ -656,6 +655,7 @@
 				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
 				6785A9B62331698D004B32B8 /* Generate Layout Anchors */,
 				676BB5FB233178C700EA9F9C /* Calculate Minimum Bar Widths */,
+				67BB96BB2337B19000119953 /* Stitch Bar Layout Anchors */,
 			);
 			path = "Processing Operations";
 			sourceTree = "<group>";
@@ -678,6 +678,14 @@
 				67BB96B92337A82200119953 /* MusicCell.swift */,
 			);
 			path = "Scrolling Music View";
+			sourceTree = "<group>";
+		};
+		67BB96BB2337B19000119953 /* Stitch Bar Layout Anchors */ = {
+			isa = PBXGroup;
+			children = (
+				67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */,
+			);
+			path = "Stitch Bar Layout Anchors";
 			sourceTree = "<group>";
 		};
 		67F6880C21EB529F003707DD /* Extensions */ = {
@@ -808,7 +816,6 @@
 				67A437A322E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift in Sources */,
 				6751A84222357AE3000B0D08 /* Rest.swift in Sources */,
 				67BB96BA2337A82200119953 /* MusicCell.swift in Sources */,
-				6726FB0322306840002EFE4D /* RenderOperation.swift in Sources */,
 				674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */,
 				67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */,
 				67678DFA21E250A200E7FD71 /* NoteBeamDescriber.swift in Sources */,
@@ -827,6 +834,7 @@
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,
 				67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */,
 				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
+				67BB96BD2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift in Sources */,
 				67678E0021E2865400E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,

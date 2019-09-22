@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GenerateSymbolDescriptionsRenderOperation: CompositionProcessingOperation {
+class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperation {
     
     private let noteSymbolDescriber = NoteSymbolDescriber()
     private let restSymbolDescriber = RestSymbolDescriber()

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CalculateStemDirectionsRenderOperation: CompositionProcessingOperation {
+class CalculateStemDirectionsProcessingOperation: CompositionProcessingOperation {
     
     private let stemDirectionDecider = StemDirectionDecider()
     

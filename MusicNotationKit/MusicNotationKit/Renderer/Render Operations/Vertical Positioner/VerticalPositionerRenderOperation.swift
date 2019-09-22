@@ -8,7 +8,7 @@
 
 import Foundation
 
-class VerticalPositionerRenderOperation: RenderOperation {
+class VerticalPositionerRenderOperation {
     
     func process(composition: Composition, layoutWidth: Double) {
         composition.enumerateNotes { note in
