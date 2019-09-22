@@ -16,7 +16,7 @@ struct ElementPopper<T> {
         self.array = array
     }
     
-    mutating func next() -> T? {
+    func next() -> T? {
         if index < array.count {
             let item = array[index]
             return item

@@ -13,6 +13,7 @@ typealias DisplaySize = Vector2<Double>
 class MusicRenderer {
     
     private let composition: Composition
+    private var _minimumBarWidths = [Double]()
     private var isPreprocessingComplete = false
     
     let staveSpacing: Double = 8
@@ -51,7 +52,14 @@ class MusicRenderer {
         // Calculate minimum bar widths
         CalculateMinimumBarWidthsRenderOperation().process(composition: composition)
         
+        // Cache the minimum bar widths
+        _minimumBarWidths = composition.bars.map { $0.minimumWidth }
+        
         isPreprocessingComplete = true
+    }
+    
+    func minimumBarWidths() -> [Double] {
+        return _minimumBarWidths.map { $0 * staveSpacing }
     }
     
     func paths(forDisplaySize displaySize: DisplaySize) -> [Path] {

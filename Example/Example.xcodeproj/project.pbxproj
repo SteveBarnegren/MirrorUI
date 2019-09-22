@@ -22,6 +22,7 @@
 		67BB96A5233677C200119953 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BB96A3233677C200119953 /* MenuViewController.xib */; };
 		67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */; };
 		67BB96AA23367A0000119953 /* ScrollingMusicExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */; };
+		67BB96B02336805C00119953 /* ExampleCompositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96AF2336805C00119953 /* ExampleCompositions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		67BB96A3233677C200119953 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMusicExampleViewController.swift; sourceTree = "<group>"; };
 		67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollingMusicExampleViewController.xib; sourceTree = "<group>"; };
+		67BB96AF2336805C00119953 /* ExampleCompositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCompositions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				677C9C5F21C5158C00C7A16E /* AppDelegate.swift */,
 				67BB96A2233677C200119953 /* MenuViewController.swift */,
 				67BB96A3233677C200119953 /* MenuViewController.xib */,
+				67BB96AE2336803900119953 /* Compositions */,
 				676BB603233676D400EA9F9C /* Music Example */,
 				67BB96A6233679E200119953 /* Scrolling Music Example */,
 				672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */,
@@ -168,6 +171,14 @@
 				67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */,
 			);
 			path = "Scrolling Music Example";
+			sourceTree = "<group>";
+		};
+		67BB96AE2336803900119953 /* Compositions */ = {
+			isa = PBXGroup;
+			children = (
+				67BB96AF2336805C00119953 /* ExampleCompositions.swift */,
+			);
+			path = Compositions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +286,7 @@
 				677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */,
 				676BB600233676D000EA9F9C /* MusicExampleViewController.swift in Sources */,
 				672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */,
+				67BB96B02336805C00119953 /* ExampleCompositions.swift in Sources */,
 				67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

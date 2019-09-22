@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import MusicNotationKit
 
 class ScrollingMusicExampleViewController: UIViewController {
+    
+    var musicViewController: ScrollingMusicViewController!
     
     init() {
         super.init(nibName: "ScrollingMusicExampleViewController", bundle: nil)
@@ -21,10 +24,14 @@ class ScrollingMusicExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
-        
-        
+        musicViewController = ScrollingMusicViewController(composition: ExampleCompositions.randomComposition)
+        addChild(musicViewController)
+        view.addSubview(musicViewController.view)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        musicViewController.view.frame = view.bounds
     }
 
 }
