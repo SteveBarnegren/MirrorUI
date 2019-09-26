@@ -30,3 +30,24 @@ public class Bar {
         self.sequences.append(sequence)
     }
 }
+
+extension Bar {
+    
+    func forEachNote(_ handler: (Note) -> Void) {
+        for sequence in self.sequences {
+            for note in sequence.notes {
+                handler(note)
+            }
+        }
+    }
+}
+
+extension Array where Element == Bar {
+    
+    func forEachNote(_ handler: (Note) -> Void) {
+        
+        for bar in self {
+            bar.forEachNote(handler)
+        }
+    }
+}

@@ -12,14 +12,17 @@ class FixedDistanceLayoutSolver {
     
     func solve(anchors: [LayoutAnchor]) {
         
+        var isFirst = true
         for anchor in anchors {
-            solveAnchor(anchor: anchor)
+            solveAdjacentLayoutAnchorOffsets(forAnchor: anchor)
+            if isFirst == false {
+                solveLeadingConstraints(forAnchor: anchor)
+            }
+            isFirst = false
         }
     }
     
-    private func solveAnchor(anchor: LayoutAnchor) {
-
-        solveAdjacentLayoutAnchorOffsets(forAnchor: anchor)
+    private func solveLeadingConstraints(forAnchor anchor: LayoutAnchor) {
         
         var leadingEdgePos = Double(0)
         

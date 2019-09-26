@@ -10,6 +10,7 @@ import Foundation
 
 struct CompositionItem {
     let barRange: Range<Int>
+    let size: Vector2<Double>
 }
 
 struct CompositionLayout {
@@ -26,6 +27,8 @@ struct CompositionLayout {
         }
         
         compositionItems = items
+        
+        dump(items)
     }
     
     func nextItem(from barWidths: [Double], layoutWidth: Double, index: inout Int) -> CompositionItem? {
@@ -34,7 +37,7 @@ struct CompositionLayout {
         var numBars = 0
         
         func canAppendCurrentBar() -> Bool {
-            if let width = barWidths[maybe: index+1] {
+            if let width = barWidths[maybe: index] {
                 return numBars == 0 || currentWidth + width < layoutWidth
             } else {
                 return false
@@ -50,7 +53,8 @@ struct CompositionLayout {
         }
         
         if numBars > 0 {
-            return CompositionItem(barRange: rangeStart..<rangeStart+numBars)
+            return CompositionItem(barRange: rangeStart..<rangeStart+numBars,
+                                   size: Vector2(layoutWidth, 100))
         } else {
             return nil
         }

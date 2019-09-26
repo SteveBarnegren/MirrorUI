@@ -10,8 +10,9 @@ import Foundation
 
 class VerticalPositionerRenderOperation {
     
-    func process(composition: Composition, layoutWidth: Double) {
-        composition.enumerateNotes { note in
+    func process(bars: [Bar]) {
+        
+        bars.forEachNote { note in
             self.position(note: note)
             note.leadingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }
             note.trailingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }

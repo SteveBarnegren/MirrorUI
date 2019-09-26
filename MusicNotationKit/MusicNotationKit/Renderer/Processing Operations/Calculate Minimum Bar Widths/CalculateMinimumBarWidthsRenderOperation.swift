@@ -19,7 +19,7 @@ class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperati
     private func process(bar: Bar) {
         
         fixedDistanceLayoutSolver.solve(anchors: bar.layoutAnchors)
-        bar.minimumWidth = bar.layoutAnchors.last?.trailingEdge ?? 0
+        bar.minimumWidth = bar.layoutAnchors.map { $0.trailingEdge }.max() ?? 0
         assert(bar.minimumWidth > 0, "Bar should have non-zero minimum width")
     }
     

@@ -31,8 +31,11 @@ class MusicRenderer {
             return
         }
         
-        // Add final barine (this should definitely be done somewhere else)
+        // Add final barline (this should definitely be done somewhere else)
         composition.bars.last?.trailingBarline = Barline()
+        
+        // Join barlines
+        JoinBarlinesCompositionProcessingOperation().process(composition: composition)
         
         // Populate note symbols
         GenerateSymbolDescriptionsProcessingOperation().process(composition: composition)
@@ -75,18 +78,29 @@ class MusicRenderer {
         let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
         let layoutWidth = displaySize.width / staveSpacing
         print("Layout width: \(layoutWidth)")
-    
+        
+        let bars: [Bar]
+        if let range = range {
+            bars = composition.bars[range].toArray()
+        } else {
+            bars = composition.bars
+        }
+        print("num bars: \(bars.count)")
+        
+        // Add the following barline anchor
+        
+        
         // Solve X Positions
-        HorizontalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        HorizontalPositionerRenderOperation().process(bars: bars, layoutWidth: layoutWidth)
         
         // Apply Veritical positions
-        VerticalPositionerRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        VerticalPositionerRenderOperation().process(bars: bars)
         
         // Calculate stem lengths
-        CalculateStemLengthsRenderOperation().process(composition: composition, layoutWidth: layoutWidth)
+        CalculateStemLengthsRenderOperation().process(bars: bars)
         
         // Make paths
-        let paths = CompositionPathsCreator().paths(fromComposition: composition,
+        let paths = CompositionPathsCreator().paths(fromBars: bars,
                                                     canvasSize: canvasSize,
                                                     staveSpacing: staveSpacing,
                                                     displaySize: displaySize)

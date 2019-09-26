@@ -10,9 +10,9 @@ import Foundation
 
 class HorizontalPositionerRenderOperation {
     
-    func process(composition: Composition, layoutWidth: Double) {
+    func process(bars: [Bar], layoutWidth: Double) {
         
-        let anchors = composition.bars.map { $0.layoutAnchors }.joined().toArray()
+        let anchors = bars.map { $0.layoutAnchors }.joined().toArray()
         HorizontalLayoutSolver().solve(anchors: anchors, layoutWidth: layoutWidth)
     }
 }

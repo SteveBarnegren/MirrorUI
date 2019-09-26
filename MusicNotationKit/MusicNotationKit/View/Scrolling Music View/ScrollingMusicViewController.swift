@@ -76,7 +76,12 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicCell", for: indexPath) as! MusicCell
+        let item = compositionLayout.compositionItems[indexPath.row]
+
+        let paths = renderer.paths(forDisplaySize: item.size, range: item.barRange)
+        cell.configure(withPaths: paths)
+        
         return cell
     }
     

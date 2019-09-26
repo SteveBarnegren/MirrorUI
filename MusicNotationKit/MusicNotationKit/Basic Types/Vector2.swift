@@ -9,6 +9,7 @@
 import Foundation
 
 struct Vector2<T> {
+    
     let firstValue: T
     let secondValue: T
     

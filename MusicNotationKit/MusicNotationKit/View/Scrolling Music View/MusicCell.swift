@@ -27,16 +27,28 @@ class MusicCell: UICollectionViewCell {
         
         view.frame = contentView.bounds
     }
+    
+    func configure(withPaths paths: [Path]) {
+        view.configure(withPaths: paths)
+    }
 }
 
 private class MusicCellView: UIView {
     
+    private var paths = [Path]()
+    
+    func configure(withPaths paths: [Path]) {
+        self.paths = paths
+        self.setNeedsDisplay()
+        
+        self.layer.borderColor = UIColor.yellow.cgColor
+        self.layer.borderWidth = 0.5
+    }
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        UIColor.orange.set()
-        let path = UIBezierPath(rect: bounds)
-        path.lineWidth = 10
-        path.stroke()
+        let pathDrawer = PathDrawer(size: bounds.size)
+        pathDrawer.draw(paths: paths)
     }
 }

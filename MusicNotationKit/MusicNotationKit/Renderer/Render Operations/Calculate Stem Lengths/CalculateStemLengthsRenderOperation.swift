@@ -12,8 +12,8 @@ class CalculateStemLengthsRenderOperation {
     
     private let stemLengthCalculator = NoteClusterStemLengthCalculator(transformer: .notes)
     
-    func process(composition: Composition, layoutWidth: Double) {
-        composition.bars.forEach(process)
+    func process(bars: [Bar]) {
+        bars.forEach(process)
     }
     
     private func process(bar: Bar) {
