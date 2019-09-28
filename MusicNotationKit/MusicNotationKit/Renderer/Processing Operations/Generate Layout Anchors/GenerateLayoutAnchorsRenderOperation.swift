@@ -10,13 +10,12 @@ import Foundation
 
 class GenerateBarLayoutAnchorsProcessingOperation: CompositionProcessingOperation {
     
-    private let layoutAnchorsBuilder = BarLayoutAnchorsBuilder()
+    private let layoutAnchorsBuilder = LayoutAnchorsBuilder()
     
     func process(composition: Composition) {
         
-        for bar in composition.bars {
-            let anchors = layoutAnchorsBuilder.buildAnchors(for: bar)
-            bar.layoutAnchors = anchors
-        }
+        layoutAnchorsBuilder.makeAnchors(from: composition)
+        
+       
     }
 }

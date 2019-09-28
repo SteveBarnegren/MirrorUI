@@ -8,32 +8,43 @@
 
 import Foundation
 
-class BarLayoutAnchorsBuilder {
+class LayoutAnchorsBuilder {
     
-    func buildAnchors(for bar: Bar) -> [LayoutAnchor] {
+    func makeAnchors(from composition: Composition) {
         
-        var anchors = [LayoutAnchor]()
+        // Add a trailing bar line - this should definitely not be done here!
+        composition.bars.last?.trailingBarline = Barline()
         
-        // Barline
-        let barlineAnchor = makeAnchor(forBarline: bar.leadingBarline, fromPrevious: nil)
-        anchors.append(barlineAnchor)
+        var previousBar: Bar?
         
-        // Notes
-        let anchorsForSequences = bar.sequences
-            .map { makeAnchors(forNoteSequence: $0, fromPrevious: barlineAnchor)}
-            .joined()
-            .toArray()
-        
-        let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
-        applyDurations(toAnchors: combinedAnchors, barDuration: bar.duration)
+        for (bar, isLast) in composition.bars.enumeratedWithLastItemFlag() {
             
-        anchors.append(contentsOf: combinedAnchors)
-        
-        if let lastBarline = bar.trailingBarline {
-            anchors.append(makeAnchor(forBarline: lastBarline, fromPrevious: anchors.last))
+            var barAnchors = [LayoutAnchor]()
+            
+            // Barline
+            let previousBarLastAnchor = previousBar?.lastBarlineAnchor ?? previousBar?.layoutAnchors.last
+            let barlineAnchor = makeAnchor(forBarline: bar.leadingBarline, fromPrevious: previousBarLastAnchor)
+            previousBar?.lastBarlineAnchor = barlineAnchor
+            barAnchors.append(barlineAnchor)
+            
+            // Notes
+            let anchorsForSequences = bar.sequences
+                .map { makeAnchors(forNoteSequence: $0, fromPrevious: barlineAnchor)}
+                .joined()
+                .toArray()
+            
+            let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
+            applyDurations(toAnchors: combinedAnchors, barDuration: bar.duration)
+            
+            barAnchors += combinedAnchors
+            
+            if isLast, let trailingBarline = composition.bars.last?.trailingBarline {
+                barAnchors.append(makeAnchor(forBarline: trailingBarline, fromPrevious: barAnchors.last))
+            }
+            
+            bar.layoutAnchors = barAnchors
+            previousBar = bar
         }
-        
-        return anchors
     }
     
     private func makeAnchor(forBarline barline: Barline, fromPrevious previousAnchor: LayoutAnchor?) -> LayoutAnchor {
@@ -41,13 +52,14 @@ class BarLayoutAnchorsBuilder {
         let anchor = SingleItemLayoutAnchor(item: barline)
         anchor.width = barline.horizontalLayoutWidth
         
-        // The starting barline will have a nil previous constraint
-        let constraint = LayoutConstraint()
-        constraint.from = previousAnchor
-        constraint.to = anchor
-        constraint.value = .greaterThan(0.5)
-        previousAnchor?.add(trailingConstraint: constraint)
-        anchor.add(leadingConstraint: constraint)
+        if let previousAnchor = previousAnchor {
+            let constraint = LayoutConstraint()
+            constraint.from = previousAnchor
+            constraint.to = anchor
+            constraint.value = .greaterThan(0.5)
+            previousAnchor.add(trailingConstraint: constraint)
+            anchor.add(leadingConstraint: constraint)
+        }
         
         return anchor
     }
@@ -96,7 +108,7 @@ class BarLayoutAnchorsBuilder {
         return anchors
     }
     
-    private func sortAndCombine(anchors: [SingleItemLayoutAnchor]) -> [LayoutAnchor] {
+    func sortAndCombine(anchors: [SingleItemLayoutAnchor]) -> [LayoutAnchor] {
         
         let chunkedAnchors = anchors
             .sortedAscendingBy { $0.time }
@@ -119,8 +131,8 @@ class BarLayoutAnchorsBuilder {
         return combinedAnchors
     }
     
-    private func applyDurations(toAnchors anchors: [LayoutAnchor], barDuration: Time) {
-        
+    func applyDurations(toAnchors anchors: [LayoutAnchor], barDuration: Time) {
+     
         var previous: LayoutAnchor?
         for (anchor, isLast) in anchors.enumeratedWithLastItemFlag() {
             
@@ -136,4 +148,3 @@ class BarLayoutAnchorsBuilder {
         }
     }
 }
-

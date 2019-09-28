@@ -35,6 +35,7 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
         self.collectionViewLayout.dataSource = self
         
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        self.collectionView.backgroundColor = .white
         self.collectionView.dataSource = self
         view.addSubview(self.collectionView)
         

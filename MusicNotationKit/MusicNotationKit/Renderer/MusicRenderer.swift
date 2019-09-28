@@ -31,11 +31,17 @@ class MusicRenderer {
             return
         }
         
+        if composition.isPreprocessed {
+            _minimumBarWidths = composition.bars.map { $0.minimumWidth }
+            isPreprocessingComplete = true
+            return
+        }
+        
         // Add final barline (this should definitely be done somewhere else)
         composition.bars.last?.trailingBarline = Barline()
         
         // Join barlines
-        JoinBarlinesCompositionProcessingOperation().process(composition: composition)
+        //JoinBarlinesCompositionProcessingOperation().process(composition: composition)
         
         // Populate note symbols
         GenerateSymbolDescriptionsProcessingOperation().process(composition: composition)
@@ -56,12 +62,13 @@ class MusicRenderer {
         CalculateMinimumBarWidthsProcessingOperation().process(composition: composition)
         
         // Stitch bar layout anchors
-        StitchBarLayoutAnchorsProcessingOperation().process(composition: composition)
+        //StitchBarLayoutAnchorsProcessingOperation().process(composition: composition)
         
         // Cache the minimum bar widths
         _minimumBarWidths = composition.bars.map { $0.minimumWidth }
         
         isPreprocessingComplete = true
+        composition.isPreprocessed = true
     }
     
     func minimumBarWidths() -> [Double] {
@@ -88,7 +95,9 @@ class MusicRenderer {
         print("num bars: \(bars.count)")
         
         // Add the following barline anchor
-        
+        for bar in composition.bars {
+            bar.layoutAnchors.forEach { $0.reset() }
+        }
         
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(bars: bars, layoutWidth: layoutWidth)

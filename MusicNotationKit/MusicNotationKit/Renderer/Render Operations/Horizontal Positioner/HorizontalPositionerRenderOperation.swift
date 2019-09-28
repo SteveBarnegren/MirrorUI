@@ -12,7 +12,11 @@ class HorizontalPositionerRenderOperation {
     
     func process(bars: [Bar], layoutWidth: Double) {
         
-        let anchors = bars.map { $0.layoutAnchors }.joined().toArray()
+        var anchors = bars.map { $0.layoutAnchors }.joined().toArray()
+        if let endBarlineAnchor = bars.last?.lastBarlineAnchor {
+            anchors.append(endBarlineAnchor)
+        }
+        
         HorizontalLayoutSolver().solve(anchors: anchors, layoutWidth: layoutWidth)
     }
 }

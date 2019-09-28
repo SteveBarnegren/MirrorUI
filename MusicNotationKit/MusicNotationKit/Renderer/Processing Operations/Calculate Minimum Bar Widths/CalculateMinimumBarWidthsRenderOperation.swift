@@ -13,10 +13,18 @@ class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperati
     private let fixedDistanceLayoutSolver = FixedDistanceLayoutSolver()
 
     func process(composition: Composition) {
-        composition.bars.forEach(self.process)
+        for bar in composition.bars {
+            composition.bars.map { $0.layoutAnchors }.joined().forEach { $0.reset() }
+            process(bar: bar)
+        }
+        
+        
+        //composition.bars.forEach(self.process)
     }
     
     private func process(bar: Bar) {
+        
+        bar.layoutAnchors.forEach { $0.reset() }
         
         fixedDistanceLayoutSolver.solve(anchors: bar.layoutAnchors)
         bar.minimumWidth = bar.layoutAnchors.map { $0.trailingEdge }.max() ?? 0

@@ -15,6 +15,8 @@ class MusicCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
+        self.backgroundColor = .white
+        self.contentView.backgroundColor = .white
         contentView.addSubview(view)
     }
     
@@ -37,12 +39,21 @@ private class MusicCellView: UIView {
     
     private var paths = [Path]()
     
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        self.backgroundColor = .white
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func configure(withPaths paths: [Path]) {
         self.paths = paths
         self.setNeedsDisplay()
         
-        self.layer.borderColor = UIColor.yellow.cgColor
-        self.layer.borderWidth = 0.5
+        //self.layer.borderColor = UIColor.yellow.cgColor
+        //self.layer.borderWidth = 0.5
     }
     
     override func draw(_ rect: CGRect) {

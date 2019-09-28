@@ -31,6 +31,7 @@ protocol LayoutAnchor: class {
     var duration: Time? { get set }
     var time: Time { get }
     
+    func reset()
     func apply()
 }
 
@@ -45,7 +46,7 @@ extension LayoutAnchor {
 }
 
 final class SingleItemLayoutAnchor: LayoutAnchor {
-    
+   
     // LayoutAnchor
     var width = Double(0)
     var leadingConstraints = [LayoutConstraint]()
@@ -91,6 +92,13 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
         self.item.xPosition = self.position
         leadingLayoutAnchors.forEach { $0.apply(anchorPosition: position) }
         trailingLayoutAnchors.forEach { $0.apply(anchorPosition: position) }
+    }
+    
+    func reset() {
+        self.isSolved = false
+        self.position = .zero
+        leadingLayoutAnchors.forEach { $0.offset = 0}
+        trailingLayoutAnchors.forEach { $0.offset = 0 }
     }
 }
 
@@ -161,5 +169,9 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
             anchor.position = position
             anchor.apply()
         }
+    }
+    
+    func reset() {
+        self.position = 0
     }
 }

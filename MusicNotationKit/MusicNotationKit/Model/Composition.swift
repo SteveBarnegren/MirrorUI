@@ -10,6 +10,9 @@ import Foundation
 
 public class Composition {
     
+    // TODO: Temporary fix for a state issue
+    var isPreprocessed = false
+    
     var bars = [Bar]()
     
     var numberOfBars: Int {
