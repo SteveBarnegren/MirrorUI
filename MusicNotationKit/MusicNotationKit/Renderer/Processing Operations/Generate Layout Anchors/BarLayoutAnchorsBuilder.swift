@@ -12,7 +12,8 @@ class LayoutAnchorsBuilder {
     
     func makeAnchors(from composition: Composition) {
         
-        // Add a trailing bar line - this should definitely not be done here!
+        // Add a trailing bar line
+        // TODO: this should definitely not be done here!
         composition.bars.last?.trailingBarline = Barline()
         
         var previousBar: Bar?
