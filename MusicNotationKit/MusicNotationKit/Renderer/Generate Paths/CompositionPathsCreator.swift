@@ -12,7 +12,17 @@ class CompositionPathsCreator {
     
     func paths(fromBars bars: [Bar], canvasSize: Size, staveSpacing: Double, displaySize: DisplaySize) -> [Path] {
         
+        if bars.isEmpty {
+            return []
+        }
+        
         var paths = bars.map(makePaths(forBar:)).joined().toArray()
+        
+        // Make the path for the last barline
+        if let lastBarline = bars.last?.trailingBarline {
+            paths += BarlineRenderer().paths(forBarline: lastBarline)
+        }
+        
         paths += StaveRenderer.stavePaths(withWidth: canvasSize.width)
         paths = paths.map { $0.scaled(staveSpacing) }.map { $0.translated(x: 0, y: displaySize.height/2) }
         return paths
@@ -22,13 +32,7 @@ class CompositionPathsCreator {
         
         let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
         let notePaths =  bar.sequences.map(makePaths(forNoteSequence:)).joined().toArray()
-        var paths = barlinePath + notePaths
-        
-        if let trailingBarline = bar.trailingBarline {
-            paths += BarlineRenderer().paths(forBarline: trailingBarline)
-        }
-        
-        return paths
+        return barlinePath + notePaths
     }
     
     private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {

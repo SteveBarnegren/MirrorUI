@@ -41,7 +41,7 @@ class MusicRenderer {
         composition.bars.last?.trailingBarline = Barline()
         
         // Join barlines
-        //JoinBarlinesCompositionProcessingOperation().process(composition: composition)
+        JoinBarlinesCompositionProcessingOperation().process(composition: composition)
         
         // Populate note symbols
         GenerateSymbolDescriptionsProcessingOperation().process(composition: composition)

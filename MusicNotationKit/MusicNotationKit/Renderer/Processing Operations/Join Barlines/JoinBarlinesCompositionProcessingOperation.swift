@@ -12,13 +12,8 @@ class JoinBarlinesCompositionProcessingOperation: CompositionProcessingOperation
     
     func process(composition: Composition) {
         
-        var previousTrailingBarline: Barline?
-        
-        for bar in composition.bars {
-            if let barline = previousTrailingBarline, bar.trailingBarline == nil {
-                bar.trailingBarline = barline
-            }
-            previousTrailingBarline = bar.leadingBarline
+        for (bar, previous) in composition.bars.eachWithPrevious() where previous?.trailingBarline == nil {
+            previous?.trailingBarline = bar.leadingBarline
         }
     }
 }
