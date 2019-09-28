@@ -26,8 +26,18 @@ class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperati
         
         bar.layoutAnchors.forEach { $0.reset() }
         
-        fixedDistanceLayoutSolver.solve(anchors: bar.layoutAnchors)
-        bar.minimumWidth = bar.layoutAnchors.map { $0.trailingEdge }.max() ?? 0
+        let layoutAnchors = bar.layoutAnchors.appending(maybe: bar.lastBarlineAnchor)
+        fixedDistanceLayoutSolver.solve(anchors: layoutAnchors)
+        
+        // The minimum width should be the start of the following
+        // barline, or the end of the last anchor of this bar
+        if let lastBarlineAnchor = bar.lastBarlineAnchor {
+            bar.minimumWidth = lastBarlineAnchor.position - lastBarlineAnchor.width
+            print("Calculate minimum width based on last barline anchor!!!")
+        } else {
+            bar.minimumWidth = bar.layoutAnchors.map { $0.trailingEdge }.max() ?? 0
+        }
+        
         assert(bar.minimumWidth > 0, "Bar should have non-zero minimum width")
     }
     
