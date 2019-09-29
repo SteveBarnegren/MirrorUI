@@ -32,6 +32,8 @@
 		673A3D1A233FC1FF001CE422 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D19233FC1FF001CE422 /* Assertions.swift */; };
 		673A3D1C233FC531001CE422 /* Array+Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D1B233FC531001CE422 /* Array+Maybe.swift */; };
 		673A3D1E233FC567001CE422 /* Array+MaybeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D1D233FC566001CE422 /* Array+MaybeTests.swift */; };
+		673A3D212340E6E2001CE422 /* Sequence+UnnestTuples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D202340E6E1001CE422 /* Sequence+UnnestTuples.swift */; };
+		673A3D232340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D222340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift */; };
 		67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7B21CC02D40078A575 /* SymbolPaths.swift */; };
 		67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7D21CC04550078A575 /* MusicRenderer.swift */; };
 		67494C8021CC06740078A575 /* Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67494C7F21CC06740078A575 /* Vector2.swift */; };
@@ -159,6 +161,8 @@
 		673A3D19233FC1FF001CE422 /* Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		673A3D1B233FC531001CE422 /* Array+Maybe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Maybe.swift"; sourceTree = "<group>"; };
 		673A3D1D233FC566001CE422 /* Array+MaybeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+MaybeTests.swift"; sourceTree = "<group>"; };
+		673A3D202340E6E1001CE422 /* Sequence+UnnestTuples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UnnestTuples.swift"; sourceTree = "<group>"; };
+		673A3D222340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+UnnestTuplesTests.swift"; sourceTree = "<group>"; };
 		6749365021CF8861005BA334 /* StaveRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveRenderer.swift; sourceTree = "<group>"; };
 		67494C7B21CC02D40078A575 /* SymbolPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolPaths.swift; sourceTree = "<group>"; };
 		67494C7D21CC04550078A575 /* MusicRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRenderer.swift; sourceTree = "<group>"; };
@@ -277,6 +281,7 @@
 			children = (
 				670ABDAF22C55E7000BFA678 /* Sequence+Extensions.swift */,
 				670ABDAD22C55C3700BFA678 /* Sequence+Sum.swift */,
+				673A3D202340E6E1001CE422 /* Sequence+UnnestTuples.swift */,
 			);
 			path = Sequence;
 			sourceTree = "<group>";
@@ -727,6 +732,7 @@
 				6769B42A22BDA77C00AAFFF9 /* Array+ExtractTests.swift */,
 				673A3D16233FC1BE001CE422 /* Array+EachWithTests.swift */,
 				673A3D1D233FC566001CE422 /* Array+MaybeTests.swift */,
+				673A3D222340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -916,6 +922,7 @@
 				674B9AB522EDF6050098D121 /* IncrementingSequence.swift in Sources */,
 				6769B42922BDA52800AAFFF9 /* Array+Extract.swift in Sources */,
 				67BB96AD23367E3200119953 /* CompositionProcessingOperation.swift in Sources */,
+				673A3D212340E6E2001CE422 /* Sequence+UnnestTuples.swift in Sources */,
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
 				6753D0F722D7D31D0052F27F /* FlatRendereer.swift in Sources */,
@@ -936,6 +943,7 @@
 				67A15F9821C5129500C3C03F /* MusicNotationKitTests.swift in Sources */,
 				674B9AB122ECBCC80098D121 /* NoteClustererTests.swift in Sources */,
 				67E863B92303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift in Sources */,
+				673A3D232340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift in Sources */,
 				673A3D1A233FC1FF001CE422 /* Assertions.swift in Sources */,
 				67A1EF7B22999143009CF58C /* PlayableItemTimeCalculatorTests.swift in Sources */,
 				67669E5F22EDF668004F1927 /* IncrementingSequenceTests.swift in Sources */,

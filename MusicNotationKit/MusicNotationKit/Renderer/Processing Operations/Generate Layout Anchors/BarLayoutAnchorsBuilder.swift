@@ -15,10 +15,8 @@ class LayoutAnchorsBuilder {
         // Add a trailing bar line
         // TODO: this should definitely not be done here!
         composition.bars.last?.trailingBarline = Barline()
-        
-        var previousBar: Bar?
-        
-        for (bar, isLast) in composition.bars.eachWithIsLast() {
+                
+        for (bar, previousBar, isLast) in composition.bars.eachWithPrevious().eachWithIsLast().unnestTuples() {
             
             var barAnchors = [LayoutAnchor]()
             
@@ -44,7 +42,6 @@ class LayoutAnchorsBuilder {
             }
             
             bar.layoutAnchors = barAnchors
-            previousBar = bar
         }
     }
     
