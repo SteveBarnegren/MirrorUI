@@ -36,6 +36,8 @@ class MusicRenderer {
             // Add final barline (this should definitely be done somewhere else)
             composition.bars.last?.trailingBarline = Barline()
             
+            
+            
             // Join barlines
             JoinBarlinesCompositionProcessingOperation().process(composition: composition)
             
@@ -90,9 +92,7 @@ class MusicRenderer {
         }
         
         // Add the following barline anchor
-        for bar in composition.bars {
-            bar.layoutAnchors.forEach { $0.reset() }
-        }
+        composition.bars.forEach { $0.resetLayoutAnchors() }
         
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(bars: bars, layoutWidth: layoutWidth)

@@ -29,6 +29,11 @@ public class Bar {
     public func add(sequence: NoteSequence) {
         self.sequences.append(sequence)
     }
+    
+    func resetLayoutAnchors() {
+        layoutAnchors.forEach { $0.reset() }
+        trailingBarlineAnchor?.reset()
+    }
 }
 
 extension Bar {
