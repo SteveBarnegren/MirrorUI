@@ -23,9 +23,9 @@ class LayoutAnchorsBuilder {
             var barAnchors = [LayoutAnchor]()
             
             // Barline
-            let previousBarLastAnchor = previousBar?.lastBarlineAnchor ?? previousBar?.layoutAnchors.last
+            let previousBarLastAnchor = previousBar?.trailingBarlineAnchor ?? previousBar?.layoutAnchors.last
             let barlineAnchor = makeAnchor(forBarline: bar.leadingBarline, fromPrevious: previousBarLastAnchor)
-            previousBar?.lastBarlineAnchor = barlineAnchor
+            previousBar?.trailingBarlineAnchor = barlineAnchor
             barAnchors.append(barlineAnchor)
             
             // Notes

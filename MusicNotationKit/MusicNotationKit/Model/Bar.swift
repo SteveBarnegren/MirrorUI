@@ -21,9 +21,8 @@ public class Bar {
     
     // Cached information
     var layoutAnchors = [LayoutAnchor]()
-    var lastBarlineAnchor: LayoutAnchor?
+    var trailingBarlineAnchor: LayoutAnchor?
     var minimumWidth = Double(0)
-    
     
     public init() {}
     
