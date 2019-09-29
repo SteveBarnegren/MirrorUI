@@ -18,7 +18,7 @@ class FixedDistanceLayoutSolver {
             if isFirst == false {
                 solveLeadingConstraints(forAnchor: anchor)
             } else {
-                anchor.position = anchor.width/2
+                anchor.position = -anchor.leadingEdgeOffset
             }
             isFirst = false
         }
