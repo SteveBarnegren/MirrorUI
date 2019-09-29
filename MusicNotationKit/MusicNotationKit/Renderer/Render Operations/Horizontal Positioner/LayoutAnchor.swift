@@ -97,8 +97,8 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
     func reset() {
         self.isSolved = false
         self.position = .zero
-        leadingLayoutAnchors.forEach { $0.offset = 0}
-        trailingLayoutAnchors.forEach { $0.offset = 0 }
+        leadingLayoutAnchors.forEach { $0.reset() }
+        trailingLayoutAnchors.forEach { $0.reset() }
     }
 }
 
@@ -119,6 +119,10 @@ class AdjacentLayoutAnchor {
     
     func apply(anchorPosition: Double) {
         self.item.xPosition = anchorPosition + offset
+    }
+    
+    func reset() {
+        offset = 0
     }
 }
 
@@ -173,5 +177,6 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     
     func reset() {
         self.position = 0
+        anchors.forEach { $0.reset() }
     }
 }
