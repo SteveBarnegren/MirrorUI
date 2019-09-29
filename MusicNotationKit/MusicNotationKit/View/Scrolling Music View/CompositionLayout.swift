@@ -27,8 +27,6 @@ struct CompositionLayout {
         }
         
         compositionItems = items
-        
-        dump(items)
     }
     
     func nextItem(from barWidths: [Double], layoutWidth: Double, index: inout Int) -> CompositionItem? {
