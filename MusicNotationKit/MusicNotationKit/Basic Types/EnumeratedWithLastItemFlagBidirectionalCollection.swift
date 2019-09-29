@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct EnumeratedWithLastItemFlagBidirectionalCollection<Base> where Base : BidirectionalCollection {
+struct EachWithIsLastBidirectionalCollection<Base> where Base : BidirectionalCollection {
 
     let base: Base
 
@@ -17,7 +17,7 @@ struct EnumeratedWithLastItemFlagBidirectionalCollection<Base> where Base : Bidi
     }
 }
 
-extension EnumeratedWithLastItemFlagBidirectionalCollection: BidirectionalCollection {
+extension EachWithIsLastBidirectionalCollection: BidirectionalCollection {
     
     
     subscript(position: Base.Index) -> (Base.Element, Bool) {
@@ -46,8 +46,8 @@ extension EnumeratedWithLastItemFlagBidirectionalCollection: BidirectionalCollec
 
 extension BidirectionalCollection {
     
-    func enumeratedWithLastItemFlag() -> EnumeratedWithLastItemFlagBidirectionalCollection<Self> {
-        return EnumeratedWithLastItemFlagBidirectionalCollection(self)
+    func eachWithIsLast() -> EachWithIsLastBidirectionalCollection<Self> {
+        return EachWithIsLastBidirectionalCollection(self)
     }
 }
 

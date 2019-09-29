@@ -18,7 +18,7 @@ class EnumeratedWithLastItemFlagBidirectionalCollection: XCTestCase {
         var items = [String]()
         var flags = [Bool]()
         
-        for (item, flag) in array.enumeratedWithLastItemFlag() {
+        for (item, flag) in array.eachWithIsLast() {
             items.append(item)
             flags.append(flag)
         }

@@ -1,5 +1,5 @@
 //
-//  LayoutAnchorsBuilderTwo.swift
+//  LayoutAnchorsBuilder.swift
 //  MusicNotationKit
 //
 //  Created by Steve Barnegren on 17/09/2019.
@@ -18,7 +18,7 @@ class LayoutAnchorsBuilder {
         
         var previousBar: Bar?
         
-        for (bar, isLast) in composition.bars.enumeratedWithLastItemFlag() {
+        for (bar, isLast) in composition.bars.eachWithIsLast() {
             
             var barAnchors = [LayoutAnchor]()
             
@@ -135,7 +135,7 @@ class LayoutAnchorsBuilder {
     func applyDurations(toAnchors anchors: [LayoutAnchor], barDuration: Time) {
      
         var previous: LayoutAnchor?
-        for (anchor, isLast) in anchors.enumeratedWithLastItemFlag() {
+        for (anchor, isLast) in anchors.eachWithIsLast() {
             
             if let previous = previous {
                 previous.duration = anchor.time - previous.time

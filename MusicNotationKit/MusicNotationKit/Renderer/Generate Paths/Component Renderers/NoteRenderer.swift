@@ -96,7 +96,7 @@ class NoteRenderer {
 
             paths.append(maybe: makeStemPath(forNote: note, to: note.position.y + stemHeight.inverted(if: { stemDirection == .down })))
             
-            for (tailNumber, isLast) in (0..<note.symbolDescription.numberOfTails).enumeratedWithLastItemFlag() {
+            for (tailNumber, isLast) in (0..<note.symbolDescription.numberOfTails).eachWithIsLast() {
                 let xOffset = stemXOffset.inverted(if: { note.symbolDescription.stemDirection == .down })
                 let yOffset = (stemHeight - Double(tailNumber) * eachTailYOffset).inverted(if: { note.symbolDescription.stemDirection == .down })
                 let commands = isLast ? makeFastNoteBottomTailCommands() : makeFastNoteTailCommands()
