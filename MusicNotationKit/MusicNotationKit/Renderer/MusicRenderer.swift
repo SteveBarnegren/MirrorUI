@@ -81,7 +81,6 @@ class MusicRenderer {
         // Calculate layout sizes
         let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
         let layoutWidth = displaySize.width / staveSpacing
-        print("Layout width: \(layoutWidth)")
         
         let bars: [Bar]
         if let range = range {
@@ -89,7 +88,6 @@ class MusicRenderer {
         } else {
             bars = composition.bars
         }
-        print("num bars: \(bars.count)")
         
         // Add the following barline anchor
         for bar in composition.bars {

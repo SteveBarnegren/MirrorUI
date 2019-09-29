@@ -46,7 +46,6 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
     }
     
     private func processComposition() {
-        print("Process composition")
         self.renderer.preprocessComposition()
     }
     
@@ -57,7 +56,6 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
         
         collectionView.frame = view.bounds.inset(by: view.safeAreaInsets)
         
-        print("Work out bar layout")
         let barWidths = self.renderer.minimumBarWidths()
         compositionLayout = CompositionLayout(barWidths: barWidths, layoutWidth: Double(collectionView.bounds.width))
         self.collectionView.reloadData()
@@ -70,9 +68,7 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numItems = compositionLayout.compositionItems.count
-        print("Number of items: \(numItems)")
-        return numItems
+        return compositionLayout.compositionItems.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

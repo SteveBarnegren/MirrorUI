@@ -26,7 +26,6 @@ class MusicCollectionViewLayout: UICollectionViewLayout {
     
     override func prepare() {
         super.prepare()
-        print("Layout: prepare")
         
         let layout = dataSource.compositionLayout(forMusicCollectionViewLayout: self)
         

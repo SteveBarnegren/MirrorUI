@@ -146,7 +146,6 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("Layout subviews")
         musicView.frame = CGRect(x: 50,
                                  y: 0,
                                  width: musicViewWidth + panTranslation,
@@ -183,8 +182,6 @@ class ViewController: UIViewController {
         view.setNeedsLayout()
         view.layoutIfNeeded()
         musicView.setNeedsDisplay()
-        
-        print("TRANS: \(translation)")
     }
     
     // MARK: - Debug Constraints

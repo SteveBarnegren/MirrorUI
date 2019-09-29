@@ -33,7 +33,6 @@ class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperati
         // barline, or the end of the last anchor of this bar
         if let lastBarlineAnchor = bar.trailingBarlineAnchor {
             bar.minimumWidth = lastBarlineAnchor.position - lastBarlineAnchor.width
-            print("Calculate minimum width based on last barline anchor!!!")
         } else {
             bar.minimumWidth = bar.layoutAnchors.map { $0.trailingEdge }.max() ?? 0
         }

@@ -138,7 +138,6 @@ class MusicExampleViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("Layout subviews")
         musicView.frame = CGRect(x: 50,
                                  y: 0,
                                  width: musicViewWidth + panTranslation,
