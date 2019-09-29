@@ -12,10 +12,6 @@ class CompositionPathsCreator {
     
     func paths(fromBars bars: [Bar], canvasSize: Size, staveSpacing: Double, displaySize: DisplaySize) -> [Path] {
         
-        if bars.isEmpty {
-            return []
-        }
-        
         var paths = bars.map(makePaths(forBar:)).joined().toArray()
         
         // Make the path for the last barline
