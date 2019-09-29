@@ -31,44 +31,41 @@ class MusicRenderer {
             return
         }
         
-        if composition.isPreprocessed {
-            _minimumBarWidths = composition.bars.map { $0.minimumWidth }
-            isPreprocessingComplete = true
-            return
+        if !composition.isPreprocessed {
+            
+            // Add final barline (this should definitely be done somewhere else)
+            composition.bars.last?.trailingBarline = Barline()
+            
+            // Join barlines
+            JoinBarlinesCompositionProcessingOperation().process(composition: composition)
+            
+            // Populate note symbols
+            GenerateSymbolDescriptionsProcessingOperation().process(composition: composition)
+            
+            // Calculate note times
+            CalculatePlayableItemTimesProcessingOperation().process(composition: composition)
+            
+            // Populate note beams
+            GenerateBeamDescriptionsProcessingOperation().process(composition: composition)
+            
+            // Calculate stem directions
+            CalculateStemDirectionsProcessingOperation().process(composition: composition)
+            
+            // Generate bar layout anchors
+            GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)
+            
+            // Calculate minimum bar widths
+            CalculateMinimumBarWidthsProcessingOperation().process(composition: composition)
+            
+            // Stitch bar layout anchors
+            //StitchBarLayoutAnchorsProcessingOperation().process(composition: composition)
+        
+            composition.isPreprocessed = true
         }
-        
-        // Add final barline (this should definitely be done somewhere else)
-        composition.bars.last?.trailingBarline = Barline()
-        
-        // Join barlines
-        JoinBarlinesCompositionProcessingOperation().process(composition: composition)
-        
-        // Populate note symbols
-        GenerateSymbolDescriptionsProcessingOperation().process(composition: composition)
-        
-        // Calculate note times
-        CalculatePlayableItemTimesProcessingOperation().process(composition: composition)
-        
-        // Populate note beams
-        GenerateBeamDescriptionsProcessingOperation().process(composition: composition)
-        
-        // Calculate stem directions
-        CalculateStemDirectionsProcessingOperation().process(composition: composition)
-        
-        // Generate bar layout anchors
-        GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)
-        
-        // Calculate minimum bar widths
-        CalculateMinimumBarWidthsProcessingOperation().process(composition: composition)
-        
-        // Stitch bar layout anchors
-        //StitchBarLayoutAnchorsProcessingOperation().process(composition: composition)
         
         // Cache the minimum bar widths
         _minimumBarWidths = composition.bars.map { $0.minimumWidth }
-        
         isPreprocessingComplete = true
-        composition.isPreprocessed = true
     }
     
     func minimumBarWidths() -> [Double] {
