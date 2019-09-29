@@ -29,7 +29,7 @@ struct CompositionLayout {
         compositionItems = items
     }
     
-    func nextItem(from barWidths: [Double], layoutWidth: Double, index: inout Int) -> CompositionItem? {
+    private func nextItem(from barWidths: [Double], layoutWidth: Double, index: inout Int) -> CompositionItem? {
         
         var currentWidth = Double(0)
         var numBars = 0
