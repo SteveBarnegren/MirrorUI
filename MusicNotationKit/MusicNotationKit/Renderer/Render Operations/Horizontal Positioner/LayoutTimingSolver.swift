@@ -24,7 +24,14 @@ private class SpaceableAnchor {
     }
 }
 
+enum SpacingType {
+    case natural
+    case mathematical
+}
+
 class LayoutTimingSolver {
+    
+    var spacingType = SpacingType.natural
     
     func distributeTime(toAnchors anchors: [LayoutAnchor], layoutWidth: Double) {
         
@@ -105,18 +112,18 @@ class LayoutTimingSolver {
             let spaceableAnchor = SpaceableAnchor(anchor: anchor)
             spaceableAnchor.nextAnchor = anchors[maybe: index+1]
             spaceableAnchor.index = index
-            spaceableAnchor.barPct = anchor.duration!.barPct
+            spaceableAnchor.barPct = spacingValue(forDuration: anchor.duration!)
             spaceableAnchors.append(spaceableAnchor)
         }
         
         // Work out the ideal percentages
         var totalDuration = Double(0)
         for spaceable in spaceableAnchors {
-            totalDuration += spaceable.anchor.duration!.barPct
+            totalDuration += spaceable.barPct
         }
         
         for spaceable in spaceableAnchors {
-            spaceable.idealPct = spaceable.anchor.duration!.barPct / totalDuration
+            spaceable.idealPct = spaceable.barPct / totalDuration
         }
         
         return spaceableAnchors
@@ -137,6 +144,15 @@ class LayoutTimingSolver {
         for spaceable in spaceableAnchors {
             let currentPct = spaceable.distanceToNextAnchor / totalAnchorDistances
             spaceable.pctExpanded = currentPct / spaceable.idealPct
+        }
+    }
+    
+    private func spacingValue(forDuration duration: Time) -> Double {
+        switch self.spacingType {
+        case .natural:
+            return NaturalSpacing().staveSpacing(forDuration: duration)
+        case .mathematical:
+            return duration.barPct
         }
     }
 }
