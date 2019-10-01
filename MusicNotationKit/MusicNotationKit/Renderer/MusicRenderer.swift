@@ -36,8 +36,6 @@ class MusicRenderer {
             // Add final barline (this should definitely be done somewhere else)
             composition.bars.last?.trailingBarline = Barline()
             
-            
-            
             // Join barlines
             JoinBarlinesCompositionProcessingOperation().process(composition: composition)
             

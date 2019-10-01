@@ -105,7 +105,7 @@ class RestRenderer {
                    c1: stemRightBottom.adding(x: -0.07956989247311824, y: -0.021505376344086002),
                    c2: stemRightBottom.adding(x: -0.10107526881720427, y: -0.01505376344086018)),
             // Close stem buttom left to top left
-            .close,
+            .close
             ]
         
         let additionalTailCommands: [Path.Command] = [
@@ -118,7 +118,7 @@ class RestRenderer {
             .curve(Point(0.08064516129032256, 0.28924731182795704), c1: Point(0.02688172043010756, 0.3559139784946237), c2: Point(0.018279569892473146, 0.28924731182795704)),
             .curve(Point(0.21182795698924733, 0.4247311827956989), c1: Point(0.11505376344086021, 0.28924731182795704), c2: Point(0.1967741935483871, 0.3924731182795699)),
             .curve(stemTopRight, c1: Point(0.22473118279569892, 0.4505376344086022), c2: Point(0.26129032258064516, 0.4505376344086022)),
-            .close,
+            .close
             ]
         
         var path = Path(commands: stemCommands)

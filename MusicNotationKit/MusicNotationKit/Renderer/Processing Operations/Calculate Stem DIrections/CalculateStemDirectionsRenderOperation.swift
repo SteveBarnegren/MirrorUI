@@ -46,16 +46,3 @@ class CalculateStemDirectionsProcessingOperation: CompositionProcessingOperation
         return noteSequence.notes.sum { $0.pitch.rawValue }
     }
 }
-
-
-
-
-// Playables
-/*
-extension Array where Element: Note {
-    
-    func clustered() -> [[Note]] {
-        return self.chunked(atChangeTo: { $0.time.convertedTruncating(toDivision: 4).value })
-    }
-}
-*/

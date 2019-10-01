@@ -16,7 +16,7 @@ class ConstraintsDebugDrawer {
         for itemDescription in debugInformation.descriptions {
             UIColor.blue.withAlphaComponent(0.3).set()
             let path = UIBezierPath()
-            path.lineWidth = 0.5;
+            path.lineWidth = 0.5
             path.move(to: CGPoint(x: CGFloat(itemDescription.xPosition), y: canvasSize.height))
             path.addLine(to: CGPoint(x: CGFloat(itemDescription.xPosition), y: 0))
             path.stroke()

@@ -35,11 +35,9 @@ class NaturalRenderer {
             .line(Point(0.07473544973544984, -0.08994708994708989)),
             .line(Point(0.07473544973544984, 0.11772486772486779)),
             .line(Point(-0.07605820105820119, 0.07804232804232814)),
-            .close,
+            .close
         ]
         
         return Path(commands: commands).scaled(2.25)
     }()
 }
-
-

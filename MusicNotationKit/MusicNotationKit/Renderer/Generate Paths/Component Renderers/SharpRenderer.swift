@@ -55,7 +55,7 @@ class SharpRenderer {
             .line(Point(0.0793908880097417, -0.20257951652090822)),
             .line(Point(0.14995485955334395, -0.18230841165057593)),
             .line(Point(0.14995485955334395, -0.07979458839020914)),
-            .close,
+            .close
         ]
         
         return Path(commands: commands).scaled(2.25)

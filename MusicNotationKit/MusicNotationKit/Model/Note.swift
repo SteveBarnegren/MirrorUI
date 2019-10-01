@@ -23,7 +23,6 @@ public class Note: Playable {
     let value: NoteValue
     var time = Time.zero
     
-    
     // HorizontalLayoutItem
     let horizontalLayoutWidth: Double = 1.4
 

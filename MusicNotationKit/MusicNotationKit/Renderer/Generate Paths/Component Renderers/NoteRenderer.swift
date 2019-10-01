@@ -123,7 +123,7 @@ class NoteRenderer {
             .move(Point(0.028177234195949308, 0.22361714423650725)),
             .curve(Point(0.1796576688116412, -0.26326044118239594), c1: Point(0.36589881412387104, 0.13806570405953167), c2: Point(0.21003653045372273, -0.15850308628952214)),
             .curve(Point(0.028177234195949308, 0.5), c1: Point(0.4571075440584742, 0.11569020480229597), c2: Point(0.03196085061274678, 0.27025900632689404)),
-            .close,
+            .close
         ].scaled(3.5)
         return commands
     }
@@ -149,7 +149,7 @@ class NoteRenderer {
             .curve(Point(0.1792304244132646, -0.35229056960819516), c1: Point(0.18226080108967335, -0.08849347359720644), c2: Point(0.2675874595303402, -0.11050336514956877)), //2
             .curve(Point(0.21425213188790243, -0.0930725216606707), c1: Point(0.26596924995952503, -0.24026207534583588), c2: Point(0.2597177947976131, -0.16797185136542003)), // 3
             .line(Point(0.2059272997832754, -0.07986761556367605)), // 15
-            .curve(Point(0.008714897856421211, 0.19140708577675658), c1: Point(0.15769398041585103, -0.0070288758595288825), c2: Point(0.07567144209624721, 0.07066417104630607)), //16
+            .curve(Point(0.008714897856421211, 0.19140708577675658), c1: Point(0.15769398041585103, -0.0070288758595288825), c2: Point(0.07567144209624721, 0.07066417104630607)) //16
             ].translated(x: -0.008714897856421211, y: -0.19140708577675658).scaled(4.2)
         return commands
     }
@@ -170,7 +170,7 @@ class NoteRenderer {
         
         // Draw beams
         let maxBeams = notes.map { $0.beams.count }.max() ?? 0
-        var beamStartNotes = Array<Note?>(repeating: nil, count: maxBeams)
+        var beamStartNotes = [Note?](repeating: nil, count: maxBeams)
         
         for note in notes {
             for (beamIndex, beam) in note.beams.enumerated() {
@@ -235,7 +235,6 @@ class NoteRenderer {
         
         return path
     }
-    
     
 //    private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
 //

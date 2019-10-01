@@ -81,7 +81,7 @@ class PlayableItemTimeCalculatorTests: XCTestCase {
             .init(value: 0, division: 32),
             .init(value: 7, division: 32),
             .init(value: 14, division: 32),
-            .init(value: 21, division: 32),
+            .init(value: 21, division: 32)
             ])
     }
     
@@ -100,9 +100,6 @@ class PlayableItemTimeCalculatorTests: XCTestCase {
             .init(semiquavers: 15) // semiquaver
             ])
     }
-    
-    
-    
 }
 
 // MARK: - Helpers
@@ -131,6 +128,4 @@ extension NoteSequence {
         XCTAssertEqual(noteTimes, self.playables.map { $0.time }, file: file, line: line)
         return self
     }
-    
-    
 }

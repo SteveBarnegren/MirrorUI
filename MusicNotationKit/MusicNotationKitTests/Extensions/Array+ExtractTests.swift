@@ -28,6 +28,4 @@ class Array_ExtractTests: XCTestCase {
         XCTAssertEqual(value, 10)
         XCTAssertEqual(array, [5, 6, 2, 9, 3])
     }
-    
-
 }

@@ -27,7 +27,7 @@ class NoteBeamDescriberTestsBase: XCTestCase {
 
 // MARK: - Note Type
 
-fileprivate class Note {
+private class Note {
     var duration: Time
     var time: Time
     var numberOfTails: Int
@@ -78,7 +78,7 @@ extension NoteBeamDescriberTestsBase {
 
 // MARK: - Note + Verify
 
-fileprivate extension Note {
+private extension Note {
     
     @discardableResult func verify(beams: [Beam], file: StaticString = #file, line: UInt = #line) -> Self {
         XCTAssertEqual(self.beams, beams, file: file, line: line)
@@ -97,10 +97,9 @@ fileprivate extension Array where Element == Note {
     }
 }
 
-
 // MARK: - Beam string helpers
 
-fileprivate func string(fromNotes notes: [Note]) -> String {
+private func string(fromNotes notes: [Note]) -> String {
     
     var string = ""
     let numBeams = notes.map { $0.beams.count }.max()!
@@ -145,7 +144,7 @@ fileprivate func string(fromNotes notes: [Note]) -> String {
                         beamIndexString += " "
                     }
                 }
-            }  else {
+            } else {
                 if !isLastNote {
                     beamIndexString += " "
                 }

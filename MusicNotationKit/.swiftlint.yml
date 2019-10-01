@@ -1,0 +1,23 @@
+disabled_rules:
+  - cyclomatic_complexity
+  - file_length
+  - function_body_length
+  - function_parameter_count
+  - identifier_name
+  - line_length
+  - nesting
+  - redundant_objc_attribute
+  - shorthand_operator
+  - trailing_whitespace
+  - type_body_length
+  - type_name
+  - unused_closure_parameter
+  - force_cast
+  - large_tuple
+
+opt_in_rules:
+  - overridden_super_call
+  - prohibited_super_call
+
+excluded: # paths to ignore during linting. overridden by `included`.
+  - .build

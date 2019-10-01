@@ -13,9 +13,6 @@ class GenerateBarLayoutAnchorsProcessingOperation: CompositionProcessingOperatio
     private let layoutAnchorsBuilder = LayoutAnchorsBuilder()
     
     func process(composition: Composition) {
-        
         layoutAnchorsBuilder.makeAnchors(from: composition)
-        
-       
     }
 }

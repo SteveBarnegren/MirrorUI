@@ -64,7 +64,4 @@ class MusicCollectionViewLayout: UICollectionViewLayout {
         attributes.frame = cellRect
         return attributes
     }
-    
-   
-
 }

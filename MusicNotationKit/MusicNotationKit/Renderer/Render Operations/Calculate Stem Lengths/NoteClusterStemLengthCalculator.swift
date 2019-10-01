@@ -113,4 +113,3 @@ class NoteClusterStemLengthCalculator<T> {
     }
 
 }
-

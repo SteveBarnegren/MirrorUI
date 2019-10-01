@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct EachWithIsLastBidirectionalCollection<Base> where Base : BidirectionalCollection {
+struct EachWithIsLastBidirectionalCollection<Base> where Base: BidirectionalCollection {
 
     let base: Base
 
@@ -18,7 +18,6 @@ struct EachWithIsLastBidirectionalCollection<Base> where Base : BidirectionalCol
 }
 
 extension EachWithIsLastBidirectionalCollection: BidirectionalCollection {
-    
     
     subscript(position: Base.Index) -> (Base.Element, Bool) {
         return (base[position], position == self.index(startIndex, offsetBy: count-1))
@@ -32,7 +31,6 @@ extension EachWithIsLastBidirectionalCollection: BidirectionalCollection {
         return base.endIndex
     }
     
-
     func index(after i: Base.Index) -> Base.Index {
         return base.index(after: i)
     }
@@ -40,8 +38,6 @@ extension EachWithIsLastBidirectionalCollection: BidirectionalCollection {
     func index(before i: Base.Index) -> Base.Index {
         return base.index(after: i)
     }
-
-
 }
 
 extension BidirectionalCollection {
@@ -50,6 +46,3 @@ extension BidirectionalCollection {
         return EachWithIsLastBidirectionalCollection(self)
     }
 }
-
-
-

@@ -30,10 +30,8 @@ class BarLayoutAnchorsStitcher {
         var constraints = [LayoutConstraint]()
         
         for anchor in bar.layoutAnchors {
-            for constraint in anchor.leadingConstraints {
-                if constraint.from == nil {
-                    constraints.append(constraint)
-                }
+            for constraint in anchor.leadingConstraints where constraint.from == nil {
+                constraints.append(constraint)
             }
         }
         
@@ -45,10 +43,8 @@ class BarLayoutAnchorsStitcher {
         var constraints = [LayoutConstraint]()
         
         for anchor in bar.layoutAnchors {
-            for constraint in anchor.trailingConstraints {
-                if constraint.to == nil {
-                    constraints.append(constraint)
-                }
+            for constraint in anchor.trailingConstraints where constraint.to == nil {
+                constraints.append(constraint)
             }
         }
         

@@ -88,7 +88,7 @@ class NoteSymbolDescriber {
         case .doubleDotted: numberOfDots = 2
         }
         
-        var dots = Array<DotSymbol>()
+        var dots = [DotSymbol]()
         
         repeated(times: numberOfDots) {
             dots.append(makeDotSymbol(forNote: note))

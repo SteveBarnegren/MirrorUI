@@ -56,6 +56,4 @@ class CompositionPathsCreator {
             fatalError("Unknown symbol type: \(symbol)")
         }
     }
-    
 }
-

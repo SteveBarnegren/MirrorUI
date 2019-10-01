@@ -277,8 +277,6 @@ class TimeSignatureTests: XCTestCase {
             breaks: [Time(crotchets: 3), Time(crotchets: 6)]
         )
     }
-
-
 }
 
 // MARK: - Helpers

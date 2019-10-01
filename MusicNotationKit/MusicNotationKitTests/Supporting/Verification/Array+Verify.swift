@@ -19,10 +19,8 @@ extension Array where Element: AnyObject {
             return
         }
         
-        for (index, (obj1, obj2)) in zip(self, instances).enumerated() {
-            if obj1 !== obj2 {
-                XCTFail("Different instances at index \(index)", file: file, line: line)
-            }
+        for (index, (obj1, obj2)) in zip(self, instances).enumerated() where obj1 !== obj2 {
+            XCTFail("Different instances at index \(index)", file: file, line: line)
         }
     }
 }

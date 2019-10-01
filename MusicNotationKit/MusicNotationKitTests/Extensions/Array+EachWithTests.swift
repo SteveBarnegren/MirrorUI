@@ -15,7 +15,7 @@ class Array_EachWithTests: XCTestCase {
     
     func test_EachWithPrevious_EmptyArray() {
         
-        let array = Array<String>()
+        let array = [String]()
         
         let results = array.eachWithPrevious()
         XCTAssertEqual(results.count, 0)
@@ -51,5 +51,3 @@ class Array_EachWithTests: XCTestCase {
         XCTAssertEqualTuple2(results[2], ("c", "b"))
     }
 }
-
-

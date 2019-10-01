@@ -177,30 +177,11 @@ public struct TimeSignature: Equatable {
         // 9/4
         else if self == TimeSignature(value: 9, division: 4) {
             return every(Time(crotchets: 3))
-        }
-            
-            
-        
-        
-        
-        
-        else {
+        } else {
             return AnySequence([])
         }
-
-//        if self == .fourFour {
-//            return every(Time(crotchets: 2))
-//        } else if self == .sixEight {
-//            return every(Time(quavers: 3))
-//        } else {
-//            return AnySequence([])
-//        }
     }
 }
-
-
-
-
 
 extension TimeSignature {
     public static let fourFour = TimeSignature(value: 4, division: 4)

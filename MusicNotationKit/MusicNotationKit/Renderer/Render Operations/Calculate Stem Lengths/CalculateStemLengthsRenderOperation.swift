@@ -85,4 +85,3 @@ extension Array where Element == Note {
         return foundForwardConnection
     }
 }
-

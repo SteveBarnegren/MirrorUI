@@ -11,9 +11,9 @@ import Foundation
 struct RepeatingPatternSequence<T>: Sequence, IteratorProtocol {
     
     private var index: Int = -1
-    private let pattern: Array<T>
+    private let pattern: [T]
     
-    init(pattern: Array<T>) {
+    init(pattern: [T]) {
         self.pattern = pattern
     }
     

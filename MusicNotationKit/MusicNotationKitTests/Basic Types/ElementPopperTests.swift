@@ -55,7 +55,4 @@ class ElementPopperTests: XCTestCase {
         XCTAssertEqual(popper.popNext(), 8)
         XCTAssertNil(popper.next())
     }
-    
-    
-
 }

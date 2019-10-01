@@ -17,4 +17,3 @@ class NaturalSymbol: AdjacentLayoutItem, Positionable {
     // Positionable
     var position = Point.zero
 }
-
