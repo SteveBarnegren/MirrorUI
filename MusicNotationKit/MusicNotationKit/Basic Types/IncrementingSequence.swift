@@ -47,5 +47,3 @@ extension IncrementingSequence where T: AdditiveArithmetic {
         self = IncrementingSequence(initialValue: items.first!, addingPattern: rotatedPattern)
     }
 }
-
-

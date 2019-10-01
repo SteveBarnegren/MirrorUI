@@ -56,11 +56,9 @@ class ViewController: UIViewController {
         return composition
     }
     
-
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
         
-
         sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .c4).natural())
         sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .g4))
         sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .e4))
@@ -134,7 +132,6 @@ class ViewController: UIViewController {
         sequence.add(note: Note(value: .eighth, pitch: .g3))
         sequence.add(note: Note(value: .sixteenth, pitch: .a4).sharp())
         
-        
         let bar = Bar()
         bar.timeSignature = .fourFour
         bar.add(sequence: sequence)
@@ -196,4 +193,3 @@ class ViewController: UIViewController {
         musicView._showConstraintsDebug = debugConstraintsEnabled
     }
 }
-
