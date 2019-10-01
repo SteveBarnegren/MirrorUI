@@ -23,6 +23,7 @@ public class Bar {
     var layoutAnchors = [LayoutAnchor]()
     var trailingBarlineAnchor: LayoutAnchor?
     var minimumWidth = Double(0)
+    var preferredWidth = Double(0)
     
     public init() {}
     

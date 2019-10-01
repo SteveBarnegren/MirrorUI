@@ -10,10 +10,20 @@ import Foundation
 
 typealias DisplaySize = Vector2<Double>
 
+struct BarSizingInfo {
+    var minimumWidth: Double
+    var preferredWidth: Double
+    
+    func scaled(_ scale: Double) -> BarSizingInfo {
+        return BarSizingInfo(minimumWidth: minimumWidth * scale,
+                             preferredWidth: preferredWidth * scale)
+    }
+}
+
 class MusicRenderer {
     
     private let composition: Composition
-    private var _minimumBarWidths = [Double]()
+    private var barSizingInformation = [BarSizingInfo]()
     private var isPreprocessingComplete = false
     
     let staveSpacing: Double = 8
@@ -64,12 +74,15 @@ class MusicRenderer {
         }
         
         // Cache the minimum bar widths
-        _minimumBarWidths = composition.bars.map { $0.minimumWidth }
+        barSizingInformation = composition.bars.map {
+            return BarSizingInfo(minimumWidth: $0.minimumWidth, preferredWidth: $0.preferredWidth)
+        }
+        
         isPreprocessingComplete = true
     }
     
-    func minimumBarWidths() -> [Double] {
-        return _minimumBarWidths.map { $0 * staveSpacing }
+    func barSizes() -> [BarSizingInfo] {
+        return barSizingInformation.map { $0.scaled(staveSpacing) }
     }
     
     func paths(forDisplaySize displaySize: DisplaySize, range: Range<Int>? = nil) -> [Path] {

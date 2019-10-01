@@ -21,17 +21,52 @@ class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperati
         bar.resetLayoutAnchors()
         
         let layoutAnchors = bar.layoutAnchors.appending(maybe: bar.trailingBarlineAnchor)
+
+        // Get the minimum width
         fixedDistanceLayoutSolver.solve(anchors: layoutAnchors)
+        bar.minimumWidth = getWidth(forBar: bar)
+        assert(bar.minimumWidth > 0, "Bar should have non-zero minimum width")
+        
+        // Get the preferred width
+        expandAnchorsToPreferredSize(anchors: layoutAnchors)
+        bar.preferredWidth = getWidth(forBar: bar)
+        assert(bar.preferredWidth > 0, "Bar should have non-zero preferred width")
+        assert(bar.preferredWidth >= bar.minimumWidth, "Bar preferred width should not be less than minimum width")
+    }
+    
+    private func expandAnchorsToPreferredSize(anchors: [LayoutAnchor]) {
+        
+        var deltas = [Double]()
+        
+        // Work out the deltas
+        for (anchor, next) in anchors.eachWithNext() {
+            if let next = next, let duration = anchor.duration {
+                let current = next.position - anchor.position
+                let preferred = NaturalSpacing().staveSpacing(forDuration: duration)
+                let diff = (preferred - current).constrained(min: 0)
+                deltas.append(diff)
+            } else {
+                deltas.append(0)
+            }
+        }
+        
+        // Apply the deltas to expand the anchors
+        var offset = 0.0
+        for (anchor, delta) in zip(anchors, deltas) {
+            offset += delta
+            anchor.position += offset
+        }
+    }
+    
+    private func getWidth(forBar bar: Bar) -> Double {
         
         // The minimum width should be the start of the following
         // barline, or the end of the last anchor of this bar
         if let lastBarlineAnchor = bar.trailingBarlineAnchor {
-            bar.minimumWidth = lastBarlineAnchor.position - lastBarlineAnchor.width
+            return lastBarlineAnchor.position - lastBarlineAnchor.width
         } else {
-            bar.minimumWidth = bar.layoutAnchors.map { $0.trailingEdge }.max() ?? 0
+            return bar.layoutAnchors.map { $0.trailingEdge }.max() ?? 0
         }
-        
-        assert(bar.minimumWidth > 0, "Bar should have non-zero minimum width")
     }
     
 }
