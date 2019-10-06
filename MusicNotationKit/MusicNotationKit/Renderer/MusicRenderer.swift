@@ -28,7 +28,7 @@ class MusicRenderer {
     private var barSizingInformation = [BarSizingInfo]()
     private var isPreprocessingComplete = false
     
-    let staveSpacing: Double = 8
+    var staveSpacing: Double = 8
     
     var _generateConstraintsDebugInformation = false
     var _constraintsDebugInformation: ConstraintsDebugInformation?

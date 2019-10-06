@@ -12,6 +12,7 @@ import MusicNotationKit
 class ScrollingMusicExampleViewController: UIViewController {
     
     var musicViewController: ScrollingMusicViewController!
+    var controlPanel: ControlPanelView!
     
     init() {
         super.init(nibName: "ScrollingMusicExampleViewController", bundle: nil)
@@ -27,6 +28,26 @@ class ScrollingMusicExampleViewController: UIViewController {
         musicViewController = ScrollingMusicViewController(composition: ExampleCompositions.randomComposition)
         addChild(musicViewController)
         view.addSubview(musicViewController.view)
+        
+        addControlPanel()
+    }
+    
+    private func addControlPanel() {
+        
+        let testSlider = SliderControl(name: "Stave spacing",
+                                       getValue: { self.musicViewController.staveSpacing },
+                                       setValue: { self.musicViewController.staveSpacing = $0 },
+                                       minValue: 1,
+                                       maxValue: 16)
+        
+        controlPanel = ControlPanelView(controls: [testSlider])
+        controlPanel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(controlPanel)
+        view.addConstraints([
+            controlPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            controlPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            controlPanel.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
     
     override func viewDidLayoutSubviews() {

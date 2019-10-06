@@ -10,6 +10,11 @@ import UIKit
 
 public class ScrollingMusicViewController: UIViewController, UICollectionViewDataSource {
    
+    public var staveSpacing: Double {
+        get { renderer.staveSpacing }
+        set { renderer.staveSpacing = newValue; reload() }
+    }
+    
     private let renderer: MusicRenderer
     private var collectionView: UICollectionView!
     private var collectionViewLayout: MusicCollectionViewLayout!
@@ -47,6 +52,12 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
     
     private func processComposition() {
         self.renderer.preprocessComposition()
+    }
+    
+    // MARK: - Reload
+    
+    private func reload() {
+        self.view.setNeedsLayout()
     }
     
     // MARK: - Layout
