@@ -19,6 +19,7 @@
 		677C9C6721C5158D00C7A16E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 677C9C6621C5158D00C7A16E /* Assets.xcassets */; };
 		677C9C6A21C5158D00C7A16E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 677C9C6821C5158D00C7A16E /* LaunchScreen.storyboard */; };
 		677C9C7D21C515FE00C7A16E /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 677C9C7721C515DC00C7A16E /* MusicNotationKit.framework */; };
+		679A2EF8234A59A200E157C8 /* TestComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A2EF7234A59A200E157C8 /* TestComposition.swift */; };
 		67BB96A4233677C200119953 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96A2233677C200119953 /* MenuViewController.swift */; };
 		67BB96A5233677C200119953 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BB96A3233677C200119953 /* MenuViewController.xib */; };
 		67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */; };
@@ -85,6 +86,7 @@
 		677C9C6921C5158D00C7A16E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		677C9C6B21C5158D00C7A16E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		677C9C7121C515DC00C7A16E /* MusicNotationKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MusicNotationKit.xcodeproj; path = ../../MusicNotationKit/MusicNotationKit.xcodeproj; sourceTree = "<group>"; };
+		679A2EF7234A59A200E157C8 /* TestComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestComposition.swift; sourceTree = "<group>"; };
 		67BB96A2233677C200119953 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		67BB96A3233677C200119953 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMusicExampleViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				67BB96AF2336805C00119953 /* ExampleCompositions.swift */,
+				679A2EF7234A59A200E157C8 /* TestComposition.swift */,
 			);
 			path = Compositions;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				67BB96A4233677C200119953 /* MenuViewController.swift in Sources */,
 				677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */,
 				676BB600233676D000EA9F9C /* MusicExampleViewController.swift in Sources */,
+				679A2EF8234A59A200E157C8 /* TestComposition.swift in Sources */,
 				673440292349E23300563210 /* ControlPanel.swift in Sources */,
 				672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */,
 				67BB96B02336805C00119953 /* ExampleCompositions.swift in Sources */,

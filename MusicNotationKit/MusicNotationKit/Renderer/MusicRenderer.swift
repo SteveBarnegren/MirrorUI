@@ -77,7 +77,7 @@ class MusicRenderer {
         
         // Cache the minimum bar widths
         barSizingInformation = composition.bars.map {
-            return BarSizingInfo(minimumWidth: $0.minimumWidth, preferredWidth: $0.preferredWidth, height: 8)
+            return BarSizingInfo(minimumWidth: $0.minimumWidth, preferredWidth: $0.preferredWidth, height: 12)
         }
         
         isPreprocessingComplete = true

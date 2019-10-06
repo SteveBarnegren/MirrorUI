@@ -25,7 +25,7 @@ class ScrollingMusicExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        musicViewController = ScrollingMusicViewController(composition: ExampleCompositions.randomComposition)
+        musicViewController = ScrollingMusicViewController(composition: ExampleCompositions.test)
         addChild(musicViewController)
         view.addSubview(musicViewController.view)
         

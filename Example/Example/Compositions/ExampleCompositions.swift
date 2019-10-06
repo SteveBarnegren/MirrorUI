@@ -13,6 +13,8 @@ struct ExampleCompositions {
     static let randomComposition = makeRandomComposition()
 }
 
+// MARK: - Random Composition
+
 private func makeRandomComposition() -> Composition {
     
     let segmentGenerators: [() -> [Note]] = [makeBarSegment1,
