@@ -53,8 +53,9 @@ struct CompositionLayout {
         }
         
         if numBars > 0 {
+            let itemWidth = index >= barSizes.count ? currentWidth : layoutWidth
             return CompositionItem(barRange: rangeStart..<rangeStart+numBars,
-                                   size: Vector2(layoutWidth, currentHeight))
+                                   size: Vector2(itemWidth, currentHeight))
         } else {
             return nil
         }
