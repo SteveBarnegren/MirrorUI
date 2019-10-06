@@ -34,7 +34,7 @@ class MusicCollectionViewLayout: UICollectionViewLayout {
         var yPos = CGFloat(0)
         for item in layout.compositionItems {
             
-            let cellHeight = CGFloat(100)
+            let cellHeight = CGFloat(item.size.height)
             let cellRect = CGRect(x: CGFloat(0), y: yPos, width: collectionView!.bounds.width, height: cellHeight)
             cellRects.append(cellRect)
             yPos += cellHeight

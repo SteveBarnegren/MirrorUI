@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias Vector2D = Vector2<Double>
+
 struct Vector2<T> {
     
     let firstValue: T

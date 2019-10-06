@@ -13,7 +13,7 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
     private let renderer: MusicRenderer
     private var collectionView: UICollectionView!
     private var collectionViewLayout: MusicCollectionViewLayout!
-    private var compositionLayout = CompositionLayout(barWidths: [], layoutWidth: 0)
+    private var compositionLayout = CompositionLayout(barSizes: [], layoutWidth: 0)
     
     // MARK: - Init
     
@@ -57,7 +57,7 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
         collectionView.frame = view.bounds.inset(by: view.safeAreaInsets)
         
         let barSizes = self.renderer.barSizes()
-        compositionLayout = CompositionLayout(barWidths: barSizes.map { $0.preferredWidth },
+        compositionLayout = CompositionLayout(barSizes: barSizes.map { Vector2D($0.preferredWidth, $0.height) },
                                               layoutWidth: Double(collectionView.bounds.width))
         self.collectionView.reloadData()
     }

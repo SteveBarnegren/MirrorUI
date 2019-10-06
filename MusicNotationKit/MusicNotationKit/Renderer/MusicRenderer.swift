@@ -13,10 +13,12 @@ typealias DisplaySize = Vector2<Double>
 struct BarSizingInfo {
     var minimumWidth: Double
     var preferredWidth: Double
+    var height: Double
     
     func scaled(_ scale: Double) -> BarSizingInfo {
         return BarSizingInfo(minimumWidth: minimumWidth * scale,
-                             preferredWidth: preferredWidth * scale)
+                             preferredWidth: preferredWidth * scale,
+                             height: height * scale)
     }
 }
 
@@ -75,7 +77,7 @@ class MusicRenderer {
         
         // Cache the minimum bar widths
         barSizingInformation = composition.bars.map {
-            return BarSizingInfo(minimumWidth: $0.minimumWidth, preferredWidth: $0.preferredWidth)
+            return BarSizingInfo(minimumWidth: $0.minimumWidth, preferredWidth: $0.preferredWidth, height: 8)
         }
         
         isPreprocessingComplete = true
