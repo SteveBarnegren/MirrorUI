@@ -13,7 +13,6 @@ import PopupControls
 class ScrollingMusicExampleViewController: UIViewController {
     
     var musicViewController: ScrollingMusicViewController!
-    var controlPanel: ControlPanelView!
     
     init() {
         super.init(nibName: "ScrollingMusicExampleViewController", bundle: nil)
