@@ -26,8 +26,12 @@ class MusicCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        view.frame = contentView.bounds
+      
+        // Use ceil of content view height to avoid occasional rounding error where subview
+        // is not rendered as fully covering content view
+        var viewFrame = contentView.bounds
+        viewFrame.size.height = ceil(viewFrame.height)
+        view.frame = viewFrame
     }
     
     func configure(withPaths paths: [Path]) {

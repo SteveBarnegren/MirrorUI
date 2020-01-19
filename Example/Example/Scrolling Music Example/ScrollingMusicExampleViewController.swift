@@ -34,7 +34,7 @@ class ScrollingMusicExampleViewController: UIViewController {
     
     private func addPopupControls() {
         
-        let controls = PopUpControlsViewController.overlay(onViewController: self, initialState: .collapsed)
+        let controls = PopUpControlsViewController.overlay(onViewController: self, initialState: .hidden)
         
         let staveSpacing = SliderItem(name: "Stave spacing",
                                       min: 1,
