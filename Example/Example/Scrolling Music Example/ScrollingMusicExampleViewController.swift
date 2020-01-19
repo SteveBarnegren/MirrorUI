@@ -8,6 +8,7 @@
 
 import UIKit
 import MusicNotationKit
+import PopupControls
 
 class ScrollingMusicExampleViewController: UIViewController {
     
@@ -29,25 +30,20 @@ class ScrollingMusicExampleViewController: UIViewController {
         addChild(musicViewController)
         view.addSubview(musicViewController.view)
         
-        addControlPanel()
+        addPopupControls()
     }
     
-    private func addControlPanel() {
+    private func addPopupControls() {
         
-        let testSlider = SliderControl(name: "Stave spacing",
-                                       getValue: { self.musicViewController.staveSpacing },
-                                       setValue: { self.musicViewController.staveSpacing = $0 },
-                                       minValue: 1,
-                                       maxValue: 16)
+        let controls = PopUpControlsViewController.overlay(onViewController: self, initialState: .collapsed)
         
-        controlPanel = ControlPanelView(controls: [testSlider])
-        controlPanel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(controlPanel)
-        view.addConstraints([
-            controlPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            controlPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            controlPanel.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+        let staveSpacing = SliderItem(name: "Stave spacing",
+                                      min: 1,
+                                      max: 16,
+                                      getValue: { Float(self.musicViewController.staveSpacing) },
+                                      setValue: { self.musicViewController.staveSpacing = Double($0) })
+        
+        controls.show(items: [staveSpacing])
     }
     
     override func viewDidLayoutSubviews() {

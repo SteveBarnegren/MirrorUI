@@ -1,0 +1,10 @@
+{
+  "commitish" : "162672710f07b425e683c6a7521f01f228ff2693",
+  "iOS" : [
+    {
+      "name" : "PopupControls",
+      "hash" : "6a5e8229e67caa2f9f50c75af0a1a55a33ccbb4082d60e0e8a8d1db0fb5b7a6d",
+      "swiftToolchainVersion" : "5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
+    }
+  ]
+}

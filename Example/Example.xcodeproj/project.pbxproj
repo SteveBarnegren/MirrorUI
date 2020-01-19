@@ -25,6 +25,7 @@
 		67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */; };
 		67BB96AA23367A0000119953 /* ScrollingMusicExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */; };
 		67BB96B02336805C00119953 /* ExampleCompositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96AF2336805C00119953 /* ExampleCompositions.swift */; };
+		67C3B01723D1017500149857 /* PopupControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C3B01623D1017500149857 /* PopupControls.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMusicExampleViewController.swift; sourceTree = "<group>"; };
 		67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollingMusicExampleViewController.xib; sourceTree = "<group>"; };
 		67BB96AF2336805C00119953 /* ExampleCompositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCompositions.swift; sourceTree = "<group>"; };
+		67C3B01623D1017500149857 /* PopupControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PopupControls.framework; path = Carthage/Build/iOS/PopupControls.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				677C9C7D21C515FE00C7A16E /* MusicNotationKit.framework in Frameworks */,
+				67C3B01723D1017500149857 /* PopupControls.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +161,7 @@
 				677C9C6621C5158D00C7A16E /* Assets.xcassets */,
 				677C9C6821C5158D00C7A16E /* LaunchScreen.storyboard */,
 				677C9C6B21C5158D00C7A16E /* Info.plist */,
+				67C3B01423D1015900149857 /* Frameworks */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -196,6 +200,14 @@
 			path = Compositions;
 			sourceTree = "<group>";
 		};
+		67C3B01423D1015900149857 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				67C3B01623D1017500149857 /* PopupControls.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -207,6 +219,7 @@
 				673A3D282343E26A001CE422 /* SwiftLint */,
 				677C9C5921C5158C00C7A16E /* Frameworks */,
 				677C9C5A21C5158C00C7A16E /* Resources */,
+				67C3B01A23D1031700149857 /* Copy Frameworks */,
 				674632122252A292007626D0 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -311,6 +324,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		67C3B01A23D1031700149857 /* Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/PopupControls.framework",
+			);
+			name = "Copy Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PopupControls.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -488,16 +521,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VAA3W4LPY2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SteveBarnegren.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Wildcard-iOS-Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -508,16 +547,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VAA3W4LPY2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SteveBarnegren.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Wildcard-iOS-Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

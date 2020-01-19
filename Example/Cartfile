@@ -1,0 +1,2 @@
+# Use a local project
+git "file:///Users/stevebarnegren/Documents/PROJECTS/CodeProjects/PopupControls" "feature/carthage"
