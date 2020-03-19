@@ -350,7 +350,7 @@ class NoteRenderer {
             xOffset = -stemXOffset
         }
         
-        var stemYOffset = 0.1
+        var stemYOffset = self.stemYOffset(forNoteHead: note.symbolDescription.headStyle)
         if stemEndY < note.position.y {
             stemYOffset = -stemYOffset
         }
@@ -361,6 +361,19 @@ class NoteRenderer {
                     y: startY,
                     width: stemThickness,
                     height: stemEndY - startY)
+    }
+    
+    /// The Stem Y starting offset from the middle of the note
+    private func stemYOffset(forNoteHead noteHead: NoteSymbolDescription.HeadStyle) -> Double {
+        
+        switch noteHead {
+        case .semibreve, .open, .filled:
+            return 0.1
+        case .cross:
+            return 0.5
+        case .none:
+            return 0
+        }
     }
     
     // MARK: - Helpers
