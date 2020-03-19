@@ -20,7 +20,8 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollingMusicExampleButtonPressed(sender: UIButton())
+        musicExampleButtonPressed(sender: UIButton())
+        //scrollingMusicExampleButtonPressed(sender: UIButton())
     }
     
     @IBAction private func musicExampleButtonPressed(sender: UIButton) {

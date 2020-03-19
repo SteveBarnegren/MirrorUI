@@ -19,8 +19,30 @@ struct Point {
         self.y = y
     }
     
+    // Adding / Subtracting
+    
     func adding(x: Double, y: Double) -> Point {
         return Point(self.x + x, self.y + y)
+    }
+    
+    func adding(x: Double) -> Point {
+        return Point(self.x + x, self.y)
+    }
+    
+    func adding(y: Double) -> Point {
+        return Point(self.x, self.y + y)
+    }
+    
+    func subtracting(x: Double, y: Double) -> Point {
+        return Point(self.x - x, self.y - y)
+    }
+    
+    func subtracting(x: Double) -> Point {
+        return Point(self.x - x, self.y)
+    }
+    
+    func subtracting(y: Double) -> Point {
+        return Point(self.x, self.y - y)
     }
 }
 

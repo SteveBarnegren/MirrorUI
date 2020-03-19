@@ -104,7 +104,7 @@ class MusicRenderer {
             bars = composition.bars
         }
         
-        // Add the following barline anchor
+        // Reset layout anchors
         composition.bars.forEach { $0.resetLayoutAnchors() }
         
         // Solve X Positions

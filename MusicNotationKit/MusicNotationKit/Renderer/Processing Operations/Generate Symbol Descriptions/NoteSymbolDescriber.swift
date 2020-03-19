@@ -12,19 +12,36 @@ class NoteSymbolDescriber {
     
     func symbolDescription(forNote note: Note) -> NoteSymbolDescription {
         
-        let description: NoteSymbolDescription
+        var headStyle: NoteSymbolDescription.HeadStyle
+        let hasStem: Bool
+        let numberOfTails: Int
         
-        let division = note.value.division
-        switch division {
+        switch note.value.division {
         case 1:
-            description = NoteSymbolDescription(headStyle: .semibreve, hasStem: false, numberOfTails: 0)
+            headStyle = .semibreve
+            hasStem = false
+            numberOfTails = 0
         case 2:
-            description = NoteSymbolDescription(headStyle: .open, hasStem: true, numberOfTails: 0)
+            headStyle = .open
+            hasStem = true
+            numberOfTails = 0
         case 4:
-            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfTails: 0)
+            headStyle = .filled
+            hasStem = true
+            numberOfTails = 0
         default:
-            description = NoteSymbolDescription(headStyle: .filled, hasStem: true, numberOfTails: numberOfTails(forDivision: division))
+            headStyle = .filled
+            hasStem = true
+            numberOfTails = self.numberOfTails(forDivision: note.value.division)
         }
+        
+        if note.noteHeadType == .cross {
+            headStyle = .cross
+        }
+        
+        let description = NoteSymbolDescription(headStyle: headStyle,
+                                                hasStem: hasStem,
+                                                numberOfTails: numberOfTails)
         
         description.trailingLayoutItems = trailingLayoutItems(forNote: note)
         description.leadingLayoutItems = leadingLayoutItems(forNote: note)

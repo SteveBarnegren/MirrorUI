@@ -24,26 +24,12 @@ class SymbolPaths {
             .curve(Point(-0.3092752083402506, -0.12327399006989698), c1: Point(-0.24493893937713618, 0.5222190290006006), c2: Point(-0.44566141442929347, 0.2679637137350671)),
             .curve(Point(0.29985413275057315, -0.31434238387233726), c1: Point(-0.21493998468806386, -0.39388416753487654), c2: Point(0.1688556246034726, -0.5142715204025433)),
             .close
-            ]
+        ]
         
         var path = Path(commands: commands)
         path.drawStyle = .fill
         return path
     }()
-    
-//    static let filledNoteHead: Path = {
-//
-//        // A filled note head, for a crotchet, quaver, semiquaver
-//
-//        let scaler = 0.9
-//        let size = Size(width: 1.5 * scaler, height: 1 * scaler)
-//        let point = Point(size.width/2, 0.5)
-//
-//        var path = Path()
-//        path.addOval(atPoint: point, withSize: size, rotation: -0.3)
-//        path.drawStyle = .fill
-//        return path
-//    }()
     
     static let filledNoteHeadCommands: [Path.Command] = [
         .move(Point(-0.5921144330682797, -0.15151477041915018)),
@@ -73,9 +59,44 @@ class SymbolPaths {
             .curve(Point(-0.19224487313966038, 0.15873002842766148), c1: Point(0.40243146197230195, 0.49999878384335905), c2: Point(0.14097845882549676, 0.3862425320381264)),
             .curve(Point(-0.6843919064775543, -0.3968255271278941), c1: Point(-0.5203435642510755, -0.06349219379456073), c2: Point(-0.6843924537480427, -0.2486775816725194)),
             .curve(Point(-0.5613551633450389, -0.5), c1: Point(-0.6843924537480428, -0.46560891442817837), c2: Point(-0.643380246575759, -0.5))
-        ].scaled(0.62)
+            ].scaled(0.62)
         
         var path = Path(commands: filledNoteHeadCommands + holeCommands)
+        path.drawStyle = .fill
+        return path
+    }()
+    
+    static let crossNoteHead: Path = {
+        
+        let width = 0.15
+        
+        // A 'reverse Pythagoras' that gets the x/y offsets required to get the width of
+        // the line (which is a 45 degree diagonal and the hypotenuse in this case)
+        let offset = sqrt((width*width)/2)
+        
+        let center = Point(0, 0)
+        let topLeft = Point(-0.5, 0.5)
+        let topRight = Point(0.5, 0.5)
+        let bottomLeft = Point(-0.5, -0.5)
+        let bottomRight = Point(0.5, -0.5)
+        
+        let commands: [Path.Command] = [
+            .move(center.adding(y: offset)), // Above Center
+            .line(topRight.subtracting(x: offset)), // Top right arm
+            .line(topRight.subtracting(y: offset)),
+            .line(center.adding(x: offset)), // Right of center
+            .line(bottomRight.adding(y: offset)), // Bottom right arm
+            .line(bottomRight.subtracting(x: offset)),
+            .line(center.subtracting(y: offset)), // Below center
+            .line(bottomLeft.adding(x: offset)), // Bottom left arm
+            .line(bottomLeft.adding(y: offset)),
+            .line(center.subtracting(x: offset)), // left of center
+            .line(topLeft.subtracting(y: offset)), // top left arm
+            .line(topLeft.adding(x: offset)),
+            .close
+        ]
+        
+        var path = Path(commands: commands)
         path.drawStyle = .fill
         return path
     }()
@@ -93,74 +114,11 @@ class SymbolPaths {
             .move(Point(0.09750504322054346, -0.22183888230805415)),
             .curve(Point(-0.002308412973578783, -0.5), c1: Point(-0.15289510164847742, 0.0024915180363466183), c2: Point(-0.24902926968371866, -0.289898632408993)),
             .curve(Point(0.10976267193612887, -0.2594427136433017), c1: Point(-0.03405479163204185, -0.44551516819147063), c2: Point(-0.12569153523945045, -0.17790090639381118))
-            ]
-
+        ]
+        
         var path = Path(commands: commands)
         path.drawStyle = .fill
         return path.scaled(3)
     }()
     
-//    static let quaverRest: Path = {
-//
-//        let commands: [Path.Command] = [
-//            .move(Point(-0.110752688172043, -0.478494623655914)),
-//            .move(Point(0.14086021505376345, 0.22258064516129028)),
-//            .curve(Point(-0.08494623655913977, 0.1752688172043011), c1: Point(0.06774193548387097, 0.1967741935483871), c2: Point(-0.00752688172043009, 0.1752688172043011)),
-//            .curve(Point(-0.27204301075268816, 0.3451612903225807), c1: Point(-0.18387096774193548, 0.1752688172043011), c2: Point(-0.27204301075268816, 0.24623655913978493)),
-//            .curve(Point(-0.11505376344086021, 0.5), c1: Point(-0.27204301075268816, 0.4311827956989247), c2: Point(-0.20107526881720428, 0.5)),
-//            .curve(Point(0.005376344086021501, 0.4161290322580645), c1: Point(-0.06129032258064515, 0.5), c2: Point(-0.011827956989247324, 0.467741935483871)),
-//            .curve(Point(0.08064516129032256, 0.28924731182795704), c1: Point(0.02688172043010756, 0.3559139784946237), c2: Point(0.018279569892473146, 0.28924731182795704)),
-//            .curve(Point(0.21182795698924733, 0.4247311827956989), c1: Point(0.11505376344086021, 0.28924731182795704), c2: Point(0.1967741935483871, 0.3924731182795699)),
-//            .curve(Point(0.27204301075268816, 0.4247311827956989), c1: Point(0.22473118279569892, 0.4505376344086022), c2: Point(0.26129032258064516, 0.4505376344086022)),
-//            .line(Point(0.00752688172043009, -0.478494623655914)),
-//            .curve(Point(-0.05053763440860215, -0.5), c1: Point(-0.009677419354838679, -0.4935483870967742), c2: Point(-0.02903225806451612, -0.5)),
-//            .curve(Point(-0.110752688172043, -0.478494623655914), c1: Point(-0.07204301075268815, -0.5), c2: Point(-0.09354838709677418, -0.4935483870967742)),
-//            .close,
-//            ]
-//
-//        var path = Path(commands: commands)
-//        path.drawStyle = .fill
-//        return path.scaled(10)
-//    }()
-    /*
-    static let quaverRest: Path = {
-        
-        let stemCommands: [Path.Command] = [
-//            .move(Point(-0.110752688172043, -0.478494623655914)),
-//            .move(Point(0.14086021505376345, 0.22258064516129028)),
-//            .curve(Point(-0.08494623655913977, 0.1752688172043011), c1: Point(0.06774193548387097, 0.1967741935483871), c2: Point(-0.00752688172043009, 0.1752688172043011)),
-//            .curve(Point(-0.27204301075268816, 0.3451612903225807), c1: Point(-0.18387096774193548, 0.1752688172043011), c2: Point(-0.27204301075268816, 0.24623655913978493)),
-//            .curve(Point(-0.11505376344086021, 0.5), c1: Point(-0.27204301075268816, 0.4311827956989247), c2: Point(-0.20107526881720428, 0.5)),
-//            .curve(Point(0.005376344086021501, 0.4161290322580645), c1: Point(-0.06129032258064515, 0.5), c2: Point(-0.011827956989247324, 0.467741935483871)),
-//            .curve(Point(0.08064516129032256, 0.28924731182795704), c1: Point(0.02688172043010756, 0.3559139784946237), c2: Point(0.018279569892473146, 0.28924731182795704)),
-            .move(Point(0.018279569892473146, 0.28924731182795704)),
-            .curve(Point(0.21182795698924733, 0.4247311827956989), c1: Point(0.11505376344086021, 0.28924731182795704), c2: Point(0.1967741935483871, 0.3924731182795699)),
-            .curve(Point(0.27204301075268816, 0.4247311827956989), c1: Point(0.22473118279569892, 0.4505376344086022), c2: Point(0.26129032258064516, 0.4505376344086022)),
-            .line(Point(0.00752688172043009, -0.478494623655914)),
-            .curve(Point(-0.05053763440860215, -0.5), c1: Point(-0.009677419354838679, -0.4935483870967742), c2: Point(-0.02903225806451612, -0.5)),
-            .curve(Point(-0.110752688172043, -0.478494623655914), c1: Point(-0.07204301075268815, -0.5), c2: Point(-0.09354838709677418, -0.4935483870967742)),
-            .close,
-            ]
-        
-        let tailCommands: [Path.Command] = [
-        .move(Point(-0.110752688172043, -0.478494623655914)),
-        .move(Point(0.14086021505376345, 0.22258064516129028)),
-        .curve(Point(-0.08494623655913977, 0.1752688172043011), c1: Point(0.06774193548387097, 0.1967741935483871), c2: Point(-0.00752688172043009, 0.1752688172043011)),
-        .curve(Point(-0.27204301075268816, 0.3451612903225807), c1: Point(-0.18387096774193548, 0.1752688172043011), c2: Point(-0.27204301075268816, 0.24623655913978493)),
-        .curve(Point(-0.11505376344086021, 0.5), c1: Point(-0.27204301075268816, 0.4311827956989247), c2: Point(-0.20107526881720428, 0.5)),
-        .curve(Point(0.005376344086021501, 0.4161290322580645), c1: Point(-0.06129032258064515, 0.5), c2: Point(-0.011827956989247324, 0.467741935483871)),
-        .curve(Point(0.08064516129032256, 0.28924731182795704), c1: Point(0.02688172043010756, 0.3559139784946237), c2: Point(0.018279569892473146, 0.28924731182795704)),
-        //            .curve(Point(0.21182795698924733, 0.4247311827956989), c1: Point(0.11505376344086021, 0.28924731182795704), c2: Point(0.1967741935483871, 0.3924731182795699)),
-        //            .curve(Point(0.27204301075268816, 0.4247311827956989), c1: Point(0.22473118279569892, 0.4505376344086022), c2: Point(0.26129032258064516, 0.4505376344086022)),
-        //            .line(Point(0.00752688172043009, -0.478494623655914)),
-        //            .curve(Point(-0.05053763440860215, -0.5), c1: Point(-0.009677419354838679, -0.4935483870967742), c2: Point(-0.02903225806451612, -0.5)),
-        //            .curve(Point(-0.110752688172043, -0.478494623655914), c1: Point(-0.07204301075268815, -0.5), c2: Point(-0.09354838709677418, -0.4935483870967742)),
-        .close,
-        ]
-        
-        var path = Path(commands: stemCommands)
-        path.add(commands: tailCommands)
-        path.drawStyle = .fill
-        return path.scaled(10)
-    }()*/
 }

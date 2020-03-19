@@ -302,6 +302,8 @@ class NoteRenderer {
             path = SymbolPaths.openNoteHead
         case .filled:
             path = SymbolPaths.filledNoteHead
+        case .cross:
+            path = SymbolPaths.crossNoteHead
         case .none:
             return nil
         }

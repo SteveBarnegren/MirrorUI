@@ -118,6 +118,7 @@
 		67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */; };
 		67E863B92303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */; };
 		67E863BB2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E863BA2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift */; };
+		67EA89EC2424195E0009BE61 /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89EB2424195E0009BE61 /* PointTests.swift */; };
 		67F6880421EA6D32003707DD /* HorizontalLayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880321EA6D32003707DD /* HorizontalLayoutItem.swift */; };
 		67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880521EA6E0C003707DD /* Array+Sorting.swift */; };
 		67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */; };
@@ -250,6 +251,7 @@
 		67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberSixEightTests.swift; sourceTree = "<group>"; };
 		67E863BA2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberTestsBase.swift; sourceTree = "<group>"; };
+		67EA89EB2424195E0009BE61 /* PointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
 		67F6880321EA6D32003707DD /* HorizontalLayoutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLayoutItem.swift; sourceTree = "<group>"; };
 		67F6880521EA6E0C003707DD /* Array+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sorting.swift"; sourceTree = "<group>"; };
 		67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				67669E5E22EDF668004F1927 /* IncrementingSequenceTests.swift */,
 				67669E6222EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift */,
 				6756F61A2300C30C003F1F19 /* ElementPopperTests.swift */,
+				67EA89EB2424195E0009BE61 /* PointTests.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				674B9AB122ECBCC80098D121 /* NoteClustererTests.swift in Sources */,
 				67E863B92303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift in Sources */,
 				673A3D302343F196001CE422 /* NaturalSpacingTests.swift in Sources */,
+				67EA89EC2424195E0009BE61 /* PointTests.swift in Sources */,
 				673A3D232340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift in Sources */,
 				673A3D1A233FC1FF001CE422 /* Assertions.swift in Sources */,
 				67A1EF7B22999143009CF58C /* PlayableItemTimeCalculatorTests.swift in Sources */,

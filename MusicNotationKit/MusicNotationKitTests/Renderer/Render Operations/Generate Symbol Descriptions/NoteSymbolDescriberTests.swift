@@ -94,4 +94,14 @@ class NoteSymbolDescriberTests: XCTestCase {
             .verify(headStyle: .filled)
             .verify(numberOfDotSymbols: 2)
     }
+    
+    // MARK: - Crossed Note heads
+    
+    func test_CrossedNotehead() {
+        let note = Note(value: .crotchet, pitch: .a3)
+        note.noteHeadType = .cross
+        
+        describer.symbolDescription(forNote: note)
+            .verify(headStyle: .cross)
+    }
 }

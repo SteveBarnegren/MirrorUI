@@ -8,10 +8,17 @@
 
 import Foundation
 
+public enum NoteHeadType {
+    case standard
+    case cross
+}
+
 public class Note: Playable {
     
-    let pitch: Pitch
     public var accidental = Accidental.none
+    public var noteHeadType = NoteHeadType.standard
+    
+    let pitch: Pitch
     var symbolDescription = NoteSymbolDescription.standard
     
     // Width
@@ -59,6 +66,12 @@ public class Note: Playable {
         self.accidental = .natural
         return self
     }
+    
+    // Note Head
+    public func crossHead() -> Note {
+        self.noteHeadType = .cross
+        return self
+    }
 }
 
 public enum Accidental {
@@ -88,6 +101,7 @@ class NoteSymbolDescription {
         case semibreve
         case open
         case filled
+        case cross
     }
     
     let headStyle: HeadStyle
