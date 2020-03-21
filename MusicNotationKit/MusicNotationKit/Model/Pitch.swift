@@ -48,3 +48,9 @@ public enum Pitch: Int {
         }
     }
 }
+
+extension Pitch: Comparable {
+    public static func < (lhs: Pitch, rhs: Pitch) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}

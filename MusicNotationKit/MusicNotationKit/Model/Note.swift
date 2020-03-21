@@ -18,7 +18,10 @@ public class Note: Playable, VerticallyPositionable {
     public var accidental = Accidental.none
     public var noteHeadType = NoteHeadType.standard
     
-    let pitch: Pitch
+    let pitches: [Pitch]
+    var highestPitch: Pitch { return pitches.max()! }
+    var lowestPitch: Pitch { return pitches.min()! }
+    
     var symbolDescription = NoteSymbolDescription.standard
     
     // Width
@@ -49,8 +52,13 @@ public class Note: Playable, VerticallyPositionable {
     // MARK: - Init
     public init(value: NoteValue, pitch: Pitch) {
         self.value = value
-        self.pitch = pitch
+        self.pitches = [pitch]
     }
+    
+    public init(value: NoteValue, pitches: [Pitch]) {
+           self.value = value
+           self.pitches = pitches
+       }
     
     // Acidentals
     public func sharp() -> Note {

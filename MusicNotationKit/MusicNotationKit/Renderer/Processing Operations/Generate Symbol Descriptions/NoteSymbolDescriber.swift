@@ -93,7 +93,7 @@ class NoteSymbolDescriber {
         
         func makeDotSymbol(forNote note: Note) -> DotSymbol {
             let symbol = DotSymbol()
-            symbol.pitch = note.pitch
+            symbol.pitch = note.highestPitch
             return symbol
         }
         

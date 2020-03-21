@@ -43,6 +43,6 @@ class CalculateStemDirectionsProcessingOperation: CompositionProcessingOperation
     }
     
     private func averagePitch(forNoteSequence noteSequence: NoteSequence) -> Int {
-        return noteSequence.notes.sum { $0.pitch.rawValue }
+        return noteSequence.notes.sum { $0.highestPitch.rawValue }
     }
 }

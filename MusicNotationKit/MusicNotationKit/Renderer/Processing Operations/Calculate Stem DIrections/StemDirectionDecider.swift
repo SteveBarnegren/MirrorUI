@@ -17,7 +17,7 @@ class StemDirectionDecider {
         
         var numDownResults = 0
         for note in notes {
-            let d = preferredStemDirection(for: note.pitch)
+            let d = preferredStemDirection(for: note.highestPitch)
             if d == .down {
                 numDownResults += 1
                 if numDownResults > notes.count/2 {
