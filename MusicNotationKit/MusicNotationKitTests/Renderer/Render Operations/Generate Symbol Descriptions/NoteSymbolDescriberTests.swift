@@ -84,14 +84,4 @@ class NoteSymbolDescriberTests: XCTestCase {
         describer.symbolDescription(forNote: note)
             .verify(hasStem: true)
     }
-    
-    // MARK: - Crossed Note heads
-    
-//    func test_CrossedNotehead() {
-//        let note = Note(value: .crotchet, pitch: .a3)
-//        note.noteHeadType = .cross
-//
-//        describer.symbolDescription(forNote: note)
-//            .verify(headStyle: .cross)
-//    }
 }

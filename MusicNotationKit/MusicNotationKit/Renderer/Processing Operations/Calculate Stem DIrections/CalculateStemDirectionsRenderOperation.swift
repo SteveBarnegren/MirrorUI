@@ -10,7 +10,7 @@ import Foundation
 
 class CalculateStemDirectionsProcessingOperation: CompositionProcessingOperation {
     
-    private let stemDirectionDecider = StemDirectionDecider()
+    private let stemDirectionDecider = StemDirectionDecider(transformer: .notes)
     
     func process(composition: Composition) {
         composition.forEachBar(process)

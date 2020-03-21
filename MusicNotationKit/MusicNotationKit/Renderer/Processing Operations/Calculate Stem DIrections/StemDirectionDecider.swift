@@ -8,30 +8,67 @@
 
 import Foundation
 
-class StemDirectionDecider {
+class StemDirectionDecider<N> {
     
-    func process(noteCluster notes: [Note]) {
+    struct Transformer<N> {
+        let stavePosition: (N) -> Int
+        let setStemDirection: (N, StemDirection) -> Void
+    }
+    
+    let tf: Transformer<N>
+    
+    init(transformer: Transformer<N>) {
+        self.tf = transformer
+    }
+    
+    func process(noteCluster notes: [N]) {
         
         // Work out the direction for this cluster
-        var direction = StemDirection.up
+        var numDown = 0
+        var numUp = 0
+        var furthestDistanceFromCenter = -1
+        var furthestFromCenterDirection = StemDirection.down
         
-        var numDownResults = 0
         for note in notes {
-            let d = preferredStemDirection(for: note.highestPitch)
-            if d == .down {
-                numDownResults += 1
-                if numDownResults > notes.count/2 {
-                    direction = .down
-                    break
-                }
+            let stavePosition = tf.stavePosition(note)
+            let distanceFromCenter = abs(stavePosition)
+            let direction: StemDirection
+            if stavePosition < 0 {
+                numUp += 1
+                direction = .up
+            } else {
+                numDown += 1
+                direction = .down
             }
+            
+            if distanceFromCenter > furthestDistanceFromCenter {
+                furthestDistanceFromCenter = distanceFromCenter
+                furthestFromCenterDirection = direction
+            } else if distanceFromCenter == furthestDistanceFromCenter && direction == .down {
+                furthestFromCenterDirection = .down
+            }
+        }
+        
+        let direction: StemDirection
+        if numUp > numDown {
+            direction = .up
+        } else if numDown > numUp {
+            direction = .down
+        } else {
+            direction = furthestFromCenterDirection
         }
        
         // Apply stem direction to notes
-        notes.forEach { $0.symbolDescription.stemDirection = direction }
+        notes.forEach { tf.setStemDirection($0, direction) }
     }
+}
+
+// MARK: - Notes Transformer
+
+extension StemDirectionDecider.Transformer {
     
-    private func preferredStemDirection(for pitch: Pitch) -> StemDirection {
-        return pitch.staveOffset > 0 ? .down : .up
+    static var notes: StemDirectionDecider.Transformer<Note> {
+        return StemDirectionDecider.Transformer<Note>(stavePosition: { $0.highestPitch.stavePosition },
+                                                      setStemDirection: { $0.symbolDescription.stemDirection = $1 })
     }
 }
