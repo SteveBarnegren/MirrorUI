@@ -120,6 +120,8 @@
 		67E863BB2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E863BA2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift */; };
 		67EA89EC2424195E0009BE61 /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89EB2424195E0009BE61 /* PointTests.swift */; };
 		67EA89EF242637310009BE61 /* NoteHeadDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89EE242637310009BE61 /* NoteHeadDescriber.swift */; };
+		67EA89F124264BE70009BE61 /* NoteHeadDescriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89F024264BE70009BE61 /* NoteHeadDescriberTests.swift */; };
+		67EA89F324264CA30009BE61 /* NoteHeadDescription+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89F224264CA30009BE61 /* NoteHeadDescription+Verify.swift */; };
 		67F6880421EA6D32003707DD /* HorizontalLayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880321EA6D32003707DD /* HorizontalLayoutItem.swift */; };
 		67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880521EA6E0C003707DD /* Array+Sorting.swift */; };
 		67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */; };
@@ -254,6 +256,8 @@
 		67E863BA2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberTestsBase.swift; sourceTree = "<group>"; };
 		67EA89EB2424195E0009BE61 /* PointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
 		67EA89EE242637310009BE61 /* NoteHeadDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadDescriber.swift; sourceTree = "<group>"; };
+		67EA89F024264BE70009BE61 /* NoteHeadDescriberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadDescriberTests.swift; sourceTree = "<group>"; };
+		67EA89F224264CA30009BE61 /* NoteHeadDescription+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteHeadDescription+Verify.swift"; sourceTree = "<group>"; };
 		67F6880321EA6D32003707DD /* HorizontalLayoutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLayoutItem.swift; sourceTree = "<group>"; };
 		67F6880521EA6E0C003707DD /* Array+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sorting.swift"; sourceTree = "<group>"; };
 		67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				671A4D2B228752E7002C56E8 /* NoteSymbolDescriberTests.swift */,
+				67EA89F024264BE70009BE61 /* NoteHeadDescriberTests.swift */,
 			);
 			path = "Generate Symbol Descriptions";
 			sourceTree = "<group>";
@@ -371,6 +376,7 @@
 				6728B2C92239986000382D92 /* NoteSequence+Verify.swift */,
 				6728B2CB2239989100382D92 /* Array+Verify.swift */,
 				671A4D242287524E002C56E8 /* NoteSymbolDescription+Verify.swift */,
+				67EA89F224264CA30009BE61 /* NoteHeadDescription+Verify.swift */,
 				671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */,
 			);
 			path = Verification;
@@ -991,11 +997,13 @@
 				671A4D2E22885987002C56E8 /* NoteValueTests.swift in Sources */,
 				6728B2C72239975700382D92 /* NoteSequenceTests.swift in Sources */,
 				67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */,
+				67EA89F324264CA30009BE61 /* NoteHeadDescription+Verify.swift in Sources */,
 				673A3D1E233FC567001CE422 /* Array+MaybeTests.swift in Sources */,
 				6728B2CA2239986000382D92 /* NoteSequence+Verify.swift in Sources */,
 				671A4D252287524E002C56E8 /* NoteSymbolDescription+Verify.swift in Sources */,
 				6756F61B2300C30C003F1F19 /* ElementPopperTests.swift in Sources */,
 				67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */,
+				67EA89F124264BE70009BE61 /* NoteHeadDescriberTests.swift in Sources */,
 				67E863BB2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift in Sources */,
 				67669E6322EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift in Sources */,
 			);

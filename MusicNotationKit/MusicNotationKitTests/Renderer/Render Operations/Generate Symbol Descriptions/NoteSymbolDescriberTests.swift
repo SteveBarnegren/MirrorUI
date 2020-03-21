@@ -23,7 +23,6 @@ class NoteSymbolDescriberTests: XCTestCase {
         
         let note = Note(value: .whole, pitch: .a3)
         describer.symbolDescription(forNote: note)
-            .verify(headStyle: .semibreve)
             .verify(hasStem: false)
             .verify(numberOfTails: 0)
     }
@@ -32,7 +31,6 @@ class NoteSymbolDescriberTests: XCTestCase {
         
         let note = Note(value: .half, pitch: .a3)
         describer.symbolDescription(forNote: note)
-            .verify(headStyle: .open)
             .verify(hasStem: true)
             .verify(numberOfTails: 0)
     }
@@ -41,7 +39,6 @@ class NoteSymbolDescriberTests: XCTestCase {
         
         let note = Note(value: .quarter, pitch: .a3)
         describer.symbolDescription(forNote: note)
-            .verify(headStyle: .filled)
             .verify(hasStem: true)
             .verify(numberOfTails: 0)
     }
@@ -50,7 +47,6 @@ class NoteSymbolDescriberTests: XCTestCase {
         
         let note = Note(value: .eighth, pitch: .a3)
         describer.symbolDescription(forNote: note)
-            .verify(headStyle: .filled)
             .verify(hasStem: true)
             .verify(numberOfTails: 1)
     }
@@ -59,7 +55,6 @@ class NoteSymbolDescriberTests: XCTestCase {
         
         let note = Note(value: .sixteenth, pitch: .a3)
         describer.symbolDescription(forNote: note)
-            .verify(headStyle: .filled)
             .verify(hasStem: true)
             .verify(numberOfTails: 2)
     }
@@ -68,7 +63,6 @@ class NoteSymbolDescriberTests: XCTestCase {
         
         let note = Note(value: .init(division: 32), pitch: .a3)
         describer.symbolDescription(forNote: note)
-            .verify(headStyle: .filled)
             .verify(hasStem: true)
             .verify(numberOfTails: 3)
     }
@@ -80,8 +74,6 @@ class NoteSymbolDescriberTests: XCTestCase {
         let note = Note(value: .init(division: 4, dots: .dotted), pitch: .a3)
         describer.symbolDescription(forNote: note)
             .verify(hasStem: true)
-            .verify(headStyle: .filled)
-            .verify(numberOfDotSymbols: 1)
     }
     
     // MARK: - Double Dotted Notes
@@ -91,17 +83,15 @@ class NoteSymbolDescriberTests: XCTestCase {
         let note = Note(value: .init(division: 4, dots: .doubleDotted), pitch: .a3)
         describer.symbolDescription(forNote: note)
             .verify(hasStem: true)
-            .verify(headStyle: .filled)
-            .verify(numberOfDotSymbols: 2)
     }
     
     // MARK: - Crossed Note heads
     
-    func test_CrossedNotehead() {
-        let note = Note(value: .crotchet, pitch: .a3)
-        note.noteHeadType = .cross
-        
-        describer.symbolDescription(forNote: note)
-            .verify(headStyle: .cross)
-    }
+//    func test_CrossedNotehead() {
+//        let note = Note(value: .crotchet, pitch: .a3)
+//        note.noteHeadType = .cross
+//
+//        describer.symbolDescription(forNote: note)
+//            .verify(headStyle: .cross)
+//    }
 }

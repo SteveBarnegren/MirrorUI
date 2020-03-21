@@ -12,10 +12,10 @@ import XCTest
 
 extension NoteSymbolDescription {
     
-    @discardableResult func verify(headStyle: HeadStyle, file: StaticString = #file, line: UInt = #line) -> Self {
-        XCTAssertEqual(self.headStyle, headStyle, file: file, line: line)
-        return self
-    }
+//    @discardableResult func verify(headStyle: HeadStyle, file: StaticString = #file, line: UInt = #line) -> Self {
+//        XCTAssertEqual(self.headStyle, headStyle, file: file, line: line)
+//        return self
+//    }
     
     @discardableResult func verify(hasStem: Bool, file: StaticString = #file, line: UInt = #line) -> Self {
         XCTAssertEqual(self.hasStem, hasStem, file: file, line: line)
@@ -27,11 +27,11 @@ extension NoteSymbolDescription {
         return self
     }
     
-    @discardableResult func verify(numberOfDotSymbols: Int, file: StaticString = #file, line: UInt = #line) -> Self {
-        XCTAssertEqual(self.trailingLayoutItems.compactMap({ $0 as? DotSymbol }).count,
-                       numberOfDotSymbols,
-                       file: file,
-                       line: line)
-        return self
-    }
+//    @discardableResult func verify(numberOfDotSymbols: Int, file: StaticString = #file, line: UInt = #line) -> Self {
+//        XCTAssertEqual(self.trailingLayoutItems.compactMap({ $0 as? DotSymbol }).count,
+//                       numberOfDotSymbols,
+//                       file: file,
+//                       line: line)
+//        return self
+//    }
 }
