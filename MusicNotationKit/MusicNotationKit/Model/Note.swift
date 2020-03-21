@@ -25,6 +25,10 @@ public class Note: Playable {
     var symbolDescription = NoteSymbolDescription.standard
     var noteHeadDescriptions = [NoteHeadDescription]()
     
+    var stemConnectingNoteHead: NoteHeadDescription {
+        return noteHeadDescriptions.first!
+    }
+    
     // Width
     var layoutDuration: Time? {
         return self.duration
@@ -48,7 +52,7 @@ public class Note: Playable {
     
     // HorizontallyPositionable
     var xPosition = Double(0)
-    var yPosition = Double(0)
+    //var yPosition = Double(0)
     
     var beams = [Beam]()
     
