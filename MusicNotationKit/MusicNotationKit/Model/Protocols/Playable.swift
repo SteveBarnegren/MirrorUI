@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Playable: Positionable, HorizontalLayoutItem {
+protocol Playable: HorizontalLayoutItem {
     var value: NoteValue { get }
     var time: Time { get set }
 }

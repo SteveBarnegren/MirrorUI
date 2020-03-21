@@ -13,7 +13,7 @@ public enum NoteHeadType {
     case cross
 }
 
-public class Note: Playable {
+public class Note: Playable, VerticallyPositionable {
     
     public var accidental = Accidental.none
     public var noteHeadType = NoteHeadType.standard
@@ -40,8 +40,9 @@ public class Note: Playable {
         return self.symbolDescription.trailingLayoutItems
     }
     
-    // Positionable
-    var position = Point.zero
+    // HorizontallyPositionable
+    var xPosition = Double(0)
+    var yPosition = Double(0)
     
     var beams = [Beam]()
     

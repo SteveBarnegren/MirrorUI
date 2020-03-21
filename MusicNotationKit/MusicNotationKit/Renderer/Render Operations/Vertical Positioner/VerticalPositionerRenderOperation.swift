@@ -20,7 +20,7 @@ class VerticalPositionerRenderOperation {
     }
     
     private func position(note: Note) {
-        note.position.y = note.pitch.staveOffset
+        note.yPosition = note.pitch.staveOffset
     }
     
     private func position(adjacentLayoutItem: AdjacentLayoutItem, forNote note: Note) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Rest: Playable {
+public class Rest: Playable, Positionable {
     
     var symbolDescription = RestSymbolDescription.standard
     
