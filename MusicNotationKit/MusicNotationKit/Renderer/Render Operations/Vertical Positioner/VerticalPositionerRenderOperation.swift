@@ -13,14 +13,16 @@ class VerticalPositionerRenderOperation {
     func process(bars: [Bar]) {
         
         bars.forEachNote { note in
-            self.position(note: note)
+            self.positionNoteHeads(forNote: note)
             note.leadingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }
             note.trailingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }
         }
     }
     
-    private func position(note: Note) {
-        note.yPosition = note.highestPitch.staveOffset
+    private func positionNoteHeads(forNote note: Note) {
+        for noteHead in note.noteHeadDescriptions {
+            noteHead.yPosition = noteHead.staveOffset
+        }
     }
     
     private func position(adjacentLayoutItem: AdjacentLayoutItem, forNote note: Note) {

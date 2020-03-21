@@ -54,7 +54,7 @@ class NoteRenderer {
     private func makePaths(forNote note: Note) -> [Path] {
         
         var paths = [Path]()
-        paths.append(maybe: makeHeadPath(forNote: note))
+        paths += makeHeadPaths(forNote: note)
         
         // Crotchet
         if note.symbolDescription.numberOfTails == 0 {
@@ -164,7 +164,7 @@ class NoteRenderer {
         
         // Draw notes with stems
         for note in notes {
-            paths.append(maybe: makeHeadPath(forNote: note))
+            paths += makeHeadPaths(forNote: note)
             paths.append(maybe: makeStemPath(forNote: note))
         }
         
@@ -291,27 +291,33 @@ class NoteRenderer {
     
     // MARK: - Components
     
-    private func makeHeadPath(forNote note: Note) -> Path? {
+    private func makeHeadPaths(forNote note: Note) -> [Path] {
         
-        let path: Path
+        var paths = [Path]()
         
-        // TEMP
-        let headStyle = NoteHeadDescription.Style.filled
-        
-        switch headStyle {
-        case .semibreve:
-            path = SymbolPaths.semibreve
-        case .open:
-            path = SymbolPaths.openNoteHead
-        case .filled:
-            path = SymbolPaths.filledNoteHead
-        case .cross:
-            path = SymbolPaths.crossNoteHead
-        case .none:
-            return nil
+        for noteHeadDescription in note.noteHeadDescriptions {
+            
+            let path: Path
+            
+            switch noteHeadDescription.style {
+            case .semibreve:
+                path = SymbolPaths.semibreve
+            case .open:
+                path = SymbolPaths.openNoteHead
+            case .filled:
+                path = SymbolPaths.filledNoteHead
+            case .cross:
+                path = SymbolPaths.crossNoteHead
+            case .none:
+                continue
+            }
+            
+            paths.append(
+                path.translated(x: note.xPosition, y: noteHeadDescription.yPosition)
+            )
         }
         
-        return path.translated(x: note.xPosition, y: note.yPosition)
+        return paths
     }
     
     // MARK: - Stems

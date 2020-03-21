@@ -17,6 +17,7 @@ class NoteHeadDescriber {
         var noteHeadDescriptions = [NoteHeadDescription]()
         for pitch in note.pitches {
             let description = NoteHeadDescription(style: headStyle)
+            description.staveOffset = pitch.staveOffset
             description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch)
             description.trailingLayoutItems = trailingLayoutItems(forNote: note, pitch: pitch)
             noteHeadDescriptions.append(description)
