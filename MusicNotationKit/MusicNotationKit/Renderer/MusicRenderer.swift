@@ -53,7 +53,7 @@ class MusicRenderer {
             
             // Populate note symbols
             GenerateSymbolDescriptionsProcessingOperation().process(composition: composition)
-            
+
             // Calculate note times
             CalculatePlayableItemTimesProcessingOperation().process(composition: composition)
             

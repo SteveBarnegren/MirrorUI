@@ -11,12 +11,15 @@ import Foundation
 class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperation {
     
     private let noteSymbolDescriber = NoteSymbolDescriber()
+    private let noteHeadDescriber = NoteHeadDescriber()
     private let restSymbolDescriber = RestSymbolDescriber()
     
     func process(composition: Composition) {
         
-        composition.enumerateNotes { $0.symbolDescription = noteSymbolDescriber.symbolDescription(forNote: $0) }
+        composition.enumerateNotes {
+            $0.symbolDescription = noteSymbolDescriber.symbolDescription(forNote: $0)
+            $0.noteHeadDescriptions = noteHeadDescriber.noteHeadDescriptions(forNote: $0)
+        }
         composition.enumerateRests { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
-        
     }
 }

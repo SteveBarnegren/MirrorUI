@@ -45,6 +45,8 @@ class LayoutAnchorsBuilder {
         }
     }
     
+    // MARK: - Make Anchors
+    
     private func makeAnchor(forBarline barline: Barline, fromPrevious previousAnchor: LayoutAnchor?) -> LayoutAnchor {
         
         let anchor = SingleItemLayoutAnchor(item: barline)
@@ -62,6 +64,7 @@ class LayoutAnchorsBuilder {
         return anchor
     }
     
+    /*
     private func makeAnchors(forNoteSequence sequence: NoteSequence, fromPrevious startingAnchor: LayoutAnchor?) -> [SingleItemLayoutAnchor] {
         
         var anchors = [SingleItemLayoutAnchor]()
@@ -105,6 +108,58 @@ class LayoutAnchorsBuilder {
         
         return anchors
     }
+     */
+    
+    private func makeAnchors(forNoteSequence sequence: NoteSequence, fromPrevious startingAnchor: LayoutAnchor?) -> [SingleItemLayoutAnchor] {
+        
+        var anchors = [SingleItemLayoutAnchor]()
+        var previousAnchor: LayoutAnchor? = startingAnchor
+        
+        for playable in sequence.playables {
+            let anchor = makeAnchor(forPlayable: playable, fromPrevious: previousAnchor)
+            previousAnchor = anchor
+            anchors.append(anchor)
+        }
+        
+        return anchors
+    }
+    
+    private func makeAnchor(forPlayable playable: Playable, fromPrevious previousAnchor: LayoutAnchor?) -> SingleItemLayoutAnchor {
+        
+        let anchor = SingleItemLayoutAnchor(item: playable)
+        anchor.width = playable.horizontalLayoutWidth
+        anchor.time = playable.time
+        
+        // Create leading anchors
+        for item in playable.leadingLayoutItems {
+            let adjacentAnchor = AdjacentLayoutAnchor(item: item)
+            adjacentAnchor.width = item.horizontalLayoutWidth
+            adjacentAnchor.distanceFromAnchor = item.hoizontalLayoutDistanceFromParentItem
+            anchor.add(leadingAnchor: adjacentAnchor)
+        }
+        
+        // Create Adjacent items for dots
+        for dot in playable.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
+            let adjacentAnchor = AdjacentLayoutAnchor(item: dot)
+            adjacentAnchor.width = dot.horizontalLayoutWidth
+            adjacentAnchor.distanceFromAnchor = dot.hoizontalLayoutDistanceFromParentItem
+            anchor.add(trailingAnchor: adjacentAnchor)
+        }
+        
+        // Assign fixed constraint from the previous anchor
+        if let prevAnchor = previousAnchor {
+            let constraint = LayoutConstraint()
+            constraint.from = prevAnchor
+            constraint.to = anchor
+            constraint.value = .greaterThan(0.5)
+            prevAnchor.add(trailingConstraint: constraint)
+            anchor.add(leadingConstraint: constraint)
+        }
+        
+        return anchor
+    }
+    
+    // MARK: - Sort / Combine
     
     func sortAndCombine(anchors: [SingleItemLayoutAnchor]) -> [LayoutAnchor] {
         

@@ -13,7 +13,7 @@ public enum NoteHeadType {
     case cross
 }
 
-public class Note: Playable, VerticallyPositionable {
+public class Note: Playable {
     
     public var accidental = Accidental.none
     public var noteHeadType = NoteHeadType.standard
@@ -23,6 +23,7 @@ public class Note: Playable, VerticallyPositionable {
     var lowestPitch: Pitch { return pitches.min()! }
     
     var symbolDescription = NoteSymbolDescription.standard
+    var noteHeadDescriptions = [NoteHeadDescription]()
     
     // Width
     var layoutDuration: Time? {
@@ -37,10 +38,12 @@ public class Note: Playable, VerticallyPositionable {
     let horizontalLayoutWidth: Double = 1.4
 
     var leadingLayoutItems: [AdjacentLayoutItem] {
-        return self.symbolDescription.leadingLayoutItems
+        return self.noteHeadDescriptions.map { $0.leadingLayoutItems }.joined().toArray()
+        //return self.symbolDescription.leadingLayoutItems
     }
     var trailingLayoutItems: [AdjacentLayoutItem] {
-        return self.symbolDescription.trailingLayoutItems
+        return self.noteHeadDescriptions.map { $0.trailingLayoutItems }.joined().toArray()
+        //return self.symbolDescription.trailingLayoutItems
     }
     
     // HorizontallyPositionable
@@ -103,6 +106,47 @@ enum StemDirection {
     case down
 }
 
+class NoteHeadDescription {
+    
+    enum Style {
+        case none
+        case semibreve
+        case open
+        case filled
+        case cross
+    }
+    
+    let style: Style
+    var leadingLayoutItems = [AdjacentLayoutItem]()
+    var trailingLayoutItems = [AdjacentLayoutItem]()
+    
+    init(style: Style) {
+        self.style = style
+    }
+}
+
+class NoteSymbolDescription {
+    
+    let hasStem: Bool
+    let numberOfTails: Int
+    var stemDirection = StemDirection.up
+    var stemLength = Double(0)
+    
+    var stemEndOffset: Double {
+        return stemLength.inverted(if: { stemDirection == .down })
+    }
+    
+    init(hasStem: Bool, numberOfTails: Int) {
+        self.hasStem = hasStem
+        self.numberOfTails = numberOfTails
+    }
+    
+    static var standard: NoteSymbolDescription {
+        return NoteSymbolDescription(hasStem: false, numberOfTails: 0)
+    }
+}
+
+/*
 class NoteSymbolDescription {
     
     enum HeadStyle {
@@ -135,3 +179,4 @@ class NoteSymbolDescription {
         return NoteSymbolDescription(headStyle: .none, hasStem: false, numberOfTails: 0)
     }
 }
+*/

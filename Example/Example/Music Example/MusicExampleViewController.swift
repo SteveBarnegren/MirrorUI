@@ -109,7 +109,7 @@ class MusicExampleViewController: UIViewController {
         
         let sequence = NoteSequence()
         
-        sequence.add(note: Note(value: .eighth, pitch: .c4).crossHead())
+        sequence.add(note: Note(value: .eighth, pitches: [.c4, .e4]))
         sequence.add(note: Note(value: .sixteenth, pitch: .c4))
         sequence.add(note: Note(value: .sixteenth, pitch: .c4))
         

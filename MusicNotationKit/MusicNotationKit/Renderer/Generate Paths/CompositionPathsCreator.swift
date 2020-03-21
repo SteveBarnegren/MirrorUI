@@ -34,9 +34,10 @@ class CompositionPathsCreator {
     private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
         let notePaths = NoteRenderer().paths(forNotes: noteSequence.notes)
         let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
+        let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeadDescriptions }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let restPaths = RestRenderer().paths(forRests: noteSequence.rests)
         
-        return notePaths + noteSymbolPaths + restPaths
+        return notePaths + noteSymbolPaths + noteHeadAdjacentItems + restPaths
     }
     
     // Render Symbols

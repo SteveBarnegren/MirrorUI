@@ -295,7 +295,10 @@ class NoteRenderer {
         
         let path: Path
         
-        switch note.symbolDescription.headStyle {
+        // TEMP
+        let headStyle = NoteHeadDescription.Style.filled
+        
+        switch headStyle {
         case .semibreve:
             path = SymbolPaths.semibreve
         case .open:
@@ -350,7 +353,8 @@ class NoteRenderer {
             xOffset = -stemXOffset
         }
         
-        var stemYOffset = self.stemYOffset(forNoteHead: note.symbolDescription.headStyle)
+        // TEMP: Pass in the actual not head style
+        var stemYOffset = self.stemYOffset(forNoteHead: .filled)
         if stemEndY < note.yPosition {
             stemYOffset = -stemYOffset
         }
@@ -364,7 +368,7 @@ class NoteRenderer {
     }
     
     /// The Stem Y starting offset from the middle of the note
-    private func stemYOffset(forNoteHead noteHead: NoteSymbolDescription.HeadStyle) -> Double {
+    private func stemYOffset(forNoteHead noteHead: NoteHeadDescription.Style) -> Double {
         
         switch noteHead {
         case .semibreve, .open, .filled:
