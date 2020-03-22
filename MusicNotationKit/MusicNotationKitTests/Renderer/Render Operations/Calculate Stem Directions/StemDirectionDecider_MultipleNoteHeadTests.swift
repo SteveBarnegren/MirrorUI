@@ -31,7 +31,7 @@ class StemDirectionDecider_MultipleNoteHeadTests: XCTestCase {
     
     // MARK: - Intervals (Two note heads)
     
-    // The notehead the furthest awat from the center of the stave determines the stem
+    // The notehead the furthest away from the center of the stave determines the stem
     // direction. When this note is above the middle line, the chord takes a down-stem;
     // when the note is below the middle line, the chord takes an up-stem.
     

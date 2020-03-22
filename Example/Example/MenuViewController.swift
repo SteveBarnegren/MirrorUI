@@ -20,9 +20,14 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        musicExampleButtonPressed(sender: UIButton())
-        //scrollingMusicExampleButtonPressed(sender: UIButton())
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        handle(deepLink: .component(.intervalsAndChords))
+    }
+    
+    // MARK: - Actions
     
     @IBAction private func musicExampleButtonPressed(sender: UIButton) {
         
@@ -32,7 +37,28 @@ class MenuViewController: UIViewController {
     
     @IBAction private func scrollingMusicExampleButtonPressed(sender: UIButton) {
         
-        let vc = ScrollingMusicExampleViewController()
+        let vc = ScrollingMusicExampleViewController(composition: ExampleCompositions.test)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction private func componentsButtonPressed(sender: UIButton) {
+        navigateToComponents(deepLink: nil)
+    }
+    
+    // MARK: - Deeplinking
+    
+    private func handle(deepLink: DeepLink) {
+        
+        switch deepLink {
+        case .component(let component):
+            navigateToComponents(deepLink: component)
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    private func navigateToComponents(deepLink: ComponentDeepLink?) {
+        let vc = ComponentsMenuViewController(deepLink: deepLink)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -12,9 +12,11 @@ import PopupControls
 
 class ScrollingMusicExampleViewController: UIViewController {
     
-    var musicViewController: ScrollingMusicViewController!
+    private var musicViewController: ScrollingMusicViewController!
+    private let composition: Composition
     
-    init() {
+    init(composition: Composition) {
+        self.composition = composition
         super.init(nibName: "ScrollingMusicExampleViewController", bundle: nil)
     }
     
@@ -25,7 +27,7 @@ class ScrollingMusicExampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        musicViewController = ScrollingMusicViewController(composition: ExampleCompositions.test)
+        musicViewController = ScrollingMusicViewController(composition: self.composition)
         addChild(musicViewController)
         view.addSubview(musicViewController.view)
         
