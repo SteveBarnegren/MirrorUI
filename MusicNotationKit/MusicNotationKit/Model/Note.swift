@@ -26,7 +26,13 @@ public class Note: Playable {
     var noteHeadDescriptions = [NoteHeadDescription]()
     
     var stemConnectingNoteHead: NoteHeadDescription {
-        return noteHeadDescriptions.first!
+        // We always expect there to be at least one note note head
+        switch symbolDescription.stemDirection {
+        case .up:
+            return noteHeadDescriptions.min(byKey: \.staveOffset)!
+        case .down:
+            return noteHeadDescriptions.max(byKey: \.staveOffset)!
+        }
     }
     
     // Width
