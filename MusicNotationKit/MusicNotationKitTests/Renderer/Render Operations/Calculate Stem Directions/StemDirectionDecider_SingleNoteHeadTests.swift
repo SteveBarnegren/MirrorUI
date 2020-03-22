@@ -25,7 +25,7 @@ class StemDirectionDecider_SingleNoteHeadTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let transformer = StemDirectionDecider<TestNote>.Transformer<TestNote>(stavePosition: { $0.stavePosition },
+        let transformer = StemDirectionDecider<TestNote>.Transformer<TestNote>(stavePositions: { [$0.stavePosition] },
                                                                                setStemDirection: { $0.stemDirection = $1 })
         decider = StemDirectionDecider(transformer: transformer)
     }

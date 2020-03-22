@@ -11,7 +11,7 @@ import Foundation
 class StemDirectionDecider<N> {
     
     struct Transformer<N> {
-        let stavePosition: (N) -> Int
+        let stavePositions: (N) -> [Int]
         let setStemDirection: (N, StemDirection) -> Void
     }
     
@@ -30,7 +30,7 @@ class StemDirectionDecider<N> {
         var furthestFromCenterDirection = StemDirection.down
         
         for note in notes {
-            let stavePosition = tf.stavePosition(note)
+            let stavePosition = self.stavePosition(forNote: note)
             let distanceFromCenter = abs(stavePosition)
             let direction: StemDirection
             if stavePosition < 0 {
@@ -61,6 +61,33 @@ class StemDirectionDecider<N> {
         // Apply stem direction to notes
         notes.forEach { tf.setStemDirection($0, direction) }
     }
+    
+    private func stavePosition(forNote note: N) -> Int {
+        
+        let stavePositions = tf.stavePositions(note)
+        assert(stavePositions.count > 0, "Notes should at least have one stave position")
+        
+        // Single stave position
+        if stavePositions.count == 1 {
+            return stavePositions[0]
+        }
+        // Multiple stave positions - return the position that is furthest from the centre.
+        // If pitches are equidistant from then the pitch above the centre line (with a
+        // downwards stem) wins.
+        else {
+            return stavePositions.max(by: { p1, p2 in
+                let p1FromCentre = abs(p1)
+                let p2FromCentre = abs(p2)
+                if p1FromCentre > p2FromCentre {
+                    return false
+                } else if p2FromCentre > p1FromCentre {
+                    return true
+                } else {
+                    return p1 >= 0 ? false : true
+                }
+            })!
+        }
+    }
 }
 
 // MARK: - Notes Transformer
@@ -68,7 +95,7 @@ class StemDirectionDecider<N> {
 extension StemDirectionDecider.Transformer {
     
     static var notes: StemDirectionDecider.Transformer<Note> {
-        return StemDirectionDecider.Transformer<Note>(stavePosition: { $0.highestPitch.stavePosition },
+        return StemDirectionDecider.Transformer<Note>(stavePositions: { n in n.pitches.map { $0.stavePosition } },
                                                       setStemDirection: { $0.symbolDescription.stemDirection = $1 })
     }
 }
