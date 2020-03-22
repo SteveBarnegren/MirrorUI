@@ -1,5 +1,5 @@
 //
-//  StemDirectionDeciderTests.swift
+//  StemDirectionDecider_SingleNoteHeadTests.swift
 //  MusicNotationKitTests
 //
 //  Created by Steve Barnegren on 21/03/2020.
@@ -18,7 +18,7 @@ private class TestNote {
     }
 }
 
-class StemDirectionDeciderTests: XCTestCase {
+class StemDirectionDecider_SingleNoteHeadTests: XCTestCase {
     
     private var decider: StemDirectionDecider<TestNote>!
     
@@ -128,7 +128,7 @@ class StemDirectionDeciderTests: XCTestCase {
 
 // MARK: - Assertion
 
-extension StemDirectionDeciderTests {
+extension StemDirectionDecider_SingleNoteHeadTests {
     
     func assert(stavePositions: [Int], direction: StemDirection, file: StaticString = #file, line: UInt = #line) {
         

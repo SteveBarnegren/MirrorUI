@@ -107,7 +107,8 @@
 		67AE184821D9462C00F3545D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AE184721D9462C00F3545D /* Time.swift */; };
 		67AE184A21D9465C00F3545D /* TimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AE184921D9465C00F3545D /* TimeTests.swift */; };
 		67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */; };
-		67B1B4BC2426924200E3E484 /* StemDirectionDeciderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1B4BB2426924200E3E484 /* StemDirectionDeciderTests.swift */; };
+		67B1B4BC2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1B4BB2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift */; };
+		67B1B4BE2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1B4BD2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift */; };
 		67BB96AD23367E3200119953 /* CompositionProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96AC23367E3200119953 /* CompositionProcessingOperation.swift */; };
 		67BB96B22336854F00119953 /* ScrollingMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B12336854F00119953 /* ScrollingMusicViewController.swift */; };
 		67BB96B6233685C700119953 /* MusicCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B5233685C700119953 /* MusicCollectionViewLayout.swift */; };
@@ -244,7 +245,8 @@
 		67AE184721D9462C00F3545D /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		67AE184921D9465C00F3545D /* TimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTests.swift; sourceTree = "<group>"; };
 		67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Accessors.swift"; sourceTree = "<group>"; };
-		67B1B4BB2426924200E3E484 /* StemDirectionDeciderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemDirectionDeciderTests.swift; sourceTree = "<group>"; };
+		67B1B4BB2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemDirectionDecider_SingleNoteHeadTests.swift; sourceTree = "<group>"; };
+		67B1B4BD2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemDirectionDecider_MultipleNoteHeadTests.swift; sourceTree = "<group>"; };
 		67BB96AC23367E3200119953 /* CompositionProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionProcessingOperation.swift; sourceTree = "<group>"; };
 		67BB96B12336854F00119953 /* ScrollingMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMusicViewController.swift; sourceTree = "<group>"; };
 		67BB96B5233685C700119953 /* MusicCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -690,7 +692,8 @@
 		67B1B4BA2426922300E3E484 /* Calculate Stem Directions */ = {
 			isa = PBXGroup;
 			children = (
-				67B1B4BB2426924200E3E484 /* StemDirectionDeciderTests.swift */,
+				67B1B4BB2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift */,
+				67B1B4BD2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift */,
 			);
 			path = "Calculate Stem Directions";
 			sourceTree = "<group>";
@@ -1007,13 +1010,14 @@
 				6756F61723005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift in Sources */,
 				671A4D2E22885987002C56E8 /* NoteValueTests.swift in Sources */,
 				6728B2C72239975700382D92 /* NoteSequenceTests.swift in Sources */,
-				67B1B4BC2426924200E3E484 /* StemDirectionDeciderTests.swift in Sources */,
+				67B1B4BC2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift in Sources */,
 				67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */,
 				67EA89F324264CA30009BE61 /* NoteHeadDescription+Verify.swift in Sources */,
 				673A3D1E233FC567001CE422 /* Array+MaybeTests.swift in Sources */,
 				6728B2CA2239986000382D92 /* NoteSequence+Verify.swift in Sources */,
 				671A4D252287524E002C56E8 /* NoteSymbolDescription+Verify.swift in Sources */,
 				6756F61B2300C30C003F1F19 /* ElementPopperTests.swift in Sources */,
+				67B1B4BE2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift in Sources */,
 				67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */,
 				67EA89F124264BE70009BE61 /* NoteHeadDescriberTests.swift in Sources */,
 				67E863BB2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift in Sources */,
