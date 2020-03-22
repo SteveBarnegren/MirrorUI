@@ -77,8 +77,29 @@ class StemDirectionDecider_MultipleNoteHeadTests: XCTestCase {
         assert(stavePositions: [[1, 3, -5]], direction: .up)
     }
     
-
-   
+    func test_Chords_OuterNotesEquidistant() {
+        
+        // If the outer notes of the chord are equidistant from the centre then the stem
+        // direction is determined by the preferred direction of the majority of the notes
+        
+        assert(stavePositions: [[3, 1, -3]], direction: .down)
+        assert(stavePositions: [[5, 2, 0, -5]], direction: .down)
+        assert(stavePositions: [[6, -4, -6]], direction: .up)
+        assert(stavePositions: [[4, -1, -4]], direction: .up)
+    }
+    
+    func test_Chords_AllNotesEquidistant() {
+        
+        // If all notes of the chord are equidistant from the centre then the stem
+        // direction should default to downwards
+        
+        assert(stavePositions: [[3, 1, -1, -3]], direction: .down)
+        assert(stavePositions: [[5, 0, -5]], direction: .down)
+        assert(stavePositions: [[6, 2, -2, -6]], direction: .down)
+        assert(stavePositions: [[4, 2, -2, -4]], direction: .down)
+        
+        assert(stavePositions: [[3, 1, -1], [2, 0, -2], [1, -1, -3]], direction: .down)
+    }
 }
 
 // MARK: - Assert
@@ -91,4 +112,3 @@ extension StemDirectionDecider_MultipleNoteHeadTests {
         XCTAssertEqual(notes.map { $0.stemDirection }, Array(repeating: direction, count: notes.count), file: file, line: line)
     }
 }
-

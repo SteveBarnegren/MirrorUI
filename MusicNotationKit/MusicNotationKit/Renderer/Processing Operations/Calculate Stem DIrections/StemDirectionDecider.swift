@@ -73,19 +73,43 @@ class StemDirectionDecider<N> {
         }
         // Multiple stave positions - return the position that is furthest from the centre.
         // If pitches are equidistant from then the pitch above the centre line (with a
-        // downwards stem) wins.
+        // downwards stem) wins. If there are multiple pitches, then the majority win.
         else {
-            return stavePositions.max(by: { p1, p2 in
-                let p1FromCentre = abs(p1)
-                let p2FromCentre = abs(p2)
-                if p1FromCentre > p2FromCentre {
-                    return false
-                } else if p2FromCentre > p1FromCentre {
-                    return true
+            
+            var numAboveCentre = 0 // or on the centre line
+            var numBelowCentre = 0
+            
+            var furthestAboveCentre = 0
+            var furthestBelowCentre = 0
+            
+            for stavePosition in stavePositions {
+                let isAboveCentre = stavePosition >= 0
+                let distanceFromCentre = abs(stavePosition)
+                if isAboveCentre {
+                    numAboveCentre += 1
+                    furthestAboveCentre = max(furthestAboveCentre, distanceFromCentre)
                 } else {
-                    return p1 >= 0 ? false : true
+                    numBelowCentre += 1
+                    furthestBelowCentre = max(furthestBelowCentre, distanceFromCentre)
                 }
-            })!
+            }
+            
+            // Resolve with the outer note
+            if furthestAboveCentre > furthestBelowCentre {
+                return furthestAboveCentre
+            } else if furthestBelowCentre > furthestAboveCentre {
+                return -furthestBelowCentre
+            }
+            // Else resolve with the majority of notes
+            else if numAboveCentre > numBelowCentre {
+                return furthestAboveCentre
+            } else if numBelowCentre > numAboveCentre {
+                return -furthestBelowCentre
+            }
+            // Else use the downwards stem note
+            else {
+                return furthestAboveCentre
+            }
         }
     }
 }
