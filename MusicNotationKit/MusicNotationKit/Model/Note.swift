@@ -25,6 +25,7 @@ public class Note: Playable {
     var symbolDescription = NoteSymbolDescription.standard
     var noteHeadDescriptions = [NoteHeadDescription]()
     
+    /// The note head that the stem connects to
     var stemConnectingNoteHead: NoteHeadDescription {
         // We always expect there to be at least one note note head
         switch symbolDescription.stemDirection {
@@ -32,6 +33,16 @@ public class Note: Playable {
             return noteHeadDescriptions.min(byKey: \.staveOffset)!
         case .down:
             return noteHeadDescriptions.max(byKey: \.staveOffset)!
+        }
+    }
+    
+    var stemExtendingNoteHead: NoteHeadDescription {
+        // We always expect there to be at least one note note head
+        switch symbolDescription.stemDirection {
+        case .up:
+            return noteHeadDescriptions.max(byKey: \.staveOffset)!
+        case .down:
+            return noteHeadDescriptions.min(byKey: \.staveOffset)!
         }
     }
     

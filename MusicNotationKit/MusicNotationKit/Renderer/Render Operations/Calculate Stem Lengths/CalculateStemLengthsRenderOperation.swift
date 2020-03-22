@@ -29,16 +29,6 @@ class CalculateStemLengthsRenderOperation {
     }
 }
 
-extension NoteClusterStemLengthCalculator.Transformer {
-    
-    static var notes: NoteClusterStemLengthCalculator.Transformer<Note> {
-        return NoteClusterStemLengthCalculator.Transformer<Note>(position: { Point($0.xPosition, $0.stemConnectingNoteHead.yPosition) },
-                                                                 stemEndOffset: { $0.symbolDescription.stemEndOffset },
-                                                                 stemDirection: { $0.symbolDescription.stemDirection },
-                                                                 setStemLength: { note, v in note.symbolDescription.stemLength = v })
-    }
-}
-
 extension Array where Element == Note {
     
     func clustered() -> [[Note]] {

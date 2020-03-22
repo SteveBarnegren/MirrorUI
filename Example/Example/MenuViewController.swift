@@ -8,6 +8,8 @@
 
 import UIKit
 
+var deeplink: DeepLink? = .component(.intervalsAndChords)
+
 class MenuViewController: UIViewController {
     
     init() {
@@ -24,7 +26,10 @@ class MenuViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        handle(deepLink: .component(.intervalsAndChords))
+        if let dl = deeplink {
+            handle(deepLink: dl)
+            deeplink = nil
+        }
     }
     
     // MARK: - Actions

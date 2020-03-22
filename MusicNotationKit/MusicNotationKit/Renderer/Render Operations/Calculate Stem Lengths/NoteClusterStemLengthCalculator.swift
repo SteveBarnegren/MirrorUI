@@ -10,63 +10,62 @@ import Foundation
 
 private let preferredStemLength = 3.5 // One octave
 
-class NoteClusterStemLengthCalculator<T> {
+class NoteClusterStemLengthCalculator<N> {
     
     // MARK: - Types
     
-    struct Transformer<T> {
-        let position: (T) -> Point
-        let stemEndOffset: (T) -> Double
-        let stemDirection: (T) -> StemDirection
-        let setStemLength: (T, Double) -> Void
+    struct Transformer<N> {
+        let connectingHeadPosition: (N) -> Point
+        let extendingHeadPosition: (N) -> Point
+        let stemDirection: (N) -> StemDirection
+        let setStemLength: (N, Double) -> Void
     }
     
     // MARK: - Properties
     
-    private let tf: Transformer<T>
+    private let tf: Transformer<N>
     
     // MARK: - Init
     
-    init(transformer: Transformer<T>) {
+    init(transformer: Transformer<N>) {
         self.tf = transformer
     }
     
     // MARK: - Process
     
-    func process(noteCluster: [T]) {
+    func process(noteCluster: [N]) {
         
         if noteCluster.count <= 1 {
-            noteCluster.forEach { tf.setStemLength($0, preferredStemLength) }
+            noteCluster.forEach {
+                let extensionLength = abs(tf.extendingHeadPosition($0).y - tf.connectingHeadPosition($0).y)
+                tf.setStemLength($0, preferredStemLength + extensionLength)
+            }
             return
         }
         
         // If the cluster creates a concave shape, then a horizontal beam should be used
-        if true || isConcave(cluster: noteCluster) {
-            applyHorizontalBeaming(to: noteCluster)
-        } else {
-            applySlantedBeaming(to: noteCluster)
-        }
+        applyHorizontalBeaming(to: noteCluster)
     }
     
-    private func applyHorizontalBeaming(to noteCluster: [T]) {
+    private func applyHorizontalBeaming(to noteCluster: [N]) {
         
         let stemDirection = tf.stemDirection(noteCluster.first!)
-        
         if stemDirection == .down {
-            let minY = noteCluster.map { tf.position($0).y - preferredStemLength }.min()!
+            let minY = noteCluster.map { tf.extendingHeadPosition($0).y - preferredStemLength }.min()!
             for note in noteCluster {
-                let length = tf.position(note).y  - minY
+                let length = tf.connectingHeadPosition(note).y  - minY
                 tf.setStemLength(note, length)
             }
         } else {
-            let maxY = noteCluster.map { tf.position($0).y + preferredStemLength }.max()!
+            let maxY = noteCluster.map { tf.extendingHeadPosition($0).y + preferredStemLength }.max()!
             for note in noteCluster {
-                let length = maxY - tf.position(note).y
+                let length = maxY - tf.connectingHeadPosition(note).y
                 tf.setStemLength(note, length)
             }
         }
     }
     
+    /*
     private func applySlantedBeaming(to noteCluster: [T]) {
         
         // First and last notes should be the preferred length
@@ -111,5 +110,16 @@ class NoteClusterStemLengthCalculator<T> {
         
         return false
     }
+ */
 
+}
+
+extension NoteClusterStemLengthCalculator.Transformer {
+    
+    static var notes: NoteClusterStemLengthCalculator.Transformer<Note> {
+        return NoteClusterStemLengthCalculator.Transformer<Note>(connectingHeadPosition: { Point($0.xPosition, $0.stemConnectingNoteHead.yPosition) },
+                                                                 extendingHeadPosition: { Point($0.xPosition, $0.stemExtendingNoteHead.yPosition) },
+                                                                 stemDirection: { $0.symbolDescription.stemDirection },
+                                                                 setStemLength: { note, v in note.symbolDescription.stemLength = v })
+    }
 }
