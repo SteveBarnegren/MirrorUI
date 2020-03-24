@@ -25,7 +25,7 @@ class PathBundleDrawer {
         paths.forEach(draw)
     }
     
-    func draw(path: Path) {
+    private func draw(path: Path) {
         
         UIColor.orange.set()
         
