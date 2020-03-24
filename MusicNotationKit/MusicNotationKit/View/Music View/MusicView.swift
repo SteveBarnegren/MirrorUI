@@ -35,10 +35,8 @@ public class MusicView: UIView {
     // MARK: - Drawing
     
     override public func draw(_ rect: CGRect) {
-        
-        let displaySize = DisplaySize(Double(bounds.width), Double(bounds.height))
-        
-        for path in musicRenderer.paths(forDisplaySize: displaySize) {
+                
+        for path in musicRenderer.paths(forDisplayWidth: Double(bounds.width)).paths {
             self.draw(path: path)
         }
         

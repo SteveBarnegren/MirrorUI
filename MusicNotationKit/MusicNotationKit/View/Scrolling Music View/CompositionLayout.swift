@@ -11,11 +11,17 @@ import Foundation
 struct CompositionItem {
     let barRange: Range<Int>
     let size: Vector2<Double>
+    
+    func with(height: Double) -> CompositionItem {
+        return CompositionItem(barRange: barRange, size: Vector2(size.x, height))
+    }
 }
 
-struct CompositionLayout {
+class CompositionLayout {
     
     var compositionItems = [CompositionItem]()
+    
+    // MARK: - Init
     
     init(barSizes: [Vector2D], layoutWidth: Double) {
         
@@ -59,5 +65,26 @@ struct CompositionLayout {
         } else {
             return nil
         }
+    }
+    
+    // MARK: - Update Item Heights
+    
+    func update(height: Double, forIndex index: Int) {
+        compositionItems[index] = compositionItems[index].with(height: height)
+    }
+}
+
+extension Array {
+    
+    mutating func mutate(range: Range<Int>, mutation: (Element) -> Element) {
+        
+        let copy = self.enumerated().map { (t) -> Element in
+            if range.contains(t.offset) {
+                return mutation(t.element)
+            } else {
+                return t.element
+            }
+        }
+        self = copy
     }
 }

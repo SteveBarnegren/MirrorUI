@@ -131,7 +131,7 @@ struct Path {
         commands.append(.line(r.bottomRight))
         commands.append(.close)
     }
-
+    
     mutating func close() {
         commands.append(.close)
     }
@@ -296,7 +296,7 @@ extension Array where Element == Path.Command {
     }
     
     func translated(x: Double, y: Double) -> [Path.Command] {
-     
+        
         var newCommands = [Path.Command]()
         
         func translatePoint(_ p: Point) -> Point {
@@ -318,7 +318,86 @@ extension Array where Element == Path.Command {
                 newCommands.append(.oval(translatePoint(p), size, rotation))
             }
         }
-    
+        
         return newCommands
+    }
+}
+
+// MARK: - Path + Bounding Box
+
+extension Path {
+    
+    func maxY() -> Double {
+        
+        //print("--------- Path maxY ---------")
+        
+        var highestY: Double?
+        func process(p: Point) {
+            //print("p.y  \(p.y)")
+            if let existing = highestY {
+                highestY = max(p.y, existing)
+            } else {
+                highestY = p.y
+            }
+            //print("Highest: \(highestY ?? 0)")
+        }
+        
+        for command in self.commands {
+            switch command {
+            case .move(let p):
+                process(p: p)
+            case .line(let p):
+                process(p: p)
+            case .curve(let p, let c1, let c2):
+                continue
+                //process(p: p)
+                //process(p: c1)
+                //process(p: c2)
+            case .close:
+                continue
+            case .oval(let point, let size, _):
+                continue
+               // process(p: point.adding(y: size.height/2))
+            }
+        }
+        
+        return highestY ?? 0
+    }
+    
+    func minY() -> Double {
+        
+        //print("--------- Path minY ---------")
+        
+        var lowestY: Double?
+        func process(p: Point) {
+            if let existing = lowestY {
+                lowestY = min(p.y, existing)
+            } else {
+                lowestY = p.y
+            }
+            
+            //print("Lowest: \(lowestY ?? 0)")
+        }
+        
+        for command in self.commands {
+            switch command {
+            case .move(let p):
+                process(p: p)
+            case .line(let p):
+                process(p: p)
+            case .curve(let p, let c1, let c2):
+                continue
+                //process(p: p)
+                //process(p: c1)
+                //process(p: c2)
+            case .close:
+                continue
+            case .oval(let point, let size, _):
+                continue
+                //process(p: point.subtracting(y: size.height/2))
+            }
+        }
+        
+        return lowestY ?? 0
     }
 }

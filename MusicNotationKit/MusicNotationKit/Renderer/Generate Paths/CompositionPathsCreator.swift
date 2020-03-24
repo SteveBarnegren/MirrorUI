@@ -10,7 +10,7 @@ import Foundation
 
 class CompositionPathsCreator {
     
-    func paths(fromBars bars: [Bar], canvasSize: Size, staveSpacing: Double, displaySize: DisplaySize) -> [Path] {
+    func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double) -> [Path] {
         
         var paths = bars.map(makePaths(forBar:)).joined().toArray()
         
@@ -19,8 +19,8 @@ class CompositionPathsCreator {
             paths += BarlineRenderer().paths(forBarline: lastBarline)
         }
         
-        paths += StaveRenderer.stavePaths(withWidth: canvasSize.width)
-        paths = paths.map { $0.scaled(staveSpacing) }.map { $0.translated(x: 0, y: displaySize.height/2) }
+        paths += StaveRenderer.stavePaths(withWidth: canvasWidth)
+        paths = paths.map { $0.scaled(staveSpacing) }
         return paths
     }
     

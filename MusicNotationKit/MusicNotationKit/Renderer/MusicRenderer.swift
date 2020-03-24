@@ -22,6 +22,13 @@ struct BarSizingInfo {
     }
 }
 
+struct PathBundle {
+    let paths: [Path]
+    var maxY: Double { paths.map { $0.maxY() }.max() ?? 0 }
+    var minY: Double { paths.map { $0.minY() }.min() ?? 0 }
+    var height: Double { maxY - minY }
+}
+
 class MusicRenderer {
     
     private let composition: Composition
@@ -87,15 +94,14 @@ class MusicRenderer {
         return barSizingInformation.map { $0.scaled(staveSpacing) }
     }
     
-    func paths(forDisplaySize displaySize: DisplaySize, range: Range<Int>? = nil) -> [Path] {
+    func paths(forDisplayWidth displayWidth: Double, range: Range<Int>? = nil) -> PathBundle {
         
         if !isPreprocessingComplete {
             fatalError("Must preprocess composition first")
         }
         
         // Calculate layout sizes
-        let canvasSize = Size(width: displaySize.width / staveSpacing, height: displaySize.height / staveSpacing)
-        let layoutWidth = displaySize.width / staveSpacing
+        let layoutWidth = displayWidth / staveSpacing
         
         let bars: [Bar]
         if let range = range {
@@ -118,15 +124,15 @@ class MusicRenderer {
         
         // Make paths
         let paths = CompositionPathsCreator().paths(fromBars: bars,
-                                                    canvasSize: canvasSize,
-                                                    staveSpacing: staveSpacing,
-                                                    displaySize: displaySize)
-     
+                                                    canvasWidth: layoutWidth,
+                                                    staveSpacing: staveSpacing)
+
         // Generate debug information
         if _generateConstraintsDebugInformation {
             _constraintsDebugInformation = ConstraintsDebugInformationGenerator().debugInformation(fromComposition: composition, scale: staveSpacing)
         }
-        
-        return paths
+
+        let pathBundle = PathBundle(paths: paths)
+        return pathBundle
     }
 }

@@ -64,4 +64,25 @@ class MusicCollectionViewLayout: UICollectionViewLayout {
         attributes.frame = cellRect
         return attributes
     }
+    
+    func updateCellHeights(fromIndex index: Int) {
+                        
+        let layout = dataSource.compositionLayout(forMusicCollectionViewLayout: self)
+        print("Layout heights: \(layout.compositionItems.map { $0.size.height })")
+        
+        var yPos = calculatedCellRects[maybe: index-1]?.maxY ?? 0
+        
+        for i in index..<calculatedCellRects.count {
+            let compositionItem = layout.compositionItems[i]
+            let cellHeight = CGFloat(compositionItem.size.height)
+            let cellRect = CGRect(x: CGFloat(0), y: yPos, width: collectionView!.bounds.width, height: cellHeight)
+            calculatedCellRects[i] = cellRect
+            yPos += cellHeight
+        }
+        
+        let context = UICollectionViewLayoutInvalidationContext()
+        let indexPathsToInvalidate = (index..<calculatedCellRects.count).map { IndexPath(item: $0, section: 0) }
+        context.invalidateItems(at: indexPathsToInvalidate)
+        invalidateLayout(with: context)
+    }
 }

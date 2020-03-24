@@ -34,14 +34,14 @@ class MusicCell: UICollectionViewCell {
         view.frame = viewFrame
     }
     
-    func configure(withPaths paths: [Path]) {
-        view.configure(withPaths: paths)
+    func configure(withPathBundle pathBundle: PathBundle) {
+        view.configure(withPathBundle: pathBundle)
     }
 }
 
 private class MusicCellView: UIView {
     
-    private var paths = [Path]()
+    private var pathBundle: PathBundle?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -52,18 +52,25 @@ private class MusicCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(withPaths paths: [Path]) {
-        self.paths = paths
+    func configure(withPathBundle pathBundle: PathBundle) {
+        self.pathBundle = pathBundle
         self.setNeedsDisplay()
         
-        //self.layer.borderColor = UIColor.yellow.cgColor
-        //self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.yellow.cgColor
+        self.layer.borderWidth = 0.5
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
+        guard let bundle = pathBundle else {
+            return
+        }
+        
         let pathDrawer = PathDrawer(size: bounds.size)
+        let viewMidY = Double(bounds.height/2)
+        let drawOffset = (abs(bundle.minY) - abs(bundle.maxY))/2
+        let paths = bundle.paths.map { $0.translated(x: 0, y: viewMidY + drawOffset) }
         pathDrawer.draw(paths: paths)
     }
 }
