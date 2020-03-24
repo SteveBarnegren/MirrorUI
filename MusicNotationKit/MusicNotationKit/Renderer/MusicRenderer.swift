@@ -94,7 +94,7 @@ class MusicRenderer {
         return barSizingInformation.map { $0.scaled(staveSpacing) }
     }
     
-    func paths(forDisplayWidth displayWidth: Double, range: Range<Int>? = nil) -> PathBundle {
+    func pathBundle(forDisplayWidth displayWidth: Double, range: Range<Int>? = nil) -> PathBundle {
         
         if !isPreprocessingComplete {
             fatalError("Must preprocess composition first")

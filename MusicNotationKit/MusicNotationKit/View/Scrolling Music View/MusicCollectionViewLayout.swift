@@ -68,7 +68,6 @@ class MusicCollectionViewLayout: UICollectionViewLayout {
     func updateCellHeights(fromIndex index: Int) {
                         
         let layout = dataSource.compositionLayout(forMusicCollectionViewLayout: self)
-        print("Layout heights: \(layout.compositionItems.map { $0.size.height })")
         
         var yPos = calculatedCellRects[maybe: index-1]?.maxY ?? 0
         
