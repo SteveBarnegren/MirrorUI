@@ -1,5 +1,5 @@
 //
-//  PathDrawer.swift
+//  PathBundleDrawer.swift
 //  MusicNotationKit
 //
 //  Created by Steve Barnegren on 22/09/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PathDrawer {
+class PathBundleDrawer {
     
     private let size: CGSize
     
@@ -16,7 +16,12 @@ class PathDrawer {
         self.size = size
     }
     
-    func draw(paths: [Path]) {
+    func draw(pathBundle: PathBundle) {
+        // Translate the paths to draw them in the correct place.
+        let midY = Double(size.height/2)
+        let drawOffset = (abs(pathBundle.minY) - abs(pathBundle.maxY))/2
+        let paths = pathBundle.paths.map { $0.translated(x: 0, y: midY + drawOffset) }
+
         paths.forEach(draw)
     }
     

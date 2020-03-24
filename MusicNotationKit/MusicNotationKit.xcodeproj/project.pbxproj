@@ -117,7 +117,7 @@
 		67BB96B823368C7400119953 /* CompositionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B723368C7400119953 /* CompositionLayout.swift */; };
 		67BB96BA2337A82200119953 /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B92337A82200119953 /* MusicCell.swift */; };
 		67BB96BD2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */; };
-		67BB96BF2337B9F300119953 /* PathDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96BE2337B9F300119953 /* PathDrawer.swift */; };
+		67BB96BF2337B9F300119953 /* PathBundleDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96BE2337B9F300119953 /* PathBundleDrawer.swift */; };
 		67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1521C6D1B200A020D0 /* Path.swift */; };
 		67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */; };
 		67E863B92303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */; };
@@ -257,7 +257,7 @@
 		67BB96B723368C7400119953 /* CompositionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionLayout.swift; sourceTree = "<group>"; };
 		67BB96B92337A82200119953 /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
 		67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchBarLayoutAnchorsProcessingOperation.swift; sourceTree = "<group>"; };
-		67BB96BE2337B9F300119953 /* PathDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDrawer.swift; sourceTree = "<group>"; };
+		67BB96BE2337B9F300119953 /* PathBundleDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathBundleDrawer.swift; sourceTree = "<group>"; };
 		67C7CC1521C6D1B200A020D0 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberSixEightTests.swift; sourceTree = "<group>"; };
@@ -573,7 +573,7 @@
 		677C9C7F21C5169200C7A16E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				67BB96BE2337B9F300119953 /* PathDrawer.swift */,
+				67BB96BE2337B9F300119953 /* PathBundleDrawer.swift */,
 				67BB96B32336855500119953 /* Music View */,
 				67BB96B42336855E00119953 /* Scrolling Music View */,
 			);
@@ -938,7 +938,7 @@
 				674B9AAB22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift in Sources */,
 				6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */,
 				679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */,
-				67BB96BF2337B9F300119953 /* PathDrawer.swift in Sources */,
+				67BB96BF2337B9F300119953 /* PathBundleDrawer.swift in Sources */,
 				671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */,
 				6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */,
 				674D504221DD5774009E5AFE /* PlayableItemTimeCalculator.swift in Sources */,

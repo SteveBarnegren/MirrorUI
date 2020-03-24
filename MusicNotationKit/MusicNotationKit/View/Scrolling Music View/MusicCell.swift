@@ -67,10 +67,7 @@ private class MusicCellView: UIView {
             return
         }
         
-        let pathDrawer = PathDrawer(size: bounds.size)
-        let viewMidY = Double(bounds.height/2)
-        let drawOffset = (abs(bundle.minY) - abs(bundle.maxY))/2
-        let paths = bundle.paths.map { $0.translated(x: 0, y: viewMidY + drawOffset) }
-        pathDrawer.draw(paths: paths)
+        let drawer = PathBundleDrawer(size: bounds.size)
+        drawer.draw(pathBundle: bundle)
     }
 }

@@ -47,7 +47,7 @@ public class MusicView: UIView {
     }
     
     func draw(path: Path) {
-        
+                
         UIColor.orange.set()
         
         let uiBezierPath = UIBezierPath()
