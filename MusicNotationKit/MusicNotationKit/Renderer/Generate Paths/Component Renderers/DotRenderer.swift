@@ -14,11 +14,7 @@ class DotRenderer {
         
         let dotSize = 0.5
         
-        let commands: [Path.Command] = [
-            .circle(Point(dot.xPosition, dot.yPosition), dotSize/2)
-        ]
-        
-        var path = Path(commands: commands)
+        var path = Path(circleWithCenter: dot.position, radius: dotSize/2)
         path.drawStyle = .fill
         return [path]
     }

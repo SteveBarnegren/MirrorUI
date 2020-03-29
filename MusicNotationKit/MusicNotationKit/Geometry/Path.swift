@@ -26,8 +26,6 @@ struct Path {
     
     var commands = [Command]()
     var drawStyle = DrawStyle.stroke
-    
-    // Bounding box
     private(set) var boundingBox = Rect.zero
     
     init(commands: [Command] = []) {
@@ -46,6 +44,11 @@ struct Path {
         ]
         
         self.init(commands: commands)
+    }
+    
+    init(circleWithCenter center: Point, radius: Double) {
+        let command = Path.Command.circle(center, radius)
+        self.init(commands: [command])
     }
 }
 
@@ -93,17 +96,13 @@ extension Path {
     // MARK: - Scale
     
     mutating func scale(_ scale: Double) {
-        self.scale(x: scale, y: scale)
-    }
-    
-    mutating func scale(x xScale: Double, y yScale: Double) {
-        
+   
         func scalePoint(_ p: Point) -> Point {
-            return Point(p.x * xScale, p.y * yScale)
+            return Point(p.x * scale, p.y * scale)
         }
         
         func scaleSize(_ s: Size) -> Size {
-            return Size(width: s.width * xScale, height: s.height * yScale)
+            return Size(width: s.width * scale, height: s.height * scale)
         }
         
         var newCommands = [Path.Command]()
@@ -121,29 +120,22 @@ extension Path {
             case .oval(let point, let size, let rotation):
                 newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
             case .circle(let p, let r):
-                newCommands.append(.circle(scalePoint(p), r * xScale))
+                newCommands.append(.circle(scalePoint(p), r * scale))
             }
         }
         
         commands = newCommands
         
-        boundingBox = Rect(x: boundingBox.x * xScale,
-                           y: boundingBox.y * yScale,
-                           width: boundingBox.width * xScale,
-                           height: boundingBox.height * yScale)
-    }
-    
-    func scaled(x xScale: Double, y yScale: Double) -> Path {
-        
-        var copy = self
-        copy.scale(x: xScale, y: yScale)
-        return copy
+        boundingBox = Rect(x: boundingBox.x * scale,
+                           y: boundingBox.y * scale,
+                           width: boundingBox.width * scale,
+                           height: boundingBox.height * scale)
     }
     
     func scaled(_ scale: Double) -> Path {
         
         var copy = self
-        copy.scale(x: scale, y: scale)
+        copy.scale(scale)
         return copy
     }
     
@@ -192,17 +184,13 @@ extension Path {
 extension Array where Element == Path.Command {
     
     func scaled(_ scale: Double) -> [Path.Command] {
-        return self.scaled(x: scale, y: scale)
-    }
-    
-    func scaled(x xScale: Double, y yScale: Double) -> [Path.Command] {
         
         func scalePoint(_ p: Point) -> Point {
-            return Point(p.x * xScale, p.y * yScale)
+            return Point(p.x * scale, p.y * scale)
         }
         
         func scaleSize(_ s: Size) -> Size {
-            return Size(width: s.width * xScale, height: s.height * yScale)
+            return Size(width: s.width * scale, height: s.height * scale)
         }
         
         var newCommands = [Path.Command]()
@@ -220,7 +208,7 @@ extension Array where Element == Path.Command {
             case .oval(let point, let size, let rotation):
                 newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
             case .circle(let p, let r):
-                newCommands.append(.circle(scalePoint(p), r * xScale))
+                newCommands.append(.circle(scalePoint(p), r * scale))
             }
         }
         
