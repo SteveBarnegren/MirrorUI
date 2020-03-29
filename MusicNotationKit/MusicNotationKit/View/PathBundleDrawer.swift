@@ -8,6 +8,8 @@
 
 import Foundation
 
+private let drawPathsBoundingBoxes = true
+
 class PathBundleDrawer {
     
     private let size: CGSize
@@ -23,6 +25,11 @@ class PathBundleDrawer {
         let paths = pathBundle.paths.map { $0.translated(x: 0, y: midY + drawOffset) }
 
         paths.forEach(draw)
+        
+        // Debug drawing
+        if drawPathsBoundingBoxes {
+            paths.forEach(drawBoundingBox)
+        }
     }
     
     private func draw(path: Path) {
@@ -86,4 +93,27 @@ class PathBundleDrawer {
         return Point(p.x, Double(size.height) - p.y)
     }
     
+    private func invertY(_ y: Double) -> Double {
+        return Double(size.height) - y
+    }
+}
+
+// MARK: - Debug Drawing
+
+extension PathBundleDrawer {
+    
+    func drawBoundingBox(path: Path) {
+        
+        var path = path
+        let rect = path.boundingBox()
+        let cgRect = CGRect(x: rect.x, y: invertY(rect.y) - rect.height, width: rect.width, height: rect.height)
+        
+        let uiBezierPath = UIBezierPath(rect: cgRect)
+        
+        UIColor.blue.withAlphaComponent(0.1).set()
+        uiBezierPath.fill()
+        
+        UIColor.blue.withAlphaComponent(0.2).set()
+        uiBezierPath.stroke()
+    }
 }

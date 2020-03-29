@@ -57,7 +57,7 @@ class BezierMath {
         for t in tValues {
             let mt = 1 - t
             let x = (mt * mt * mt * x0) + (3 * mt * mt * t * x1) + (3 * mt * t * t * x2) + (t * t * t * x3)
-            let y = (mt * mt * mt * y0) + (3 * mt * mt * t * y1) + (3 * mt * t * t * y2) + (t * t * t * y3);
+            let y = (mt * mt * mt * y0) + (3 * mt * mt * t * y1) + (3 * mt * t * t * y2) + (t * t * t * y3)
             let point = Point(x, y)
             edgePoints.append(point)
         }
