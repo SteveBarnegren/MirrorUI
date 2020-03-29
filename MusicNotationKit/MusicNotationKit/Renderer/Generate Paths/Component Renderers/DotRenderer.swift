@@ -15,7 +15,7 @@ class DotRenderer {
         let dotSize = 0.5
         
         let commands: [Path.Command] = [
-            .oval(Point(dot.xPosition, dot.yPosition), Size(width: dotSize, height: dotSize), 0)
+            .circle(Point(dot.xPosition, dot.yPosition), dotSize/2)
         ]
         
         var path = Path(commands: commands)

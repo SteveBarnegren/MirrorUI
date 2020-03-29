@@ -38,6 +38,13 @@ class PathBundleDrawer {
         
         let uiBezierPath = UIBezierPath()
         
+        func draw(uiBezierPath: UIBezierPath) {
+            switch path.drawStyle {
+            case .stroke: uiBezierPath.stroke()
+            case .fill: uiBezierPath.fill()
+            }
+        }
+        
         for command in path.commands {
             switch command {
             case .move(var p):
@@ -69,23 +76,21 @@ class PathBundleDrawer {
                 
                 let fullTransform = translateToOrgin.concatenating(rotate).concatenating(translateBack)
                 ovalBezierPath.apply(fullTransform)
+                draw(uiBezierPath: ovalBezierPath)
                 
-                switch path.drawStyle {
-                case .stroke:
-                    ovalBezierPath.stroke()
-                case .fill:
-                    ovalBezierPath.fill()
-                }
+            case .circle(let p, let r):
+                let point = invertY(p)
+                let rect = CGRect(x: point.x - r,
+                                  y: point.y - r,
+                                  width: r*2,
+                                  height: r*2)
+                let circleBezierPath = UIBezierPath(ovalIn: rect)
+                draw(uiBezierPath: circleBezierPath)
             }
         }
         
         if uiBezierPath.isEmpty == false {
-            switch path.drawStyle {
-            case .stroke:
-                uiBezierPath.stroke()
-            case .fill:
-                uiBezierPath.fill()
-            }
+            draw(uiBezierPath: uiBezierPath)
         }
     }
     

@@ -15,6 +15,7 @@ struct Path {
         case line(Point)
         case curve(Point, c1: Point, c2: Point)
         case close
+        case circle(Point, Double) // Center, Radius
         case oval(Point, Size, Double)
     }
     
@@ -70,8 +71,11 @@ extension Path {
                 newCommands.append(.curve(translatePoint(p), c1: translatePoint(c1), c2: translatePoint(c2)))
             case .close:
                 newCommands.append(.close)
+            case .circle(let p, let r):
+                newCommands.append(.circle(translatePoint(p), r))
             case .oval(let point, let size, let rotation):
                 newCommands.append(.oval(translatePoint(point), size, rotation))
+           
             }
         }
         
@@ -116,6 +120,8 @@ extension Path {
                 newCommands.append(.close)
             case .oval(let point, let size, let rotation):
                 newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
+            case .circle(let p, let r):
+                newCommands.append(.circle(scalePoint(p), r * xScale))
             }
         }
         
@@ -163,6 +169,8 @@ extension Path {
                 newCommands.append(.close)
             case .oval(let p, let size, let rotation):
                 newCommands.append(.oval(invert(p), size, rotation))
+            case .circle(let p, let r):
+                newCommands.append(.circle(invert(p), r))
             }
         }
         
@@ -206,6 +214,8 @@ extension Array where Element == Path.Command {
                 newCommands.append(.close)
             case .oval(let point, let size, let rotation):
                 newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
+            case .circle(let p, let r):
+                newCommands.append(.circle(scalePoint(p), r * xScale))
             }
         }
         
@@ -222,7 +232,6 @@ extension Array where Element == Path.Command {
         
         for command in self {
             switch command {
-                
             case .move(let p):
                 newCommands.append(.move(translatePoint(p)))
             case .line(let p):
@@ -233,6 +242,8 @@ extension Array where Element == Path.Command {
                 newCommands.append(.close)
             case .oval(let p, let size, let rotation):
                 newCommands.append(.oval(translatePoint(p), size, rotation))
+            case .circle(let p, let r):
+                newCommands.append(.circle(translatePoint(p), r))
             }
         }
         
@@ -278,6 +289,9 @@ extension Path {
                 break;
             case .oval(_, _, _):
                 break;
+            case .circle(let p, let r):
+                process(point: p.adding(x: r, y: r))
+                process(point: p.subtracting(x: r, y: r))
             }
         }
         
