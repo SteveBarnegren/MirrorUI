@@ -57,6 +57,14 @@ struct Rect {
     var width: Double
     var height: Double
     
+    var maxY: Double {
+        y + height
+    }
+    
+    var minY: Double {
+        return y
+    }
+    
     var bottomLeft: Point {
         return Point(x, y)
     }
@@ -100,28 +108,45 @@ struct Path {
     var commands = [Command]()
     var drawStyle = DrawStyle.stroke
     
+    // Bounding box
+    private var _boundingBoxCached: Rect?
+    mutating func boundingBox() -> Rect {
+        if let cachedValue = _boundingBoxCached {
+            return cachedValue
+        } else {
+            let value = calculateBoundingBox()
+            _boundingBoxCached = value
+            return value
+        }
+    }
+    
     init(commands: [Command] = []) {
         self.commands = commands
     }
     
     mutating func add(commands: [Command]) {
         self.commands.append(contentsOf: commands)
+        _boundingBoxCached = nil
     }
     
     mutating func move(to point: Point) {
         commands.append(.move(point))
+        _boundingBoxCached = nil
     }
     
     mutating func addLine(to point: Point) {
         commands.append(.line(point))
+        _boundingBoxCached = nil
     }
     
     mutating func addCurve(to point: Point, c1: Point, c2: Point) {
         commands.append(.curve(point, c1: c1, c2: c2))
+        _boundingBoxCached = nil
     }
     
     mutating func addOval(atPoint point: Point, withSize size: Size, rotation: Double) {
         commands.append(.oval(point, size, rotation))
+        _boundingBoxCached = nil
     }
     
     mutating func addRect(_ r: Rect) {
@@ -130,10 +155,12 @@ struct Path {
         commands.append(.line(r.topRight))
         commands.append(.line(r.bottomRight))
         commands.append(.close)
+        _boundingBoxCached = nil
     }
     
     mutating func close() {
         commands.append(.close)
+        _boundingBoxCached = nil
     }
 }
 
@@ -165,6 +192,7 @@ extension Path {
         }
         
         commands = newCommands
+        _boundingBoxCached = nil
     }
     
     func translated(x: Double, y: Double) -> Path {
@@ -208,6 +236,7 @@ extension Path {
         }
         
         commands = newCommands
+        _boundingBoxCached = nil
     }
     
     func scaled(x xScale: Double, y yScale: Double) -> Path {
@@ -250,6 +279,7 @@ extension Path {
         }
         
         self.commands = newCommands
+        _boundingBoxCached = nil
     }
     
     func invertedY() -> Path {
@@ -327,77 +357,62 @@ extension Array where Element == Path.Command {
 
 extension Path {
     
-    func maxY() -> Double {
+    fileprivate func calculateBoundingBox() -> Rect {
         
-        //print("--------- Path maxY ---------")
-        
+        var lowestX: Double?
+        var highestX: Double?
+        var lowestY: Double?
         var highestY: Double?
-        func process(p: Point) {
-            //print("p.y  \(p.y)")
-            if let existing = highestY {
-                highestY = max(p.y, existing)
-            } else {
-                highestY = p.y
-            }
-            //print("Highest: \(highestY ?? 0)")
+        
+        func process(point: Point) {
+            lowestX = min(lowestX ?? point.x, point.x)
+            lowestY = min(lowestY ?? point.y, point.y)
+            highestX = max(highestX ?? point.x, point.x)
+            highestY = max(highestY ?? point.y, point.y)
         }
         
+        var lastPoint: Point?
         for command in self.commands {
             switch command {
             case .move(let p):
-                process(p: p)
+                process(point: p)
+                lastPoint = p
             case .line(let p):
-                process(p: p)
+                process(point: p)
+                lastPoint = p
             case .curve(let p, let c1, let c2):
-                continue
-                //process(p: p)
-                //process(p: c1)
-                //process(p: c2)
+                if let lp = lastPoint {
+                    let bb = BezierMath.boundingBox(x0: lp.x, y0: lp.y, x1: c1.x, y1: c1.y, x2: c2.x, y2: c2.y, x3: p.x, y3: p.y)
+                    process(point: bb.bottomLeft)
+                    process(point: bb.topRight)
+                }
+                lastPoint = p
             case .close:
-                continue
-            case .oval(let point, let size, _):
-                continue
-               // process(p: point.adding(y: size.height/2))
+                break;
+            case .oval(_, _, _):
+                break;
             }
         }
         
-        return highestY ?? 0
+        let minX = lowestX ?? 0
+        let minY = lowestY ?? 0
+        let maxX = highestX ?? 0
+        let maxY = highestY ?? 0
+        
+        return Rect(x: minX,
+                    y: minY,
+                    width: maxX - minX,
+                    height: maxY - minY)
+    }
+}
+
+extension Path {
+    
+    mutating func maxY() -> Double {
+        return boundingBox().maxY
     }
     
-    func minY() -> Double {
-        
-        //print("--------- Path minY ---------")
-        
-        var lowestY: Double?
-        func process(p: Point) {
-            if let existing = lowestY {
-                lowestY = min(p.y, existing)
-            } else {
-                lowestY = p.y
-            }
-            
-            //print("Lowest: \(lowestY ?? 0)")
-        }
-        
-        for command in self.commands {
-            switch command {
-            case .move(let p):
-                process(p: p)
-            case .line(let p):
-                process(p: p)
-            case .curve(let p, let c1, let c2):
-                continue
-                //process(p: p)
-                //process(p: c1)
-                //process(p: c2)
-            case .close:
-                continue
-            case .oval(let point, let size, _):
-                continue
-                //process(p: point.subtracting(y: size.height/2))
-            }
-        }
-        
-        return lowestY ?? 0
+    mutating func minY() -> Double {
+        return boundingBox().minY
     }
 }

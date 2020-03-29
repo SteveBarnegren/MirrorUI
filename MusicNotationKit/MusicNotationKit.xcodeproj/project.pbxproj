@@ -111,6 +111,9 @@
 		67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */; };
 		67B1B4BC2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1B4BB2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift */; };
 		67B1B4BE2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B1B4BD2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift */; };
+		67BA7899242FE1E40097806B /* BezierMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA7898242FE1E40097806B /* BezierMath.swift */; };
+		67BA789B2430AF100097806B /* SingleValueCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA789A2430AF100097806B /* SingleValueCache.swift */; };
+		67BA789D2430AF750097806B /* SingleValueCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA789C2430AF750097806B /* SingleValueCacheTests.swift */; };
 		67BB96AD23367E3200119953 /* CompositionProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96AC23367E3200119953 /* CompositionProcessingOperation.swift */; };
 		67BB96B22336854F00119953 /* ScrollingMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B12336854F00119953 /* ScrollingMusicViewController.swift */; };
 		67BB96B6233685C700119953 /* MusicCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B5233685C700119953 /* MusicCollectionViewLayout.swift */; };
@@ -251,6 +254,9 @@
 		67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Accessors.swift"; sourceTree = "<group>"; };
 		67B1B4BB2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemDirectionDecider_SingleNoteHeadTests.swift; sourceTree = "<group>"; };
 		67B1B4BD2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemDirectionDecider_MultipleNoteHeadTests.swift; sourceTree = "<group>"; };
+		67BA7898242FE1E40097806B /* BezierMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierMath.swift; sourceTree = "<group>"; };
+		67BA789A2430AF100097806B /* SingleValueCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleValueCache.swift; sourceTree = "<group>"; };
+		67BA789C2430AF750097806B /* SingleValueCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleValueCacheTests.swift; sourceTree = "<group>"; };
 		67BB96AC23367E3200119953 /* CompositionProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionProcessingOperation.swift; sourceTree = "<group>"; };
 		67BB96B12336854F00119953 /* ScrollingMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMusicViewController.swift; sourceTree = "<group>"; };
 		67BB96B5233685C700119953 /* MusicCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -442,6 +448,7 @@
 				67669E6222EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift */,
 				6756F61A2300C30C003F1F19 /* ElementPopperTests.swift */,
 				67EA89EB2424195E0009BE61 /* PointTests.swift */,
+				67BA789C2430AF750097806B /* SingleValueCacheTests.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -456,6 +463,7 @@
 				674B9AB422EDF6040098D121 /* IncrementingSequence.swift */,
 				67669E6022EDF9D9004F1927 /* RepeatingPatternSequence.swift */,
 				6756F6182300C2AE003F1F19 /* ElementPopper.swift */,
+				67BA789A2430AF100097806B /* SingleValueCache.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -638,6 +646,7 @@
 				67A15F8C21C5129500C3C03F /* MusicNotationKit.h */,
 				67494C7B21CC02D40078A575 /* SymbolPaths.swift */,
 				673A3D2D2343ECD9001CE422 /* NaturalSpacing.swift */,
+				67BA7898242FE1E40097806B /* BezierMath.swift */,
 				674D503721DD50B2009E5AFE /* Basic Types */,
 				677C9C8221C518F800C7A16E /* Extensions */,
 				677C9C7E21C5168500C7A16E /* Model */,
@@ -903,6 +912,7 @@
 			files = (
 				67BB96B6233685C700119953 /* MusicCollectionViewLayout.swift in Sources */,
 				677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */,
+				67BA7899242FE1E40097806B /* BezierMath.swift in Sources */,
 				670ABDB822C6B1D200BFA678 /* SharpRenderer.swift in Sources */,
 				6751A8382232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift in Sources */,
 				674B9AAD22ECB64E0098D121 /* TimeSignature.swift in Sources */,
@@ -958,6 +968,7 @@
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
 				679EB93922BC3AB800A22778 /* Array+Chunked.swift in Sources */,
 				6767E322229F182E00E9964D /* BarLayoutAnchorsStitcher.swift in Sources */,
+				67BA789B2430AF100097806B /* SingleValueCache.swift in Sources */,
 				674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */,
 				67494C8021CC06740078A575 /* Vector2.swift in Sources */,
 				674D503D21DD50F8009E5AFE /* NoteSequence.swift in Sources */,
@@ -1028,6 +1039,7 @@
 				67B1B4BE2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift in Sources */,
 				67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */,
 				67EA89F124264BE70009BE61 /* NoteHeadDescriberTests.swift in Sources */,
+				67BA789D2430AF750097806B /* SingleValueCacheTests.swift in Sources */,
 				67E863BB2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift in Sources */,
 				67669E6322EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift in Sources */,
 			);
