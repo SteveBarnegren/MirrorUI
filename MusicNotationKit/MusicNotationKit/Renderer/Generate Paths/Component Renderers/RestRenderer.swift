@@ -25,12 +25,15 @@ class RestRenderer {
             let height = blockStyle.height
             let blockStartY = blockStyle.startY
             
-            var path = Path()
-            path.move(to: Point(rest.position.x - width/2, blockStartY))
-            path.addLine(to: Point(rest.position.x - width/2, blockStartY + height))
-            path.addLine(to: Point(rest.position.x + width/2, blockStartY + height))
-            path.addLine(to: Point(rest.position.x + width/2, blockStartY))
-            path.close()
+            let commands: [Path.Command] = [
+                .move(Point(rest.position.x - width/2, blockStartY)),
+                .line(Point(rest.position.x - width/2, blockStartY + height)),
+                .line(Point(rest.position.x + width/2, blockStartY + height)),
+                .line(Point(rest.position.x + width/2, blockStartY)),
+                .close
+            ]
+            
+            var path = Path(commands: commands)
             path.drawStyle = .fill
             return path
         case .crotchet:
@@ -45,31 +48,6 @@ class RestRenderer {
             return path
         }
     }
-    
-//    private func path(forTailedRest tailedRest: TailedRest) -> Path {
-//
-//        let commands: [Path.Command] = [
-//            .move(Point(-0.110752688172043, -0.478494623655914)),
-//            .move(Point(0.14086021505376345, 0.22258064516129028)),
-//            .curve(Point(-0.08494623655913977, 0.1752688172043011), c1: Point(0.06774193548387097, 0.1967741935483871), c2: Point(-0.00752688172043009, 0.1752688172043011)),
-//            .curve(Point(-0.27204301075268816, 0.3451612903225807), c1: Point(-0.18387096774193548, 0.1752688172043011), c2: Point(-0.27204301075268816, 0.24623655913978493)),
-//            .curve(Point(-0.11505376344086021, 0.5), c1: Point(-0.27204301075268816, 0.4311827956989247), c2: Point(-0.20107526881720428, 0.5)),
-//            .curve(Point(0.005376344086021501, 0.4161290322580645), c1: Point(-0.06129032258064515, 0.5), c2: Point(-0.011827956989247324, 0.467741935483871)),
-//            .curve(Point(0.08064516129032256, 0.28924731182795704), c1: Point(0.02688172043010756, 0.3559139784946237), c2: Point(0.018279569892473146, 0.28924731182795704)),
-//            .curve(Point(0.21182795698924733, 0.4247311827956989), c1: Point(0.11505376344086021, 0.28924731182795704), c2: Point(0.1967741935483871, 0.3924731182795699)),
-//            .curve(Point(0.27204301075268816, 0.4247311827956989), c1: Point(0.22473118279569892, 0.4505376344086022), c2: Point(0.26129032258064516, 0.4505376344086022)),
-            // bottom right
-//            .line(Point(0.00752688172043009, -0.478494623655914)),
-            // double curve through bottom
-//            .curve(Point(-0.05053763440860215, -0.5), c1: Point(-0.009677419354838679, -0.4935483870967742), c2: Point(-0.02903225806451612, -0.5)),
-//            .curve(Point(-0.110752688172043, -0.478494623655914), c1: Point(-0.07204301075268815, -0.5), c2: Point(-0.09354838709677418, -0.4935483870967742)),
-//            .close,
-//            ]
-//
-//        var path = Path(commands: commands)
-//        path.drawStyle = .fill
-//        return path.scaled(2)
-//    }
     
     private func path(forTailedRestStyle tailedRest: TailedRestStyle) -> Path {
         
@@ -121,7 +99,7 @@ class RestRenderer {
             .close
             ]
         
-        var path = Path(commands: stemCommands)
+        var pathCommands = stemCommands
         
         // Add additional tails
         if additionalTailsToRender > 0 {
@@ -130,9 +108,11 @@ class RestRenderer {
                 let translationX = cos(stemRightSideAngle) * additionalTailOffset * Double(i)
                 let translationY = sin(stemRightSideAngle) * additionalTailOffset * Double(i)
                 let commands = additionalTailCommands.translated(x: translationX, y: translationY)
-                path.add(commands: commands)
+                pathCommands += commands
             }
         }
+        
+        var path = Path(commands: pathCommands)
         
         // Translate the path upwards to account for a longer bottom due to additional tail rendering
         if additionalTailsToRender != 0 {

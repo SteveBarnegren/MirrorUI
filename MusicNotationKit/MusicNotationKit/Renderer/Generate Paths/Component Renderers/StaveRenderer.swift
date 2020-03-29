@@ -20,10 +20,13 @@ class StaveRenderer {
         var y = -totalStaveHeight/2
         for _ in (0..<numberOfLines) {
             
-            var path = Path()
+            let commands: [Path.Command] = [
+                .move(Point(0, y)),
+                .line(Point(staveWidth, y))
+            ]
+            
+            var path = Path(commands: commands)
             path.drawStyle = .stroke
-            path.move(to: Point(0, y))
-            path.addLine(to: Point(staveWidth, y))
             paths.append(path)
             y += 1
         }

@@ -14,6 +14,8 @@ struct Rect {
     var width: Double
     var height: Double
     
+    static let zero = Rect(x: 0, y: 0, width: 0, height: 0)
+    
     var maxY: Double {
         y + height
     }
@@ -41,8 +43,15 @@ struct Rect {
     var center: Point {
         return Point(x + width/2, y + height/2)
     }
+}
+
+// MARK: - Translate
+
+extension Rect {
     
     func translated(x: Double, y: Double) -> Rect {
         return Rect(x: self.x + x, y: self.y + y, width: width, height: height)
     }
 }
+
+

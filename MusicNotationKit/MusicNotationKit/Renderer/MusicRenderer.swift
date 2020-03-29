@@ -24,8 +24,8 @@ struct BarSizingInfo {
 
 struct PathBundle {
     let paths: [Path]
-    var maxY: Double { paths.map { var copy = $0; return copy.maxY() }.max() ?? 0 }
-    var minY: Double { paths.map { var copy = $0; return copy.minY() }.min() ?? 0 }
+    var maxY: Double { paths.map { $0.maxY }.max() ?? 0 }
+    var minY: Double { paths.map { $0.minY }.min() ?? 0 }
     var height: Double { maxY - minY }
 }
 

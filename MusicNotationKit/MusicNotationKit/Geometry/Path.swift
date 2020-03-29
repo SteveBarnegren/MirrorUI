@@ -27,58 +27,24 @@ struct Path {
     var drawStyle = DrawStyle.stroke
     
     // Bounding box
-    private var _boundingBoxCached: Rect?
-    mutating func boundingBox() -> Rect {
-        if let cachedValue = _boundingBoxCached {
-            return cachedValue
-        } else {
-            let value = calculateBoundingBox()
-            _boundingBoxCached = value
-            return value
-        }
-    }
+    private(set) var boundingBox = Rect.zero
     
     init(commands: [Command] = []) {
         self.commands = commands
+        boundingBox = self.calculateBoundingBox()
     }
     
-    mutating func add(commands: [Command]) {
-        self.commands.append(contentsOf: commands)
-        _boundingBoxCached = nil
-    }
-    
-    mutating func move(to point: Point) {
-        commands.append(.move(point))
-        _boundingBoxCached = nil
-    }
-    
-    mutating func addLine(to point: Point) {
-        commands.append(.line(point))
-        _boundingBoxCached = nil
-    }
-    
-    mutating func addCurve(to point: Point, c1: Point, c2: Point) {
-        commands.append(.curve(point, c1: c1, c2: c2))
-        _boundingBoxCached = nil
-    }
-    
-    mutating func addOval(atPoint point: Point, withSize size: Size, rotation: Double) {
-        commands.append(.oval(point, size, rotation))
-        _boundingBoxCached = nil
-    }
-    
-    mutating func addRect(_ r: Rect) {
-        commands.append(.move(r.bottomLeft))
-        commands.append(.line(r.topLeft))
-        commands.append(.line(r.topRight))
-        commands.append(.line(r.bottomRight))
-        commands.append(.close)
-        _boundingBoxCached = nil
-    }
-    
-    mutating func close() {
-        commands.append(.close)
-        _boundingBoxCached = nil
+    init(rect: Rect) {
+        
+        let commands: [Command] = [
+            .move(rect.bottomLeft),
+            .line(rect.topLeft),
+            .line(rect.topRight),
+            .line(rect.bottomRight),
+            .close
+        ]
+        
+        self.init(commands: commands)
     }
 }
 
@@ -110,7 +76,7 @@ extension Path {
         }
         
         commands = newCommands
-        _boundingBoxCached = nil
+        boundingBox = boundingBox.translated(x: xOffset, y: yOffset)
     }
     
     func translated(x: Double, y: Double) -> Path {
@@ -154,7 +120,11 @@ extension Path {
         }
         
         commands = newCommands
-        _boundingBoxCached = nil
+        
+        boundingBox = Rect(x: boundingBox.x * xScale,
+                           y: boundingBox.y * yScale,
+                           width: boundingBox.width * xScale,
+                           height: boundingBox.height * yScale)
     }
     
     func scaled(x xScale: Double, y yScale: Double) -> Path {
@@ -197,7 +167,6 @@ extension Path {
         }
         
         self.commands = newCommands
-        _boundingBoxCached = nil
     }
     
     func invertedY() -> Path {
@@ -324,13 +293,9 @@ extension Path {
     }
 }
 
+// MARK: - Min / Max
+
 extension Path {
-    
-    mutating func maxY() -> Double {
-        return boundingBox().maxY
-    }
-    
-    mutating func minY() -> Double {
-        return boundingBox().minY
-    }
+    var maxY: Double { boundingBox.maxY }
+    var minY: Double { boundingBox.minY }
 }

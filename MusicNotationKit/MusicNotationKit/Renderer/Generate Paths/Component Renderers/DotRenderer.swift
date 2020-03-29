@@ -14,8 +14,11 @@ class DotRenderer {
         
         let dotSize = 0.5
         
-        var path = Path()
-        path.addOval(atPoint: Point(dot.xPosition, dot.yPosition), withSize: Size(width: dotSize, height: dotSize), rotation: 0)
+        let commands: [Path.Command] = [
+            .oval(Point(dot.xPosition, dot.yPosition), Size(width: dotSize, height: dotSize), 0)
+        ]
+        
+        var path = Path(commands: commands)
         path.drawStyle = .fill
         return [path]
     }

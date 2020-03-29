@@ -225,12 +225,15 @@ class NoteRenderer {
         let startPoint = Point(startX, startY - (Double(beamIndex) * eachBeamYOffset))
         let endPoint = Point(endX, endY - (Double(beamIndex) * eachBeamYOffset))
 
-        var path = Path()
-        path.move(to: startPoint)
-        path.addLine(to: Point(startPoint.x, startPoint.y - thickness))
-        path.addLine(to: Point(endPoint.x, endPoint.y - thickness))
-        path.addLine(to: endPoint)
-        path.close()
+        let commmands: [Path.Command] = [
+            .move(startPoint),
+            .line(Point(startPoint.x, startPoint.y - thickness)),
+            .line(Point(endPoint.x, endPoint.y - thickness)),
+            .line(endPoint),
+            .close
+        ]
+        
+        var path = Path(commands: commmands)
         path.drawStyle = .fill
         
         return path
@@ -283,8 +286,7 @@ class NoteRenderer {
                             width: width,
                             height: height.inverted(if: { stemDirection == .up }))
         
-        var path = Path()
-        path.addRect(beamRect)
+        var path = Path(rect: beamRect)
         path.drawStyle = .fill
         return path
     }
@@ -340,8 +342,7 @@ class NoteRenderer {
             return nil
         }
         
-        var stemPath = Path()
-        stemPath.addRect(stemRect)
+        var stemPath = Path(rect: stemRect)
         stemPath.drawStyle = .fill
         return stemPath
     }

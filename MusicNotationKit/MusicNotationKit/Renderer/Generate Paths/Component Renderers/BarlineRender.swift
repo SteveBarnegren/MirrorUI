@@ -20,8 +20,7 @@ class BarlineRenderer {
                         width: width,
                         height: height)
         
-        var path = Path()
-        path.addRect(rect)
+        var path = Path(rect: rect)
         path.drawStyle = .fill
         return [path]
     }

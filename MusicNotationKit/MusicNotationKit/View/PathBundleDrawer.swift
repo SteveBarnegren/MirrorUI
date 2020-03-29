@@ -104,8 +104,7 @@ extension PathBundleDrawer {
     
     func drawBoundingBox(path: Path) {
         
-        var path = path
-        let rect = path.boundingBox()
+        let rect = path.boundingBox
         let cgRect = CGRect(x: rect.x, y: invertY(rect.y) - rect.height, width: rect.width, height: rect.height)
         
         let uiBezierPath = UIBezierPath(rect: cgRect)
