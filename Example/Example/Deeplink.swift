@@ -13,7 +13,7 @@ enum DeepLink {
 }
 
 enum ComponentDeepLink {
-    case intervalsAndChords
+    case notes
     case rests
-    case test
+    case intervalsAndChords
 }

@@ -105,7 +105,8 @@ class ComponentsMenuViewController: UIViewController, UITableViewDataSource, UIT
 }
 
 private func makeComponentInfos() -> [ComponentInfo] {
-    let info1 = ComponentInfo(name: "Intervals and chords", composition: ComponentCompositions.intervalsAndChords, deepLink: .intervalsAndChords)
-    let info2 = ComponentInfo(name: "Rests", composition: ComponentCompositions.rests, deepLink: .rests)
-    return [info1, info2]
+    let notes = ComponentInfo(name: "Notes", composition: ComponentCompositions.notes, deepLink: .notes)
+    let rests = ComponentInfo(name: "Rests", composition: ComponentCompositions.rests, deepLink: .rests)
+    let intervals = ComponentInfo(name: "Intervals and chords", composition: ComponentCompositions.intervalsAndChords, deepLink: .intervalsAndChords)
+    return [notes, rests, intervals]
 }

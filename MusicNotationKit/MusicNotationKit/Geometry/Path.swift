@@ -175,6 +175,11 @@ extension Path {
         }
         
         self.commands = newCommands
+        
+        boundingBox = Rect(x: boundingBox.x,
+                           y: -boundingBox.y - boundingBox.height,
+                           width: boundingBox.width,
+                           height: boundingBox.height)
     }
     
     func invertedY() -> Path {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-var deeplink: DeepLink? = .component(.rests)
+var deeplink: DeepLink? = .component(.notes)
 
 class MenuViewController: UIViewController {
     

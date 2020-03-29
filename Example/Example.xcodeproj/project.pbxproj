@@ -29,6 +29,7 @@
 		67BB96AA23367A0000119953 /* ScrollingMusicExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */; };
 		67BB96B02336805C00119953 /* ExampleCompositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96AF2336805C00119953 /* ExampleCompositions.swift */; };
 		67C3B01723D1017500149857 /* PopupControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C3B01623D1017500149857 /* PopupControls.framework */; };
+		67F440532431049F003DFA63 /* ComponentCompositions+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		67BB96A823367A0000119953 /* ScrollingMusicExampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollingMusicExampleViewController.xib; sourceTree = "<group>"; };
 		67BB96AF2336805C00119953 /* ExampleCompositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCompositions.swift; sourceTree = "<group>"; };
 		67C3B01623D1017500149857 /* PopupControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PopupControls.framework; path = Carthage/Build/iOS/PopupControls.framework; sourceTree = SOURCE_ROOT; };
+		67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Notes.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,8 +195,9 @@
 			isa = PBXGroup;
 			children = (
 				67BA78A02430B90C0097806B /* ComponentCompositions.swift */,
-				67BA78A22430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift */,
+				67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */,
 				67BA78A42430BB070097806B /* ComponentCompositions+Rests.swift */,
+				67BA78A22430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift */,
 			);
 			path = "Component Compositions";
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				677F34BF2427789900507156 /* ComponentsMenuViewController.swift in Sources */,
 				672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */,
 				67BA78A52430BB070097806B /* ComponentCompositions+Rests.swift in Sources */,
+				67F440532431049F003DFA63 /* ComponentCompositions+Notes.swift in Sources */,
 				67BA78A32430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift in Sources */,
 				67BB96B02336805C00119953 /* ExampleCompositions.swift in Sources */,
 				67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */,
