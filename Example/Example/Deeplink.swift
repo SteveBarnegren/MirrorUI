@@ -14,5 +14,6 @@ enum DeepLink {
 
 enum ComponentDeepLink {
     case intervalsAndChords
+    case rests
     case test
 }

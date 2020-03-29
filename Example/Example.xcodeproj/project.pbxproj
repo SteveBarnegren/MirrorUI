@@ -20,6 +20,9 @@
 		677F34BF2427789900507156 /* ComponentsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677F34BE2427789900507156 /* ComponentsMenuViewController.swift */; };
 		677F34C12427E48300507156 /* Deeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677F34C02427E48300507156 /* Deeplink.swift */; };
 		679A2EF8234A59A200E157C8 /* TestComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A2EF7234A59A200E157C8 /* TestComposition.swift */; };
+		67BA78A12430B90C0097806B /* ComponentCompositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA78A02430B90C0097806B /* ComponentCompositions.swift */; };
+		67BA78A32430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA78A22430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift */; };
+		67BA78A52430BB070097806B /* ComponentCompositions+Rests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BA78A42430BB070097806B /* ComponentCompositions+Rests.swift */; };
 		67BB96A4233677C200119953 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96A2233677C200119953 /* MenuViewController.swift */; };
 		67BB96A5233677C200119953 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BB96A3233677C200119953 /* MenuViewController.xib */; };
 		67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */; };
@@ -88,6 +91,9 @@
 		677F34BE2427789900507156 /* ComponentsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsMenuViewController.swift; sourceTree = "<group>"; };
 		677F34C02427E48300507156 /* Deeplink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deeplink.swift; sourceTree = "<group>"; };
 		679A2EF7234A59A200E157C8 /* TestComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestComposition.swift; sourceTree = "<group>"; };
+		67BA78A02430B90C0097806B /* ComponentCompositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCompositions.swift; sourceTree = "<group>"; };
+		67BA78A22430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+IntervalsAndChords.swift"; sourceTree = "<group>"; };
+		67BA78A42430BB070097806B /* ComponentCompositions+Rests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Rests.swift"; sourceTree = "<group>"; };
 		67BB96A2233677C200119953 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		67BB96A3233677C200119953 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		67BB96A723367A0000119953 /* ScrollingMusicExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMusicExampleViewController.swift; sourceTree = "<group>"; };
@@ -177,9 +183,20 @@
 		677F34BC2427786B00507156 /* Components Menu */ = {
 			isa = PBXGroup;
 			children = (
+				67BA789E2430B8F20097806B /* Component Compositions */,
 				677F34BE2427789900507156 /* ComponentsMenuViewController.swift */,
 			);
 			path = "Components Menu";
+			sourceTree = "<group>";
+		};
+		67BA789E2430B8F20097806B /* Component Compositions */ = {
+			isa = PBXGroup;
+			children = (
+				67BA78A02430B90C0097806B /* ComponentCompositions.swift */,
+				67BA78A22430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift */,
+				67BA78A42430BB070097806B /* ComponentCompositions+Rests.swift */,
+			);
+			path = "Component Compositions";
 			sourceTree = "<group>";
 		};
 		67BB96A6233679E200119953 /* Scrolling Music Example */ = {
@@ -360,8 +377,11 @@
 				677F34C12427E48300507156 /* Deeplink.swift in Sources */,
 				677F34BF2427789900507156 /* ComponentsMenuViewController.swift in Sources */,
 				672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */,
+				67BA78A52430BB070097806B /* ComponentCompositions+Rests.swift in Sources */,
+				67BA78A32430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift in Sources */,
 				67BB96B02336805C00119953 /* ExampleCompositions.swift in Sources */,
 				67BB96A923367A0000119953 /* ScrollingMusicExampleViewController.swift in Sources */,
+				67BA78A12430B90C0097806B /* ComponentCompositions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
