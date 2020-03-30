@@ -12,8 +12,8 @@ typealias Vector2D = Vector2<Double>
 
 struct Vector2<T> {
     
-    let firstValue: T
-    let secondValue: T
+    var firstValue: T
+    var secondValue: T
     
     init(_ firstValue: T, _ secondValue: T) {
         self.firstValue = firstValue
@@ -21,18 +21,21 @@ struct Vector2<T> {
     }
     
     var x: T {
-        return firstValue
-    }
+        get { return firstValue }
+        set { firstValue = newValue }    }
     
     var y: T {
-        return secondValue
+        get { return secondValue }
+        set { secondValue = newValue }
     }
     
     var width: T {
-        return firstValue
+        get { return firstValue }
+        set { firstValue = newValue }
     }
     
     var height: T {
-        return secondValue
+        get { return secondValue }
+        set { secondValue = newValue }
     }
 }

@@ -68,7 +68,7 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
         collectionView.frame = view.bounds.inset(by: view.safeAreaInsets)
         
         let barSizes = self.renderer.barSizes()
-        compositionLayout = CompositionLayout(barSizes: barSizes.map { Vector2D($0.preferredWidth, $0.height) },
+        compositionLayout = CompositionLayout(barSizes: barSizes.map { Vector2D($0.preferredWidth, $0.minimumHeight) },
                                               layoutWidth: Double(collectionView.bounds.width))
         self.collectionView.reloadData()
     }
@@ -88,9 +88,17 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicCell", for: indexPath) as! MusicCell
         let item = compositionLayout.compositionItems[indexPath.row]
         
+        // Get the paths for this cell
         let paths = renderer.pathBundle(forDisplayWidth: item.size.width, range: item.barRange)
-        compositionLayout.update(height: paths.height, forIndex: indexPath.row)
-        collectionViewLayout.updateCellHeights(fromIndex: indexPath.row)
+        
+        // Update the cell heights in the layout if the paths don't fit
+        var didUpdate = false
+        compositionLayout.update(pathHeights: paths.height, forIndex: indexPath.row, didUpdate: &didUpdate)
+        if didUpdate {
+            collectionViewLayout.updateCellHeights(fromIndex: indexPath.row)
+        }
+        
+        // Configure the cell
         cell.configure(withPathBundle: paths)
         
         return cell

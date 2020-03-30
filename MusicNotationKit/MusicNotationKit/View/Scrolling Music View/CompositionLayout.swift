@@ -10,7 +10,7 @@ import Foundation
 
 struct CompositionItem {
     let barRange: Range<Int>
-    let size: Vector2<Double>
+    var size: Vector2<Double>
     
     func with(height: Double) -> CompositionItem {
         return CompositionItem(barRange: barRange, size: Vector2(size.x, height))
@@ -69,8 +69,17 @@ class CompositionLayout {
     
     // MARK: - Update Item Heights
     
-    func update(height: Double, forIndex index: Int) {
-        compositionItems[index] = compositionItems[index].with(height: height)
+    func update(pathHeights: Double, forIndex index: Int, didUpdate: inout Bool) {
+        
+        var item = compositionItems[index]
+        let existingHeight = item.size.height
+        if pathHeights > existingHeight {
+            item.size.height = pathHeights
+            compositionItems[index] = item
+            didUpdate = true
+        } else {
+            didUpdate = false
+        }
     }
 }
 
