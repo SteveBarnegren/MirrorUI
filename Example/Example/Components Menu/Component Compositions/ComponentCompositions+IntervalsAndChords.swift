@@ -15,17 +15,6 @@ extension ComponentCompositions {
         
         let composition = Composition()
         
-        repeated(times: 20) {
-            let bar = Bar()
-            let sequence = NoteSequence()
-            sequence.add(note: Note(value: .crotchet, pitch: .f3))
-            sequence.add(note: Note(value: .crotchet, pitch: .f3))
-            sequence.add(note: Note(value: .crotchet, pitch: .f3))
-            sequence.add(note: Note(value: .crotchet, pitch: .f3))
-            bar.add(sequence: sequence)
-            composition.add(bar: bar)
-        }
-        
         // Intervals
         do {
             let bar = Bar()
@@ -82,8 +71,8 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitches: [.a5, .c3]))
             sequence.add(note: Note(value: .crotchet, pitches: [.b5, .b3]))
             sequence.add(note: Note(value: .crotchet, pitches: [.c5, .a3]))
-            sequence.add(note: Note(value: .crotchet, pitches: [.d5, .g4]))
-            sequence.add(note: Note(value: .crotchet, pitches: [.e5, .f4]))
+            sequence.add(note: Note(value: .crotchet, pitches: [.d5, .g2]))
+            sequence.add(note: Note(value: .crotchet, pitches: [.e5, .f2]))
             bar.add(sequence: sequence)
             composition.add(bar: bar)
         }
@@ -129,41 +118,6 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .quaver, pitches: [.a4, .c4, .e4]))
             sequence.add(note: Note(value: .quaver, pitches: [.f3, .a4, .c4]))
             sequence.add(note: Note(value: .quaver, pitches: [.g3, .b4, .d4]))
-            bar.add(sequence: sequence)
-            composition.add(bar: bar)
-        }
-        
-        // TEST
-        
-        repeated(times: 20) {
-            let bar = Bar()
-            let sequence = NoteSequence()
-            sequence.add(note: Note(value: .crotchet, pitch: .f3))
-            sequence.add(note: Note(value: .crotchet, pitch: .f3))
-            sequence.add(note: Note(value: .crotchet, pitch: .f3))
-            sequence.add(note: Note(value: .crotchet, pitch: .f3))
-            bar.add(sequence: sequence)
-            composition.add(bar: bar)
-        }
-        
-        repeated(times: 20) {
-            let bar = Bar()
-            let sequence = NoteSequence()
-            sequence.add(note: Note(value: .crotchet, pitch: .f5))
-            sequence.add(note: Note(value: .crotchet, pitch: .f5))
-            sequence.add(note: Note(value: .crotchet, pitch: .f5))
-            sequence.add(note: Note(value: .crotchet, pitch: .f5))
-            bar.add(sequence: sequence)
-            composition.add(bar: bar)
-        }
-        
-        repeated(times: 20) {
-            let bar = Bar()
-            let sequence = NoteSequence()
-            sequence.add(note: Note(value: .crotchet, pitch: .a2))
-            sequence.add(note: Note(value: .crotchet, pitch: .a2))
-            sequence.add(note: Note(value: .crotchet, pitch: .a2))
-            sequence.add(note: Note(value: .crotchet, pitch: .a2))
             bar.add(sequence: sequence)
             composition.add(bar: bar)
         }
