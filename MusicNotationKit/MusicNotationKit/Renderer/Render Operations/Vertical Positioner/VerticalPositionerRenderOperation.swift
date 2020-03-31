@@ -26,18 +26,16 @@ class VerticalPositionerRenderOperation {
     }
     
     private func position(adjacentLayoutItem: AdjacentLayoutItem, forNote note: Note) {
-        
-        let notePitch = note.highestPitch
-        
+                
         switch adjacentLayoutItem {
         case let dot as DotSymbol:
             dot.position.y = dot.pitch.staveOffset
         case let sharp as SharpSymbol:
-            sharp.position.y = notePitch.staveOffset
+            sharp.position.y = sharp.staveOffset
         case let flat as FlatSymbol:
-            flat.position.y = notePitch.staveOffset
+            flat.position.y = flat.staveOffset
         case let natural as NaturalSymbol:
-            natural.position.y = notePitch.staveOffset
+            natural.position.y = natural.staveOffset
         default:
             fatalError("Unknown item type: \(adjacentLayoutItem)")
         }

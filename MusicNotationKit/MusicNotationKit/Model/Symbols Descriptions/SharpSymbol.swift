@@ -16,4 +16,12 @@ class SharpSymbol: AdjacentLayoutItem, Positionable {
     
     // Positionable
     var position = Point.zero
+    
+    let stavePosition: Int
+    let staveOffset: Double
+    
+    init(stavePosition: Int, staveOffset: Double) {
+        self.stavePosition = stavePosition
+        self.staveOffset = staveOffset
+    }
 }

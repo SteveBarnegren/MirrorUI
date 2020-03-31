@@ -47,11 +47,11 @@ class NoteHeadDescriber {
                 
         switch accidental {
         case .sharp:
-            return [SharpSymbol()]
+            return [SharpSymbol(stavePosition: pitch.stavePosition, staveOffset: pitch.staveOffset)]
         case .flat:
-            return [FlatSymbol()]
+            return [FlatSymbol(stavePosition: pitch.stavePosition, staveOffset: pitch.staveOffset)]
         case .natural:
-            return [NaturalSymbol()]
+            return [NaturalSymbol(stavePosition: pitch.stavePosition, staveOffset: pitch.staveOffset)]
         }
     }
     
