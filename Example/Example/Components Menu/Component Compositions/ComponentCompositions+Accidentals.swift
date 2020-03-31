@@ -20,10 +20,8 @@ extension Array {
 extension ComponentCompositions {
     
     static var accidentals: Composition {
-        
-        let lowestPitch = Pitch.c2
-        let highestPitch = Pitch.c5
-        let allPitches: [Pitch] = (lowestPitch.rawValue...highestPitch.rawValue).compactMap(Pitch.init)
+
+        let allPitches: [Pitch] = makeAllPitches()
         
         let composition = Composition()
         allPitches.chunked(into: 8).forEach { pitches in
@@ -37,5 +35,72 @@ extension ComponentCompositions {
         }
         
         return composition
+    }
+    
+    static func makeAllPitches() -> [Pitch] {
+        let pitches: [Pitch] = [
+            // 2
+            .a2,
+            .aSharp2,
+            .bFlat2,
+            .b2,
+            .c2,
+            .cSharp2,
+            .dFlat2,
+            .d2,
+            .dSharp2,
+            .e2,
+            .f2,
+            .fSharp2,
+            .gFlat2,
+            .g2,
+            // 3
+            .a3,
+            .aSharp3,
+            .bFlat3,
+            .b3,
+            .c3,
+            .cSharp3,
+            .dFlat3,
+            .d3,
+            .dSharp3,
+            .e3,
+            .f3,
+            .fSharp3,
+            .gFlat3,
+            .g3,
+            // 4
+            .a4,
+            .aSharp4,
+            .bFlat4,
+            .b4,
+            .c4,
+            .cSharp4,
+            .dFlat4,
+            .d4,
+            .dSharp4,
+            .e4,
+            .f4,
+            .fSharp4,
+            .gFlat4,
+            .g4,
+            // 5
+            .a5,
+            .aSharp5,
+            .bFlat5,
+            .b5,
+            .c5,
+            .cSharp5,
+            .dFlat5,
+            .d5,
+            .dSharp5,
+            .e5,
+            .f5,
+            .fSharp5,
+            .gFlat5,
+            .g5
+        ]
+        
+        return pitches
     }
 }

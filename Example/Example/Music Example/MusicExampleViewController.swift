@@ -51,13 +51,13 @@ class MusicExampleViewController: UIViewController {
     func makeFirstBar() -> Bar {
         let sequenceOne = NoteSequence()
         
-        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .c4).natural())
+        sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .c4))
         sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .g4))
         sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .e4))
         
         sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
         sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
-        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4).flat())
+        sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
         sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
         sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
         sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
@@ -122,7 +122,7 @@ class MusicExampleViewController: UIViewController {
         
         sequence.add(note: Note(value: .sixteenth, pitch: .f3))
         sequence.add(note: Note(value: .eighth, pitch: .g3))
-        sequence.add(note: Note(value: .sixteenth, pitch: .a4).sharp())
+        sequence.add(note: Note(value: .sixteenth, pitch: .a4))
         
         let bar = Bar()
         bar.timeSignature = .fourFour

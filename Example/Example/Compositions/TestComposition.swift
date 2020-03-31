@@ -30,7 +30,7 @@ private func makeBar1() -> Bar {
     
     let sequence = NoteSequence()
     sequence.add(rest: Rest(value: 8))
-    sequence.add(note: Note(value: 8, pitch: .d4).natural())
+    sequence.add(note: Note(value: 8, pitch: .d4))
     
     sequence.add(note: Note(value: .dottedQuaver, pitch: .b4))
     sequence.add(note: Note(value: 16, pitch: .a4))
@@ -60,7 +60,7 @@ private func makeBar2() -> Bar {
     sequence.add(note: Note(value: 16, pitch: .a4))
     
     sequence.add(note: Note(value: 8, pitch: .b4))
-    sequence.add(note: Note(value: 16, pitch: .d4).sharp())
+    sequence.add(note: Note(value: 16, pitch: .d4))
     sequence.add(note: Note(value: 16, pitch: .a4))
 
     sequence.add(note: Note(value: 4, pitch: .a4))
@@ -83,7 +83,7 @@ private func makeBar3() -> Bar {
     top.add(note: Note(value: 16, pitch: .a4))
     
     top.add(note: Note(value: 8, pitch: .b4))
-    top.add(note: Note(value: 16, pitch: .d4).sharp())
+    top.add(note: Note(value: 16, pitch: .d4))
     top.add(note: Note(value: 16, pitch: .a4))
 
     top.add(note: Note(value: 4, pitch: .a4))
@@ -108,13 +108,13 @@ private func makeBar3() -> Bar {
 func makeBar4() -> Bar {
     let sequenceOne = NoteSequence()
     
-    sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .c4).natural())
+    sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .c4))
     sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .g4))
     sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .e4))
     
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
-    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4).flat())
+    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
@@ -149,7 +149,7 @@ func makeBar5() -> Bar {
     
     sequence.add(note: Note(value: .sixteenth, pitch: .f3))
     sequence.add(note: Note(value: .eighth, pitch: .g3))
-    sequence.add(note: Note(value: .sixteenth, pitch: .a4).sharp())
+    sequence.add(note: Note(value: .sixteenth, pitch: .a4))
     
     let bar = Bar()
     bar.timeSignature = .fourFour

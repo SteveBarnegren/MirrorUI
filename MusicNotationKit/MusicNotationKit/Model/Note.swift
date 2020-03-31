@@ -15,7 +15,7 @@ public enum NoteHeadType {
 
 public class Note: Playable {
     
-    public var accidental = Accidental.none
+    //public var accidental = Accidental.none
     public var noteHeadType = NoteHeadType.standard
     
     let pitches: [Pitch]
@@ -85,6 +85,7 @@ public class Note: Playable {
        }
     
     // Acidentals
+    /*
     public func sharp() -> Note {
         self.accidental = .sharp
         return self
@@ -99,6 +100,7 @@ public class Note: Playable {
         self.accidental = .natural
         return self
     }
+ */
     
     // Note Head
     public func crossHead() -> Note {

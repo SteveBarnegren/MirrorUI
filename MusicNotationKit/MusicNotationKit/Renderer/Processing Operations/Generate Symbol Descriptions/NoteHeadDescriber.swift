@@ -41,20 +41,18 @@ class NoteHeadDescriber {
     
     private func leadingLayoutItems(forNote note: Note, pitch: Pitch) -> [AdjacentLayoutItem] {
         
-        var items = [AdjacentLayoutItem]()
-        
-        switch note.accidental {
-        case .none:
-            break
-        case .sharp:
-            items.append(SharpSymbol())
-        case .flat:
-            items.append(FlatSymbol())
-        case .natural:
-            items.append(NaturalSymbol())
+        guard let accidental = pitch.accidental else {
+            return []
         }
-        
-        return items
+                
+        switch accidental {
+        case .sharp:
+            return [SharpSymbol()]
+        case .flat:
+            return [FlatSymbol()]
+        case .natural:
+            return [NaturalSymbol()]
+        }
     }
     
     private func trailingLayoutItems(forNote note: Note, pitch: Pitch) -> [AdjacentLayoutItem] {
