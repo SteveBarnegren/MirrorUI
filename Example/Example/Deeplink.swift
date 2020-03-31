@@ -16,4 +16,5 @@ enum ComponentDeepLink {
     case notes
     case rests
     case intervalsAndChords
+    case accidentals
 }

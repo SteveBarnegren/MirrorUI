@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let drawPathsBoundingBoxes = true
+private let drawPathsBoundingBoxes = false
 
 class PathBundleDrawer {
     

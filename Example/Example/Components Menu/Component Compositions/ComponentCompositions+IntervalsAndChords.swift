@@ -115,9 +115,9 @@ extension ComponentCompositions {
         do {
             let bar = Bar()
             let sequence = NoteSequence()
-            sequence.add(note: Note(value: .quaver, pitches: [.a4, .c4, .e4]))
-            sequence.add(note: Note(value: .quaver, pitches: [.f3, .a4, .c4]))
-            sequence.add(note: Note(value: .quaver, pitches: [.g3, .b4, .d4]))
+            sequence.add(note: Note(value: .quaver, pitches: [.a4, .c4, .e4]).sharp())
+            sequence.add(note: Note(value: .quaver, pitches: [.f3, .a4, .c4]).natural())
+            sequence.add(note: Note(value: .quaver, pitches: [.g3, .b4, .d4]).flat())
             bar.add(sequence: sequence)
             composition.add(bar: bar)
         }
