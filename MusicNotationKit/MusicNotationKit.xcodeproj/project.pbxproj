@@ -91,6 +91,7 @@
 		676BB5F4233169C200EA9F9C /* GenerateLayoutAnchorsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5F3233169C200EA9F9C /* GenerateLayoutAnchorsRenderOperation.swift */; };
 		676BB5F623316A1400EA9F9C /* BarLayoutAnchorsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5F523316A1400EA9F9C /* BarLayoutAnchorsBuilder.swift */; };
 		676BB5FD233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5FC233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift */; };
+		6772877D243518BB0038B142 /* StavePositionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6772877C243518BB0038B142 /* StavePositionUtils.swift */; };
 		677643F3228E0D18000683FF /* FreeFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677643F2228E0D18000683FF /* FreeFunctions.swift */; };
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
@@ -234,6 +235,7 @@
 		676BB5F3233169C200EA9F9C /* GenerateLayoutAnchorsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLayoutAnchorsRenderOperation.swift; sourceTree = "<group>"; };
 		676BB5F523316A1400EA9F9C /* BarLayoutAnchorsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarLayoutAnchorsBuilder.swift; sourceTree = "<group>"; };
 		676BB5FC233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateMinimumBarWidthsRenderOperation.swift; sourceTree = "<group>"; };
+		6772877C243518BB0038B142 /* StavePositionUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StavePositionUtils.swift; sourceTree = "<group>"; };
 		677643F2228E0D18000683FF /* FreeFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFunctions.swift; sourceTree = "<group>"; };
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				67494C7D21CC04550078A575 /* MusicRenderer.swift */,
+				6772877B2435185C0038B142 /* Utils */,
 				67BB96AB23367DFF00119953 /* Processing Operations */,
 				67678DFB21E259E500E7FD71 /* Render Operations */,
 				67B5999623315B0100050589 /* Generate Paths */,
@@ -562,6 +565,14 @@
 				676BB5FC233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift */,
 			);
 			path = "Calculate Minimum Bar Widths";
+			sourceTree = "<group>";
+		};
+		6772877B2435185C0038B142 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6772877C243518BB0038B142 /* StavePositionUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		677C9C7E21C5168500C7A16E /* Model */ = {
@@ -967,6 +978,7 @@
 				6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */,
 				679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */,
 				67BB96BF2337B9F300119953 /* PathBundleDrawer.swift in Sources */,
+				6772877D243518BB0038B142 /* StavePositionUtils.swift in Sources */,
 				671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */,
 				6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */,
 				674D504221DD5774009E5AFE /* PlayableItemTimeCalculator.swift in Sources */,

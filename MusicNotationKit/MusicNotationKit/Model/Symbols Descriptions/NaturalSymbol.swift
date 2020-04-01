@@ -18,10 +18,8 @@ class NaturalSymbol: AdjacentLayoutItem, Positionable {
     var position = Point.zero
     
     let stavePosition: Int
-    let staveOffset: Double
     
-    init(stavePosition: Int, staveOffset: Double) {
+    init(stavePosition: Int) {
         self.stavePosition = stavePosition
-        self.staveOffset = staveOffset
     }
 }

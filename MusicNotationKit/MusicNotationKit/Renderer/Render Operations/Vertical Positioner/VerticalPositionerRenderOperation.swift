@@ -31,11 +31,11 @@ class VerticalPositionerRenderOperation {
         case let dot as DotSymbol:
             dot.position.y = dot.pitch.staveOffset
         case let sharp as SharpSymbol:
-            sharp.position.y = sharp.staveOffset
+            sharp.position.y = StavePositionUtils.staveYOffset(forStavePostion: sharp.stavePosition)
         case let flat as FlatSymbol:
-            flat.position.y = flat.staveOffset
+            flat.position.y = StavePositionUtils.staveYOffset(forStavePostion: flat.stavePosition)
         case let natural as NaturalSymbol:
-            natural.position.y = natural.staveOffset
+            natural.position.y = StavePositionUtils.staveYOffset(forStavePostion: natural.stavePosition)
         default:
             fatalError("Unknown item type: \(adjacentLayoutItem)")
         }
