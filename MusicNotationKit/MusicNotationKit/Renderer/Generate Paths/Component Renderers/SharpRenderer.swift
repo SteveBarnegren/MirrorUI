@@ -10,9 +10,9 @@ import Foundation
 
 class SharpRenderer {
     
-    func paths(forSharp sharp: SharpSymbol) -> [Path] {
+    func paths(forSharpAtX x: Double, y: Double) -> [Path] {
         
-        var path = sharpPath.translated(x: sharp.position.x, y: sharp.position.y)
+        var path = sharpPath.translated(x: x, y: y)
         path.drawStyle = .fill
         return [path]
     }

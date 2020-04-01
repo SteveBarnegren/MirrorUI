@@ -10,9 +10,9 @@ import Foundation
 
 class NaturalRenderer {
     
-    func paths(forNatural natural: NaturalSymbol) -> [Path] {
+    func paths(forNaturalAtX x: Double, y: Double) -> [Path] {
         
-        var path = naturalPath.translated(x: natural.position.x, y: natural.position.y)
+        var path = naturalPath.translated(x: x, y: y)
         path.drawStyle = .fill
         return [path]
     }

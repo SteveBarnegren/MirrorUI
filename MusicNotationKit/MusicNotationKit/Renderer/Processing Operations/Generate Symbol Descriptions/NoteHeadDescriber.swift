@@ -44,15 +44,20 @@ class NoteHeadDescriber {
         guard let accidental = pitch.accidental else {
             return []
         }
+        
+        let symbolType: AccidentalSymbol.SymbolType
                 
         switch accidental {
         case .sharp:
-            return [SharpSymbol(stavePosition: pitch.stavePosition)]
+            symbolType = .sharp
         case .flat:
-            return [FlatSymbol(stavePosition: pitch.stavePosition)]
+            symbolType = .flat
         case .natural:
-            return [NaturalSymbol(stavePosition: pitch.stavePosition)]
+            symbolType = .natural
         }
+        
+        let item = AccidentalSymbol(type: symbolType, stavePosition: pitch.stavePosition)
+        return [item]
     }
     
     private func trailingLayoutItems(forNote note: Note, pitch: Pitch) -> [AdjacentLayoutItem] {

@@ -10,9 +10,9 @@ import Foundation
 
 class FlatRenderer {
     
-    func paths(forFlat flat: FlatSymbol) -> [Path] {
+    func paths(forFlatAtX x: Double, y: Double) -> [Path] {
         
-        var path = flatPath.translated(x: flat.position.x, y: flat.position.y + 0.5)
+        var path = flatPath.translated(x: x, y: y + 0.5)
         path.drawStyle = .fill
         return [path]
     }

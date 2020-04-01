@@ -47,14 +47,25 @@ class CompositionPathsCreator {
         switch symbol {
         case let dot as DotSymbol:
             return DotRenderer().paths(forDot: dot)
-        case let sharp as SharpSymbol:
-            return SharpRenderer().paths(forSharp: sharp)
-        case let flat as FlatSymbol:
-            return FlatRenderer().paths(forFlat: flat)
-        case let natural as NaturalSymbol:
-            return NaturalRenderer().paths(forNatural: natural)
+        case let accidental as AccidentalSymbol:
+           return makePaths(forAccidentalSymbol: accidental)
         default:
             fatalError("Unknown symbol type: \(symbol)")
+        }
+    }
+    
+    private func makePaths(forAccidentalSymbol accidentalSymbol: AccidentalSymbol) -> [Path] {
+        
+        let x = accidentalSymbol.xPosition
+        let y = accidentalSymbol.yPosition
+        
+        switch accidentalSymbol.type {
+        case .sharp:
+            return SharpRenderer().paths(forSharpAtX: x, y: y)
+        case .flat:
+            return FlatRenderer().paths(forFlatAtX: x, y: y)
+        case .natural:
+            return NaturalRenderer().paths(forNaturalAtX: x, y: y)
         }
     }
 }
