@@ -42,8 +42,7 @@ class ViewController: UIViewController {
         
         // Debug Constraints
         debugConstraintsStackView.superview?.bringSubviewToFront(debugConstraintsStackView)
-        musicView._showConstraintsDebug = debugConstraintsEnabled
-        debugConstraintsSwitch.isOn = debugConstraintsEnabled
+        debugConstraintsSwitch.isOn = false
     }
     
     func makeComposition() -> Composition {
@@ -190,6 +189,5 @@ class ViewController: UIViewController {
     
     @IBAction private func debugConstraintsSwitchChanges(sender: UISwitch) {
         debugConstraintsEnabled = debugConstraintsSwitch.isOn
-        musicView._showConstraintsDebug = debugConstraintsEnabled
     }
 }

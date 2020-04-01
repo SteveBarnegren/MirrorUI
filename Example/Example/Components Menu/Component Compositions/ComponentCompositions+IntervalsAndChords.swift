@@ -122,6 +122,18 @@ extension ComponentCompositions {
             composition.add(bar: bar)
         }
         
+        // Adjacent note intervals
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            sequence.add(note: Note(value: .minim, pitches: [.f3, .g3]))
+            sequence.add(note: Note(value: .crotchet, pitches: [.g3, .a4]))
+            sequence.add(note: Note(value: .minim, pitches: [.b4, .c4]))
+            sequence.add(note: Note(value: .crotchet, pitches: [.e4, .f4]))
+            bar.add(sequence: sequence)
+            composition.add(bar: bar)
+        }
+        
         return composition
     }
 }

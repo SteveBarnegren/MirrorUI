@@ -30,6 +30,8 @@ class PathBundleDrawer {
         if drawPathsBoundingBoxes {
             paths.forEach(drawBoundingBox)
         }
+        
+        draw(debugDrawCommands: pathBundle.debugDrawCommands)
     }
     
     private func draw(path: Path) {
@@ -119,5 +121,35 @@ extension PathBundleDrawer {
         
         UIColor.blue.withAlphaComponent(0.2).set()
         uiBezierPath.stroke()
+    }
+    
+    private func draw(debugDrawCommands: [DebugDrawCommand]) {
+        debugDrawCommands.forEach(draw)
+    }
+    
+    private func draw(debugCommand: DebugDrawCommand) {
+        
+        if let line = debugCommand as? DebugDrawVerticalLine {
+            line.color.set()
+            let path = UIBezierPath()
+            path.moveTo(CGFloat(line.xPos), 0)
+            path.lineTo(CGFloat(line.xPos), y: size.height)
+            path.lineWidth = 0.5
+            
+            if line.style == .dashed {
+                let dashes: [CGFloat] = [2.0, 4.0]
+                path.setLineDash(dashes, count: dashes.count, phase: 0.0)
+            }
+            
+            path.stroke()
+        } else if let region = debugCommand as? DebugDrawHorizontalRegion {
+            region.color.set()
+            let rect = CGRect(x: CGFloat(region.startX),
+                              y: 0,
+                              width: CGFloat(region.endX - region.startX),
+                              height: size.height)
+            let path = UIBezierPath(rect: rect)
+            path.fill()
+        }
     }
 }

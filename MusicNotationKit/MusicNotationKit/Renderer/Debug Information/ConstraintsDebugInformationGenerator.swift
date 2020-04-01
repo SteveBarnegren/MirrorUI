@@ -8,89 +8,75 @@
 
 import Foundation
 
-struct ConstraintsDebugInformation {
-    struct ConstraintZone {
-        let color: UIColor
-        let startX: Double
-        let endX: Double
-    }
+protocol DebugDrawCommand {
+    func scaled(scale: Double) -> Self
+}
+
+enum DebugLineStyle {
+    case regular
+    case dashed
+}
+
+struct DebugDrawVerticalLine: DebugDrawCommand {
+    var xPos: Double
+    var color: UIColor
+    var style = DebugLineStyle.regular
     
-    struct ItemDescription {
-        let xPosition: Double
-        let constraintZones: [ConstraintZone]
+    func scaled(scale: Double) -> DebugDrawVerticalLine {
+        var copy = self
+        copy.xPos = copy.xPos * scale
+        return copy
     }
+}
+
+struct DebugDrawHorizontalRegion: DebugDrawCommand {
+    var startX: Double
+    var endX: Double
+    let color: UIColor
     
-    let descriptions: [ItemDescription]
+    func scaled(scale: Double) -> DebugDrawHorizontalRegion {
+        var copy = self
+        copy.startX = copy.startX * scale
+        copy.endX = copy.endX * scale
+        return copy
+    }
 }
 
 class ConstraintsDebugInformationGenerator {
     
-    func debugInformation(fromComposition composition: Composition, scale: Double) -> ConstraintsDebugInformation {
-        return ConstraintsDebugInformation(descriptions: [])
-        
-//        var descriptions = [ConstraintsDebugInformation.ItemDescription]()
-//
-//        for bar in composition.bars {
-//
-//            descriptions.append(itemDescription(for: bar.leadingBarline, scale: scale))
-//
-//            for noteSequence in bar.sequences {
-//                for playable in noteSequence.playables {
-//                    descriptions.append(itemDescription(for: playable, scale: scale))
-//                }
-//            }
-//        }
-//
-//        return ConstraintsDebugInformation(descriptions: descriptions)
+    func debugInformation(fromBars bars: [Bar], staveSpacing: Double) -> [DebugDrawCommand] {
+        let layoutAnchors = bars.map { $0.layoutAnchors }.joined().toArray()
+        return commands(forLayoutAnchors: layoutAnchors).map { $0.scaled(scale: staveSpacing) }
     }
     
-//    private func itemDescription(for item: HorizontalLayoutItem, scale: Double) -> ConstraintsDebugInformation.ItemDescription {
-//        
-//        let xPosition = item.xPosition * scale
-//        var constraintZones = [ConstraintsDebugInformation.ConstraintZone]()
-//        
-//        // Leading
-//        var leadingX = xPosition
-//        
-//        do {
-//            var maxValueLength = 0.0
-//            for value in item.leadingConstraint.values.sortedAscendingBy({ $0.priority }) {
-//                let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
-//                                                                      startX: leadingX - value.length*scale,
-//                                                                      endX: leadingX)
-//                constraintZones.append(zone)
-//                maxValueLength = max(maxValueLength, value.length * scale)
-//            }
-//            leadingX -= maxValueLength
-//        }
-//        
-//    
-//        // Trailing
-//        var trailingX = xPosition
-//        
-//        do {
-//            var maxValueLength = 0.0
-//            for value in item.trailingConstraint.values.sortedAscendingBy({ $0.priority }) {
-//                let zone = ConstraintsDebugInformation.ConstraintZone(color: self.color(forPriority: value.priority),
-//                                                                      startX: trailingX + value.length*scale,
-//                                                                      endX: trailingX)
-//                constraintZones.append(zone)
-//                maxValueLength = max(maxValueLength, value.length * scale)
-//            }
-//            trailingX += maxValueLength
-//        }
-//        
-//        let description = ConstraintsDebugInformation.ItemDescription(xPosition: item.xPosition * scale,
-//                                                                      constraintZones: constraintZones)
-//        return description
-//    }
-//    
-//    private func color(forPriority priority: ConstraintPriority) -> UIColor {
-//        switch priority {
-//        case .required:
-//            return UIColor.red
-//        case .regular:
-//            return UIColor.yellow
-//        }
-//    }
+    private func commands(forLayoutAnchors layoutAnchors: [LayoutAnchor]) -> [DebugDrawCommand] {
+        return layoutAnchors.map(commands).joined().toArray()
+    }
+    
+    private func commands(forLayoutAnchor anchor: LayoutAnchor) -> [DebugDrawCommand] {
+        
+        var commands = [DebugDrawCommand]()
+        
+        // Horzontal Region for anchor width
+        let widthRegion = DebugDrawHorizontalRegion(startX: anchor.position - anchor.width/2,
+                                                    endX: anchor.position + anchor.width/2,
+                                                    color: UIColor.blue.withAlphaComponent(0.05))
+        commands.append(widthRegion)
+        
+        // Line at the center of the anchor
+        let centerLine = DebugDrawVerticalLine(xPos: anchor.position, color: UIColor.blue)
+        commands.append(centerLine)
+        
+        // Dashed line at the start and end of the anchor region
+        let regionEndColor = UIColor.blue.withAlphaComponent(0.3)
+        var regionStart = DebugDrawVerticalLine(xPos: anchor.position - anchor.width/2, color: regionEndColor)
+        regionStart.style = .dashed
+        commands.append(regionStart)
+        
+        var regionEnd = DebugDrawVerticalLine(xPos: anchor.position + anchor.width/2, color: regionEndColor)
+        regionEnd.style = .dashed
+        commands.append(regionEnd)
+        
+        return commands
+    }
 }

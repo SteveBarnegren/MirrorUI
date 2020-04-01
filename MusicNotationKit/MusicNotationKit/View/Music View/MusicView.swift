@@ -12,13 +12,6 @@ public class MusicView: UIView {
 
     private var musicRenderer: MusicRenderer
     
-    public var _showConstraintsDebug = false {
-        didSet {
-            musicRenderer._generateConstraintsDebugInformation = _showConstraintsDebug
-            self.setNeedsDisplay()
-        }
-    }
-    
     // MARK: - Init
     
     public init(composition: Composition) {
@@ -40,10 +33,5 @@ public class MusicView: UIView {
         
         let drawer = PathBundleDrawer(size: bounds.size)
         drawer.draw(pathBundle: pathBundle)
-        
-        // Debug
-        if _showConstraintsDebug, let debugInformation = musicRenderer._constraintsDebugInformation {
-            ConstraintsDebugDrawer().draw(debugInformation: debugInformation, canvasSize: bounds.size)
-        }
     }
 }

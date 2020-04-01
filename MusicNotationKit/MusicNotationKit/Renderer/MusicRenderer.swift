@@ -27,6 +27,7 @@ struct PathBundle {
     var maxY: Double { paths.map { $0.maxY }.max() ?? 0 }
     var minY: Double { paths.map { $0.minY }.min() ?? 0 }
     var height: Double { maxY - minY }
+    var debugDrawCommands = [DebugDrawCommand]()
 }
 
 class MusicRenderer {
@@ -36,10 +37,7 @@ class MusicRenderer {
     private var isPreprocessingComplete = false
     
     var staveSpacing: Double = 8
-    
-    var _generateConstraintsDebugInformation = false
-    var _constraintsDebugInformation: ConstraintsDebugInformation?
-    
+        
     init(composition: Composition) {
         self.composition = composition
     }
@@ -126,13 +124,13 @@ class MusicRenderer {
         let paths = CompositionPathsCreator().paths(fromBars: bars,
                                                     canvasWidth: layoutWidth,
                                                     staveSpacing: staveSpacing)
-
-        // Generate debug information
-        if _generateConstraintsDebugInformation {
-            _constraintsDebugInformation = ConstraintsDebugInformationGenerator().debugInformation(fromComposition: composition, scale: staveSpacing)
-        }
-
-        let pathBundle = PathBundle(paths: paths)
+        
+        var pathBundle = PathBundle(paths: paths)
+        
+        // Debug information
+        pathBundle.debugDrawCommands += ConstraintsDebugInformationGenerator().debugInformation(fromBars: bars,
+                                                                                                staveSpacing: staveSpacing)
+        
         return pathBundle
     }
 }
