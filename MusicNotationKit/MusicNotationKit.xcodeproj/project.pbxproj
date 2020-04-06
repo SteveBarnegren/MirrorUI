@@ -89,6 +89,8 @@
 		676BB5FD233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5FC233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift */; };
 		6772877D243518BB0038B142 /* StavePositionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6772877C243518BB0038B142 /* StavePositionUtils.swift */; };
 		6772877F24351BFE0038B142 /* AccidentalSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6772877E24351BFE0038B142 /* AccidentalSymbol.swift */; };
+		67728784243BB6C80038B142 /* CalculateNoteHeadAlignmentProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67728783243BB6C70038B142 /* CalculateNoteHeadAlignmentProcessingOperation.swift */; };
+		67728786243BB7300038B142 /* NoteHeadAlignmentDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67728785243BB7300038B142 /* NoteHeadAlignmentDecider.swift */; };
 		677643F3228E0D18000683FF /* FreeFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677643F2228E0D18000683FF /* FreeFunctions.swift */; };
 		677C9C8121C5172100C7A16E /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8021C5172100C7A16E /* MusicView.swift */; };
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
@@ -124,6 +126,7 @@
 		67BB96BF2337B9F300119953 /* PathBundleDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96BE2337B9F300119953 /* PathBundleDrawer.swift */; };
 		67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1521C6D1B200A020D0 /* Path.swift */; };
 		67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */; };
+		67E7DE03243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E7DE02243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift */; };
 		67E863B92303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */; };
 		67E863BB2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E863BA2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift */; };
 		67EA89EC2424195E0009BE61 /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89EB2424195E0009BE61 /* PointTests.swift */; };
@@ -230,6 +233,8 @@
 		676BB5FC233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateMinimumBarWidthsRenderOperation.swift; sourceTree = "<group>"; };
 		6772877C243518BB0038B142 /* StavePositionUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StavePositionUtils.swift; sourceTree = "<group>"; };
 		6772877E24351BFE0038B142 /* AccidentalSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccidentalSymbol.swift; sourceTree = "<group>"; };
+		67728783243BB6C70038B142 /* CalculateNoteHeadAlignmentProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateNoteHeadAlignmentProcessingOperation.swift; sourceTree = "<group>"; };
+		67728785243BB7300038B142 /* NoteHeadAlignmentDecider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadAlignmentDecider.swift; sourceTree = "<group>"; };
 		677643F2228E0D18000683FF /* FreeFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFunctions.swift; sourceTree = "<group>"; };
 		677C9C8021C5172100C7A16E /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
@@ -268,6 +273,7 @@
 		67BB96BE2337B9F300119953 /* PathBundleDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathBundleDrawer.swift; sourceTree = "<group>"; };
 		67C7CC1521C6D1B200A020D0 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		67E7DE02243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadAlignmentDeciderTests.swift; sourceTree = "<group>"; };
 		67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberSixEightTests.swift; sourceTree = "<group>"; };
 		67E863BA2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberTestsBase.swift; sourceTree = "<group>"; };
 		67EA89EB2424195E0009BE61 /* PointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
@@ -335,6 +341,7 @@
 				67A1EF792299910F009CF58C /* Calculate Playable Item Times */,
 				67A1EF78229990F8009CF58C /* Generate Beam Descriptions */,
 				67B1B4BA2426922300E3E484 /* Calculate Stem Directions */,
+				67E7DE01243BBC18006D7476 /* Calculate Note Head Alignment */,
 			);
 			path = "Render Operations";
 			sourceTree = "<group>";
@@ -567,6 +574,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		67728782243BB6240038B142 /* Calculate Note Head Alignment */ = {
+			isa = PBXGroup;
+			children = (
+				67728783243BB6C70038B142 /* CalculateNoteHeadAlignmentProcessingOperation.swift */,
+				67728785243BB7300038B142 /* NoteHeadAlignmentDecider.swift */,
+			);
+			path = "Calculate Note Head Alignment";
+			sourceTree = "<group>";
+		};
 		677C9C7E21C5168500C7A16E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -750,6 +766,7 @@
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
 				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
+				67728782243BB6240038B142 /* Calculate Note Head Alignment */,
 				6785A9B62331698D004B32B8 /* Generate Layout Anchors */,
 				676BB5FB233178C700EA9F9C /* Calculate Minimum Bar Widths */,
 				67BB96BB2337B19000119953 /* Stitch Bar Layout Anchors */,
@@ -782,6 +799,14 @@
 				67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */,
 			);
 			path = "Stitch Bar Layout Anchors";
+			sourceTree = "<group>";
+		};
+		67E7DE01243BBC18006D7476 /* Calculate Note Head Alignment */ = {
+			isa = PBXGroup;
+			children = (
+				67E7DE02243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift */,
+			);
+			path = "Calculate Note Head Alignment";
 			sourceTree = "<group>";
 		};
 		67F6880C21EB529F003707DD /* Extensions */ = {
@@ -958,10 +983,12 @@
 				6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */,
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,
 				67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */,
+				67728784243BB6C80038B142 /* CalculateNoteHeadAlignmentProcessingOperation.swift in Sources */,
 				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
 				67BB96BD2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift in Sources */,
 				67678E0021E2865400E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */,
+				67728786243BB7300038B142 /* NoteHeadAlignmentDecider.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
 				674B9AAB22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift in Sources */,
@@ -1044,6 +1071,7 @@
 				671A4D3022885A02002C56E8 /* NoteValue+Verify.swift in Sources */,
 				67678E0221E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				67A1EF7D22999974009CF58C /* NoteBeamDescriberTests.swift in Sources */,
+				67E7DE03243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift in Sources */,
 				674B9AB322ECC9DF0098D121 /* TimeSignatureTests.swift in Sources */,
 				6769B42B22BDA77C00AAFFF9 /* Array+ExtractTests.swift in Sources */,
 				6756F61723005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift in Sources */,

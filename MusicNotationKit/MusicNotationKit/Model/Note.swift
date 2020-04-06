@@ -129,6 +129,12 @@ enum StemDirection {
     case down
 }
 
+enum NoteHeadAlignment {
+    case center
+    case leftOfStem
+    case rightOfStem
+}
+
 class NoteHeadDescription: VerticallyPositionable {
     
     enum Style {
@@ -140,6 +146,8 @@ class NoteHeadDescription: VerticallyPositionable {
     }
     
     let style: Style
+    var alignment = NoteHeadAlignment.center
+    var stavePosition = Int(0)
     var staveOffset = Double(0)
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
