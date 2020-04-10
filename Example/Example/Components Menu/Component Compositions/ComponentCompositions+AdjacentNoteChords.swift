@@ -51,7 +51,7 @@ extension ComponentCompositions {
             composition.add(bar: bar)
         }
         
-        // Event number of adjacent notes, the lowest note always goes the left side of the stem
+        // Even number of adjacent notes, the lowest note always goes the left side of the stem
         do {
             let bar = Bar()
             let sequence = NoteSequence()
@@ -59,6 +59,16 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitches: [.e3, .f3, .g3, .a4, .b4, .c4, .d4, .e4]))
             sequence.add(note: Note(value: .minim, pitches: [.c4, .d4, .e4, .f4]))
             sequence.add(note: Note(value: .crotchet, pitches: [.d4, .e4, .f4, .g4, .a5, .b5]))
+            bar.add(sequence: sequence)
+            composition.add(bar: bar)
+        }
+        
+        // Multiple adjacent note clusters
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            sequence.add(note: Note(value: .minim, pitches: [.f3, .g3, .a4, .c4, .d4, .e4]))
+            sequence.add(note: Note(value: .minim, pitches: [.c3, .f3, .g3, .a4, .c4]))
             bar.add(sequence: sequence)
             composition.add(bar: bar)
         }

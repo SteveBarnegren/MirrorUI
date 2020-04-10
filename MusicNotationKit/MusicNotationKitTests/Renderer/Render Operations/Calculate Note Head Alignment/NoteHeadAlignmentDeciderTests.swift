@@ -114,6 +114,21 @@ class NoteHeadAlignmentDeciderTests: XCTestCase {
                resultsIn: [.leftOfStem, .center, .leftOfStem, .center, .leftOfStem, .center])
     }
     
+    // MARK: - Multiple clusters
+    
+    func testMultipleNoteClusters() {
+        
+        // Note cluster - 2 sets of odd numbered clusters
+        assert(stavePostions: [-3, -2, -1, 1, 2, 3],
+               stemDirection: .down,
+               resultsIn: [.center, .leftOfStem, .center, .center, .leftOfStem, .center])
+        
+        // Note cluster -  odd numbered clusters with isolated notes on either side
+        assert(stavePostions: [-6, -3, -2, -1, 1],
+               stemDirection: .up,
+               resultsIn: [.center, .center, .rightOfStem, .center, .center])
+    }
+    
     func assert(stavePostions: [Int],
                 stemDirection: StemDirection,
                 resultsIn alignments: [NoteHeadAlignment],

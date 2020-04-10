@@ -42,6 +42,7 @@ class NoteHeadAlignmentDecider<N> {
             return
         }
         
+        // 3 or more note heads
         processThreeOrMoreHeadedNote(note: note, stavePositions: stavePositions)
     }
     
@@ -74,24 +75,55 @@ class NoteHeadAlignmentDecider<N> {
         // Sort the stave positions ascending
         let sortMapper = SortMapper(items: stavePositions, sortingFunction: <)
         
+        // Get the chunks
+        var clusterIndicies = [Int]()
+        var lastClusterStavePositon: Int?
+        
+        func processCluster() {
+            if clusterIndicies.count == 1 {
+                tf.setNoteHeadAlignmentForIndex(note, clusterIndicies[0], .center)
+            } else {
+                processAdjacentNoteCluser(note: note, noteHeadIndicies: clusterIndicies)
+            }
+            clusterIndicies.removeAll()
+            lastClusterStavePositon = nil
+        }
+        
+        for index in 0..<sortMapper.count {
+            let originalIndex = sortMapper.originalIndex(fromSorted: index)
+            let stavePosition = stavePositions[originalIndex]
+            if let last = lastClusterStavePositon {
+                if stavePosition - last > 1 {
+                    processCluster()
+                }
+            }
+            clusterIndicies.append(originalIndex)
+            lastClusterStavePositon = stavePosition
+        }
+        
+        processCluster()
+    }
+    
+    // noteHeadIndicies to be passed in ascending order
+    private func processAdjacentNoteCluser(note: N, noteHeadIndicies: [Int]) {
+        
         let evenAlignment: NoteHeadAlignment
         let oddAlignment: NoteHeadAlignment
         
         // If there is an odd number of notes, the lowest is on the correct side, then alternate
-        if sortMapper.count.isOdd {
+        if noteHeadIndicies.count.isOdd {
             evenAlignment = NoteHeadAlignment.center
             oddAlignment = tf.stemDirection(note) == .up ? .rightOfStem : .leftOfStem
         }
-        // If there is an even number of notes, the lowest note is always on the left
+            // If there is an even number of notes, the lowest note is always on the left
         else {
             evenAlignment = tf.stemDirection(note) == .up ? .center : .leftOfStem
             oddAlignment = tf.stemDirection(note) == .up ? .rightOfStem : .center
         }
-
+        
         // Apply alignments
-        for i in (0..<sortMapper.count) {
-            let originalIndex = sortMapper.originalIndex(fromSorted: i)
-            tf.setNoteHeadAlignmentForIndex(note, originalIndex, i.isOdd ? oddAlignment : evenAlignment)
+        for (clusterIndex, originalIndex) in noteHeadIndicies.enumerated() {
+            tf.setNoteHeadAlignmentForIndex(note, originalIndex, clusterIndex.isOdd ? oddAlignment : evenAlignment)
         }
     }
 }
