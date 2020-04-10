@@ -17,7 +17,7 @@ class AccidentalSymbol: AdjacentLayoutItem, Positionable {
     }
     
     // AdjacentLayoutItem
-    let horizontalLayoutWidth: Double = 1
+    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.0)
     var hoizontalLayoutDistanceFromParentItem: Double = 0.1
     
     // Positionable

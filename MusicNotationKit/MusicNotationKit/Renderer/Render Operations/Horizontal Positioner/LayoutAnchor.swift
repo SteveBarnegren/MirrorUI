@@ -22,7 +22,8 @@ class LayoutConstraint {
 // MARK: - ******* Layout Anchor ********
 
 protocol LayoutAnchor: class {
-    var width: Double { get }
+    var leadingWidth: Double { get }
+    var trailingWidth: Double { get }
     var leadingConstraints: [LayoutConstraint] { get set }
     var trailingConstraints: [LayoutConstraint] { get set }
     var position: Double { get set }
@@ -46,9 +47,10 @@ extension LayoutAnchor {
 }
 
 final class SingleItemLayoutAnchor: LayoutAnchor {
-   
+  
     // LayoutAnchor
-    var width = Double(0)
+    var leadingWidth: Double = 0
+    var trailingWidth: Double = 0
     var leadingConstraints = [LayoutConstraint]()
     var trailingConstraints = [LayoutConstraint]()
     var position: Double = 0
@@ -62,7 +64,7 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
         if let leftMostLeadingAnchor = leadingLayoutAnchors.last {
             return leftMostLeadingAnchor.offset - leftMostLeadingAnchor.width/2
         } else {
-            return -width/2
+            return -leadingWidth
         }
     }
     
@@ -70,7 +72,7 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
         if let lastTrailingAnchor = trailingLayoutAnchors.last {
             return lastTrailingAnchor.trailingEdge(anchorPosition: position)
         } else {
-            return position + width/2
+            return position + trailingWidth
         }
     }
     
@@ -129,7 +131,8 @@ class AdjacentLayoutAnchor {
 class CombinedItemsLayoutAnchor: LayoutAnchor {
   
     // LayoutAnchor
-    var width: Double { return anchors.map { $0.width }.max()! }
+    var leadingWidth: Double { anchors.map { $0.leadingWidth }.max()! }
+    var trailingWidth: Double { anchors.map { $0.trailingWidth }.max()! }
     var trailingConstraints: [LayoutConstraint]
     var leadingConstraints: [LayoutConstraint]
     var position: Double = 0 {
@@ -145,9 +148,9 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     var leadingEdgeOffset: Double {
         let leftMostAnchors = anchors.compactMap { $0.leadingLayoutAnchors.last }
         if leftMostAnchors.isEmpty == false {
-            return leftMostAnchors.map { $0.offset - width/2 }.min()!
+            return leftMostAnchors.map { $0.offset - $0.width/2 }.min()!
         } else {
-            return -width/2
+            return -leadingWidth/2
         }
     }
     
@@ -156,7 +159,7 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
         if lastAnchors.isEmpty == false {
             return lastAnchors.map { $0.trailingEdge(anchorPosition: position) }.max()!
         } else {
-            return position + width/2
+            return position + trailingWidth/2
         }
     }
     

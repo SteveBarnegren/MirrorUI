@@ -58,8 +58,8 @@ class ConstraintsDebugInformationGenerator {
         var commands = [DebugDrawCommand]()
         
         // Horzontal Region for anchor width
-        let widthRegion = DebugDrawHorizontalRegion(startX: anchor.position - anchor.width/2,
-                                                    endX: anchor.position + anchor.width/2,
+        let widthRegion = DebugDrawHorizontalRegion(startX: anchor.position - anchor.leadingWidth,
+                                                    endX: anchor.position + anchor.trailingWidth,
                                                     color: UIColor.blue.withAlphaComponent(0.05))
         commands.append(widthRegion)
         
@@ -69,11 +69,11 @@ class ConstraintsDebugInformationGenerator {
         
         // Dashed line at the start and end of the anchor region
         let regionEndColor = UIColor.blue.withAlphaComponent(0.3)
-        var regionStart = DebugDrawVerticalLine(xPos: anchor.position - anchor.width/2, color: regionEndColor)
+        var regionStart = DebugDrawVerticalLine(xPos: anchor.position - anchor.leadingWidth, color: regionEndColor)
         regionStart.style = .dashed
         commands.append(regionStart)
         
-        var regionEnd = DebugDrawVerticalLine(xPos: anchor.position + anchor.width/2, color: regionEndColor)
+        var regionEnd = DebugDrawVerticalLine(xPos: anchor.position + anchor.trailingWidth, color: regionEndColor)
         regionEnd.style = .dashed
         commands.append(regionEnd)
         

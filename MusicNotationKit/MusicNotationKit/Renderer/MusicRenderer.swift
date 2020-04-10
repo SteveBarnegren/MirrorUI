@@ -71,6 +71,9 @@ class MusicRenderer {
             // Calculate note head alignments
             CalculateNoteHeadAlignmentProcessingOperation().process(composition: composition)
             
+            // Calculate note widths
+            CalculateNoteWidthsProcessingOperation().process(composition: composition)
+            
             // Generate bar layout anchors
             GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)
             

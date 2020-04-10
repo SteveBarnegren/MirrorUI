@@ -9,9 +9,9 @@
 import Foundation
 
 class DotSymbol: AdjacentLayoutItem, Positionable {
-    
+        
     // AdjacentLayoutItem
-    var horizontalLayoutWidth: Double = 0.5
+    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 0.5)
     var hoizontalLayoutDistanceFromParentItem: Double = 0.1
     
     // Positionable

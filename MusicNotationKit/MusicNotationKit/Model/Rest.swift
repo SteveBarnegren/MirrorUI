@@ -17,7 +17,7 @@ public class Rest: Playable, Positionable {
     
     // HorizontalLayoutItem
     var time = Time.zero
-    let horizontalLayoutWidth: Double = 1.4
+    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.4)
     let leadingLayoutItems = [AdjacentLayoutItem]()
     let trailingLayoutItems = [AdjacentLayoutItem]()
     

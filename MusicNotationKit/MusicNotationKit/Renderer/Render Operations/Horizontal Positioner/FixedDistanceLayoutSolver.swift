@@ -62,7 +62,7 @@ class FixedDistanceLayoutSolver {
     
     private func solveLeadingLayoutAnchorOffsets(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
         
-        var offset = -anchor.width/2
+        var offset = -anchor.leadingWidth
         
         for leadingAnchor in anchor.leadingLayoutAnchors {
             offset -= leadingAnchor.distanceFromAnchor
@@ -74,7 +74,7 @@ class FixedDistanceLayoutSolver {
     
     private func solveTrailingLayoutAnchorOffsets(forSingleItemAnchor anchor: SingleItemLayoutAnchor) {
         
-        var offset = anchor.width/2
+        var offset = anchor.trailingWidth
         
         for trailingAnchor in anchor.trailingLayoutAnchors {
             offset += trailingAnchor.distanceFromAnchor

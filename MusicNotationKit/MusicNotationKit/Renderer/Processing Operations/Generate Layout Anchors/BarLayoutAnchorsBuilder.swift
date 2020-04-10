@@ -50,7 +50,8 @@ class LayoutAnchorsBuilder {
     private func makeAnchor(forBarline barline: Barline, fromPrevious previousAnchor: LayoutAnchor?) -> LayoutAnchor {
         
         let anchor = SingleItemLayoutAnchor(item: barline)
-        anchor.width = barline.horizontalLayoutWidth
+        anchor.leadingWidth = barline.leadingWidth
+        anchor.trailingWidth = barline.trailingWidth
         
         if let previousAnchor = previousAnchor {
             let constraint = LayoutConstraint()
@@ -81,13 +82,14 @@ class LayoutAnchorsBuilder {
     private func makeAnchor(forPlayable playable: Playable, fromPrevious previousAnchor: LayoutAnchor?) -> SingleItemLayoutAnchor {
         
         let anchor = SingleItemLayoutAnchor(item: playable)
-        anchor.width = playable.horizontalLayoutWidth
+        anchor.leadingWidth = playable.leadingWidth
+        anchor.trailingWidth = playable.trailingWidth
         anchor.time = playable.time
         
         // Create leading anchors
         for item in playable.leadingLayoutItems {
             let adjacentAnchor = AdjacentLayoutAnchor(item: item)
-            adjacentAnchor.width = item.horizontalLayoutWidth
+            adjacentAnchor.width = item.leadingWidth + item.trailingWidth
             adjacentAnchor.distanceFromAnchor = item.hoizontalLayoutDistanceFromParentItem
             anchor.add(leadingAnchor: adjacentAnchor)
         }
@@ -95,7 +97,7 @@ class LayoutAnchorsBuilder {
         // Create Adjacent items for dots
         for dot in playable.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
             let adjacentAnchor = AdjacentLayoutAnchor(item: dot)
-            adjacentAnchor.width = dot.horizontalLayoutWidth
+            adjacentAnchor.width = dot.leadingWidth + dot.trailingWidth
             adjacentAnchor.distanceFromAnchor = dot.hoizontalLayoutDistanceFromParentItem
             anchor.add(trailingAnchor: adjacentAnchor)
         }

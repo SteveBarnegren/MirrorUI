@@ -56,7 +56,7 @@ public class Note: Playable {
     var time = Time.zero
     
     // HorizontalLayoutItem
-    let horizontalLayoutWidth: Double = 1.4
+    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.4)
 
     var leadingLayoutItems: [AdjacentLayoutItem] {
         return self.noteHeadDescriptions.map { $0.leadingLayoutItems }.joined().toArray()
