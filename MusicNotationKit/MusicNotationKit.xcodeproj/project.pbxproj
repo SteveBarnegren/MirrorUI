@@ -98,6 +98,10 @@
 		677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */; };
 		677F34C32427E9D500507156 /* Sequence+MaxAndMin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677F34C22427E9D500507156 /* Sequence+MaxAndMin.swift */; };
 		677F34C52427EAE200507156 /* Sequence+MaxAndMinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677F34C42427EAE200507156 /* Sequence+MaxAndMinTests.swift */; };
+		678318652440E73100FB9784 /* BinaryInteger+Parity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678318642440E73100FB9784 /* BinaryInteger+Parity.swift */; };
+		678318672440E77A00FB9784 /* BinaryInteger+ParityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678318662440E77A00FB9784 /* BinaryInteger+ParityTests.swift */; };
+		678318692440FCD500FB9784 /* SortMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678318682440FCD500FB9784 /* SortMapper.swift */; };
+		6783186B2440FD4100FB9784 /* SortMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783186A2440FD4100FB9784 /* SortMapperTests.swift */; };
 		6785A9B523315B38004B32B8 /* CompositionPathsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6785A9B423315B38004B32B8 /* CompositionPathsCreator.swift */; };
 		679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93522BC1AF300A22778 /* LayoutAnchor.swift */; };
 		679EB93922BC3AB800A22778 /* Array+Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93822BC3AB800A22778 /* Array+Chunked.swift */; };
@@ -244,6 +248,10 @@
 		677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		677F34C22427E9D500507156 /* Sequence+MaxAndMin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+MaxAndMin.swift"; sourceTree = "<group>"; };
 		677F34C42427EAE200507156 /* Sequence+MaxAndMinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+MaxAndMinTests.swift"; sourceTree = "<group>"; };
+		678318642440E73100FB9784 /* BinaryInteger+Parity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+Parity.swift"; sourceTree = "<group>"; };
+		678318662440E77A00FB9784 /* BinaryInteger+ParityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+ParityTests.swift"; sourceTree = "<group>"; };
+		678318682440FCD500FB9784 /* SortMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMapper.swift; sourceTree = "<group>"; };
+		6783186A2440FD4100FB9784 /* SortMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMapperTests.swift; sourceTree = "<group>"; };
 		6785A9B423315B38004B32B8 /* CompositionPathsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionPathsCreator.swift; sourceTree = "<group>"; };
 		679EB93522BC1AF300A22778 /* LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutAnchor.swift; sourceTree = "<group>"; };
 		679EB93822BC3AB800A22778 /* Array+Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunked.swift"; sourceTree = "<group>"; };
@@ -420,6 +428,7 @@
 				67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */,
 				67F6880F21EB5597003707DD /* Numeric+Constrained.swift */,
 				6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */,
+				678318642440E73100FB9784 /* BinaryInteger+Parity.swift */,
 			);
 			path = "Swift Standard Library";
 			sourceTree = "<group>";
@@ -461,6 +470,7 @@
 				6756F61A2300C30C003F1F19 /* ElementPopperTests.swift */,
 				67EA89EB2424195E0009BE61 /* PointTests.swift */,
 				67BA789C2430AF750097806B /* SingleValueCacheTests.swift */,
+				6783186A2440FD4100FB9784 /* SortMapperTests.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -474,6 +484,7 @@
 				67669E6022EDF9D9004F1927 /* RepeatingPatternSequence.swift */,
 				6756F6182300C2AE003F1F19 /* ElementPopper.swift */,
 				67BA789A2430AF100097806B /* SingleValueCache.swift */,
+				678318682440FCD500FB9784 /* SortMapper.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -832,6 +843,7 @@
 				673A3D1D233FC566001CE422 /* Array+MaybeTests.swift */,
 				677F34C42427EAE200507156 /* Sequence+MaxAndMinTests.swift */,
 				673A3D222340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift */,
+				678318662440E77A00FB9784 /* BinaryInteger+ParityTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -975,6 +987,7 @@
 				6751A8382232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift in Sources */,
 				674B9AAD22ECB64E0098D121 /* TimeSignature.swift in Sources */,
 				673A3D15233FC18A001CE422 /* Array+EachWith.swift in Sources */,
+				678318652440E73100FB9784 /* BinaryInteger+Parity.swift in Sources */,
 				6767E320229F143D00E9964D /* HorizontalLayoutSolver.swift in Sources */,
 				67A437A322E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift in Sources */,
 				6751A84222357AE3000B0D08 /* Rest.swift in Sources */,
@@ -1039,6 +1052,7 @@
 				67EA89EF242637310009BE61 /* NoteHeadDescriber.swift in Sources */,
 				671A4D3922886FBD002C56E8 /* DotRenderer.swift in Sources */,
 				67BA78AD2430BEB00097806B /* Rect.swift in Sources */,
+				678318692440FCD500FB9784 /* SortMapper.swift in Sources */,
 				677256112440D9AE00954C91 /* CaclulateNoteWidthsProcessingOperation.swift in Sources */,
 				6751A84022350475000B0D08 /* NoteValue.swift in Sources */,
 				67678DF821E245DB00E7FD71 /* VerticalPositionerRenderOperation.swift in Sources */,
@@ -1079,7 +1093,9 @@
 				673A3D232340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift in Sources */,
 				673A3D1A233FC1FF001CE422 /* Assertions.swift in Sources */,
 				67A1EF7B22999143009CF58C /* PlayableItemTimeCalculatorTests.swift in Sources */,
+				678318672440E77A00FB9784 /* BinaryInteger+ParityTests.swift in Sources */,
 				67669E5F22EDF668004F1927 /* IncrementingSequenceTests.swift in Sources */,
+				6783186B2440FD4100FB9784 /* SortMapperTests.swift in Sources */,
 				6728B2CC2239989100382D92 /* Array+Verify.swift in Sources */,
 				671A4D2C228752E7002C56E8 /* NoteSymbolDescriberTests.swift in Sources */,
 				673A3D17233FC1BE001CE422 /* Array+EachWithTests.swift in Sources */,

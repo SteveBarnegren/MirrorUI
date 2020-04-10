@@ -46,10 +46,14 @@ class NoteHeadAlignmentDeciderTests: XCTestCase {
         decider = NoteHeadAlignmentDecider(transformer: transformer)
     }
     
+    // MARK: - Single note
+    
     func test_SingleNote_HasCenterAlignment() {
         assert(stavePostions: [1], stemDirection: .down, resultsIn: [.center])
         assert(stavePostions: [-1], stemDirection: .up, resultsIn: [.center])
     }
+    
+    // MARK: - Two Notes
     
     func test_NotesTwoStavePositionsApart_HaveCenterAlignment() {
         assert(stavePostions: [1, 3], stemDirection: .down, resultsIn: [.center, .center])
@@ -61,6 +65,53 @@ class NoteHeadAlignmentDeciderTests: XCTestCase {
         assert(stavePostions: [-2, -1], stemDirection: .up, resultsIn: [.center, .rightOfStem])
         assert(stavePostions: [0, 1], stemDirection: .down, resultsIn: [.leftOfStem, .center])
         assert(stavePostions: [3, 4], stemDirection: .down, resultsIn: [.leftOfStem, .center])
+    }
+    
+    // MARK: - Several Overlapping notes
+    
+    func testOddNumberOfMultipleAdjacentNotes() {
+        // The majority of notes should fall on the 'correct' side of the stem. This
+        // results in the lowest note being on the left side for up-stems and the right
+        // side for down-stems.
+        assert(stavePostions: [-1, -2, -3], stemDirection: .up, resultsIn: [.center, .rightOfStem, .center])
+
+        assert(stavePostions: [-1, -2, -3], stemDirection: .up, resultsIn: [.center, .rightOfStem, .center])
+        
+        assert(stavePostions: [-4, -3, -2, -1, 0, 1, 2],
+               stemDirection: .up,
+               resultsIn: [.center, .rightOfStem, .center, .rightOfStem, .center, .rightOfStem, .center])
+
+        assert(stavePostions: [1, 2, 3], stemDirection: .down, resultsIn: [.center, .leftOfStem, .center])
+        
+        assert(stavePostions: [2, 3, 4, 5, 6],
+               stemDirection: .down,
+               resultsIn: [.center, .leftOfStem, .center, .leftOfStem, .center])
+        
+        // Different arrangements to ensure a certain order isn't depended on
+        assert(stavePostions: [-1, -2, -3], stemDirection: .up, resultsIn: [.center, .rightOfStem, .center])
+        assert(stavePostions: [-3, -2, -1], stemDirection: .up, resultsIn: [.center, .rightOfStem, .center])
+        assert(stavePostions: [-2, -1, -3], stemDirection: .up, resultsIn: [.rightOfStem, .center, .center])
+
+    }
+    
+    
+    func testEvenNumberOfMultipleAdjacentNotes() {
+        // When there is an even number of adjacent notes, the lowest note always goes on the left side
+        assert(stavePostions: [-3, -2, -1, 0],
+               stemDirection: .up,
+               resultsIn: [.center, .rightOfStem, .center, .rightOfStem])
+        
+        assert(stavePostions: [-4, -3, -2, -1, 0, 1, 2, 3],
+               stemDirection: .up,
+               resultsIn: [.center, .rightOfStem, .center, .rightOfStem, .center, .rightOfStem, .center, .rightOfStem])
+        
+        assert(stavePostions: [1, 2, 3, 4],
+               stemDirection: .down,
+               resultsIn: [.leftOfStem, .center, .leftOfStem, .center])
+        
+        assert(stavePostions: [2, 3, 4, 5, 6, 7],
+               stemDirection: .down,
+               resultsIn: [.leftOfStem, .center, .leftOfStem, .center, .leftOfStem, .center])
     }
     
     func assert(stavePostions: [Int],

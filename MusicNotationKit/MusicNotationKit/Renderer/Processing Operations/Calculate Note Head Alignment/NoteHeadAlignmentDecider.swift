@@ -42,7 +42,7 @@ class NoteHeadAlignmentDecider<N> {
             return
         }
         
-        print("Notes with more than Two heads not supported!!!!")
+        processThreeOrMoreHeadedNote(note: note, stavePositions: stavePositions)
     }
     
     private func processTwoHeadedNote(note: N, stavePositions: [Int]) {
@@ -66,6 +66,32 @@ class NoteHeadAlignmentDecider<N> {
         } else {
             tf.setNoteHeadAlignmentForIndex(note, lowPossitionIndex, .center)
             tf.setNoteHeadAlignmentForIndex(note, highPositionIndex, .rightOfStem)
+        }
+    }
+    
+    private func processThreeOrMoreHeadedNote(note: N, stavePositions: [Int]) {
+        
+        // Sort the stave positions ascending
+        let sortMapper = SortMapper(items: stavePositions, sortingFunction: <)
+        
+        let evenAlignment: NoteHeadAlignment
+        let oddAlignment: NoteHeadAlignment
+        
+        // If there is an odd number of notes, the lowest is on the correct side, then alternate
+        if sortMapper.count.isOdd {
+            evenAlignment = NoteHeadAlignment.center
+            oddAlignment = tf.stemDirection(note) == .up ? .rightOfStem : .leftOfStem
+        }
+        // If there is an even number of notes, the lowest note is always on the left
+        else {
+            evenAlignment = tf.stemDirection(note) == .up ? .center : .leftOfStem
+            oddAlignment = tf.stemDirection(note) == .up ? .rightOfStem : .center
+        }
+
+        // Apply alignments
+        for i in (0..<sortMapper.count) {
+            let originalIndex = sortMapper.originalIndex(fromSorted: i)
+            tf.setNoteHeadAlignmentForIndex(note, originalIndex, i.isOdd ? oddAlignment : evenAlignment)
         }
     }
 }
