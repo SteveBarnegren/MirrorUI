@@ -314,8 +314,18 @@ class NoteRenderer {
                 continue
             }
             
+            let alignmentOffset: Double
+            switch noteHeadDescription.alignment {
+            case .center:
+                alignmentOffset = 0
+            case .leftOfStem:
+                alignmentOffset = -(1 + stemThickness)
+            case .rightOfStem:
+                alignmentOffset = 1 + stemThickness
+            }
+            
             paths.append(
-                path.translated(x: note.xPosition, y: noteHeadDescription.yPosition)
+                path.translated(x: note.xPosition + alignmentOffset, y: noteHeadDescription.yPosition)
             )
         }
         

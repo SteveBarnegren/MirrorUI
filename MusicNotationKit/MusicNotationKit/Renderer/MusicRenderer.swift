@@ -68,6 +68,9 @@ class MusicRenderer {
             // Calculate stem directions
             CalculateStemDirectionsProcessingOperation().process(composition: composition)
             
+            // Calculate note head alignments
+            CalculateNoteHeadAlignmentProcessingOperation().process(composition: composition)
+            
             // Generate bar layout anchors
             GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)
             
