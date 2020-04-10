@@ -108,7 +108,8 @@ private func makeComponentInfos() -> [ComponentInfo] {
     let notes = ComponentInfo(name: "Notes", composition: ComponentCompositions.notes, deepLink: .notes)
     let rests = ComponentInfo(name: "Rests", composition: ComponentCompositions.rests, deepLink: .rests)
     let intervals = ComponentInfo(name: "Intervals and chords", composition: ComponentCompositions.intervalsAndChords, deepLink: .intervalsAndChords)
+    let adjacentNoteChords = ComponentInfo(name: "Adjacent note chords", composition: ComponentCompositions.adjacentNoteChords, deepLink: .adjacentNoteChords)
     let accidentals = ComponentInfo(name: "Accidentals", composition: ComponentCompositions.accidentals, deepLink: .accidentals)
 
-    return [notes, rests, intervals, accidentals]
+    return [notes, rests, intervals, adjacentNoteChords, accidentals]
 }

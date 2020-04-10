@@ -11,6 +11,7 @@
 		6746320F2252A291007626D0 /* MusicNotationKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 677C9C7721C515DC00C7A16E /* MusicNotationKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		676BB600233676D000EA9F9C /* MusicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5FE233676D000EA9F9C /* MusicExampleViewController.swift */; };
 		676BB601233676D000EA9F9C /* MusicExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 676BB5FF233676D000EA9F9C /* MusicExampleViewController.xib */; };
+		677256152440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677256142440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift */; };
 		677287702433C9B00038B142 /* ComponentCompositions+Accidentals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6772876F2433C9B00038B142 /* ComponentCompositions+Accidentals.swift */; };
 		677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C5F21C5158C00C7A16E /* AppDelegate.swift */; };
 		677C9C6221C5158C00C7A16E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677C9C6121C5158C00C7A16E /* ViewController.swift */; };
@@ -82,6 +83,7 @@
 		672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlayView.swift; sourceTree = "<group>"; };
 		676BB5FE233676D000EA9F9C /* MusicExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicExampleViewController.swift; sourceTree = "<group>"; };
 		676BB5FF233676D000EA9F9C /* MusicExampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicExampleViewController.xib; sourceTree = "<group>"; };
+		677256142440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+AdjacentNoteChords.swift"; sourceTree = "<group>"; };
 		6772876F2433C9B00038B142 /* ComponentCompositions+Accidentals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Accidentals.swift"; sourceTree = "<group>"; };
 		677C9C5C21C5158C00C7A16E /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677C9C5F21C5158C00C7A16E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */,
 				67BA78A42430BB070097806B /* ComponentCompositions+Rests.swift */,
 				67BA78A22430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift */,
+				677256142440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift */,
 				6772876F2433C9B00038B142 /* ComponentCompositions+Accidentals.swift */,
 			);
 			path = "Component Compositions";
@@ -380,6 +383,7 @@
 				677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */,
 				676BB600233676D000EA9F9C /* MusicExampleViewController.swift in Sources */,
 				677287702433C9B00038B142 /* ComponentCompositions+Accidentals.swift in Sources */,
+				677256152440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift in Sources */,
 				679A2EF8234A59A200E157C8 /* TestComposition.swift in Sources */,
 				677F34C12427E48300507156 /* Deeplink.swift in Sources */,
 				677F34BF2427789900507156 /* ComponentsMenuViewController.swift in Sources */,
