@@ -299,18 +299,7 @@ class NoteRenderer {
         
         for noteHeadDescription in note.noteHeadDescriptions {
             
-            let path: Path
-            
-            switch noteHeadDescription.style {
-            case .semibreve:
-                path = SymbolPaths.semibreve
-            case .open:
-                path = SymbolPaths.openNoteHead
-            case .filled:
-                path = SymbolPaths.filledNoteHead
-            case .cross:
-                path = SymbolPaths.crossNoteHead
-            case .none:
+            guard let path = SymbolPaths.path(forNoteHeadStyle: noteHeadDescription.style) else {
                 continue
             }
             

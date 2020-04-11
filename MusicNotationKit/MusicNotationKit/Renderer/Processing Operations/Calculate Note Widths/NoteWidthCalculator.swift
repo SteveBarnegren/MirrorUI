@@ -18,29 +18,28 @@ class NoteWidthCalculator {
     
     func width(forNote note: Note) -> (leading: Double, trailing: Double) {
         
-        // Centered on the note head
-        var leading = noteHeadWidth/2
-        var trailing = noteHeadWidth/2
+        var centeredNotesWidth = 0.0
+        var leftOfStemNotesWidth = 0.0
+        var rightOfStemNotesWidth = 0.0
         
-        // Add the stem if required
-//        if note.symbolDescription.hasStem {
-//            leading += stemThickness/2
-//            trailing += stemThickness/2
-//        }
-        
-        // Add additional width if there are note heads on the opposite side of the stem. A note can only contain either left of stem OR right of stem heads, so we can break after finding either one.
-        alignmentLoop: for alignment in note.noteHeadDescriptions.map({ $0.alignment }) {
-            switch alignment {
-            case .center:
+        for description in note.noteHeadDescriptions {
+            
+            guard let path = SymbolPaths.path(forNoteHeadStyle: description.style) else {
                 continue
+            }
+                        
+            switch description.alignment {
+            case .center:
+                centeredNotesWidth = max(centeredNotesWidth, path.boundingBox.width)
             case .leftOfStem:
-                leading += noteHeadWidth
-                break alignmentLoop
+                leftOfStemNotesWidth = max(leftOfStemNotesWidth, path.boundingBox.width)
             case .rightOfStem:
-                trailing += noteHeadWidth
-                break alignmentLoop
+                rightOfStemNotesWidth = max(rightOfStemNotesWidth, path.boundingBox.width)
             }
         }
+        
+        let leading = centeredNotesWidth/2 + leftOfStemNotesWidth
+        let trailing = centeredNotesWidth/2 + rightOfStemNotesWidth
         
         return (leading, trailing)
     }

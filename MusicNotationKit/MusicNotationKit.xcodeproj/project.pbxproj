@@ -102,6 +102,7 @@
 		678318672440E77A00FB9784 /* BinaryInteger+ParityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678318662440E77A00FB9784 /* BinaryInteger+ParityTests.swift */; };
 		678318692440FCD500FB9784 /* SortMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678318682440FCD500FB9784 /* SortMapper.swift */; };
 		6783186B2440FD4100FB9784 /* SortMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783186A2440FD4100FB9784 /* SortMapperTests.swift */; };
+		6783186D24422DEC00FB9784 /* SymbolPaths+NoteHeads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783186C24422DEC00FB9784 /* SymbolPaths+NoteHeads.swift */; };
 		6785A9B523315B38004B32B8 /* CompositionPathsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6785A9B423315B38004B32B8 /* CompositionPathsCreator.swift */; };
 		679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93522BC1AF300A22778 /* LayoutAnchor.swift */; };
 		679EB93922BC3AB800A22778 /* Array+Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93822BC3AB800A22778 /* Array+Chunked.swift */; };
@@ -252,6 +253,7 @@
 		678318662440E77A00FB9784 /* BinaryInteger+ParityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+ParityTests.swift"; sourceTree = "<group>"; };
 		678318682440FCD500FB9784 /* SortMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMapper.swift; sourceTree = "<group>"; };
 		6783186A2440FD4100FB9784 /* SortMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMapperTests.swift; sourceTree = "<group>"; };
+		6783186C24422DEC00FB9784 /* SymbolPaths+NoteHeads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SymbolPaths+NoteHeads.swift"; sourceTree = "<group>"; };
 		6785A9B423315B38004B32B8 /* CompositionPathsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionPathsCreator.swift; sourceTree = "<group>"; };
 		679EB93522BC1AF300A22778 /* LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutAnchor.swift; sourceTree = "<group>"; };
 		679EB93822BC3AB800A22778 /* Array+Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunked.swift"; sourceTree = "<group>"; };
@@ -692,6 +694,7 @@
 			children = (
 				67A15F8C21C5129500C3C03F /* MusicNotationKit.h */,
 				67494C7B21CC02D40078A575 /* SymbolPaths.swift */,
+				6783186C24422DEC00FB9784 /* SymbolPaths+NoteHeads.swift */,
 				673A3D2D2343ECD9001CE422 /* NaturalSpacing.swift */,
 				674D503721DD50B2009E5AFE /* Basic Types */,
 				67BA78A62430BE410097806B /* Geometry */,
@@ -1018,6 +1021,7 @@
 				670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */,
 				67728786243BB7300038B142 /* NoteHeadAlignmentDecider.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,
+				6783186D24422DEC00FB9784 /* SymbolPaths+NoteHeads.swift in Sources */,
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
 				674B9AAB22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift in Sources */,
 				6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */,
