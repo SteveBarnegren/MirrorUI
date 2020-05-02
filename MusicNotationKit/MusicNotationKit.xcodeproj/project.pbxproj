@@ -90,6 +90,8 @@
 		67706494245CB41E0083037F /* Tie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67706493245CB41E0083037F /* Tie.swift */; };
 		67706497245CB8C60083037F /* ConfigureTiesProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67706496245CB8C60083037F /* ConfigureTiesProcessingOperation.swift */; };
 		67706499245CC3DC0083037F /* TieRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67706498245CC3DC0083037F /* TieRenderer.swift */; };
+		6770649C245DA2730083037F /* Collection+EachWithRemaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6770649B245DA2730083037F /* Collection+EachWithRemaining.swift */; };
+		6770649E245DBEC60083037F /* Collection+EachWithRemainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6770649D245DBEC60083037F /* Collection+EachWithRemainingTests.swift */; };
 		677256112440D9AE00954C91 /* CaclulateNoteWidthsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677256102440D9AE00954C91 /* CaclulateNoteWidthsProcessingOperation.swift */; };
 		677256132440D9D500954C91 /* NoteWidthCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677256122440D9D500954C91 /* NoteWidthCalculator.swift */; };
 		6772877D243518BB0038B142 /* StavePositionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6772877C243518BB0038B142 /* StavePositionUtils.swift */; };
@@ -244,6 +246,8 @@
 		67706493245CB41E0083037F /* Tie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tie.swift; sourceTree = "<group>"; };
 		67706496245CB8C60083037F /* ConfigureTiesProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureTiesProcessingOperation.swift; sourceTree = "<group>"; };
 		67706498245CC3DC0083037F /* TieRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieRenderer.swift; sourceTree = "<group>"; };
+		6770649B245DA2730083037F /* Collection+EachWithRemaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+EachWithRemaining.swift"; sourceTree = "<group>"; };
+		6770649D245DBEC60083037F /* Collection+EachWithRemainingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+EachWithRemainingTests.swift"; sourceTree = "<group>"; };
 		677256102440D9AE00954C91 /* CaclulateNoteWidthsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaclulateNoteWidthsProcessingOperation.swift; sourceTree = "<group>"; };
 		677256122440D9D500954C91 /* NoteWidthCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidthCalculator.swift; sourceTree = "<group>"; };
 		6772877C243518BB0038B142 /* StavePositionUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StavePositionUtils.swift; sourceTree = "<group>"; };
@@ -430,6 +434,7 @@
 			children = (
 				679EB93722BC3AA400A22778 /* Array */,
 				670ABDAC22C55C1B00BFA678 /* Sequence */,
+				6770649A245DA2510083037F /* Collection */,
 				67AE184521D9387900F3545D /* Optional+Extensions.swift */,
 				67AE184B21DA8C9000F3545D /* Collection+Accessors.swift */,
 				67678DF521E2420D00E7FD71 /* Collection+Extensions.swift */,
@@ -596,6 +601,14 @@
 				67706496245CB8C60083037F /* ConfigureTiesProcessingOperation.swift */,
 			);
 			path = "Configure Ties";
+			sourceTree = "<group>";
+		};
+		6770649A245DA2510083037F /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				6770649B245DA2730083037F /* Collection+EachWithRemaining.swift */,
+			);
+			path = Collection;
 			sourceTree = "<group>";
 		};
 		6772560F2440D98300954C91 /* Calculate Note Widths */ = {
@@ -864,6 +877,7 @@
 				677F34C42427EAE200507156 /* Sequence+MaxAndMinTests.swift */,
 				673A3D222340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift */,
 				678318662440E77A00FB9784 /* BinaryInteger+ParityTests.swift */,
+				6770649D245DBEC60083037F /* Collection+EachWithRemainingTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1020,6 +1034,7 @@
 				670ABDB222C562CF00BFA678 /* FixedDistanceLayoutSolver.swift in Sources */,
 				67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */,
 				677643F3228E0D18000683FF /* FreeFunctions.swift in Sources */,
+				6770649C245DA2730083037F /* Collection+EachWithRemaining.swift in Sources */,
 				67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */,
 				677256132440D9D500954C91 /* NoteWidthCalculator.swift in Sources */,
 				67706494245CB41E0083037F /* Tie.swift in Sources */,
@@ -1122,6 +1137,7 @@
 				6783186B2440FD4100FB9784 /* SortMapperTests.swift in Sources */,
 				6728B2CC2239989100382D92 /* Array+Verify.swift in Sources */,
 				671A4D2C228752E7002C56E8 /* NoteSymbolDescriberTests.swift in Sources */,
+				6770649E245DBEC60083037F /* Collection+EachWithRemainingTests.swift in Sources */,
 				673A3D17233FC1BE001CE422 /* Array+EachWithTests.swift in Sources */,
 				677F34C52427EAE200507156 /* Sequence+MaxAndMinTests.swift in Sources */,
 				671A4D3022885A02002C56E8 /* NoteValue+Verify.swift in Sources */,

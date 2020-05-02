@@ -56,9 +56,7 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
         let end = pitchesAndNoteHeadDescriptions(for: endNote)
         
         for ((startPitch, startHeadDescription), (endPitch, endHeadDescription)) in zip(start, end) {
-            
-            print("------------")
-                                    
+                                                
             let noteStavePosition = abs(startHeadDescription.stavePosition)
             
             var startPosition = TiePosition()
@@ -77,27 +75,12 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
             middlePosition.lineNumber = startPosition.lineNumber + 1
             middlePosition.spaceQuartile = .half
             
-            print("Start line number: \(startPosition.lineNumber)")
-            print("Start quartile: \(startPosition.spaceQuartile)")
-            print("Middle line number: \(middlePosition.lineNumber)")
-            print("Middle quartile: \(middlePosition.spaceQuartile)")
-            
             let tie = Tie(orientation: .aboveNoteHead)
             tie.toNote = endNote
             tie.toNoteHead = endHeadDescription
             tie.startPosition = startPosition
             tie.middlePosition = middlePosition
             
-            let startStavePosition = startHeadDescription.stavePosition
-            let isOnLine = startStavePosition.isEven
-            let endsOffset = isOnLine ? 1 : 2
-            let middleOffset = endsOffset + 3
-            
-            
-            
-
-            //tie.endsStavePosition = startHeadDescription.stavePosition + endsOffset*sign
-            //tie.middleStavePosition = startHeadDescription.stavePosition + middleOffset*sign
             startHeadDescription.tie = tie
         }
     }
