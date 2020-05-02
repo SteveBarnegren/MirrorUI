@@ -17,6 +17,11 @@ public class NoteSequence {
     var rests: [Rest] {
         return playables.compactMap { $0 as? Rest }
     }
+    var ties: [Tie] {
+        return notes.map { note in
+            note.noteHeadDescriptions.compactMap { $0.tie }
+        }.joined().toArray()
+    }
     
     var duration: Time {
         return playables.reduce(Time.zero) { $0 + $1.duration }

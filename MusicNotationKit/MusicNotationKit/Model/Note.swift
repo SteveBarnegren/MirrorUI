@@ -25,6 +25,8 @@ public class Note: Playable {
     var symbolDescription = NoteSymbolDescription.standard
     var noteHeadDescriptions = [NoteHeadDescription]()
     
+    var tiedToNext = false
+    
     /// The note head that the stem connects to
     var stemConnectingNoteHead: NoteHeadDescription {
         // We always expect there to be at least one note note head
@@ -84,23 +86,11 @@ public class Note: Playable {
            self.pitches = pitches
        }
     
-    // Acidentals
-    /*
-    public func sharp() -> Note {
-        self.accidental = .sharp
+    // Tie
+    public func tied() -> Note {
+        self.tiedToNext = true
         return self
     }
-    
-    public func flat() -> Note {
-        self.accidental = .flat
-        return self
-    }
-    
-    public func natural() -> Note {
-        self.accidental = .natural
-        return self
-    }
- */
     
     // Note Head
     public func crossHead() -> Note {
@@ -151,6 +141,7 @@ class NoteHeadDescription: VerticallyPositionable {
     var staveOffset = Double(0)
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
+    var tie: Tie?
     
     // VerticallyPositionable
     var yPosition: Double = 0

@@ -74,6 +74,9 @@ class MusicRenderer {
             // Calculate note widths
             CalculateNoteWidthsProcessingOperation().process(composition: composition)
             
+            // Create Ties
+            ConfigureTiesProcessingOperation().process(composition: composition)
+            
             // Generate bar layout anchors
             GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)
             
@@ -115,6 +118,7 @@ class MusicRenderer {
         }
         
         // Reset layout anchors
+        // TODO: Reset the layout anchors just for the bar range?
         composition.bars.forEach { $0.resetLayoutAnchors() }
         
         // Solve X Positions

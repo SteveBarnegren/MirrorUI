@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Array {
+public extension Collection {
     
     /// Returns a new array sorted ascending by the `Comparable` result of transforming
     /// each element through the `transform` closure
@@ -37,6 +37,9 @@ public extension Array {
     func sortedDescendingBy<T: Comparable>(_ transform: (Element) -> T) -> [Element] {
         return sorted { transform($0) > transform($1) }
     }
+}
+
+extension Array {
     
     /// Sorts the `Element`s in ascending order
     ///

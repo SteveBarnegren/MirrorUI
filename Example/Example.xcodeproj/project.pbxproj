@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */; };
 		6746320F2252A291007626D0 /* MusicNotationKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 677C9C7721C515DC00C7A16E /* MusicNotationKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6748CF39245B4FB300F1E64D /* ComponentCompositions+Ties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6748CF38245B4FB300F1E64D /* ComponentCompositions+Ties.swift */; };
 		676BB600233676D000EA9F9C /* MusicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5FE233676D000EA9F9C /* MusicExampleViewController.swift */; };
 		676BB601233676D000EA9F9C /* MusicExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 676BB5FF233676D000EA9F9C /* MusicExampleViewController.xib */; };
 		677256152440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677256142440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift */; };
@@ -81,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		672FA3BF21CF8F0F002ECDD6 /* GridOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlayView.swift; sourceTree = "<group>"; };
+		6748CF38245B4FB300F1E64D /* ComponentCompositions+Ties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Ties.swift"; sourceTree = "<group>"; };
 		676BB5FE233676D000EA9F9C /* MusicExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicExampleViewController.swift; sourceTree = "<group>"; };
 		676BB5FF233676D000EA9F9C /* MusicExampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicExampleViewController.xib; sourceTree = "<group>"; };
 		677256142440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+AdjacentNoteChords.swift"; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				67BA78A22430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift */,
 				677256142440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift */,
 				6772876F2433C9B00038B142 /* ComponentCompositions+Accidentals.swift */,
+				6748CF38245B4FB300F1E64D /* ComponentCompositions+Ties.swift */,
 			);
 			path = "Component Compositions";
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6748CF39245B4FB300F1E64D /* ComponentCompositions+Ties.swift in Sources */,
 				677C9C6221C5158C00C7A16E /* ViewController.swift in Sources */,
 				67BB96A4233677C200119953 /* MenuViewController.swift in Sources */,
 				677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */,
