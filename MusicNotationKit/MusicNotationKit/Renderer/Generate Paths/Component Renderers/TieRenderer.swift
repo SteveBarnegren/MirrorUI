@@ -35,8 +35,19 @@ class TieRenderer {
     }
     
     private func yPosition(fromTiePosition tiePosition: TiePosition) -> Double {
-        let stavePosition = tiePosition.lineNumber * 2
+        let stavePosition = tiePosition.space*2 + (tiePosition.space.isPositive ? -1 : 1)
         let staveOffset = StavePositionUtils.staveYOffset(forStavePostion: stavePosition)
-        return (staveOffset + tiePosition.spaceQuartile.value) * Double(tiePosition.sign.sign)
+        return staveOffset
+    }
+}
+
+extension Int {
+    
+    var isPositive: Bool {
+        return self >= 0
+    }
+    
+    var isNegative: Bool {
+        return !self.isPositive
     }
 }

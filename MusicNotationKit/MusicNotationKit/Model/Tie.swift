@@ -15,43 +15,12 @@ enum TieOrientation {
 }
 
 struct TiePosition {
-    
-    enum Sign {
-        case positive
-        case negative
-        
-        var sign: Int { self == .positive ? 1 : -1 }
-    }
-    
-    enum SpaceQuartile {
-        case zero
-        case quarter
-        case half
-        case threeQuarters
-        
-        var value: Double {
-            switch self {
-            case .zero: return 0
-            case .quarter: return 0.25
-            case .half: return 0.5
-            case .threeQuarters: return 0.75
-            }
-        }
-    }
-
-    var sign = Sign.positive
-    var lineNumber: Int = 0
-    var spaceQuartile: SpaceQuartile = .zero
+    let space: Int
 }
 
 class Tie {
-    let orientation: TieOrientation
-    var startPosition = TiePosition()
-    var middlePosition = TiePosition()
+    var startPosition = TiePosition(space: 0)
+    var middlePosition = TiePosition(space: 0)
     weak var toNote: Note?
     weak var toNoteHead: NoteHeadDescription?
-    
-    init(orientation: TieOrientation) {
-        self.orientation = orientation
-    }
 }

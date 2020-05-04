@@ -27,13 +27,13 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
     
     private func process(sequence: NoteSequence, nextBarNotes: SingleValueCache<[Note]>) {
         
-        for (note, nextNote) in sequence.notes.eachWithNext() {
+        for (note, remaining) in sequence.notes.eachWithRemaining() {
             if note.tiedToNext == false {
                 continue
             }
             
             let tiedToNote: Note
-            if let nextNote = nextNote {
+            if let nextNote = remaining.first(where: { $0.pitches.contains(anyOf: note.pitches) }) {
                 tiedToNote = nextNote
             } else if let nextBarNote = nextBarNotes.value.first(where: { $0.pitches.contains(anyOf: note.pitches) }) {
                 tiedToNote = nextBarNote
@@ -56,37 +56,55 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
         let end = pitchesAndNoteHeadDescriptions(for: endNote)
         
         for ((startPitch, startHeadDescription), (endPitch, endHeadDescription)) in zip(start, end) {
-                                                
-            let noteStavePosition = abs(startHeadDescription.stavePosition)
             
-            var startPosition = TiePosition()
-            var middlePosition = TiePosition()
-            startPosition.sign = startNote.symbolDescription.stemDirection == .down ? .positive: .negative
-            middlePosition.sign = startNote.symbolDescription.stemDirection == .down ? .positive: .negative
-            
-            if noteStavePosition.isEven {
-                startPosition.lineNumber = noteStavePosition / 2
-                startPosition.spaceQuartile = .threeQuarters
-            } else {
-                startPosition.lineNumber = (noteStavePosition-1)/2 + 1
-                startPosition.spaceQuartile = .half
-            }
-            
-            middlePosition.lineNumber = startPosition.lineNumber + 1
-            middlePosition.spaceQuartile = .half
-            
-            let tie = Tie(orientation: .aboveNoteHead)
+            let tie = makeTie(stavePosition: startHeadDescription.stavePosition, stemDirection: startNote.symbolDescription.stemDirection)
             tie.toNote = endNote
             tie.toNoteHead = endHeadDescription
-            tie.startPosition = startPosition
-            tie.middlePosition = middlePosition
-            
             startHeadDescription.tie = tie
         }
     }
     
+    private func makeTie(stavePosition: Int, stemDirection: StemDirection) -> Tie {
+        
+        let isOnSpace = stavePosition.isOdd
+        let tieAboveNote = (stemDirection == .down)
+        let tieDirectionMultiplier = tieAboveNote ? 1 : -1
+
+        // Start on the next available space
+        var startSpace: Int
+        if tieAboveNote {
+            startSpace = stavePosition.nextEven() / 2 + 1
+        } else {
+            startSpace = stavePosition.previousEven()/2 - 1
+        }
+        
+        // Middle is one space above
+        let middleSpace = startSpace + (1*tieDirectionMultiplier)
+        
+        let tie = Tie()
+        tie.startPosition = TiePosition(space: startSpace)
+        tie.middlePosition = TiePosition(space: middleSpace)
+        
+        print("Start space: \(startSpace)")
+        print("Middle space: \(middleSpace)")
+        
+        return tie
+    }
+    
     private func getStartNotes(ofBar bar: Bar) -> [Note] {
         return bar.sequences.compactMap { $0.notes.first }
+    }
+    
+    private func previousEven(_ value: Int) -> Int {
+        if value.isEven {
+            return value
+        }
+        
+        if value > 0 {
+            return value - 1
+        } else {
+            return value + 1
+        }
     }
 }
 
@@ -96,5 +114,35 @@ extension Sequence where Element: Equatable {
         return self.contains { (element) -> Bool in
             other.contains(element)
         }
+    }
+}
+
+extension Int {
+    
+    func nextOdd() -> Int {
+        return self.isOdd ? self : self + 1
+    }
+    
+    func nextEven() -> Int {
+        return self.isEven ? self : self + 1
+    }
+    
+    func previousOdd() -> Int {
+        return self.isOdd ? self : self - 1
+    }
+    
+    func previousEven() -> Int {
+        return self.isEven ? self : self - 1
+    }
+}
+
+extension Int {
+    
+    func awayFromZero(_ value: Int) -> Int {
+        return isPositive ? self + value : self - value
+    }
+    
+    func closerToZero(_ value: Int) -> Int {
+        return isPositive ? self - value : self + value
     }
 }

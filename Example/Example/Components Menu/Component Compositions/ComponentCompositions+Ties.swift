@@ -16,15 +16,51 @@ extension ComponentCompositions {
         let compostion = Composition()
   
         // Tied crotchets
+        /*
+        do {
+            let pitchPairs: [(Pitch, Pitch)] = [
+                (.e3, .f3),
+                (.g3, .a4),
+                (.b4, .c4),
+                (.d4, .e4),
+                (.f4, .g4)
+            ]
+            
+            for (firstPitch, secondPitch) in pitchPairs {
+                let bar = Bar()
+                let sequence = NoteSequence()
+                
+                sequence.add(note: Note(value: .crotchet, pitch: firstPitch).tied())
+                sequence.add(note: Note(value: .crotchet, pitch: firstPitch))
+                
+                sequence.add(note: Note(value: .crotchet, pitch: secondPitch).tied())
+                sequence.add(note: Note(value: .crotchet, pitch: secondPitch))
+                
+                bar.add(sequence: sequence)
+                compostion.add(bar: bar)
+            }
+        }
+ */
+        
         do {
             let bar = Bar()
             let sequence = NoteSequence()
             
-            sequence.add(note: Note(value: .crotchet, pitch: .g3).tied())
-            sequence.add(note: Note(value: .crotchet, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitches: [.f3]))
+            sequence.add(note: Note(value: .quaver, pitches: [.d4]).tied())
+            sequence.add(note: Note(value: .crotchet, pitch: .d4))
             
-            sequence.add(note: Note(value: .crotchet, pitch: .c4).tied())
-            sequence.add(note: Note(value: .crotchet, pitch: .c4))
+            bar.add(sequence: sequence)
+            compostion.add(bar: bar)
+        }
+   /*
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            
+            sequence.add(note: Note(value: .quaver, pitches: [.d4]))
+            sequence.add(note: Note(value: .quaver, pitches: [.g3]).tied())
+            sequence.add(note: Note(value: .crotchet, pitch: .g3))
             
             bar.add(sequence: sequence)
             compostion.add(bar: bar)
@@ -83,6 +119,36 @@ extension ComponentCompositions {
                 compostion.add(bar: bar)
             }
         }
+        
+        // Chords over bar line
+        
+        do {
+            let pitches: [Pitch] = [.e3, .g3, .b4, .d4]
+        
+            do {
+                let bar = Bar()
+                let sequence = NoteSequence()
+                
+                sequence.add(rest: Rest(value: .dottedQuaver))
+                sequence.add(note: Note(value: .semiquaver, pitches: pitches).tied())
+                sequence.add(note: Note(value: .crotchet, pitches: pitches).tied())
+                
+                bar.add(sequence: sequence)
+                compostion.add(bar: bar)
+            }
+            
+            do {
+                let bar = Bar()
+                let sequence = NoteSequence()
+                
+                sequence.add(note: Note(value: .minim, pitches: pitches).tied())
+                sequence.add(note: Note(value: .quaver, pitches: pitches).tied())
+                
+                bar.add(sequence: sequence)
+                compostion.add(bar: bar)
+            }
+        }
+ */
         
         return compostion
     }
