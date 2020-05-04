@@ -88,4 +88,9 @@ extension StaveSpace {
             }
         }
     }
+    
+    var stavePosition: Int {
+        let position = Int(space)*2 + 1
+        return self.isPositive ? position : -position
+    }
 }
