@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension BinaryInteger {
+extension BinaryInteger {
     
     var isEven: Bool {
         return self % 2 == 0
