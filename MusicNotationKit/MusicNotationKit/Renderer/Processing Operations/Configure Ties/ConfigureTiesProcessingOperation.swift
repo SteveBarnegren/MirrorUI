@@ -98,16 +98,4 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
     private func getStartNotes(ofBar bar: Bar) -> [Note] {
         return bar.sequences.compactMap { $0.notes.first }
     }
-    
-    private func previousEven(_ value: Int) -> Int {
-        if value.isEven {
-            return value
-        }
-        
-        if value > 0 {
-            return value - 1
-        } else {
-            return value + 1
-        }
-    }
 }
