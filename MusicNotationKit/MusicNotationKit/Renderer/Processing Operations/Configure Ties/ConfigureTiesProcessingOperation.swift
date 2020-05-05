@@ -95,7 +95,6 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
         return tie
     }
     
-    
     private func getStartNotes(ofBar bar: Bar) -> [Note] {
         return bar.sequences.compactMap { $0.notes.first }
     }
@@ -110,44 +109,5 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
         } else {
             return value + 1
         }
-    }
-}
-
-extension Sequence where Element: Equatable {
-    
-    func contains<T: Sequence>(anyOf other: T) -> Bool where T.Element == Element {
-        return self.contains { (element) -> Bool in
-            other.contains(element)
-        }
-    }
-}
-
-extension Int {
-    
-    func nextOdd() -> Int {
-        return self.isOdd ? self : self + 1
-    }
-    
-    func nextEven() -> Int {
-        return self.isEven ? self : self + 1
-    }
-    
-    func previousOdd() -> Int {
-        return self.isOdd ? self : self - 1
-    }
-    
-    func previousEven() -> Int {
-        return self.isEven ? self : self - 1
-    }
-}
-
-extension Int {
-    
-    func awayFromZero(_ value: Int) -> Int {
-        return isPositive ? self + value : self - value
-    }
-    
-    func closerToZero(_ value: Int) -> Int {
-        return isPositive ? self - value : self + value
     }
 }
