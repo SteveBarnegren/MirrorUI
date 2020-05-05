@@ -113,6 +113,8 @@
 		679855C92460A30F00877129 /* StaveSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855C82460A30F00877129 /* StaveSpaceTests.swift */; };
 		679855CC2460BA2800877129 /* Int+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855CB2460BA2800877129 /* Int+Rounding.swift */; };
 		679855CE2460BC8300877129 /* UInt+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855CD2460BC8300877129 /* UInt+Extensions.swift */; };
+		679855D12461FE7A00877129 /* NoteMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855D02461FE7A00877129 /* NoteMetrics.swift */; };
+		679855D42461FF6700877129 /* NoteHeadAligner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855D32461FF6700877129 /* NoteHeadAligner.swift */; };
 		679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93522BC1AF300A22778 /* LayoutAnchor.swift */; };
 		679EB93922BC3AB800A22778 /* Array+Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93822BC3AB800A22778 /* Array+Chunked.swift */; };
 		67A15F9321C5129500C3C03F /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A15F8921C5129500C3C03F /* MusicNotationKit.framework */; };
@@ -273,6 +275,8 @@
 		679855C82460A30F00877129 /* StaveSpaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveSpaceTests.swift; sourceTree = "<group>"; };
 		679855CB2460BA2800877129 /* Int+Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Rounding.swift"; sourceTree = "<group>"; };
 		679855CD2460BC8300877129 /* UInt+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+Extensions.swift"; sourceTree = "<group>"; };
+		679855D02461FE7A00877129 /* NoteMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMetrics.swift; sourceTree = "<group>"; };
+		679855D32461FF6700877129 /* NoteHeadAligner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadAligner.swift; sourceTree = "<group>"; };
 		679EB93522BC1AF300A22778 /* LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutAnchor.swift; sourceTree = "<group>"; };
 		679EB93822BC3AB800A22778 /* Array+Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunked.swift"; sourceTree = "<group>"; };
 		67A15F8921C5129500C3C03F /* MusicNotationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicNotationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -476,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				67494C7D21CC04550078A575 /* MusicRenderer.swift */,
+				679855CF2461FE6400877129 /* Metrics */,
 				6772877B2435185C0038B142 /* Utils */,
 				67BB96AB23367DFF00119953 /* Processing Operations */,
 				67678DFB21E259E500E7FD71 /* Render Operations */,
@@ -576,7 +581,7 @@
 		67678DFC21E25A1400E7FD71 /* Component Renderers */ = {
 			isa = PBXGroup;
 			children = (
-				674D504A21E23CD8009E5AFE /* NoteRenderer.swift */,
+				679855D22461FF4100877129 /* Note Renderer */,
 				6751A849223585D5000B0D08 /* RestRenderer.swift */,
 				6749365021CF8861005BA334 /* StaveRenderer.swift */,
 				67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */,
@@ -704,6 +709,23 @@
 				678318642440E73100FB9784 /* BinaryInteger+Parity.swift */,
 			);
 			path = BinaryInteger;
+			sourceTree = "<group>";
+		};
+		679855CF2461FE6400877129 /* Metrics */ = {
+			isa = PBXGroup;
+			children = (
+				679855D02461FE7A00877129 /* NoteMetrics.swift */,
+			);
+			path = Metrics;
+			sourceTree = "<group>";
+		};
+		679855D22461FF4100877129 /* Note Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				674D504A21E23CD8009E5AFE /* NoteRenderer.swift */,
+				679855D32461FF6700877129 /* NoteHeadAligner.swift */,
+			);
+			path = "Note Renderer";
 			sourceTree = "<group>";
 		};
 		679EB93722BC3AA400A22778 /* Array */ = {
@@ -1044,6 +1066,7 @@
 				678318652440E73100FB9784 /* BinaryInteger+Parity.swift in Sources */,
 				6767E320229F143D00E9964D /* HorizontalLayoutSolver.swift in Sources */,
 				67A437A322E8F90F008C00E3 /* CalculateStemLengthsRenderOperation.swift in Sources */,
+				679855D42461FF6700877129 /* NoteHeadAligner.swift in Sources */,
 				6751A84222357AE3000B0D08 /* Rest.swift in Sources */,
 				67BB96BA2337A82200119953 /* MusicCell.swift in Sources */,
 				674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */,
@@ -1099,6 +1122,7 @@
 				6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */,
 				676BB5FD233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
+				679855D12461FE7A00877129 /* NoteMetrics.swift in Sources */,
 				679EB93922BC3AB800A22778 /* Array+Chunked.swift in Sources */,
 				6767E322229F182E00E9964D /* BarLayoutAnchorsStitcher.swift in Sources */,
 				679855C72460A1DB00877129 /* StaveSpace.swift in Sources */,

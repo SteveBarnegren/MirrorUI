@@ -12,10 +12,11 @@ class NoteRenderer {
     
     private let preferredStemHeight = 3.0
     private let stemXOffset = 0.58
-    private let stemThickness = 0.13
     private let beamThickness = 0.3
     private let beamSeparation = 0.3
     private let noteHeadWidth = 1.4
+    
+    private var stemThickness: Double { NoteMetrics.stemThickness }
     
     func paths(forNotes notes: [Note]) -> [Path] {
         
@@ -302,16 +303,8 @@ class NoteRenderer {
             guard let path = SymbolPaths.path(forNoteHeadStyle: noteHeadDescription.style) else {
                 continue
             }
-            
-            let alignmentOffset: Double
-            switch noteHeadDescription.alignment {
-            case .center:
-                alignmentOffset = 0
-            case .leftOfStem:
-                alignmentOffset = -(1 + stemThickness)
-            case .rightOfStem:
-                alignmentOffset = 1 + stemThickness
-            }
+
+            let alignmentOffset = NoteHeadAligner.xOffset(forAlignment: noteHeadDescription.alignment)
             
             paths.append(
                 path.translated(x: note.xPosition + alignmentOffset, y: noteHeadDescription.yPosition)

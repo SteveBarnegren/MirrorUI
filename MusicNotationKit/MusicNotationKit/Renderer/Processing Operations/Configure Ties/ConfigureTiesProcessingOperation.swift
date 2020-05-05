@@ -48,18 +48,19 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
     
     private func createTie(between startNote: Note, and endNote: Note) {
         
-        func pitchesAndNoteHeadDescriptions(for note: Note) -> [(Pitch, NoteHeadDescription)] {
+        func pitchesAndNoteHeadDescriptions(for note: Note) -> [(pitch: Pitch, description: NoteHeadDescription)] {
             return Array(zip(note.pitches, note.noteHeadDescriptions)).sortedAscendingBy { $0.0 }
         }
         
         let start = pitchesAndNoteHeadDescriptions(for: startNote)
         let end = pitchesAndNoteHeadDescriptions(for: endNote)
         
-        for ((startPitch, startHeadDescription), (endPitch, endHeadDescription)) in zip(start, end) {
+        for (startPitch, startHeadDescription) in start {
             
-            let tie = makeTie(stavePosition: startHeadDescription.stavePosition, stemDirection: startNote.symbolDescription.stemDirection)
+            let tie = makeTie(stavePosition: startHeadDescription.stavePosition,
+                              stemDirection: startNote.symbolDescription.stemDirection)
             tie.toNote = endNote
-            tie.toNoteHead = endHeadDescription
+            tie.toNoteHead = end.first { $0.pitch == startPitch }?.description
             startHeadDescription.tie = tie
         }
     }

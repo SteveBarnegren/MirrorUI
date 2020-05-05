@@ -17,10 +17,17 @@ class TieRenderer {
             return []
         }
         
+        guard let endNoteHead = tie.toNoteHead else {
+            print("Error - tie had no end note head")
+            return []
+        }
+                
         let startY = yPosition(fromTiePosition: tie.startPosition) + yOffset(forEndAlignment: tie.endAlignment)
-        let start = Point(note.xPosition, startY)
-        let end = Point(endNote.xPosition, startY)
-        let mid = Point((endNote.xPosition + note.xPosition) / 2,
+        let start = Point(xPosition(forNote: note, noteHead: noteHead),
+                          startY)
+        let end = Point(xPosition(forNote: endNote, noteHead: endNoteHead),
+                        startY)
+        let mid = Point((start.x + end.x) / 2,
                         yPosition(fromTiePosition: tie.middlePosition))
         
         var path = Path(commands: [
@@ -32,6 +39,10 @@ class TieRenderer {
         path.drawStyle = .stroke
         
         return [path]
+    }
+    
+    private func xPosition(forNote note: Note, noteHead: NoteHeadDescription) -> Double {
+        return note.xPosition + NoteHeadAligner.xOffset(forAlignment: noteHead.alignment)
     }
     
     private func yPosition(fromTiePosition tiePosition: TiePosition) -> Double {
