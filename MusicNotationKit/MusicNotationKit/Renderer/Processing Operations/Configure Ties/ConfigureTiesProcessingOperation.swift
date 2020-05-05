@@ -65,33 +65,6 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
         }
     }
     
-//    private func makeTie(stavePosition: Int, stemDirection: StemDirection) -> Tie {
-//
-//        let isOnSpace = stavePosition.isOdd
-//        let tieAboveNote = (stemDirection == .down)
-//        let tieDirectionMultiplier = tieAboveNote ? 1 : -1
-//
-//        // Start on the next available space
-//        var startSpace: Int
-//        if tieAboveNote {
-//            startSpace = stavePosition.nextEven() / 2 + 1
-//        } else {
-//            startSpace = stavePosition.previousEven()/2 - 1
-//        }
-//
-//        // Middle is one space above
-//        let middleSpace = startSpace + (1*tieDirectionMultiplier)
-//
-//        let tie = Tie()
-//        tie.startPosition = TiePosition(space: startSpace)
-//        tie.middlePosition = TiePosition(space: middleSpace)
-//
-//        print("Start space: \(startSpace)")
-//        print("Middle space: \(middleSpace)")
-//
-//        return tie
-//    }
-    
     private func makeTie(stavePosition: Int, stemDirection: StemDirection) -> Tie {
         
         let isOnSpace = stavePosition.isOdd
@@ -121,7 +94,6 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
         
         return tie
     }
-    
     
     
     private func getStartNotes(ofBar bar: Bar) -> [Note] {
