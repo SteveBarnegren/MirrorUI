@@ -64,32 +64,64 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
         }
     }
     
+//    private func makeTie(stavePosition: Int, stemDirection: StemDirection) -> Tie {
+//
+//        let isOnSpace = stavePosition.isOdd
+//        let tieAboveNote = (stemDirection == .down)
+//        let tieDirectionMultiplier = tieAboveNote ? 1 : -1
+//
+//        // Start on the next available space
+//        var startSpace: Int
+//        if tieAboveNote {
+//            startSpace = stavePosition.nextEven() / 2 + 1
+//        } else {
+//            startSpace = stavePosition.previousEven()/2 - 1
+//        }
+//
+//        // Middle is one space above
+//        let middleSpace = startSpace + (1*tieDirectionMultiplier)
+//
+//        let tie = Tie()
+//        tie.startPosition = TiePosition(space: startSpace)
+//        tie.middlePosition = TiePosition(space: middleSpace)
+//
+//        print("Start space: \(startSpace)")
+//        print("Middle space: \(middleSpace)")
+//
+//        return tie
+//    }
+    
     private func makeTie(stavePosition: Int, stemDirection: StemDirection) -> Tie {
         
         let isOnSpace = stavePosition.isOdd
         let tieAboveNote = (stemDirection == .down)
         let tieDirectionMultiplier = tieAboveNote ? 1 : -1
-
+        
         // Start on the next available space
-        var startSpace: Int
-        if tieAboveNote {
-            startSpace = stavePosition.nextEven() / 2 + 1
+        var startSpace: StaveSpace
+        let endAlignment: TieEndAlignment
+        if isOnSpace {
+            startSpace = StaveSpace(stavePosition: stavePosition,
+                                    lineRounding: .spaceAbove).adding(spaces: tieDirectionMultiplier)
+            endAlignment = .middleOfSpace
         } else {
-            startSpace = stavePosition.previousEven()/2 - 1
+            startSpace = StaveSpace(stavePosition: stavePosition,
+                                    lineRounding: tieAboveNote ? .spaceAbove : .spaceBelow)
+            endAlignment = tieAboveNote ? .sittingAboveNoteHead : .hangingBelowNoteHead
         }
         
         // Middle is one space above
-        let middleSpace = startSpace + (1*tieDirectionMultiplier)
+        let middleSpace = startSpace.adding(spaces: tieDirectionMultiplier)
         
         let tie = Tie()
         tie.startPosition = TiePosition(space: startSpace)
         tie.middlePosition = TiePosition(space: middleSpace)
-        
-        print("Start space: \(startSpace)")
-        print("Middle space: \(middleSpace)")
+        tie.endAlignment = endAlignment
         
         return tie
     }
+    
+    
     
     private func getStartNotes(ofBar bar: Bar) -> [Note] {
         return bar.sequences.compactMap { $0.notes.first }

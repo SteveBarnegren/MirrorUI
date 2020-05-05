@@ -14,13 +14,29 @@ enum TieOrientation {
     case rightOfNoteHead
 }
 
+enum TieEndAlignment {
+    case middleOfSpace
+    case sittingAboveNoteHead
+    case hangingBelowNoteHead
+}
+
 struct TiePosition {
-    let space: Int
+    
+    let space: StaveSpace
+    
+    init() {
+        self.space = StaveSpace(0, .positive)
+    }
+    
+    init(space: StaveSpace) {
+        self.space = space
+    }
 }
 
 class Tie {
-    var startPosition = TiePosition(space: 0)
-    var middlePosition = TiePosition(space: 0)
+    var startPosition = TiePosition()
+    var middlePosition = TiePosition()
+    var endAlignment = TieEndAlignment.middleOfSpace
     weak var toNote: Note?
     weak var toNoteHead: NoteHeadDescription?
 }

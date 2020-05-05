@@ -17,7 +17,7 @@ class TieRenderer {
             return []
         }
         
-        let startY = yPosition(fromTiePosition: tie.startPosition)
+        let startY = yPosition(fromTiePosition: tie.startPosition) + yOffset(forEndAlignment: tie.endAlignment)
         let start = Point(note.xPosition, startY)
         let end = Point(endNote.xPosition, startY)
         let mid = Point((endNote.xPosition + note.xPosition) / 2,
@@ -35,9 +35,20 @@ class TieRenderer {
     }
     
     private func yPosition(fromTiePosition tiePosition: TiePosition) -> Double {
-        let stavePosition = tiePosition.space*2 + (tiePosition.space.isPositive ? -1 : 1)
+        let stavePosition = tiePosition.space.stavePosition
         let staveOffset = StavePositionUtils.staveYOffset(forStavePostion: stavePosition)
         return staveOffset
+    }
+    
+    private func yOffset(forEndAlignment alignment: TieEndAlignment) -> Double {
+        switch alignment {
+        case .middleOfSpace:
+            return 0
+        case .sittingAboveNoteHead:
+            return 0.25
+        case .hangingBelowNoteHead:
+            return -0.25
+        }
     }
 }
 
