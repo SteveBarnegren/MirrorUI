@@ -18,6 +18,7 @@ public class Note: Playable {
     //public var accidental = Accidental.none
     public var noteHeadType = NoteHeadType.standard
     
+    /// Pitches, in ascending order
     let pitches: [Pitch]
     var highestPitch: Pitch { return pitches.max()! }
     var lowestPitch: Pitch { return pitches.min()! }
@@ -83,7 +84,7 @@ public class Note: Playable {
     
     public init(value: NoteValue, pitches: [Pitch]) {
            self.value = value
-           self.pitches = pitches
+        self.pitches = pitches.sorted()
        }
     
     // Tie
@@ -171,38 +172,3 @@ class NoteSymbolDescription {
         return NoteSymbolDescription(hasStem: false, numberOfTails: 0)
     }
 }
-
-/*
-class NoteSymbolDescription {
-    
-    enum HeadStyle {
-        case none
-        case semibreve
-        case open
-        case filled
-        case cross
-    }
-    
-    let headStyle: HeadStyle
-    let hasStem: Bool
-    let numberOfTails: Int
-    var leadingLayoutItems = [AdjacentLayoutItem]()
-    var trailingLayoutItems = [AdjacentLayoutItem]()
-    var stemDirection = StemDirection.up
-    var stemLength = Double(0)
-    
-    var stemEndOffset: Double {
-        return stemLength.inverted(if: { stemDirection == .down })
-    }
-    
-    init(headStyle: HeadStyle, hasStem: Bool, numberOfTails: Int) {
-        self.headStyle = headStyle
-        self.hasStem = hasStem
-        self.numberOfTails = numberOfTails
-    }
-    
-    static var standard: NoteSymbolDescription {
-        return NoteSymbolDescription(headStyle: .none, hasStem: false, numberOfTails: 0)
-    }
-}
-*/

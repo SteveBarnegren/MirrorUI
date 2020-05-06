@@ -10,6 +10,8 @@ import Foundation
 
 class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
     
+    private let tieCreator = TieCreator(transformer: .notes)
+    
     func process(composition: Composition) {
         composition.bars.eachWithNext().forEach(process)
     }
@@ -48,51 +50,18 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
     
     private func createTie(between startNote: Note, and endNote: Note) {
         
-        func pitchesAndNoteHeadDescriptions(for note: Note) -> [(pitch: Pitch, description: NoteHeadDescription)] {
-            return Array(zip(note.pitches, note.noteHeadDescriptions)).sortedAscendingBy { $0.0 }
-        }
+        let ties: [TieVariations] = tieCreator.createTies(between: startNote, and: endNote)
         
-        let start = pitchesAndNoteHeadDescriptions(for: startNote)
-        let end = pitchesAndNoteHeadDescriptions(for: endNote)
-        
-        for (startPitch, startHeadDescription) in start {
+        for tieVariations in ties {
+            guard let tie = tieVariations.ties.first else {
+                assertionFailure("Expected at least one tie variation to be created")
+                return
+            }
             
-            let tie = makeTie(stavePosition: startHeadDescription.stavePosition,
-                              stemDirection: startNote.symbolDescription.stemDirection)
             tie.toNote = endNote
-            tie.toNoteHead = end.first { $0.pitch == startPitch }?.description
-            startHeadDescription.tie = tie
+            tie.toNoteHead = endNote.noteHeadDescriptions[tieVariations.endNoteHeadIndex]
+            startNote.noteHeadDescriptions[tieVariations.startNoteHeadIndex].tie = tie
         }
-    }
-    
-    private func makeTie(stavePosition: Int, stemDirection: StemDirection) -> Tie {
-        
-        let isOnSpace = stavePosition.isOdd
-        let tieAboveNote = (stemDirection == .down)
-        let tieDirectionMultiplier = tieAboveNote ? 1 : -1
-        
-        // Start on the next available space
-        var startSpace: StaveSpace
-        let endAlignment: TieEndAlignment
-        if isOnSpace {
-            startSpace = StaveSpace(stavePosition: stavePosition,
-                                    lineRounding: .spaceAbove).adding(spaces: tieDirectionMultiplier)
-            endAlignment = .middleOfSpace
-        } else {
-            startSpace = StaveSpace(stavePosition: stavePosition,
-                                    lineRounding: tieAboveNote ? .spaceAbove : .spaceBelow)
-            endAlignment = tieAboveNote ? .sittingAboveNoteHead : .hangingBelowNoteHead
-        }
-        
-        // Middle is one space above
-        let middleSpace = startSpace.adding(spaces: tieDirectionMultiplier)
-        
-        let tie = Tie()
-        tie.startPosition = TiePosition(space: startSpace)
-        tie.middlePosition = TiePosition(space: middleSpace)
-        tie.endAlignment = endAlignment
-        
-        return tie
     }
     
     private func getStartNotes(ofBar bar: Bar) -> [Note] {
