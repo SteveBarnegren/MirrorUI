@@ -50,7 +50,7 @@ class ConfigureTiesProcessingOperation: CompositionProcessingOperation {
     
     private func createTie(between startNote: Note, and endNote: Note) {
         
-        let ties: [TieVariations] = tieCreator.createTies(between: startNote, and: endNote)
+        let ties: [TieVariationSet] = tieCreator.createTies(between: startNote, and: endNote)
         
         for tieVariations in ties {
             guard let tie = tieVariations.ties.first else {
