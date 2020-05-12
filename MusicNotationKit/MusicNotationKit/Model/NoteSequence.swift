@@ -17,7 +17,7 @@ public class NoteSequence {
     var rests: [Rest] {
         return playables.compactMap { $0 as? Rest }
     }
-    var ties: [Tie] {
+    var ties: [VariationSet<Tie>] {
         return notes.map { note in
             note.noteHeadDescriptions.compactMap { $0.tie }
         }.joined().toArray()

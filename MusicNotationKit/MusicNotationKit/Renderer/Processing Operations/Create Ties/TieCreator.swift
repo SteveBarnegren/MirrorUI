@@ -13,13 +13,13 @@ private struct PitchAndPosition {
     let stavePosition: Int
 }
 
-class TieVariationSet {
-    let ties: [Tie]
+class TieVariations {
+    let variations: [Variation<Tie>]
     let startNoteHeadIndex: Int
     let endNoteHeadIndex: Int
     
-    init(ties: [Tie], startHeadIndex: Int, endHeadIndex: Int) {
-        self.ties = ties
+    init(variations: [Variation<Tie>], startHeadIndex: Int, endHeadIndex: Int) {
+        self.variations = variations
         self.startNoteHeadIndex = startHeadIndex
         self.endNoteHeadIndex = endHeadIndex
     }
@@ -39,7 +39,7 @@ class TieCreator<N> {
         self.tf = transformer
     }
     
-    func createTies(between startNote: N, and endNote: N) -> [TieVariationSet] {
+    func createTies(between startNote: N, and endNote: N) -> [TieVariations] {
         
         func pitchesAndPositions(for note: N) -> [PitchAndPosition] {
             return zip(tf.pitches(note), tf.stavePositions(note))
@@ -49,33 +49,33 @@ class TieCreator<N> {
         let start = pitchesAndPositions(for: startNote)
         let end = pitchesAndPositions(for: endNote)
         
-        var variationSets = [TieVariationSet]()
+        var variationsArray = [TieVariations]()
         
         for (noteheadIndex, currentNoteHead) in start.enumerated() {
             
             let preferredDirection: VerticalDirection = (tf.stemDirection(startNote) == .down ? .up : .down)
             
-            var ties = [Tie]()
+            var ties = [Variation<Tie>]()
             
             // Make the preferred vertical tie (above or below the note)
             let preferredVerticalTie = makeTie(stavePosition: currentNoteHead.stavePosition,
                                                direction: preferredDirection)
-            ties.append(preferredVerticalTie)
+            ties.append(Variation(value: preferredVerticalTie, suitability: .preferable))
             
             // Make the fallback vertical ties (above or below on the opposite side)
             let fallbackVerticalTie = makeTie(stavePosition: currentNoteHead.stavePosition,
                                               direction: preferredDirection.opposite)
-            ties.append(fallbackVerticalTie)
-            
+            ties.append(Variation(value: fallbackVerticalTie, suitability: .preferable))
+
             if let endHeadIndex = end.firstIndex(where: { $0.pitch == currentNoteHead.pitch }) {
-                let variationSet = TieVariationSet(ties: ties,
-                                                   startHeadIndex: noteheadIndex,
-                                                   endHeadIndex: endHeadIndex)
-                variationSets.append(variationSet)
+                let variations = TieVariations(variations: ties,
+                                               startHeadIndex: noteheadIndex,
+                                               endHeadIndex: endHeadIndex)
+                variationsArray.append(variations)
             }
         }
         
-        return variationSets
+        return variationsArray
     }
     
     private func makeTie(stavePosition: Int, direction: VerticalDirection) -> Tie {

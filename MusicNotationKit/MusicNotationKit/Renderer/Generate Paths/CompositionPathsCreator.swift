@@ -40,7 +40,7 @@ class CompositionPathsCreator {
         var tiePaths = [Path]()
         for note in noteSequence.notes {
             for noteHeadDescription in note.noteHeadDescriptions {
-                if let tie = noteHeadDescription.tie {
+                if let tie = noteHeadDescription.tie?.chosenVariation {
                     tiePaths += TieRenderer().paths(forTie: tie, noteHead: noteHeadDescription, note: note)
                 }
             }

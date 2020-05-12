@@ -75,7 +75,7 @@ class MusicRenderer {
             CalculateNoteWidthsProcessingOperation().process(composition: composition)
             
             // Create Ties
-            ConfigureTiesProcessingOperation().process(composition: composition)
+            CreateTiesProcessingOperation().process(composition: composition)
             
             // Generate bar layout anchors
             GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)

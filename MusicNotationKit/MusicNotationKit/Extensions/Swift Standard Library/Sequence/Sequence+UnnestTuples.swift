@@ -16,6 +16,13 @@ extension Sequence {
             return (arg.0.0, arg.0.1, arg.1)
         }
     }
+    
+    // (T, (U, V)) -> (T, U, V)
+    func unnestTuples<T, U, V>() -> UnnestedTuplesSequence<Self, Self.Element, (T, U, V)> where Element == (T, (U, V)) {
+        return UnnestedTuplesSequence(sequence: self) { arg in
+            return (arg.0, arg.1.0, arg.1.1)
+        }
+    }
 }
 
 struct UnnestedTuplesSequence<WrappedSequence: Sequence, Input, Output>: Sequence, IteratorProtocol where WrappedSequence.Element == Input {

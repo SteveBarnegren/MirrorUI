@@ -88,7 +88,7 @@
 		676BB5F623316A1400EA9F9C /* BarLayoutAnchorsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5F523316A1400EA9F9C /* BarLayoutAnchorsBuilder.swift */; };
 		676BB5FD233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676BB5FC233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift */; };
 		67706494245CB41E0083037F /* Tie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67706493245CB41E0083037F /* Tie.swift */; };
-		67706497245CB8C60083037F /* ConfigureTiesProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67706496245CB8C60083037F /* ConfigureTiesProcessingOperation.swift */; };
+		67706497245CB8C60083037F /* CreateTiesProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67706496245CB8C60083037F /* CreateTiesProcessingOperation.swift */; };
 		67706499245CC3DC0083037F /* TieRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67706498245CC3DC0083037F /* TieRenderer.swift */; };
 		6770649C245DA2730083037F /* Collection+EachWithRemaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6770649B245DA2730083037F /* Collection+EachWithRemaining.swift */; };
 		6770649E245DBEC60083037F /* Collection+EachWithRemainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6770649D245DBEC60083037F /* Collection+EachWithRemainingTests.swift */; };
@@ -113,6 +113,11 @@
 		6789B869246206AC002D78A8 /* Sequence+ContainsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B868246206AC002D78A8 /* Sequence+ContainsTests.swift */; };
 		6789B86B24620A08002D78A8 /* TieCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B86A24620A08002D78A8 /* TieCreator.swift */; };
 		6789B86D24635E26002D78A8 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B86C24635E26002D78A8 /* Direction.swift */; };
+		6789B86F2465538E002D78A8 /* VariationSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B86E2465538E002D78A8 /* VariationSelector.swift */; };
+		6789B87324686E22002D78A8 /* VariationSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B87224686E22002D78A8 /* VariationSelectorTests.swift */; };
+		6789B87524687484002D78A8 /* VariationSequencerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B87424687484002D78A8 /* VariationSequencerTests.swift */; };
+		6789B87724689739002D78A8 /* Collection+AllPairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B87624689738002D78A8 /* Collection+AllPairs.swift */; };
+		6789B87924689AC4002D78A8 /* Collection+AllPairsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B87824689AC4002D78A8 /* Collection+AllPairsTests.swift */; };
 		679855C72460A1DB00877129 /* StaveSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855C62460A1DB00877129 /* StaveSpace.swift */; };
 		679855C92460A30F00877129 /* StaveSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855C82460A30F00877129 /* StaveSpaceTests.swift */; };
 		679855CC2460BA2800877129 /* Int+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855CB2460BA2800877129 /* Int+Rounding.swift */; };
@@ -254,7 +259,7 @@
 		676BB5F523316A1400EA9F9C /* BarLayoutAnchorsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarLayoutAnchorsBuilder.swift; sourceTree = "<group>"; };
 		676BB5FC233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateMinimumBarWidthsRenderOperation.swift; sourceTree = "<group>"; };
 		67706493245CB41E0083037F /* Tie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tie.swift; sourceTree = "<group>"; };
-		67706496245CB8C60083037F /* ConfigureTiesProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureTiesProcessingOperation.swift; sourceTree = "<group>"; };
+		67706496245CB8C60083037F /* CreateTiesProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTiesProcessingOperation.swift; sourceTree = "<group>"; };
 		67706498245CC3DC0083037F /* TieRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieRenderer.swift; sourceTree = "<group>"; };
 		6770649B245DA2730083037F /* Collection+EachWithRemaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+EachWithRemaining.swift"; sourceTree = "<group>"; };
 		6770649D245DBEC60083037F /* Collection+EachWithRemainingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+EachWithRemainingTests.swift"; sourceTree = "<group>"; };
@@ -279,6 +284,11 @@
 		6789B868246206AC002D78A8 /* Sequence+ContainsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+ContainsTests.swift"; sourceTree = "<group>"; };
 		6789B86A24620A08002D78A8 /* TieCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieCreator.swift; sourceTree = "<group>"; };
 		6789B86C24635E26002D78A8 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		6789B86E2465538E002D78A8 /* VariationSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariationSelector.swift; sourceTree = "<group>"; };
+		6789B87224686E22002D78A8 /* VariationSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariationSelectorTests.swift; sourceTree = "<group>"; };
+		6789B87424687484002D78A8 /* VariationSequencerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariationSequencerTests.swift; sourceTree = "<group>"; };
+		6789B87624689738002D78A8 /* Collection+AllPairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+AllPairs.swift"; sourceTree = "<group>"; };
+		6789B87824689AC4002D78A8 /* Collection+AllPairsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+AllPairsTests.swift"; sourceTree = "<group>"; };
 		679855C62460A1DB00877129 /* StaveSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveSpace.swift; sourceTree = "<group>"; };
 		679855C82460A30F00877129 /* StaveSpaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveSpaceTests.swift; sourceTree = "<group>"; };
 		679855CB2460BA2800877129 /* Int+Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Rounding.swift"; sourceTree = "<group>"; };
@@ -622,19 +632,21 @@
 			path = "Calculate Minimum Bar Widths";
 			sourceTree = "<group>";
 		};
-		67706495245CB8910083037F /* Configure Ties */ = {
+		67706495245CB8910083037F /* Create Ties */ = {
 			isa = PBXGroup;
 			children = (
-				67706496245CB8C60083037F /* ConfigureTiesProcessingOperation.swift */,
+				67706496245CB8C60083037F /* CreateTiesProcessingOperation.swift */,
+				6789B86E2465538E002D78A8 /* VariationSelector.swift */,
 				6789B86A24620A08002D78A8 /* TieCreator.swift */,
 			);
-			path = "Configure Ties";
+			path = "Create Ties";
 			sourceTree = "<group>";
 		};
 		6770649A245DA2510083037F /* Collection */ = {
 			isa = PBXGroup;
 			children = (
 				6770649B245DA2730083037F /* Collection+EachWithRemaining.swift */,
+				6789B87624689738002D78A8 /* Collection+AllPairs.swift */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -792,6 +804,8 @@
 		67A15F9621C5129500C3C03F /* MusicNotationKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				6789B87224686E22002D78A8 /* VariationSelectorTests.swift */,
+				6789B87424687484002D78A8 /* VariationSequencerTests.swift */,
 				674B9AB822EDF6330098D121 /* Basic Types */,
 				671A4D2322875211002C56E8 /* Supporting */,
 				67F6880C21EB529F003707DD /* Extensions */,
@@ -877,7 +891,7 @@
 				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
 				67728782243BB6240038B142 /* Calculate Note Head Alignment */,
 				6772560F2440D98300954C91 /* Calculate Note Widths */,
-				67706495245CB8910083037F /* Configure Ties */,
+				67706495245CB8910083037F /* Create Ties */,
 				6785A9B62331698D004B32B8 /* Generate Layout Anchors */,
 				676BB5FB233178C700EA9F9C /* Calculate Minimum Bar Widths */,
 				67BB96BB2337B19000119953 /* Stitch Bar Layout Anchors */,
@@ -930,6 +944,7 @@
 				677F34C42427EAE200507156 /* Sequence+MaxAndMinTests.swift */,
 				673A3D222340EBD4001CE422 /* Sequence+UnnestTuplesTests.swift */,
 				678318662440E77A00FB9784 /* BinaryInteger+ParityTests.swift */,
+				6789B87824689AC4002D78A8 /* Collection+AllPairsTests.swift */,
 				6770649D245DBEC60083037F /* Collection+EachWithRemainingTests.swift */,
 				6789B868246206AC002D78A8 /* Sequence+ContainsTests.swift */,
 			);
@@ -1150,6 +1165,7 @@
 				67EA89EF242637310009BE61 /* NoteHeadDescriber.swift in Sources */,
 				671A4D3922886FBD002C56E8 /* DotRenderer.swift in Sources */,
 				67BA78AD2430BEB00097806B /* Rect.swift in Sources */,
+				6789B87724689739002D78A8 /* Collection+AllPairs.swift in Sources */,
 				678318692440FCD500FB9784 /* SortMapper.swift in Sources */,
 				677256112440D9AE00954C91 /* CaclulateNoteWidthsProcessingOperation.swift in Sources */,
 				6751A84022350475000B0D08 /* NoteValue.swift in Sources */,
@@ -1164,12 +1180,13 @@
 				674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */,
 				670ABDB022C55E7000BFA678 /* Sequence+Extensions.swift in Sources */,
 				6772877F24351BFE0038B142 /* AccidentalSymbol.swift in Sources */,
+				6789B86F2465538E002D78A8 /* VariationSelector.swift in Sources */,
 				67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */,
 				6751A83E223304E7000B0D08 /* Barline.swift in Sources */,
 				6753D0FB22D7D9340052F27F /* NaturalRenderer.swift in Sources */,
 				674B9AB522EDF6050098D121 /* IncrementingSequence.swift in Sources */,
 				6769B42922BDA52800AAFFF9 /* Array+Extract.swift in Sources */,
-				67706497245CB8C60083037F /* ConfigureTiesProcessingOperation.swift in Sources */,
+				67706497245CB8C60083037F /* CreateTiesProcessingOperation.swift in Sources */,
 				67BB96AD23367E3200119953 /* CompositionProcessingOperation.swift in Sources */,
 				673A3D212340E6E2001CE422 /* Sequence+UnnestTuples.swift in Sources */,
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
@@ -1217,13 +1234,16 @@
 				67EA89F324264CA30009BE61 /* NoteHeadDescription+Verify.swift in Sources */,
 				673A3D1E233FC567001CE422 /* Array+MaybeTests.swift in Sources */,
 				6728B2CA2239986000382D92 /* NoteSequence+Verify.swift in Sources */,
+				6789B87524687484002D78A8 /* VariationSequencerTests.swift in Sources */,
 				671A4D252287524E002C56E8 /* NoteSymbolDescription+Verify.swift in Sources */,
 				6756F61B2300C30C003F1F19 /* ElementPopperTests.swift in Sources */,
 				67B1B4BE2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift in Sources */,
+				6789B87924689AC4002D78A8 /* Collection+AllPairsTests.swift in Sources */,
 				67494C8221CC06940078A575 /* Vector2Tests.swift in Sources */,
 				67EA89F124264BE70009BE61 /* NoteHeadDescriberTests.swift in Sources */,
 				67BA789D2430AF750097806B /* SingleValueCacheTests.swift in Sources */,
 				6789B869246206AC002D78A8 /* Sequence+ContainsTests.swift in Sources */,
+				6789B87324686E22002D78A8 /* VariationSelectorTests.swift in Sources */,
 				67E863BB2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift in Sources */,
 				67669E6322EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift in Sources */,
 			);

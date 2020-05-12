@@ -142,7 +142,7 @@ class NoteHeadDescription: VerticallyPositionable {
     var staveOffset = Double(0)
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
-    var tie: Tie?
+    var tie: VariationSet<Tie>?
     
     // VerticallyPositionable
     var yPosition: Double = 0
