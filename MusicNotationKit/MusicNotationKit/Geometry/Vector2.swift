@@ -39,3 +39,9 @@ struct Vector2<T> {
         set { secondValue = newValue }
     }
 }
+
+extension Vector2: Equatable where T: Equatable {
+    static func == (lhs: Vector2, rhs: Vector2) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y
+    }
+}

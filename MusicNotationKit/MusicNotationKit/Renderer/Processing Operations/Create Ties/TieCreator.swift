@@ -57,28 +57,54 @@ class TieCreator<N> {
             
             var ties = [Variation<Tie>]()
             
-            // Make the preferred vertical tie (above or below the note)
-            let preferredVerticalTie = makeTie(stavePosition: currentNoteHead.stavePosition,
-                                               direction: preferredDirection)
-            ties.append(Variation(value: preferredVerticalTie, suitability: .preferable))
+            // Big arc tie
+            do {
+                let tie = makeBigArcTie(stavePosition: currentNoteHead.stavePosition,
+                                        direction: preferredDirection)
+                ties.append(Variation(value: tie, suitability: .preferable))
+            }
             
-            // Make the fallback vertical ties (above or below on the opposite side)
-            let fallbackVerticalTie = makeTie(stavePosition: currentNoteHead.stavePosition,
-                                              direction: preferredDirection.opposite)
-            ties.append(Variation(value: fallbackVerticalTie, suitability: .preferable))
-
+            // Adjacent arc tie
+            do {
+                let tie = makeAdjacentArcTie(stavePosition: currentNoteHead.stavePosition,
+                                             direction: preferredDirection)
+                ties.append(Variation(value: tie, suitability: .preferable))
+            }
+            
+            // Flattened tie
+            do {
+                let tie = makeFlattenedTie(stavePosition: currentNoteHead.stavePosition,
+                                           direction: preferredDirection)
+                ties.append(Variation(value: tie, suitability: .allowed))
+            }
+            
+            // Big arc tie (opposite direction)
+            do {
+                let tie = makeBigArcTie(stavePosition: currentNoteHead.stavePosition,
+                                        direction: preferredDirection.opposite)
+                ties.append(Variation(value: tie, suitability: .concession))
+            }
+            
             if let endHeadIndex = end.firstIndex(where: { $0.pitch == currentNoteHead.pitch }) {
                 let variations = TieVariations(variations: ties,
                                                startHeadIndex: noteheadIndex,
                                                endHeadIndex: endHeadIndex)
                 variationsArray.append(variations)
             }
+            
+            // Adjacent arc tie (opposite direction)
+            do {
+                let tie = makeAdjacentArcTie(stavePosition: currentNoteHead.stavePosition,
+                                             direction: preferredDirection.opposite)
+                ties.append(Variation(value: tie, suitability: .concession))
+            }
         }
         
         return variationsArray
     }
     
-    private func makeTie(stavePosition: Int, direction: VerticalDirection) -> Tie {
+    // Makes the ideal tie. Sits above or below the note, and arcs in to the next space.
+    private func makeBigArcTie(stavePosition: Int, direction: VerticalDirection) -> Tie {
         
         let isOnSpace = stavePosition.isOdd
         let tieAboveNote = (direction == .up)
@@ -104,6 +130,47 @@ class TieCreator<N> {
         tie.startPosition = TiePosition(space: startSpace)
         tie.middlePosition = TiePosition(space: middleSpace)
         tie.endAlignment = endAlignment
+        tie.middleAlignment = .middleOfSpace
+        tie.orientation = .verticallyAlignedWithNote
+        
+        return tie
+    }
+    
+    // Makes an arcing tie that sits next to the note and arcs in to the space above /
+    // below. As it starts on the same space as the note it takes up one less space
+    // than the big arc style.
+    private func makeAdjacentArcTie(stavePosition: Int, direction: VerticalDirection) -> Tie {
+        
+        let tieAboveNote = (direction == .up)
+        let startSpace =  StaveSpace(stavePosition: stavePosition,
+                                     lineRounding: tieAboveNote ? .spaceAbove : .spaceBelow)
+        
+        let endAlignment: TieEndAlignment = tieAboveNote ? .top : .bottom
+        let middleSpace = startSpace.adding(spaces: tieAboveNote ? 1 : -1)
+        
+        let tie = Tie()
+        tie.startPosition = TiePosition(space: startSpace)
+        tie.middlePosition = TiePosition(space: middleSpace)
+        tie.endAlignment = endAlignment
+        tie.middleAlignment = .middleOfSpace
+        tie.orientation = .adjacentToNote
+        
+        return tie
+    }
+    
+    // Makes a flat adjacent tie that curves within a single stave space
+    private func makeFlattenedTie(stavePosition: Int, direction: VerticalDirection) -> Tie {
+        
+        let tieAboveNote = (direction == .up)
+        let space =  StaveSpace(stavePosition: stavePosition,
+                                lineRounding: tieAboveNote ? .spaceAbove : .spaceBelow)
+                
+        let tie = Tie()
+        tie.startPosition = TiePosition(space: space)
+        tie.middlePosition = TiePosition(space: space)
+        tie.endAlignment = (direction == .up) ? .bottom : .top
+        tie.middleAlignment = (direction == .up) ? .topOfSpace : .bottomOfSpace
+        tie.orientation = .adjacentToNote
         
         return tie
     }

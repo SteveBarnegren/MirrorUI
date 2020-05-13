@@ -52,7 +52,13 @@ class VariationSet<T> {
 
 class VariationSelector<T> {
     
-    func pruneVariations(variationSets: [VariationSet<T>], areCompatable: (T, T) -> Bool) {
+    private let areCompatable: (T, T) -> Bool
+    
+    init(areCompatable: @escaping (T, T) -> Bool) {
+        self.areCompatable = areCompatable
+    }
+    
+    func pruneVariations(variationSets: [VariationSet<T>]) {
         
         let sets = variationSets
         
@@ -61,14 +67,14 @@ class VariationSelector<T> {
         var iteration: [T]?
         repeat {
             iteration = sequencer.next()
-        } while iteration.flatMap({ containsConflicts($0, areCompatable) }) == true
+        } while iteration.flatMap({ self.containsConflicts($0) }) == true
 
         for (chosenIndex, set) in zip(sequencer.variationIndexes, sets) {
             set.prune(toIndex: chosenIndex)
         }
     }
     
-    private func containsConflicts(_ values: [T], _ areCompatable: (T, T) -> Bool) -> Bool {
+    private func containsConflicts(_ values: [T]) -> Bool {
         return values.allPairs().contains { pair in
             areCompatable(pair.0, pair.1) == false
         }

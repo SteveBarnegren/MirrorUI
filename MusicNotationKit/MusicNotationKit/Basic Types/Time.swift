@@ -103,3 +103,7 @@ func -= (lhs: inout Time, rhs: Time) {
 func * (lhs: Time, rhs: Int) -> Time {
     return Time(value: lhs.value * rhs, division: lhs.division)
 }
+
+func / (lhs: Time, rhs: Int) -> Time {
+    return Time(value: lhs.value, division: lhs.division * rhs)
+}

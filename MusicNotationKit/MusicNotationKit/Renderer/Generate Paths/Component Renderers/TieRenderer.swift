@@ -21,14 +21,16 @@ class TieRenderer {
             print("Error - tie had no end note head")
             return []
         }
+        
+        let orientationOffset = xOffset(forOrientation: tie.orientation)
                 
         let startY = yPosition(fromTiePosition: tie.startPosition) + yOffset(forEndAlignment: tie.endAlignment)
-        let start = Point(xPosition(forNote: note, noteHead: noteHead),
+        let start = Point(xPosition(forNote: note, noteHead: noteHead) + orientationOffset,
                           startY)
-        let end = Point(xPosition(forNote: endNote, noteHead: endNoteHead),
+        let end = Point(xPosition(forNote: endNote, noteHead: endNoteHead) - orientationOffset,
                         startY)
         let mid = Point((start.x + end.x) / 2,
-                        yPosition(fromTiePosition: tie.middlePosition))
+                        yPosition(fromTiePosition: tie.middlePosition) + yOffset(forMiddleAlignment: tie.middleAlignment))
         
         var path = Path(commands: [
             .move(start),
@@ -42,7 +44,8 @@ class TieRenderer {
     }
     
     private func xPosition(forNote note: Note, noteHead: NoteHeadDescription) -> Double {
-        return note.xPosition + NoteHeadAligner.xOffset(forAlignment: noteHead.alignment)
+        return note.xPosition
+            + NoteHeadAligner.xOffset(forAlignment: noteHead.alignment)
     }
     
     private func yPosition(fromTiePosition tiePosition: TiePosition) -> Double {
@@ -59,6 +62,30 @@ class TieRenderer {
             return 0.25
         case .hangingBelowNoteHead:
             return -0.25
+        case .top:
+            return 0.25
+        case .bottom:
+            return -0.25
+        }
+    }
+    
+    private func yOffset(forMiddleAlignment alignment: TieMiddleAlignment) -> Double {
+        switch alignment {
+        case .middleOfSpace:
+            return 0
+        case .topOfSpace:
+            return 0.25
+        case .bottomOfSpace:
+            return -0.25
+        }
+    }
+    
+    private func xOffset(forOrientation orientation: TieOrientation) -> Double {
+        switch orientation {
+        case .verticallyAlignedWithNote:
+            return 0
+        case .adjacentToNote:
+            return 1
         }
     }
 }

@@ -9,15 +9,22 @@
 import Foundation
 
 enum TieOrientation {
-    case aboveNoteHead
-    case belowNoteHead
-    case rightOfNoteHead
+    case verticallyAlignedWithNote
+    case adjacentToNote
 }
 
 enum TieEndAlignment {
     case middleOfSpace
     case sittingAboveNoteHead
     case hangingBelowNoteHead
+    case bottom
+    case top
+}
+
+enum TieMiddleAlignment {
+    case middleOfSpace
+    case topOfSpace
+    case bottomOfSpace
 }
 
 struct TiePosition {
@@ -34,9 +41,16 @@ struct TiePosition {
 }
 
 class Tie {
+    
     var startPosition = TiePosition()
     var middlePosition = TiePosition()
     var endAlignment = TieEndAlignment.middleOfSpace
+    var middleAlignment = TieMiddleAlignment.middleOfSpace
+    var orientation = TieOrientation.verticallyAlignedWithNote
     weak var toNote: Note?
     weak var toNoteHead: NoteHeadDescription?
+    
+    // Additonal information used to prune variations
+    var startNoteTime = Time.zero
+    var endNoteTime = Time.zero
 }

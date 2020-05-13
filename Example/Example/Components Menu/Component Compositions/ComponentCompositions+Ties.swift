@@ -16,7 +16,6 @@ extension ComponentCompositions {
         let compostion = Composition()
   
         // Tied crotchets
-        
         do {
             let pitchPairs: [(Pitch, Pitch)] = [
                 (.e3, .f3),
@@ -67,6 +66,7 @@ extension ComponentCompositions {
         
         // Various
         do {
+            
             do {
                 let bar = Bar()
                 let sequence = NoteSequence()
@@ -140,6 +140,7 @@ extension ComponentCompositions {
                 bar.add(sequence: sequence)
                 compostion.add(bar: bar)
             }
+ 
         }
         
         // Chords over bar line
