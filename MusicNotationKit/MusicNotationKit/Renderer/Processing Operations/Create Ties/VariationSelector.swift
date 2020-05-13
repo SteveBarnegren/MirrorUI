@@ -50,6 +50,30 @@ class VariationSet<T> {
     }
 }
 
+class VariationSelectorSet<T> {
+    let variationSet: VariationSet<T>
+    var selectedIndex = 0
+    var hasFurtherVariations: Bool {
+        return selectedIndex < variationSet.variations.endIndex-1
+    }
+    
+    var currentValue: T {
+        return variationSet.variations[selectedIndex].value
+    }
+    
+    var nextVariation: Variation<T>? {
+        return variationSet.variations[maybe: selectedIndex+1]
+    }
+    
+    init(variationSet: VariationSet<T>) {
+        self.variationSet = variationSet
+    }
+    
+    func prune() {
+        variationSet.prune(toIndex: selectedIndex)
+    }
+}
+
 class VariationSelector<T> {
     
     private let areCompatable: (T, T) -> Bool
@@ -59,25 +83,57 @@ class VariationSelector<T> {
     }
     
     func pruneVariations(variationSets: [VariationSet<T>]) {
-        
-        let sets = variationSets
-        
-        var sequencer = VariationSequencer(variationSets: sets)
-    
-        var iteration: [T]?
-        repeat {
-            iteration = sequencer.next()
-        } while iteration.flatMap({ self.containsConflicts($0) }) == true
+        let sets = variationSets.map(VariationSelectorSet.init)
+        var conflictingSets = [VariationSelectorSet<T>]()
 
-        for (chosenIndex, set) in zip(sequencer.variationIndexes, sets) {
-            set.prune(toIndex: chosenIndex)
-        }
+        repeat {
+            // Figure out if there are any conflicts
+            conflictingSets.removeAll()
+            sets.allPairs().forEach { first, second in
+                if areCompatable(first.currentValue, second.currentValue) {
+                    return
+                }
+                
+                if !conflictingSets.contains(where: { $0 === first }) {
+                    conflictingSets.append(first)
+                }
+                if !conflictingSets.contains(where: { $0 === second }) {
+                    conflictingSets.append(second)
+                }
+            }
+            
+            // Resolved if no conflicts
+            if conflictingSets.isEmpty {
+                sets.forEach { $0.prune() }
+                return
+            }
+        } while moveIndex(inSets: conflictingSets)
+        
+        sets.forEach { $0.prune() }
     }
     
-    private func containsConflicts(_ values: [T]) -> Bool {
-        return values.allPairs().contains { pair in
-            areCompatable(pair.0, pair.1) == false
+    private func moveIndex(inSets sets: [VariationSelectorSet<T>]) -> Bool {
+        
+        // Find the set to change
+        var variationSetToChange: VariationSelectorSet<T>?
+        var currentSuitability = VariationSuitability.lowest
+        
+        for set in sets {
+            guard let nextVariation = set.nextVariation else {
+                continue
+            }
+            
+            if variationSetToChange == nil || nextVariation.suitability > currentSuitability {
+                variationSetToChange = set
+                currentSuitability = nextVariation.suitability
+            }
         }
+        
+        // Increment the variation
+        variationSetToChange?.selectedIndex += 1
+        
+        // Return whether to continue
+        return variationSetToChange != nil
     }
 }
 
