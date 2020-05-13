@@ -8,89 +8,122 @@
 
 import Foundation
 
-enum VariationSuitability: Int, CaseIterable {
-    case concession
-    case allowed
-    case preferable
+class AnyVariationSet {
     
-    static let lowest: VariationSuitability = {
-        return VariationSuitability.allCases.min()!
-    }()
-}
-
-extension VariationSuitability: Comparable {
-    static func < (lhs: VariationSuitability, rhs: VariationSuitability) -> Bool {
-        return lhs.rawValue < rhs.rawValue
+    private let _valueAtIndex: (Int) -> Any
+    private let _getValues: () -> [Any]
+    private let _getSuitabilities: () -> [VariationSuitability]
+    private let _pruneToIndex: (Int) -> Void
+    
+    var values: [Any] {
+        return _getValues()
+    }
+    
+    var suitabilities: [VariationSuitability] {
+        return _getSuitabilities()
+    }
+    
+    init<T>(_ variationSet: VariationSet<T>) {
+        self._valueAtIndex = { return variationSet.variations[$0].value }
+        self._getValues = { return variationSet.variations.map { $0.value } as [Any] }
+        self._getSuitabilities = { return variationSet.variations.map { $0.suitability } }
+        self._pruneToIndex = { variationSet.prune(toIndex: $0) }
+    }
+    
+    func value(at index: Int) -> Any {
+        return self._valueAtIndex(index)
+    }
+    
+    func prune(to index: Int) {
+        self._pruneToIndex(index)
     }
 }
 
-class Variation<T> {
-    let value: T
-    var suitability: VariationSuitability
-    
-    init(value: T, suitability: VariationSuitability = .allowed) {
-        self.value = value
-        self.suitability = suitability
-    }
-}
-
-class VariationSet<T> {
-    var variations: [Variation<T>]
-    
-    var chosenVariation: T {
-        return variations.first!.value
-    }
-    
-    init(variations: [Variation<T>]) {
-        self.variations = variations
-    }
-    
-    func prune(toIndex index: Int) {
-        variations = variations.suffix(from: index).toArray()
-    }
-}
-
-class VariationSelectorSet<T> {
-    let variationSet: VariationSet<T>
+class VariationSelectorSet {
+    var variationSet: AnyVariationSet
     var selectedIndex = 0
-    var hasFurtherVariations: Bool {
-        return selectedIndex < variationSet.variations.endIndex-1
-    }
-    
-    var currentValue: T {
-        return variationSet.variations[selectedIndex].value
-    }
-    
-    var nextVariation: Variation<T>? {
-        return variationSet.variations[maybe: selectedIndex+1]
-    }
-    
-    init(variationSet: VariationSet<T>) {
+
+    init(_ variationSet: AnyVariationSet) {
         self.variationSet = variationSet
     }
     
+    var currentValue: Any {
+        return variationSet.value(at: selectedIndex)
+    }
+    
+    var nextVariationValue: Any? {
+        return variationSet.values[maybe: selectedIndex+1]
+    }
+    
+    var nextVariationSuitability: VariationSuitability? {
+        return variationSet.suitabilities[maybe: selectedIndex+1]
+    }
+    
     func prune() {
-        variationSet.prune(toIndex: selectedIndex)
+        variationSet.prune(to: selectedIndex)
     }
 }
 
-class VariationSelector<T> {
+class ConflictIdentifier<T, U> {
     
-    private let areCompatable: (T, T) -> Bool
+    private var areCompatible: (T, U) -> Bool
     
-    init(areCompatable: @escaping (T, T) -> Bool) {
-        self.areCompatable = areCompatable
+    init(areCompatible: @escaping (T, U) -> Bool) {
+        self.areCompatible = areCompatible
     }
     
-    func pruneVariations(variationSets: [VariationSet<T>]) {
-        let sets = variationSets.map(VariationSelectorSet.init)
-        var conflictingSets = [VariationSelectorSet<T>]()
+    func isConflict(first: T, second: U) -> Bool {
+        return areCompatible(first, second) == false
+    }
+}
+
+class AnyConflictIdentifier {
+    
+    private var _isConflict: (Any, Any) -> Bool
+    
+    init<T, U>(_ conflictIdentifier: ConflictIdentifier<T, U>) {
+        self._isConflict = { first, second in
+            if let f = first as? T, let s = second as? U {
+                return conflictIdentifier.isConflict(first: f, second: s)
+            } else if let f = second as? T, let s = first as? U {
+                return conflictIdentifier.isConflict(first: f, second: s)
+            } else {
+                return false
+            }
+        }
+    }
+    
+    func isConflict(first: Any, second: Any) -> Bool {
+        return _isConflict(first, second)
+    }
+}
+
+class VariationSelector {
+    
+    private var conflictIdentifiers = [AnyConflictIdentifier]()
+    private var variationSets = [VariationSelectorSet]()
+    
+    func add<T, U>(conflictIdentifier: ConflictIdentifier<T, U>) {
+        conflictIdentifiers.append(AnyConflictIdentifier(conflictIdentifier))
+    }
+    
+    func add<T>(variationSet: VariationSet<T>) {
+        variationSets.append(VariationSelectorSet(AnyVariationSet(variationSet)))
+    }
+    
+    func add<T>(variationSets: [VariationSet<T>]) {
+        variationSets.forEach(add)
+    }
+
+    func pruneVariations() {
+        let sets = variationSets
+        var conflictingSets = [VariationSelectorSet]()
 
         repeat {
             // Figure out if there are any conflicts
             conflictingSets.removeAll()
             sets.allPairs().forEach { first, second in
-                if areCompatable(first.currentValue, second.currentValue) {
+                if self.areCompatible(first.currentValue, second.currentValue) {
                     return
                 }
                 
@@ -112,20 +145,29 @@ class VariationSelector<T> {
         sets.forEach { $0.prune() }
     }
     
-    private func moveIndex(inSets sets: [VariationSelectorSet<T>]) -> Bool {
+    private func areCompatible(_ first: Any, _ second: Any) -> Bool {
+        for conflictIdentifier in conflictIdentifiers {
+            if conflictIdentifier.isConflict(first: first, second: second) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    private func moveIndex(inSets sets: [VariationSelectorSet]) -> Bool {
         
         // Find the set to change
-        var variationSetToChange: VariationSelectorSet<T>?
+        var variationSetToChange: VariationSelectorSet?
         var currentSuitability = VariationSuitability.lowest
         
         for set in sets {
-            guard let nextVariation = set.nextVariation else {
+            guard let nextSuitability = set.nextVariationSuitability else {
                 continue
             }
             
-            if variationSetToChange == nil || nextVariation.suitability > currentSuitability {
+            if variationSetToChange == nil || nextSuitability > currentSuitability {
                 variationSetToChange = set
-                currentSuitability = nextVariation.suitability
+                currentSuitability = nextSuitability
             }
         }
         

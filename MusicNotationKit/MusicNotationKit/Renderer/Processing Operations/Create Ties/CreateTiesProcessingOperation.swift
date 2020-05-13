@@ -87,8 +87,10 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
     private func chooseVariations(forBar bar: Bar) {
         let variationSets = bar.sequences.map(self.variationSets).joined().toArray()
         
-        let variationSelector = VariationSelector<Tie>(areCompatable: areTiesCompatable)
-        variationSelector.pruneVariations(variationSets: variationSets)
+        let variationSelector = VariationSelector()
+        variationSelector.add(conflictIdentifier: makeTiesConflictIdentifier())
+        variationSelector.add(variationSets: variationSets)
+        variationSelector.pruneVariations()
     }
     
     private func variationSets(forNoteSequence noteSequence: NoteSequence) -> [VariationSet<Tie>] {
@@ -102,6 +104,10 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
         }
         
         return variationSets
+    }
+    
+    private func makeTiesConflictIdentifier() -> ConflictIdentifier<Tie, Tie> {
+        return ConflictIdentifier<Tie, Tie>(areCompatible: self.areTiesCompatable)
     }
     
     private func areTiesCompatable(tie1: Tie, tie2: Tie) -> Bool {
