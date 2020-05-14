@@ -14,6 +14,7 @@ public class Rest: Playable, Positionable {
     
     // Playable
     var value: NoteValue
+    var compositionTime = CompositionTime.zero
     
     // HorizontalLayoutItem
     var time = Time.zero

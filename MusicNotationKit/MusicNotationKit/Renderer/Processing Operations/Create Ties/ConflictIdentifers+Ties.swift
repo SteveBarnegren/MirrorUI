@@ -24,9 +24,9 @@ extension ConflictIdentifiers {
         
         func makeVectors(forTie tie: Tie) -> (start: Vector2D, middle: Vector2D, end: Vector2D) {
             return (
-                makeVector(tie.startNoteTime, tie.startPosition),
-                makeVector(tie.startNoteTime + ((tie.endNoteTime - tie.startNoteTime)/2), tie.middlePosition),
-                makeVector(tie.endNoteTime, tie.startPosition)
+                makeVector(tie.startNoteTime.time, tie.startPosition),
+                makeVector(tie.startNoteTime.time + ((tie.endNoteTime.time - tie.startNoteTime.time)/2), tie.middlePosition),
+                makeVector(tie.endNoteTime.time, tie.startPosition)
             )
         }
         
@@ -34,7 +34,12 @@ extension ConflictIdentifiers {
             return VectorMath.lineSegmentsIntersect(start1: p1, end1: p2, start2: p3, end2: p4)
         }
         
-       // print("Tie compatability -------------")
+        // If the ties aren't in the same bar then we'll assume that they're not in
+        // conflict. This isn't actually true, but it handles the most common cases.
+        if tie1.startNoteTime.bar != tie2.startNoteTime.bar || tie1.endNoteTime.bar != tie2.endNoteTime.bar {
+            return true
+        }
+        
         
         let t1 = makeVectors(forTie: tie1)
         let t2 = makeVectors(forTie: tie2)

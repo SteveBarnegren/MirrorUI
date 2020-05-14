@@ -57,6 +57,7 @@ public class Note: Playable {
     // Playable
     let value: NoteValue
     var time = Time.zero
+    var compositionTime = CompositionTime.zero
     
     // HorizontalLayoutItem
     var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.4)

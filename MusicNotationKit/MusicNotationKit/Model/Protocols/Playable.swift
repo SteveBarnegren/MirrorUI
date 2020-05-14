@@ -11,6 +11,7 @@ import Foundation
 protocol Playable: HorizontalLayoutItem {
     var value: NoteValue { get }
     var time: Time { get set }
+    var compositionTime: CompositionTime { get set }
 }
 
 extension Playable {

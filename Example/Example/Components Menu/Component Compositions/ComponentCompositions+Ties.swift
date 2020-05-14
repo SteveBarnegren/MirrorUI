@@ -8,7 +8,7 @@
 
 import Foundation
 import MusicNotationKit
-/*
+
 extension ComponentCompositions {
     
     static var ties: Composition {
@@ -175,7 +175,8 @@ extension ComponentCompositions {
         return compostion
     }
 }
-*/
+
+/*
 extension ComponentCompositions {
     
     static var ties: Composition {
@@ -214,7 +215,7 @@ extension ComponentCompositions {
         return compostion
     }
 }
-
+*/
 /*
 extension ComponentCompositions {
     

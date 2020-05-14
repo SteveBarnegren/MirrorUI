@@ -13,14 +13,16 @@ class CalculatePlayableItemTimesProcessingOperation: CompositionProcessingOperat
     private let playableItemTimeCalculator = PlayableItemTimeCalculator()
     
     func process(composition: Composition) {
-        for bar in composition.bars {
-            process(bar: bar)
-        }
-    }
-    
-    private func process(bar: Bar) {
-        for noteSequence in bar.sequences {
-            playableItemTimeCalculator.process(noteSequence: noteSequence)
+        for (barIndex, bar) in composition.bars.enumerated() {
+            for sequence in bar.sequences {
+                
+                var currentTime = Time.zero
+                for playable in sequence.playables {
+                    playable.time = currentTime
+                    playable.compositionTime = CompositionTime(bar: barIndex, time: currentTime)
+                    currentTime += playable.duration
+                }
+            }
         }
     }
 }
