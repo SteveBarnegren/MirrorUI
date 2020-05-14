@@ -47,6 +47,8 @@ class Tie {
     var endAlignment = TieEndAlignment.middleOfSpace
     var middleAlignment = TieMiddleAlignment.middleOfSpace
     var orientation = TieOrientation.verticallyAlignedWithNote
+    weak var fromNote: Note?
+    weak var fromNoteHead: NoteHeadDescription?
     weak var toNote: Note?
     weak var toNoteHead: NoteHeadDescription?
     

@@ -8,7 +8,7 @@
 
 import Foundation
 import MusicNotationKit
-
+/*
 extension ComponentCompositions {
     
     static var ties: Composition {
@@ -175,7 +175,67 @@ extension ComponentCompositions {
         return compostion
     }
 }
+*/
+extension ComponentCompositions {
+    
+    static var ties: Composition {
+        
+        let compostion = Composition()
+        
+        do {
+            let pitches: [Pitch] = [.e3, .g3, .b4, .d4]
+            
+            do {
+                let bar = Bar()
+                let sequence = NoteSequence()
+                
+                sequence.add(rest: Rest(value: .dottedQuaver))
+                //sequence.add(note: Note(value: .semiquaver, pitches: pitches).tied())
+                sequence.add(rest: Rest(value: .semiquaver))
 
+                sequence.add(note: Note(value: .crotchet, pitches: pitches).tied())
+                
+                bar.add(sequence: sequence)
+                compostion.add(bar: bar)
+            }
+            
+            do {
+                let bar = Bar()
+                let sequence = NoteSequence()
+                
+                sequence.add(note: Note(value: .minim, pitches: pitches).tied())
+                sequence.add(note: Note(value: .quaver, pitches: pitches).tied())
+                
+                bar.add(sequence: sequence)
+                compostion.add(bar: bar)
+            }
+        }
+        
+        return compostion
+    }
+}
+
+/*
+extension ComponentCompositions {
+    
+    static var ties: Composition {
+        
+        let compostion = Composition()
+        
+        let bar = Bar()
+        let sequence = NoteSequence()
+        
+        sequence.add(rest: Rest(value: .dottedQuaver))
+        sequence.add(note: Note(value: .semibreve, pitches: [.g3, .b4]).tied())
+        sequence.add(note: Note(value: .crotchet, pitches: [.g3, .b4]))
+        
+        bar.add(sequence: sequence)
+        compostion.add(bar: bar)
+        
+        return compostion
+    }
+}
+*/
 /*
 extension ComponentCompositions {
     

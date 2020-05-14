@@ -62,6 +62,8 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
         for tieVariations in variationsArray {
             var ties = [Variation<Tie>]()
             for variation in tieVariations.variations {
+                variation.value.fromNote = startNote
+                variation.value.fromNoteHead = startNote.noteHeadDescriptions[tieVariations.startNoteHeadIndex]
                 variation.value.toNote = endNote
                 variation.value.toNoteHead = endNote.noteHeadDescriptions[tieVariations.endNoteHeadIndex]
                 variation.value.startNoteTime = startNote.time
@@ -81,16 +83,35 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
     // MARK: - Choose Tie Variations
     
     private func chooseVariations(forComposition composition: Composition) {
-        composition.bars.forEach(chooseVariations)
+        composition.bars.eachWithNext().forEach { self.chooseVariations(forBar: $0.0, nextBar: $0.1) }
     }
     
-    private func chooseVariations(forBar bar: Bar) {
-        let variationSets = bar.sequences.map(self.variationSets).joined().toArray()
+    private func chooseVariations(forBar bar: Bar, nextBar: Bar?) {
+        let tieVariationSets = bar.sequences.map(self.variationSets).joined().toArray()
+        let noteVariationSets = self.noteVariationSets(forBar: bar, nextbar: nextBar)
         
         let variationSelector = VariationSelector()
-        variationSelector.add(conflictIdentifier: makeTiesConflictIdentifier())
-        variationSelector.add(variationSets: variationSets)
+        variationSelector.add(conflictIdentifier: ConflictIdentifiers.ties)
+        variationSelector.add(conflictIdentifier: ConflictIdentifiers.tiesAndNotes)
+        variationSelector.add(variationSets: tieVariationSets)
+        variationSelector.add(variationSets: noteVariationSets)
         variationSelector.pruneVariations()
+    }
+    
+    private func noteVariationSets(forBar bar: Bar, nextbar: Bar?) -> [VariationSet<Note>] {
+        
+        var variationSets = [VariationSet<Note>]()
+        
+        let thisBarNotes = bar.sequences.map { $0.notes }.joined().toArray()
+        let nextBarNotes = nextbar.flatMap(getStartNotes) ?? []
+        let allNotes = thisBarNotes + nextBarNotes
+        
+        for note in allNotes {
+            let variation = Variation(value: note, suitability: .preferable)
+            let set = VariationSet(variations: [variation])
+            variationSets.append(set)
+        }
+        return variationSets
     }
     
     private func variationSets(forNoteSequence noteSequence: NoteSequence) -> [VariationSet<Tie>] {
