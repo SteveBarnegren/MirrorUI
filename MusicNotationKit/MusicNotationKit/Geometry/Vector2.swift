@@ -40,6 +40,16 @@ struct Vector2<T> {
     }
 }
 
+extension Vector2 where T: AdditiveArithmetic {
+    func adding(x: T) -> Vector2<T> {
+        return Vector2<T>(self.x + x, y)
+    }
+    
+    func subtracting(x: T) -> Vector2<T> {
+        return Vector2<T>(self.x - x, y)
+    }
+}
+
 extension Vector2: Equatable where T: Equatable {
     static func == (lhs: Vector2, rhs: Vector2) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y

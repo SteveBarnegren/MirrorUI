@@ -13,16 +13,23 @@ class CalculatePlayableItemTimesProcessingOperation: CompositionProcessingOperat
     private let playableItemTimeCalculator = PlayableItemTimeCalculator()
     
     func process(composition: Composition) {
+        var absoluteTime = Time.zero
         for (barIndex, bar) in composition.bars.enumerated() {
+            
+            var longestSequenceTime = Time.zero
+            
             for sequence in bar.sequences {
-                
-                var currentTime = Time.zero
+                var sequenceTime = Time.zero
                 for playable in sequence.playables {
-                    playable.time = currentTime
-                    playable.compositionTime = CompositionTime(bar: barIndex, time: currentTime)
-                    currentTime += playable.duration
+                    playable.time = sequenceTime
+                    playable.compositionTime = CompositionTime(bar: barIndex,
+                                                               time: sequenceTime,
+                                                               absoluteTime: absoluteTime + sequenceTime)
+                    sequenceTime += playable.duration
                 }
+                longestSequenceTime = max(longestSequenceTime, sequenceTime)
             }
+            absoluteTime += longestSequenceTime
         }
     }
 }

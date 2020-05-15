@@ -58,8 +58,8 @@ extension ConflictIdentifiers {
         
         // The note is in the middle of the tie, check that the tie doesn't overlap it
         let middleYRange = yRange(forTieMiddle: tie)
-        let middleTimeRanges = timeRanges(forTieMiddle: tie)
-        if middleTimeRanges.contains(where: { $0.contains(note.compositionTime) }) {
+        let middleTimeRange = timeRange(forTieMiddle: tie)
+        if middleTimeRange.contains(note.compositionTime.absoluteTime) {
             for noteHead in note.noteHeadDescriptions {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 if yRange.overlaps(middleYRange) {
@@ -130,19 +130,12 @@ extension ConflictIdentifiers {
         return (midY - tieWidth)...(midY + tieWidth)
     }
     
-    static func timeRanges(forTieMiddle tie: Tie) -> [ClosedRange<CompositionTime>] {
+    static func timeRange(forTieMiddle tie: Tie) -> ClosedRange<Time> {
         
-        // If the whole tie is in the same bar, then the middle range is the most centre half of the tie
-        // Otherwise return an empty array, as we don't support this for now
-        if tie.startNoteTime.bar == tie.endNoteTime.bar {
-            let bar = tie.startNoteTime.bar
-            let middleTime = tie.startNoteTime.time + ((tie.endNoteTime.time - tie.startNoteTime.time)/2)
-            let quarter = (middleTime - tie.startNoteTime.time)/2
-            let start = CompositionTime(bar: bar, time: tie.startNoteTime.time + quarter)
-            let end = CompositionTime(bar: bar, time: tie.endNoteTime.time - quarter)
-            return [start...end]
-        } else {
-            return []
-        }
+        let middleTime = tie.startNoteTime.absoluteTime + ((tie.endNoteTime.absoluteTime - tie.startNoteTime.absoluteTime)/2)
+        let quarter = (middleTime - tie.startNoteTime.absoluteTime)/2
+        let start = tie.startNoteTime.absoluteTime + quarter
+        let end = tie.endNoteTime.absoluteTime - quarter
+        return start...end
     }
 }

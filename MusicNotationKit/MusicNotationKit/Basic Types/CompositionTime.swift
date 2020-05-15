@@ -8,12 +8,20 @@
 
 import Foundation
 
-struct CompositionTime: Equatable {
+struct CompositionTime {
     var bar: Int
     var time: Time
+    var absoluteTime: Time
     
-    static let zero = CompositionTime(bar: 0, time: .zero)
+    static let zero = CompositionTime(bar: 0, time: .zero, absoluteTime: .zero)
 }
+
+extension CompositionTime: Equatable {
+    static func == (lhs: CompositionTime, rhs: CompositionTime) -> Bool {
+        return lhs.bar == rhs.bar && lhs.time == rhs.time
+    }
+}
+
 
 extension CompositionTime: Comparable {
     static func < (lhs: CompositionTime, rhs: CompositionTime) -> Bool {

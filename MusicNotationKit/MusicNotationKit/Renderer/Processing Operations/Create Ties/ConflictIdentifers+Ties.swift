@@ -17,28 +17,15 @@ extension ConflictIdentifiers {
     
     static private func areTiesCompatable(tie1: Tie, tie2: Tie) -> Bool {
         
-        func makeVector(_ x: Time, _ y: TiePosition) -> Vector2D {
-            return Vector2D(x.barPct,
-                            Double(y.space.stavePosition))
-        }
-        
-        func makeVectors(forTie tie: Tie) -> (start: Vector2D, middle: Vector2D, end: Vector2D) {
-            return (
-                makeVector(tie.startNoteTime.time, tie.startPosition),
-                makeVector(tie.startNoteTime.time + ((tie.endNoteTime.time - tie.startNoteTime.time)/2), tie.middlePosition),
-                makeVector(tie.endNoteTime.time, tie.startPosition)
-            )
-        }
-        
         func does(_ p1: Vector2D, _ p2: Vector2D, intersectWith p3: Vector2D, _ p4: Vector2D) -> Bool {
             return VectorMath.lineSegmentsIntersect(start1: p1, end1: p2, start2: p3, end2: p4)
         }
         
-        // If the ties aren't in the same bar then we'll assume that they're not in
-        // conflict. This isn't actually true, but it handles the most common cases.
-        if tie1.startNoteTime.bar != tie2.startNoteTime.bar || tie1.endNoteTime.bar != tie2.endNoteTime.bar {
-            return true
-        }
+//        // If the ties aren't in the same bar then we'll assume that they're not in
+//        // conflict. This isn't actually true, but it handles the most common cases.
+//        if tie1.startNoteTime.bar != tie2.startNoteTime.bar || tie1.endNoteTime.bar != tie2.endNoteTime.bar {
+//            return true
+//        }
         
         
         let t1 = makeVectors(forTie: tie1)
@@ -54,7 +41,7 @@ extension ConflictIdentifiers {
         for v1 in [t1.start, t1.middle, t1.end] {
             for v2 in [t2.start, t2.middle, t2.end] {
                 if v1 == v2 {
-                    //print("Ties contain same point")
+                    print("Ties contain same point")
                     return false
                 }
             }
@@ -73,11 +60,36 @@ extension ConflictIdentifiers {
             return false
         }
         if does(t1.middle, t1.end, intersectWith: t2.middle, t2.end) {
-           // print("Second halves intersect")
+            // print("Second halves intersect")
             return false
         }
         
         //print("Compatible")
         return true
+    }
+    
+    private static func makeVectors(forTie tie: Tie) -> (start: Vector2D, middle: Vector2D, end: Vector2D) {
+
+        // xNudge is used to nudge adjacent vectors so that they don't share the same start
+        // point as vertically aligned ones. This ensures that they're not incorrectly
+        // identified as sharing a point.
+        let xNudge: Double
+        switch tie.orientation {
+        case .verticallyAlignedWithNote:
+            xNudge = 0
+        case .adjacentToNote:
+            xNudge = 0.001
+        }
+        
+        return (
+            makeVector(tie.startNoteTime.absoluteTime, tie.startPosition).adding(x: xNudge),
+            makeVector(tie.startNoteTime.absoluteTime + ((tie.endNoteTime.absoluteTime - tie.startNoteTime.absoluteTime)/2), tie.middlePosition),
+            makeVector(tie.endNoteTime.absoluteTime, tie.startPosition).subtracting(x: xNudge)
+        )
+    }
+    
+    private static func makeVector(_ x: Time, _ y: TiePosition) -> Vector2D {
+        return Vector2D(Double(x.value) / Double(x.division),
+                        Double(y.space.stavePosition))
     }
 }
