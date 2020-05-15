@@ -15,18 +15,14 @@ extension ConflictIdentifiers {
     }
     
     static func isTieAndNoteCompatible(tie: Tie, note: Note) -> Bool {
-        
-        print("------ Ties and notes ------")
-        
+                
         // If the note time is less that the tie time, do not conflict
         if note.compositionTime < tie.startNoteTime {
-            print("✅ < start")
             return true
         }
         
         // If the note time is greater than the tie end time, do not conflict
         if note.compositionTime > tie.endNoteTime {
-            print("✅ > end")
             return true
         }
         
@@ -36,7 +32,6 @@ extension ConflictIdentifiers {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 let tieY = startY(forTie: tie)
                 if yRange.contains(tieY) {
-                    print("❌ Start overlaps note")
                     return false
                 }
             }
@@ -49,7 +44,6 @@ extension ConflictIdentifiers {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 let tieY = startY(forTie: tie)
                 if yRange.contains(tieY) {
-                    print("❌ End overlaps note")
                     return false
                 }
             }
@@ -63,14 +57,11 @@ extension ConflictIdentifiers {
             for noteHead in note.noteHeadDescriptions {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 if yRange.overlaps(middleYRange) {
-                    print("❌ Middle overlaps note")
                     return false
                 }
             }
         }
-        
-        print("✅ passed")
-        
+                
         return true
     }
     
