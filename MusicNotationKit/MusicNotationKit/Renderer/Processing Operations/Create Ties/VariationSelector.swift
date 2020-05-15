@@ -114,6 +114,17 @@ class VariationSelector {
     func add<T>(variationSets: [VariationSet<T>]) {
         variationSets.forEach(add)
     }
+    
+    func add<T>(staticItem: T) {
+        // Static items can be hosted in a variation set containing only that item
+        let variation = Variation(value: staticItem, suitability: .preferable)
+        let set = VariationSet(variations: [variation])
+        add(variationSet: set)
+    }
+    
+    func add<T>(staticItems: [T]) {
+        staticItems.forEach(add)
+    }
 
     func pruneVariations() {
         let sets = variationSets

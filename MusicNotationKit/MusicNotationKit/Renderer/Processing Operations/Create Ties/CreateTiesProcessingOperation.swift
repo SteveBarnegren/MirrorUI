@@ -88,30 +88,20 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
     
     private func chooseVariations(forBar bar: Bar, nextBar: Bar?) {
         let tieVariationSets = bar.sequences.map(self.variationSets).joined().toArray()
-        let noteVariationSets = self.noteVariationSets(forBar: bar, nextbar: nextBar)
+        let notes = self.notes(forBar: bar, nextbar: nextBar)
         
         let variationSelector = VariationSelector()
         variationSelector.add(conflictIdentifier: ConflictIdentifiers.ties)
         variationSelector.add(conflictIdentifier: ConflictIdentifiers.tiesAndNotes)
         variationSelector.add(variationSets: tieVariationSets)
-        variationSelector.add(variationSets: noteVariationSets)
+        variationSelector.add(staticItems: notes)
         variationSelector.pruneVariations()
     }
     
-    private func noteVariationSets(forBar bar: Bar, nextbar: Bar?) -> [VariationSet<Note>] {
-        
-        var variationSets = [VariationSet<Note>]()
-        
+    private func notes(forBar bar: Bar, nextbar: Bar?) -> [Note] {
         let thisBarNotes = bar.sequences.map { $0.notes }.joined().toArray()
         let nextBarNotes = nextbar.flatMap(getStartNotes) ?? []
-        let allNotes = thisBarNotes + nextBarNotes
-        
-        for note in allNotes {
-            let variation = Variation(value: note, suitability: .preferable)
-            let set = VariationSet(variations: [variation])
-            variationSets.append(set)
-        }
-        return variationSets
+        return thisBarNotes + nextBarNotes
     }
     
     private func variationSets(forNoteSequence noteSequence: NoteSequence) -> [VariationSet<Tie>] {
