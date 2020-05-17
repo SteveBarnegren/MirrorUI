@@ -32,6 +32,10 @@ class LayoutAnchorsBuilder {
                 .joined()
                 .toArray()
             
+            // Add tie constraints
+            addTieWidthConstraints(toAnchors: anchorsForSequences)
+            
+            // Combine
             let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
             applyDurations(toAnchors: combinedAnchors, barDuration: bar.duration)
             
@@ -42,6 +46,44 @@ class LayoutAnchorsBuilder {
             }
             
             bar.layoutAnchors = barAnchors
+        }
+    }
+    
+    // MARK: - Add Ties
+    
+    private func addTieWidthConstraints(toAnchors anchors: [SingleItemLayoutAnchor]) {
+        
+        struct PendingTie {
+            let note: Note
+            let anchor: SingleItemLayoutAnchor
+            let tie: Tie
+        }
+        
+        var pendingTies = [PendingTie]()
+        
+        for anchor in anchors {
+            guard let note = anchor.item as? Note else { continue }
+            
+            // Create constraints for any ties that end on this note
+            let pending = pendingTies.extract { $0.tie.toNote === note }
+            for pendingTie in pending {
+                let startAnchor = pendingTie.anchor
+                let endAnchor = anchor
+                let constraint = LayoutConstraint()
+                constraint.from = startAnchor
+                constraint.to = endAnchor
+                constraint.value = .greaterThan(2.5)
+                startAnchor.add(trailingConstraint: constraint)
+                endAnchor.add(leadingConstraint: constraint)
+            }
+            
+            // Create pending ties for any ties that are start on this note
+            for noteHead in note.noteHeadDescriptions {
+                if let tie = noteHead.tie?.chosenVariation {
+                    let pendingTie = PendingTie(note: note, anchor: anchor, tie: tie)
+                    pendingTies.append(pendingTie)
+                }
+            }
         }
     }
     
