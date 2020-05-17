@@ -10,6 +10,7 @@ import Foundation
 
 public class Bar {
     
+    var barNumber = 0
     var sequences = [NoteSequence]()
     let leadingBarline = Barline()
     var trailingBarline: Barline?

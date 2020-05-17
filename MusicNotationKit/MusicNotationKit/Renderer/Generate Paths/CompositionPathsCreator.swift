@@ -12,7 +12,12 @@ class CompositionPathsCreator {
     
     func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double) -> [Path] {
         
-        var paths = bars.map(makePaths(forBar:)).joined().toArray()
+        let barRange = (bars.first!.barNumber)...(bars.last!.barNumber)
+        print("Creating paths for bar range \(barRange)")
+        
+        var paths = bars.map {
+            makePaths(forBar: $0, inRange: barRange, canvasWidth: canvasWidth)
+        }.joined().toArray()
         
         // Make the path for the last barline
         if let lastBarline = bars.last?.trailingBarline {
@@ -24,14 +29,18 @@ class CompositionPathsCreator {
         return paths
     }
     
-    private func makePaths(forBar bar: Bar) -> [Path] {
+    private func makePaths(forBar bar: Bar, inRange barRange: ClosedRange<Int>, canvasWidth: Double) -> [Path] {
         
         let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
-        let notePaths =  bar.sequences.map(makePaths(forNoteSequence:)).joined().toArray()
+        
+        let notePaths =  bar.sequences.map {
+            makePaths(forNoteSequence: $0, inRange: barRange, canvasWidth: canvasWidth)
+        }.joined().toArray()
+        
         return barlinePath + notePaths
     }
     
-    private func makePaths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
+    private func makePaths(forNoteSequence noteSequence: NoteSequence, inRange barRange: ClosedRange<Int>, canvasWidth: Double) -> [Path] {
         let notePaths = NoteRenderer().paths(forNotes: noteSequence.notes)
         let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeadDescriptions }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
@@ -41,7 +50,11 @@ class CompositionPathsCreator {
         for note in noteSequence.notes {
             for noteHeadDescription in note.noteHeadDescriptions {
                 if let tie = noteHeadDescription.tie?.chosenVariation {
-                    tiePaths += TieRenderer().paths(forTie: tie, noteHead: noteHeadDescription, note: note)
+                    tiePaths += TieRenderer().paths(forTie: tie,
+                                                    noteHead: noteHeadDescription,
+                                                    note: note,
+                                                    inBarRange: barRange,
+                                                    canvasWidth: canvasWidth)
                 }
             }
         }

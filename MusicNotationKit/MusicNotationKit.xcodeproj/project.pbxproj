@@ -166,6 +166,7 @@
 		67EA89EF242637310009BE61 /* NoteHeadDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89EE242637310009BE61 /* NoteHeadDescriber.swift */; };
 		67EA89F124264BE70009BE61 /* NoteHeadDescriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89F024264BE70009BE61 /* NoteHeadDescriberTests.swift */; };
 		67EA89F324264CA30009BE61 /* NoteHeadDescription+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89F224264CA30009BE61 /* NoteHeadDescription+Verify.swift */; };
+		67F0DD522471C5370048C718 /* SetBarNumbersProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F0DD512471C5370048C718 /* SetBarNumbersProcessingOperation.swift */; };
 		67F6880421EA6D32003707DD /* HorizontalLayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880321EA6D32003707DD /* HorizontalLayoutItem.swift */; };
 		67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880521EA6E0C003707DD /* Array+Sorting.swift */; };
 		67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */; };
@@ -346,6 +347,7 @@
 		67EA89EE242637310009BE61 /* NoteHeadDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadDescriber.swift; sourceTree = "<group>"; };
 		67EA89F024264BE70009BE61 /* NoteHeadDescriberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadDescriberTests.swift; sourceTree = "<group>"; };
 		67EA89F224264CA30009BE61 /* NoteHeadDescription+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteHeadDescription+Verify.swift"; sourceTree = "<group>"; };
+		67F0DD512471C5370048C718 /* SetBarNumbersProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBarNumbersProcessingOperation.swift; sourceTree = "<group>"; };
 		67F6880321EA6D32003707DD /* HorizontalLayoutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLayoutItem.swift; sourceTree = "<group>"; };
 		67F6880521EA6E0C003707DD /* Array+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sorting.swift"; sourceTree = "<group>"; };
 		67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -902,6 +904,7 @@
 			isa = PBXGroup;
 			children = (
 				67BB96AC23367E3200119953 /* CompositionProcessingOperation.swift */,
+				67F0DD502471C5160048C718 /* Set Bar Numbers */,
 				673A3D0C233D4935001CE422 /* Join Barlines */,
 				6726FB01223067BC002EFE4D /* Generate Symbol Descriptions */,
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
@@ -950,6 +953,14 @@
 				67E7DE02243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift */,
 			);
 			path = "Calculate Note Head Alignment";
+			sourceTree = "<group>";
+		};
+		67F0DD502471C5160048C718 /* Set Bar Numbers */ = {
+			isa = PBXGroup;
+			children = (
+				67F0DD512471C5370048C718 /* SetBarNumbersProcessingOperation.swift */,
+			);
+			path = "Set Bar Numbers";
 			sourceTree = "<group>";
 		};
 		67F6880C21EB529F003707DD /* Extensions */ = {
@@ -1140,6 +1151,7 @@
 				67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */,
 				67728784243BB6C80038B142 /* CalculateNoteHeadAlignmentProcessingOperation.swift in Sources */,
 				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
+				67F0DD522471C5370048C718 /* SetBarNumbersProcessingOperation.swift in Sources */,
 				67BB96BD2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift in Sources */,
 				67678E0021E2865400E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */,

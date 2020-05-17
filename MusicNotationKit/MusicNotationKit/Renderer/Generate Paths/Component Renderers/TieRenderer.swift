@@ -10,7 +10,11 @@ import Foundation
 
 class TieRenderer {
     
-    func paths(forTie tie: Tie, noteHead: NoteHeadDescription, note: Note) -> [Path] {
+    func paths(forTie tie: Tie,
+               noteHead: NoteHeadDescription,
+               note: Note,
+               inBarRange barRange: ClosedRange<Int>,
+               canvasWidth: Double) -> [Path] {
         
         guard let endNote = tie.toNote else {
             print("Error - tie had no end note")
@@ -27,16 +31,28 @@ class TieRenderer {
         let startY = yPosition(fromTiePosition: tie.startPosition) + yOffset(forEndAlignment: tie.endAlignment)
         let start = Point(xPosition(forNote: note, noteHead: noteHead) + orientationOffset,
                           startY)
-        let end = Point(xPosition(forNote: endNote, noteHead: endNoteHead) - orientationOffset,
-                        startY)
-        let mid = Point((start.x + end.x) / 2,
-                        yPosition(fromTiePosition: tie.middlePosition) + yOffset(forMiddleAlignment: tie.middleAlignment))
         
-        var path = Path(commands: [
-            .move(start),
-            .line(mid),
-            .line(end)
-        ])
+        var path: Path
+        if barRange.contains(tie.endNoteTime.bar) {
+            let end = Point(xPosition(forNote: endNote, noteHead: endNoteHead) - orientationOffset,
+                            startY)
+            let mid = Point((start.x + end.x) / 2,
+                            yPosition(fromTiePosition: tie.middlePosition) + yOffset(forMiddleAlignment: tie.middleAlignment))
+            
+            path = Path(commands: [
+                .move(start),
+                .line(mid),
+                .line(end)
+            ])
+        } else {
+            let mid = Point(canvasWidth,
+                            yPosition(fromTiePosition: tie.middlePosition) + yOffset(forMiddleAlignment: tie.middleAlignment))
+            
+            path = Path(commands: [
+                .move(start),
+                .line(mid)
+            ])
+        }
         
         path.drawStyle = .stroke
         
