@@ -56,8 +56,8 @@ private class MusicCellView: UIView {
         self.pathBundle = pathBundle
         self.setNeedsDisplay()
         
-        self.layer.borderColor = UIColor.yellow.cgColor
-        self.layer.borderWidth = 0.5
+//        self.layer.borderColor = UIColor.yellow.cgColor
+//        self.layer.borderWidth = 0.5
     }
     
     override func draw(_ rect: CGRect) {

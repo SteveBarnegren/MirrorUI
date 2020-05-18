@@ -131,11 +131,11 @@ extension ComponentCompositions {
                 let sequence = NoteSequence()
                 sequence.add(rest: Rest(value: .dottedQuaver))
                 sequence.add(note: Note(value: .semiquaver, pitch: .d4).tied())
-                sequence.add(note: Note(value: .semiquaver, pitch: .g4).tied())
+                sequence.add(note: Note(value: .semiquaver, pitch: .a5).tied())
                 sequence.add(note: Note(value: .semiquaver, pitch: .b4).tied())
                 sequence.add(note: Note(value: .semiquaver, pitch: .f3).tied())
                 sequence.add(note: Note(value: .semiquaver, pitch: .g3).tied())
-                sequence.add(note: Note(value: .crotchet, pitches: [.d4, .g4, .b4, .f3, .g3]))
+                sequence.add(note: Note(value: .crotchet, pitches: [.d4, .a5, .b4, .f3, .g3]))
                 
                 bar.add(sequence: sequence)
                 compostion.add(bar: bar)
@@ -165,7 +165,7 @@ extension ComponentCompositions {
                 let sequence = NoteSequence()
                 
                 sequence.add(note: Note(value: .minim, pitches: pitches).tied())
-                sequence.add(note: Note(value: .quaver, pitches: pitches).tied())
+                sequence.add(note: Note(value: .crotchet, pitches: pitches).tied())
                 
                 bar.add(sequence: sequence)
                 compostion.add(bar: bar)

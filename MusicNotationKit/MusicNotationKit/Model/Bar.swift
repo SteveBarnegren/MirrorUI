@@ -16,6 +16,13 @@ public class Bar {
     var trailingBarline: Barline?
     public var timeSignature: TimeSignature?
     
+    var trailingTies: [Tie] {
+        return sequences
+            .map { $0.notes }.joined()
+            .map { $0.noteHeadDescriptions }.joined()
+            .compactMap { $0.tie?.chosenVariation }
+    }
+    
     var duration: Time {
         return sequences.map { $0.duration }.max() ?? .zero
     }

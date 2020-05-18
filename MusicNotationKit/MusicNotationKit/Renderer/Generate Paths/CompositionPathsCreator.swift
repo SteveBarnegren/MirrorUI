@@ -10,13 +10,13 @@ import Foundation
 
 class CompositionPathsCreator {
     
-    func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double) -> [Path] {
+    func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double, leadingTies: [Tie]) -> [Path] {
         
         let barRange = (bars.first!.barNumber)...(bars.last!.barNumber)
         print("Creating paths for bar range \(barRange)")
         
         var paths = bars.map {
-            makePaths(forBar: $0, inRange: barRange, canvasWidth: canvasWidth)
+            makePaths(forBar: $0, inRange: barRange, canvasWidth: canvasWidth, leadingTies: leadingTies)
         }.joined().toArray()
         
         // Make the path for the last barline
@@ -29,23 +29,28 @@ class CompositionPathsCreator {
         return paths
     }
     
-    private func makePaths(forBar bar: Bar, inRange barRange: ClosedRange<Int>, canvasWidth: Double) -> [Path] {
+    private func makePaths(forBar bar: Bar, inRange barRange: ClosedRange<Int>, canvasWidth: Double, leadingTies: [Tie]) -> [Path] {
         
         let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
         
         let notePaths =  bar.sequences.map {
-            makePaths(forNoteSequence: $0, inRange: barRange, canvasWidth: canvasWidth)
+            makePaths(forNoteSequence: $0, inRange: barRange, canvasWidth: canvasWidth, leadingTies: leadingTies)
         }.joined().toArray()
         
         return barlinePath + notePaths
     }
     
-    private func makePaths(forNoteSequence noteSequence: NoteSequence, inRange barRange: ClosedRange<Int>, canvasWidth: Double) -> [Path] {
+    private func makePaths(forNoteSequence noteSequence: NoteSequence,
+                           inRange barRange: ClosedRange<Int>,
+                           canvasWidth: Double,
+                           leadingTies: [Tie]) -> [Path] {
+        
         let notePaths = NoteRenderer().paths(forNotes: noteSequence.notes)
         let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeadDescriptions }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let restPaths = RestRenderer().paths(forRests: noteSequence.rests)
         
+        // Draw ties
         var tiePaths = [Path]()
         for note in noteSequence.notes {
             for noteHeadDescription in note.noteHeadDescriptions {
@@ -59,7 +64,22 @@ class CompositionPathsCreator {
             }
         }
         
-        return notePaths + noteSymbolPaths + noteHeadAdjacentItems + restPaths + tiePaths
+        // Draw leading ties
+        var leadingTiePaths = [Path]()
+        for tie in leadingTies {
+            leadingTiePaths += TieRenderer().paths(forLeadingTie: tie)
+        }
+        
+        var allPaths = [Path]()
+        allPaths += notePaths
+        allPaths += noteSymbolPaths
+        allPaths += noteHeadAdjacentItems
+        allPaths += restPaths
+        allPaths += tiePaths
+        allPaths += leadingTiePaths
+        return allPaths
+        
+//        return notePaths + noteSymbolPaths + noteHeadAdjacentItems + restPaths + tiePaths + leadingTiePaths
     }
     
     // Render Symbols

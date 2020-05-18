@@ -134,16 +134,39 @@ class MusicRenderer {
         CalculateStemLengthsRenderOperation().process(bars: bars)
         
         // Make paths
+        let leadingTies = range
+            .flatMap { composition.bars[maybe: $0.startIndex-1] }
+            .flatMap(trailingTies(forBar:)) ?? []
+        
         let paths = CompositionPathsCreator().paths(fromBars: bars,
                                                     canvasWidth: layoutWidth,
-                                                    staveSpacing: staveSpacing)
+                                                    staveSpacing: staveSpacing,
+                                                    leadingTies: leadingTies)
         
         var pathBundle = PathBundle(paths: paths)
         
         // Debug information
+        /*
         pathBundle.debugDrawCommands += ConstraintsDebugInformationGenerator().debugInformation(fromBars: bars,
                                                                                                 staveSpacing: staveSpacing)
-        
+        */
         return pathBundle
+    }
+    
+    private func trailingTies(forBar bar: Bar) -> [Tie] {
+        
+        var ties = [Tie]()
+        
+        for sequence in bar.sequences {
+            for note in sequence.notes {
+                for noteHead in note.noteHeadDescriptions {
+                    if let tie = noteHead.tie?.chosenVariation, tie.endNoteTime.bar != bar.barNumber {
+                        ties.append(maybe: noteHead.tie?.chosenVariation)
+                    }
+                }
+            }
+        }
+        
+        return ties
     }
 }

@@ -8,6 +8,8 @@
 
 import Foundation
 
+private let requiredTieSpace = 2.5
+
 class LayoutAnchorsBuilder {
     
     func makeAnchors(from composition: Composition) {
@@ -33,7 +35,10 @@ class LayoutAnchorsBuilder {
                 .toArray()
             
             // Add tie constraints
-            addTieWidthConstraints(toAnchors: anchorsForSequences)
+            let leadingTies = previousBar?.trailingTies ?? []
+            addTieWidthConstraints(toAnchors: anchorsForSequences,
+                                   previousBarline: barlineAnchor,
+                                   leadingTies: leadingTies)
             
             // Combine
             let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
@@ -51,7 +56,9 @@ class LayoutAnchorsBuilder {
     
     // MARK: - Add Ties
     
-    private func addTieWidthConstraints(toAnchors anchors: [SingleItemLayoutAnchor]) {
+    private func addTieWidthConstraints(toAnchors anchors: [SingleItemLayoutAnchor],
+                                        previousBarline: LayoutAnchor,
+                                        leadingTies: [Tie]) {
         
         struct PendingTie {
             let note: Note
@@ -64,6 +71,16 @@ class LayoutAnchorsBuilder {
         for anchor in anchors {
             guard let note = anchor.item as? Note else { continue }
             
+            // Create constraints for leading ties
+            if leadingTies.contains(where: { $0.toNote === note }) {
+                let constraint = LayoutConstraint()
+                constraint.from = previousBarline
+                constraint.to = anchor
+                constraint.value = .greaterThan(requiredTieSpace / 2)
+                previousBarline.add(trailingConstraint: constraint)
+                anchor.add(leadingConstraint: constraint)
+            }
+            
             // Create constraints for any ties that end on this note
             let pending = pendingTies.extract { $0.tie.toNote === note }
             for pendingTie in pending {
@@ -72,7 +89,7 @@ class LayoutAnchorsBuilder {
                 let constraint = LayoutConstraint()
                 constraint.from = startAnchor
                 constraint.to = endAnchor
-                constraint.value = .greaterThan(2.5)
+                constraint.value = .greaterThan(requiredTieSpace)
                 startAnchor.add(trailingConstraint: constraint)
                 endAnchor.add(leadingConstraint: constraint)
             }

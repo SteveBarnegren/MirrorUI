@@ -59,6 +59,33 @@ class TieRenderer {
         return [path]
     }
     
+    func paths(forLeadingTie tie: Tie) -> [Path] {
+        
+        guard let endNote = tie.toNote else {
+            print("Error - Tie end note not set")
+            return []
+        }
+        
+        guard let endNoteHead = tie.toNoteHead else {
+            print("Error - Tie end note head not set")
+            return []
+        }
+        
+        let midX = 0.0
+        let midY = yPosition(fromTiePosition: tie.middlePosition) + yOffset(forMiddleAlignment: tie.middleAlignment)
+        
+        let endX = xPosition(forNote: endNote, noteHead: endNoteHead) - xOffset(forOrientation: tie.orientation)
+        let endY = yPosition(fromTiePosition: tie.startPosition) + yOffset(forEndAlignment: tie.endAlignment)
+        
+        var path = Path(commands: [
+            .move(Point(midX, midY)),
+            .line(Point(endX, endY))
+        ])
+        
+        path.drawStyle = .stroke
+        return [path]
+    }
+    
     private func xPosition(forNote note: Note, noteHead: NoteHeadDescription) -> Double {
         return note.xPosition
             + NoteHeadAligner.xOffset(forAlignment: noteHead.alignment)
