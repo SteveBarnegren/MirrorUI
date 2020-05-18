@@ -17,7 +17,9 @@ private func makeTestComposition() -> Composition {
     
     let composition = Composition()
     composition.add(bar: makeBar1())
+    composition.add(bar: makeBar8())
     composition.add(bar: makeBar2())
+    composition.add(bar: makeBar9())
     composition.add(bar: makeBar3())
     composition.add(bar: makeBar4())
     composition.add(bar: makeBar5())
@@ -38,10 +40,10 @@ private func makeBar1() -> Bar {
     sequence.add(note: Note(value: 16, pitch: .b4))
     sequence.add(note: Note(value: 16, pitch: .a4))
     sequence.add(note: Note(value: 16, pitch: .b4))
-    sequence.add(note: Note(value: 16, pitch: .a4))
+    sequence.add(note: Note(value: 16, pitch: .aSharp4))
     
-    sequence.add(note: Note(value: 8, pitch: .b4))
-    sequence.add(note: Note(value: 16, pitch: .b4))
+    sequence.add(note: Note(value: 8, pitches: [.b4, .e4]))
+    sequence.add(note: Note(value: 16, pitches: [.b4, .e4]))
     sequence.add(note: Note(value: 16, pitch: .a4))
     
     let bar = Bar()
@@ -57,13 +59,13 @@ private func makeBar2() -> Bar {
     sequence.add(note: Note(value: 16, pitch: .b4))
     sequence.add(note: Note(value: 16, pitch: .a4))
     sequence.add(note: Note(value: 16, pitch: .b4))
-    sequence.add(note: Note(value: 16, pitch: .a4))
+    sequence.add(note: Note(value: 16, pitch: .aSharp4))
     
     sequence.add(note: Note(value: 8, pitch: .b4))
     sequence.add(note: Note(value: 16, pitch: .d4))
     sequence.add(note: Note(value: 16, pitch: .a4))
 
-    sequence.add(note: Note(value: 4, pitch: .a4))
+    sequence.add(note: Note(value: 4, pitches: [.f3, .a4, .e4]))
 
     sequence.add(rest: Rest(value: 4))
     
@@ -112,16 +114,16 @@ func makeBar4() -> Bar {
     sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .g4))
     sequenceOne.add(note: Note(value: NoteValue(division: 8), pitch: .e4))
     
-    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
+    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitches: [.g4, .e4]))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
-    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
+    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitches: [.g4, .e4]))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
-    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
+    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitches: [.g4, .e4]))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
-    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .g4))
+    sequenceOne.add(note: Note(value: NoteValue(division: 32), pitches: [.g4, .e4]))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .c4))
     sequenceOne.add(note: Note(value: NoteValue(division: 32), pitch: .a4))
     
@@ -190,12 +192,34 @@ private func makeBar7() -> Bar {
     sequence.add(note: Note(value: 16, pitch: .b3))
     sequence.add(note: Note(value: 16, pitch: .c3))
     
-    sequence.add(note: Note(value: 4, pitch: .e4))
+    sequence.add(note: Note(value: 4, pitches: [.e4, .d4, .b4]))
 
-    sequence.add(note: Note(value: 4, pitch: .f3))
+    sequence.add(note: Note(value: 4, pitches: [.f3, .d3]))
     
     let bar = Bar()
     bar.timeSignature = .fourFour
+    bar.add(sequence: sequence)
+    return bar
+}
+
+private func makeBar8() -> Bar {
+    
+    let bar = Bar()
+    let sequence = NoteSequence()
+    sequence.add(note: Note(value: .minim, pitches: [.f3, .g3, .a4, .c4, .d4, .e4]))
+    sequence.add(note: Note(value: .minim, pitches: [.c3, .f3, .g3, .a4, .c4]))
+    bar.add(sequence: sequence)
+    return bar
+}
+
+private func makeBar9() -> Bar {
+    
+    let bar = Bar()
+    let sequence = NoteSequence()
+    sequence.add(note: Note(value: .minim, pitches: [.f3, .g3, .a4]))
+    sequence.add(note: Note(value: .crotchet, pitches: [.e3, .f3, .g3, .a4, .b4, .c4, .d4]))
+    sequence.add(note: Note(value: .minim, pitches: [.c4, .d4, .e4]))
+    sequence.add(note: Note(value: .crotchet, pitches: [.d4, .e4, .f4, .g4, .a5]))
     bar.add(sequence: sequence)
     return bar
 }
