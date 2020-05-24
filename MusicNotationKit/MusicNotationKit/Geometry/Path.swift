@@ -17,6 +17,7 @@ struct Path {
         case close
         case circle(Point, Double) // Center, Radius
         case oval(Point, Size, Double)
+        case arc(center: Point, radius: Double, startAngle: Double, endAngle: Double, clockwise: Bool)
     }
     
     enum DrawStyle {
@@ -78,7 +79,14 @@ extension Path {
                 newCommands.append(.circle(translatePoint(p), r))
             case .oval(let point, let size, let rotation):
                 newCommands.append(.oval(translatePoint(point), size, rotation))
-           
+            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                newCommands.append(
+                    .arc(center: translatePoint(center),
+                         radius: radius,
+                         startAngle: startAngle,
+                         endAngle: endAngle,
+                         clockwise: clockwise)
+                )
             }
         }
         
@@ -121,6 +129,14 @@ extension Path {
                 newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
             case .circle(let p, let r):
                 newCommands.append(.circle(scalePoint(p), r * scale))
+            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                newCommands.append(
+                    .arc(center: scalePoint(center),
+                         radius: radius * scale,
+                         startAngle: startAngle,
+                         endAngle: endAngle,
+                         clockwise: clockwise)
+                )
             }
         }
         
@@ -163,6 +179,14 @@ extension Path {
                 newCommands.append(.oval(invert(p), size, rotation))
             case .circle(let p, let r):
                 newCommands.append(.circle(invert(p), r))
+            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                newCommands.append(
+                    .arc(center: invert(center),
+                         radius: radius,
+                         startAngle: startAngle,
+                         endAngle: endAngle,
+                         clockwise: clockwise)
+                )
             }
         }
         
@@ -209,6 +233,14 @@ extension Array where Element == Path.Command {
                 newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
             case .circle(let p, let r):
                 newCommands.append(.circle(scalePoint(p), r * scale))
+            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                newCommands.append(
+                    .arc(center: scalePoint(center),
+                         radius: radius*scale,
+                         startAngle: startAngle,
+                         endAngle: endAngle,
+                         clockwise: clockwise)
+                )
             }
         }
         
@@ -237,6 +269,14 @@ extension Array where Element == Path.Command {
                 newCommands.append(.oval(translatePoint(p), size, rotation))
             case .circle(let p, let r):
                 newCommands.append(.circle(translatePoint(p), r))
+            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                newCommands.append(
+                    .arc(center: translatePoint(center),
+                         radius: radius,
+                         startAngle: startAngle,
+                         endAngle: endAngle,
+                         clockwise: clockwise)
+                )
             }
         }
         
@@ -279,12 +319,14 @@ extension Path {
                 }
                 lastPoint = p
             case .close:
-                break;
+                break
             case .oval(_, _, _):
-                break;
+                break
             case .circle(let p, let r):
                 process(point: p.adding(x: r, y: r))
                 process(point: p.subtracting(x: r, y: r))
+            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                break
             }
         }
         
@@ -306,3 +348,53 @@ extension Path {
     var maxY: Double { boundingBox.maxY }
     var minY: Double { boundingBox.minY }
 }
+/*
+extension Array where Element == Path.Command {
+    
+    func reversedCommands() -> [Path.Command] {
+           
+        var nextControlPoints: (cp1: Vector2D, cp2: Vector2D)?
+        
+        var newCommands = [Path.Command]()
+        
+        for command in self.reversed() {
+            switch command {
+            case .move(let p):
+                if let nextPoints = nextControlPoints {
+                    newCommands.append(.curve(to: point, cp1: nextPoints.cp1, cp2: nextPoints.cp2))
+                } else {
+                    newCommands.append(.point(point))
+                }
+                
+            }
+        }
+        
+        
+        
+           for command in self.reversed() {
+               switch command {
+               case .point(let point):
+                   if let nextPoints = nextControlPoints {
+                       newCommands.append(.curve(to: point, cp1: nextPoints.cp1, cp2: nextPoints.cp2))
+                   } else {
+                       newCommands.append(.point(point))
+                   }
+                   nextControlPoints = nil
+               case .curve(let to, let cp1, let cp2):
+                   if let nextPoints = nextControlPoints {
+                       newCommands.append(.curve(to: to, cp1: nextPoints.cp1, cp2: nextPoints.cp2))
+                   } else {
+                       newCommands.append(.point(to))
+                   }
+                   nextControlPoints = (cp2, cp1)
+               case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                   newCommands.append(
+                       .arc(center: center, radius: radius, startAngle: endAngle, endAngle: startAngle, clockwise: !clockwise)
+                   )
+               }
+           }
+           
+           return newCommands
+       }
+}
+*/

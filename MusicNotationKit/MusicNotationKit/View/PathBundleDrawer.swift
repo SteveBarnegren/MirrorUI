@@ -88,6 +88,13 @@ class PathBundleDrawer {
                                   height: r*2)
                 let circleBezierPath = UIBezierPath(ovalIn: rect)
                 draw(uiBezierPath: circleBezierPath)
+            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                let point = invertY(center)
+                uiBezierPath.addArc(withCenter: CGPoint(x: point.x, y: point.y),
+                                    radius: CGFloat(radius),
+                                    startAngle: CGFloat(startAngle),
+                                    endAngle: CGFloat(endAngle),
+                                    clockwise: clockwise)
             }
         }
         

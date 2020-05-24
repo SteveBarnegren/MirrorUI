@@ -16,7 +16,7 @@ extension FloatingPoint {
         let value = self - from
         return value / diff
     }
-
+    
     func interpolate(to other: Self, t: Self) -> Self {
         let diff = other - self
         return self + (diff * t)
@@ -25,5 +25,11 @@ extension FloatingPoint {
     func lerp(to other: Self, t: Self) -> Self {
         let diff = other - self
         return self + (diff * t)
+    }
+    
+    func inverseLerp(between start: Self, and end: Self) -> Self {
+        let totalDistance = end - start
+        let offset = self - start
+        return offset / totalDistance
     }
 }
