@@ -49,4 +49,3 @@ class VariationSet<T> {
         variations = variations.suffix(from: index).toArray()
     }
 }
-

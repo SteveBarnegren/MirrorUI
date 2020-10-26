@@ -320,12 +320,12 @@ extension Path {
                 lastPoint = p
             case .close:
                 break
-            case .oval(_, _, _):
+            case .oval:
                 break
             case .circle(let p, let r):
                 process(point: p.adding(x: r, y: r))
                 process(point: p.subtracting(x: r, y: r))
-            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+            case .arc:
                 break
             }
         }

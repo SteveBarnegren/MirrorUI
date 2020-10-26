@@ -63,12 +63,6 @@ class TieRenderer {
             let path = pathForFullTie(startX: start.x, endX: end.x, startY: startY, arcY: mid.y)
             return [path]
 
-            
-//            path = Path(commands: [
-//                .move(start),
-//                .line(mid),
-//                .line(end)
-//            ])
         } else {
             var path: Path
 

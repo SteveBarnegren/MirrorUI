@@ -86,19 +86,19 @@ extension Vector2: Equatable where T: Equatable {
 
 // MARK: - Math
 
-func +(lhs: Vector2D, rhs: Vector2D) -> Vector2D {
+func + (lhs: Vector2D, rhs: Vector2D) -> Vector2D {
     return Vector2D(lhs.x + rhs.x, lhs.y + rhs.y)
 }
 
-func -(lhs: Vector2D, rhs: Vector2D) -> Vector2D {
+func - (lhs: Vector2D, rhs: Vector2D) -> Vector2D {
     return Vector2D(lhs.x - rhs.x, lhs.y - rhs.y)
 }
 
-func *(lhs: Vector2D, rhs: Double) -> Vector2D {
+func * (lhs: Vector2D, rhs: Double) -> Vector2D {
     return Vector2D(lhs.x * rhs, lhs.y * rhs)
 }
 
-func *=(lhs: inout Vector2D, rhs: Double) {
+func *= (lhs: inout Vector2D, rhs: Double) {
     lhs.x *= rhs
     lhs.y *= rhs
 }

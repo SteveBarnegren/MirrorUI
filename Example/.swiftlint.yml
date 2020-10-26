@@ -19,5 +19,6 @@ opt_in_rules:
   - overridden_super_call
   - prohibited_super_call
 
-excluded: # paths to ignore during linting. overridden by `included`.
+excluded:
+  - Carthage
   - .build

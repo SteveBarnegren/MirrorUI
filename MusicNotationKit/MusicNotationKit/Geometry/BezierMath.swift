@@ -22,12 +22,12 @@ class BezierMath {
             let c = 3.0 * v1 - 3.0 * v0
             
             // Account for small values
-            if (abs(a) < 1e-12) {
-                if (abs(b) < 1e-12) {
+            if abs(a) < 1e-12 {
+                if abs(b) < 1e-12 {
                     return
                 }
-                let t = -c / b;
-                if (0 < t && t < 1) {
+                let t = -c / b
+                if 0 < t && t < 1 {
                     tValues.append(t)
                 }
                 return
@@ -36,15 +36,15 @@ class BezierMath {
             // Find t values
             let b2ac = b * b - 4 * c * a
             let sqrtb2ac = sqrt(b2ac)
-            if (b2ac < 0) {
+            if b2ac < 0 {
                 return
             }
             let t1 = (-b + sqrtb2ac) / (2 * a)
-            if (0 < t1 && t1 < 1) {
+            if 0 < t1 && t1 < 1 {
                 tValues.append(t1)
             }
             let t2 = (-b - sqrtb2ac) / (2 * a)
-            if (0 < t2 && t2 < 1) {
+            if 0 < t2 && t2 < 1 {
                 tValues.append(t2)
             }
         }

@@ -37,4 +37,3 @@ extension Array {
         return array
     }
 }
-

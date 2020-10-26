@@ -30,4 +30,3 @@ struct SortMapper<T> {
         return sortedIndicies[sortedIndex]
     }
 }
-

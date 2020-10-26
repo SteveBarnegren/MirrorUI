@@ -6,6 +6,8 @@
 //  Copyright © 2020 Steve Barnegren. All rights reserved.
 //
 
+//swiftlint:disable for_where
+
 import Foundation
 
 class ConflictIdentifiers {}

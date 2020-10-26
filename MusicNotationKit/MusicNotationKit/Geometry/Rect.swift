@@ -97,5 +97,3 @@ extension Rect {
         return Rect(x: self.x + x, y: self.y + y, width: width, height: height)
     }
 }
-
-

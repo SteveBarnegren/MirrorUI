@@ -57,4 +57,3 @@ struct AllPairsSequence<WrappedCollection: Collection>: Sequence, IteratorProtoc
         return (currentValue, pairValue)
     }
 }
-

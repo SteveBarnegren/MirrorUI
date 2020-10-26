@@ -22,7 +22,6 @@ extension CompositionTime: Equatable {
     }
 }
 
-
 extension CompositionTime: Comparable {
     static func < (lhs: CompositionTime, rhs: CompositionTime) -> Bool {
         if lhs.bar == rhs.bar {

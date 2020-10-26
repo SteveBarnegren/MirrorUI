@@ -71,5 +71,4 @@ class VariationSequencerTests: XCTestCase {
         XCTAssertNil(sequencer.next())
     }
 
-    
 }

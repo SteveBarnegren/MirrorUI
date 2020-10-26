@@ -94,7 +94,6 @@ class NoteHeadAlignmentDeciderTests: XCTestCase {
 
     }
     
-    
     func testEvenNumberOfMultipleAdjacentNotes() {
         // When there is an even number of adjacent notes, the lowest note always goes on the left side
         assert(stavePostions: [-3, -2, -1, 0],
