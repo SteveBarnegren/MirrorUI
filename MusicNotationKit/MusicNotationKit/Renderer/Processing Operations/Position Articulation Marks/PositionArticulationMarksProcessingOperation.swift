@@ -30,16 +30,19 @@ class PositionArticulationMarksProcessingOperation: CompositionProcessingOperati
         
         let pitch: Pitch
         let spaceOffset: Int
+        let lineRounding: StaveSpace.LineRounding
         switch note.symbolDescription.stemDirection {
         case .up:
             pitch = note.lowestPitch
             spaceOffset = -1
+            lineRounding = .spaceBelow
         case .down:
             pitch = note.highestPitch
             spaceOffset = 1
+            lineRounding = .spaceAbove
         }
         
-        var staveSpace = StaveSpace(stavePosition: pitch.stavePosition, lineRounding: .spaceAbove)
+        var staveSpace = StaveSpace(stavePosition: pitch.stavePosition, lineRounding: lineRounding)
         staveSpace = staveSpace.adding(spaces: spaceOffset)
         let stavePosition = staveSpace.stavePosition
         
