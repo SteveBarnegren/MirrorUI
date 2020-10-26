@@ -2,9 +2,10 @@
   "commitish" : "162672710f07b425e683c6a7521f01f228ff2693",
   "iOS" : [
     {
+      "hash" : "b4fe0bbd4543cf7b7d8bedd183a69464431de2c07ddb2851baf5a36cafed69d6",
       "name" : "PopupControls",
-      "hash" : "6a5e8229e67caa2f9f50c75af0a1a55a33ccbb4082d60e0e8a8d1db0fb5b7a6d",
-      "swiftToolchainVersion" : "5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
+      "linking" : "dynamic",
+      "swiftToolchainVersion" : "5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)"
     }
   ]
 }
