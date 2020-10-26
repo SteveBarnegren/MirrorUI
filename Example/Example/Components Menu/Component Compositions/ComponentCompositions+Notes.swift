@@ -13,7 +13,7 @@ extension ComponentCompositions {
     
     static var notes: Composition {
         
-        let compostion = Composition()
+        let composition = Composition()
         
         func addNote(value: NoteValue, hasStem: Bool) {
             
@@ -25,7 +25,7 @@ extension ComponentCompositions {
                 let note = Note(value: value, pitch: pitch)
                 sequence.add(note: note)
                 bar.add(sequence: sequence)
-                compostion.add(bar: bar)
+                composition.add(bar: bar)
             }
         }
         
@@ -41,6 +41,6 @@ extension ComponentCompositions {
         addNote(value: 512, hasStem: true)
         addNote(value: 1024, hasStem: true)
         
-        return compostion
+        return composition
     }
 }
