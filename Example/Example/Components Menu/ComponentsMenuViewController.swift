@@ -111,6 +111,7 @@ private func makeComponentInfos() -> [ComponentInfo] {
     let adjacentNoteChords = ComponentInfo(name: "Adjacent note chords", composition: ComponentCompositions.adjacentNoteChords, deepLink: .adjacentNoteChords)
     let accidentals = ComponentInfo(name: "Accidentals", composition: ComponentCompositions.accidentals, deepLink: .accidentals)
     let ties = ComponentInfo(name: "Ties", composition: ComponentCompositions.ties, deepLink: .ties)
+    let accents = ComponentInfo(name: "Accents", composition: ComponentCompositions.accents, deepLink: .accents)
 
-    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties]
+    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents]
 }

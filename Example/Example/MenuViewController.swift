@@ -8,7 +8,7 @@
 
 import UIKit
 
-var deeplink: DeepLink? = .component(.ties)
+var deeplink: DeepLink? = .component(.accents)
 
 class MenuViewController: UIViewController {
     

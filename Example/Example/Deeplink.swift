@@ -19,4 +19,5 @@ enum ComponentDeepLink {
     case adjacentNoteChords
     case accidentals
     case ties
+    case accents
 }

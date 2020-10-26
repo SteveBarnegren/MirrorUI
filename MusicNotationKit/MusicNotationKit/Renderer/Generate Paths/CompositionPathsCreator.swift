@@ -50,6 +50,10 @@ class CompositionPathsCreator {
         let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeadDescriptions }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let restPaths = RestRenderer().paths(forRests: noteSequence.rests)
         
+        let articulationMarkPaths = noteSequence.notes.map { note in
+            note.articulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()
+        }.joined().toArray()
+        
         // Draw ties
         var tiePaths = [Path]()
         for note in noteSequence.notes {
@@ -77,9 +81,8 @@ class CompositionPathsCreator {
         allPaths += restPaths
         allPaths += tiePaths
         allPaths += leadingTiePaths
+        allPaths += articulationMarkPaths
         return allPaths
-        
-//        return notePaths + noteSymbolPaths + noteHeadAdjacentItems + restPaths + tiePaths + leadingTiePaths
     }
     
     // Render Symbols
@@ -108,6 +111,17 @@ class CompositionPathsCreator {
             return FlatRenderer().paths(forFlatAtX: x, y: y)
         case .natural:
             return NaturalRenderer().paths(forNaturalAtX: x, y: y)
+        }
+    }
+    
+    // MARK: - Render Articulation
+    
+    private func makePaths(forArticulationMark articulation: ArticulationMark, xPos: Double) -> [Path] {
+        
+        if let accent = articulation as? Accent {
+            return AccentRenderer().paths(forAccent: accent, xPos: xPos)
+        } else {
+            fatalError("Unknown articulation type: \(articulation)")
         }
     }
 }

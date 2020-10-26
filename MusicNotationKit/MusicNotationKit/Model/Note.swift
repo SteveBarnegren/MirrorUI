@@ -25,6 +25,7 @@ public class Note: Playable {
     
     var symbolDescription = NoteSymbolDescription.standard
     var noteHeadDescriptions = [NoteHeadDescription]()
+    var articulationMarks = [ArticulationMark]()
     
     var tiedToNext = false
     
@@ -97,6 +98,12 @@ public class Note: Playable {
     // Note Head
     public func crossHead() -> Note {
         self.noteHeadType = .cross
+        return self
+    }
+    
+    // Accent
+    public func accent() -> Note {
+        self.articulationMarks.append(Accent())
         return self
     }
 }
