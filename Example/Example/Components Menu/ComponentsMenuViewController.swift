@@ -12,25 +12,16 @@ import MusicNotationKit
 struct ComponentInfo {
     let name: String
     let composition: Composition
-    let deepLink: ComponentDeepLink
 }
 
 private let cellIdentifier = "DefaultCell"
 
 class ComponentsMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var deeplink: Deeplink?
+    
     private var tableView: UITableView!
     private let componentInfos = makeComponentInfos()
-    private let deepLink: ComponentDeepLink?
-    
-    init(deepLink: ComponentDeepLink?) {
-        self.deepLink = deepLink
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +33,6 @@ class ComponentsMenuViewController: UIViewController, UITableViewDataSource, UIT
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
-        
-        handleDeepLink()
     }
     
     override func viewDidLayoutSubviews() {
@@ -54,6 +43,33 @@ class ComponentsMenuViewController: UIViewController, UITableViewDataSource, UIT
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.indexPathsForSelectedRows?.forEach { tableView.deselectRow(at: $0, animated: true) }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        handleDeeplink()
+    }
+    
+    // MARK: - Deeplinking
+    
+    private func handleDeeplink() {
+        
+        guard let path = deeplink?.nextPathComponent() else {
+            return
+        }
+        
+        func sanitise(_ string: String) -> String {
+            var s = string
+            s.removeAll(where: { $0 == " " })
+            return s.lowercased()
+        }
+        
+        for component in componentInfos {
+            if sanitise(component.name) == sanitise(path) {
+                showComponent(info: component)
+                return
+            }
+        }
     }
     
     // MARK: - UITableViewDataSource
@@ -87,31 +103,16 @@ class ComponentsMenuViewController: UIViewController, UITableViewDataSource, UIT
         let vc = ScrollingMusicExampleViewController(composition: info.composition)
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    // MARK: - DeepLink
-    
-    private func handleDeepLink() {
-        
-        guard let deepLink = self.deepLink else {
-            return
-        }
-        
-        guard let info = self.componentInfos.first(where: { $0.deepLink == deepLink }) else {
-            return
-        }
-        
-        showComponent(info: info)
-    }
 }
 
 private func makeComponentInfos() -> [ComponentInfo] {
-    let notes = ComponentInfo(name: "Notes", composition: ComponentCompositions.notes, deepLink: .notes)
-    let rests = ComponentInfo(name: "Rests", composition: ComponentCompositions.rests, deepLink: .rests)
-    let intervals = ComponentInfo(name: "Intervals and chords", composition: ComponentCompositions.intervalsAndChords, deepLink: .intervalsAndChords)
-    let adjacentNoteChords = ComponentInfo(name: "Adjacent note chords", composition: ComponentCompositions.adjacentNoteChords, deepLink: .adjacentNoteChords)
-    let accidentals = ComponentInfo(name: "Accidentals", composition: ComponentCompositions.accidentals, deepLink: .accidentals)
-    let ties = ComponentInfo(name: "Ties", composition: ComponentCompositions.ties, deepLink: .ties)
-    let accents = ComponentInfo(name: "Accents", composition: ComponentCompositions.accents, deepLink: .accents)
+    let notes = ComponentInfo(name: "Notes", composition: ComponentCompositions.notes)
+    let rests = ComponentInfo(name: "Rests", composition: ComponentCompositions.rests)
+    let intervals = ComponentInfo(name: "Intervals and chords", composition: ComponentCompositions.intervalsAndChords)
+    let adjacentNoteChords = ComponentInfo(name: "Adjacent note chords", composition: ComponentCompositions.adjacentNoteChords)
+    let accidentals = ComponentInfo(name: "Accidentals", composition: ComponentCompositions.accidentals)
+    let ties = ComponentInfo(name: "Ties", composition: ComponentCompositions.ties)
+    let accents = ComponentInfo(name: "Accents", composition: ComponentCompositions.accents)
 
     return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents]
 }

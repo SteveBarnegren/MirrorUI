@@ -8,9 +8,9 @@
 
 import UIKit
 
-var deeplink: DeepLink? = .component(.accents)
-
 class MenuViewController: UIViewController {
+    
+    var deeplink: Deeplink?
     
     init() {
         super.init(nibName: "MenuViewController", bundle: nil)
@@ -26,10 +26,25 @@ class MenuViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let dl = deeplink {
-            handle(deepLink: dl)
-            deeplink = nil
+        handleDeeplink()
+    }
+    
+    // MARK: - Deeplink
+    
+    private func handleDeeplink() {
+        
+        guard let path = deeplink?.nextPathComponent() else {
+            return
         }
+        
+        switch path {
+        case "components":
+            navigateToComponents(deeplink: deeplink)
+        default:
+            print("Unknown deeplink path: \(path)")
+        }
+        
+        deeplink = nil
     }
     
     // MARK: - Actions
@@ -47,23 +62,14 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func componentsButtonPressed(sender: UIButton) {
-        navigateToComponents(deepLink: nil)
-    }
-    
-    // MARK: - Deeplinking
-    
-    private func handle(deepLink: DeepLink) {
-        
-        switch deepLink {
-        case .component(let component):
-            navigateToComponents(deepLink: component)
-        }
+        navigateToComponents()
     }
     
     // MARK: - Navigation
     
-    private func navigateToComponents(deepLink: ComponentDeepLink?) {
-        let vc = ComponentsMenuViewController(deepLink: deepLink)
+    private func navigateToComponents(deeplink: Deeplink? = nil) {
+        let vc = ComponentsMenuViewController()
+        vc.deeplink = deeplink
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let menu = MenuViewController()
+        menu.deeplink = getDeeplink()
         
         let navController = UINavigationController(rootViewController: menu)
         navController.navigationBar.isTranslucent = false
@@ -26,5 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
+    
+    private func getDeeplink() -> Deeplink? {
+        
+        if let path = UserDefaults.standard.string(forKey: "deeplink") {
+            return Deeplink(path: path)
+        } else {
+            return nil
+        }
+    }
 }

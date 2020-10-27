@@ -8,16 +8,19 @@
 
 import Foundation
 
-enum DeepLink {
-    case component(ComponentDeepLink)
-}
-
-enum ComponentDeepLink {
-    case notes
-    case rests
-    case intervalsAndChords
-    case adjacentNoteChords
-    case accidentals
-    case ties
-    case accents
+class Deeplink {
+    
+    private var components: [String]
+    
+    init(path: String) {
+        components = path.components(separatedBy: "/")
+    }
+    
+    func nextPathComponent() -> String? {
+        if components.isEmpty {
+            return nil
+        } else {
+            return components.removeFirst()
+        }
+    }
 }
