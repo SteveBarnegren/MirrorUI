@@ -14,7 +14,7 @@ extension ComponentCompositions {
     static var ties: Composition {
         
         let composition = Composition()
-  
+
         // Tied crotchets
         do {
             let pitchPairs: [(Pitch, Pitch)] = [
@@ -179,10 +179,10 @@ extension ComponentCompositions {
             let bar = Bar()
             let sequence = NoteSequence()
             
-            sequence.add(note: Note(value: .crotchet, pitch: .d4).tied().accent())
-            sequence.add(note: Note(value: .crotchet, pitch: .d4).accent())
             sequence.add(note: Note(value: .crotchet, pitch: .e4).tied().accent())
             sequence.add(note: Note(value: .crotchet, pitch: .e4).accent())
+            sequence.add(note: Note(value: .crotchet, pitch: .d4).tied().accent())
+            sequence.add(note: Note(value: .crotchet, pitch: .d4).accent())
             
             bar.add(sequence: sequence)
             composition.add(bar: bar)

@@ -77,11 +77,11 @@ class MusicRenderer {
             // Calculate note widths
             CalculateNoteWidthsProcessingOperation().process(composition: composition)
             
-            // Create Ties
-            CreateTiesProcessingOperation().process(composition: composition)
-            
             // Position Articulation marks
             PositionArticulationMarksProcessingOperation().process(composition: composition)
+            
+            // Create Ties
+            CreateTiesProcessingOperation().process(composition: composition)
             
             // Generate bar layout anchors
             GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)

@@ -101,6 +101,7 @@ class ComponentsMenuViewController: UIViewController, UITableViewDataSource, UIT
     
     private func showComponent(info: ComponentInfo) {
         let vc = ScrollingMusicExampleViewController(composition: info.composition)
+        vc.title = info.name
         navigationController?.pushViewController(vc, animated: true)
     }
 }

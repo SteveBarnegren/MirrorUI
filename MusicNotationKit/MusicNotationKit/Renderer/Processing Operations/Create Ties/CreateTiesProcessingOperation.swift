@@ -130,8 +130,10 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
         let variationSelector = VariationSelector()
         variationSelector.add(conflictIdentifier: ConflictIdentifiers.ties)
         variationSelector.add(conflictIdentifier: ConflictIdentifiers.tiesAndNotes)
+        variationSelector.add(conflictIdentifier: ConflictIdentifiers.tiesAndArticulationMarks)
         variationSelector.add(variationSets: tieVariationSets)
         variationSelector.add(staticItems: notes)
+        variationSelector.add(staticItems: notes.map { $0.articulationMarks }.joined().toArray())
         variationSelector.pruneVariations()
     }
     

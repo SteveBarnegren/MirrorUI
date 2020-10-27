@@ -48,6 +48,7 @@ class PositionArticulationMarksProcessingOperation: CompositionProcessingOperati
         
         for articulation in articulations {
             articulation.stavePosition = stavePosition
+            articulation.note = note
         }
         
     }
