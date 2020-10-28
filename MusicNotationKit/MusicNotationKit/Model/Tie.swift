@@ -14,10 +14,15 @@ enum TieOrientation {
 }
 
 enum TieEndAlignment {
+    // In the middle of a space
     case middleOfSpace
+    // Sitting above a note head that is on a line (in the space that the top half of the note is in)
     case sittingAboveNoteHead
+    // Hanging below a note head that in on a line (in the space that the bottom half of the note is in)
     case hangingBelowNoteHead
+    // The bottom of a space
     case bottom
+    // The top of a space
     case top
 }
 

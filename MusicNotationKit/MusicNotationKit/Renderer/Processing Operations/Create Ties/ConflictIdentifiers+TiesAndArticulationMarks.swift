@@ -20,7 +20,7 @@ extension ConflictIdentifiers {
         let startNote = tie.fromNote!
         let endNote = tie.toNote!
 
-        if (tie.endAlignment == .sittingAboveNoteHead || tie.endAlignment == .hangingBelowNoteHead || tie.endAlignment == .middleOfSpace)
+        if tie.orientation == .verticallyAlignedWithNote
             && (articulationNote === startNote || articulationNote === endNote) {
             return false
         }
