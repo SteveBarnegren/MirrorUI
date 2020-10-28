@@ -60,8 +60,6 @@ class CompositionPathsCreator {
             for noteHeadDescription in note.noteHeadDescriptions {
                 if let tie = noteHeadDescription.tie?.chosenVariation {
                     tiePaths += TieRenderer().paths(forTie: tie,
-                                                    noteHead: noteHeadDescription,
-                                                    note: note,
                                                     inBarRange: barRange,
                                                     canvasWidth: canvasWidth)
                 }
@@ -71,7 +69,9 @@ class CompositionPathsCreator {
         // Draw leading ties
         var leadingTiePaths = [Path]()
         for tie in leadingTies {
-            leadingTiePaths += TieRenderer().paths(forLeadingTie: tie)
+            leadingTiePaths += TieRenderer().paths(forTie: tie,
+                                                   inBarRange: barRange,
+                                                   canvasWidth: canvasWidth)
         }
         
         var allPaths = [Path]()

@@ -33,10 +33,18 @@ private struct CubicBezier {
 class TieRenderer {
     
     func paths(forTie tie: Tie,
-               noteHead: NoteHeadDescription,
-               note: Note,
                inBarRange barRange: ClosedRange<Int>,
                canvasWidth: Double) -> [Path] {
+        
+        guard let fromNote = tie.fromNote else {
+            print("Error - tie had no from note")
+            return []
+        }
+        
+        guard let fromNoteHead = tie.fromNoteHead else {
+            print("Error - tie had no from note head")
+            return []
+        }
         
         guard let endNote = tie.toNote else {
             print("Error - tie had no end note")
@@ -48,36 +56,34 @@ class TieRenderer {
             return []
         }
         
-        let orientationOffset = xOffset(forOrientation: tie.orientation)
-                
-        let startY = yPosition(fromTiePosition: tie.startPosition) + yOffset(forEndAlignment: tie.endAlignment)
-        let start = Point(xPosition(forNote: note, noteHead: noteHead) + orientationOffset,
-                          startY)
+        let arcY = yPosition(fromTiePosition: tie.middlePosition)
+            + yOffset(forMiddleAlignment: tie.middleAlignment)
+        let orientationOffset = Point(xOffset(forOrientation: tie.orientation),
+                                      yOffset(forEndAlignment: tie.endAlignment))
+      
+        let startY = yPosition(fromTiePosition: tie.startPosition) + orientationOffset.y
+        let startX: Double
+        let endX: Double
         
-        if barRange.contains(tie.endNoteTime.bar) {
-            let end = Point(xPosition(forNote: endNote, noteHead: endNoteHead) - orientationOffset,
-                            startY)
-            let mid = Point((start.x + end.x) / 2,
-                            yPosition(fromTiePosition: tie.middlePosition) + yOffset(forMiddleAlignment: tie.middleAlignment))
+        if barRange.contains(tie.startNoteTime.bar) && barRange.contains(tie.endNoteTime.bar) {
             
-            let path = pathForFullTie(startX: start.x, endX: end.x, startY: startY, arcY: mid.y)
-            return [path]
+            startX = xPosition(forNote: fromNote, noteHead: fromNoteHead) + orientationOffset.x
+            endX = xPosition(forNote: endNote, noteHead: endNoteHead) - orientationOffset.x
+            
+        } else if barRange.contains(tie.startNoteTime.bar) {
 
+            startX = xPosition(forNote: fromNote, noteHead: fromNoteHead) + orientationOffset.x
+            endX = canvasWidth
+            
         } else {
-            var path: Path
-
-            let mid = Point(canvasWidth,
-                            yPosition(fromTiePosition: tie.middlePosition) + yOffset(forMiddleAlignment: tie.middleAlignment))
-            
-            path = Path(commands: [
-                .move(start),
-                .line(mid)
-            ])
-            
-            path.drawStyle = .stroke
-            return [path]
-
+            startX = 0
+            endX = xPosition(forNote: endNote, noteHead: endNoteHead) - orientationOffset.x
         }
+        
+        var path = pathForFullTie(startX: startX, endX: endX, startY: startY, arcY: arcY)
+        path.drawStyle = .fill
+        
+        return [path]
     }
     
     // MARK: - Full Tie
