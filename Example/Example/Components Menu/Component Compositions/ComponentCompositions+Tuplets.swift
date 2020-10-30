@@ -37,6 +37,68 @@ extension ComponentCompositions {
             composition.add(bar: bar)
         }
         
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            
+            sequence.startTuplet(TupletTime(value: 2, over: 3))// triplet
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.endTuplet()
+            
+            sequence.startTuplet(TupletTime(value: 2, over: 3))// triplet
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .a4))
+            sequence.add(note: Note(value: .quaver, pitch: .c4))
+            sequence.endTuplet()
+            
+            sequence.startTuplet(TupletTime(value: 2, over: 3))// triplet
+            sequence.add(note: Note(value: .quaver, pitch: .e4))
+            sequence.add(note: Note(value: .quaver, pitch: .e4))
+            sequence.add(note: Note(value: .quaver, pitch: .e4))
+            sequence.endTuplet()
+            
+            sequence.startTuplet(TupletTime(value: 2, over: 3))// triplet
+            sequence.add(note: Note(value: .quaver, pitch: .e4))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.endTuplet()
+            
+            bar.add(sequence: sequence)
+            composition.add(bar: bar)
+        }
+        
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            
+            sequence.add(note: Note(value: .crotchet, pitch: .f3))
+            
+            sequence.add(note: Note(value: .semiquaver, pitch: .f3))
+            sequence.add(note: Note(value: .semiquaver, pitch: .a4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+
+            sequence.startTuplet(TupletTime(value: 6, over: 4)) // sixtuplet
+            sequence.add(note: Note(value: .semiquaver, pitch: .f3))
+            sequence.add(note: Note(value: .semiquaver, pitch: .a4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.endTuplet()
+            
+            sequence.startTuplet(TupletTime(value: 2, over: 3))
+            sequence.add(note: Note(value: .quaver, pitch: .e4))
+            sequence.add(rest: Rest(value: .quaver))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.endTuplet()
+            
+            bar.add(sequence: sequence)
+            composition.add(bar: bar)
+        }
+        
         return composition
        
     }

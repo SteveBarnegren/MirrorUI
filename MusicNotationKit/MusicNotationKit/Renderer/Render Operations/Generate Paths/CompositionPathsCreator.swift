@@ -54,6 +54,8 @@ class CompositionPathsCreator {
             note.articulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()
         }.joined().toArray()
         
+        let tupletMarkPaths = TupletMarksRenderer().paths(forNoteSequence: noteSequence)
+        
         // Draw ties
         var tiePaths = [Path]()
         for note in noteSequence.notes {
@@ -82,6 +84,7 @@ class CompositionPathsCreator {
         allPaths += tiePaths
         allPaths += leadingTiePaths
         allPaths += articulationMarkPaths
+        allPaths += tupletMarkPaths
         return allPaths
     }
     
