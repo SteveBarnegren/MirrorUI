@@ -70,7 +70,7 @@ class NoteBeamDescriberFourFourTests: NoteBeamDescriberTestsBase {
         )
     }
     
-    func test_QuaterBar_32() {
+    func test_QuarterBar_32() {
         assert(values: Array(repeating: 32, count: 8), beams:
             """
             |--|--|--|--|--|--|--|
@@ -80,7 +80,7 @@ class NoteBeamDescriberFourFourTests: NoteBeamDescriberTestsBase {
         )
     }
     
-    func test_QuaterBar_64() {
+    func test_QuarterBar_64() {
         assert(values: Array(repeating: 64, count: 16), beams:
             """
             |--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
