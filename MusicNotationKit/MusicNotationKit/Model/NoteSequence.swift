@@ -8,9 +8,40 @@
 
 import Foundation
 
+public struct TupletTime: Equatable {
+    var numerator: Int
+    var denominator: Int
+    
+    public init(value: Int, over: Int) {
+        self.numerator = value
+        self.denominator = over
+    }
+}
+
 public class NoteSequence {
     
-    var playables = [Playable]()
+    enum Item {
+        case note(Note)
+        case rest(Rest)
+        case startTuplet(TupletTime)
+        case endTuplet
+
+        var playable: Playable? {
+            switch self {
+            case .note(let n):
+                return n
+            case .rest(let r):
+                return r
+            default:
+                return nil
+            }
+        }
+    }
+    
+    var items = [Item]()
+    var playables: [Playable] {
+        return items.compactMap { $0.playable }
+    }
     var notes: [Note] {
         return playables.compactMap { $0 as? Note }
     }
@@ -34,10 +65,18 @@ public class NoteSequence {
     // MARK: - Add Playable items
     
     public func add(note: Note) {
-        self.playables.append(note)
+        self.items.append(.note(note))
     }
     
     public func add(rest: Rest) {
-        self.playables.append(rest)
+        self.items.append(.rest(rest))
+    }
+    
+    public func startTuplet(_ time: TupletTime) {
+        self.items.append(.startTuplet(time))
+    }
+    
+    public func endTuplet() {
+        self.items.append(.endTuplet)
     }
 }

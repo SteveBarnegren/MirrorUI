@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Playable: HorizontalLayoutItem {
-    var value: NoteValue { get }
+    var value: NoteValue { get set }
     var time: Time { get set }
     var compositionTime: CompositionTime { get set }
 }

@@ -56,7 +56,7 @@ public class Note: Playable {
     }
     
     // Playable
-    let value: NoteValue
+    var value: NoteValue
     var time = Time.zero
     var compositionTime = CompositionTime.zero
     

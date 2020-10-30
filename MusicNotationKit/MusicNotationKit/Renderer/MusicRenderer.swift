@@ -56,6 +56,9 @@ class MusicRenderer {
             // Set bar numbers
             SetBarNumbersProcessingOperation().process(composition: composition)
             
+            // Apply tuplet timings
+            ApplyTupletTimesProcessingOperation().process(composition: composition)
+            
             // Join barlines
             JoinBarlinesCompositionProcessingOperation().process(composition: composition)
             

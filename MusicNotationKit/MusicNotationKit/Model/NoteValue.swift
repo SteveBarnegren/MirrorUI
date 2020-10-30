@@ -48,16 +48,26 @@ public struct NoteValue: Equatable {
     
     var division: Int
     var dots: Dots
+    var tuplet: TupletTime?
     
     var duration: Time {
+        
+        var time: Time
         switch dots {
         case .none:
-            return Time(value: 1, division: division)
+            time = Time(value: 1, division: division)
         case .dotted:
-            return Time(value: 3, division: division * 2)
+            time = Time(value: 3, division: division * 2)
         case .doubleDotted:
-            return Time(value: 7, division: division * 2 * 2)
+            time = Time(value: 7, division: division * 2 * 2)
         }
+        
+        if let tuplet = self.tuplet {
+            time.value *= tuplet.numerator
+            time.division *= tuplet.denominator
+        }
+        
+        return time
     }
     
     // MARK: - Init
