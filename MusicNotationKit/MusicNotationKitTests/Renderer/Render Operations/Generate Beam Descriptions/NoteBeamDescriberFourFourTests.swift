@@ -175,4 +175,16 @@ class NoteBeamDescriberFourFourTests: NoteBeamDescriberTestsBase {
             """
         )
     }
+    
+    // MARK: - Triplets
+    
+    func test_triplets() {
+        let value = NoteBeamDescriberValue.tuplet(16, TupletTime(value: 4, over: 6))
+        assert(values: Array(repeating: value, count: 6), beams:
+            """
+            |--|--|--|--|--|
+            |--|--|--|--|--|
+            """
+        )
+    }
 }

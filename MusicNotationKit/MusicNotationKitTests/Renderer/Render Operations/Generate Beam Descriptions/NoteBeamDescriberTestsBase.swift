@@ -17,7 +17,8 @@ class NoteBeamDescriberTestsBase: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let beaming = Beaming<Note>(duration: { $0.duration },
+        let beaming = Beaming<Note>(division: { $0.division },
+                                    duration: { $0.duration },
                                     time: { $0.time },
                                     numberOfTails: { $0.numberOfTails },
                                     setBeams: { note, beams in note.beams = beams})
@@ -28,12 +29,14 @@ class NoteBeamDescriberTestsBase: XCTestCase {
 // MARK: - Note Type
 
 private class Note {
+    var division: Int
     var duration: Time
     var time: Time
     var numberOfTails: Int
     var beams = [Beam]()
     
-    init(duration: Time, time: Time, numberOfTails: Int) {
+    init(division: Int, duration: Time, time: Time, numberOfTails: Int) {
+        self.division = division
         self.duration = duration
         self.time = time
         self.numberOfTails = numberOfTails
@@ -44,14 +47,48 @@ private class Note {
 
 extension NoteBeamDescriberTestsBase {
     
-    func assert(values: [Int], beams: String, file: StaticString = #file, line: UInt = #line) {
+    enum NoteBeamDescriberValue: ExpressibleByIntegerLiteral {
+        case standard(Int)
+        case tuplet(Int, TupletTime)
+        
+        init(integerLiteral value: IntegerLiteralType) {
+            self = .standard(value)
+        }
+        
+        var value: Int {
+            switch self {
+            case .standard(let v):
+                return v
+            case .tuplet(let v, _):
+                return v
+            }
+        }
+        
+        var tuplet: TupletTime? {
+            switch self {
+            case .standard:
+                return nil
+            case .tuplet(_, let t):
+                return t
+            }
+        }
+    }
+    
+    func assert(values: [NoteBeamDescriberValue], beams: String, file: StaticString = #file, line: UInt = #line) {
         
         var currentTime = Time.zero
         var notes = [Note]()
         for value in values {
             
-            let duration = Time(value: 1, division: value)
-            let note = Note(duration: duration, time: currentTime, numberOfTails: tails(fromValue: value))
+            var duration = Time(value: 1, division: value.value)
+            if let tuplet = value.tuplet {
+                duration.value *= tuplet.numerator
+                duration.division *= tuplet.denominator
+            }
+            let note = Note(division: value.value,
+                            duration: duration,
+                            time: currentTime,
+                            numberOfTails: tails(fromValue: value.value))
             notes.append(note)
             currentTime += duration
         }

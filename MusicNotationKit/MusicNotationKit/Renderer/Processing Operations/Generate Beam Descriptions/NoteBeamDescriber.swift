@@ -11,6 +11,7 @@ import Foundation
 struct Beaming<T> {
     
     // Inputs
+    var division: (T) -> Int
     var duration: (T) -> Time
     var time: (T) -> Time
     var numberOfTails: (T) -> Int
@@ -22,7 +23,8 @@ struct Beaming<T> {
 extension Beaming where T == Note {
     
     static var notes: Beaming<Note> {
-        return Beaming(duration: { return $0.duration },
+        return Beaming(division: { return $0.value.division },
+                       duration: { return $0.duration },
                        time: { return $0.time },
                        numberOfTails: { return $0.symbolDescription.numberOfTails },
                        setBeams: { note, beams in note.beams = beams})
@@ -164,15 +166,14 @@ class NoteBeamDescriber<T> {
     private func numberOfBeamsBetweenSameDurationNotes(first: T, second: T, timeSignature: TimeSignature) -> Int {
         
         assert(beaming.numberOfTails(first) == beaming.numberOfTails(second))
-        assert(beaming.duration(first) == beaming.duration(second))
+        assert(beaming.division(first) == beaming.division(second))
         
         var numberOfBeams = beaming.numberOfTails(first)
-        let duration = beaming.duration(first)
+        var division = beaming.division(first)
         
         let firstTime = beaming.time(first)
         let secondTime = beaming.time(second)
         
-        var division = duration.division
         division /= 2
         
         var isFirstDivision = true
