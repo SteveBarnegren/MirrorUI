@@ -50,6 +50,16 @@ public class Note: Playable {
         }
     }
     
+    /// The y position of the end of the note stem
+    var stemEndY: Double {
+        switch symbolDescription.stemDirection {
+        case .up:
+            return stemConnectingNoteHead.yPosition + symbolDescription.stemLength
+        case .down:
+            return stemConnectingNoteHead.yPosition - symbolDescription.stemLength
+        }
+    }
+    
     // Width
     var layoutDuration: Time? {
         return self.duration
@@ -130,6 +140,9 @@ enum Beam {
 enum StemDirection {
     case up
     case down
+    
+    var isUp: Bool { self == .up }
+    var isDown: Bool { self == .down }
 }
 
 enum NoteHeadAlignment {
