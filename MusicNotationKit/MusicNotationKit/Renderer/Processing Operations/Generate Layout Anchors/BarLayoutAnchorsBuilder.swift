@@ -143,7 +143,7 @@ class LayoutAnchorsBuilder {
         let anchor = SingleItemLayoutAnchor(item: playable)
         anchor.leadingWidth = playable.leadingWidth
         anchor.trailingWidth = playable.trailingWidth
-        anchor.time = playable.time
+        anchor.time = playable.barTime
         
         // Create leading anchors
         for item in playable.leadingLayoutItems {

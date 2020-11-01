@@ -125,7 +125,7 @@ extension PlayableItemTimeCalculatorTests {
 extension NoteSequence {
     
     @discardableResult func verify(noteTimes: [Time], file: StaticString = #file, line: UInt = #line) -> Self {
-        XCTAssertEqual(noteTimes, self.playables.map { $0.time }, file: file, line: line)
+        XCTAssertEqual(noteTimes, self.playables.map { $0.barTime }, file: file, line: line)
         return self
     }
 }

@@ -15,7 +15,7 @@ class PlayableItemTimeCalculator {
         var currentTime = Time.zero
         
         for playable in noteSequence.playables {
-            playable.time = currentTime
+            playable.barTime = currentTime
             currentTime += playable.duration
         }
     }

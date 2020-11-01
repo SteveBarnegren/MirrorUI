@@ -57,7 +57,7 @@ public class Note: Playable {
     
     // Playable
     var value: NoteValue
-    var time = Time.zero
+    var barTime = Time.zero
     var compositionTime = CompositionTime.zero
     
     // HorizontalLayoutItem

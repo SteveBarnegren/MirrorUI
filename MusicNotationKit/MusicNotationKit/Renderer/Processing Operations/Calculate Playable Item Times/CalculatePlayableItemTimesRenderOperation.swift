@@ -21,7 +21,7 @@ class CalculatePlayableItemTimesProcessingOperation: CompositionProcessingOperat
             for sequence in bar.sequences {
                 var sequenceTime = Time.zero
                 for playable in sequence.playables {
-                    playable.time = sequenceTime
+                    playable.barTime = sequenceTime
                     playable.compositionTime = CompositionTime(bar: barIndex,
                                                                time: sequenceTime,
                                                                absoluteTime: absoluteTime + sequenceTime)
