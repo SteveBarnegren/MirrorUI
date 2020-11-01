@@ -17,17 +17,17 @@ extension ConflictIdentifiers {
     static func isTieAndNoteCompatible(tie: Tie, note: Note) -> Bool {
                 
         // If the note time is less that the tie time, do not conflict
-        if note.compositionTime < tie.startNoteTime {
+        if note.compositionTime < tie.startNoteCompositionTime {
             return true
         }
         
         // If the note time is greater than the tie end time, do not conflict
-        if note.compositionTime > tie.endNoteTime {
+        if note.compositionTime > tie.endNoteCompositionTime {
             return true
         }
         
         // If the note is at the tie start time, check for overlapping note heads
-        if note.compositionTime == tie.startNoteTime && doesTieVerticallyAlignWithNote(tie: tie) {
+        if note.compositionTime == tie.startNoteCompositionTime && doesTieVerticallyAlignWithNote(tie: tie) {
             for noteHead in note.noteHeadDescriptions where tie.fromNoteHead !== noteHead {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 let tieY = startY(forTie: tie)
@@ -39,7 +39,7 @@ extension ConflictIdentifiers {
         }
         
         // If the note is at the tie end time, check for overlapping note heads
-        if note.compositionTime == tie.endNoteTime && doesTieVerticallyAlignWithNote(tie: tie) {
+        if note.compositionTime == tie.endNoteCompositionTime && doesTieVerticallyAlignWithNote(tie: tie) {
             for noteHead in note.noteHeadDescriptions where tie.toNoteHead !== noteHead {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 let tieY = startY(forTie: tie)
@@ -123,10 +123,10 @@ extension ConflictIdentifiers {
     
     static func timeRange(forTieMiddle tie: Tie) -> ClosedRange<Time> {
         
-        let middleTime = tie.startNoteTime.absoluteTime + ((tie.endNoteTime.absoluteTime - tie.startNoteTime.absoluteTime)/2)
-        let quarter = (middleTime - tie.startNoteTime.absoluteTime)/2
-        let start = tie.startNoteTime.absoluteTime + quarter
-        let end = tie.endNoteTime.absoluteTime - quarter
+        let middleTime = tie.startNoteCompositionTime.absoluteTime + ((tie.endNoteCompositionTime.absoluteTime - tie.startNoteCompositionTime.absoluteTime)/2)
+        let quarter = (middleTime - tie.startNoteCompositionTime.absoluteTime)/2
+        let start = tie.startNoteCompositionTime.absoluteTime + quarter
+        let end = tie.endNoteCompositionTime.absoluteTime - quarter
         return start...end
     }
 }

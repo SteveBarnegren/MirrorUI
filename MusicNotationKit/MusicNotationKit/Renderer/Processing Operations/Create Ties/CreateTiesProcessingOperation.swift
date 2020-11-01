@@ -66,8 +66,8 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
                 variation.value.fromNoteHead = startNote.noteHeadDescriptions[tieVariations.startNoteHeadIndex]
                 variation.value.toNote = endNote
                 variation.value.toNoteHead = endNote.noteHeadDescriptions[tieVariations.endNoteHeadIndex]
-                variation.value.startNoteTime = startNote.compositionTime
-                variation.value.endNoteTime = endNote.compositionTime
+                variation.value.startNoteCompositionTime = startNote.compositionTime
+                variation.value.endNoteCompositionTime = endNote.compositionTime
                 ties.append(variation)
             }
             
@@ -107,7 +107,7 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
             for note in sequence.notes {
                 for noteHead in note.noteHeadDescriptions {
                     if let tie = noteHead.tie?.chosenVariation {
-                        if tie.startNoteTime.bar != tie.endNoteTime.bar {
+                        if tie.startNoteCompositionTime.bar != tie.endNoteCompositionTime.bar {
                             return true
                         }
                     }

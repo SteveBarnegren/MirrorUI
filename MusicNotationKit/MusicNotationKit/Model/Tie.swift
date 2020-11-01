@@ -58,6 +58,6 @@ class Tie {
     weak var toNoteHead: NoteHeadDescription?
     
     // Additonal information used to prune variations
-    var startNoteTime = CompositionTime.zero
-    var endNoteTime = CompositionTime.zero
+    var startNoteCompositionTime = CompositionTime.zero
+    var endNoteCompositionTime = CompositionTime.zero
 }

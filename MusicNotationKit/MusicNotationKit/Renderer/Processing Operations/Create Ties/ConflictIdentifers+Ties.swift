@@ -64,9 +64,9 @@ extension ConflictIdentifiers {
         }
         
         return (
-            makeVector(tie.startNoteTime.absoluteTime, tie.startPosition).adding(x: xNudge),
-            makeVector(tie.startNoteTime.absoluteTime + ((tie.endNoteTime.absoluteTime - tie.startNoteTime.absoluteTime)/2), tie.middlePosition),
-            makeVector(tie.endNoteTime.absoluteTime, tie.startPosition).subtracting(x: xNudge)
+            makeVector(tie.startNoteCompositionTime.absoluteTime, tie.startPosition).adding(x: xNudge),
+            makeVector(tie.startNoteCompositionTime.absoluteTime + ((tie.endNoteCompositionTime.absoluteTime - tie.startNoteCompositionTime.absoluteTime)/2), tie.middlePosition),
+            makeVector(tie.endNoteCompositionTime.absoluteTime, tie.startPosition).subtracting(x: xNudge)
         )
     }
     

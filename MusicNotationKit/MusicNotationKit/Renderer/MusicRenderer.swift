@@ -166,7 +166,7 @@ class MusicRenderer {
         for sequence in bar.sequences {
             for note in sequence.notes {
                 for noteHead in note.noteHeadDescriptions {
-                    if let tie = noteHead.tie?.chosenVariation, tie.endNoteTime.bar != bar.barNumber {
+                    if let tie = noteHead.tie?.chosenVariation, tie.endNoteCompositionTime.bar != bar.barNumber {
                         ties.append(maybe: noteHead.tie?.chosenVariation)
                     }
                 }

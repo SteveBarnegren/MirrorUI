@@ -65,12 +65,12 @@ class TieRenderer {
         let startX: Double
         let endX: Double
         
-        if barRange.contains(tie.startNoteTime.bar) && barRange.contains(tie.endNoteTime.bar) {
+        if barRange.contains(tie.startNoteCompositionTime.bar) && barRange.contains(tie.endNoteCompositionTime.bar) {
             
             startX = xPosition(forNote: fromNote, noteHead: fromNoteHead) + orientationOffset.x
             endX = xPosition(forNote: endNote, noteHead: endNoteHead) - orientationOffset.x
             
-        } else if barRange.contains(tie.startNoteTime.bar) {
+        } else if barRange.contains(tie.startNoteCompositionTime.bar) {
 
             startX = xPosition(forNote: fromNote, noteHead: fromNoteHead) + orientationOffset.x
             endX = canvasWidth
