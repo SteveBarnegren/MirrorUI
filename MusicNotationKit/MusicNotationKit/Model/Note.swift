@@ -79,7 +79,6 @@ public class Note: Playable {
             assert(!xPosition.isInfinite)
         }
     }
-    //var yPosition = Double(0)
     
     var beams = [Beam]()
     
