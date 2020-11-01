@@ -237,6 +237,8 @@ class TieRenderer {
                 newCommands.append(.line(flip(p)))
             case .curve(let p, let c1, let c2):
                 newCommands.append(.curve(flip(p), c1: flip(c1), c2: flip(c2)))
+            case .quadCurve(let p, let c1):
+                newCommands.append(.quadCurve(flip(p), c1: flip(c1)))
             case .close:
                 newCommands.append(.close)
             case .circle(let center, let radius):

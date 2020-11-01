@@ -164,6 +164,7 @@
 		67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */; };
 		67CDC489254CAE6800C70E5B /* ApplyTupletTimesProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CDC488254CAE6800C70E5B /* ApplyTupletTimesProcessingOperation.swift */; };
 		67CDC48F254CBC7600C70E5B /* TupletMarksRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CDC48E254CBC7600C70E5B /* TupletMarksRenderer.swift */; };
+		67D04B7C254F649100297036 /* TextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D04B7B254F649100297036 /* TextRenderer.swift */; };
 		67E7DE03243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E7DE02243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift */; };
 		67E8304D246C965900E682EF /* VariationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E8304C246C965900E682EF /* VariationSet.swift */; };
 		67E863B92303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */; };
@@ -352,6 +353,7 @@
 		67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		67CDC488254CAE6800C70E5B /* ApplyTupletTimesProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyTupletTimesProcessingOperation.swift; sourceTree = "<group>"; };
 		67CDC48E254CBC7600C70E5B /* TupletMarksRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupletMarksRenderer.swift; sourceTree = "<group>"; };
+		67D04B7B254F649100297036 /* TextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRenderer.swift; sourceTree = "<group>"; };
 		67E7DE02243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadAlignmentDeciderTests.swift; sourceTree = "<group>"; };
 		67E8304C246C965900E682EF /* VariationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariationSet.swift; sourceTree = "<group>"; };
 		67E863B82303493400A5DE73 /* NoteBeamDescriberSixEightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberSixEightTests.swift; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				67706498245CC3DC0083037F /* TieRenderer.swift */,
 				67F5658E254754EC00910487 /* AccentRenderer.swift */,
 				67CDC48E254CBC7600C70E5B /* TupletMarksRenderer.swift */,
+				67D04B7B254F649100297036 /* TextRenderer.swift */,
 			);
 			path = "Component Renderers";
 			sourceTree = "<group>";
@@ -1158,6 +1161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67D04B7C254F649100297036 /* TextRenderer.swift in Sources */,
 				67BB96B6233685C700119953 /* MusicCollectionViewLayout.swift in Sources */,
 				677C9C8421C5192900C7A16E /* UIBezierPath+Extensions.swift in Sources */,
 				67BA7899242FE1E40097806B /* BezierMath.swift in Sources */,

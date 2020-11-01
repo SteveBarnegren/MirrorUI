@@ -13,6 +13,7 @@ struct Path {
     enum Command {
         case move(Point)
         case line(Point)
+        case quadCurve(Point, c1: Point)
         case curve(Point, c1: Point, c2: Point)
         case close
         case circle(Point, Double) // Center, Radius
@@ -77,6 +78,8 @@ extension Path {
                 newCommands.append(.move(translatePoint(p)))
             case .line(let p):
                 newCommands.append(.line(translatePoint(p)))
+            case .quadCurve(let p, let c1):
+                newCommands.append(.quadCurve(translatePoint(p), c1: translatePoint(c1)))
             case .curve(let p, let c1, let c2):
                 newCommands.append(.curve(translatePoint(p), c1: translatePoint(c1), c2: translatePoint(c2)))
             case .close:
@@ -125,6 +128,8 @@ extension Path {
                 newCommands.append(.move(scalePoint(p)))
             case .line(let p):
                 newCommands.append(.line(scalePoint(p)))
+            case .quadCurve(let p, let c1):
+                newCommands.append(.quadCurve(scalePoint(p), c1: scalePoint(c1)))
             case .curve(let p, let c1, let c2):
                 newCommands.append(.curve(scalePoint(p), c1: scalePoint(c1), c2: scalePoint(c2)))
             case .close:
@@ -173,6 +178,8 @@ extension Path {
                 newCommands.append(.move(invert(p)))
             case .line(let p):
                 newCommands.append(.line(invert(p)))
+            case .quadCurve(let p, let c1):
+                newCommands.append(.quadCurve(invert(p), c1: invert(c1)))
             case .curve(let p, let c1, let c2):
                 newCommands.append(.curve(invert(p), c1: invert(c1), c2: invert(c2)))
             case .close:
@@ -225,6 +232,8 @@ extension Array where Element == Path.Command {
                 newCommands.append(.move(scalePoint(p)))
             case .line(let p):
                 newCommands.append(.line(scalePoint(p)))
+            case .quadCurve(let p, let c1):
+                newCommands.append(.quadCurve(scalePoint(p), c1: scalePoint(c1)))
             case .curve(let p, let c1, let c2):
                 newCommands.append(.curve(scalePoint(p), c1: scalePoint(c1), c2: scalePoint(c2)))
             case .close:
@@ -259,6 +268,8 @@ extension Array where Element == Path.Command {
                 newCommands.append(.move(translatePoint(p)))
             case .line(let p):
                 newCommands.append(.line(translatePoint(p)))
+            case .quadCurve(let p, let c1):
+                newCommands.append(.quadCurve(translatePoint(p), c1: translatePoint(c1)))
             case .curve(let p, let c1, let c2):
                 newCommands.append(.curve(translatePoint(p), c1: translatePoint(c1), c2: translatePoint(c2)))
             case .close:
@@ -321,6 +332,10 @@ extension Path {
                 process(point: p.subtracting(x: r, y: r))
             case .arc:
                 break
+            case .quadCurve(let p, let c1):
+                // TODO: Need to calculate the bounding box of quad curve
+                process(point: p)
+                process(point: c1)
             }
         }
         
@@ -363,6 +378,9 @@ extension Array where Element == Path.Command {
                 if isPointInvalid(p) { return true }
             case .line(let p):
                 if isPointInvalid(p) { return true }
+            case .quadCurve(let p, let c1):
+                if isPointInvalid(p) { return true }
+                if isPointInvalid(c1) { return true }
             case .curve(let p, let c1, let c2):
                 if isPointInvalid(p) { return true }
                 if isPointInvalid(c1) { return true }

@@ -55,6 +55,10 @@ class PathBundleDrawer {
             case .line(var p):
                 p = invertY(p)
                 uiBezierPath.addLine(to: CGPoint(x: p.x, y: p.y))
+            case .quadCurve(var p, var c1):
+                p = invertY(p)
+                c1 = invertY(c1)
+                uiBezierPath.addQuadCurve(to: CGPoint(x: p.x, y: p.y), controlPoint: CGPoint(x: c1.x, y: c1.y))
             case .curve(var p, var c1, var c2):
                 p = invertY(p)
                 c1 = invertY(c1)
