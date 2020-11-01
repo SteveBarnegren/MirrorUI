@@ -14,7 +14,7 @@ extension ComponentCompositions {
     static var tuplets: Composition {
         
         let composition = Composition()
-        
+
         do {
             let bar = Bar()
             let sequence = NoteSequence()
@@ -131,7 +131,7 @@ extension ComponentCompositions {
                 
                 bar.add(sequence: sequence)
             }
-            /*
+            
             do {
                 let sequence2 = NoteSequence()
                 
@@ -142,7 +142,6 @@ extension ComponentCompositions {
                 
                 bar.add(sequence: sequence2)
             }
- */
             
             composition.add(bar: bar)
         }

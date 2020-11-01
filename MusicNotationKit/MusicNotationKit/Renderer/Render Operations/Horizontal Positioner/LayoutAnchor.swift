@@ -53,7 +53,12 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
     var trailingWidth: Double = 0
     var leadingConstraints = [LayoutConstraint]()
     var trailingConstraints = [LayoutConstraint]()
-    var position: Double = 0
+    var position: Double = 0 {
+        didSet {
+            assert(!position.isNaN)
+            assert(!position.isInfinite)
+        }
+    }
     var isSolved = false
     var time: Time = .zero
     var duration: Time?

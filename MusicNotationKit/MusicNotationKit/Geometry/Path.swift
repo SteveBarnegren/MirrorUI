@@ -30,6 +30,13 @@ struct Path {
     private(set) var boundingBox = Rect.zero
     
     init(commands: [Command] = []) {
+        #if DEBUG
+        if commands.containsInvalidValues() {
+            dump(commands)
+            fatalError("Commands contain invalid values. (Nan or Infinite)")
+        }
+        #endif
+        
         self.commands = commands
         boundingBox = self.calculateBoundingBox()
     }
@@ -348,6 +355,83 @@ extension Path {
     var maxY: Double { boundingBox.maxY }
     var minY: Double { boundingBox.minY }
 }
+
+// MARK: - Verify command validity
+
+extension Array where Element == Path.Command {
+    
+    func containsInvalidValues() -> Bool {
+        
+        func isPointInvalid(_ point: Point) -> Bool {
+            return point.x.isNaN || point.y.isNaN || point.x.isInfinite || point.y.isInfinite
+        }
+        
+        func isScalarInvalid(_ n: Double) -> Bool {
+            return n.isNaN || n.isInfinite
+        }
+        
+        for command in self {
+            switch command {
+            case .move(let p):
+                if isPointInvalid(p) { return true }
+            case .line(let p):
+                if isPointInvalid(p) { return true }
+            case .curve(let p, let c1, let c2):
+                if isPointInvalid(p) { return true }
+                if isPointInvalid(c1) { return true }
+                if isPointInvalid(c2) { return true }
+            case .close:
+                break
+            case .circle(let p, let radius):
+                if isPointInvalid(p) { return true }
+                if isScalarInvalid(radius) { return true }
+            case .oval:
+                fatalError("unsupported")
+            case .arc(let center, let radius, let startAngle, let endAngle, _):
+                if isPointInvalid(center) { return true }
+                if isScalarInvalid(radius) { return true }
+                if isScalarInvalid(startAngle) { return true }
+                if isScalarInvalid(endAngle) { return true }
+            }
+        }
+        
+        return false
+    }
+    
+    /*
+    func invalidValuesError() -> String? {
+        
+        var valuesAreInvalid = false
+        var errorString = String()
+        
+        func isPointValid(_ point: Point) -> Bool {
+            if point.x.isNaN || point.y.isNaN || point.x.isInfinite || point.y.isInfinite {
+                return false
+            } else {
+                return true
+            }
+        }
+        
+        func add(_ string: String) {
+            if errorString.isEmpty {
+                errorString.append(string)
+            } else {
+                errorString.append("\n\(string)")
+            }
+        }
+        
+        for command in self {
+            switch command {
+            case .line(let p):
+                
+            }
+        }
+    }
+ */
+}
+
+
+
 /*
 extension Array where Element == Path.Command {
     

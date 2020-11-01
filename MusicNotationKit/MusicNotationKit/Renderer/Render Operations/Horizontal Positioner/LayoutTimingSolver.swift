@@ -13,11 +13,24 @@ private class SpaceableAnchor {
     var anchor: LayoutAnchor
     var nextAnchor: LayoutAnchor?
     var barPct: Double = 0
-    var distanceToNextAnchor: Double = 0
+    var distanceToNextAnchor: Double = 0 {
+        didSet {
+            assert(distanceToNextAnchor != 0)
+        }
+    }
     var idealPct: Double = 0
-    var pctExpanded: Double = 0
+    var pctExpanded: Double = 0 {
+        didSet {
+            assert(pctExpanded != 0)
+        }
+    }
     
-    var proposedAdditionalSpace: Double = 0
+    var proposedAdditionalSpace: Double = 0 {
+        didSet {
+            assert(!proposedAdditionalSpace.isNaN)
+            assert(!proposedAdditionalSpace.isInfinite)
+        }
+    }
     
     init(anchor: LayoutAnchor) {
         self.anchor = anchor
@@ -63,6 +76,7 @@ class LayoutTimingSolver {
             
             // Figure out required expansion per anchor
             for anchor in expandingAnchors {
+                // This is 0 / 0
                 let proposedNewValue = anchor.distanceToNextAnchor / anchor.pctExpanded * targetPct
                 anchor.proposedAdditionalSpace = proposedNewValue - anchor.distanceToNextAnchor
             }
@@ -99,6 +113,7 @@ class LayoutTimingSolver {
     }
     
     private func offset(anchors: AnySequence<LayoutAnchor>, by offset: Double) {
+        assert(!offset.isNaN)
         for anchor in anchors {
             anchor.position += offset
         }

@@ -73,7 +73,12 @@ public class Note: Playable {
     }
     
     // HorizontallyPositionable
-    var xPosition = Double(0)
+    var xPosition = Double(0) {
+        didSet {
+            assert(!xPosition.isNaN)
+            assert(!xPosition.isInfinite)
+        }
+    }
     //var yPosition = Double(0)
     
     var beams = [Beam]()
