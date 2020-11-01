@@ -62,24 +62,6 @@ class PathBundleDrawer {
                 uiBezierPath.addCurve(to: p, controlPoint1: c1, controlPoint2: c2)
             case .close:
                 uiBezierPath.close()
-            case .oval(var point, let size, let rotation):
-                point = invertY(point)
-                let cgRect = CGRect(x: CGFloat(point.x - size.width/2),
-                                    y: CGFloat(point.y - size.height/2),
-                                    width: CGFloat(size.width),
-                                    height: CGFloat(size.height))
-                let ovalBezierPath = UIBezierPath(ovalIn: cgRect)
-                
-                let translateToOrgin = CGAffineTransform(translationX: CGFloat(-point.x),
-                                                         y: CGFloat(-point.y))
-                let rotate = CGAffineTransform(rotationAngle: CGFloat(rotation))
-                let translateBack = CGAffineTransform(translationX: CGFloat(point.x),
-                                                      y: CGFloat(point.y))
-                
-                let fullTransform = translateToOrgin.concatenating(rotate).concatenating(translateBack)
-                ovalBezierPath.apply(fullTransform)
-                draw(uiBezierPath: ovalBezierPath)
-                
             case .circle(let p, let r):
                 let point = invertY(p)
                 let rect = CGRect(x: point.x - r,

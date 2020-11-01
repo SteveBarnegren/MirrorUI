@@ -16,7 +16,6 @@ struct Path {
         case curve(Point, c1: Point, c2: Point)
         case close
         case circle(Point, Double) // Center, Radius
-        case oval(Point, Size, Double)
         case arc(center: Point, radius: Double, startAngle: Double, endAngle: Double, clockwise: Bool)
     }
     
@@ -84,8 +83,6 @@ extension Path {
                 newCommands.append(.close)
             case .circle(let p, let r):
                 newCommands.append(.circle(translatePoint(p), r))
-            case .oval(let point, let size, let rotation):
-                newCommands.append(.oval(translatePoint(point), size, rotation))
             case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
                 newCommands.append(
                     .arc(center: translatePoint(center),
@@ -132,8 +129,6 @@ extension Path {
                 newCommands.append(.curve(scalePoint(p), c1: scalePoint(c1), c2: scalePoint(c2)))
             case .close:
                 newCommands.append(.close)
-            case .oval(let point, let size, let rotation):
-                newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
             case .circle(let p, let r):
                 newCommands.append(.circle(scalePoint(p), r * scale))
             case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
@@ -182,8 +177,6 @@ extension Path {
                 newCommands.append(.curve(invert(p), c1: invert(c1), c2: invert(c2)))
             case .close:
                 newCommands.append(.close)
-            case .oval(let p, let size, let rotation):
-                newCommands.append(.oval(invert(p), size, rotation))
             case .circle(let p, let r):
                 newCommands.append(.circle(invert(p), r))
             case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
@@ -236,8 +229,6 @@ extension Array where Element == Path.Command {
                 newCommands.append(.curve(scalePoint(p), c1: scalePoint(c1), c2: scalePoint(c2)))
             case .close:
                 newCommands.append(.close)
-            case .oval(let point, let size, let rotation):
-                newCommands.append(.oval(scalePoint(point), scaleSize(size), rotation))
             case .circle(let p, let r):
                 newCommands.append(.circle(scalePoint(p), r * scale))
             case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
@@ -272,8 +263,6 @@ extension Array where Element == Path.Command {
                 newCommands.append(.curve(translatePoint(p), c1: translatePoint(c1), c2: translatePoint(c2)))
             case .close:
                 newCommands.append(.close)
-            case .oval(let p, let size, let rotation):
-                newCommands.append(.oval(translatePoint(p), size, rotation))
             case .circle(let p, let r):
                 newCommands.append(.circle(translatePoint(p), r))
             case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
@@ -326,8 +315,6 @@ extension Path {
                 }
                 lastPoint = p
             case .close:
-                break
-            case .oval:
                 break
             case .circle(let p, let r):
                 process(point: p.adding(x: r, y: r))
@@ -385,8 +372,6 @@ extension Array where Element == Path.Command {
             case .circle(let p, let radius):
                 if isPointInvalid(p) { return true }
                 if isScalarInvalid(radius) { return true }
-            case .oval:
-                fatalError("unsupported")
             case .arc(let center, let radius, let startAngle, let endAngle, _):
                 if isPointInvalid(center) { return true }
                 if isScalarInvalid(radius) { return true }

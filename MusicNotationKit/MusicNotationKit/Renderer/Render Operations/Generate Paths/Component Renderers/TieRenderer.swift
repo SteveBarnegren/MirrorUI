@@ -241,8 +241,6 @@ class TieRenderer {
                 newCommands.append(.close)
             case .circle(let center, let radius):
                 newCommands.append(.circle(flip(center), radius))
-            case .oval:
-                fatalError("Oval flipping not supported")
             case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
                 newCommands.append(
                     .arc(center: flip(center),
