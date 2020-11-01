@@ -11,12 +11,12 @@ import Foundation
 class NoteRenderer {
     
     private let preferredStemHeight = 3.0
-    private let stemXOffset = 0.58
     private let beamThickness = 0.3
     private let beamSeparation = 0.3
     private let noteHeadWidth = 1.4
     
     private var stemThickness: Double { NoteMetrics.stemThickness }
+    private var stemXOffset: Double { NoteMetrics.stemXOffset }
     
     func paths(forNotes notes: [Note]) -> [Path] {
         

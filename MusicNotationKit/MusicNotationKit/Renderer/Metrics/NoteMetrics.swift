@@ -10,6 +10,10 @@ import Foundation
 
 class NoteMetrics {
     
+    /// Note stem thickness
     static let stemThickness = 0.13
 
+    /// The x distance from the note center of the outer edge of the stem
+    static let stemXOffset = 0.58
+    
 }

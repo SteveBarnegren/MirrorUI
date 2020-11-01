@@ -29,6 +29,8 @@ public class Note: Playable {
     
     var tiedToNext = false
     
+    // MARK: - Stem
+    
     /// The note head that the stem connects to
     var stemConnectingNoteHead: NoteHeadDescription {
         // We always expect there to be at least one note note head
@@ -57,6 +59,16 @@ public class Note: Playable {
             return stemConnectingNoteHead.yPosition + symbolDescription.stemLength
         case .down:
             return stemConnectingNoteHead.yPosition - symbolDescription.stemLength
+        }
+    }
+    
+    /// The x position of the stem center
+    var stemCenterX: Double {
+        switch self.symbolDescription.stemDirection {
+        case .up:
+            return xPosition + NoteMetrics.stemXOffset - NoteMetrics.stemThickness/2
+        case .down:
+            return xPosition - NoteMetrics.stemXOffset + NoteMetrics.stemThickness/2
         }
     }
     

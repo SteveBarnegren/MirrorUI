@@ -50,7 +50,9 @@ class TupletMarksRenderer {
         }
         
         // x Position is the average of the notes in the tuplet
-        let x = playables.sum(\.xPosition) / Double(playables.count)
+        let startX = self.startX(forPlayable: playables.first!)
+        let endX = self.endX(forPlayable: playables.last!)
+        let x = startX.lerp(to: endX, t: 0.5)
         
         // yPos is max / min y
         let position = markPosition(forPlayables: playables)
@@ -68,6 +70,28 @@ class TupletMarksRenderer {
                                    height: squareSize))
         path.drawStyle = .fill
         return [path]
+    }
+    
+    private func startX(forPlayable playable: Playable) -> Double {
+        
+        if let note = playable as? Note {
+            return note.stemCenterX - NoteMetrics.stemThickness/2
+        } else if let rest = playable as? Rest {
+            return rest.position.x - rest.leadingWidth
+        }
+        
+        fatalError("Unknown playable type")
+    }
+    
+    private func endX(forPlayable playable: Playable) -> Double {
+        
+        if let note = playable as? Note {
+            return note.stemCenterX + NoteMetrics.stemThickness/2
+        } else if let rest = playable as? Rest {
+            return rest.position.x + rest.trailingWidth
+        }
+        
+        fatalError("Unknown playable type")
     }
     
     private struct TupletMarkPosition {
