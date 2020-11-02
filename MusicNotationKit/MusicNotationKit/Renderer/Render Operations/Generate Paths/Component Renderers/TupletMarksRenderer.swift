@@ -8,15 +8,21 @@
 
 import Foundation
 
-private let number3Character = CharactorPath(pathCreator: {
-    let path = TextRenderer().path(forCharacter: "3")
-    return PathUtils.centered(path: path)
-})
+var textCache = [String: TextPath]()
 
-private let number6Character = CharactorPath(pathCreator: {
-    let path = TextRenderer().path(forCharacter: "6")
-    return PathUtils.centered(path: path)
-})
+class TextPath {
+    let path: Path
+    var size: Vector2D { sizeCache.value }
+    private var sizeCache: SingleValueCache<Vector2D>!
+    
+    init(path: Path) {
+        self.path = path
+        
+        sizeCache = SingleValueCache<Vector2D>(calculate: { [unowned self] in
+            PathUtils.calculateSize(path: self.path)
+        })
+    }
+}
 
 class TupletMarksRenderer {
     
@@ -49,44 +55,11 @@ class TupletMarksRenderer {
         
         return paths
     }
-    /*
-    private func paths(forTuplet tuplet: TupletTime, playables: [Playable]) -> [Path] {
-        
-        let squareSize = 0.8
-        let margin = 0.3
-        
-        if playables.isEmpty {
-            return []
-        }
-        
-        // x Position is the average of the notes in the tuplet
-        let startX = self.startX(forPlayable: playables.first!)
-        let endX = self.endX(forPlayable: playables.last!)
-        let x = startX.lerp(to: endX, t: 0.5)
-        
-        // yPos is max / min y
-        let position = markPosition(forPlayables: playables)
-        var y = position.yPosition
-        if position.placeAbove {
-            y += margin
-        } else {
-            y -= margin
-            y -= squareSize
-        }
-    
-        var path = Path(rect: Rect(x: x - squareSize/2,
-                                   y: y,
-                                   width: squareSize,
-                                   height: squareSize))
-        path.drawStyle = .fill
-        return [path]
-    }
-    */
-    
+  
     private func paths(forTuplet tuplet: TupletTime, playables: [Playable]) -> [Path] {
         
         // Note that the origin of the numbers is at the center
-        let character = characterPath(forTupletTime: tuplet)
+        let character = textPath(forTupletTime: tuplet)
         
         let margin = 0.3
         
@@ -157,14 +130,19 @@ class TupletMarksRenderer {
     
     // MARK: - Character paths
     
-    private func characterPath(forTupletTime tupletTime: TupletTime) -> CharactorPath {
+    private func textPath(forTupletTime tupletTime: TupletTime) -> TextPath {
         
-        if tupletTime.denominator == 3 {
-            return number3Character
-        } else if tupletTime.denominator == 6 {
-            return number6Character
+        let string = "\(tupletTime.denominator)"
+        
+        if let cachedPath = textCache[string] {
+            return cachedPath
         }
         
-        fatalError("Unsupported tuplet time")
+        var path = TextRenderer().path(forString: string)
+        path = PathUtils.centered(path: path)
+        
+        let textPath = TextPath(path: path)
+        textCache[string] = textPath
+        return textPath
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 struct Path {
     
-    enum Command {
+    enum Command: Equatable {
         case move(Point)
         case line(Point)
         case quadCurve(Point, c1: Point)
@@ -255,6 +255,10 @@ extension Array where Element == Path.Command {
     }
     
     func translated(x: Double, y: Double) -> [Path.Command] {
+        
+        if x == 0 && y == 0 {
+            return self
+        }
         
         var newCommands = [Path.Command]()
         

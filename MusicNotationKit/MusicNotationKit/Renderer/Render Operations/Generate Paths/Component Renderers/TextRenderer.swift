@@ -22,9 +22,76 @@ class TextRenderer {
             return Path()
         }
         
+        
         let cgPath = CTFontCreatePathForGlyph(font, glyphs[0], nil)!
         let path = Path(cgPath: cgPath)
         return path
+    }
+    
+    func path(forString string: String) -> Path {
+        
+        let font = UIFont(name: "HelveticaNeue-Bold", size: 1)!
+        let spacing = 0.05
+
+        var unichars = [UniChar](string.utf16)
+        var glyphs = [CGGlyph](repeating: 0, count: unichars.count)
+        let gotGlyphs = CTFontGetGlyphsForCharacters(font, &unichars, &glyphs, unichars.count)
+        
+        if gotGlyphs == false {
+            return Path()
+        }
+        
+        var commands = [Path.Command]()
+        
+        var xPos = 0.0
+        for i in 0..<unichars.count {
+            let glyphCommands = CTFontCreatePathForGlyph(font, glyphs[i], nil)!.pathCommands
+            commands += glyphCommands.translated(x: xPos, y: 0)
+            xPos += glyphCommands.width() + spacing
+        }
+        
+        var path = Path(commands: commands)
+        path.drawStyle = .fill
+        return path
+    }
+}
+
+extension CGPath {
+    
+    var pathCommands: [Path.Command] {
+        
+        var commands = [Path.Command]()
+        
+        func p(_ cgPoint: CGPoint) -> Point {
+            return Point(Double(cgPoint.x), Double(cgPoint.y))
+        }
+        
+        self.applyWithBlock { element in
+            
+            switch element.pointee.type {
+            case .moveToPoint:
+                commands.append(.move(p(element.pointee.points.pointee)))
+            case .addLineToPoint:
+                commands.append(.line(p(element.pointee.points.pointee)))
+            case .addQuadCurveToPoint:
+                commands.append(.quadCurve(p(element.pointee.points.pointee),
+                                           c1: p(element.pointee.points.advanced(by: 1).pointee)))
+            case .addCurveToPoint:
+                commands.append(.curve(p(element.pointee.points.pointee),
+                                       c1: p(element.pointee.points.advanced(by: 2).pointee),
+                                       c2: p(element.pointee.points.advanced(by: 1).pointee)))
+            case .closeSubpath:
+                commands.append(.close)
+            @unknown default:
+                assertionFailure("Unknown element type")
+            }
+        }
+        
+        if !commands.isEmpty && commands.last != .close {
+            commands.append(.close)
+        }
+        
+        return commands
     }
 }
 
@@ -60,33 +127,6 @@ extension Path {
         }
         
         self.init(commands: commands)
-    }
-}
-
-
-class CharactorPath {
-    
-    private var pathCache: SingleValueCache<Path>!
-    private var sizeCache: SingleValueCache<Vector2D>!
-    
-    var path: Path {
-        return pathCache.value
-    }
-    
-    var size: Vector2D {
-        return sizeCache.value
-    }
-    
-    init(pathCreator: @escaping () -> Path) {
-        pathCache = .init(calculate: pathCreator)
-        sizeCache = .init(calculate: { [unowned self] in
-            PathUtils.calculateSize(path: self.pathCache.value)
-        })
-    }
-    
-    func invalidate() {
-        pathCache.invalidate()
-        sizeCache.invalidate()
     }
 }
 
