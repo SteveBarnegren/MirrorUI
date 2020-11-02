@@ -138,7 +138,8 @@ class TupletMarksRenderer {
             return cachedPath
         }
         
-        var path = TextPathCreator().path(forString: string)
+        let font = UIFont.systemFont(ofSize: 1, weight: .bold)
+        var path = TextPathCreator().path(forString: string, font: font)
         path = PathUtils.centered(path: path)
         
         let textPath = TextPath(path: path)
