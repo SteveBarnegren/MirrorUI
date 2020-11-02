@@ -8,7 +8,7 @@
 
 import Foundation
 
-private var textCache = [String: TextPath]()
+private var textCache = KeyValueCache<String, TextPath>()
 
 class TextPath {
     let path: Path
@@ -134,7 +134,7 @@ class TupletMarksRenderer {
         
         let string = "\(tupletTime.denominator)"
 
-        if let cachedPath = textCache[string] {
+        if let cachedPath = textCache.value(forKey: string) {
             return cachedPath
         }
         
@@ -142,7 +142,7 @@ class TupletMarksRenderer {
         path = PathUtils.centered(path: path)
         
         let textPath = TextPath(path: path)
-        textCache[string] = textPath
+        textCache.set(value: textPath, forKey: string)
         return textPath
     }
 }
