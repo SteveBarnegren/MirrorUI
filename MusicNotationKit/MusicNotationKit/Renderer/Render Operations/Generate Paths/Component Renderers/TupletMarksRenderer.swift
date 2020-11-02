@@ -8,7 +8,7 @@
 
 import Foundation
 
-var textCache = [String: TextPath]()
+private var textCache = [String: TextPath]()
 
 class TextPath {
     let path: Path
@@ -133,12 +133,12 @@ class TupletMarksRenderer {
     private func textPath(forTupletTime tupletTime: TupletTime) -> TextPath {
         
         let string = "\(tupletTime.denominator)"
-        
+
         if let cachedPath = textCache[string] {
             return cachedPath
         }
         
-        var path = TextRenderer().path(forString: string)
+        var path = TextPathCreator().path(forString: string)
         path = PathUtils.centered(path: path)
         
         let textPath = TextPath(path: path)

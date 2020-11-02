@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TextRenderer {
+class TextPathCreator {
     
     func path(forCharacter character: Character) -> Path {
         
@@ -21,7 +21,6 @@ class TextRenderer {
         if gotGlyphs == false {
             return Path()
         }
-        
         
         let cgPath = CTFontCreatePathForGlyph(font, glyphs[0], nil)!
         let path = Path(cgPath: cgPath)
@@ -43,11 +42,18 @@ class TextRenderer {
         
         var commands = [Path.Command]()
         
-        var xPos = 0.0
-        for i in 0..<unichars.count {
-            let glyphCommands = CTFontCreatePathForGlyph(font, glyphs[i], nil)!.pathCommands
-            commands += glyphCommands.translated(x: xPos, y: 0)
-            xPos += glyphCommands.width() + spacing
+        // For a multi-character string, place each glyph next to the last
+        if unichars.count > 1 {
+            var xPos = 0.0
+            for i in 0..<unichars.count {
+                let glyphCommands = CTFontCreatePathForGlyph(font, glyphs[i], nil)!.pathCommands
+                commands += glyphCommands.translated(x: xPos, y: 0)
+                xPos += glyphCommands.width() + spacing
+            }
+        }
+        // For a single character string we can skip this and just return the commands
+        else {
+            commands = CTFontCreatePathForGlyph(font, glyphs[0], nil)!.pathCommands
         }
         
         var path = Path(commands: commands)
