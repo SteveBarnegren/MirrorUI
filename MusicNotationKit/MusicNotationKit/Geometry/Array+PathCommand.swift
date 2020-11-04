@@ -16,7 +16,7 @@ extension Array where Element == Path.Command {
         var minX = 0.0
         var maxX = 0.0
         
-        func process(_ p: Point) {
+        func process(_ p: Vector2D) {
             minX = Swift.min(minX, p.x)
             maxX = Swift.max(maxX, p.x)
         }

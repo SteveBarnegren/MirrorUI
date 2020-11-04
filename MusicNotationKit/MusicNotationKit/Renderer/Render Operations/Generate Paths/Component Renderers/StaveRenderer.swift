@@ -21,8 +21,8 @@ class StaveRenderer {
         for _ in (0..<numberOfLines) {
             
             let commands: [Path.Command] = [
-                .move(Point(0, y)),
-                .line(Point(staveWidth, y))
+                .move(Vector2D(0, y)),
+                .line(Vector2D(staveWidth, y))
             ]
             
             var path = Path(commands: commands)

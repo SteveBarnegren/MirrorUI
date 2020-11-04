@@ -17,7 +17,7 @@ protocol VerticallyPositionable {
 }
 
 protocol Positionable: HorizontallyPositionable, VerticallyPositionable {
-    var position: Point { get set }
+    var position: Vector2D { get set }
 }
 
 extension Positionable {

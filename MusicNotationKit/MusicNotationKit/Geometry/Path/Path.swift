@@ -11,13 +11,13 @@ import Foundation
 struct Path {
     
     enum Command: Equatable {
-        case move(Point)
-        case line(Point)
-        case quadCurve(Point, c1: Point)
-        case curve(Point, c1: Point, c2: Point)
+        case move(Vector2D)
+        case line(Vector2D)
+        case quadCurve(Vector2D, c1: Vector2D)
+        case curve(Vector2D, c1: Vector2D, c2: Vector2D)
         case close
-        case circle(Point, Double) // Center, Radius
-        case arc(center: Point, radius: Double, startAngle: Double, endAngle: Double, clockwise: Bool)
+        case circle(Vector2D, Double) // Center, Radius
+        case arc(center: Vector2D, radius: Double, startAngle: Double, endAngle: Double, clockwise: Bool)
     }
     
     enum DrawStyle {
@@ -54,7 +54,7 @@ struct Path {
         self.init(commands: commands)
     }
     
-    init(circleWithCenter center: Point, radius: Double) {
+    init(circleWithCenter center: Vector2D, radius: Double) {
         let command = Path.Command.circle(center, radius)
         self.init(commands: [command])
     }
@@ -66,8 +66,8 @@ extension Path {
     
     mutating func translate(x xOffset: Double, y yOffset: Double) {
         
-        func translatePoint(_ p: Point) -> Point {
-            return Point(xOffset + p.x, yOffset + p.y)
+        func translatePoint(_ p: Vector2D) -> Vector2D {
+            return Vector2D(xOffset + p.x, yOffset + p.y)
         }
         
         var newCommands = [Path.Command]()
@@ -112,8 +112,8 @@ extension Path {
     
     mutating func scale(_ scale: Double) {
    
-        func scalePoint(_ p: Point) -> Point {
-            return Point(p.x * scale, p.y * scale)
+        func scalePoint(_ p: Vector2D) -> Vector2D {
+            return Vector2D(p.x * scale, p.y * scale)
         }
         
         func scaleSize(_ s: Size) -> Size {
@@ -168,8 +168,8 @@ extension Path {
         
         var newCommands = [Command]()
         
-        func invert(_ p: Point) -> Point {
-            return Point(p.x, -p.y)
+        func invert(_ p: Vector2D) -> Vector2D {
+            return Vector2D(p.x, -p.y)
         }
         
         for command in self.commands {
@@ -216,8 +216,8 @@ extension Array where Element == Path.Command {
     
     func scaled(_ scale: Double) -> [Path.Command] {
         
-        func scalePoint(_ p: Point) -> Point {
-            return Point(p.x * scale, p.y * scale)
+        func scalePoint(_ p: Vector2D) -> Vector2D {
+            return Vector2D(p.x * scale, p.y * scale)
         }
         
         func scaleSize(_ s: Size) -> Size {
@@ -262,8 +262,8 @@ extension Array where Element == Path.Command {
         
         var newCommands = [Path.Command]()
         
-        func translatePoint(_ p: Point) -> Point {
-            return Point(p.x + x, p.y + y)
+        func translatePoint(_ p: Vector2D) -> Vector2D {
+            return Vector2D(p.x + x, p.y + y)
         }
         
         for command in self {
@@ -306,14 +306,14 @@ extension Path {
         var lowestY: Double?
         var highestY: Double?
         
-        func process(point: Point) {
+        func process(point: Vector2D) {
             lowestX = min(lowestX ?? point.x, point.x)
             lowestY = min(lowestY ?? point.y, point.y)
             highestX = max(highestX ?? point.x, point.x)
             highestY = max(highestY ?? point.y, point.y)
         }
         
-        var lastPoint: Point?
+        var lastPoint: Vector2D?
         for command in self.commands {
             switch command {
             case .move(let p):
@@ -368,7 +368,7 @@ extension Array where Element == Path.Command {
     
     func containsInvalidValues() -> Bool {
         
-        func isPointInvalid(_ point: Point) -> Bool {
+        func isPointInvalid(_ point: Vector2D) -> Bool {
             return point.x.isNaN || point.y.isNaN || point.x.isInfinite || point.y.isInfinite
         }
         

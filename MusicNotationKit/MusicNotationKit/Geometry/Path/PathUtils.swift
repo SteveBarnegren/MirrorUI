@@ -18,7 +18,7 @@ class PathUtils {
         var maxX = 0.0
         var maxY = 0.0
         
-        func process(_ p: Point) {
+        func process(_ p: Vector2D) {
             minX = min(p.x, minX)
             minY = min(p.y, minY)
             maxX = max(p.x, maxX)
@@ -32,7 +32,7 @@ class PathUtils {
             maxY = max(rect.maxY, maxY)
         }
         
-        var lastPoint: Point?
+        var lastPoint: Vector2D?
         
         for command in path.commands {
             switch command {

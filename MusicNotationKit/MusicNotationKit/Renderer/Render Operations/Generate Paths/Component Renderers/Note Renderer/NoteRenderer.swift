@@ -121,9 +121,9 @@ class NoteRenderer {
     private func makeQuaverTailCommands() -> [Path.Command] {
         // A note tail, anchored to the left
         let commands: [Path.Command] = [
-            .move(Point(0.028177234195949308, 0.22361714423650725)),
-            .curve(Point(0.1796576688116412, -0.26326044118239594), c1: Point(0.36589881412387104, 0.13806570405953167), c2: Point(0.21003653045372273, -0.15850308628952214)),
-            .curve(Point(0.028177234195949308, 0.5), c1: Point(0.4571075440584742, 0.11569020480229597), c2: Point(0.03196085061274678, 0.27025900632689404)),
+            .move(Vector2D(0.028177234195949308, 0.22361714423650725)),
+            .curve(Vector2D(0.1796576688116412, -0.26326044118239594), c1: Vector2D(0.36589881412387104, 0.13806570405953167), c2: Vector2D(0.21003653045372273, -0.15850308628952214)),
+            .curve(Vector2D(0.028177234195949308, 0.5), c1: Vector2D(0.4571075440584742, 0.11569020480229597), c2: Vector2D(0.03196085061274678, 0.27025900632689404)),
             .close
         ].scaled(3.5)
         return commands
@@ -132,12 +132,12 @@ class NoteRenderer {
     // all tails
     private func makeFastNoteTailCommands() -> [Path.Command] {
         let commands: [Path.Command] = [
-            .move(Point(0.008714897856421211, 0.19140708577675658)), // 14
-            .curve(Point(0.2059272997832754, -0.07986761556367605), c1: Point(0.18538248682111114, 0.04105231380363639), c2: Point(0.1846982200696919, 0.07654361989015901)), // 15
-            .line(Point(0.21425213188790243, -0.0930725216606707)), // 3
-            .curve(Point(0.21683570047209705, 0.026919885916367292), c1: Point(0.2210403262938127, -0.04268545684726699), c2: Point(0.2213882927932591, -0.004074871766974408)), // 4
-            .line(Point(0.20363079437510245, 0.07543356266402135)), // 10
-            .curve(Point(0.008714897856421211, 0.3082417984175567), c1: Point(0.16985480329407404, 0.15394531374787002), c2: Point(0.08875637875071873, 0.17787456940425372)), // 11
+            .move(Vector2D(0.008714897856421211, 0.19140708577675658)), // 14
+            .curve(Vector2D(0.2059272997832754, -0.07986761556367605), c1: Vector2D(0.18538248682111114, 0.04105231380363639), c2: Vector2D(0.1846982200696919, 0.07654361989015901)), // 15
+            .line(Vector2D(0.21425213188790243, -0.0930725216606707)), // 3
+            .curve(Vector2D(0.21683570047209705, 0.026919885916367292), c1: Vector2D(0.2210403262938127, -0.04268545684726699), c2: Vector2D(0.2213882927932591, -0.004074871766974408)), // 4
+            .line(Vector2D(0.20363079437510245, 0.07543356266402135)), // 10
+            .curve(Vector2D(0.008714897856421211, 0.3082417984175567), c1: Vector2D(0.16985480329407404, 0.15394531374787002), c2: Vector2D(0.08875637875071873, 0.17787456940425372)), // 11
             .close
             ].translated(x: -0.008714897856421211, y: -0.3082417984175567).scaled(4.2)
         return commands
@@ -146,11 +146,11 @@ class NoteRenderer {
     // last tails
     private func makeFastNoteBottomTailCommands() -> [Path.Command] {
         let commands: [Path.Command] = [
-            .move(Point(0.008714897856421211, 0.026058696388302383)), // 1
-            .curve(Point(0.1792304244132646, -0.35229056960819516), c1: Point(0.18226080108967335, -0.08849347359720644), c2: Point(0.2675874595303402, -0.11050336514956877)), //2
-            .curve(Point(0.21425213188790243, -0.0930725216606707), c1: Point(0.26596924995952503, -0.24026207534583588), c2: Point(0.2597177947976131, -0.16797185136542003)), // 3
-            .line(Point(0.2059272997832754, -0.07986761556367605)), // 15
-            .curve(Point(0.008714897856421211, 0.19140708577675658), c1: Point(0.15769398041585103, -0.0070288758595288825), c2: Point(0.07567144209624721, 0.07066417104630607)) //16
+            .move(Vector2D(0.008714897856421211, 0.026058696388302383)), // 1
+            .curve(Vector2D(0.1792304244132646, -0.35229056960819516), c1: Vector2D(0.18226080108967335, -0.08849347359720644), c2: Vector2D(0.2675874595303402, -0.11050336514956877)), //2
+            .curve(Vector2D(0.21425213188790243, -0.0930725216606707), c1: Vector2D(0.26596924995952503, -0.24026207534583588), c2: Vector2D(0.2597177947976131, -0.16797185136542003)), // 3
+            .line(Vector2D(0.2059272997832754, -0.07986761556367605)), // 15
+            .curve(Vector2D(0.008714897856421211, 0.19140708577675658), c1: Vector2D(0.15769398041585103, -0.0070288758595288825), c2: Vector2D(0.07567144209624721, 0.07066417104630607)) //16
             ].translated(x: -0.008714897856421211, y: -0.19140708577675658).scaled(4.2)
         return commands
     }
@@ -223,13 +223,13 @@ class NoteRenderer {
         let startY = fromNote.stemConnectingNoteHead.yPosition + fromNote.symbolDescription.stemEndOffset
         let endY = toNote.stemConnectingNoteHead.yPosition + toNote.symbolDescription.stemEndOffset
         
-        let startPoint = Point(startX, startY - (Double(beamIndex) * eachBeamYOffset))
-        let endPoint = Point(endX, endY - (Double(beamIndex) * eachBeamYOffset))
+        let startPoint = Vector2D(startX, startY - (Double(beamIndex) * eachBeamYOffset))
+        let endPoint = Vector2D(endX, endY - (Double(beamIndex) * eachBeamYOffset))
 
         let commmands: [Path.Command] = [
             .move(startPoint),
-            .line(Point(startPoint.x, startPoint.y - thickness)),
-            .line(Point(endPoint.x, endPoint.y - thickness)),
+            .line(Vector2D(startPoint.x, startPoint.y - thickness)),
+            .line(Vector2D(endPoint.x, endPoint.y - thickness)),
             .line(endPoint),
             .close
         ]

@@ -58,7 +58,7 @@ class TieRenderer {
         
         let arcY = yPosition(fromTiePosition: tie.middlePosition)
             + yOffset(forMiddleAlignment: tie.middleAlignment)
-        let orientationOffset = Point(xOffset(forOrientation: tie.orientation),
+        let orientationOffset = Vector2D(xOffset(forOrientation: tie.orientation),
                                       yOffset(forEndAlignment: tie.endAlignment))
       
         let startY = yPosition(fromTiePosition: tie.startPosition) + orientationOffset.y
@@ -217,15 +217,15 @@ class TieRenderer {
     
     private func commands(fromBezier bezier: CubicBezier) -> [Path.Command] {
         let curve = Path.Command.curve(bezier.end.asPoint(), c1: bezier.cp1.asPoint(), c2: bezier.cp2.asPoint())
-        return [.line(Point(bezier.start.x, bezier.start.y)), curve]
+        return [.line(Vector2D(bezier.start.x, bezier.start.y)), curve]
     }
     
     private func flipPathCommandsY(commands: [Path.Command], minY: Double, maxY: Double) -> [Path.Command] {
         
         var newCommands = [Path.Command]()
         
-        func flip(_ p: Point) -> Point {
-            return Point(p.x,
+        func flip(_ p: Vector2D) -> Vector2D {
+            return Vector2D(p.x,
                          maxY - (p.y - minY))
         }
         
@@ -349,8 +349,8 @@ class TieRenderer {
         let endY = yPosition(fromTiePosition: tie.startPosition) + yOffset(forEndAlignment: tie.endAlignment)
         
         var path = Path(commands: [
-            .move(Point(midX, midY)),
-            .line(Point(endX, endY))
+            .move(Vector2D(midX, midY)),
+            .line(Vector2D(endX, endY))
         ])
         
         path.drawStyle = .stroke
@@ -416,7 +416,7 @@ extension Int {
 }
 
 extension Vector2D {
-    func asPoint() -> Point {
-        return Point(self.x, self.y)
+    func asPoint() -> Vector2D {
+        return Vector2D(self.x, self.y)
     }
 }

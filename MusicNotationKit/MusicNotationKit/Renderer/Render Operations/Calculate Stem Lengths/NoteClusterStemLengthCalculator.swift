@@ -15,8 +15,8 @@ class NoteClusterStemLengthCalculator<N> {
     // MARK: - Types
     
     struct Transformer<N> {
-        let connectingHeadPosition: (N) -> Point
-        let extendingHeadPosition: (N) -> Point
+        let connectingHeadPosition: (N) -> Vector2D
+        let extendingHeadPosition: (N) -> Vector2D
         let stemDirection: (N) -> StemDirection
         let setStemLength: (N, Double) -> Void
     }
@@ -117,8 +117,8 @@ class NoteClusterStemLengthCalculator<N> {
 extension NoteClusterStemLengthCalculator.Transformer {
     
     static var notes: NoteClusterStemLengthCalculator.Transformer<Note> {
-        return NoteClusterStemLengthCalculator.Transformer<Note>(connectingHeadPosition: { Point($0.xPosition, $0.stemConnectingNoteHead.yPosition) },
-                                                                 extendingHeadPosition: { Point($0.xPosition, $0.stemExtendingNoteHead.yPosition) },
+        return NoteClusterStemLengthCalculator.Transformer<Note>(connectingHeadPosition: { Vector2D($0.xPosition, $0.stemConnectingNoteHead.yPosition) },
+                                                                 extendingHeadPosition: { Vector2D($0.xPosition, $0.stemExtendingNoteHead.yPosition) },
                                                                  stemDirection: { $0.symbolDescription.stemDirection },
                                                                  setStemLength: { note, v in note.symbolDescription.stemLength = v })
     }

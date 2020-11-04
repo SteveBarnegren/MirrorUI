@@ -11,11 +11,11 @@ import UIKit
 
 extension UIBezierPath {
     
-    func move(to point: Point) {
+    func move(to point: Vector2D) {
         self.move(to: CGPoint(point))
     }
     
-    func addCurve(to point: Point, controlPoint1: Point, controlPoint2: Point) {
+    func addCurve(to point: Vector2D, controlPoint1: Vector2D, controlPoint2: Vector2D) {
         self.addCurve(to: CGPoint(point), controlPoint1: CGPoint(controlPoint1), controlPoint2: CGPoint(controlPoint2))
     }
 

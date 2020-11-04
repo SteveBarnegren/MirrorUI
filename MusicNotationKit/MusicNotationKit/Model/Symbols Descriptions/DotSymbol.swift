@@ -15,6 +15,6 @@ class DotSymbol: AdjacentLayoutItem, Positionable {
     var hoizontalLayoutDistanceFromParentItem: Double = 0.1
     
     // Positionable
-    var position: Point = .zero
+    var position: Vector2D = .zero
     var pitch = Pitch.c4
 }

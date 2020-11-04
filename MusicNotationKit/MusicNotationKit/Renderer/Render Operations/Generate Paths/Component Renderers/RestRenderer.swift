@@ -26,10 +26,10 @@ class RestRenderer {
             let blockStartY = blockStyle.startY
             
             let commands: [Path.Command] = [
-                .move(Point(rest.position.x - width/2, blockStartY)),
-                .line(Point(rest.position.x - width/2, blockStartY + height)),
-                .line(Point(rest.position.x + width/2, blockStartY + height)),
-                .line(Point(rest.position.x + width/2, blockStartY)),
+                .move(Vector2D(rest.position.x - width/2, blockStartY)),
+                .line(Vector2D(rest.position.x - width/2, blockStartY + height)),
+                .line(Vector2D(rest.position.x + width/2, blockStartY + height)),
+                .line(Vector2D(rest.position.x + width/2, blockStartY)),
                 .close
             ]
             
@@ -54,25 +54,25 @@ class RestRenderer {
         let additionalTailsToRender = (tailedRest.numberOfTails-1).constrained(min: 0)
         let additionalTailOffset = 0.5
         
-        let stemTopRight = Point(0.27204301075268816, 0.4247311827956989)
+        let stemTopRight = Vector2D(0.27204301075268816, 0.4247311827956989)
         let stemRightSideAngle = -Double.pi/2 - 0.28489090065227207
         let stemLength = 0.9411618564085439 + (Double(additionalTailsToRender) * additionalTailOffset)
 
         let stemRightXLength = cos(stemRightSideAngle) * stemLength
         let stemRightYLength = sin(stemRightSideAngle) * stemLength
-        let stemRightBottom = Point(stemTopRight.x + stemRightXLength, stemTopRight.y + stemRightYLength)
+        let stemRightBottom = Vector2D(stemTopRight.x + stemRightXLength, stemTopRight.y + stemRightYLength)
         
         let stemCommands: [Path.Command] = [
-            .move(Point(-0.110752688172043, -0.478494623655914)),
-            .move(Point(0.14086021505376345, 0.22258064516129028)),
-            .curve(Point(-0.08494623655913977, 0.1752688172043011), c1: Point(0.06774193548387097, 0.1967741935483871), c2: Point(-0.00752688172043009, 0.1752688172043011)),
-            .curve(Point(-0.27204301075268816, 0.3451612903225807), c1: Point(-0.18387096774193548, 0.1752688172043011), c2: Point(-0.27204301075268816, 0.24623655913978493)),
-            .curve(Point(-0.11505376344086021, 0.5), c1: Point(-0.27204301075268816, 0.4311827956989247), c2: Point(-0.20107526881720428, 0.5)),
-            .curve(Point(0.005376344086021501, 0.4161290322580645), c1: Point(-0.06129032258064515, 0.5), c2: Point(-0.011827956989247324, 0.467741935483871)),
-            .curve(Point(0.08064516129032256, 0.28924731182795704), c1: Point(0.02688172043010756, 0.3559139784946237), c2: Point(0.018279569892473146, 0.28924731182795704)),
-            .curve(Point(0.21182795698924733, 0.4247311827956989), c1: Point(0.11505376344086021, 0.28924731182795704), c2: Point(0.1967741935483871, 0.3924731182795699)),
+            .move(Vector2D(-0.110752688172043, -0.478494623655914)),
+            .move(Vector2D(0.14086021505376345, 0.22258064516129028)),
+            .curve(Vector2D(-0.08494623655913977, 0.1752688172043011), c1: Vector2D(0.06774193548387097, 0.1967741935483871), c2: Vector2D(-0.00752688172043009, 0.1752688172043011)),
+            .curve(Vector2D(-0.27204301075268816, 0.3451612903225807), c1: Vector2D(-0.18387096774193548, 0.1752688172043011), c2: Vector2D(-0.27204301075268816, 0.24623655913978493)),
+            .curve(Vector2D(-0.11505376344086021, 0.5), c1: Vector2D(-0.27204301075268816, 0.4311827956989247), c2: Vector2D(-0.20107526881720428, 0.5)),
+            .curve(Vector2D(0.005376344086021501, 0.4161290322580645), c1: Vector2D(-0.06129032258064515, 0.5), c2: Vector2D(-0.011827956989247324, 0.467741935483871)),
+            .curve(Vector2D(0.08064516129032256, 0.28924731182795704), c1: Vector2D(0.02688172043010756, 0.3559139784946237), c2: Vector2D(0.018279569892473146, 0.28924731182795704)),
+            .curve(Vector2D(0.21182795698924733, 0.4247311827956989), c1: Vector2D(0.11505376344086021, 0.28924731182795704), c2: Vector2D(0.1967741935483871, 0.3924731182795699)),
              // top of stem right
-            .curve(stemTopRight, c1: Point(0.22473118279569892, 0.4505376344086022), c2: Point(0.26129032258064516, 0.4505376344086022)),
+            .curve(stemTopRight, c1: Vector2D(0.22473118279569892, 0.4505376344086022), c2: Vector2D(0.26129032258064516, 0.4505376344086022)),
              // bottom of stem right
             .line(stemRightBottom),
             // Double curve through bottom
@@ -87,15 +87,15 @@ class RestRenderer {
             ]
         
         let additionalTailCommands: [Path.Command] = [
-            .move(Point(-0.110752688172043, -0.478494623655914)),
-            .move(Point(0.14086021505376345, 0.22258064516129028)),
-            .curve(Point(-0.08494623655913977, 0.1752688172043011), c1: Point(0.06774193548387097, 0.1967741935483871), c2: Point(-0.00752688172043009, 0.1752688172043011)),
-            .curve(Point(-0.27204301075268816, 0.3451612903225807), c1: Point(-0.18387096774193548, 0.1752688172043011), c2: Point(-0.27204301075268816, 0.24623655913978493)),
-            .curve(Point(-0.11505376344086021, 0.5), c1: Point(-0.27204301075268816, 0.4311827956989247), c2: Point(-0.20107526881720428, 0.5)),
-            .curve(Point(0.005376344086021501, 0.4161290322580645), c1: Point(-0.06129032258064515, 0.5), c2: Point(-0.011827956989247324, 0.467741935483871)),
-            .curve(Point(0.08064516129032256, 0.28924731182795704), c1: Point(0.02688172043010756, 0.3559139784946237), c2: Point(0.018279569892473146, 0.28924731182795704)),
-            .curve(Point(0.21182795698924733, 0.4247311827956989), c1: Point(0.11505376344086021, 0.28924731182795704), c2: Point(0.1967741935483871, 0.3924731182795699)),
-            .curve(stemTopRight, c1: Point(0.22473118279569892, 0.4505376344086022), c2: Point(0.26129032258064516, 0.4505376344086022)),
+            .move(Vector2D(-0.110752688172043, -0.478494623655914)),
+            .move(Vector2D(0.14086021505376345, 0.22258064516129028)),
+            .curve(Vector2D(-0.08494623655913977, 0.1752688172043011), c1: Vector2D(0.06774193548387097, 0.1967741935483871), c2: Vector2D(-0.00752688172043009, 0.1752688172043011)),
+            .curve(Vector2D(-0.27204301075268816, 0.3451612903225807), c1: Vector2D(-0.18387096774193548, 0.1752688172043011), c2: Vector2D(-0.27204301075268816, 0.24623655913978493)),
+            .curve(Vector2D(-0.11505376344086021, 0.5), c1: Vector2D(-0.27204301075268816, 0.4311827956989247), c2: Vector2D(-0.20107526881720428, 0.5)),
+            .curve(Vector2D(0.005376344086021501, 0.4161290322580645), c1: Vector2D(-0.06129032258064515, 0.5), c2: Vector2D(-0.011827956989247324, 0.467741935483871)),
+            .curve(Vector2D(0.08064516129032256, 0.28924731182795704), c1: Vector2D(0.02688172043010756, 0.3559139784946237), c2: Vector2D(0.018279569892473146, 0.28924731182795704)),
+            .curve(Vector2D(0.21182795698924733, 0.4247311827956989), c1: Vector2D(0.11505376344086021, 0.28924731182795704), c2: Vector2D(0.1967741935483871, 0.3924731182795699)),
+            .curve(stemTopRight, c1: Vector2D(0.22473118279569892, 0.4505376344086022), c2: Vector2D(0.26129032258064516, 0.4505376344086022)),
             .close
             ]
         

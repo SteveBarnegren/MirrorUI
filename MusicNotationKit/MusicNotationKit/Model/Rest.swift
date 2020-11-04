@@ -23,7 +23,7 @@ public class Rest: Playable, Positionable {
     let trailingLayoutItems = [AdjacentLayoutItem]()
     
     // Positionable
-    var position = Point.zero
+    var position = Vector2D.zero
     
     // Horizontally Constrained
     var layoutDuration: Time? { return self.duration }

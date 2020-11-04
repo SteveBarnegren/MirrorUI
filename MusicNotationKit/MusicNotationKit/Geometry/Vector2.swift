@@ -41,25 +41,36 @@ struct Vector2<T> {
 }
 
 extension Vector2 where T: AdditiveArithmetic {
+   
     func adding(x: T) -> Vector2<T> {
         return Vector2<T>(self.x + x, y)
-    }
-    
-    func subtracting(x: T) -> Vector2<T> {
-        return Vector2<T>(self.x - x, y)
     }
     
     func adding(y: T) -> Vector2<T> {
         return Vector2<T>(self.x, self.y + y)
     }
     
+    func adding(x: T, y: T) -> Vector2<T> {
+        return Vector2<T>(self.x + x, self.y + y)
+    }
+    
+    func subtracting(x: T) -> Vector2<T> {
+        return Vector2<T>(self.x - x, y)
+    }
+    
     func subtracting(y: T) -> Vector2<T> {
         return Vector2<T>(self.x, self.y - y)
+    }
+    
+    func subtracting(x: T, y: T) -> Vector2<T> {
+        return Vector2<T>(self.x - x, self.y - y)
     }
 }
 
 extension Vector2 where T: Numeric {
     
+    static var zero: Vector2 { Vector2(T.zero, T.zero) }
+        
     func lerp(to other: Self, t: T) -> Self {
         return Self(self.x + (other.x - self.x)*t,
                     self.y + (other.y - self.y)*t)

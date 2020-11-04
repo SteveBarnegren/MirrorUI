@@ -10,7 +10,7 @@ import Foundation
 
 class BezierMath {
     
-    static func boundingBoxForQuadBezier(from start: Point, cp: Point, to end: Point) -> Rect {
+    static func boundingBoxForQuadBezier(from start: Vector2D, cp: Vector2D, to end: Vector2D) -> Rect {
         
         // convert the quad bezier to cubic and use cubic bounding box method
         let cp1x = start.x + (2.0/3.0) * (cp.x-start.x)
@@ -22,14 +22,14 @@ class BezierMath {
         return boundingBox(x0: start.x, y0: start.y, x1: cp1x, y1: cp1y, x2: cp2x, y2: cp2y, x3: end.x, y3: end.y)
     }
     
-    static func boundingBoxForCubicBezier(from start: Point, c1: Point, c2: Point, to end: Point) -> Rect {
+    static func boundingBoxForCubicBezier(from start: Vector2D, c1: Vector2D, c2: Vector2D, to end: Vector2D) -> Rect {
         return boundingBox(x0: start.x, y0: start.y, x1: c1.x, y1: c1.y, x2: c2.x, y2: c2.y, x3: end.x, y3: end.y)
     }
     
     static func boundingBox(x0: Double, y0: Double, x1: Double, y1: Double, x2: Double, y2: Double, x3: Double, y3: Double) -> Rect {
         
         var tValues = [Double]()
-        var edgePoints: [Point] = [Point(x0, y0), Point(x3, y3)]
+        var edgePoints: [Vector2D] = [Vector2D(x0, y0), Vector2D(x3, y3)]
         
         // Find T Values
         func findTValues(v0: Double, v1: Double, v2: Double, v3: Double) {
@@ -74,7 +74,7 @@ class BezierMath {
             let mt = 1 - t
             let x = (mt * mt * mt * x0) + (3 * mt * mt * t * x1) + (3 * mt * t * t * x2) + (t * t * t * x3)
             let y = (mt * mt * mt * y0) + (3 * mt * mt * t * y1) + (3 * mt * t * t * y2) + (t * t * t * y3)
-            let point = Point(x, y)
+            let point = Vector2D(x, y)
             edgePoints.append(point)
         }
         

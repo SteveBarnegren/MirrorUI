@@ -89,8 +89,8 @@ class PathBundleDrawer {
         }
     }
     
-    private func invertY(_ p: Point) -> Point {
-        return Point(p.x, Double(size.height) - p.y)
+    private func invertY(_ p: Vector2D) -> Vector2D {
+        return Vector2D(p.x, Double(size.height) - p.y)
     }
     
     private func invertY(_ y: Double) -> Double {

@@ -14,8 +14,8 @@ extension CGPath {
         
         var commands = [Path.Command]()
         
-        func p(_ cgPoint: CGPoint) -> Point {
-            return Point(Double(cgPoint.x), Double(cgPoint.y))
+        func p(_ cgPoint: CGPoint) -> Vector2D {
+            return Vector2D(Double(cgPoint.x), Double(cgPoint.y))
         }
         
         self.applyWithBlock { element in

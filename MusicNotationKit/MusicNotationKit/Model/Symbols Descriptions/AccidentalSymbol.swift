@@ -21,7 +21,7 @@ class AccidentalSymbol: AdjacentLayoutItem, Positionable {
     var hoizontalLayoutDistanceFromParentItem: Double = 0.1
     
     // Positionable
-    var position = Point.zero
+    var position = Vector2D.zero
     
     let type: SymbolType
     let stavePosition: Int

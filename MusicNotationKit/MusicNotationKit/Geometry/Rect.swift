@@ -44,24 +44,24 @@ struct Rect {
         return Vector2D(x, y)
     }
     
-    var bottomLeft: Point {
-        return Point(x, y)
+    var bottomLeft: Vector2D {
+        return Vector2D(x, y)
     }
     
-    var bottomRight: Point {
-        return Point(x + width, y)
+    var bottomRight: Vector2D {
+        return Vector2D(x + width, y)
     }
     
-    var topLeft: Point {
-        return Point(x, y + height)
+    var topLeft: Vector2D {
+        return Vector2D(x, y + height)
     }
     
-    var topRight: Point {
-        return Point(x + width, y + height)
+    var topRight: Vector2D {
+        return Vector2D(x + width, y + height)
     }
     
-    var center: Point {
-        return Point(x + width/2, y + height/2)
+    var center: Vector2D {
+        return Vector2D(x + width/2, y + height/2)
     }
     
     func adding(height: Double) -> Rect {

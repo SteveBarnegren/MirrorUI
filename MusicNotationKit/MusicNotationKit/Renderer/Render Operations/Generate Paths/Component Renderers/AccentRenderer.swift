@@ -20,8 +20,8 @@ class AccentRenderer {
         let yPos = StavePositionUtils.staveYOffset(forStavePostion: accent.stavePosition)
                 
         // Makes a point, taking localised coordinates, and moving to the correct absolute position
-        func p(_ x: Double, y: Double) -> Point {
-            return Point(xPos + x, yPos + y)
+        func p(_ x: Double, y: Double) -> Vector2D {
+            return Vector2D(xPos + x, yPos + y)
         }
         
         var commands = [Path.Command]()
