@@ -10,6 +10,22 @@ import Foundation
 
 class BezierMath {
     
+    static func boundingBoxForQuadBezier(from start: Point, cp: Point, to end: Point) -> Rect {
+        
+        // convert the quad bezier to cubic and use cubic bounding box method
+        let cp1x = start.x + (2.0/3.0) * (cp.x-start.x)
+        let cp1y = start.y + (2.0/3.0) * (cp.y-start.y)
+        
+        let cp2x = end.x + (2.0/3.0) * (cp.x-end.x)
+        let cp2y = end.y + (2.0/3.0) * (cp.y-end.y)
+        
+        return boundingBox(x0: start.x, y0: start.y, x1: cp1x, y1: cp1y, x2: cp2x, y2: cp2y, x3: end.x, y3: end.y)
+    }
+    
+    static func boundingBoxForCubicBezier(from start: Point, c1: Point, c2: Point, to end: Point) -> Rect {
+        return boundingBox(x0: start.x, y0: start.y, x1: c1.x, y1: c1.y, x2: c2.x, y2: c2.y, x3: end.x, y3: end.y)
+    }
+    
     static func boundingBox(x0: Double, y0: Double, x1: Double, y1: Double, x2: Double, y2: Double, x3: Double, y3: Double) -> Rect {
         
         var tValues = [Double]()

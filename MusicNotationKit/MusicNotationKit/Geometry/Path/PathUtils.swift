@@ -25,28 +25,45 @@ class PathUtils {
             maxY = max(p.y, maxY)
         }
         
+        func process(rect: Rect) {
+            minX = min(rect.minX, minX)
+            minY = min(rect.minY, minY)
+            maxX = max(rect.maxX, maxX)
+            maxY = max(rect.maxY, maxY)
+        }
+        
+        var lastPoint: Point?
+        
         for command in path.commands {
             switch command {
             case .move(let p):
                 process(p)
+                lastPoint = p
             case .line(let p):
                 process(p)
+                lastPoint = p
             case .quadCurve(let p, let c1):
-                process(p)
-                process(c1)
+                if let start = lastPoint {
+                    let bb = BezierMath.boundingBoxForQuadBezier(from: start, cp: c1, to: p)
+                    process(rect: bb)
+                }
+                lastPoint = p
             case .curve(let p, let c1, let c2):
-                process(p)
-                process(c1)
-                process(c2)
+                if let start = lastPoint {
+                    let bb = BezierMath.boundingBoxForCubicBezier(from: start, c1: c1, c2: c2, to: p)
+                    process(rect: bb)
+                }
+                lastPoint = p
             case .close:
-                break
+                lastPoint = nil
             case .circle(let p, let r):
                 minX = min(minX, p.x - r)
                 minY = min(minY, p.y - r)
                 maxX = max(maxX, p.x + r)
                 maxY = max(maxY, p.y + r)
+                lastPoint = nil
             case .arc(center: let center, radius: let radius, startAngle: let startAngle, endAngle: let endAngle, clockwise: let clockwise):
-                break
+                lastPoint = nil
             }
         }
         
@@ -54,51 +71,8 @@ class PathUtils {
     }
     
     static func centered(path: Path) -> Path {
-                
-        // TODO: Calculate with the Bezier Box algorithm
-        var minX = 0.0
-        var minY = 0.0
-        var maxX = 0.0
-        var maxY = 0.0
-        
-        func process(_ p: Point) {
-            minX = min(p.x, minX)
-            minY = min(p.y, minY)
-            maxX = max(p.x, maxX)
-            maxY = max(p.y, maxY)
-        }
-        
-        for command in path.commands {
-            switch command {
-            case .move(let p):
-                process(p)
-            case .line(let p):
-                process(p)
-            case .quadCurve(let p, let c1):
-                process(p)
-               // process(c1)
-            case .curve(let p, let c1, let c2):
-                process(p)
-                //process(c1)
-                //process(c2)
-            case .close:
-                break
-            case .circle(let p, let r):
-                minX = min(minX, p.x - r)
-                minY = min(minY, p.y - r)
-                maxX = max(maxX, p.x + r)
-                maxY = max(maxY, p.y + r)
-            case .arc(center: let center, radius: let radius, startAngle: let startAngle, endAngle: let endAngle, clockwise: let clockwise):
-                break
-            }
-        }
-        
-        
-        let midX = minX.lerp(to: maxX, t: 0.5)
-        let midY = minY.lerp(to: maxY, t: 0.5)
-
-        return path.translated(x: -midX, y: -midY)
+        let size = calculateSize(path: path)
+        return path.translated(x: -size.x/2, y: -size.y/2)
     }
     
 }
-
