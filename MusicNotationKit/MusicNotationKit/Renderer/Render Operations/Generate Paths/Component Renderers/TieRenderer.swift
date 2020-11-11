@@ -32,6 +32,12 @@ private struct CubicBezier {
 
 class TieRenderer {
     
+    private let glyphs: GlyphStore
+    
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
+    }
+    
     func paths(forTie tie: Tie,
                inBarRange barRange: ClosedRange<Int>,
                canvasWidth: Double) -> [Path] {
@@ -359,7 +365,7 @@ class TieRenderer {
     
     private func xPosition(forNote note: Note, noteHead: NoteHeadDescription) -> Double {
         return note.xPosition
-            + NoteHeadAligner.xOffset(forAlignment: noteHead.alignment)
+            + NoteHeadAligner.xOffset(forNoteHead: noteHead, glyphs: glyphs)
     }
     
     private func yPosition(fromTiePosition tiePosition: TiePosition) -> Double {

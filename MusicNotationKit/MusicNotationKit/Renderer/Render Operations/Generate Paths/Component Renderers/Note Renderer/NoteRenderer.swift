@@ -18,6 +18,12 @@ class NoteRenderer {
     private var stemThickness: Double { NoteMetrics.stemThickness }
     private var stemXOffset: Double { NoteMetrics.stemXOffset }
     
+    private let glyphs: GlyphStore
+    
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
+    }
+    
     func paths(forNotes notes: [Note]) -> [Path] {
         
         var paths = [Path]()
@@ -300,15 +306,15 @@ class NoteRenderer {
         
         for noteHeadDescription in note.noteHeadDescriptions {
             
-            guard let path = SymbolPaths.path(forNoteHeadStyle: noteHeadDescription.style) else {
+            guard let glyph = glyphs.glyph(forNoteHeadStyle: noteHeadDescription.style) else {
                 continue
             }
 
-            //let alignmentOffset = NoteHeadAligner.xOffset(forAlignment: noteHeadDescription.alignment)
+            let alignmentOffset = NoteHeadAligner.xOffset(forNoteHead: noteHeadDescription, glyphs: glyphs)
             
-            // The path will be at the center of the stem. Nudging 0.5 (but what is the width?) moves it to the correct place
             paths.append(
-                path.translated(x: note.xPosition - 0.5, y: noteHeadDescription.yPosition)
+                glyph.path.translated(x: note.xPosition - glyph.size.width/2 + alignmentOffset,
+                                      y: noteHeadDescription.yPosition)
             )
         }
         

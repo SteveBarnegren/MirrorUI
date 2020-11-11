@@ -35,6 +35,7 @@ class MusicRenderer {
     private let composition: Composition
     private var barSizingInformation = [BarSizingInfo]()
     private var isPreprocessingComplete = false
+    private var glyphs = GlyphStore()
     
     var staveSpacing: Double = 8
         
@@ -44,8 +45,7 @@ class MusicRenderer {
     
     func preprocessComposition() {
         
-        // Start the font renderer
-        FontLoader.shared.go()
+        FontLoader.loadFonts()
         
         if isPreprocessingComplete {
             return
@@ -81,7 +81,8 @@ class MusicRenderer {
             CalculateNoteHeadAlignmentProcessingOperation().process(composition: composition)
             
             // Calculate note widths
-            CalculateNoteWidthsProcessingOperation().process(composition: composition)
+            CalculateNoteWidthsProcessingOperation(glyphs: glyphs)
+                .process(composition: composition)
             
             // Position Articulation marks
             PositionArticulationMarksProcessingOperation().process(composition: composition)
@@ -147,10 +148,10 @@ class MusicRenderer {
             .flatMap { composition.bars[maybe: $0.startIndex-1] }
             .flatMap(trailingTies(forBar:)) ?? []
         
-        let paths = CompositionPathsCreator().paths(fromBars: bars,
-                                                    canvasWidth: layoutWidth,
-                                                    staveSpacing: staveSpacing,
-                                                    leadingTies: leadingTies)
+        let paths = CompositionPathsCreator(glyphs: glyphs).paths(fromBars: bars,
+                                                                  canvasWidth: layoutWidth,
+                                                                  staveSpacing: staveSpacing,
+                                                                  leadingTies: leadingTies)
         
         var pathBundle = PathBundle(paths: paths)
         

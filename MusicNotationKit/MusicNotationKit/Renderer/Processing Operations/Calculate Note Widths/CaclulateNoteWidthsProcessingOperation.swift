@@ -10,7 +10,11 @@ import Foundation
 
 class CalculateNoteWidthsProcessingOperation: CompositionProcessingOperation {
     
-    private let noteWidthCalculator = NoteWidthCalculator()
+    private let noteWidthCalculator: NoteWidthCalculator
+    
+    init(glyphs: GlyphStore) {
+        noteWidthCalculator = NoteWidthCalculator(glyphs: glyphs)
+    }
     
     func process(composition: Composition) {
         composition.enumerateNotes {

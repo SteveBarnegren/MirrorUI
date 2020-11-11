@@ -16,6 +16,12 @@ private let stemThickness = 0.1
 
 class NoteWidthCalculator {
     
+    private let glyphs: GlyphStore
+    
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
+    }
+    
     func width(forNote note: Note) -> (leading: Double, trailing: Double) {
         
         var centeredNotesWidth = 0.0
@@ -24,17 +30,17 @@ class NoteWidthCalculator {
         
         for description in note.noteHeadDescriptions {
             
-            guard let path = SymbolPaths.path(forNoteHeadStyle: description.style) else {
+            guard let glyph = glyphs.glyph(forNoteHeadStyle: description.style) else {
                 continue
             }
                         
             switch description.alignment {
             case .center:
-                centeredNotesWidth = max(centeredNotesWidth, path.boundingBox.width)
+                centeredNotesWidth = max(centeredNotesWidth, glyph.size.width)
             case .leftOfStem:
-                leftOfStemNotesWidth = max(leftOfStemNotesWidth, path.boundingBox.width)
+                leftOfStemNotesWidth = max(leftOfStemNotesWidth, glyph.size.width)
             case .rightOfStem:
-                rightOfStemNotesWidth = max(rightOfStemNotesWidth, path.boundingBox.width)
+                rightOfStemNotesWidth = max(rightOfStemNotesWidth, glyph.size.width)
             }
         }
         

@@ -116,19 +116,19 @@ public class Note: Playable {
        }
     
     // Tie
-    public func tied() -> Note {
+    @discardableResult public func tied() -> Note {
         self.tiedToNext = true
         return self
     }
     
     // Note Head
-    public func crossHead() -> Note {
+    @discardableResult public func crossHead() -> Note {
         self.noteHeadType = .cross
         return self
     }
     
     // Accent
-    public func accent() -> Note {
+    @discardableResult public func accent() -> Note {
         self.articulationMarks.append(Accent())
         return self
     }

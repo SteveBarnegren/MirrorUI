@@ -72,7 +72,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-deeplink components/notes"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/rests"
@@ -100,7 +100,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/tuplets"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

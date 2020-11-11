@@ -10,15 +10,19 @@ import Foundation
 
 class NoteHeadAligner {
     
-    static func xOffset(forAlignment alignment: NoteHeadAlignment) -> Double {
+    static func xOffset(forNoteHead noteHead: NoteHeadDescription, glyphs: GlyphStore) -> Double {
         
-        switch alignment {
+        guard let glyph = glyphs.glyph(forNoteHeadStyle: noteHead.style) else {
+            return 0
+        }
+        
+        switch noteHead.alignment {
         case .center:
             return 0
         case .leftOfStem:
-            return -(1 + NoteMetrics.stemThickness)
+            return -(glyph.width + NoteMetrics.stemThickness)
         case .rightOfStem:
-            return 1 + NoteMetrics.stemThickness
+            return glyph.width + NoteMetrics.stemThickness
         }
     }
 }

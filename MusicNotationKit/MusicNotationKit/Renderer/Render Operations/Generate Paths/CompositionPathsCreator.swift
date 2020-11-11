@@ -10,6 +10,14 @@ import Foundation
 
 class CompositionPathsCreator {
     
+    private let noteRenderer: NoteRenderer
+    private let tieRenderer: TieRenderer
+    
+    init(glyphs: GlyphStore) {
+        self.noteRenderer = NoteRenderer(glyphs: glyphs)
+        self.tieRenderer = TieRenderer(glyphs: glyphs)
+    }
+    
     func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double, leadingTies: [Tie]) -> [Path] {
         
         let barRange = (bars.first!.barNumber)...(bars.last!.barNumber)
@@ -45,7 +53,7 @@ class CompositionPathsCreator {
                            canvasWidth: Double,
                            leadingTies: [Tie]) -> [Path] {
         
-        let notePaths = NoteRenderer().paths(forNotes: noteSequence.notes)
+        let notePaths = noteRenderer.paths(forNotes: noteSequence.notes)
         let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeadDescriptions }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let restPaths = RestRenderer().paths(forRests: noteSequence.rests)
@@ -61,9 +69,9 @@ class CompositionPathsCreator {
         for note in noteSequence.notes {
             for noteHeadDescription in note.noteHeadDescriptions {
                 if let tie = noteHeadDescription.tie?.chosenVariation {
-                    tiePaths += TieRenderer().paths(forTie: tie,
-                                                    inBarRange: barRange,
-                                                    canvasWidth: canvasWidth)
+                    tiePaths += tieRenderer.paths(forTie: tie,
+                                                  inBarRange: barRange,
+                                                  canvasWidth: canvasWidth)
                 }
             }
         }
@@ -71,9 +79,9 @@ class CompositionPathsCreator {
         // Draw leading ties
         var leadingTiePaths = [Path]()
         for tie in leadingTies {
-            leadingTiePaths += TieRenderer().paths(forTie: tie,
-                                                   inBarRange: barRange,
-                                                   canvasWidth: canvasWidth)
+            leadingTiePaths += tieRenderer.paths(forTie: tie,
+                                                 inBarRange: barRange,
+                                                 canvasWidth: canvasWidth)
         }
         
         var allPaths = [Path]()
