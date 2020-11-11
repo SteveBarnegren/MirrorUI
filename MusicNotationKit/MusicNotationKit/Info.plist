@@ -16,6 +16,10 @@
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Bravura.otf</string>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 </dict>

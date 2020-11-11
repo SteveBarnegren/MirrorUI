@@ -304,10 +304,11 @@ class NoteRenderer {
                 continue
             }
 
-            let alignmentOffset = NoteHeadAligner.xOffset(forAlignment: noteHeadDescription.alignment)
+            //let alignmentOffset = NoteHeadAligner.xOffset(forAlignment: noteHeadDescription.alignment)
             
+            // The path will be at the center of the stem. Nudging 0.5 (but what is the width?) moves it to the correct place
             paths.append(
-                path.translated(x: note.xPosition + alignmentOffset, y: noteHeadDescription.yPosition)
+                path.translated(x: note.xPosition - 0.5, y: noteHeadDescription.yPosition)
             )
         }
         

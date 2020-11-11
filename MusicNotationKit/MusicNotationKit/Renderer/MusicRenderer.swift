@@ -44,6 +44,9 @@ class MusicRenderer {
     
     func preprocessComposition() {
         
+        // Start the font renderer
+        FontLoader.shared.go()
+        
         if isPreprocessingComplete {
             return
         }

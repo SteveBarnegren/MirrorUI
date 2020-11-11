@@ -19,7 +19,9 @@ extension SymbolPaths {
         case .open:
             return SymbolPaths.openNoteHead
         case .filled:
-            return SymbolPaths.filledNoteHead
+            let unicode = FontLoader.shared.glyphs["noteheadBlack"]!.unicode
+            return TextPathCreator().path(forString: String(unicode),
+                                          font: UIFont(name: "Bravura", size: 4)!)
         case .cross:
             return SymbolPaths.crossNoteHead
         }

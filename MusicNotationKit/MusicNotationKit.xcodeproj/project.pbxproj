@@ -127,6 +127,12 @@
 		6789B87724689739002D78A8 /* Collection+AllPairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B87624689738002D78A8 /* Collection+AllPairs.swift */; };
 		6789B87924689AC4002D78A8 /* Collection+AllPairsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B87824689AC4002D78A8 /* Collection+AllPairsTests.swift */; };
 		678E5ECB25489F8100025EDC /* ConflictIdentifiers+TiesAndArticulationMarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678E5ECA25489F8000025EDC /* ConflictIdentifiers+TiesAndArticulationMarks.swift */; };
+		6793005A25549AD4001AF1E4 /* glyphnames.json in Resources */ = {isa = PBXBuildFile; fileRef = 6793005725549AD3001AF1E4 /* glyphnames.json */; };
+		6793005B25549AD4001AF1E4 /* ranges.json in Resources */ = {isa = PBXBuildFile; fileRef = 6793005825549AD4001AF1E4 /* ranges.json */; };
+		6793005C25549AD4001AF1E4 /* classes.json in Resources */ = {isa = PBXBuildFile; fileRef = 6793005925549AD4001AF1E4 /* classes.json */; };
+		6793006125549AEA001AF1E4 /* bravura_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 6793006025549AEA001AF1E4 /* bravura_metadata.json */; };
+		6793006525549B1A001AF1E4 /* FontLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793006425549B1A001AF1E4 /* FontLoader.swift */; };
+		6793006B2554A1C1001AF1E4 /* Bravura.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6793006A2554A1C1001AF1E4 /* Bravura.otf */; };
 		679855C72460A1DB00877129 /* StaveSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855C62460A1DB00877129 /* StaveSpace.swift */; };
 		679855C92460A30F00877129 /* StaveSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855C82460A30F00877129 /* StaveSpaceTests.swift */; };
 		679855CC2460BA2800877129 /* Int+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855CB2460BA2800877129 /* Int+Rounding.swift */; };
@@ -316,6 +322,12 @@
 		6789B87624689738002D78A8 /* Collection+AllPairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+AllPairs.swift"; sourceTree = "<group>"; };
 		6789B87824689AC4002D78A8 /* Collection+AllPairsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+AllPairsTests.swift"; sourceTree = "<group>"; };
 		678E5ECA25489F8000025EDC /* ConflictIdentifiers+TiesAndArticulationMarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConflictIdentifiers+TiesAndArticulationMarks.swift"; sourceTree = "<group>"; };
+		6793005725549AD3001AF1E4 /* glyphnames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = glyphnames.json; sourceTree = "<group>"; };
+		6793005825549AD4001AF1E4 /* ranges.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ranges.json; sourceTree = "<group>"; };
+		6793005925549AD4001AF1E4 /* classes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = classes.json; sourceTree = "<group>"; };
+		6793006025549AEA001AF1E4 /* bravura_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bravura_metadata.json; sourceTree = "<group>"; };
+		6793006425549B1A001AF1E4 /* FontLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontLoader.swift; sourceTree = "<group>"; };
+		6793006A2554A1C1001AF1E4 /* Bravura.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bravura.otf; sourceTree = "<group>"; };
 		679855C62460A1DB00877129 /* StaveSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveSpace.swift; sourceTree = "<group>"; };
 		679855C82460A30F00877129 /* StaveSpaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveSpaceTests.swift; sourceTree = "<group>"; };
 		679855CB2460BA2800877129 /* Int+Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Rounding.swift"; sourceTree = "<group>"; };
@@ -799,6 +811,35 @@
 			path = "Generate Layout Anchors";
 			sourceTree = "<group>";
 		};
+		6793005525549A5E001AF1E4 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				6793006425549B1A001AF1E4 /* FontLoader.swift */,
+				6793005F25549ADC001AF1E4 /* Bravura */,
+				6793005625549AC6001AF1E4 /* SmuFL */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		6793005625549AC6001AF1E4 /* SmuFL */ = {
+			isa = PBXGroup;
+			children = (
+				6793005925549AD4001AF1E4 /* classes.json */,
+				6793005725549AD3001AF1E4 /* glyphnames.json */,
+				6793005825549AD4001AF1E4 /* ranges.json */,
+			);
+			path = SmuFL;
+			sourceTree = "<group>";
+		};
+		6793005F25549ADC001AF1E4 /* Bravura */ = {
+			isa = PBXGroup;
+			children = (
+				6793006025549AEA001AF1E4 /* bravura_metadata.json */,
+				6793006A2554A1C1001AF1E4 /* Bravura.otf */,
+			);
+			path = Bravura;
+			sourceTree = "<group>";
+		};
 		679855CA2460B92800877129 /* BinaryInteger */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,6 +907,7 @@
 				674D503721DD50B2009E5AFE /* Basic Types */,
 				67BA78A62430BE410097806B /* Geometry */,
 				677C9C8221C518F800C7A16E /* Extensions */,
+				6793005525549A5E001AF1E4 /* Font */,
 				677C9C7E21C5168500C7A16E /* Model */,
 				67494C8C21CEB0220078A575 /* Renderer */,
 				677C9C7F21C5169200C7A16E /* View */,
@@ -1140,6 +1182,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6793006125549AEA001AF1E4 /* bravura_metadata.json in Resources */,
+				6793006B2554A1C1001AF1E4 /* Bravura.otf in Resources */,
+				6793005A25549AD4001AF1E4 /* glyphnames.json in Resources */,
+				6793005B25549AD4001AF1E4 /* ranges.json in Resources */,
+				6793005C25549AD4001AF1E4 /* classes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1236,6 +1283,7 @@
 				67C480B5246B38BB00899F5A /* VectorMath.swift in Sources */,
 				674B9AAB22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift in Sources */,
 				6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */,
+				6793006525549B1A001AF1E4 /* FontLoader.swift in Sources */,
 				679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */,
 				67BB96BF2337B9F300119953 /* PathBundleDrawer.swift in Sources */,
 				6772877D243518BB0038B142 /* StavePositionUtils.swift in Sources */,
