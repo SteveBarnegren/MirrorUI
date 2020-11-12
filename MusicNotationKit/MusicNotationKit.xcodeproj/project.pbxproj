@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6708E3DB255C9230006B8D80 /* Lazy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6708E3DA255C9230006B8D80 /* Lazy.swift */; };
 		670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670ABDAD22C55C3700BFA678 /* Sequence+Sum.swift */; };
 		670ABDB022C55E7000BFA678 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670ABDAF22C55E7000BFA678 /* Sequence+Extensions.swift */; };
 		670ABDB222C562CF00BFA678 /* FixedDistanceLayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670ABDB122C562CF00BFA678 /* FixedDistanceLayoutSolver.swift */; };
@@ -132,6 +133,9 @@
 		6793006125549AEA001AF1E4 /* bravura_metadata.json in Resources */ = {isa = PBXBuildFile; fileRef = 6793006025549AEA001AF1E4 /* bravura_metadata.json */; };
 		6793006525549B1A001AF1E4 /* SMuFLSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793006425549B1A001AF1E4 /* SMuFLSupport.swift */; };
 		6793006B2554A1C1001AF1E4 /* Bravura.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6793006A2554A1C1001AF1E4 /* Bravura.otf */; };
+		679523F7255DC40A005E7A90 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679523F6255DC40A005E7A90 /* Font.swift */; };
+		679523FB255DC433005E7A90 /* Font+Bravura.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679523FA255DC433005E7A90 /* Font+Bravura.swift */; };
+		67952404255DD91B005E7A90 /* LazyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67952403255DD91B005E7A90 /* LazyTests.swift */; };
 		679855C72460A1DB00877129 /* StaveSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855C62460A1DB00877129 /* StaveSpace.swift */; };
 		679855C92460A30F00877129 /* StaveSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855C82460A30F00877129 /* StaveSpaceTests.swift */; };
 		679855CC2460BA2800877129 /* Int+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679855CB2460BA2800877129 /* Int+Rounding.swift */; };
@@ -204,6 +208,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6708E3DA255C9230006B8D80 /* Lazy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lazy.swift; sourceTree = "<group>"; };
 		670ABDAD22C55C3700BFA678 /* Sequence+Sum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Sum.swift"; sourceTree = "<group>"; };
 		670ABDAF22C55E7000BFA678 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		670ABDB122C562CF00BFA678 /* FixedDistanceLayoutSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedDistanceLayoutSolver.swift; sourceTree = "<group>"; };
@@ -329,6 +334,9 @@
 		6793006025549AEA001AF1E4 /* bravura_metadata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bravura_metadata.json; sourceTree = "<group>"; };
 		6793006425549B1A001AF1E4 /* SMuFLSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMuFLSupport.swift; sourceTree = "<group>"; };
 		6793006A2554A1C1001AF1E4 /* Bravura.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bravura.otf; sourceTree = "<group>"; };
+		679523F6255DC40A005E7A90 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		679523FA255DC433005E7A90 /* Font+Bravura.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Bravura.swift"; sourceTree = "<group>"; };
+		67952403255DD91B005E7A90 /* LazyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyTests.swift; sourceTree = "<group>"; };
 		679855C62460A1DB00877129 /* StaveSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveSpace.swift; sourceTree = "<group>"; };
 		679855C82460A30F00877129 /* StaveSpaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaveSpaceTests.swift; sourceTree = "<group>"; };
 		679855CB2460BA2800877129 /* Int+Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Rounding.swift"; sourceTree = "<group>"; };
@@ -598,6 +606,7 @@
 				6783186A2440FD4100FB9784 /* SortMapperTests.swift */,
 				679855C82460A30F00877129 /* StaveSpaceTests.swift */,
 				6736F2332550B4D600148F6B /* KeyValueCacheTests.swift */,
+				67952403255DD91B005E7A90 /* LazyTests.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -616,6 +625,7 @@
 				679855C62460A1DB00877129 /* StaveSpace.swift */,
 				6789B86C24635E26002D78A8 /* Direction.swift */,
 				6736F22F2550B47B00148F6B /* KeyValueCache.swift */,
+				6708E3DA255C9230006B8D80 /* Lazy.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -842,6 +852,7 @@
 			children = (
 				6793006025549AEA001AF1E4 /* bravura_metadata.json */,
 				6793006A2554A1C1001AF1E4 /* Bravura.otf */,
+				679523FA255DC433005E7A90 /* Font+Bravura.swift */,
 			);
 			path = Bravura;
 			sourceTree = "<group>";
@@ -1054,6 +1065,7 @@
 		67C89FE4255C8187009B18DF /* GlyphStore */ = {
 			isa = PBXGroup;
 			children = (
+				679523F6255DC40A005E7A90 /* Font.swift */,
 				67C89FD8255C731A009B18DF /* GlyphStore.swift */,
 				67C89FE5255C81D2009B18DF /* GlyphStore+Noteheads.swift */,
 			);
@@ -1258,6 +1270,7 @@
 				679855D42461FF6700877129 /* NoteHeadAligner.swift in Sources */,
 				6751A84222357AE3000B0D08 /* Rest.swift in Sources */,
 				67BB96BA2337A82200119953 /* MusicCell.swift in Sources */,
+				6708E3DB255C9230006B8D80 /* Lazy.swift in Sources */,
 				67F5658F254754EC00910487 /* AccentRenderer.swift in Sources */,
 				674D504B21E23CD8009E5AFE /* NoteRenderer.swift in Sources */,
 				67C7CC1B21C6D5CD00A020D0 /* CGPoint+Extensions.swift in Sources */,
@@ -1288,6 +1301,7 @@
 				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
 				67F0DD522471C5370048C718 /* SetBarNumbersProcessingOperation.swift in Sources */,
 				67BB96BD2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift in Sources */,
+				679523FB255DC433005E7A90 /* Font+Bravura.swift in Sources */,
 				67678E0021E2865400E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */,
 				67728786243BB7300038B142 /* NoteHeadAlignmentDecider.swift in Sources */,
@@ -1315,6 +1329,7 @@
 				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
 				67669E6522EDFEDB004F1927 /* Array+Insertion.swift in Sources */,
 				67669E6122EDF9D9004F1927 /* RepeatingPatternSequence.swift in Sources */,
+				679523F7255DC40A005E7A90 /* Font.swift in Sources */,
 				673A3D1C233FC531001CE422 /* Array+Maybe.swift in Sources */,
 				67494C8A21CD84520078A575 /* Pitch.swift in Sources */,
 				6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */,
@@ -1421,6 +1436,7 @@
 				67BA789D2430AF750097806B /* SingleValueCacheTests.swift in Sources */,
 				6789B869246206AC002D78A8 /* Sequence+ContainsTests.swift in Sources */,
 				6789B87324686E22002D78A8 /* VariationSelectorTests.swift in Sources */,
+				67952404255DD91B005E7A90 /* LazyTests.swift in Sources */,
 				67E863BB2303498300A5DE73 /* NoteBeamDescriberTestsBase.swift in Sources */,
 				67669E6322EDF9EE004F1927 /* RepeatingPatternSequenceTests.swift in Sources */,
 			);

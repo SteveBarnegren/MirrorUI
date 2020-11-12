@@ -46,11 +46,23 @@ class Glyph {
         self.createPath = createPath
     }
     
+    fileprivate var _stemUpSE: Lazy<Vector2D>!
+    var stemUpSE: Vector2D { _stemUpSE.value }
+    
+    fileprivate var _stemUpNW: Lazy<Vector2D>!
+    var stemUpNW: Vector2D { _stemUpNW.value }
+    
+    fileprivate var _stemDownNW: Lazy<Vector2D>!
+    var stemDownNW: Vector2D { _stemDownNW.value }
 }
 
 class GlyphStore {
     
-    private lazy var font: UIFont = UIFont(name: "Bravura", size: 4)!
+    let font: Font
+    
+    init(font: Font) {
+        self.font = font
+    }
     
     lazy var noteheadFilled = makeGlyph("noteheadBlack")
     lazy var noteheadWhole = makeGlyph("noteheadWhole")
@@ -61,10 +73,24 @@ class GlyphStore {
         
         let font = self.font
         
-        return Glyph(createPath: {
+        let glyph = Glyph(createPath: {
             let unicode = SMuFLSupport.shared.glyphs[name]!.unicode
             return TextPathCreator().path(forString: String(unicode),
-                                          font: font)
+                                          font: font.uiFont)
         })
+        
+        glyph._stemUpSE = Lazy {
+            font.anchor(forGlyphName: name, anchorName: "stemUpSE") ?? .zero
+        }
+        
+        glyph._stemUpNW = Lazy {
+            font.anchor(forGlyphName: name, anchorName: "stemUpNW") ?? .zero
+        }
+        
+        glyph._stemDownNW = Lazy {
+            font.anchor(forGlyphName: name, anchorName: "stemDownNW") ?? .zero
+        }
+        
+        return glyph
     }
 }

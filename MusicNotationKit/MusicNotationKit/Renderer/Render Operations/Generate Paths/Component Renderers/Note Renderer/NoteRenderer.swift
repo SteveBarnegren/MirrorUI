@@ -309,7 +309,7 @@ class NoteRenderer {
             guard let glyph = glyphs.glyph(forNoteHeadStyle: noteHeadDescription.style) else {
                 continue
             }
-
+            
             let alignmentOffset = NoteHeadAligner.xOffset(forNoteHead: noteHeadDescription, glyphs: glyphs)
             
             paths.append(
@@ -352,51 +352,34 @@ class NoteRenderer {
             return nil
         }
         
-        let xOffset: Double
+        let noteHead = note.stemConnectingNoteHead
+        let glyph = glyphs.glyph(forNoteHeadStyle: noteHead.style)!
+        
         if note.symbolDescription.stemDirection == .up {
-            xOffset = stemXOffset - stemThickness
+            let anchor = glyph.stemUpSE
+            let connectPoint = Vector2D(note.xPosition - glyph.width/2 + anchor.x,
+                                        noteHead.yPosition + anchor.y)
+            
+            let rect = Rect(x: connectPoint.x - stemThickness,
+                            y: connectPoint.y,
+                            width: stemThickness,
+                            height: stemEndY - connectPoint.y)
+            return rect
         } else {
-            xOffset = -stemXOffset
-        }
-        
-        // TEMP: Pass in the actual not head style
-        var stemYOffset = self.stemYOffset(forNoteHead: .filled)
-        if stemEndY < note.stemConnectingNoteHead.yPosition {
-            stemYOffset = -stemYOffset
-        }
-        
-        let startY = note.stemConnectingNoteHead.yPosition + stemYOffset
-        
-        return Rect(x: note.xPosition + xOffset,
-                    y: startY,
-                    width: stemThickness,
-                    height: stemEndY - startY)
-    }
-    
-    /// The Stem Y starting offset from the middle of the note
-    private func stemYOffset(forNoteHead noteHead: NoteHeadDescription.Style) -> Double {
-        
-        switch noteHead {
-        case .semibreve, .open, .filled:
-            return 0.1
-        case .cross:
-            return 0.5
-        case .none:
-            return 0
+            let anchor = glyph.stemDownNW
+            let connectPoint = Vector2D(note.xPosition - glyph.width/2 + anchor.x,
+                                        noteHead.yPosition + anchor.y)
+            let height = connectPoint.y - stemEndY
+            
+            let rect = Rect(x: connectPoint.x,
+                            y: connectPoint.y - height,
+                            width: stemThickness,
+                            height: height)
+            return rect
         }
     }
     
     // MARK: - Helpers
-    
-//    private func preferredStemOffset(for direction: StemDirection) -> Double {
-//        
-//        switch direction {
-//        case .up:
-//            return preferredStemHeight
-//        case .down:
-//            return -preferredStemHeight
-//        }
-//    }
     
     private func stemXOffset(for direction: StemDirection) -> Double {
         switch direction {

@@ -35,17 +35,18 @@ class MusicRenderer {
     private let composition: Composition
     private var barSizingInformation = [BarSizingInfo]()
     private var isPreprocessingComplete = false
-    private var glyphs = GlyphStore()
+    private var glyphs: GlyphStore!
     
     var staveSpacing: Double = 8
         
     init(composition: Composition) {
+        FontLoader.loadFonts()
+        glyphs = GlyphStore(font: .bravura)
+
         self.composition = composition
     }
     
     func preprocessComposition() {
-        
-        FontLoader.loadFonts()
         
         if isPreprocessingComplete {
             return
