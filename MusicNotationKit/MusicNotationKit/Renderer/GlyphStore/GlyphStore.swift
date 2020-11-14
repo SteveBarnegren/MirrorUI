@@ -60,6 +60,10 @@ class GlyphStore {
     
     let font: Font
     
+    var metrics: FontMetrics {
+        return font.metrics
+    }
+    
     init(font: Font) {
         self.font = font
     }

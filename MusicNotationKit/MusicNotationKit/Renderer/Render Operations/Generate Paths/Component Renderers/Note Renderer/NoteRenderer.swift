@@ -15,7 +15,7 @@ class NoteRenderer {
     private let beamSeparation = 0.3
     private let noteHeadWidth = 1.4
     
-    private var stemThickness: Double { NoteMetrics.stemThickness }
+    private var stemThickness: Double { glyphs.metrics.stemThickness }
     private var stemXOffset: Double { NoteMetrics.stemXOffset }
     
     private let glyphs: GlyphStore
