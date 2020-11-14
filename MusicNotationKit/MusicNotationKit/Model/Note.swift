@@ -63,7 +63,7 @@ public class Note: Playable {
     /// The width of the stem, as specified by the font being used to render the note
     var stemWidth = Double.zero
     
-    /// The sbsolute x position of the stem's center
+    /// The absolute x position of the stem's center
     var stemCenterX: Double {
         switch symbolDescription.stemDirection {
         case .up:
@@ -71,6 +71,16 @@ public class Note: Playable {
         case .down:
             return xPosition + stemConnectionPoint.x + stemWidth/2
         }
+    }
+    
+    /// The absolute position of the stem's leading edge
+    var stemLeadingEdge: Double {
+        return stemCenterX - stemWidth/2
+    }
+    
+    /// The absolute position of the stem's trailing edge
+    var stemTrailingEdge: Double {
+        return stemCenterX + stemWidth/2
     }
     
     /// The y position of the end of the note stem

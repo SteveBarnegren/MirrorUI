@@ -16,7 +16,6 @@ class NoteRenderer {
     private let noteHeadWidth = 1.4
     
     private var stemThickness: Double { glyphs.metrics.stemThickness }
-    private var stemXOffset: Double { NoteMetrics.stemXOffset }
     
     private let glyphs: GlyphStore
     
@@ -77,7 +76,7 @@ class NoteRenderer {
                 path.invertY()
             }
             
-            var xOffset = stemXOffset.inverted(if: { note.symbolDescription.stemDirection == .down })
+            var xOffset = note.stemConnectionPoint.x
             
             // x nudge
             if note.symbolDescription.stemDirection == .up {
@@ -104,7 +103,7 @@ class NoteRenderer {
             paths.append(maybe: makeStemPath(forNote: note, to: note.stemConnectingNoteHead.yPosition + stemHeight.inverted(if: { stemDirection == .down })))
             
             for (tailNumber, isLast) in (0..<note.symbolDescription.numberOfTails).eachWithIsLast() {
-                let xOffset = stemXOffset.inverted(if: { note.symbolDescription.stemDirection == .down })
+                let xOffset = note.stemConnectionPoint.x
                 let yOffset = (stemHeight - Double(tailNumber) * eachTailYOffset).inverted(if: { note.symbolDescription.stemDirection == .down })
                 let commands = isLast ? makeFastNoteBottomTailCommands() : makeFastNoteTailCommands()
                 
@@ -221,8 +220,8 @@ class NoteRenderer {
         
         let stemDirection = fromNote.symbolDescription.stemDirection
         
-        let startX = fromNote.xPosition + stemXOffset(for: stemDirection)
-        let endX = toNote.xPosition + stemXOffset(for: stemDirection)
+        let startX = fromNote.stemTrailingEdge
+        let endX = toNote.stemLeadingEdge
         let eachBeamYOffset = (beamSeparation + beamThickness).inverted(if: { stemDirection == .down })
         
         let thickness = beamThickness.inverted(if: { stemDirection == .down })
@@ -272,19 +271,9 @@ class NoteRenderer {
         
         let x: Double
         if rightSide {
-            switch stemDirection {
-            case .up:
-                x = note.xPosition + stemXOffset
-            case .down:
-                x = note.xPosition - stemXOffset + stemThickness
-            }
+            x = note.stemTrailingEdge
         } else {
-            switch stemDirection {
-            case .up:
-                x = note.xPosition + stemXOffset - stemThickness - width
-            case .down:
-                x = note.xPosition - stemXOffset - width
-            }
+            x = note.stemLeadingEdge - width
         }
         
         let eachBeamYOffset = (beamSeparation + height).inverted(if: { stemDirection == .up })
@@ -376,17 +365,6 @@ class NoteRenderer {
                             width: stemThickness,
                             height: height)
             return rect
-        }
-    }
-    
-    // MARK: - Helpers
-    
-    private func stemXOffset(for direction: StemDirection) -> Double {
-        switch direction {
-        case .up:
-            return stemXOffset
-        case .down:
-            return -stemXOffset
         }
     }
 }
