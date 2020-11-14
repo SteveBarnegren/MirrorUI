@@ -14,6 +14,10 @@ public class Composition {
     
     var bars = [Bar]()
     
+    var notes: [Note] {
+        return bars.map { $0.sequences }.joined().map { $0.notes }.joined().toArray()
+    }
+    
     var numberOfBars: Int {
         return bars.count
     }

@@ -117,6 +117,7 @@
 		678318692440FCD500FB9784 /* SortMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678318682440FCD500FB9784 /* SortMapper.swift */; };
 		6783186B2440FD4100FB9784 /* SortMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783186A2440FD4100FB9784 /* SortMapperTests.swift */; };
 		6785A9B523315B38004B32B8 /* CompositionPathsCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6785A9B423315B38004B32B8 /* CompositionPathsCreator.swift */; };
+		6786968B256044F10007214C /* CalculateStemPositionsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6786968A256044F10007214C /* CalculateStemPositionsProcessingOperation.swift */; };
 		6789B86724620690002D78A8 /* Sequence+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B86624620690002D78A8 /* Sequence+Contains.swift */; };
 		6789B869246206AC002D78A8 /* Sequence+ContainsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B868246206AC002D78A8 /* Sequence+ContainsTests.swift */; };
 		6789B86B24620A08002D78A8 /* TieCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6789B86A24620A08002D78A8 /* TieCreator.swift */; };
@@ -318,6 +319,7 @@
 		678318682440FCD500FB9784 /* SortMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMapper.swift; sourceTree = "<group>"; };
 		6783186A2440FD4100FB9784 /* SortMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMapperTests.swift; sourceTree = "<group>"; };
 		6785A9B423315B38004B32B8 /* CompositionPathsCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionPathsCreator.swift; sourceTree = "<group>"; };
+		6786968A256044F10007214C /* CalculateStemPositionsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateStemPositionsProcessingOperation.swift; sourceTree = "<group>"; };
 		6789B86624620690002D78A8 /* Sequence+Contains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Contains.swift"; sourceTree = "<group>"; };
 		6789B868246206AC002D78A8 /* Sequence+ContainsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+ContainsTests.swift"; sourceTree = "<group>"; };
 		6789B86A24620A08002D78A8 /* TieCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TieCreator.swift; sourceTree = "<group>"; };
@@ -826,6 +828,14 @@
 			path = "Generate Layout Anchors";
 			sourceTree = "<group>";
 		};
+		67869689256041F40007214C /* Calculate Stem Positions */ = {
+			isa = PBXGroup;
+			children = (
+				6786968A256044F10007214C /* CalculateStemPositionsProcessingOperation.swift */,
+			);
+			path = "Calculate Stem Positions";
+			sourceTree = "<group>";
+		};
 		6793005525549A5E001AF1E4 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -1024,6 +1034,7 @@
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
 				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
+				67869689256041F40007214C /* Calculate Stem Positions */,
 				67728782243BB6240038B142 /* Calculate Note Head Alignment */,
 				6772560F2440D98300954C91 /* Calculate Note Widths */,
 				670D51BC25474D2C000B7B36 /* Position Articulation Marks */,
@@ -1263,6 +1274,7 @@
 				673A3D15233FC18A001CE422 /* Array+EachWith.swift in Sources */,
 				6789B86724620690002D78A8 /* Sequence+Contains.swift in Sources */,
 				67CDC489254CAE6800C70E5B /* ApplyTupletTimesProcessingOperation.swift in Sources */,
+				6786968B256044F10007214C /* CalculateStemPositionsProcessingOperation.swift in Sources */,
 				678318652440E73100FB9784 /* BinaryInteger+Parity.swift in Sources */,
 				6767E320229F143D00E9964D /* HorizontalLayoutSolver.swift in Sources */,
 				670D51B025474AB1000B7B36 /* ArticulationMark.swift in Sources */,

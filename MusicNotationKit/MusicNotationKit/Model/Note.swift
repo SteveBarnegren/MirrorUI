@@ -31,6 +31,11 @@ public class Note: Playable {
     
     // MARK: - Stem
     
+    /// If the note has a stem
+    var hasStem: Bool {
+        return symbolDescription.hasStem
+    }
+    
     /// The note head that the stem connects to
     var stemConnectingNoteHead: NoteHeadDescription {
         // We always expect there to be at least one note note head
@@ -52,6 +57,22 @@ public class Note: Playable {
         }
     }
     
+    /// The stem connection point, relative to the note position
+    var stemConnectionPoint = Vector2D.zero
+    
+    /// The width of the stem, as specified by the font being used to render the note
+    var stemWidth = Double.zero
+    
+    /// The sbsolute x position of the stem's center
+    var stemCenterX: Double {
+        switch symbolDescription.stemDirection {
+        case .up:
+            return xPosition + stemConnectionPoint.x - stemWidth/2
+        case .down:
+            return xPosition + stemConnectionPoint.x + stemWidth/2
+        }
+    }
+    
     /// The y position of the end of the note stem
     var stemEndY: Double {
         switch symbolDescription.stemDirection {
@@ -59,16 +80,6 @@ public class Note: Playable {
             return stemConnectingNoteHead.yPosition + symbolDescription.stemLength
         case .down:
             return stemConnectingNoteHead.yPosition - symbolDescription.stemLength
-        }
-    }
-    
-    /// The x position of the stem center
-    var stemCenterX: Double {
-        switch self.symbolDescription.stemDirection {
-        case .up:
-            return xPosition + NoteMetrics.stemXOffset - NoteMetrics.stemThickness/2
-        case .down:
-            return xPosition - NoteMetrics.stemXOffset + NoteMetrics.stemThickness/2
         }
     }
     

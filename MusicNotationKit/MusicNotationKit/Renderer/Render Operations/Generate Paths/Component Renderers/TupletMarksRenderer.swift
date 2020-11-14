@@ -91,7 +91,7 @@ class TupletMarksRenderer {
     private func startX(forPlayable playable: Playable) -> Double {
         
         if let note = playable as? Note {
-            return note.stemCenterX - NoteMetrics.stemThickness/2
+            return note.stemCenterX - note.stemWidth/2
         } else if let rest = playable as? Rest {
             return rest.position.x - rest.leadingWidth
         }
@@ -102,7 +102,7 @@ class TupletMarksRenderer {
     private func endX(forPlayable playable: Playable) -> Double {
         
         if let note = playable as? Note {
-            return note.stemCenterX + NoteMetrics.stemThickness/2
+            return note.stemCenterX + note.stemWidth/2
         } else if let rest = playable as? Rest {
             return rest.position.x + rest.trailingWidth
         }

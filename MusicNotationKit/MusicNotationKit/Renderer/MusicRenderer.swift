@@ -78,6 +78,10 @@ class MusicRenderer {
             // Calculate stem directions
             CalculateStemDirectionsProcessingOperation().process(composition: composition)
             
+            // Calculate Stem Positons
+            CalculateStemPositionsProcessingOperation(glyphs: glyphs)
+                .process(composition: composition)
+            
             // Calculate note head alignments
             CalculateNoteHeadAlignmentProcessingOperation().process(composition: composition)
             
