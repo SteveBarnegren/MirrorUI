@@ -30,6 +30,8 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
         composition.enumerateNotes(applyAdjacentItemWidths)
     }
     
+    // MARK: - Apply adjacent item widths from font
+    
     private func applyAdjacentItemWidths(note: Note) {
         
         for item in (note.leadingLayoutItems + note.trailingLayoutItems) {
@@ -41,6 +43,8 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
         
         if let accidental = item as? AccidentalSymbol {
             applyAccidentalWidth(accidental: accidental)
+        } else if let dot = item as? DotSymbol {
+            dot.horizontalLayoutWidth = .centered(width: glyphs.augmentationDot.width)
         }
     }
     

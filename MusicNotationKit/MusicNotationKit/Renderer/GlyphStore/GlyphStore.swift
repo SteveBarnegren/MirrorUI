@@ -74,6 +74,9 @@ class GlyphStore {
     lazy var noteheadHalf = makeGlyph("noteheadHalf")
     lazy var noteheadCross = makeGlyph("noteheadXBlack")
     
+    // MARK: - Augmentation
+    lazy var augmentationDot = makeGlyph("augmentationDot")
+    
     // MARK: - Accidentals
     lazy var accidentalFlat = makeGlyph("accidentalFlat")
     lazy var accidentalNatural = makeGlyph("accidentalNatural")

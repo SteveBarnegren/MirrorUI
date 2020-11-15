@@ -10,11 +10,17 @@ import Foundation
 
 class DotRenderer {
     
+    private let glyphs: GlyphStore
+    
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
+    }
+    
     func paths(forDot dot: DotSymbol) -> [Path] {
         
-        let dotSize = 0.5
-        
-        var path = Path(circleWithCenter: dot.position, radius: dotSize/2)
+        let glyph = glyphs.augmentationDot
+        var path = glyph.path.translated(x: dot.xPosition - glyph.width/2,
+                                         y: dot.yPosition)
         path.drawStyle = .fill
         return [path]
     }
