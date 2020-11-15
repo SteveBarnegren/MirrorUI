@@ -17,11 +17,9 @@ class RestSymbolDescriber {
         let division = rest.value.division
         switch division {
         case 1:
-            let blockStyle = BlockRestStyle(startY: 0.5, height: 0.5)
-            description = RestSymbolDescription(style: .block(blockStyle))
+            description = RestSymbolDescription(style: .whole)
         case 2:
-            let blockStyle = BlockRestStyle(startY: 0, height: 0.5)
-            description = RestSymbolDescription(style: .block(blockStyle))
+            description = RestSymbolDescription(style: .half)
         case 4:
             description = RestSymbolDescription(style: .crotchet)
         default:

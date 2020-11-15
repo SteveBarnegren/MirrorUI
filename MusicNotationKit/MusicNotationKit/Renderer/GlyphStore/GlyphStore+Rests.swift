@@ -15,10 +15,12 @@ extension GlyphStore {
         switch style {
         case .none:
             return nil
+        case .whole:
+            return self.restWhole
+        case .half:
+            return self.restHalf
         case .crotchet:
             return self.restQuarter
-        case .block(_):
-            return nil
         case .tailed(let tailedStyle):
             switch tailedStyle.numberOfTails {
             case 1: return self.rest8th

@@ -38,8 +38,9 @@ class RestSymbolDescription {
     
     enum Style {
         case none
+        case whole
+        case half
         case crotchet
-        case block(BlockRestStyle)
         case tailed(TailedRestStyle)
     }
     
