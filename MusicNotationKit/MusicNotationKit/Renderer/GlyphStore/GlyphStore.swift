@@ -68,10 +68,16 @@ class GlyphStore {
         self.font = font
     }
     
+    // MARK: - Note Heads
     lazy var noteheadFilled = makeGlyph("noteheadBlack")
     lazy var noteheadWhole = makeGlyph("noteheadWhole")
     lazy var noteheadHalf = makeGlyph("noteheadHalf")
     lazy var noteheadCross = makeGlyph("noteheadXBlack")
+    
+    // MARK: - Accidentals
+    lazy var accidentalFlat = makeGlyph("accidentalFlat")
+    lazy var accidentalNatural = makeGlyph("accidentalNatural")
+    lazy var accidentalSharp = makeGlyph("accidentalSharp")
     
     private func makeGlyph(_ name: String) -> Glyph {
         

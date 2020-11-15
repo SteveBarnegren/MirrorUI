@@ -12,7 +12,7 @@ public struct Pitch {
     let note: Pitch.Note
     let accidental: Pitch.Accidental?
     
-    init(_ note: Pitch.Note, _ accidental: Pitch.Accidental? = nil) {
+    public init(_ note: Pitch.Note, _ accidental: Pitch.Accidental? = nil) {
         self.note = note
         self.accidental = accidental
     }
@@ -98,7 +98,7 @@ public struct Pitch {
     public static let gSharp5 = Pitch(.g5, .sharp)
 }
 
-extension Pitch {
+public extension Pitch {
     enum Accidental {
         case sharp
         case flat
@@ -107,7 +107,7 @@ extension Pitch {
 }
 
 // Middle C is c4
-extension Pitch {
+public extension Pitch {
     enum Note: Int {
         
         // 2

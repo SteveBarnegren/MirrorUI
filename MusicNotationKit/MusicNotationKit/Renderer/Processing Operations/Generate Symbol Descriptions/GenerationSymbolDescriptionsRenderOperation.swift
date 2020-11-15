@@ -10,9 +10,14 @@ import Foundation
 
 class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperation {
     
+    private let glyphs: GlyphStore
     private let noteSymbolDescriber = NoteSymbolDescriber()
     private let noteHeadDescriber = NoteHeadDescriber()
     private let restSymbolDescriber = RestSymbolDescriber()
+    
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
+    }
     
     func process(composition: Composition) {
         
@@ -21,5 +26,37 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
             $0.noteHeadDescriptions = noteHeadDescriber.noteHeadDescriptions(forNote: $0)
         }
         composition.enumerateRests { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
+        
+        composition.enumerateNotes(applyAdjacentItemWidths)
+    }
+    
+    private func applyAdjacentItemWidths(note: Note) {
+        
+        for item in (note.leadingLayoutItems + note.trailingLayoutItems) {
+            applyAdjacentItemWidth(item: item)
+        }
+    }
+    
+    private func applyAdjacentItemWidth(item: AdjacentLayoutItem) {
+        
+        if let accidental = item as? AccidentalSymbol {
+            applyAccidentalWidth(accidental: accidental)
+        }
+    }
+    
+    private func applyAccidentalWidth(accidental: AccidentalSymbol) {
+        
+        let glyph: Glyph
+        
+        switch accidental.type {
+        case .sharp:
+            glyph = glyphs.accidentalSharp
+        case .flat:
+            glyph = glyphs.accidentalFlat
+        case .natural:
+            glyph = glyphs.accidentalNatural
+        }
+        
+        accidental.horizontalLayoutWidth = .centered(width: glyph.width)
     }
 }

@@ -70,7 +70,7 @@
 		6751A84422357AFA000B0D08 /* Playable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84322357AFA000B0D08 /* Playable.swift */; };
 		6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */; };
 		6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A849223585D5000B0D08 /* RestRenderer.swift */; };
-		6753D0F722D7D31D0052F27F /* FlatRendereer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0F622D7D31D0052F27F /* FlatRendereer.swift */; };
+		6753D0F722D7D31D0052F27F /* FlatRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0F622D7D31D0052F27F /* FlatRenderer.swift */; };
 		6753D0FB22D7D9340052F27F /* NaturalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */; };
 		6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */; };
 		6753D10222DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */; };
@@ -271,7 +271,7 @@
 		6751A84322357AFA000B0D08 /* Playable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playable.swift; sourceTree = "<group>"; };
 		6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestSymbolDescriber.swift; sourceTree = "<group>"; };
 		6751A849223585D5000B0D08 /* RestRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRenderer.swift; sourceTree = "<group>"; };
-		6753D0F622D7D31D0052F27F /* FlatRendereer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatRendereer.swift; sourceTree = "<group>"; };
+		6753D0F622D7D31D0052F27F /* FlatRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatRenderer.swift; sourceTree = "<group>"; };
 		6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalRenderer.swift; sourceTree = "<group>"; };
 		6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
 		6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateStemDirectionsRenderOperation.swift; sourceTree = "<group>"; };
@@ -698,7 +698,7 @@
 				67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */,
 				671A4D3822886FBD002C56E8 /* DotRenderer.swift */,
 				670ABDB722C6B1D100BFA678 /* SharpRenderer.swift */,
-				6753D0F622D7D31D0052F27F /* FlatRendereer.swift */,
+				6753D0F622D7D31D0052F27F /* FlatRenderer.swift */,
 				6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */,
 				67706498245CC3DC0083037F /* TieRenderer.swift */,
 				67F5658E254754EC00910487 /* AccentRenderer.swift */,
@@ -1382,7 +1382,7 @@
 				673A3D212340E6E2001CE422 /* Sequence+UnnestTuples.swift in Sources */,
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
-				6753D0F722D7D31D0052F27F /* FlatRendereer.swift in Sources */,
+				6753D0F722D7D31D0052F27F /* FlatRenderer.swift in Sources */,
 				6785A9B523315B38004B32B8 /* CompositionPathsCreator.swift in Sources */,
 				6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */,
 				67BB96B823368C7400119953 /* CompositionLayout.swift in Sources */,

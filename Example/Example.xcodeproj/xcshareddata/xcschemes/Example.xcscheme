@@ -72,6 +72,10 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-deeplink components/notes"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-deeplink components/accidentals"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

@@ -67,7 +67,8 @@ class MusicRenderer {
             JoinBarlinesCompositionProcessingOperation().process(composition: composition)
             
             // Populate note symbols
-            GenerateSymbolDescriptionsProcessingOperation().process(composition: composition)
+            GenerateSymbolDescriptionsProcessingOperation(glyphs: glyphs)
+                .process(composition: composition)
 
             // Calculate note times
             CalculatePlayableItemTimesProcessingOperation().process(composition: composition)

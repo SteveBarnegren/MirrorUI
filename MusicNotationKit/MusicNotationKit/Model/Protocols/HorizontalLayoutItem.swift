@@ -9,7 +9,9 @@
 import Foundation
 
 enum HorizontalLayoutWidthType {
+    /// Centered layout, where 'x anchor' of the item is in the center of it's width
     case centered(width: Double)
+    /// Offset layout, where the 'x anchor' of the item is offset. A leading and trailing with to the anchor can be specified.
     case offset(leading: Double, trailing: Double)
 }
 

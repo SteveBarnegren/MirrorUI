@@ -20,7 +20,7 @@ extension Array {
 extension ComponentCompositions {
     
     static var accidentals: Composition {
-
+        
         let allPitches: [Pitch] = makeAllPitches()
         
         let composition = Composition()
@@ -40,65 +40,65 @@ extension ComponentCompositions {
     static func makeAllPitches() -> [Pitch] {
         let pitches: [Pitch] = [
             // 2
-            .a2,
+            Pitch(.a2, .natural),
             .aSharp2,
             .bFlat2,
-            .b2,
-            .c2,
+            Pitch(.b2, .natural),
+            Pitch(.c2, .natural),
             .cSharp2,
             .dFlat2,
-            .d2,
+            Pitch(.d2, .natural),
             .dSharp2,
-            .e2,
-            .f2,
+            Pitch(.e2, .natural),
+            Pitch(.f2, .natural),
             .fSharp2,
             .gFlat2,
-            .g2,
+            Pitch(.g2, .natural),
             // 3
-            .a3,
+            Pitch(.a3, .natural),
             .aSharp3,
             .bFlat3,
-            .b3,
-            .c3,
+            Pitch(.b3, .natural),
+            Pitch(.c3, .natural),
             .cSharp3,
             .dFlat3,
-            .d3,
+            Pitch(.d3, .natural),
             .dSharp3,
-            .e3,
-            .f3,
+            Pitch(.e3, .natural),
+            Pitch(.f3, .natural),
             .fSharp3,
             .gFlat3,
-            .g3,
+            Pitch(.g3, .natural),
             // 4
-            .a4,
+            Pitch(.a4, .natural),
             .aSharp4,
             .bFlat4,
-            .b4,
-            .c4,
+            Pitch(.b4, .natural),
+            Pitch(.c4, .natural),
             .cSharp4,
             .dFlat4,
-            .d4,
+            Pitch(.d4, .natural),
             .dSharp4,
-            .e4,
-            .f4,
+            Pitch(.e4, .natural),
+            Pitch(.f4, .natural),
             .fSharp4,
             .gFlat4,
-            .g4,
+            Pitch(.g4, .natural),
             // 5
-            .a5,
+            Pitch(.a5, .natural),
             .aSharp5,
             .bFlat5,
-            .b5,
-            .c5,
+            Pitch(.b5, .natural),
+            Pitch(.c5, .natural),
             .cSharp5,
             .dFlat5,
-            .d5,
+            Pitch(.d5, .natural),
             .dSharp5,
-            .e5,
-            .f5,
+            Pitch(.e5, .natural),
+            Pitch(.f5, .natural),
             .fSharp5,
             .gFlat5,
-            .g5
+            Pitch(.g5, .natural)
         ]
         
         return pitches

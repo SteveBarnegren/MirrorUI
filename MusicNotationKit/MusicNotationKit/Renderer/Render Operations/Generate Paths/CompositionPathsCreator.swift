@@ -12,10 +12,16 @@ class CompositionPathsCreator {
     
     private let noteRenderer: NoteRenderer
     private let tieRenderer: TieRenderer
+    private let sharpRenderer: SharpRenderer
+    private let flatRenderer: FlatRenderer
+    private let naturalRenderer: NaturalRenderer
     
     init(glyphs: GlyphStore) {
         self.noteRenderer = NoteRenderer(glyphs: glyphs)
         self.tieRenderer = TieRenderer(glyphs: glyphs)
+        self.sharpRenderer = SharpRenderer(glyphs: glyphs)
+        self.flatRenderer = FlatRenderer(glyphs: glyphs)
+        self.naturalRenderer = NaturalRenderer(glyphs: glyphs)
     }
     
     func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double, leadingTies: [Tie]) -> [Path] {
@@ -117,11 +123,11 @@ class CompositionPathsCreator {
         
         switch accidentalSymbol.type {
         case .sharp:
-            return SharpRenderer().paths(forSharpAtX: x, y: y)
+            return sharpRenderer.paths(forSharpAtX: x, y: y)
         case .flat:
-            return FlatRenderer().paths(forFlatAtX: x, y: y)
+            return flatRenderer.paths(forFlatAtX: x, y: y)
         case .natural:
-            return NaturalRenderer().paths(forNaturalAtX: x, y: y)
+            return naturalRenderer.paths(forNaturalAtX: x, y: y)
         }
     }
     
