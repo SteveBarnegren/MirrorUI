@@ -22,9 +22,14 @@ class RestRenderer {
     
     private func path(forRest rest: Rest) -> Path? {
         
+        // Glyph based rests
+        if let glyph = glyphs.glyph(forRestStyle: rest.symbolDescription.style) {
+            return glyph.path.translated(x: rest.xPosition - glyph.width/2,
+                                         y: rest.yPosition)
+        }
+        
+        // Non glyph based rests
         switch rest.symbolDescription.style {
-        case .none:
-            return nil
         case .block(let blockStyle):
             
             let width: Double = 1
@@ -42,15 +47,8 @@ class RestRenderer {
             var path = Path(commands: commands)
             path.drawStyle = .fill
             return path
-        case .crotchet:
-            let glyph = glyphs.restQuarter
-            return glyph.path.translated(x: rest.position.x - glyph.width/2,
-                                         y: 0)
-        case .tailed(let tailedRest):
-            
-            var path = self.path(forTailedRestStyle: tailedRest)
-            path.translate(x: rest.position.x, y: 0)
-            return path
+        default:
+            return nil
         }
     }
     

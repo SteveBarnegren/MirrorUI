@@ -19,8 +19,20 @@ extension GlyphStore {
             return self.restQuarter
         case .block(_):
             return nil
-        case .tailed(_):
-            return nil
+        case .tailed(let tailedStyle):
+            switch tailedStyle.numberOfTails {
+            case 1: return self.rest8th
+            case 2: return self.rest16th
+            case 3: return self.rest32nd
+            case 4: return self.rest64th
+            case 5: return self.rest128th
+            case 6: return self.rest256th
+            case 7: return self.rest512th
+            case 8: return self.rest1024th
+            default:
+                print("No available glyph for rest with \(tailedStyle.numberOfTails) tails. Using 1024th note rest glyph")
+                return self.rest1024th
+            }
         }
     }
 }

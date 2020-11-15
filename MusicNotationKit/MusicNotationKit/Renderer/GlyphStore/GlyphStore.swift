@@ -84,7 +84,15 @@ class GlyphStore {
     
     // MARK: - Rests
     lazy var restQuarter = makeGlyph("restQuarter")
-    
+    lazy var rest8th = makeGlyph("rest8th")
+    lazy var rest16th = makeGlyph("rest16th")
+    lazy var rest32nd = makeGlyph("rest32nd")
+    lazy var rest64th = makeGlyph("rest64th")
+    lazy var rest128th = makeGlyph("rest128th")
+    lazy var rest256th = makeGlyph("rest256th")
+    lazy var rest512th = makeGlyph("rest512th")
+    lazy var rest1024th = makeGlyph("rest1024th")
+
     private func makeGlyph(_ name: String) -> Glyph {
         
         let font = self.font
