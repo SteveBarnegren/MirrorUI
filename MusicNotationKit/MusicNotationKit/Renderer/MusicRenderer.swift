@@ -86,8 +86,8 @@ class MusicRenderer {
             // Calculate note head alignments
             CalculateNoteHeadAlignmentProcessingOperation().process(composition: composition)
             
-            // Calculate note widths
-            CalculateNoteWidthsProcessingOperation(glyphs: glyphs)
+            // Calculate playable item widths
+            CalculatePlayableItemWidthsProcessingOperation(glyphs: glyphs)
                 .process(composition: composition)
             
             // Position Articulation marks

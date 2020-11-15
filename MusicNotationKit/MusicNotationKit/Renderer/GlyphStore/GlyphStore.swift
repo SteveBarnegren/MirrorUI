@@ -82,6 +82,9 @@ class GlyphStore {
     lazy var accidentalNatural = makeGlyph("accidentalNatural")
     lazy var accidentalSharp = makeGlyph("accidentalSharp")
     
+    // MARK: - Rests
+    lazy var restQuarter = makeGlyph("restQuarter")
+    
     private func makeGlyph(_ name: String) -> Glyph {
         
         let font = self.font

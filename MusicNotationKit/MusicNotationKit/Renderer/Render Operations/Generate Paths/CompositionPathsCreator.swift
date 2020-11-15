@@ -16,6 +16,7 @@ class CompositionPathsCreator {
     private let flatRenderer: FlatRenderer
     private let naturalRenderer: NaturalRenderer
     private let dotRenderer: DotRenderer
+    private let restRenderer: RestRenderer
     
     init(glyphs: GlyphStore) {
         self.noteRenderer = NoteRenderer(glyphs: glyphs)
@@ -24,6 +25,7 @@ class CompositionPathsCreator {
         self.flatRenderer = FlatRenderer(glyphs: glyphs)
         self.naturalRenderer = NaturalRenderer(glyphs: glyphs)
         self.dotRenderer = DotRenderer(glyphs: glyphs)
+        self.restRenderer = RestRenderer(glyphs: glyphs)
     }
     
     func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double, leadingTies: [Tie]) -> [Path] {
@@ -64,7 +66,7 @@ class CompositionPathsCreator {
         let notePaths = noteRenderer.paths(forNotes: noteSequence.notes)
         let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeadDescriptions }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
-        let restPaths = RestRenderer().paths(forRests: noteSequence.rests)
+        let restPaths = restRenderer.paths(forRests: noteSequence.rests)
         
         let articulationMarkPaths = noteSequence.notes.map { note in
             note.articulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()

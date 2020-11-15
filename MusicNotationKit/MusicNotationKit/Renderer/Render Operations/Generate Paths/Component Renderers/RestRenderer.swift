@@ -10,6 +10,12 @@ import Foundation
 
 class RestRenderer {
     
+    private let glyphs: GlyphStore
+    
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
+    }
+    
     func paths(forRests rests: [Rest]) -> [Path] {
         return rests.compactMap(path(forRest:))
     }
@@ -37,10 +43,9 @@ class RestRenderer {
             path.drawStyle = .fill
             return path
         case .crotchet:
-            
-            var path = SymbolPaths.crotchetRest
-            path.translate(x: rest.position.x, y: 0)
-            return path
+            let glyph = glyphs.restQuarter
+            return glyph.path.translated(x: rest.position.x - glyph.width/2,
+                                         y: 0)
         case .tailed(let tailedRest):
             
             var path = self.path(forTailedRestStyle: tailedRest)
