@@ -22,16 +22,14 @@ extension ViewMapping {
     -> ViewMapping where T.Stride: BinaryFloatingPoint {
         
         return ViewMapping(for: T.self) { ref, context in
-            
-            print("MakeFloatView: \(Date())")
-            
+                        
             let state = context.state
             let properties = context.properties
             
             // State accessors
-            var showingPopover: Bool {
-                get { state.value[bool: "showEditPopover"] ?? false }
-                set { state.value["showEditPopover"] = newValue; print("showEditPopover: \(newValue)") }
+            var editing: Bool {
+                get { state.value[bool: "editing"] ?? false }
+                set { state.value["editing"] = newValue }
             }
             
             // Make bindings
@@ -43,14 +41,10 @@ extension ViewMapping {
                                             ref.value = value
                                         }
                                       })
-            let showingPopoverBinding = Binding(get: { showingPopover },
-                                                set: { showingPopover = $0 })
             
             let sliderView: AnyView
             if let range: ClosedRange<T> = properties.getRange() {
-                let slider = Slider(value: sliderBinding, in: range, onEditingChanged: { _ in
-                    context.reloadTrigger.reload()
-                })
+                let slider = Slider(value: sliderBinding, in: range)
                 sliderView = AnyView(slider)
             } else {
                 let slider = Slider(value: sliderBinding)
@@ -62,17 +56,15 @@ extension ViewMapping {
                     sliderView
                     
                     Button() {
-                        showingPopover = !showingPopover
+                        editing = !editing
                     } label: {
                         /*Image(systemName: "square.and.pencil") macos 11 only */
                         Text("Edit")
                     }
                 }
-                if showingPopover {
+                if editing {
                     HStack {
-                        TextField("Value", text: textBinding, onEditingChanged: { _ in
-                            context.reloadTrigger.reload()
-                        }, onCommit: {})
+                        TextField("Value", text: textBinding)
                         Spacer()
                     }
                 }
