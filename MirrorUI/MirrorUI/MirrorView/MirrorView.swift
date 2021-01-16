@@ -76,7 +76,7 @@ public struct MirrorView: View {
     
     public var body: some View {
         
-        List {
+        VStack(alignment: .leading) {
             
             ForEach(objectProperties) { property -> AnyView in
                 
@@ -97,7 +97,8 @@ public struct MirrorView: View {
                 }
                 return AnyView(stack)
             }
-        }
+            Spacer()
+        }.padding()
     }
     
     private func makeControlView(propertyName: String, displayName: String, state: Ref<[String: Any]>) -> AnyView {

@@ -32,15 +32,29 @@ extension ViewMapping {
                 set { state.value["editing"] = newValue }
             }
             
+            var editText: String? {
+                get { state.value[string: "text"] ?? String("\(ref.value)") }
+                set { state.value["text"] = newValue }
+            }
+            
             // Make bindings
             let sliderBinding = Binding(get: { ref.value },
                                         set: { ref.value = $0 })
-            let textBinding = Binding(get: { String("\(ref.value)") },
+           /* let textBinding = Binding(get: { String("\(ref.value)") },
                                       set: {
                                         if let value = stringInit($0) {
                                             ref.value = value
                                         }
-                                      })
+                                      })*/
+            let textBinding = Binding(get: { editText ?? "" },
+                                      set: { editText = $0 })
+            
+            func commitEditText() {
+                if let text = editText, let value = stringInit(text) {
+                    ref.value = value
+                }
+                editText = nil
+            }
             
             let sliderView: AnyView
             if let range: ClosedRange<T> = properties.getRange() {
@@ -64,7 +78,7 @@ extension ViewMapping {
                 }
                 if editing {
                     HStack {
-                        TextField("Value", text: textBinding)
+                        TextField("Value", text: textBinding, onCommit: { commitEditText() })
                         Spacer()
                     }
                 }
