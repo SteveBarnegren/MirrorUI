@@ -44,6 +44,11 @@ public struct MirrorView: View {
             property.viewStateStorage.didSet = { _ in
                 reloadTrigger.reload()
             }
+            if let didSetCaller = property.objectRef as? InternalDidSetCaller {
+                didSetCaller.internalDidSet = {
+                    reloadTrigger.reload()
+                }
+            }
         }
         
         self.objectProperties = objectProperties

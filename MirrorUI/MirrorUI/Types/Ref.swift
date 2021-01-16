@@ -7,13 +7,21 @@
 
 import Foundation
 
-public class Ref<T> {
+public class Ref<T>: InternalDidSetCaller {
     public var didSet: (T) -> Void = { _ in }
+    var internalDidSet: () -> Void = {}
     
     var value: T {
-        didSet { didSet(value) }
+        didSet {
+            internalDidSet()
+            didSet(value)
+        }
     }
     init(value: T) {
         self.value = value
     }
+}
+
+protocol InternalDidSetCaller: class {
+    var internalDidSet: () -> Void { get set }
 }
