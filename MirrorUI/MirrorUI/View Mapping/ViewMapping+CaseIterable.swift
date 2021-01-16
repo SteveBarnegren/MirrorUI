@@ -104,7 +104,7 @@ extension ViewMapping {
                 let aCase = cases[index]
                 Text("\(aCase.name)")
             }
-        }.pickerStyle(MenuPickerStyle())
+        }/*.pickerStyle(MenuPickerStyle()) macos 11 only */
         
         return AnyView(picker)
     }

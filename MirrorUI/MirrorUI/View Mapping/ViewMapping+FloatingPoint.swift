@@ -64,7 +64,8 @@ extension ViewMapping {
                     Button() {
                         showingPopover = !showingPopover
                     } label: {
-                        Image(systemName: "square.and.pencil")
+                        /*Image(systemName: "square.and.pencil") macos 11 only */
+                        Text("Edit")
                     }
                 }
                 if showingPopover {

@@ -16,6 +16,13 @@
 		676CC69225B34933008F1378 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC69125B34933008F1378 /* Settings.swift */; };
 		676CC69525B34B17008F1378 /* MirrorUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC66525B3484B008F1378 /* MirrorUI.framework */; };
 		676CC69625B34B17008F1378 /* MirrorUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC66525B3484B008F1378 /* MirrorUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		678C304A25B34EE80060D708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678C304925B34EE80060D708 /* AppDelegate.swift */; };
+		678C304C25B34EE80060D708 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678C304B25B34EE80060D708 /* ViewController.swift */; };
+		678C304E25B34EEA0060D708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 678C304D25B34EEA0060D708 /* Assets.xcassets */; };
+		678C305125B34EEA0060D708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 678C304F25B34EEA0060D708 /* Main.storyboard */; };
+		678C305C25B350400060D708 /* MirrorUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC66525B3484B008F1378 /* MirrorUI.framework */; };
+		678C305D25B350400060D708 /* MirrorUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC66525B3484B008F1378 /* MirrorUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		678C306525B3528C0060D708 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC69125B34933008F1378 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +54,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		678C305E25B350400060D708 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				678C305D25B350400060D708 /* MirrorUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +78,13 @@
 		676CC65825B347E9008F1378 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		676CC65F25B3484B008F1378 /* MirrorUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MirrorUI.xcodeproj; path = ../MirrorUI/MirrorUI.xcodeproj; sourceTree = "<group>"; };
 		676CC69125B34933008F1378 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		678C304725B34EE80060D708 /* MirrorUIExample_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MirrorUIExample_macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		678C304925B34EE80060D708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		678C304B25B34EE80060D708 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		678C304D25B34EEA0060D708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		678C305025B34EEA0060D708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		678C305225B34EEA0060D708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		678C305325B34EEA0060D708 /* MirrorUIExample_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MirrorUIExample_macOS.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +96,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		678C304425B34EE80060D708 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				678C305C25B350400060D708 /* MirrorUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,7 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				676CC65F25B3484B008F1378 /* MirrorUI.xcodeproj */,
+				676CC69125B34933008F1378 /* Settings.swift */,
 				676CC64925B347E6008F1378 /* MirrorUIExample */,
+				678C304825B34EE80060D708 /* MirrorUIExample_macOS */,
 				676CC64825B347E6008F1378 /* Products */,
 				676CC69425B34B17008F1378 /* Frameworks */,
 			);
@@ -88,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				676CC64725B347E6008F1378 /* MirrorUIExample.app */,
+				678C304725B34EE80060D708 /* MirrorUIExample_macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,7 +131,6 @@
 		676CC64925B347E6008F1378 /* MirrorUIExample */ = {
 			isa = PBXGroup;
 			children = (
-				676CC69125B34933008F1378 /* Settings.swift */,
 				676CC64A25B347E6008F1378 /* AppDelegate.swift */,
 				676CC64C25B347E6008F1378 /* SceneDelegate.swift */,
 				676CC64E25B347E6008F1378 /* ViewController.swift */,
@@ -123,6 +158,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		678C304825B34EE80060D708 /* MirrorUIExample_macOS */ = {
+			isa = PBXGroup;
+			children = (
+				678C304925B34EE80060D708 /* AppDelegate.swift */,
+				678C304B25B34EE80060D708 /* ViewController.swift */,
+				678C304D25B34EEA0060D708 /* Assets.xcassets */,
+				678C304F25B34EEA0060D708 /* Main.storyboard */,
+				678C305225B34EEA0060D708 /* Info.plist */,
+				678C305325B34EEA0060D708 /* MirrorUIExample_macOS.entitlements */,
+			);
+			path = MirrorUIExample_macOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,6 +192,24 @@
 			productReference = 676CC64725B347E6008F1378 /* MirrorUIExample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		678C304625B34EE80060D708 /* MirrorUIExample_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 678C305825B34EEA0060D708 /* Build configuration list for PBXNativeTarget "MirrorUIExample_macOS" */;
+			buildPhases = (
+				678C304325B34EE80060D708 /* Sources */,
+				678C304425B34EE80060D708 /* Frameworks */,
+				678C304525B34EE80060D708 /* Resources */,
+				678C305E25B350400060D708 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MirrorUIExample_macOS;
+			productName = MirrorUIExample_macOS;
+			productReference = 678C304725B34EE80060D708 /* MirrorUIExample_macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -154,6 +220,9 @@
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					676CC64625B347E6008F1378 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					678C304625B34EE80060D708 = {
 						CreatedOnToolsVersion = 12.2;
 					};
 				};
@@ -178,6 +247,7 @@
 			projectRoot = "";
 			targets = (
 				676CC64625B347E6008F1378 /* MirrorUIExample */,
+				678C304625B34EE80060D708 /* MirrorUIExample_macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -210,6 +280,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		678C304525B34EE80060D708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				678C304E25B34EEA0060D708 /* Assets.xcassets in Resources */,
+				678C305125B34EEA0060D708 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -221,6 +300,16 @@
 				676CC64B25B347E6008F1378 /* AppDelegate.swift in Sources */,
 				676CC69225B34933008F1378 /* Settings.swift in Sources */,
 				676CC64D25B347E6008F1378 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		678C304325B34EE80060D708 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				678C306525B3528C0060D708 /* Settings.swift in Sources */,
+				678C304C25B34EE80060D708 /* ViewController.swift in Sources */,
+				678C304A25B34EE80060D708 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +330,14 @@
 				676CC65625B347E9008F1378 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		678C304F25B34EEA0060D708 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				678C305025B34EEA0060D708 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -400,6 +497,52 @@
 			};
 			name = Release;
 		};
+		678C305425B34EEA0060D708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MirrorUIExample_macOS/MirrorUIExample_macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VAA3W4LPY2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = MirrorUIExample_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stevebarnegren.MirrorUIExample-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		678C305525B34EEA0060D708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MirrorUIExample_macOS/MirrorUIExample_macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VAA3W4LPY2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = MirrorUIExample_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stevebarnegren.MirrorUIExample-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -417,6 +560,15 @@
 			buildConfigurations = (
 				676CC65C25B347E9008F1378 /* Debug */,
 				676CC65D25B347E9008F1378 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		678C305825B34EEA0060D708 /* Build configuration list for PBXNativeTarget "MirrorUIExample_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				678C305425B34EEA0060D708 /* Debug */,
+				678C305525B34EEA0060D708 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
