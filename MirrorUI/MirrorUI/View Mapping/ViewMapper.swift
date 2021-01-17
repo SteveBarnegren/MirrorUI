@@ -82,9 +82,21 @@ class ViewMapping {
 extension ViewMapper {
     
     static let defaultMapper = ViewMapper(mappings: [
-                                           // ViewMapping.caseIterable,
-                                            ViewMapping.bool,
-                                            ViewMapping.double
+        
+        // BinaryFloatingPoint types
+        ViewMapping.bool,
+        ViewMapping.double,
+        // FixedWidthInteger types
+        ViewMapping.int,
+        ViewMapping.int16,
+        ViewMapping.int32,
+        ViewMapping.int64,
+        ViewMapping.int8,
+        ViewMapping.uInt,
+        ViewMapping.uInt16,
+        ViewMapping.uInt32,
+        ViewMapping.uInt64,
+        ViewMapping.uInt8,
     ])
     
 }

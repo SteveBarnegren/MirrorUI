@@ -24,6 +24,7 @@ class Settings {
     @MirrorUI(range: 0...20) var blurAmount = 5.3
     @MirrorUI var shadowOpacity = 4.6
     @MirrorUI var level = Level.low
+    @MirrorUI var numEnemies = UInt(4)
     
     init() {
         $shadowEnabled.didSet = {

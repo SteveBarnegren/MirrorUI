@@ -99,7 +99,7 @@ public struct MirrorView: View {
         
         guard let control = value as? MirrorControl else {
             assertionFailure("All properties should be mirror controls")
-            return makeNoMappingView()
+            return makeNoMappingView(name: propertyName)
         }
         
         let context = ViewMappingContext(
@@ -112,12 +112,12 @@ public struct MirrorView: View {
             return ViewMapping.makeCaseIterableView(ref: caseIterableRefProvider.caseIterableRef,
                                                     context: context)
         } else {
-            return viewMapper.createView(object: control.mirrorObject, context: context) ?? makeNoMappingView()
+            return viewMapper.createView(object: control.mirrorObject, context: context) ?? makeNoMappingView(name: propertyName)
         }
     }
     
-    private func makeNoMappingView() -> AnyView {
-        let text = Text("No mapping").foregroundColor(.gray).italic()
+    private func makeNoMappingView(name: String) -> AnyView {
+        let text = Text("No mapping (\(name))").foregroundColor(.gray).italic()
         return AnyView(text)
     }
 }
