@@ -22,7 +22,7 @@ class Settings {
     @MirrorUI var shadowEnabled = false
     @MirrorUI var blurEnabled = false
     @MirrorUI(range: 0...20) var blurAmount = 5.3
-    var someOtherProperty = false
+    @MirrorUI var shadowOpacity = 4.6
     @MirrorUI var level = Level.low
     
     init() {

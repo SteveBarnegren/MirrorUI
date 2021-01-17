@@ -26,26 +26,14 @@ extension ViewMapping {
             let state = context.state
             let properties = context.properties
             
-            // State accessors
-            var editing: Bool {
-                get { state.value[bool: "editing"] ?? false }
-                set { state.value["editing"] = newValue }
-            }
-            
             var editText: String? {
                 get { state.value[string: "text"] ?? String("\(ref.value)") }
                 set { state.value["text"] = newValue }
             }
             
             // Make bindings
-            let sliderBinding = Binding(get: { ref.value },
-                                        set: { ref.value = $0 })
-           /* let textBinding = Binding(get: { String("\(ref.value)") },
-                                      set: {
-                                        if let value = stringInit($0) {
-                                            ref.value = value
-                                        }
-                                      })*/
+            let numericBinding = Binding(get: { ref.value },
+                                         set: { ref.value = $0 })
             let textBinding = Binding(get: { editText ?? "" },
                                       set: { editText = $0 })
             
@@ -56,36 +44,76 @@ extension ViewMapping {
                 editText = nil
             }
             
-            let sliderView: AnyView
+            // Create ranged or non-ranged view
             if let range: ClosedRange<T> = properties.getRange() {
-                let slider = Slider(value: sliderBinding, in: range)
-                sliderView = AnyView(slider)
+               return makeRangedFloatingPointView(context: context,
+                                                  numericBinding: numericBinding,
+                                                  textBinding: textBinding,
+                                                  range: range,
+                                                  commitEditText: commitEditText).asAnyView()
             } else {
-                let slider = Slider(value: sliderBinding)
-                sliderView = AnyView(slider)
+                return makeFloatingPointView(context: context,
+                                             textBinding: textBinding,
+                                             commitEditText: commitEditText).asAnyView()
+                
             }
-            
-            let stack = VStack {
-                HStack {
-                    sliderView
-                    
-                    Button() {
-                        editing = !editing
-                    } label: {
-                        Image(systemName: "pencil")
-                    }
-                }
-                if editing {
-                    HStack {
-                        TextField("Value", text: textBinding, onCommit: { commitEditText() })
-                        Spacer()
-                    }
-                }
-            }
-            
-            return AnyView(stack)
         }
     }
+    
+   
+}
+
+fileprivate func makeFloatingPointView(context: ViewMappingContext,
+                                       textBinding: Binding<String>,
+                                       commitEditText: @escaping () -> Void) -> some View {
+    
+    return HStack {
+        Text(context.propertyName)
+        TextField("Value", text: textBinding, onCommit: { commitEditText() })
+    }
+}
+
+fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: ViewMappingContext,
+                                                                     numericBinding: Binding<T>,
+                                                                     textBinding: Binding<String>,
+                                                                     range: ClosedRange<T>,
+                                                                     commitEditText: @escaping () -> Void) -> some View where T.Stride: BinaryFloatingPoint {
+    
+    // State accessors
+    let state = context.state
+    var editing: Bool {
+        get { state.value[bool: "editing"] ?? false }
+        set { state.value["editing"] = newValue }
+    }
+    
+    
+    let stack = VStack {
+        HStack {
+            Slider(value: numericBinding, in: range)
+            
+            Button() {
+                editing = !editing
+            } label: {
+                Image(systemName: "pencil")
+            }
+        }
+        if editing {
+            HStack {
+                TextField("Value", text: textBinding, onCommit: { commitEditText() })
+                Spacer()
+            }
+        }
+    }
+    
+    return stack
+}
+
+extension SwiftUI.View {
+    
+    func asAnyView() -> AnyView {
+        return AnyView(self)
+    }
+    
 }
 
 
