@@ -72,8 +72,7 @@ extension ViewMapping {
                     Button() {
                         editing = !editing
                     } label: {
-                        /*Image(systemName: "square.and.pencil") macos 11 only */
-                        Text("Edit")
+                        Image(systemName: "pencil")
                     }
                 }
                 if editing {

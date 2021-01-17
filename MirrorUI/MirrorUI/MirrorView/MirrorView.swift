@@ -13,7 +13,7 @@ struct ObjectProperty: Identifiable {
     let displayName: String
     var viewStateStorage: Ref<[String: Any]> = Ref(value: [:])
     var objectRef: AnyObject
-    var viewDisplaysTitle = false
+    var isEnum: Bool
 }
 
 protocol MirrorControl {
@@ -66,7 +66,8 @@ public struct MirrorView: View {
             let property = ObjectProperty(
                 name: label,
                 displayName: PropertyNameFormatter.displayName(forPropertyName: label),
-                objectRef: mirrorControl.mirrorObject)
+                objectRef: mirrorControl.mirrorObject,
+                isEnum: (mirrorControl is CaseIterableRefProvider))
             
             properties.append(property)
         }
@@ -87,7 +88,7 @@ public struct MirrorView: View {
                 )
                 
                 let stack = VStack {
-                    if !viewMapper.mappingDisplaysTitle(forObject: property.objectRef) {
+                    if !property.isEnum && !viewMapper.mappingDisplaysTitle(forObject: property.objectRef) {
                         HStack {
                             Text(property.displayName)
                             Spacer()

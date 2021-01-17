@@ -34,6 +34,10 @@ class CaseIterableRef {
         get { getByIndex() }
         set { setByIndex(newValue) }
     }
+    
+    var selectedCase: Case {
+        return allCases[valueIndex]
+    }
 
     init<T: CaseIterable & Equatable>(_ object: Ref<T>) {
         
@@ -98,15 +102,34 @@ extension ViewMapping {
                                         ref.valueIndex = $0
                                         reloadTrigger.reload()
                                        })
-                
-        let picker = Picker(selection: selectionBinding, label: Text("Select")) {
+        
+        #if os(macOS)
+        
+        let picker = Picker(selection: selectionBinding, label: Text(context.propertyName)) {
             ForEach(0..<cases.count) { index in
                 let aCase = cases[index]
                 Text("\(aCase.name)")
             }
-        }/*.pickerStyle(MenuPickerStyle()) macos 11 only */
-        
+        }.pickerStyle(MenuPickerStyle())
         return AnyView(picker)
+        
+        #else
+        
+        let picker = Picker(selection: selectionBinding, label: Text(ref.selectedCase.name)) {
+            ForEach(0..<cases.count) { index in
+                let aCase = cases[index]
+                Text("\(aCase.name)")
+            }
+        }.pickerStyle(MenuPickerStyle())
+        
+        let pickerAndTitle = HStack {
+            Text(context.propertyName)
+            picker
+        }.animation(.none)
+        
+        return AnyView(pickerAndTitle)
+        
+        #endif
     }
 }
 
