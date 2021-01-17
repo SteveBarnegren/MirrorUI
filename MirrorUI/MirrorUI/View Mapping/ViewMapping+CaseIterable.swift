@@ -82,13 +82,9 @@ extension ViewMapping {
     static func makeCaseIterableView(ref: CaseIterableRef, context: ViewMappingContext) -> AnyView {
         
         let cases = ref.allCases
-        let reloadTrigger = context.reloadTrigger
        
         let selectionBinding = Binding(get: { ref.valueIndex },
-                                       set: {
-                                        ref.valueIndex = $0
-                                        reloadTrigger.reload()
-                                       })
+                                       set: { ref.valueIndex = $0 })
         
         #if os(macOS)
         

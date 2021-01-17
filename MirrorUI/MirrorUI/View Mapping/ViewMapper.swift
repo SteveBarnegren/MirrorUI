@@ -48,7 +48,6 @@ struct ViewMappingContext {
     var propertyName: String
     var properties: ControlProperties
     var state: Ref<[String: Any]>
-    var reloadTrigger: ReloadTrigger
 }
 
 class ViewMapping {

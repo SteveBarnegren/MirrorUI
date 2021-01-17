@@ -105,8 +105,7 @@ public struct MirrorView: View {
         let context = ViewMappingContext(
             propertyName: displayName,
             properties: control.properties,
-            state: state,
-            reloadTrigger: self.reloadTrigger
+            state: state
         )
         
         if let caseIterableRefProvider = control as? CaseIterableRefProvider {
