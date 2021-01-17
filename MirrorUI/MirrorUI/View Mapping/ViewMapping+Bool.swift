@@ -19,7 +19,6 @@ extension ViewMapping {
             let toggle = Toggle(context.propertyName, isOn: binding)
             return AnyView(toggle)
         }
-        mapping.displaysTitle = true
         return mapping
     }()
 }

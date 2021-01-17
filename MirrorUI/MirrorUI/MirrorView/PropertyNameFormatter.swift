@@ -23,10 +23,10 @@ class PropertyNameFormatter {
         var index = propertyName.startIndex
         
         func nextChar() -> Character? {
-            let nextIndex = propertyName.index(after: index)
-            if nextIndex < propertyName.endIndex {
-                index = nextIndex
-                return propertyName[index]
+            if index < propertyName.endIndex {
+                let value = propertyName[index]
+                index = propertyName.index(after: index)
+                return value
             } else {
                 return nil
             }
@@ -36,8 +36,10 @@ class PropertyNameFormatter {
         var lastWasCapital = false
         
         while let char = nextChar() {
-            if char == "_" && !displayName.isEmpty {
-                displayName += " "
+            if char == "_" {
+                if !displayName.isEmpty {
+                    displayName += " "
+                }
             } else if char.isLetter && char.isUppercase {
                 if !displayName.isEmpty && !lastWasCapital {
                     displayName.append(" ")

@@ -44,8 +44,9 @@ class CaseIterableRef {
         var cases = [Case]()
         
         for c in type(of: object.value).allCases {
+            let caseName = "\(c)"
             cases.append(
-                Case(value: c, name: "\(c)")
+                Case(value: c, name: PropertyNameFormatter.displayName(forPropertyName: caseName))
             )
         }
         
@@ -77,21 +78,7 @@ class CaseIterableRef {
 }
 
 extension ViewMapping {
-    /*
-    static func makeCaseIterableView(ref: CaseIterableRef, context: ViewMappingContext) -> AnyView {
-        
-        let cases = ref.allCases
-        
-        let view = VStack {
-            ForEach(0..<cases.count) { index in
-                let aCase = cases[index]
-                Text("\(aCase.name)")
-            }
-        }
-        
-        return AnyView(view)
-    }
-    */
+  
     static func makeCaseIterableView(ref: CaseIterableRef, context: ViewMappingContext) -> AnyView {
         
         let cases = ref.allCases

@@ -24,15 +24,6 @@ class ViewMapper {
         mappings.append(mapping)
     }
     
-    func mappingDisplaysTitle(forObject object: AnyObject) -> Bool {
-        for mapping in mappings {
-            if mapping.canCreateView(forObject: object) {
-                return mapping.displaysTitle
-            }
-        }
-        return false
-    }
-    
     func canCreateView(forObject object: AnyObject) -> Bool {
         for mapping in mappings {
             if mapping.canCreateView(forObject: object) {
@@ -61,10 +52,6 @@ struct ViewMappingContext {
 }
 
 class ViewMapping {
-    
-    /// If this mapping displays the title. If set to false then the title of the
-    /// control will be displayed above the view
-    var displaysTitle = false
     
     private var viewCreator: (AnyObject, ViewMappingContext) -> AnyView?
     private var canCreate: (AnyObject) -> Bool

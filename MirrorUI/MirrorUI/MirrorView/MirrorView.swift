@@ -81,22 +81,12 @@ public struct MirrorView: View {
             
             ForEach(objectProperties) { property -> AnyView in
                 
-                let controlView = self.makeControlView(
+                self.makeControlView(
                     propertyName: property.name,
                     displayName: property.displayName,
                     state: property.viewStateStorage
                 )
-                
-                let stack = VStack {
-                    if !property.isEnum && !viewMapper.mappingDisplaysTitle(forObject: property.objectRef) {
-                        HStack {
-                            Text(property.displayName)
-                            Spacer()
-                        }
-                    }
-                    controlView
-                }
-                return AnyView(stack)
+        
             }
             Spacer()
         }.padding()
