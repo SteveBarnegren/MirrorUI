@@ -11,16 +11,22 @@ import SwiftUI
 
 class ViewController: UIViewController {
     
-    let settings = Settings()
+    private let settings = Settings()
+    private var settingsViewController: UIViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    @IBAction private func showSettingsButtonPressed() {
+        
         let mirrorView = MirrorView(object: settings)
         let viewController = UIHostingController(rootView: mirrorView)
-        present(viewController, animated: true, completion: nil)
+        view.addSubview(viewController.view)
+        addChild(viewController)
+        settingsViewController = viewController
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        settingsViewController.view.frame = view.bounds
     }
 
 

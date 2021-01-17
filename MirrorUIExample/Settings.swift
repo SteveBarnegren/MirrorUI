@@ -16,9 +16,7 @@ enum Level: CaseIterable {
 }
 
 class Settings {
-    
-    static let shared = Settings()
-    
+        
     @MirrorUI var shadowEnabled = false
     @MirrorUI var blurEnabled = false
     @MirrorUI(range: 0...20) var blurAmount = 5.3
