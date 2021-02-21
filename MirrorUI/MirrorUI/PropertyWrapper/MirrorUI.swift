@@ -15,7 +15,7 @@ import Foundation
     
     public var didSet: (T) -> Void {
         get { ref.didSet }
-        set { ref.didSet = newValue; print("Ref was set") }
+        set { ref.didSet = newValue }
     }
     
     var ref: Ref<T>
@@ -26,10 +26,6 @@ import Foundation
 
     public init(wrappedValue: T) {
         self.ref = Ref(value: wrappedValue)
-    }
-    
-    public var projectedValue: Ref<T> {
-        return ref
     }
 }
 
