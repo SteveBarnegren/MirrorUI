@@ -23,9 +23,8 @@ protocol MirrorControl {
 }
 
 class ReloadTrigger: ObservableObject {
-    @Published var reloadToggle = false
     func reload() {
-        reloadToggle.toggle()
+        self.objectWillChange.send()
     }
 }
 

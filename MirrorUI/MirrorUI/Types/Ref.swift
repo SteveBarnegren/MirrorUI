@@ -7,8 +7,8 @@
 
 import Foundation
 
-public class Ref<T>: InternalDidSetCaller {
-    public var didSet: (T) -> Void = { _ in }
+class Ref<T>: InternalDidSetCaller {
+    var didSet: (T) -> Void = { _ in }
     var internalDidSet: () -> Void = {}
     
     var value: T {
