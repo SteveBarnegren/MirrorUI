@@ -77,7 +77,7 @@ public struct MirrorView: View {
     
     public var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             
             ForEach(objectProperties) { property -> AnyView in
                 
