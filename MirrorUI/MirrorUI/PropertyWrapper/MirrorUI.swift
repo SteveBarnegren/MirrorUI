@@ -8,7 +8,9 @@
 import Foundation
 
 @propertyWrapper public struct MirrorUI<T> {
-    
+
+    public var name: String?
+
     var properties = ControlProperties()
     
     public var didSet: (T) -> Void {

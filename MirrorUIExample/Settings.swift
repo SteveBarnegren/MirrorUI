@@ -15,6 +15,9 @@ class Settings {
     @MirrorUI var startingHealth = 4.6
     @MirrorUI(range: 0...20) var damage = 5.3
     @MirrorUI var level = Level.low
+
+    init() {
+    }
 }
 
 struct MirrorControlsView_Previews: PreviewProvider {

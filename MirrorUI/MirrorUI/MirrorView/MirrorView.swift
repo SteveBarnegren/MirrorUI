@@ -19,6 +19,7 @@ struct ObjectProperty: Identifiable {
 protocol MirrorControl {
     var mirrorObject: AnyObject { get }
     var properties: ControlProperties { get }
+    var name: String? { get }
 }
 
 class ReloadTrigger: ObservableObject {
@@ -65,7 +66,7 @@ public struct MirrorView: View {
             guard let label = child.label else { continue }
             let property = ObjectProperty(
                 name: label,
-                displayName: PropertyNameFormatter.displayName(forPropertyName: label),
+                displayName: mirrorControl.name ?? PropertyNameFormatter.displayName(forPropertyName: label),
                 objectRef: mirrorControl.mirrorObject,
                 isEnum: (mirrorControl is CaseIterableRefProvider))
             
