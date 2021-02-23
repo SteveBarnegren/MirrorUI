@@ -12,7 +12,8 @@ import Foundation
     public var name: String?
 
     var properties = ControlProperties()
-    
+    var valueModifiers = [String: (T) -> T]()
+
     public var didSet: (T) -> Void {
         get { ref.didSet }
         set { ref.didSet = newValue }
@@ -28,6 +29,8 @@ import Foundation
         self.ref = Ref(value: wrappedValue)
     }
 }
+
+
 
 extension MirrorUI: MirrorControl {
     

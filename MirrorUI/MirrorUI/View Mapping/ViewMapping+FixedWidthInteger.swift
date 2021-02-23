@@ -53,9 +53,7 @@ extension ViewMapping {
     static func makeFixedWidthIntegerMapping<T: FixedWidthInteger>(forType: T.Type, stringInit: @escaping (String) -> T?) -> ViewMapping {
         
         return ViewMapping(for: T.self) { ref, context in
-            
-            
-                        
+
             let state = context.state
             
             var editText: String? {

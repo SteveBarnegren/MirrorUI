@@ -9,7 +9,7 @@ import Foundation
 
 struct ControlProperties {
     
-    private var storage = [String: Any]()
+    var storage = [String: Any]()
     
     // Range
     mutating func set<T>(range: ClosedRange<T>?) {
