@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		674E7CBB25E59659003EE285 /* ViewMapping+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */; };
 		676CC62C25B34775008F1378 /* MirrorUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC62225B34775008F1378 /* MirrorUI.framework */; };
 		676CC63125B34775008F1378 /* MirrorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC63025B34775008F1378 /* MirrorUITests.swift */; };
 		676CC63325B34775008F1378 /* MirrorUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 676CC62525B34775008F1378 /* MirrorUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+Color.swift"; sourceTree = "<group>"; };
 		676CC62225B34775008F1378 /* MirrorUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MirrorUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		676CC62525B34775008F1378 /* MirrorUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MirrorUI.h; sourceTree = "<group>"; };
 		676CC62625B34775008F1378 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				676CC67025B34888008F1378 /* ViewMapper.swift */,
 				676CC67125B34888008F1378 /* ViewMapping+BinaryFloatingPoint.swift */,
 				67AF77AE25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift */,
+				674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */,
 			);
 			path = "View Mapping";
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				676CC67D25B348A8008F1378 /* MirrorView.swift in Sources */,
 				676CC68125B348A8008F1378 /* ViewMapping+CaseIterable.swift in Sources */,
 				676CC68A25B348C4008F1378 /* PropertyRef.swift in Sources */,
+				674E7CBB25E59659003EE285 /* ViewMapping+Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

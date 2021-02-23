@@ -97,6 +97,8 @@ extension ViewMapper {
         ViewMapping.uInt32,
         ViewMapping.uInt64,
         ViewMapping.uInt8,
+        // SwiftUI types
+        ViewMapping.color
     ])
     
 }
