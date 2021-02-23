@@ -1,5 +1,5 @@
 //
-//  AutoControl+Float.swift
+//  MirrorUI+Float.swift
 //  MirrorControlsExample
 //
 //  Created by Steve Barnegren on 11/01/2021.

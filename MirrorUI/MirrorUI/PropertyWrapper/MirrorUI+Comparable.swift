@@ -1,5 +1,5 @@
 //
-//  AutoControl+Comparable.swift
+//  MirrorUI+Comparable.swift
 //  MirrorUI
 //
 //  Created by Steve Barnegren on 21/02/2021.

@@ -7,6 +7,14 @@
 
 import Foundation
 
+/// Protocol that the MirrorUI property wrapper conforms to. This is useful for
+/// erasing the generic type of the property wrapper.
+protocol MirrorControl {
+    var mirrorObject: AnyObject { get }
+    var properties: ControlProperties { get }
+    var name: String? { get }
+}
+
 @propertyWrapper public struct MirrorUI<T> {
 
     public var name: String?

@@ -16,12 +16,6 @@ struct ObjectProperty: Identifiable {
     var isEnum: Bool
 }
 
-protocol MirrorControl {
-    var mirrorObject: AnyObject { get }
-    var properties: ControlProperties { get }
-    var name: String? { get }
-}
-
 class ReloadTrigger: ObservableObject {
     func reload() {
         self.objectWillChange.send()
