@@ -47,7 +47,7 @@ class ViewMapper {
 struct ViewMappingContext {
     var propertyName: String
     var properties: ControlProperties
-    var state: Ref<[String: Any]>
+    var state: PropertyRef<[String: Any]>
 }
 
 class ViewMapping {
@@ -56,9 +56,9 @@ class ViewMapping {
     private var canCreate: (AnyObject) -> Bool
 
     
-    init<T>(for: T.Type, makeView: @escaping (Ref<T>, ViewMappingContext) -> AnyView) {
+    init<T>(for: T.Type, makeView: @escaping (PropertyRef<T>, ViewMappingContext) -> AnyView) {
         viewCreator = { input, context in
-            guard let ref = input as? Ref<T> else {
+            guard let ref = input as? PropertyRef<T> else {
                 return nil
             }
             
@@ -66,7 +66,7 @@ class ViewMapping {
         }
         
         canCreate = { input in
-            return input is Ref<T>
+            return input is PropertyRef<T>
         }
     }
     

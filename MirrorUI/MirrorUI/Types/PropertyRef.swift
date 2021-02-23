@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-class Ref<T>: InternalDidSetCaller {
+class PropertyRef<T>: InternalDidSetCaller {
     var didSet: (T) -> Void = { _ in }
     var internalDidSet: () -> Void = {}
     private var valueModifiers = [String: (T) -> T]()

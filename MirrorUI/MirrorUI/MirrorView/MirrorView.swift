@@ -11,7 +11,7 @@ struct ObjectProperty: Identifiable {
     var id: String { name }
     let name: String
     let displayName: String
-    var viewStateStorage: Ref<[String: Any]> = Ref(value: [:])
+    var viewStateStorage: PropertyRef<[String: Any]> = PropertyRef(value: [:])
     var objectRef: AnyObject
     var isEnum: Bool
 }
@@ -86,7 +86,7 @@ public struct MirrorView: View {
         }.padding()
     }
     
-    private func makeControlView(propertyName: String, displayName: String, state: Ref<[String: Any]>) -> AnyView {
+    private func makeControlView(propertyName: String, displayName: String, state: PropertyRef<[String: Any]>) -> AnyView {
          let value = Mirror(reflecting: object).children
             .first { $0.label == propertyName }
             .flatMap { $0.value }!

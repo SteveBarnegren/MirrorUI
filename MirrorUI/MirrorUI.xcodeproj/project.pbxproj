@@ -19,7 +19,7 @@
 		676CC68425B348AD008F1378 /* MirrorUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC67425B34888008F1378 /* MirrorUI.swift */; };
 		676CC68525B348AD008F1378 /* MirrorUI+FloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC67525B34888008F1378 /* MirrorUI+FloatingPoint.swift */; };
 		676CC68625B348AD008F1378 /* ControlProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC67625B34888008F1378 /* ControlProperties.swift */; };
-		676CC68A25B348C4008F1378 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC68925B348C4008F1378 /* Ref.swift */; };
+		676CC68A25B348C4008F1378 /* PropertyRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC68925B348C4008F1378 /* PropertyRef.swift */; };
 		676CC6A325B34CBC008F1378 /* Dictionary+TypedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC69925B34C50008F1378 /* Dictionary+TypedSubscript.swift */; };
 		67984BC425E2D1A600A1FE9E /* MirrorUI+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67984BC325E2D1A600A1FE9E /* MirrorUI+Comparable.swift */; };
 		67AF77AF25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AF77AE25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift */; };
@@ -51,7 +51,7 @@
 		676CC67425B34888008F1378 /* MirrorUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorUI.swift; sourceTree = "<group>"; };
 		676CC67525B34888008F1378 /* MirrorUI+FloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorUI+FloatingPoint.swift"; sourceTree = "<group>"; };
 		676CC67625B34888008F1378 /* ControlProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlProperties.swift; sourceTree = "<group>"; };
-		676CC68925B348C4008F1378 /* Ref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
+		676CC68925B348C4008F1378 /* PropertyRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyRef.swift; sourceTree = "<group>"; };
 		676CC69925B34C50008F1378 /* Dictionary+TypedSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+TypedSubscript.swift"; sourceTree = "<group>"; };
 		67984BC325E2D1A600A1FE9E /* MirrorUI+Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorUI+Comparable.swift"; sourceTree = "<group>"; };
 		67AF77AE25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewMapping+FixedWidthInteger.swift"; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		676CC6A025B34C96008F1378 /* Types */ = {
 			isa = PBXGroup;
 			children = (
-				676CC68925B348C4008F1378 /* Ref.swift */,
+				676CC68925B348C4008F1378 /* PropertyRef.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -285,7 +285,7 @@
 				676CC68525B348AD008F1378 /* MirrorUI+FloatingPoint.swift in Sources */,
 				676CC67D25B348A8008F1378 /* MirrorView.swift in Sources */,
 				676CC68125B348A8008F1378 /* ViewMapping+CaseIterable.swift in Sources */,
-				676CC68A25B348C4008F1378 /* Ref.swift in Sources */,
+				676CC68A25B348C4008F1378 /* PropertyRef.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

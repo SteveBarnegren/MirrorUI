@@ -27,14 +27,14 @@ protocol MirrorControl {
         set { ref.didSet = newValue }
     }
     
-    var ref: Ref<T>
+    var ref: PropertyRef<T>
     
     public var wrappedValue: T {
         ref.value
     }
 
     public init(wrappedValue: T) {
-        self.ref = Ref(value: wrappedValue)
+        self.ref = PropertyRef(value: wrappedValue)
     }
 }
 

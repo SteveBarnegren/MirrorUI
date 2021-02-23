@@ -39,7 +39,7 @@ class CaseIterableRef {
         return allCases[valueIndex]
     }
 
-    init<T: CaseIterable & Equatable>(_ object: Ref<T>) {
+    init<T: CaseIterable & Equatable>(_ object: PropertyRef<T>) {
         
         var cases = [Case]()
         
