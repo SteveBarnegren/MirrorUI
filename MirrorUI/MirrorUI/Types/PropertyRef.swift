@@ -19,6 +19,7 @@ class PropertyRef<T>: InternalDidSetCaller {
             didSet(value)
         }
     }
+
     init(value: T) {
         self.value = value
     }

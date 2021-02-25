@@ -15,7 +15,7 @@ class NumericEntryBinder {
 
     private let _commit: () -> Void
 
-    convenience init<T>(state: PropertyRef<[String: Any]>, ref: PropertyRef<T>) where T: StringRepresentable {
+    convenience init<T>(state: Ref<[String: Any]>, ref: PropertyRef<T>) where T: StringRepresentable {
 
         self.init(state: state,
                   get: { ref.value },
@@ -23,7 +23,7 @@ class NumericEntryBinder {
                   stateKey: "text")
     }
 
-    convenience init<T, F>(state: PropertyRef<[String: Any]>, ref: PropertyRef<T>, fieldPath: WritableKeyPath<T, F>) where F: StringRepresentable {
+    convenience init<T, F>(state: Ref<[String: Any]>, ref: PropertyRef<T>, fieldPath: WritableKeyPath<T, F>) where F: StringRepresentable {
 
         self.init(state: state,
                   get: { ref.value[keyPath: fieldPath] },
@@ -31,7 +31,7 @@ class NumericEntryBinder {
                   stateKey: "text\(fieldPath.hashValue)")
     }
 
-    init<F>(state: PropertyRef<[String: Any]>,
+    init<F>(state: Ref<[String: Any]>,
             get: @escaping () -> F,
             set: @escaping (F) -> Void,
             stateKey: String) where F: StringRepresentable {

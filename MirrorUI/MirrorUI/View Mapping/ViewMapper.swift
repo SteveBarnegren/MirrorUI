@@ -47,7 +47,7 @@ class ViewMapper {
 struct ViewMappingContext {
     var propertyName: String
     var properties: ControlProperties
-    var state: PropertyRef<[String: Any]>
+    var state: Ref<[String: Any]>
 }
 
 class ViewMapping {
