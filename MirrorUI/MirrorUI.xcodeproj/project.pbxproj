@@ -27,6 +27,7 @@
 		67AF77AF25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AF77AE25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift */; };
 		67B8A30B25E82E2400882274 /* StringRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8A30A25E82E2400882274 /* StringRepresentable.swift */; };
 		67B8A31125E82EA800882274 /* NumericEntryBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8A31025E82EA800882274 /* NumericEntryBinder.swift */; };
+		67B8A31525E839B400882274 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8A31425E839B400882274 /* View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		67AF77AE25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewMapping+FixedWidthInteger.swift"; sourceTree = "<group>"; };
 		67B8A30A25E82E2400882274 /* StringRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringRepresentable.swift; sourceTree = "<group>"; };
 		67B8A31025E82EA800882274 /* NumericEntryBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericEntryBinder.swift; sourceTree = "<group>"; };
+		67B8A31425E839B400882274 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				676CC69925B34C50008F1378 /* Dictionary+TypedSubscript.swift */,
+				67B8A31425E839B400882274 /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				676CC68525B348AD008F1378 /* MirrorUI+FloatingPoint.swift in Sources */,
 				676CC67D25B348A8008F1378 /* MirrorView.swift in Sources */,
 				676CC68125B348A8008F1378 /* ViewMapping+CaseIterable.swift in Sources */,
+				67B8A31525E839B400882274 /* View.swift in Sources */,
 				674E7CBF25E59886003EE285 /* ViewMapping+Vector2.swift in Sources */,
 				676CC68A25B348C4008F1378 /* PropertyRef.swift in Sources */,
 				674E7CBB25E59659003EE285 /* ViewMapping+Color.swift in Sources */,

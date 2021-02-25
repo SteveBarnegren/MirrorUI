@@ -13,7 +13,7 @@ class Settings {
 
     @MirrorUI var blurEnabled = false
     @MirrorUI var lives = 4
-    @MirrorUI var startingHealth = 4.6
+    @MirrorUI var startingHealth = CGFloat(4.6)
     @MirrorUI(range: 0...20) var damage = 5.3
     @MirrorUI var level = Level.low
     @MirrorUI var bgColor = Color.red

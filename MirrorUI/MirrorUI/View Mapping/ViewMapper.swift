@@ -100,6 +100,7 @@ extension ViewMapper {
             // SwiftUI types
             ViewMapping.color,
             // CoreGraphics types
+            ViewMapping.cgFloat,
             ViewMapping.cgPoint,
             ViewMapping.cgSize,
         ]

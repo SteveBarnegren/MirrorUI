@@ -17,6 +17,10 @@ extension ViewMapping {
     static let float: ViewMapping = {
         return makeFloatingPointMapping(forType: Float.self, stringInit: Float.init)
     }()
+
+    static let cgFloat: ViewMapping = {
+        return makeFloatingPointMapping(forType: CGFloat.self, stringInit: CGFloat.init)
+    }()
     
     static func makeFloatingPointMapping<T: BinaryFloatingPoint>(forType: T.Type, stringInit: @escaping (String) -> T?)
     -> ViewMapping where T.Stride: BinaryFloatingPoint {
@@ -107,13 +111,3 @@ fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: Vi
     
     return stack
 }
-
-extension SwiftUI.View {
-    
-    func asAnyView() -> AnyView {
-        return AnyView(self)
-    }
-    
-}
-
-
