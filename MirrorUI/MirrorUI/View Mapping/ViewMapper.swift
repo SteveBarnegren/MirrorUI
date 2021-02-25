@@ -55,7 +55,6 @@ class ViewMapping {
     private var viewCreator: (AnyObject, ViewMappingContext) -> AnyView?
     private var canCreate: (AnyObject) -> Bool
 
-    
     init<T>(for: T.Type, makeView: @escaping (PropertyRef<T>, ViewMappingContext) -> AnyView) {
         viewCreator = { input, context in
             guard let ref = input as? PropertyRef<T> else {
@@ -81,24 +80,38 @@ class ViewMapping {
 
 extension ViewMapper {
     
-    static let defaultMapper = ViewMapper(mappings: [
-        
-        // BinaryFloatingPoint types
-        ViewMapping.bool,
-        ViewMapping.double,
-        // FixedWidthInteger types
-        ViewMapping.int,
-        ViewMapping.int16,
-        ViewMapping.int32,
-        ViewMapping.int64,
-        ViewMapping.int8,
-        ViewMapping.uInt,
-        ViewMapping.uInt16,
-        ViewMapping.uInt32,
-        ViewMapping.uInt64,
-        ViewMapping.uInt8,
-        // SwiftUI types
-        ViewMapping.color
-    ])
+    static let defaultMapper = { () -> ViewMapper in
+
+        var mappings = [
+            // BinaryFloatingPoint types
+            ViewMapping.bool,
+            ViewMapping.double,
+            // FixedWidthInteger types
+            ViewMapping.int,
+            ViewMapping.int16,
+            ViewMapping.int32,
+            ViewMapping.int64,
+            ViewMapping.int8,
+            ViewMapping.uInt,
+            ViewMapping.uInt16,
+            ViewMapping.uInt32,
+            ViewMapping.uInt64,
+            ViewMapping.uInt8,
+            // SwiftUI types
+            ViewMapping.color,
+            // CoreGraphics types
+            ViewMapping.cgPoint,
+            ViewMapping.cgSize,
+        ]
+
+        #if os(macOS)
+        mappings += [
+            ViewMapping.nsPoint,
+            ViewMapping.nsSize
+        ]
+        #endif
+
+        return ViewMapper(mappings: mappings)
+    }()
     
 }

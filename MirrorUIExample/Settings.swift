@@ -1,6 +1,7 @@
 import Foundation
 import MirrorUI
 import SwiftUI
+import CoreGraphics
 
 enum Level: CaseIterable {
     case low
@@ -16,6 +17,10 @@ class Settings {
     @MirrorUI(range: 0...20) var damage = 5.3
     @MirrorUI var level = Level.low
     @MirrorUI var bgColor = Color.red
+    #if os(macOS)
+    @MirrorUI var startPoint = NSPoint(x: 3, y: 5)
+    @MirrorUI var bulletSize = NSSize(width: 2, height: 6)
+    #endif
 
     init() {
     }
