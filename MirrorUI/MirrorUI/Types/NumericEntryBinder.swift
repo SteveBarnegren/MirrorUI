@@ -15,17 +15,36 @@ class NumericEntryBinder {
 
     private let _commit: () -> Void
 
-    init<T, F>(state: PropertyRef<[String: Any]>, ref: PropertyRef<T>, fieldPath: WritableKeyPath<T, F>) where F: StringRepresentable {
+    convenience init<T>(state: PropertyRef<[String: Any]>, ref: PropertyRef<T>) where T: StringRepresentable {
 
-        let textKey = "text\(fieldPath.hashValue)"
+        self.init(state: state,
+                  get: { ref.value },
+                  set: {  ref.value = $0 },
+                  stateKey: "text")
+    }
+
+    convenience init<T, F>(state: PropertyRef<[String: Any]>, ref: PropertyRef<T>, fieldPath: WritableKeyPath<T, F>) where F: StringRepresentable {
+
+        self.init(state: state,
+                  get: { ref.value[keyPath: fieldPath] },
+                  set: {  ref.value[keyPath: fieldPath] = $0 },
+                  stateKey: "text\(fieldPath.hashValue)")
+    }
+
+    init<F>(state: PropertyRef<[String: Any]>,
+            get: @escaping () -> F,
+            set: @escaping (F) -> Void,
+            stateKey: String) where F: StringRepresentable {
+
+        let textKey = stateKey //"text\(fieldPath.hashValue)"
         var editText: String? {
-            get { state.value[string: textKey] ?? String("\(ref.value[keyPath: fieldPath])") }
+            get { state.value[string: textKey] ?? String("\(get())") }
             set { state.value[textKey] = newValue }
         }
 
         _commit = {
             if let text = editText, let value = F(stringRepresentation: text) {
-                ref.value[keyPath: fieldPath] = value
+                set(value)
             }
             editText = nil
         }

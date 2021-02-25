@@ -8,6 +8,18 @@
 import Foundation
 import SwiftUI
 
+extension Double: StringRepresentable {
+    init?(stringRepresentation: String) {
+        self.init(stringRepresentation)
+    }
+}
+
+extension Float: StringRepresentable {
+    init?(stringRepresentation: String) {
+        self.init(stringRepresentation)
+    }
+}
+
 extension ViewMapping {
     
     static let double: ViewMapping = {
@@ -23,65 +35,47 @@ extension ViewMapping {
     }()
     
     static func makeFloatingPointMapping<T: BinaryFloatingPoint>(forType: T.Type, stringInit: @escaping (String) -> T?)
-    -> ViewMapping where T.Stride: BinaryFloatingPoint {
+    -> ViewMapping where T.Stride: BinaryFloatingPoint, T: StringRepresentable {
         
         return ViewMapping(for: T.self) { ref, context in
                         
             let state = context.state
             let properties = context.properties
-            
-            var editText: String? {
-                get { state.value[string: "text"] ?? String("\(ref.value)") }
-                set { state.value["text"] = newValue }
-            }
-            
-            // Make bindings
+
             let numericBinding = Binding(get: { ref.value },
                                          set: { ref.value = $0 })
-            let textBinding = Binding(get: { editText ?? "" },
-                                      set: { editText = $0 })
-            
-            func commitEditText() {
-                if let text = editText, let value = stringInit(text) {
-                    ref.value = value
-                }
-                editText = nil
-            }
+
+            let binder = NumericEntryBinder(state: state, ref: ref)
             
             // Create ranged or non-ranged view
             if let range: ClosedRange<T> = properties.getRange() {
                return makeRangedFloatingPointView(context: context,
                                                   numericBinding: numericBinding,
-                                                  textBinding: textBinding,
-                                                  range: range,
-                                                  commitEditText: commitEditText).asAnyView()
+                                                  textBinder: binder,
+                                                  range: range).asAnyView()
             } else {
                 return makeFloatingPointView(context: context,
-                                             textBinding: textBinding,
-                                             commitEditText: commitEditText).asAnyView()
+                                             binder: binder).asAnyView()
                 
             }
         }
     }
-    
    
 }
 
 fileprivate func makeFloatingPointView(context: ViewMappingContext,
-                                       textBinding: Binding<String>,
-                                       commitEditText: @escaping () -> Void) -> some View {
+                                       binder: NumericEntryBinder) -> some View {
     
     return HStack {
         Text(context.propertyName)
-        TextField("Value", text: textBinding, onCommit: { commitEditText() })
+        TextField("Value", text: binder.textBinding, onCommit: { binder.commit() })
     }
 }
 
 fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: ViewMappingContext,
                                                                      numericBinding: Binding<T>,
-                                                                     textBinding: Binding<String>,
-                                                                     range: ClosedRange<T>,
-                                                                     commitEditText: @escaping () -> Void) -> some View where T.Stride: BinaryFloatingPoint {
+                                                                     textBinder: NumericEntryBinder,
+                                                                     range: ClosedRange<T>) -> some View where T.Stride: BinaryFloatingPoint {
     
     // State accessors
     let state = context.state
@@ -89,7 +83,6 @@ fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: Vi
         get { state.value[bool: "editing"] ?? false }
         set { state.value["editing"] = newValue }
     }
-    
     
     let stack = VStack(alignment: .leading) {
         Text(context.propertyName)
@@ -103,7 +96,7 @@ fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: Vi
         }
         if editing {
             HStack {
-                TextField("Value", text: textBinding, onCommit: { commitEditText() })
+                TextField("Value", text: textBinder.textBinding, onCommit: { textBinder.commit() })
                 Spacer()
             }
         }
