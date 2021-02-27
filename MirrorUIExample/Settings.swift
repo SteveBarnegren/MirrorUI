@@ -20,6 +20,7 @@ class Settings {
     @MirrorUI var startPoint = CGPoint(x: 3, y: 5)
     @MirrorUI var endPoint = CGPoint(x: 3, y: 5)
     @MirrorUI var size = CGSize(width: 2, height: 6)
+    @MirrorUI var box = CGRect(x: 0, y: 1, width: 2, height: 3)
 
     init() {
     }

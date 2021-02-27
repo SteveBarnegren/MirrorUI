@@ -33,7 +33,7 @@ class ViewMapper {
         return false
     }
     
-    func createView(object: AnyObject, context: ViewMappingContext) -> AnyView? {
+    func createView(object: PropertyRefCastable, context: ViewMappingContext) -> AnyView? {
         
         for mapping in mappings {
             if let view = mapping.createView(object: object, context: context) {
@@ -52,12 +52,13 @@ struct ViewMappingContext {
 
 class ViewMapping {
     
-    private var viewCreator: (AnyObject, ViewMappingContext) -> AnyView?
+    private var viewCreator: (PropertyRefCastable, ViewMappingContext) -> AnyView?
     private var canCreate: (AnyObject) -> Bool
 
     init<T>(for: T.Type, makeView: @escaping (PropertyRef<T>, ViewMappingContext) -> AnyView) {
         viewCreator = { input, context in
-            guard let ref = input as? PropertyRef<T> else {
+
+            guard let ref = input.maybeCast(to: T.self) else {
                 return nil
             }
             
@@ -73,7 +74,7 @@ class ViewMapping {
         return canCreate(object)
     }
     
-    func createView(object: AnyObject, context: ViewMappingContext) -> AnyView? {
+    func createView(object: PropertyRefCastable, context: ViewMappingContext) -> AnyView? {
         return viewCreator(object, context)
     }
 }
@@ -83,6 +84,7 @@ extension ViewMapper {
     static let defaultMapper = { () -> ViewMapper in
 
         var mappings = [
+            ViewMapping.rectLike,
             // BinaryFloatingPoint types
             ViewMapping.bool,
             ViewMapping.double,
@@ -116,3 +118,8 @@ extension ViewMapper {
     }()
     
 }
+
+protocol RectLike {
+}
+
+extension CGRect: RectLike {}

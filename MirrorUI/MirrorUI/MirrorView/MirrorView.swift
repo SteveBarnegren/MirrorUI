@@ -105,8 +105,10 @@ public struct MirrorView: View {
         if let caseIterableRefProvider = control as? CaseIterableRefProvider {
             return ViewMapping.makeCaseIterableView(ref: caseIterableRefProvider.caseIterableRef,
                                                     context: context)
+        } else if let property = control.mirrorObject as? PropertyRefCastable {
+            return viewMapper.createView(object: property, context: context) ?? makeNoMappingView(name: propertyName)
         } else {
-            return viewMapper.createView(object: control.mirrorObject, context: context) ?? makeNoMappingView(name: propertyName)
+            return makeNoMappingView(name: propertyName)
         }
     }
     

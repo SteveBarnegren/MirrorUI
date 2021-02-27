@@ -29,6 +29,7 @@
 		67B8A31125E82EA800882274 /* NumericEntryBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8A31025E82EA800882274 /* NumericEntryBinder.swift */; };
 		67B8A31525E839B400882274 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8A31425E839B400882274 /* View.swift */; };
 		67B8A31925E8404200882274 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8A31825E8404200882274 /* Ref.swift */; };
+		67C074C425EAC0A6006E144B /* ViewMapping+Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C074C325EAC0A6006E144B /* ViewMapping+Rect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		67B8A31025E82EA800882274 /* NumericEntryBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericEntryBinder.swift; sourceTree = "<group>"; };
 		67B8A31425E839B400882274 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		67B8A31825E8404200882274 /* Ref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
+		67C074C325EAC0A6006E144B /* ViewMapping+Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+Rect.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				67AF77AE25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift */,
 				674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */,
 				674E7CBE25E59886003EE285 /* ViewMapping+Vector2.swift */,
+				67C074C325EAC0A6006E144B /* ViewMapping+Rect.swift */,
 			);
 			path = "View Mapping";
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				676CC67F25B348A8008F1378 /* ViewMapping+BinaryFloatingPoint.swift in Sources */,
 				676CC68525B348AD008F1378 /* MirrorUI+FloatingPoint.swift in Sources */,
 				676CC67D25B348A8008F1378 /* MirrorView.swift in Sources */,
+				67C074C425EAC0A6006E144B /* ViewMapping+Rect.swift in Sources */,
 				676CC68125B348A8008F1378 /* ViewMapping+CaseIterable.swift in Sources */,
 				67B8A31525E839B400882274 /* View.swift in Sources */,
 				67B8A31925E8404200882274 /* Ref.swift in Sources */,

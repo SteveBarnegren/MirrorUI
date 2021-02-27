@@ -7,21 +7,68 @@
 
 import Foundation
 
+protocol PropertyRefCastable {
+    func maybeCast<Target>(to: Target.Type) -> PropertyRef<Target>?
+}
+
+extension PropertyRef: PropertyRefCastable {
+}
+
+struct GetterSetter<T> {
+    var get: () -> T
+    var set: (T) -> Void
+}
+
+private enum Value<T> {
+    case stored(T)
+    case proxy(GetterSetter<T>)
+
+    var value: T {
+        get {
+            switch self {
+                case .stored(let v):
+                    return v
+                case .proxy(let proxy):
+                    return proxy.get()
+            }
+        }
+        set {
+            switch self {
+                case .stored:
+                    self = .stored(newValue)
+                case .proxy(let proxy):
+                    proxy.set(newValue)
+            }
+        }
+    }
+
+}
+
 class PropertyRef<T>: InternalDidSetCaller {
+
     var didSet: (T) -> Void = { _ in }
     var internalDidSet: () -> Void = {}
     private var valueModifiers = [String: (T) -> T]()
 
+    private var _value: Value<T>
+
     var value: T {
-        didSet {
-            value = modify(value: value)
+        get {
+            _value.value
+        }
+        set {
+            _value.value = modify(value: newValue)
             internalDidSet()
-            didSet(value)
+            didSet(_value.value)
         }
     }
 
     init(value: T) {
-        self.value = value
+        self._value = .stored(value)
+    }
+
+    init(getterSetter: GetterSetter<T>) {
+        self._value = .proxy(getterSetter)
     }
 
     func set(valueModifier: @escaping (T) -> T, forKey key: String) {
@@ -35,6 +82,25 @@ class PropertyRef<T>: InternalDidSetCaller {
             modified = modifier(modified)
         }
         return modified
+    }
+
+    func maybeCast<Target>(to: Target.Type) -> PropertyRef<Target>? {
+
+        // Check is already target
+        if let asTarget = self as? PropertyRef<Target> {
+            return asTarget
+        }
+
+        // Or can cast to target
+        guard self.value is Target else {
+            return nil
+        }
+
+        let getterSetter = GetterSetter<Target>(get: { self.value as! Target },
+                                                set: { self.value = $0 as! T })
+
+        return PropertyRef<Target>(getterSetter: getterSetter)
+
     }
 }
 
