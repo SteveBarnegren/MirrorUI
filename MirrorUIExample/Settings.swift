@@ -17,10 +17,9 @@ class Settings {
     @MirrorUI(range: 0...20) var damage = 5.3
     @MirrorUI var level = Level.low
     @MirrorUI var bgColor = Color.red
-    #if os(macOS)
-    @MirrorUI var startPoint = NSPoint(x: 3, y: 5)
-    @MirrorUI var bulletSize = NSSize(width: 2, height: 6)
-    #endif
+    @MirrorUI var startPoint = CGPoint(x: 3, y: 5)
+    @MirrorUI var endPoint = CGPoint(x: 3, y: 5)
+    @MirrorUI var size = CGSize(width: 2, height: 6)
 
     init() {
     }

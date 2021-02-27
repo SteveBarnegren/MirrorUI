@@ -34,8 +34,8 @@ extension ViewMapping {
 
     static let nsSize: ViewMapping = makeVector2Mapping(
         type: NSSize.self,
-        xName: "width",
-        yName: "height",
+        xName: "w",
+        yName: "h",
         xPath: \.width,
         yPath: \.height
     )
@@ -57,8 +57,8 @@ extension ViewMapping {
 
     static let cgSize: ViewMapping = makeVector2Mapping(
         type: CGSize.self,
-        xName: "width",
-        yName: "height",
+        xName: "w",
+        yName: "h",
         xPath: \.width,
         yPath: \.height
     )
