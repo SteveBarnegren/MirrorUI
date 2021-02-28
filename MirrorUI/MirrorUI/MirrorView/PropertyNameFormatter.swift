@@ -7,9 +7,9 @@
 
 import Foundation
 
-private enum State {
-    case wordStart
-    case wordEnd
+private enum CharacterType {
+    case regular
+    case wordSeparator
 }
 
 class PropertyNameFormatter {
@@ -22,7 +22,7 @@ class PropertyNameFormatter {
         
         var index = propertyName.startIndex
         
-        func nextChar() -> Character? {
+        func next() -> Character? {
             if index < propertyName.endIndex {
                 let value = propertyName[index]
                 index = propertyName.index(after: index)
@@ -33,32 +33,65 @@ class PropertyNameFormatter {
         }
         
         var displayName = ""
-        var lastWasCapital = false
-        
-        while let char = nextChar() {
-            if char == "_" {
-                if !displayName.isEmpty {
-                    displayName += " "
-                }
-            } else if char.isLetter && char.isUppercase {
-                if !displayName.isEmpty && !lastWasCapital {
-                    displayName.append(" ")
-                }
-                displayName.append(char)
-              
-                lastWasCapital = true
-            } else {
-                if displayName.isEmpty {
-                    displayName.append(char.uppercased())
-                    lastWasCapital = true
-                } else {
-                    displayName.append(char)
-                    lastWasCapital = false
-                }
+        var startNewWord = true
+
+        var prevChar: Character?
+        while let char = next() {
+
+            defer {
+                prevChar = char
             }
+
+            if isWordSeparator(char) {
+                startNewWord = true
+                continue
+            }
+
+            if isNewWord(char, prev: prevChar) {
+                startNewWord = true
+            }
+
+            if startNewWord {
+                if !displayName.isEmpty { displayName.append(" ") }
+                displayName.append(char.uppercased())
+            } else {
+                displayName.append(char)
+            }
+
+            startNewWord = false
         }
         
         return displayName
     }
-    
+
+    static private func isWordSeparator(_ character: Character) -> Bool {
+        return character == "_"
+    }
+
+    static private func isNewWord(_ character: Character, prev: Character?) -> Bool {
+
+        if character.isUppercase {
+            return true
+        }
+
+        if character.isNumber && (prev?.isNumber).isNilOrFalse {
+            return true
+        }
+
+        return false
+    }
 }
+
+extension Optional where Wrapped == Bool {
+
+    var isNilOrFalse: Bool {
+        switch self {
+            case .none:
+                return true
+            case .some(let v):
+                return v == false
+        }
+    }
+}
+
+

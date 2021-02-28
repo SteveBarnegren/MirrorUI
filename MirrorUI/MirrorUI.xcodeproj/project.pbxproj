@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6712A93F25EC0DBE00FF348A /* PropertyNameFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6712A93E25EC0DBE00FF348A /* PropertyNameFormatterTests.swift */; };
 		674E7CBB25E59659003EE285 /* ViewMapping+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */; };
 		674E7CBF25E59886003EE285 /* ViewMapping+Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674E7CBE25E59886003EE285 /* ViewMapping+Vector2.swift */; };
 		676CC62C25B34775008F1378 /* MirrorUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC62225B34775008F1378 /* MirrorUI.framework */; };
-		676CC63125B34775008F1378 /* MirrorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC63025B34775008F1378 /* MirrorUITests.swift */; };
 		676CC63325B34775008F1378 /* MirrorUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 676CC62525B34775008F1378 /* MirrorUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		676CC67925B348A2008F1378 /* PropertyNameFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC66C25B34888008F1378 /* PropertyNameFormatter.swift */; };
 		676CC67D25B348A8008F1378 /* MirrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC67225B34888008F1378 /* MirrorView.swift */; };
@@ -43,13 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6712A93E25EC0DBE00FF348A /* PropertyNameFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyNameFormatterTests.swift; sourceTree = "<group>"; };
 		674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+Color.swift"; sourceTree = "<group>"; };
 		674E7CBE25E59886003EE285 /* ViewMapping+Vector2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+Vector2.swift"; sourceTree = "<group>"; };
 		676CC62225B34775008F1378 /* MirrorUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MirrorUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		676CC62525B34775008F1378 /* MirrorUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MirrorUI.h; sourceTree = "<group>"; };
 		676CC62625B34775008F1378 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		676CC62B25B34775008F1378 /* MirrorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirrorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		676CC63025B34775008F1378 /* MirrorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorUITests.swift; sourceTree = "<group>"; };
 		676CC63225B34775008F1378 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		676CC66C25B34888008F1378 /* PropertyNameFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyNameFormatter.swift; sourceTree = "<group>"; };
 		676CC66E25B34888008F1378 /* ViewMapping+Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+Bool.swift"; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		676CC62F25B34775008F1378 /* MirrorUITests */ = {
 			isa = PBXGroup;
 			children = (
-				676CC63025B34775008F1378 /* MirrorUITests.swift */,
+				6712A93E25EC0DBE00FF348A /* PropertyNameFormatterTests.swift */,
 				676CC63225B34775008F1378 /* Info.plist */,
 			);
 			path = MirrorUITests;
@@ -329,7 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				676CC63125B34775008F1378 /* MirrorUITests.swift in Sources */,
+				6712A93F25EC0DBE00FF348A /* PropertyNameFormatterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
