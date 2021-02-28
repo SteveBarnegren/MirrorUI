@@ -118,8 +118,3 @@ extension ViewMapper {
     }()
     
 }
-
-protocol RectLike {
-}
-
-extension CGRect: RectLike {}

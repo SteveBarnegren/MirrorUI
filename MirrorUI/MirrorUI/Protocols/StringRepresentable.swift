@@ -17,3 +17,14 @@ extension StringRepresentable {
         "\(self)"
     }
 }
+
+extension String: StringRepresentable {
+
+    init?(stringRepresentation: String) {
+        self = stringRepresentation
+    }
+
+    var stringRepresentation: String {
+        return self
+    }
+}
