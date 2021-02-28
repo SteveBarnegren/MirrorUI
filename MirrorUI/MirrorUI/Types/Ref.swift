@@ -7,9 +7,9 @@
 
 import Foundation
 
-class Ref<T> {
+public class Ref<T> {
 
-    var value: T {
+    public var value: T {
         didSet {
             didSet(value)
         }

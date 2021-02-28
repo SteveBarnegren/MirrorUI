@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class ViewMapper {
+public class ViewMapper {
 
     private var mappings: [ViewMapping]
     
@@ -20,7 +20,7 @@ class ViewMapper {
         self.mappings = mappings
     }
     
-    func add(mapping: ViewMapping) {
+    public func add(mapping: ViewMapping) {
         mappings.append(mapping)
     }
     
@@ -44,18 +44,18 @@ class ViewMapper {
     }
 }
 
-struct ViewMappingContext {
-    var propertyName: String
-    var properties: ControlProperties
-    var state: Ref<[String: Any]>
+public struct ViewMappingContext {
+    public var propertyName: String
+    public var properties: ControlProperties
+    public var state: Ref<[String: Any]>
 }
 
-class ViewMapping {
+public class ViewMapping {
     
     private var viewCreator: (PropertyRefCastable, ViewMappingContext) -> AnyView?
     private var canCreate: (AnyObject) -> Bool
 
-    init<T>(for: T.Type, makeView: @escaping (PropertyRef<T>, ViewMappingContext) -> AnyView) {
+    public init<T>(for: T.Type, makeView: @escaping (PropertyRef<T>, ViewMappingContext) -> AnyView) {
         viewCreator = { input, context in
 
             guard let ref = input.maybeCast(to: T.self) else {
@@ -80,8 +80,10 @@ class ViewMapping {
 }
 
 extension ViewMapper {
+
+
     
-    static let defaultMapper = { () -> ViewMapper in
+    public static let defaultMapper = { () -> ViewMapper in
 
         var mappings = [
             ViewMapping.rectLike,

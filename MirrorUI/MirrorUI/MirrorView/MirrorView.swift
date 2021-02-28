@@ -26,11 +26,12 @@ public struct MirrorView: View {
     
     private let object: AnyObject
     private let objectProperties: [ObjectProperty]
-    private let viewMapper = ViewMapper.defaultMapper
+    private let viewMapper: ViewMapper
     @ObservedObject private var reloadTrigger: ReloadTrigger
     
-    public init(object: AnyObject) {
+    public init(object: AnyObject, viewMapper: ViewMapper = .defaultMapper) {
         self.object = object
+        self.viewMapper = viewMapper
         let objectProperties = Self.getProperties(from: object)
         
         let reloadTrigger = ReloadTrigger()

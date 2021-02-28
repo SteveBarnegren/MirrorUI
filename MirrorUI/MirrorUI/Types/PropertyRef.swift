@@ -44,7 +44,7 @@ private enum Value<T> {
 
 }
 
-class PropertyRef<T>: InternalDidSetCaller {
+public class PropertyRef<T>: InternalDidSetCaller {
 
     var didSet: (T) -> Void = { _ in }
     var internalDidSet: () -> Void = {}
@@ -52,7 +52,7 @@ class PropertyRef<T>: InternalDidSetCaller {
 
     private var _value: Value<T>
 
-    var value: T {
+    public var value: T {
         get {
             _value.value
         }

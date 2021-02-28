@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ControlProperties {
+public struct ControlProperties {
     
     var storage = [String: Any]()
     
