@@ -86,6 +86,7 @@ extension ViewMapper {
     public static let defaultMapper = { () -> ViewMapper in
 
         var mappings = [
+            ViewMapping.string,
             ViewMapping.rectLike,
             // BinaryFloatingPoint types
             ViewMapping.bool,

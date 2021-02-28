@@ -27,9 +27,9 @@ class Settings {
     @MirrorUI var endPoint = CGPoint(x: 3, y: 5)
     @MirrorUI var box = CGRect(x: 0, y: 1, width: 2, height: 3)
     @MirrorUI var size = Size.medium
+    @MirrorUI var greeting = "Hello"
 
-    init() {
-    }
+    init() {}
 }
 
 func makeCustomSizeViewMapping() -> ViewMapping {

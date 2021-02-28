@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6712A93F25EC0DBE00FF348A /* PropertyNameFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6712A93E25EC0DBE00FF348A /* PropertyNameFormatterTests.swift */; };
+		6712A94525EC268800FF348A /* ViewMapping+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6712A94425EC268800FF348A /* ViewMapping+String.swift */; };
 		674E7CBB25E59659003EE285 /* ViewMapping+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */; };
 		674E7CBF25E59886003EE285 /* ViewMapping+Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674E7CBE25E59886003EE285 /* ViewMapping+Vector2.swift */; };
 		676CC62C25B34775008F1378 /* MirrorUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC62225B34775008F1378 /* MirrorUI.framework */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		6712A93E25EC0DBE00FF348A /* PropertyNameFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyNameFormatterTests.swift; sourceTree = "<group>"; };
+		6712A94425EC268800FF348A /* ViewMapping+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+String.swift"; sourceTree = "<group>"; };
 		674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+Color.swift"; sourceTree = "<group>"; };
 		674E7CBE25E59886003EE285 /* ViewMapping+Vector2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+Vector2.swift"; sourceTree = "<group>"; };
 		676CC62225B34775008F1378 /* MirrorUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MirrorUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 				674E7CBA25E59659003EE285 /* ViewMapping+Color.swift */,
 				674E7CBE25E59886003EE285 /* ViewMapping+Vector2.swift */,
 				67C074C325EAC0A6006E144B /* ViewMapping+Rect.swift */,
+				6712A94425EC268800FF348A /* ViewMapping+String.swift */,
 			);
 			path = "View Mapping";
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				67B8A31125E82EA800882274 /* NumericEntryBinder.swift in Sources */,
 				67AF77AF25B4DC0D0058CA2E /* ViewMapping+FixedWidthInteger.swift in Sources */,
 				676CC68025B348A8008F1378 /* ViewMapper.swift in Sources */,
+				6712A94525EC268800FF348A /* ViewMapping+String.swift in Sources */,
 				67B8A30B25E82E2400882274 /* StringRepresentable.swift in Sources */,
 				67984BC425E2D1A600A1FE9E /* MirrorUI+Comparable.swift in Sources */,
 				676CC67F25B348A8008F1378 /* ViewMapping+BinaryFloatingPoint.swift in Sources */,
