@@ -254,7 +254,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					676CC62125B34775008F1378 = {
 						CreatedOnToolsVersion = 12.2;
@@ -473,14 +473,6 @@
 		676CC63725B34775008F1378 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					arm64,
-					armv7,
-					armv7s,
-					i386,
-					x86_64,
-					"$(ARCHS_STANDARD)",
-				);
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = VAA3W4LPY2;
@@ -509,14 +501,6 @@
 		676CC63825B34775008F1378 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					arm64,
-					armv7,
-					armv7s,
-					i386,
-					x86_64,
-					"$(ARCHS_STANDARD)",
-				);
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = VAA3W4LPY2;
