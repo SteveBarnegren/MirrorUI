@@ -18,6 +18,7 @@ enum Size: Int {
 class Settings {
 
     @MirrorUI var blurEnabled = false
+    @MirrorUI var someFloat = Float(3.2)
     @MirrorUI var lives = 4
     @MirrorUI var startingHealth = CGFloat(4.6)
     @MirrorUI(range: 0...20) var damage = 5.3

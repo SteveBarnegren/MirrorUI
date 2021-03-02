@@ -88,9 +88,10 @@ extension ViewMapper {
         var mappings = [
             ViewMapping.string,
             ViewMapping.rectLike,
-            // BinaryFloatingPoint types
             ViewMapping.bool,
+            // BinaryFloatingPoint types
             ViewMapping.double,
+            ViewMapping.float,
             // FixedWidthInteger types
             ViewMapping.int,
             ViewMapping.int16,
