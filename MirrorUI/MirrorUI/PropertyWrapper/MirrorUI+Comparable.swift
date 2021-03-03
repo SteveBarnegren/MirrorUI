@@ -25,10 +25,28 @@ extension MirrorUI where T: Comparable {
         get { properties.getMax() }
     }
 
+    public var range: ClosedRange<T>? {
+        set {
+            min = newValue?.lowerBound
+            max = newValue?.upperBound
+        }
+        get {
+            guard let min = self.min, let max = self.max else {
+                return nil
+            }
+            return min...max
+        }
+    }
+
     public init(wrappedValue: T, min: T? = nil, max: T? = nil) {
         self.init(wrappedValue: wrappedValue)
         self.min = min
         self.max = max
+    }
+
+    public init(wrappedValue: T, range: ClosedRange<T>) {
+        self.init(wrappedValue: wrappedValue)
+        self.range = range
     }
 
     mutating private func updateMinMaxValueModifier() {
@@ -67,5 +85,14 @@ extension ControlProperties {
 
     func getMax<T>() -> T? {
         storage["max"] as? T
+    }
+
+    func getRange<T>() -> ClosedRange<T>? {
+
+        guard let min: T = getMin(), let max: T = getMax() else {
+            return nil
+        }
+
+        return min...max
     }
 }
