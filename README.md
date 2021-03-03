@@ -83,8 +83,7 @@ Some types have additional configuration.
 
 Comparable types can be given minimum and maximum values:
 
-```
-
+```swift
 class Settings {
   @MirrorUI var lives = true
 
@@ -132,7 +131,7 @@ Note that it will be required to write a custom `Binding<T>` for the value. Writ
 
 Simply register the mapping with the ViewMapper, and it will map to any fields of the matching type.
 
-```
+```swift
 ViewMapper.defaultMapper.add(mapping: sizeMapping)
 ```
 
@@ -140,7 +139,7 @@ In some instances, the view may also need to save additional state of its own. F
 
 The following mapping provides a text field for editing a `String`. The value is only updated on `onCommit`. During editing the partial value is stored in the state dictionary until it is ready to commit back to the object. The state dictionary can be accessed via `context.state.value`.
 
-```
+```swift
 let stringMapping = ViewMapping(for: String.self) { ref, context in
 
   var partial: String {
