@@ -1,15 +1,20 @@
 # MirrorUI
 
-[![License](https://img.shields.io/cocoapods/l/TweenKit.svg?style=flat)](http://cocoapods.org/pods/TweenKit)
 [![Twitter](https://img.shields.io/badge/contact-@stevebarnegren-blue.svg?style=flat)](https://twitter.com/stevebarnegren)
 
-MirrorUI uses reflection to construct a UI to edit your object's properties. It's a great way to quickly add controls to your demos, experiments and prototypes.
+MirrorUI uses reflection to construct a UI to edit an object's properties. It's a great way to quickly add controls to your demos, experiments and prototypes.
 
-// Image
+![MirrorUI](https://user-images.githubusercontent.com/6288713/109871391-102e2c00-7c63-11eb-8f64-0e63a8301daf.gif)
+
+Simply add the `@MirrorUI` property wrapper and MirrorUI will construct a UI for you. You can then edit your object directly whilst your app runs.
+
+### macOS:
+
+![macOS](https://user-images.githubusercontent.com/6288713/109872686-a9aa0d80-7c64-11eb-84d4-2bea36bd6fdd.png)
 
 ## Instructions
 
-Simply create a class with the fields that you want to manipulate. Use the `@MirrorUI` property wrapper to expose these to MirrorUI.
+Create a class with the fields that you want to manipulate. Use the `@MirrorUI` property wrapper to expose these to MirrorUI.
 
 You might like to make this a singleton so that you can access it from other places in your application.
 
@@ -32,11 +37,25 @@ Then, simply construct a `MirrorView` with the instance of your object. You can 
 let mirrorView = MirrorView(object: Settings.shared)
 ```
 
-The presented view will look like this:
-
-<img style="border:10px solid black; border-radius: 7px;" src="https://user-images.githubusercontent.com/6288713/109864223-79f60800-7c5a-11eb-828e-18e2b87cee1d.png">
-
 Any changes made will be reflected in the properties of your object. You can read these properties as normal throughout the rest of your application.
+
+## Supported types
+
+To be able to present UI to edit a type, MirrorUI needs to have a 'mapping' to a view for that type. Several common types are supported out of the box:
+
+- String
+- Bool
+- Int and other FixedWidthInteger types
+- Double
+- Float
+- SwiftUI.Color
+- CGFloat
+- CGPoint
+- CGSize
+- CGRect
+- Enums*
+
+*Enums must conform to `CaseIterable`. Enums that contain cases with associated values will require bespoke view mappings.
 
 ## Callbacks
 
@@ -57,23 +76,6 @@ class Settings {
 }
 ```
 
-## Supported types
-
-To be able to present UI to edit a type, MirrorUI needs to have a 'mapping' to a view for that type. Several common types are supported out of the box:
-
-- String
-- Bool
-- Int and other FixedWidthInteger types
-- Double
-- Float
-- SwiftUI.Color
-- CGFloat
-- CGPoint
-- CGSize
-- CGRect
-- Enums*
-
-* Enums must conform to `CaseIterable`. Enums that contain cases with associated values will require bespoke view mappings.
 
 ## Configuration
 
@@ -113,7 +115,7 @@ let sizeMapping = ViewMapping(for: Size.self) { (ref, context) -> AnyView in
   let binding = Binding(get: { ref.value.rawValue },
                         set: { ref.value = Size(rawValue: $0)! })
 
-  let view = VStack(alignment: .leading, spacing: 0) {
+  let view = VStack {
     Text(context.propertyName)
     Picker(context.propertyName, selection: binding) {
       Text("Small").tag(0)
@@ -171,9 +173,9 @@ A `ViewMapping` is held for each supported property type in the `ViewMapper`. If
 
 Steve Barnegren
 
-steve.barnegren@gmail.com
+[www.stevebarnegren.com](www.stevebarnegren.com)
 
-@stevebarnegren
+[@stevebarnegren](twitter.com/stevebarnegren)
 
 ## License
 
