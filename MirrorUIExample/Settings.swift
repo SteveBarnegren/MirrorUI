@@ -29,8 +29,6 @@ class Settings {
     @MirrorUI var box = CGRect(x: 0, y: 1, width: 2, height: 3)
     @MirrorUI var size = Size.medium
     @MirrorUI var greeting = "Hello"
-
-    init() {}
 }
 
 func makeCustomSizeViewMapping() -> ViewMapping {
@@ -40,7 +38,9 @@ func makeCustomSizeViewMapping() -> ViewMapping {
                               set: { ref.value = Size(rawValue: $0)! })
 
         let view = VStack(alignment: .leading, spacing: 0) {
+            #if os(iOS)
             Text(context.propertyName)
+            #endif
             Picker(context.propertyName, selection: binding) {
                 Text("Small").tag(0)
                 Text("Medium").tag(1)
@@ -55,7 +55,8 @@ func makeCustomSizeViewMapping() -> ViewMapping {
 struct MirrorControlsView_Previews: PreviewProvider {
     static var previews: some View {
         let settings = Settings()
-        MirrorView(object: settings)
+        ViewMapper.defaultMapper.add(mapping: makeCustomSizeViewMapping())
+        return MirrorView(object: settings)
     }
 }
 

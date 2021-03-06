@@ -18,6 +18,7 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        ViewMapper.defaultMapper.add(mapping: makeCustomSizeViewMapping())
         let mirrorView = MirrorView(object: settings)
         mirrorHostingView = NSHostingView(rootView: mirrorView)
         view.addSubview(mirrorHostingView)
