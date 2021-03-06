@@ -55,8 +55,9 @@ func makeCustomSizeViewMapping() -> ViewMapping {
 struct MirrorControlsView_Previews: PreviewProvider {
     static var previews: some View {
         let settings = Settings()
-        ViewMapper.defaultMapper.add(mapping: makeCustomSizeViewMapping())
-        return MirrorView(object: settings)
+        let mapper = ViewMapper.mapperWithDefaultMappings()
+        mapper.add(mapping: makeCustomSizeViewMapping())
+        return MirrorView(object: settings, viewMapper: mapper)
     }
 }
 

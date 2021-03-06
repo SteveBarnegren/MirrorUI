@@ -12,11 +12,11 @@ public class ViewMapper {
 
     private var mappings: [ViewMapping]
     
-    init() {
+    public init() {
         self.mappings = []
     }
     
-    init(mappings: [ViewMapping]) {
+    public init(mappings: [ViewMapping]) {
         self.mappings = mappings
     }
     
@@ -80,11 +80,9 @@ public class ViewMapping {
 }
 
 extension ViewMapper {
-
-
     
-    public static let defaultMapper = { () -> ViewMapper in
-
+    public static func mapperWithDefaultMappings() -> ViewMapper {
+        
         var mappings = [
             ViewMapping.string,
             ViewMapping.rectLike,
@@ -110,7 +108,7 @@ extension ViewMapper {
             ViewMapping.cgPoint,
             ViewMapping.cgSize,
         ]
-
+        
         #if os(macOS)
         mappings += [
             ViewMapping.nsPoint,
@@ -119,6 +117,7 @@ extension ViewMapper {
         #endif
 
         return ViewMapper(mappings: mappings)
-    }()
+    }
     
+    public static let shared = mapperWithDefaultMappings()
 }

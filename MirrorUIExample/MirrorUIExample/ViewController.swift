@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ViewMapper.defaultMapper.add(mapping: makeCustomSizeViewMapping())
+        ViewMapper.shared.add(mapping: makeCustomSizeViewMapping())
 
         let mirrorView = MirrorView(object: settings)
         let viewController = UIHostingController(rootView: mirrorView)
