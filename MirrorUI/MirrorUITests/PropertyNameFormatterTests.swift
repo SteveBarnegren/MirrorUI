@@ -23,7 +23,5 @@ class PropertyNameFormatterTests: XCTestCase {
         test("my_property", "My Property")
         test("my_property2", "My Property 2")
         test("my_property24", "My Property 24")
-
     }
-
 }

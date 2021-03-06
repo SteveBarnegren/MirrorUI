@@ -30,7 +30,4 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         settingsViewController.view.frame = view.bounds
     }
-
-
 }
-

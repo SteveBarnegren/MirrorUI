@@ -93,5 +93,3 @@ extension Optional where Wrapped == Bool {
         }
     }
 }
-
-

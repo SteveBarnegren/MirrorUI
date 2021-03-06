@@ -38,8 +38,6 @@ protocol MirrorControl {
     }
 }
 
-
-
 extension MirrorUI: MirrorControl {
     
     var mirrorObject: AnyObject {

@@ -28,13 +28,4 @@ class ViewController: NSViewController {
         super.viewDidLayout()
         mirrorHostingView.frame = view.bounds
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
 }
-

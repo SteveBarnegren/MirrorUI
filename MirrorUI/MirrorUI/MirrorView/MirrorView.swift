@@ -118,11 +118,3 @@ public struct MirrorView: View {
         return AnyView(text)
     }
 }
-/*
-struct MirrorControlsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let settings = Settings()
-        MirrorView(object: settings)
-    }
-}
-*/

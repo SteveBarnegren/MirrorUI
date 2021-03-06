@@ -8,7 +8,5 @@
 import Foundation
 
 public struct ControlProperties {
-
     var storage = [String: Any]()
 }
-
