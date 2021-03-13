@@ -1,0 +1,11 @@
+{
+  "commitish" : "162672710f07b425e683c6a7521f01f228ff2693",
+  "iOS" : [
+    {
+      "hash" : "dcf19dcdb1180538fbfd1d0466d7a18b98144a2bdd4e0441308a48445b9b7454",
+      "name" : "PopupControls",
+      "linking" : "dynamic",
+      "swiftToolchainVersion" : "5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
+    }
+  ]
+}
