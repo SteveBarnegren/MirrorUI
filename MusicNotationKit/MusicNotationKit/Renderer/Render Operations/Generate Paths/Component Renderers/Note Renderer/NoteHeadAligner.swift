@@ -20,9 +20,9 @@ class NoteHeadAligner {
         case .center:
             return 0
         case .leftOfStem:
-            return -(glyph.width + glyphs.metrics.stemThickness)
+            return -(glyph.width)
         case .rightOfStem:
-            return glyph.width + glyphs.metrics.stemThickness
+            return glyph.width
         }
     }
 }
