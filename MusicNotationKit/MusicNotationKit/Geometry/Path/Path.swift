@@ -65,39 +65,7 @@ extension Path {
     // MARK: - Translate
     
     mutating func translate(x xOffset: Double, y yOffset: Double) {
-        
-        func translatePoint(_ p: Vector2D) -> Vector2D {
-            return Vector2D(xOffset + p.x, yOffset + p.y)
-        }
-        
-        var newCommands = [Path.Command]()
-        
-        for command in commands {
-            switch command {
-            case .move(let p):
-                newCommands.append(.move(translatePoint(p)))
-            case .line(let p):
-                newCommands.append(.line(translatePoint(p)))
-            case .quadCurve(let p, let c1):
-                newCommands.append(.quadCurve(translatePoint(p), c1: translatePoint(c1)))
-            case .curve(let p, let c1, let c2):
-                newCommands.append(.curve(translatePoint(p), c1: translatePoint(c1), c2: translatePoint(c2)))
-            case .close:
-                newCommands.append(.close)
-            case .circle(let p, let r):
-                newCommands.append(.circle(translatePoint(p), r))
-            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
-                newCommands.append(
-                    .arc(center: translatePoint(center),
-                         radius: radius,
-                         startAngle: startAngle,
-                         endAngle: endAngle,
-                         clockwise: clockwise)
-                )
-            }
-        }
-        
-        commands = newCommands
+        commands = commands.translated(x: xOffset, y: yOffset)
         boundingBox = boundingBox.translated(x: xOffset, y: yOffset)
     }
     
@@ -112,43 +80,7 @@ extension Path {
     
     mutating func scale(_ scale: Double) {
    
-        func scalePoint(_ p: Vector2D) -> Vector2D {
-            return Vector2D(p.x * scale, p.y * scale)
-        }
-        
-        func scaleSize(_ s: Size) -> Size {
-            return Size(width: s.width * scale, height: s.height * scale)
-        }
-        
-        var newCommands = [Path.Command]()
-        
-        for command in commands {
-            switch command {
-            case .move(let p):
-                newCommands.append(.move(scalePoint(p)))
-            case .line(let p):
-                newCommands.append(.line(scalePoint(p)))
-            case .quadCurve(let p, let c1):
-                newCommands.append(.quadCurve(scalePoint(p), c1: scalePoint(c1)))
-            case .curve(let p, let c1, let c2):
-                newCommands.append(.curve(scalePoint(p), c1: scalePoint(c1), c2: scalePoint(c2)))
-            case .close:
-                newCommands.append(.close)
-            case .circle(let p, let r):
-                newCommands.append(.circle(scalePoint(p), r * scale))
-            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
-                newCommands.append(
-                    .arc(center: scalePoint(center),
-                         radius: radius * scale,
-                         startAngle: startAngle,
-                         endAngle: endAngle,
-                         clockwise: clockwise)
-                )
-            }
-        }
-        
-        commands = newCommands
-        
+        commands = commands.scaled(scale)
         boundingBox = Rect(x: boundingBox.x * scale,
                            y: boundingBox.y * scale,
                            width: boundingBox.width * scale,
@@ -165,40 +97,7 @@ extension Path {
     // MARK: - Flip Y
     
     mutating func invertY() {
-        
-        var newCommands = [Command]()
-        
-        func invert(_ p: Vector2D) -> Vector2D {
-            return Vector2D(p.x, -p.y)
-        }
-        
-        for command in self.commands {
-            switch command {
-            case .move(let p):
-                newCommands.append(.move(invert(p)))
-            case .line(let p):
-                newCommands.append(.line(invert(p)))
-            case .quadCurve(let p, let c1):
-                newCommands.append(.quadCurve(invert(p), c1: invert(c1)))
-            case .curve(let p, let c1, let c2):
-                newCommands.append(.curve(invert(p), c1: invert(c1), c2: invert(c2)))
-            case .close:
-                newCommands.append(.close)
-            case .circle(let p, let r):
-                newCommands.append(.circle(invert(p), r))
-            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
-                newCommands.append(
-                    .arc(center: invert(center),
-                         radius: radius,
-                         startAngle: startAngle,
-                         endAngle: endAngle,
-                         clockwise: clockwise)
-                )
-            }
-        }
-        
-        self.commands = newCommands
-        
+        self.commands = commands.invertedY()
         boundingBox = Rect(x: boundingBox.x,
                            y: -boundingBox.y - boundingBox.height,
                            width: boundingBox.width,
@@ -215,6 +114,10 @@ extension Path {
 extension Array where Element == Path.Command {
     
     func scaled(_ scale: Double) -> [Path.Command] {
+        
+        if scale == 1 {
+            return self
+        }
         
         func scalePoint(_ p: Vector2D) -> Vector2D {
             return Vector2D(p.x * scale, p.y * scale)
@@ -283,6 +186,42 @@ extension Array where Element == Path.Command {
             case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
                 newCommands.append(
                     .arc(center: translatePoint(center),
+                         radius: radius,
+                         startAngle: startAngle,
+                         endAngle: endAngle,
+                         clockwise: clockwise)
+                )
+            }
+        }
+        
+        return newCommands
+    }
+    
+    func invertedY() -> [Path.Command] {
+        
+        var newCommands = [Path.Command]()
+        
+        func invert(_ p: Vector2D) -> Vector2D {
+            return Vector2D(p.x, -p.y)
+        }
+        
+        for command in self {
+            switch command {
+            case .move(let p):
+                newCommands.append(.move(invert(p)))
+            case .line(let p):
+                newCommands.append(.line(invert(p)))
+            case .quadCurve(let p, let c1):
+                newCommands.append(.quadCurve(invert(p), c1: invert(c1)))
+            case .curve(let p, let c1, let c2):
+                newCommands.append(.curve(invert(p), c1: invert(c1), c2: invert(c2)))
+            case .close:
+                newCommands.append(.close)
+            case .circle(let p, let r):
+                newCommands.append(.circle(invert(p), r))
+            case .arc(let center, let radius, let startAngle, let endAngle, let clockwise):
+                newCommands.append(
+                    .arc(center: invert(center),
                          radius: radius,
                          startAngle: startAngle,
                          endAngle: endAngle,
