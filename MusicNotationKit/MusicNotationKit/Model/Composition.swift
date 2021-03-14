@@ -38,7 +38,7 @@ public class Composition {
     
     // MARK: - Enumeration conviniences
     
-    func enumerateNotes(_ handler: (Note) -> Void) {
+    func forEachNote(_ handler: (Note) -> Void) {
         
         for bar in bars {
             for noteSequence in bar.sequences {
@@ -49,7 +49,7 @@ public class Composition {
         }
     }
     
-    func enumerateRests(_ handler: (Rest) -> Void) {
+    func forEachRest(_ handler: (Rest) -> Void) {
         
         for bar in bars {
             for noteSequence in bar.sequences {
@@ -60,7 +60,7 @@ public class Composition {
         }
     }
     
-    func enumerateNoteSequences(_ handler: (NoteSequence) -> Void) {
+    func forEachNoteSequence(_ handler: (NoteSequence) -> Void) {
         
         for bar in bars {
             for noteSequence in bar.sequences {

@@ -21,7 +21,7 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
     
     func process(composition: Composition) {
         
-        composition.enumerateNotes {
+        composition.forEachNote {
             
             // Make basic symbol description
             let description = noteSymbolDescriber.symbolDescription(forNote: $0)
@@ -31,9 +31,9 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
             // Make note head descriptions
             $0.noteHeads = noteHeadDescriber.noteHeadDescriptions(forNote: $0)
         }
-        composition.enumerateRests { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
+        composition.forEachRest { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
         
-        composition.enumerateNotes(applyAdjacentItemWidths)
+        composition.forEachNote(applyAdjacentItemWidths)
     }
     
     // MARK: - Apply adjacent item widths from font

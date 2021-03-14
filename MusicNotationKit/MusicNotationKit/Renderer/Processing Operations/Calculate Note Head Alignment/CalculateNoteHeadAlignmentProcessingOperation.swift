@@ -13,6 +13,6 @@ class CalculateNoteHeadAlignmentProcessingOperation: CompositionProcessingOperat
     private let alignmentDecider = NoteHeadAlignmentDecider(transformer: .notes)
     
     func process(composition: Composition) {
-        composition.enumerateNotes(alignmentDecider.process)
+        composition.forEachNote(alignmentDecider.process)
     }
 }

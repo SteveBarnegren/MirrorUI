@@ -21,13 +21,13 @@ class CalculatePlayableItemWidthsProcessingOperation: CompositionProcessingOpera
     func process(composition: Composition) {
         
         // Calculate note widths
-        composition.enumerateNotes {
+        composition.forEachNote {
             let result = self.noteWidthCalculator.width(forNote: $0)
             $0.horizontalLayoutWidth = .offset(leading: result.leading, trailing: result.trailing)
         }
         
         // Calculate rest widths
-        composition.enumerateRests(applyWidth)
+        composition.forEachRest(applyWidth)
     }
     
     // MARK: - Calculate rest widths
