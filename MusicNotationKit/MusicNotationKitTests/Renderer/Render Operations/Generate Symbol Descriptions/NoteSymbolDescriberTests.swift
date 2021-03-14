@@ -85,3 +85,16 @@ class NoteSymbolDescriberTests: XCTestCase {
             .verify(hasStem: true)
     }
 }
+
+private extension NoteSymbolDescriber.Result {
+    
+    @discardableResult func verify(hasStem: Bool, file: StaticString = #file, line: UInt = #line) -> Self {
+        XCTAssertEqual(self.hasStem, hasStem, file: file, line: line)
+        return self
+    }
+    
+    @discardableResult func verify(numberOfTails: Int, file: StaticString = #file, line: UInt = #line) -> Self {
+        XCTAssertEqual(self.numberOfTails, numberOfTails, file: file, line: line)
+        return self
+    }
+}

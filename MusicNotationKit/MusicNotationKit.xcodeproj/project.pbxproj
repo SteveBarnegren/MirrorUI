@@ -15,7 +15,6 @@
 		670D51B025474AB1000B7B36 /* ArticulationMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670D51AF25474AB1000B7B36 /* ArticulationMark.swift */; };
 		670D51B625474B21000B7B36 /* Accent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670D51B525474B21000B7B36 /* Accent.swift */; };
 		670D51BE25474D65000B7B36 /* PositionArticulationMarksProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670D51BD25474D65000B7B36 /* PositionArticulationMarksProcessingOperation.swift */; };
-		671A4D252287524E002C56E8 /* NoteSymbolDescription+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D242287524E002C56E8 /* NoteSymbolDescription+Verify.swift */; };
 		671A4D2C228752E7002C56E8 /* NoteSymbolDescriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2B228752E7002C56E8 /* NoteSymbolDescriberTests.swift */; };
 		671A4D2E22885987002C56E8 /* NoteValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2D22885987002C56E8 /* NoteValueTests.swift */; };
 		671A4D3022885A02002C56E8 /* NoteValue+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */; };
@@ -217,7 +216,6 @@
 		670D51AF25474AB1000B7B36 /* ArticulationMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticulationMark.swift; sourceTree = "<group>"; };
 		670D51B525474B21000B7B36 /* Accent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accent.swift; sourceTree = "<group>"; };
 		670D51BD25474D65000B7B36 /* PositionArticulationMarksProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionArticulationMarksProcessingOperation.swift; sourceTree = "<group>"; };
-		671A4D242287524E002C56E8 /* NoteSymbolDescription+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteSymbolDescription+Verify.swift"; sourceTree = "<group>"; };
 		671A4D2B228752E7002C56E8 /* NoteSymbolDescriberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSymbolDescriberTests.swift; sourceTree = "<group>"; };
 		671A4D2D22885987002C56E8 /* NoteValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteValueTests.swift; sourceTree = "<group>"; };
 		671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteValue+Verify.swift"; sourceTree = "<group>"; };
@@ -532,7 +530,6 @@
 			children = (
 				6728B2C92239986000382D92 /* NoteSequence+Verify.swift */,
 				6728B2CB2239989100382D92 /* Array+Verify.swift */,
-				671A4D242287524E002C56E8 /* NoteSymbolDescription+Verify.swift */,
 				67EA89F224264CA30009BE61 /* NoteHeadDescription+Verify.swift */,
 				671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */,
 			);
@@ -1431,7 +1428,6 @@
 				673A3D1E233FC567001CE422 /* Array+MaybeTests.swift in Sources */,
 				6728B2CA2239986000382D92 /* NoteSequence+Verify.swift in Sources */,
 				6789B87524687484002D78A8 /* VariationSequencerTests.swift in Sources */,
-				671A4D252287524E002C56E8 /* NoteSymbolDescription+Verify.swift in Sources */,
 				6756F61B2300C30C003F1F19 /* ElementPopperTests.swift in Sources */,
 				67B1B4BE2426A50800E3E484 /* StemDirectionDecider_MultipleNoteHeadTests.swift in Sources */,
 				6789B87924689AC4002D78A8 /* Collection+AllPairsTests.swift in Sources */,

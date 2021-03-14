@@ -22,7 +22,13 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
     func process(composition: Composition) {
         
         composition.enumerateNotes {
-            $0.symbolDescription = noteSymbolDescriber.symbolDescription(forNote: $0)
+            
+            // Make basic symbol description
+            let description = noteSymbolDescriber.symbolDescription(forNote: $0)
+            $0.hasStem = description.hasStem
+            $0.symbolDescription.numberOfTails = description.numberOfTails
+            
+            // Make note head descriptions
             $0.noteHeadDescriptions = noteHeadDescriber.noteHeadDescriptions(forNote: $0)
         }
         composition.enumerateRests { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }

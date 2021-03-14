@@ -15,7 +15,6 @@ public enum NoteHeadType {
 
 public class Note: Playable {
     
-    //public var accidental = Accidental.none
     public var noteHeadType = NoteHeadType.standard
     
     /// Pitches, in ascending order
@@ -32,9 +31,7 @@ public class Note: Playable {
     // MARK: - Stem
     
     /// If the note has a stem
-    var hasStem: Bool {
-        return symbolDescription.hasStem
-    }
+    var hasStem: Bool = false
     
     /// The note head that the stem connects to
     var stemConnectingNoteHead: NoteHeadDescription {
@@ -212,8 +209,7 @@ class NoteHeadDescription: VerticallyPositionable {
 
 class NoteSymbolDescription {
     
-    let hasStem: Bool
-    let numberOfTails: Int
+    var numberOfTails: Int
     var stemDirection = StemDirection.up
     var stemLength = Double(0)
     
@@ -221,12 +217,11 @@ class NoteSymbolDescription {
         return stemLength.inverted(if: { stemDirection == .down })
     }
     
-    init(hasStem: Bool, numberOfTails: Int) {
-        self.hasStem = hasStem
+    init(numberOfTails: Int) {
         self.numberOfTails = numberOfTails
     }
     
     static var standard: NoteSymbolDescription {
-        return NoteSymbolDescription(hasStem: false, numberOfTails: 0)
+        return NoteSymbolDescription(numberOfTails: 0)
     }
 }

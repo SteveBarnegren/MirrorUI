@@ -314,7 +314,7 @@ class NoteRenderer {
     
     private func makeStemPath(forNote note: Note, to customStemEndY: Double? = nil) -> Path? {
         
-        if note.symbolDescription.hasStem == false {
+        if note.hasStem == false {
             return nil
         }
         
@@ -337,7 +337,7 @@ class NoteRenderer {
     
     private func stemRect(fromNote note: Note, to stemEndY: Double) -> Rect? {
         
-        if note.symbolDescription.hasStem == false {
+        if note.hasStem == false {
             return nil
         }
         

@@ -10,7 +10,12 @@ import Foundation
 
 class NoteSymbolDescriber {
     
-    func symbolDescription(forNote note: Note) -> NoteSymbolDescription {
+    struct Result {
+        let hasStem: Bool
+        let numberOfTails: Int
+    }
+    
+    func symbolDescription(forNote note: Note) -> Result {
         
         let hasStem: Bool
         let numberOfTails: Int
@@ -30,10 +35,7 @@ class NoteSymbolDescriber {
             numberOfTails = self.numberOfTails(forDivision: note.value.division)
         }
         
-        let description = NoteSymbolDescription(hasStem: hasStem,
-                                                numberOfTails: numberOfTails)
-        
-        return description
+        return Result(hasStem: hasStem, numberOfTails: numberOfTails)
     }
     
     private func numberOfTails(forDivision division: Int) -> Int {
