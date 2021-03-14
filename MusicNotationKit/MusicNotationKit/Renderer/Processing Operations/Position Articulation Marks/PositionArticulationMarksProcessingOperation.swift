@@ -11,14 +11,7 @@ import Foundation
 class PositionArticulationMarksProcessingOperation: CompositionProcessingOperation {
     
     func process(composition: Composition) {
-        
-        for bar in composition.bars {
-            for sequence in bar.sequences {
-                for note in sequence.notes {
-                    self.process(note: note)
-                }
-            }
-        }
+        composition.forEachNote(self.process)
     }
     
     private func process(note: Note) {

@@ -23,7 +23,7 @@ extension ComponentCompositions {
         
         let allPitches: [Pitch] = makeAllPitches()
         
-        let composition = Composition()
+        let stave = Stave()
         allPitches.chunked(into: 8).forEach { pitches in
             let bar = Bar()
             let sequence = NoteSequence()
@@ -31,9 +31,11 @@ extension ComponentCompositions {
                 sequence.add(note: Note(value: .crotchet, pitch: pitch))
             }
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
+        let composition = Composition()
+        composition.add(stave: stave)
         return composition
     }
     

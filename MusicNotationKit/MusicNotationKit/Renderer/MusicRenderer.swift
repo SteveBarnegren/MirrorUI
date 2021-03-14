@@ -55,7 +55,9 @@ class MusicRenderer {
         if !composition.isPreprocessed {
             
             // Add final barline (this should definitely be done somewhere else)
-            composition.bars.last?.trailingBarline = Barline()
+            for stave in composition.staves {
+                stave.bars.last?.trailingBarline = Barline()
+            }
             
             // Set bar numbers
             SetBarNumbersProcessingOperation().process(composition: composition)
@@ -96,6 +98,9 @@ class MusicRenderer {
             // Create Ties
             CreateTiesProcessingOperation().process(composition: composition)
             
+            // Create bar slices
+            CreateBarSlicesRenderOperation().process(composition: composition)
+            
             // Generate bar layout anchors
             GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)
             
@@ -103,13 +108,13 @@ class MusicRenderer {
             CalculateMinimumBarWidthsProcessingOperation().process(composition: composition)
             
             // Stitch bar layout anchors
-            //StitchBarLayoutAnchorsProcessingOperation().process(composition: composition)
+            // StitchBarLayoutAnchorsProcessingOperation().process(composition: composition)
         
             composition.isPreprocessed = true
         }
         
         // Cache the minimum bar widths
-        barSizingInformation = composition.bars.map {
+        barSizingInformation = composition.barSlices.map {
             return BarSizingInfo(minimumWidth: $0.minimumWidth, preferredWidth: $0.preferredWidth, minimumHeight: 10)
         }
         
@@ -129,29 +134,33 @@ class MusicRenderer {
         // Calculate layout sizes
         let layoutWidth = displayWidth / staveSpacing
         
-        let bars: [Bar]
+        let barSlices: [BarSlice]
+        let staveBars: [[Bar]]
         if let range = range {
-            bars = composition.bars[range].toArray()
+            barSlices = composition.barSlices[range].toArray()
+            staveBars = composition.staves.map { $0.bars[range].toArray() }.toArray()
         } else {
-            bars = composition.bars
+            barSlices = composition.barSlices
+            staveBars = composition.staves.map { $0.bars.toArray() }.toArray()
         }
         
         // Reset layout anchors
         // TODO: Reset the layout anchors just for the bar range?
-        composition.bars.forEach { $0.resetLayoutAnchors() }
+        composition.barSlices.forEach { $0.resetLayoutAnchors() }
         
         // Solve X Positions
-        HorizontalPositionerRenderOperation().process(bars: bars, layoutWidth: layoutWidth)
+        HorizontalPositionerRenderOperation().process(bars: barSlices, layoutWidth: layoutWidth)
         
         // Apply Veritical positions
-        VerticalPositionerRenderOperation().process(bars: bars)
+        VerticalPositionerRenderOperation().process(bars: barSlices)
         
         // Calculate stem lengths
-        CalculateStemLengthsRenderOperation().process(bars: bars)
+        CalculateStemLengthsRenderOperation().process(barSlices: barSlices)
         
-        // Make paths
+        // Make paths - Use bars from here, not slices
+        let bars = staveBars.first! // Only render the first stave for now
         let leadingTies = range
-            .flatMap { composition.bars[maybe: $0.startIndex-1] }
+            .flatMap { composition.barSlices[maybe: $0.startIndex-1] }
             .flatMap(trailingTies(forBar:)) ?? []
         
         let paths = CompositionPathsCreator(glyphs: glyphs).paths(fromBars: bars,
@@ -169,7 +178,7 @@ class MusicRenderer {
         return pathBundle
     }
     
-    private func trailingTies(forBar bar: Bar) -> [Tie] {
+    private func trailingTies(forBar bar: BarSlice) -> [Tie] {
         
         var ties = [Tie]()
         

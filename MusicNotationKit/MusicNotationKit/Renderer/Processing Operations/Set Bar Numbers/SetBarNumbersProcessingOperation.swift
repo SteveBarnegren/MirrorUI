@@ -12,8 +12,10 @@ class SetBarNumbersProcessingOperation: CompositionProcessingOperation {
     
     func process(composition: Composition) {
         
-        for (index, bar) in composition.bars.enumerated() {
-            bar.barNumber = index
+        for stave in composition.staves {
+            for (index, bar) in stave.bars.enumerated() {
+                bar.barNumber = index
+            }
         }
     }
 }

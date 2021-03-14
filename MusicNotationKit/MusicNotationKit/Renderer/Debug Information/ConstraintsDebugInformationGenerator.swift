@@ -45,8 +45,13 @@ struct DebugDrawHorizontalRegion: DebugDrawCommand {
 class ConstraintsDebugInformationGenerator {
     
     func debugInformation(fromBars bars: [Bar], staveSpacing: Double) -> [DebugDrawCommand] {
+        return []
+
+        // BSL: Reinstate
+        /*
         let layoutAnchors = bars.map { $0.layoutAnchors }.joined().toArray()
         return commands(forLayoutAnchors: layoutAnchors).map { $0.scaled(scale: staveSpacing) }
+ */
     }
     
     private func commands(forLayoutAnchors layoutAnchors: [LayoutAnchor]) -> [DebugDrawCommand] {

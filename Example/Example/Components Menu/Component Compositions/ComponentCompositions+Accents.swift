@@ -13,7 +13,7 @@ extension ComponentCompositions {
     
     static var accents: Composition {
         
-        let composition = Composition()
+        let stave = Stave()
         
         do {
             let bar = Bar()
@@ -28,7 +28,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .quaver, pitch: .e4).accent())
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         do {
@@ -50,7 +50,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitch: .d3).accent())
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         do {
@@ -78,9 +78,11 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .semiquaver, pitch: .c5).accent())
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
+        let composition = Composition()
+        composition.add(stave: stave)
         return composition
        
     }

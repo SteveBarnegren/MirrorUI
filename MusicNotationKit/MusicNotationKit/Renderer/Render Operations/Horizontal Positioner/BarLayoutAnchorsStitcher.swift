@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 class BarLayoutAnchorsStitcher {
     
     func stichAnchors(for bars: [Bar]) {
@@ -51,3 +51,4 @@ class BarLayoutAnchorsStitcher {
         return constraints
     }
 }
+*/

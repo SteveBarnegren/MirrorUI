@@ -27,21 +27,10 @@ public class Bar {
         return sequences.map { $0.duration }.max() ?? .zero
     }
     
-    // Cached information
-    var layoutAnchors = [LayoutAnchor]()
-    var trailingBarlineAnchor: LayoutAnchor?
-    var minimumWidth = Double(0)
-    var preferredWidth = Double(0)
-    
     public init() {}
     
     public func add(sequence: NoteSequence) {
         self.sequences.append(sequence)
-    }
-    
-    func resetLayoutAnchors() {
-        layoutAnchors.forEach { $0.reset() }
-        trailingBarlineAnchor?.reset()
     }
 }
 

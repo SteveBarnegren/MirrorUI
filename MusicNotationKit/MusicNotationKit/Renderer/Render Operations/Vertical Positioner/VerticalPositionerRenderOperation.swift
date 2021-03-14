@@ -10,9 +10,13 @@ import Foundation
 
 class VerticalPositionerRenderOperation {
     
-    func process(bars: [Bar]) {
+    func process(bars: [BarSlice]) {
+        bars.forEach(process)
+    }
+    
+    func process(barSlice: BarSlice) {
         
-        bars.forEachNote { note in
+        barSlice.forEachNote { note in
             self.positionNoteHeads(forNote: note)
             note.leadingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }
             note.trailingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }

@@ -15,16 +15,19 @@ extension ExampleCompositions {
 
 private func makeTestComposition() -> Composition {
     
+    let stave = Stave()
+    stave.add(bar: makeBar1())
+    stave.add(bar: makeBar8())
+    stave.add(bar: makeBar2())
+    stave.add(bar: makeBar9())
+    stave.add(bar: makeBar3())
+    stave.add(bar: makeBar4())
+    stave.add(bar: makeBar5())
+    stave.add(bar: makeBar6())
+    stave.add(bar: makeBar7())
+    
     let composition = Composition()
-    composition.add(bar: makeBar1())
-    composition.add(bar: makeBar8())
-    composition.add(bar: makeBar2())
-    composition.add(bar: makeBar9())
-    composition.add(bar: makeBar3())
-    composition.add(bar: makeBar4())
-    composition.add(bar: makeBar5())
-    composition.add(bar: makeBar6())
-    composition.add(bar: makeBar7())
+    composition.add(stave: stave)
     return composition
 }
 

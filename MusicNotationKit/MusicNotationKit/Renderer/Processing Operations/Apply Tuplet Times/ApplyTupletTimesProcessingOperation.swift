@@ -11,11 +11,7 @@ import Foundation
 class ApplyTupletTimesProcessingOperation: CompositionProcessingOperation {
     
     func process(composition: Composition) {
-        composition.bars.forEach(process)
-    }
-    
-    private func process(bar: Bar) {
-        bar.sequences.forEach(process)
+        composition.forEachNoteSequence(process)
     }
     
     private func process(noteSequence: NoteSequence) {

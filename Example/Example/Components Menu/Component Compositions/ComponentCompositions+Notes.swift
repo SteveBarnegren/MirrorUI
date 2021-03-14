@@ -13,7 +13,7 @@ extension ComponentCompositions {
     
     static var notes: Composition {
         
-        let composition = Composition()
+        let stave = Stave()
         
         func addNote(value: NoteValue, hasStem: Bool) {
             
@@ -25,7 +25,7 @@ extension ComponentCompositions {
                 let note = Note(value: value, pitch: pitch)
                 sequence.add(note: note)
                 bar.add(sequence: sequence)
-                composition.add(bar: bar)
+                stave.add(bar: bar)
             }
         }
         
@@ -55,11 +55,13 @@ extension ComponentCompositions {
             }
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         specialNotehead(modify: { $0.crossHead() })
         
+        let composition = Composition()
+        composition.add(stave: stave)
         return composition
     }
 }

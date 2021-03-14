@@ -12,38 +12,43 @@ public class Composition {
     
     var isPreprocessed = false
     
-    var bars = [Bar]()
+    var staves = [Stave]()
+    var barSlices = [BarSlice]()
     
     var notes: [Note] {
-        return bars.map { $0.sequences }.joined().map { $0.notes }.joined().toArray()
+        return staves.map { $0.bars }.joined()
+            .map { $0.sequences }.joined()
+            .map { $0.notes }.joined().toArray()
     }
     
     var numberOfBars: Int {
-        return bars.count
+        return staves.map { $0.bars.count }.max() ?? 0
     }
     
     var duration: Time {
-        return bars.reduce(Time.zero) { $0 + $1.duration }
+        return staves.map { $0.duration }.max() ?? .zero
     }
     
     // MARK: - Init
     
     public init() {}
     
-    // MARK: - Add bars
+    // MARK: - Add staves
     
-    public func add(bar: Bar) {
-        self.bars.append(bar)
+    public func add(stave: Stave) {
+        self.staves.append(stave)
     }
     
     // MARK: - Enumeration conviniences
     
     func forEachNote(_ handler: (Note) -> Void) {
         
-        for bar in bars {
-            for noteSequence in bar.sequences {
-                for note in noteSequence.notes {
-                    handler(note)
+        for stave in staves {
+            for bar in stave.bars {
+                for noteSequence in bar.sequences {
+                    for note in noteSequence.notes {
+                        handler(note)
+                    }
                 }
             }
         }
@@ -51,10 +56,12 @@ public class Composition {
     
     func forEachRest(_ handler: (Rest) -> Void) {
         
-        for bar in bars {
-            for noteSequence in bar.sequences {
-                for rest in noteSequence.rests {
-                    handler(rest)
+        for stave in staves {
+            for bar in stave.bars {
+                for noteSequence in bar.sequences {
+                    for rest in noteSequence.rests {
+                        handler(rest)
+                    }
                 }
             }
         }
@@ -62,16 +69,20 @@ public class Composition {
     
     func forEachNoteSequence(_ handler: (NoteSequence) -> Void) {
         
-        for bar in bars {
-            for noteSequence in bar.sequences {
-                handler(noteSequence)
+        for stave in staves {
+            for bar in stave.bars {            
+                for noteSequence in bar.sequences {
+                    handler(noteSequence)
+                }
             }
         }
     }
     
     func forEachBar(_ handler: (Bar) -> Void) {
-        for bar in bars {
-            handler(bar)
+        for stave in staves {
+            for bar in stave.bars {            
+                handler(bar)
+            }
         }
     }
 }

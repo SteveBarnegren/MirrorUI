@@ -14,6 +14,7 @@ extension ComponentCompositions {
     static var rests: Composition {
         
         let composition = Composition()
+        let stave = Stave()
         
         func add(value: NoteValue, number: Int) {
             let bar = Bar()
@@ -23,7 +24,7 @@ extension ComponentCompositions {
                 sequence.add(rest: Rest(value: value))
             }
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         add(value: .semibreve, number: 1)
@@ -42,8 +43,9 @@ extension ComponentCompositions {
         sequence.add(rest: Rest(value: 512))
         sequence.add(rest: Rest(value: 1024))
         bar.add(sequence: sequence)
-        composition.add(bar: bar)
+        stave.add(bar: bar)
 
+        composition.add(stave: stave)
         return composition
     }
 }

@@ -127,7 +127,7 @@ class TieRenderer {
         let bottomPathEnd = bottomResults.end
         
         var fullPathCommands = [Path.Command.move(topPathStart.asPoint())]
-        //var fullPathCommands = [Path.Command]()
+        // var fullPathCommands = [Path.Command]()
 
         fullPathCommands += topPathCommands
         

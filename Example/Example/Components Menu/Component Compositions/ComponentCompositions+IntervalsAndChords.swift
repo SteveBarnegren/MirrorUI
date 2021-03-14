@@ -13,7 +13,7 @@ extension ComponentCompositions {
     
     static var intervalsAndChords: Composition {
         
-        let composition = Composition()
+        let stave = Stave()
         
         // Intervals
         do {
@@ -24,7 +24,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitches: [.d4, .f3]))
             sequence.add(note: Note(value: .crotchet, pitches: [.e4, .g3]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Intervals (wider)
@@ -36,7 +36,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitches: [.d3, .f4]))
             sequence.add(note: Note(value: .crotchet, pitches: [.f2, .c5]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Connected intervals
@@ -46,7 +46,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .quaver, pitches: [.f3, .a4]))
             sequence.add(note: Note(value: .quaver, pitches: [.d4, .f4]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Connected intervals
@@ -56,7 +56,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .quaver, pitches: [.c3, .g3]))
             sequence.add(note: Note(value: .quaver, pitches: [.e4, .g4]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Equidistant intervals
@@ -74,7 +74,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitches: [.d5, .g2]))
             sequence.add(note: Note(value: .crotchet, pitches: [.e5, .f2]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Chords
@@ -84,7 +84,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitches: [.a5, .a4, .f3, .d3]))
             sequence.add(note: Note(value: .crotchet, pitches: [.e4, .c4, .d3]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Chords
@@ -96,7 +96,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitches: [.a5, .e3, .c3]))
             sequence.add(note: Note(value: .crotchet, pitches: [.e3, .a4, .f4]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Chords - Equidistant notes from center
@@ -108,7 +108,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitches: [.c3, .g3, .d4, .a5]))
             sequence.add(note: Note(value: .minim, pitches: [.e3, .g3, .d4, .f4]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Chords - Equidistant notes from center
@@ -119,7 +119,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .quaver, pitches: [.f3, .a4, .c4]))
             sequence.add(note: Note(value: .quaver, pitches: [.gFlat3, .bFlat4, .dFlat4]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Adjacent note intervals
@@ -131,9 +131,11 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .minim, pitches: [.b4, .c4]))
             sequence.add(note: Note(value: .crotchet, pitches: [.e4, .f4]))
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
+        let composition = Composition()
+        composition.add(stave: stave)
         return composition
     }
 }

@@ -13,7 +13,7 @@ extension ComponentCompositions {
     
     static var ties: Composition {
         
-        let composition = Composition()
+        let stave = Stave()
 
         // Tied crotchets
         do {
@@ -36,7 +36,7 @@ extension ComponentCompositions {
                 sequence.add(note: Note(value: .crotchet, pitch: secondPitch))
                 
                 bar.add(sequence: sequence)
-                composition.add(bar: bar)
+                stave.add(bar: bar)
             }
         }
         
@@ -49,7 +49,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitch: .d4))
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
    
         do {
@@ -61,7 +61,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitch: .g3))
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         // Various
@@ -76,7 +76,7 @@ extension ComponentCompositions {
                 sequence.add(note: Note(value: .crotchet, pitches: [.g3, .b4]))
                 
                 bar.add(sequence: sequence)
-                composition.add(bar: bar)
+                stave.add(bar: bar)
             }
             
             do {
@@ -99,7 +99,7 @@ extension ComponentCompositions {
                 bar.add(sequence: topSequence)
                 bar.add(sequence: middleSequence)
                 bar.add(sequence: bottomSequence)
-                composition.add(bar: bar)
+                stave.add(bar: bar)
             }
             
             do {
@@ -122,7 +122,7 @@ extension ComponentCompositions {
                 bar.add(sequence: topSequence)
                 bar.add(sequence: middleSequence)
                 bar.add(sequence: bottomSequence)
-                composition.add(bar: bar)
+                stave.add(bar: bar)
             }
             
             do {
@@ -138,7 +138,7 @@ extension ComponentCompositions {
                 sequence.add(note: Note(value: .crotchet, pitches: [.d4, .a5, .b4, .f3, .g3]))
                 
                 bar.add(sequence: sequence)
-                composition.add(bar: bar)
+                stave.add(bar: bar)
             }
  
         }
@@ -157,7 +157,7 @@ extension ComponentCompositions {
                 sequence.add(note: Note(value: .crotchet, pitches: pitches).tied())
                 
                 bar.add(sequence: sequence)
-                composition.add(bar: bar)
+                stave.add(bar: bar)
             }
             
             do {
@@ -168,7 +168,7 @@ extension ComponentCompositions {
                 sequence.add(note: Note(value: .crotchet, pitches: pitches).tied())
                 
                 bar.add(sequence: sequence)
-                composition.add(bar: bar)
+                stave.add(bar: bar)
             }
         }
         
@@ -185,9 +185,11 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .crotchet, pitch: .d4).accent())
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
+        let composition = Composition()
+        composition.add(stave: stave)
         return composition
     }
 }

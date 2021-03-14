@@ -7,12 +7,15 @@
 //
 
 import Foundation
-
+/*
 class StitchBarLayoutAnchorsProcessingOperation: CompositionProcessingOperation {
     
     private let layoutAnchorsStitcher = BarLayoutAnchorsStitcher()
     
     func process(composition: Composition) {
-        layoutAnchorsStitcher.stichAnchors(for: composition.bars)
+        for stave in composition.staves {
+            layoutAnchorsStitcher.stichAnchors(for: stave.bars)
+        }
     }
 }
+*/

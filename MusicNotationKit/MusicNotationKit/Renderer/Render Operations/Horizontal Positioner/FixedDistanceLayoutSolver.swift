@@ -45,7 +45,7 @@ class FixedDistanceLayoutSolver {
         for constraint in anchor.leadingConstraints {
             guard let fromAnchor = constraint.from else {
                 continue
-                //fatalError("All constraints should have a from value")
+                // fatalError("All constraints should have a from value")
             }
             
             var constraintDistance: Double

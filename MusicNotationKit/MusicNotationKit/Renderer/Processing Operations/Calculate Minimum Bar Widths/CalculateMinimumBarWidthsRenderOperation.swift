@@ -13,10 +13,13 @@ class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperati
     private let fixedDistanceLayoutSolver = FixedDistanceLayoutSolver()
 
     func process(composition: Composition) {
-       composition.bars.forEach(self.process)
+        composition.barSlices.forEach(process)
+//        for stave in composition.staves {
+//            stave.bars.forEach(self.process)
+//        }
     }
     
-    private func process(bar: Bar) {
+    private func process(bar: BarSlice) {
         
         bar.resetLayoutAnchors()
         
@@ -58,7 +61,7 @@ class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperati
         }
     }
     
-    private func getWidth(forBar bar: Bar) -> Double {
+    private func getWidth(forBar bar: BarSlice) -> Double {
         
         // The minimum width should be the start of the following
         // barline, or the end of the last anchor of this bar

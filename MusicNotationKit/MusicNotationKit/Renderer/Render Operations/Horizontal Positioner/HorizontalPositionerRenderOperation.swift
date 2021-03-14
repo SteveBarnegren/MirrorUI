@@ -10,7 +10,7 @@ import Foundation
 
 class HorizontalPositionerRenderOperation {
     
-    func process(bars: [Bar], layoutWidth: Double) {
+    func process(bars: [BarSlice], layoutWidth: Double) {
         
         let anchors = bars.map { $0.layoutAnchors }
             .joined()

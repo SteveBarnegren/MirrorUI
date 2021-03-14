@@ -27,7 +27,7 @@ private func makeRandomComposition() -> Composition {
     
     let numberOfBars = 20
     
-    let composition = Composition()
+    let stave = Stave()
     
     for _ in 0..<numberOfBars {
     
@@ -39,9 +39,11 @@ private func makeRandomComposition() -> Composition {
         
         let bar = Bar()
         bar.add(sequence: sequence)
-        composition.add(bar: bar)
+        stave.add(bar: bar)
     }
     
+    let composition = Composition()
+    composition.add(stave: stave)
     return composition
 }
 

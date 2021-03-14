@@ -13,7 +13,7 @@ extension ComponentCompositions {
     
     static var tuplets: Composition {
         
-        let composition = Composition()
+        let stave = Stave()
 
         do {
             let bar = Bar()
@@ -34,7 +34,7 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .quaver, pitch: .c4))
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         do {
@@ -66,7 +66,7 @@ extension ComponentCompositions {
             sequence.endTuplet()
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         do {
@@ -96,7 +96,7 @@ extension ComponentCompositions {
             sequence.endTuplet()
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         do {
@@ -143,7 +143,7 @@ extension ComponentCompositions {
                 bar.add(sequence: sequence2)
             }
             
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
         do {
@@ -172,9 +172,11 @@ extension ComponentCompositions {
             sequence.endTuplet()
             
             bar.add(sequence: sequence)
-            composition.add(bar: bar)
+            stave.add(bar: bar)
         }
         
+        let composition = Composition()
+        composition.add(stave: stave)
         return composition
        
     }

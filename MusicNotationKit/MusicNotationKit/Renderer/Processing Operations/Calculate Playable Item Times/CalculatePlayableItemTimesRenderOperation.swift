@@ -13,8 +13,12 @@ class CalculatePlayableItemTimesProcessingOperation: CompositionProcessingOperat
     private let playableItemTimeCalculator = PlayableItemTimeCalculator()
     
     func process(composition: Composition) {
+        composition.staves.forEach(process)
+    }
+    
+    func process(stave: Stave) {
         var absoluteTime = Time.zero
-        for (barIndex, bar) in composition.bars.enumerated() {
+        for (barIndex, bar) in stave.bars.enumerated() {
             
             var longestSequenceTime = Time.zero
             

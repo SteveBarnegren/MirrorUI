@@ -10,21 +10,59 @@ import Foundation
 
 private let requiredTieSpace = 2.5
 
+class GroupedHorizontalLayoutItem: HorizontalLayoutItem {
+
+    var items: [HorizontalLayoutItem]
+    
+    var layoutDuration: Time? {
+        items.compactMap { $0.layoutDuration }.max()
+    }
+    
+    var leadingLayoutItems: [AdjacentLayoutItem] {
+        fatalError("Unsupported")
+    }
+    
+    var trailingLayoutItems: [AdjacentLayoutItem] {
+        fatalError("Unsupported")
+    }
+    
+    var horizontalLayoutWidth: HorizontalLayoutWidthType {
+//        items.map { $0.horizontalLayoutWidth }√
+        // BSL: should have the real width
+        return .centered(width: 1)
+    }
+    
+    var xPosition: Double = 0 {
+        didSet {
+            // BSL: Doesn't take in to account leading / trailing offsets
+            for i in items.indices {
+                items[i].xPosition = xPosition
+            }
+        }
+    }
+    
+    init(items: [HorizontalLayoutItem]) {
+        self.items = items
+    }
+}
+
 class LayoutAnchorsBuilder {
     
     func makeAnchors(from composition: Composition) {
         
         // Add a trailing bar line
         // TODO: this should definitely not be done here!
-        composition.bars.last?.trailingBarline = Barline()
-                
-        for (bar, previousBar, isLast) in composition.bars.eachWithPrevious().eachWithIsLast().unnestTuples() {
+        for stave in composition.staves {
+            stave.bars.last?.trailingBarline = Barline()
+        }
+        
+        for (bar, previousBar, isLast) in composition.barSlices.eachWithPrevious().eachWithIsLast().unnestTuples() {
             
             var barAnchors = [LayoutAnchor]()
             
             // Barline
             let previousBarLastAnchor = previousBar?.trailingBarlineAnchor ?? previousBar?.layoutAnchors.last
-            let barlineAnchor = makeAnchor(forBarline: bar.leadingBarline, fromPrevious: previousBarLastAnchor)
+            let barlineAnchor = makeAnchor(forBarline: bar.leadingBarlinePositionable, fromPrevious: previousBarLastAnchor)
             previousBar?.trailingBarlineAnchor = barlineAnchor
             barAnchors.append(barlineAnchor)
             
@@ -46,12 +84,13 @@ class LayoutAnchorsBuilder {
             
             barAnchors += combinedAnchors
             
-            if isLast, let trailingBarline = composition.bars.last?.trailingBarline {
+            if isLast, let trailingBarline = composition.barSlices.last?.leadingBarlinePositionable {
                 barAnchors.append(makeAnchor(forBarline: trailingBarline, fromPrevious: barAnchors.last))
             }
             
             bar.layoutAnchors = barAnchors
         }
+        
     }
     
     // MARK: - Add Ties
@@ -106,7 +145,7 @@ class LayoutAnchorsBuilder {
     
     // MARK: - Make Anchors
     
-    private func makeAnchor(forBarline barline: Barline, fromPrevious previousAnchor: LayoutAnchor?) -> LayoutAnchor {
+    private func makeAnchor(forBarline barline: HorizontalLayoutItem, fromPrevious previousAnchor: LayoutAnchor?) -> LayoutAnchor {
         
         let anchor = SingleItemLayoutAnchor(item: barline)
         anchor.leadingWidth = barline.leadingWidth

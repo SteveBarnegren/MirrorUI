@@ -40,11 +40,13 @@ class MusicExampleViewController: UIViewController {
     
     func makeComposition() -> Composition {
         
+        let stave = Stave()
+        
+        stave.add(bar: makeFirstBar())
+        stave.add(bar: makeSecondBar())
+        
         let composition = Composition()
-        
-        composition.add(bar: makeFirstBar())
-        composition.add(bar: makeSecondBar())
-        
+        composition.add(stave: stave)
         return composition
     }
     

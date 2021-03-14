@@ -20,7 +20,9 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
     // MARK: - Create ties
     
     private func createTies(forComposition composition: Composition) {
-        composition.bars.eachWithNext().forEach(createTies)
+        for stave in composition.staves {
+            stave.bars.eachWithNext().forEach(createTies)
+        }
     }
     
     private func createTies(bar: Bar, nextBar: Bar?) {
@@ -91,10 +93,12 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
             barsToProcess.removeAll()
         }
         
-        for bar in composition.bars {
-            barsToProcess.append(bar)
-            if doesBarContainTiesToNextBar(bar: bar) == false {
-                processBars()
+        for stave in composition.staves {
+            for bar in stave.bars {
+                barsToProcess.append(bar)
+                if doesBarContainTiesToNextBar(bar: bar) == false {
+                    processBars()
+                }
             }
         }
         
