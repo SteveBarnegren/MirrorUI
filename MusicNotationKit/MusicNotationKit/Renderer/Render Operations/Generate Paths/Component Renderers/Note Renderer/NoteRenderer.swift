@@ -323,7 +323,7 @@ class NoteRenderer {
         case let (value?, _):
             stemEndY = value
         case (nil, let direction):
-            stemEndY = note.stemConnectingNoteHead.yPosition + note.stemLength.inverted(if: { note.stemDirection == .down })
+            stemEndY = note.stemConnectingNoteHead.yPosition + note.stemEndOffset
         }
         
         guard let stemRect = self.stemRect(fromNote: note, to: stemEndY) else {
