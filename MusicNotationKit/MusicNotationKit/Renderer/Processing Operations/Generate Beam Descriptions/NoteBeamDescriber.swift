@@ -26,7 +26,7 @@ extension Beaming where T == Note {
         return Beaming(division: { return $0.value.division },
                        duration: { return $0.duration },
                        time: { return $0.barTime },
-                       numberOfTails: { return $0.symbolDescription.numberOfTails },
+                       numberOfTails: { return $0.numberOfTails },
                        setBeams: { note, beams in note.beams = beams})
     }
 }

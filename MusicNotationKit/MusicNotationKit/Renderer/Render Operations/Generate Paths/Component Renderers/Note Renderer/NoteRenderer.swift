@@ -63,12 +63,12 @@ class NoteRenderer {
         paths += makeHeadPaths(forNote: note)
         
         // Crotchet
-        if note.symbolDescription.numberOfTails == 0 {
+        if note.numberOfTails == 0 {
             paths.append(maybe: makeStemPath(forNote: note))
         }
         
         // Quaver
-        if note.symbolDescription.numberOfTails == 1 {
+        if note.numberOfTails == 1 {
             paths.append(maybe: makeStemPath(forNote: note))
             
             var path = Path(commands: makeQuaverTailCommands())
@@ -91,18 +91,18 @@ class NoteRenderer {
         }
         
         // Semiquaver or faster
-        if note.symbolDescription.numberOfTails >= 2 {
+        if note.numberOfTails >= 2 {
             
             let stemDirection = note.symbolDescription.stemDirection
             
             let bottomOffset = 2.2
             let eachTailYOffset = 0.5
-            let tailsHeight = eachTailYOffset * Double(note.symbolDescription.numberOfTails)
+            let tailsHeight = eachTailYOffset * Double(note.numberOfTails)
             let stemHeight = max(note.symbolDescription.stemLength, tailsHeight + bottomOffset)
 
             paths.append(maybe: makeStemPath(forNote: note, to: note.stemConnectingNoteHead.yPosition + stemHeight.inverted(if: { stemDirection == .down })))
             
-            for (tailNumber, isLast) in (0..<note.symbolDescription.numberOfTails).eachWithIsLast() {
+            for (tailNumber, isLast) in (0..<note.numberOfTails).eachWithIsLast() {
                 let xOffset = note.stemConnectionPoint.x
                 let yOffset = (stemHeight - Double(tailNumber) * eachTailYOffset).inverted(if: { note.symbolDescription.stemDirection == .down })
                 let commands = isLast ? makeFastNoteBottomTailCommands() : makeFastNoteTailCommands()

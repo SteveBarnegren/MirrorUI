@@ -26,7 +26,7 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
             // Make basic symbol description
             let description = noteSymbolDescriber.symbolDescription(forNote: $0)
             $0.hasStem = description.hasStem
-            $0.symbolDescription.numberOfTails = description.numberOfTails
+            $0.numberOfTails = description.numberOfTails
             
             // Make note head descriptions
             $0.noteHeadDescriptions = noteHeadDescriber.noteHeadDescriptions(forNote: $0)

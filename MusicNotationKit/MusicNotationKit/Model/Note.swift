@@ -28,6 +28,8 @@ public class Note: Playable {
     
     var tiedToNext = false
     
+    var numberOfTails: Int = 0
+    
     // MARK: - Stem
     
     /// If the note has a stem
@@ -209,7 +211,6 @@ class NoteHeadDescription: VerticallyPositionable {
 
 class NoteSymbolDescription {
     
-    var numberOfTails: Int
     var stemDirection = StemDirection.up
     var stemLength = Double(0)
     
@@ -217,11 +218,7 @@ class NoteSymbolDescription {
         return stemLength.inverted(if: { stemDirection == .down })
     }
     
-    init(numberOfTails: Int) {
-        self.numberOfTails = numberOfTails
-    }
-    
     static var standard: NoteSymbolDescription {
-        return NoteSymbolDescription(numberOfTails: 0)
+        return NoteSymbolDescription()
     }
 }
