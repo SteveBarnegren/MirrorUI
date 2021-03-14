@@ -10,7 +10,7 @@ import Foundation
 
 extension GlyphStore {
     
-    func glyph(forNoteHeadStyle style: NoteHeadDescription.Style) -> Glyph? {
+    func glyph(forNoteHeadStyle style: NoteHead.Style) -> Glyph? {
         switch style {
         case .none:
             return nil

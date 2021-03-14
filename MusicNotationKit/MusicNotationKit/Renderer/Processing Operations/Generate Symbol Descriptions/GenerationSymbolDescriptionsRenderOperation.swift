@@ -29,7 +29,7 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
             $0.numberOfTails = description.numberOfTails
             
             // Make note head descriptions
-            $0.noteHeadDescriptions = noteHeadDescriber.noteHeadDescriptions(forNote: $0)
+            $0.noteHeads = noteHeadDescriber.noteHeadDescriptions(forNote: $0)
         }
         composition.enumerateRests { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
         

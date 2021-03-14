@@ -10,13 +10,13 @@ import Foundation
 
 class NoteHeadDescriber {
     
-    func noteHeadDescriptions(forNote note: Note) -> [NoteHeadDescription] {
+    func noteHeadDescriptions(forNote note: Note) -> [NoteHead] {
         
         let headStyle = self.headStyle(forNote: note)
         
-        var noteHeadDescriptions = [NoteHeadDescription]()
+        var noteHeadDescriptions = [NoteHead]()
         for pitch in note.pitches {
-            let description = NoteHeadDescription(style: headStyle)
+            let description = NoteHead(style: headStyle)
             description.staveOffset = pitch.staveOffset
             description.stavePosition = pitch.stavePosition
             description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch)
@@ -27,7 +27,7 @@ class NoteHeadDescriber {
         return noteHeadDescriptions
     }
     
-    private func headStyle(forNote note: Note) -> NoteHeadDescription.Style {
+    private func headStyle(forNote note: Note) -> NoteHead.Style {
         
         if note.noteHeadType == .cross {
             return .cross

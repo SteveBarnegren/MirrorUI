@@ -19,7 +19,7 @@ public class Bar {
     var trailingTies: [Tie] {
         return sequences
             .map { $0.notes }.joined()
-            .map { $0.noteHeadDescriptions }.joined()
+            .map { $0.noteHeads }.joined()
             .compactMap { $0.tie?.chosenVariation }
     }
     

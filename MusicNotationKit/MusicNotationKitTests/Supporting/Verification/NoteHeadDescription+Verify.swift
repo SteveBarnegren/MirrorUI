@@ -10,9 +10,9 @@ import Foundation
 import XCTest
 @testable import MusicNotationKit
 
-extension NoteHeadDescription {
+extension NoteHead {
     
-    @discardableResult func verify(style: NoteHeadDescription.Style, file: StaticString = #file, line: UInt = #line) -> Self {
+    @discardableResult func verify(style: NoteHead.Style, file: StaticString = #file, line: UInt = #line) -> Self {
         XCTAssertEqual(self.style, style, file: file, line: line)
         return self
     }

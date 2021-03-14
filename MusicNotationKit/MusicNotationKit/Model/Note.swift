@@ -22,7 +22,7 @@ public class Note: Playable {
     var highestPitch: Pitch { return pitches.max()! }
     var lowestPitch: Pitch { return pitches.min()! }
     
-    var noteHeadDescriptions = [NoteHeadDescription]()
+    var noteHeads = [NoteHead]()
     var articulationMarks = [ArticulationMark]()
     
     var tiedToNext = false
@@ -43,23 +43,23 @@ public class Note: Playable {
     }
     
     /// The note head that the stem connects to
-    var stemConnectingNoteHead: NoteHeadDescription {
+    var stemConnectingNoteHead: NoteHead {
         // We always expect there to be at least one note note head
         switch stemDirection {
         case .up:
-            return noteHeadDescriptions.min(byKey: \.staveOffset)!
+            return noteHeads.min(byKey: \.staveOffset)!
         case .down:
-            return noteHeadDescriptions.max(byKey: \.staveOffset)!
+            return noteHeads.max(byKey: \.staveOffset)!
         }
     }
     
-    var stemExtendingNoteHead: NoteHeadDescription {
+    var stemExtendingNoteHead: NoteHead {
         // We always expect there to be at least one note note head
         switch stemDirection {
         case .up:
-            return noteHeadDescriptions.max(byKey: \.staveOffset)!
+            return noteHeads.max(byKey: \.staveOffset)!
         case .down:
-            return noteHeadDescriptions.min(byKey: \.staveOffset)!
+            return noteHeads.min(byKey: \.staveOffset)!
         }
     }
     
@@ -113,10 +113,10 @@ public class Note: Playable {
     var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.4)
 
     var leadingLayoutItems: [AdjacentLayoutItem] {
-        return self.noteHeadDescriptions.map { $0.leadingLayoutItems }.joined().toArray()
+        return self.noteHeads.map { $0.leadingLayoutItems }.joined().toArray()
     }
     var trailingLayoutItems: [AdjacentLayoutItem] {
-        return self.noteHeadDescriptions.map { $0.trailingLayoutItems }.joined().toArray()
+        return self.noteHeads.map { $0.trailingLayoutItems }.joined().toArray()
     }
     
     // HorizontallyPositionable
@@ -188,7 +188,7 @@ enum NoteHeadAlignment {
     case rightOfStem
 }
 
-class NoteHeadDescription: VerticallyPositionable {
+class NoteHead: VerticallyPositionable {
     
     enum Style {
         case none

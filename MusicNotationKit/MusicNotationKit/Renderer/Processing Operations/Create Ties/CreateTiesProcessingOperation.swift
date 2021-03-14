@@ -63,16 +63,16 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
             var ties = [Variation<Tie>]()
             for variation in tieVariations.variations {
                 variation.value.fromNote = startNote
-                variation.value.fromNoteHead = startNote.noteHeadDescriptions[tieVariations.startNoteHeadIndex]
+                variation.value.fromNoteHead = startNote.noteHeads[tieVariations.startNoteHeadIndex]
                 variation.value.toNote = endNote
-                variation.value.toNoteHead = endNote.noteHeadDescriptions[tieVariations.endNoteHeadIndex]
+                variation.value.toNoteHead = endNote.noteHeads[tieVariations.endNoteHeadIndex]
                 variation.value.startNoteCompositionTime = startNote.compositionTime
                 variation.value.endNoteCompositionTime = endNote.compositionTime
                 ties.append(variation)
             }
             
             let variationSet = VariationSet<Tie>(variations: ties)
-            startNote.noteHeadDescriptions[tieVariations.startNoteHeadIndex].tie = variationSet
+            startNote.noteHeads[tieVariations.startNoteHeadIndex].tie = variationSet
         }
     }
     
@@ -105,7 +105,7 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
         
         for sequence in bar.sequences {
             for note in sequence.notes {
-                for noteHead in note.noteHeadDescriptions {
+                for noteHead in note.noteHeads {
                     if let tie = noteHead.tie?.chosenVariation {
                         if tie.startNoteCompositionTime.bar != tie.endNoteCompositionTime.bar {
                             return true
@@ -142,7 +142,7 @@ class CreateTiesProcessingOperation: CompositionProcessingOperation {
         var variationSets = [VariationSet<Tie>]()
         
         for note in noteSequence.notes {
-            for noteHead in note.noteHeadDescriptions {
+            for noteHead in note.noteHeads {
                 variationSets.append(maybe: noteHead.tie)
             }
         }

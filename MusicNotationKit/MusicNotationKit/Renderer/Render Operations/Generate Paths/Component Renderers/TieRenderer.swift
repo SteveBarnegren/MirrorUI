@@ -363,7 +363,7 @@ class TieRenderer {
         return [path]
     }
     
-    private func xPosition(forNote note: Note, noteHead: NoteHeadDescription) -> Double {
+    private func xPosition(forNote note: Note, noteHead: NoteHead) -> Double {
         return note.xPosition
             + NoteHeadAligner.xOffset(forNoteHead: noteHead, glyphs: glyphs)
     }

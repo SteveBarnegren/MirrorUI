@@ -50,7 +50,7 @@ public class NoteSequence {
     }
     var ties: [VariationSet<Tie>] {
         return notes.map { note in
-            note.noteHeadDescriptions.compactMap { $0.tie }
+            note.noteHeads.compactMap { $0.tie }
         }.joined().toArray()
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 class NoteHeadAligner {
     
-    static func xOffset(forNoteHead noteHead: NoteHeadDescription, glyphs: GlyphStore) -> Double {
+    static func xOffset(forNoteHead noteHead: NoteHead, glyphs: GlyphStore) -> Double {
         
         guard let glyph = glyphs.glyph(forNoteHeadStyle: noteHead.style) else {
             return 0

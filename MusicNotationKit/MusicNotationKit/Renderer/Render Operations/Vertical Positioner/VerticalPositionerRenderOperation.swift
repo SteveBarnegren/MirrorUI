@@ -20,7 +20,7 @@ class VerticalPositionerRenderOperation {
     }
     
     private func positionNoteHeads(forNote note: Note) {
-        for noteHead in note.noteHeadDescriptions {
+        for noteHead in note.noteHeads {
             noteHead.yPosition = noteHead.staveOffset
         }
     }

@@ -95,7 +95,7 @@ class LayoutAnchorsBuilder {
             }
             
             // Create pending ties for any ties that are start on this note
-            for noteHead in note.noteHeadDescriptions {
+            for noteHead in note.noteHeads {
                 if let tie = noteHead.tie?.chosenVariation {
                     let pendingTie = PendingTie(note: note, anchor: anchor, tie: tie)
                     pendingTies.append(pendingTie)

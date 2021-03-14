@@ -293,7 +293,7 @@ class NoteRenderer {
         
         var paths = [Path]()
         
-        for noteHeadDescription in note.noteHeadDescriptions {
+        for noteHeadDescription in note.noteHeads {
             
             guard let glyph = glyphs.glyph(forNoteHeadStyle: noteHeadDescription.style) else {
                 continue

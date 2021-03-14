@@ -65,7 +65,7 @@ class CompositionPathsCreator {
         
         let notePaths = noteRenderer.paths(forNotes: noteSequence.notes)
         let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
-        let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeadDescriptions }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
+        let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeads }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let restPaths = restRenderer.paths(forRests: noteSequence.rests)
         
         let articulationMarkPaths = noteSequence.notes.map { note in
@@ -77,7 +77,7 @@ class CompositionPathsCreator {
         // Draw ties
         var tiePaths = [Path]()
         for note in noteSequence.notes {
-            for noteHeadDescription in note.noteHeadDescriptions {
+            for noteHeadDescription in note.noteHeads {
                 if let tie = noteHeadDescription.tie?.chosenVariation {
                     tiePaths += tieRenderer.paths(forTie: tie,
                                                   inBarRange: barRange,

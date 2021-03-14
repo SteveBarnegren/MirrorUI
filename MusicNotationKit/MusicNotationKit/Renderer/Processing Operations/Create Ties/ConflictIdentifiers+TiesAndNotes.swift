@@ -28,7 +28,7 @@ extension ConflictIdentifiers {
         
         // If the note is at the tie start time, check for overlapping note heads
         if note.compositionTime == tie.startNoteCompositionTime && doesTieVerticallyAlignWithNote(tie: tie) {
-            for noteHead in note.noteHeadDescriptions where tie.fromNoteHead !== noteHead {
+            for noteHead in note.noteHeads where tie.fromNoteHead !== noteHead {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 let tieY = startY(forTie: tie)
                 if yRange.contains(tieY) {
@@ -40,7 +40,7 @@ extension ConflictIdentifiers {
         
         // If the note is at the tie end time, check for overlapping note heads
         if note.compositionTime == tie.endNoteCompositionTime && doesTieVerticallyAlignWithNote(tie: tie) {
-            for noteHead in note.noteHeadDescriptions where tie.toNoteHead !== noteHead {
+            for noteHead in note.noteHeads where tie.toNoteHead !== noteHead {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 let tieY = startY(forTie: tie)
                 if yRange.contains(tieY) {
@@ -54,7 +54,7 @@ extension ConflictIdentifiers {
         let middleYRange = yRange(forTieMiddle: tie)
         let middleTimeRange = timeRange(forTieMiddle: tie)
         if middleTimeRange.contains(note.compositionTime.absoluteTime) {
-            for noteHead in note.noteHeadDescriptions {
+            for noteHead in note.noteHeads {
                 let yRange = self.yRange(forNoteHead: noteHead)
                 if yRange.overlaps(middleYRange) {
                     return false
@@ -95,7 +95,7 @@ extension ConflictIdentifiers {
         return y + yOffset
     }
     
-    static func yRange(forNoteHead noteHead: NoteHeadDescription) -> ClosedRange<Double> {
+    static func yRange(forNoteHead noteHead: NoteHead) -> ClosedRange<Double> {
         
         let staveOffset = StavePositionUtils.staveYOffset(forStavePostion: noteHead.stavePosition)
         let noteHeadHeight = 1.0

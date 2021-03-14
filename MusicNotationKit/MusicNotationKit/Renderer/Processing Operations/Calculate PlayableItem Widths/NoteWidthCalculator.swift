@@ -28,7 +28,7 @@ class NoteWidthCalculator {
         var leftOfStemNotesWidth = 0.0
         var rightOfStemNotesWidth = 0.0
         
-        for description in note.noteHeadDescriptions {
+        for description in note.noteHeads {
             
             guard let glyph = glyphs.glyph(forNoteHeadStyle: description.style) else {
                 continue
