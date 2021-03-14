@@ -32,7 +32,7 @@ class CalculateStemPositionsProcessingOperation: CompositionProcessingOperation 
                 
         let anchor: Vector2D
         
-        switch note.symbolDescription.stemDirection {
+        switch note.stemDirection {
         case .up:
             anchor = glyph.stemUpSE
         case .down:

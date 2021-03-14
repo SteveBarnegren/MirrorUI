@@ -181,6 +181,6 @@ extension TieCreator.Transformer {
     static var notes: TieCreator<Note>.Transformer<Note> {
         return TieCreator<Note>.Transformer<Note>.init(pitches: { $0.pitches },
                                                        stavePositions: { n in n.noteHeadDescriptions.map { $0.stavePosition } },
-                                                       stemDirection: { $0.symbolDescription.stemDirection })
+                                                       stemDirection: { $0.stemDirection })
     }
 }

@@ -22,7 +22,6 @@ public class Note: Playable {
     var highestPitch: Pitch { return pitches.max()! }
     var lowestPitch: Pitch { return pitches.min()! }
     
-    var symbolDescription = NoteSymbolDescription.standard
     var noteHeadDescriptions = [NoteHeadDescription]()
     var articulationMarks = [ArticulationMark]()
     
@@ -35,10 +34,18 @@ public class Note: Playable {
     /// If the note has a stem
     var hasStem: Bool = false
     
+    var stemDirection = StemDirection.up
+    
+    var stemLength = Double(0)
+    
+    var stemEndOffset: Double {
+        return stemLength.inverted(if: { stemDirection == .down })
+    }
+    
     /// The note head that the stem connects to
     var stemConnectingNoteHead: NoteHeadDescription {
         // We always expect there to be at least one note note head
-        switch symbolDescription.stemDirection {
+        switch stemDirection {
         case .up:
             return noteHeadDescriptions.min(byKey: \.staveOffset)!
         case .down:
@@ -48,7 +55,7 @@ public class Note: Playable {
     
     var stemExtendingNoteHead: NoteHeadDescription {
         // We always expect there to be at least one note note head
-        switch symbolDescription.stemDirection {
+        switch stemDirection {
         case .up:
             return noteHeadDescriptions.max(byKey: \.staveOffset)!
         case .down:
@@ -64,7 +71,7 @@ public class Note: Playable {
     
     /// The absolute x position of the stem's center
     var stemCenterX: Double {
-        switch symbolDescription.stemDirection {
+        switch stemDirection {
         case .up:
             return xPosition + stemConnectionPoint.x - stemWidth/2
         case .down:
@@ -84,11 +91,11 @@ public class Note: Playable {
     
     /// The y position of the end of the note stem
     var stemEndY: Double {
-        switch symbolDescription.stemDirection {
+        switch stemDirection {
         case .up:
-            return stemConnectingNoteHead.yPosition + symbolDescription.stemLength
+            return stemConnectingNoteHead.yPosition + stemLength
         case .down:
-            return stemConnectingNoteHead.yPosition - symbolDescription.stemLength
+            return stemConnectingNoteHead.yPosition - stemLength
         }
     }
     
@@ -107,11 +114,9 @@ public class Note: Playable {
 
     var leadingLayoutItems: [AdjacentLayoutItem] {
         return self.noteHeadDescriptions.map { $0.leadingLayoutItems }.joined().toArray()
-        //return self.symbolDescription.leadingLayoutItems
     }
     var trailingLayoutItems: [AdjacentLayoutItem] {
         return self.noteHeadDescriptions.map { $0.trailingLayoutItems }.joined().toArray()
-        //return self.symbolDescription.trailingLayoutItems
     }
     
     // HorizontallyPositionable
@@ -206,19 +211,5 @@ class NoteHeadDescription: VerticallyPositionable {
 
     init(style: Style) {
         self.style = style
-    }
-}
-
-class NoteSymbolDescription {
-    
-    var stemDirection = StemDirection.up
-    var stemLength = Double(0)
-    
-    var stemEndOffset: Double {
-        return stemLength.inverted(if: { stemDirection == .down })
-    }
-    
-    static var standard: NoteSymbolDescription {
-        return NoteSymbolDescription()
     }
 }

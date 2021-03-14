@@ -134,7 +134,7 @@ extension NoteHeadAlignmentDecider.Transformer {
         return .init(noteHeadStavePositions: { (note) -> [Int] in
             return note.noteHeadDescriptions.map { $0.stavePosition }
         }, stemDirection: { (note) -> StemDirection in
-            note.symbolDescription.stemDirection
+            note.stemDirection
         }, setNoteHeadAlignmentForIndex: { (note, index, alignment) in
             note.noteHeadDescriptions[index].alignment = alignment
         })

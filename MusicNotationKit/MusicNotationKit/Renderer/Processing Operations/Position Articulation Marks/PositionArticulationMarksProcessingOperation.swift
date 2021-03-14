@@ -31,7 +31,7 @@ class PositionArticulationMarksProcessingOperation: CompositionProcessingOperati
         let pitch: Pitch
         let spaceOffset: Int
         let lineRounding: StaveSpace.LineRounding
-        switch note.symbolDescription.stemDirection {
+        switch note.stemDirection {
         case .up:
             pitch = note.lowestPitch
             spaceOffset = -1

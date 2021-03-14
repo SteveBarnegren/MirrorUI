@@ -72,18 +72,18 @@ class NoteRenderer {
             paths.append(maybe: makeStemPath(forNote: note))
             
             var path = Path(commands: makeQuaverTailCommands())
-            if note.symbolDescription.stemDirection == .down {
+            if note.stemDirection == .down {
                 path.invertY()
             }
             
             var xOffset = note.stemConnectionPoint.x
             
             // x nudge
-            if note.symbolDescription.stemDirection == .up {
+            if note.stemDirection == .up {
                 xOffset -= 0.11
             }
             
-            let yOffset = 1.30.inverted(if: { note.symbolDescription.stemDirection == .down })
+            let yOffset = 1.30.inverted(if: { note.stemDirection == .down })
             path.translate(x: note.xPosition + xOffset, y: note.stemConnectingNoteHead.yPosition + yOffset)
         
             path.drawStyle = .fill
@@ -93,23 +93,23 @@ class NoteRenderer {
         // Semiquaver or faster
         if note.numberOfTails >= 2 {
             
-            let stemDirection = note.symbolDescription.stemDirection
+            let stemDirection = note.stemDirection
             
             let bottomOffset = 2.2
             let eachTailYOffset = 0.5
             let tailsHeight = eachTailYOffset * Double(note.numberOfTails)
-            let stemHeight = max(note.symbolDescription.stemLength, tailsHeight + bottomOffset)
+            let stemHeight = max(note.stemLength, tailsHeight + bottomOffset)
 
             paths.append(maybe: makeStemPath(forNote: note, to: note.stemConnectingNoteHead.yPosition + stemHeight.inverted(if: { stemDirection == .down })))
             
             for (tailNumber, isLast) in (0..<note.numberOfTails).eachWithIsLast() {
                 let xOffset = note.stemConnectionPoint.x
-                let yOffset = (stemHeight - Double(tailNumber) * eachTailYOffset).inverted(if: { note.symbolDescription.stemDirection == .down })
+                let yOffset = (stemHeight - Double(tailNumber) * eachTailYOffset).inverted(if: { note.stemDirection == .down })
                 let commands = isLast ? makeFastNoteBottomTailCommands() : makeFastNoteTailCommands()
                 
                 var path = Path(commands: commands)
                 
-                if note.symbolDescription.stemDirection == .down {
+                if note.stemDirection == .down {
                     path.invertY()
                 }
                 path.translate(x: note.xPosition + xOffset,
@@ -166,7 +166,7 @@ class NoteRenderer {
         
         var paths = [Path]()
 
-        let stemDirection = notes[0].symbolDescription.stemDirection
+        let stemDirection = notes[0].stemDirection
         
         // Draw notes with stems
         for note in notes {
@@ -194,18 +194,18 @@ class NoteRenderer {
                 case .cutOffLeft:
                     let beamY: Double
                     if stemDirection == .up {
-                        beamY = notes.map { $0.stemConnectingNoteHead.yPosition + $0.symbolDescription.stemEndOffset }.max()!
+                        beamY = notes.map { $0.stemConnectingNoteHead.yPosition + $0.stemEndOffset }.max()!
                     } else {
-                        beamY = notes.map { $0.stemConnectingNoteHead.yPosition + $0.symbolDescription.stemEndOffset }.min()!
+                        beamY = notes.map { $0.stemConnectingNoteHead.yPosition + $0.stemEndOffset }.min()!
                     }
                     let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: false)
                     paths.append(path)
                 case .cutOffRight:
                     let beamY: Double
                     if stemDirection == .up {
-                        beamY = notes.map { $0.stemConnectingNoteHead.yPosition + $0.symbolDescription.stemEndOffset }.max()!
+                        beamY = notes.map { $0.stemConnectingNoteHead.yPosition + $0.stemEndOffset }.max()!
                     } else {
-                        beamY = notes.map { $0.stemConnectingNoteHead.yPosition + $0.symbolDescription.stemEndOffset }.min()!
+                        beamY = notes.map { $0.stemConnectingNoteHead.yPosition + $0.stemEndOffset }.min()!
                     }
                     let path = makeCutOffBeamPath(forNote: note, beamYPosition: beamY, beamIndex: beamIndex, rightSide: true)
                     paths.append(path)
@@ -218,15 +218,15 @@ class NoteRenderer {
     
     private func makeBeamPath(fromNote: Note, toNote: Note, beamIndex: Int) -> Path {
         
-        let stemDirection = fromNote.symbolDescription.stemDirection
+        let stemDirection = fromNote.stemDirection
         
         let startX = fromNote.stemTrailingEdge
         let endX = toNote.stemLeadingEdge
         let eachBeamYOffset = (beamSeparation + beamThickness).inverted(if: { stemDirection == .down })
         
         let thickness = beamThickness.inverted(if: { stemDirection == .down })
-        let startY = fromNote.stemConnectingNoteHead.yPosition + fromNote.symbolDescription.stemEndOffset
-        let endY = toNote.stemConnectingNoteHead.yPosition + toNote.symbolDescription.stemEndOffset
+        let startY = fromNote.stemConnectingNoteHead.yPosition + fromNote.stemEndOffset
+        let endY = toNote.stemConnectingNoteHead.yPosition + toNote.stemEndOffset
         
         let startPoint = Vector2D(startX, startY - (Double(beamIndex) * eachBeamYOffset))
         let endPoint = Vector2D(endX, endY - (Double(beamIndex) * eachBeamYOffset))
@@ -265,7 +265,7 @@ class NoteRenderer {
     
     private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
         
-        let stemDirection = note.symbolDescription.stemDirection
+        let stemDirection = note.stemDirection
         let height = beamThickness
         let width = 0.85
         
@@ -319,11 +319,11 @@ class NoteRenderer {
         }
         
         let stemEndY: Double
-        switch (customStemEndY, note.symbolDescription.stemDirection) {
+        switch (customStemEndY, note.stemDirection) {
         case let (value?, _):
             stemEndY = value
         case (nil, let direction):
-            stemEndY = note.stemConnectingNoteHead.yPosition + note.symbolDescription.stemLength.inverted(if: { note.symbolDescription.stemDirection == .down })
+            stemEndY = note.stemConnectingNoteHead.yPosition + note.stemLength.inverted(if: { note.stemDirection == .down })
         }
         
         guard let stemRect = self.stemRect(fromNote: note, to: stemEndY) else {
@@ -344,7 +344,7 @@ class NoteRenderer {
         let noteHead = note.stemConnectingNoteHead
         let glyph = glyphs.glyph(forNoteHeadStyle: noteHead.style)!
         
-        if note.symbolDescription.stemDirection == .up {
+        if note.stemDirection == .up {
             let anchor = glyph.stemUpSE
             let connectPoint = Vector2D(note.xPosition - glyph.width/2 + anchor.x,
                                         noteHead.yPosition + anchor.y)

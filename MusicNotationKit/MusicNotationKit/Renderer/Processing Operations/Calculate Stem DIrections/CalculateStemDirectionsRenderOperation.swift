@@ -35,9 +35,9 @@ class CalculateStemDirectionsProcessingOperation: CompositionProcessingOperation
         
         for (sequence, pitch) in zip(noteSequences, averagePitches) {
             if averagePitches.contains(where: { $0 > pitch }) {
-                sequence.notes.forEach { $0.symbolDescription.stemDirection = .down }
+                sequence.notes.forEach { $0.stemDirection = .down }
             } else {
-                sequence.notes.forEach { $0.symbolDescription.stemDirection = .up }
+                sequence.notes.forEach { $0.stemDirection = .up }
             }
         }
     }

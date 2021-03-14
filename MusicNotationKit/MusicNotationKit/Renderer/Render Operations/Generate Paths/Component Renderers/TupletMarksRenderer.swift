@@ -117,7 +117,7 @@ class TupletMarksRenderer {
     
     private func markPosition(forPlayables playables: [Playable]) -> TupletMarkPosition {
         
-        let placeAbove = playables.compactMap { $0 as? Note }.first?.symbolDescription.stemDirection.isUp ?? false
+        let placeAbove = playables.compactMap { $0 as? Note }.first?.stemDirection.isUp ?? false
         
         var y = Double(0)
         

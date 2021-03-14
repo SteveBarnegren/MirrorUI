@@ -119,7 +119,7 @@ extension NoteClusterStemLengthCalculator.Transformer {
     static var notes: NoteClusterStemLengthCalculator.Transformer<Note> {
         return NoteClusterStemLengthCalculator.Transformer<Note>(connectingHeadPosition: { Vector2D($0.xPosition, $0.stemConnectingNoteHead.yPosition) },
                                                                  extendingHeadPosition: { Vector2D($0.xPosition, $0.stemExtendingNoteHead.yPosition) },
-                                                                 stemDirection: { $0.symbolDescription.stemDirection },
-                                                                 setStemLength: { note, v in note.symbolDescription.stemLength = v })
+                                                                 stemDirection: { $0.stemDirection },
+                                                                 setStemLength: { note, v in note.stemLength = v })
     }
 }
