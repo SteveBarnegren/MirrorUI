@@ -17,7 +17,7 @@ extension ComponentCompositions {
         composition.add(stave: makeSecondStave())
         return composition
     }
-    
+    /*
     private static func makeFirstStave() -> Stave {
         
         let stave = Stave()
@@ -81,8 +81,8 @@ extension ComponentCompositions {
         
         return stave
     }
+    */
     
-    /*
     private static func makeFirstStave() -> Stave {
         
         let stave = Stave()
@@ -196,5 +196,5 @@ extension ComponentCompositions {
 
         return stave
     }
-    */
+    
 }

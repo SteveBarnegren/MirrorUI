@@ -78,10 +78,6 @@ class CompositionPathsCreator {
     
     private func makePaths(forBar bar: Bar, inRange barRange: ClosedRange<Int>, canvasWidth: Double, leadingTies: [Tie]) -> [Path] {
         
-        print("*************")
-        print("Leading barline x: \(bar.leadingBarline.xPosition)")
-        print("notes x: [\(bar.sequences.first!.playables.map { "\($0.xPosition)" }.joined(separator: ","))]")
-        
         let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
         
         let notePaths =  bar.sequences.map {
