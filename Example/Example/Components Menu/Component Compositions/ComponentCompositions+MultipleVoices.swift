@@ -13,8 +13,8 @@ extension ComponentCompositions {
     
     static var multipleVoices: Composition {
         let composition = Composition()
-        composition.add(stave: makeFirstStave())
         composition.add(stave: makeSecondStave())
+        composition.add(stave: makeFirstStave())
         return composition
     }
     /*
@@ -91,6 +91,48 @@ extension ComponentCompositions {
             let bar = Bar()
             let sequence = NoteSequence()
             
+            sequence.add(rest: Rest(value: .semibreve))
+            
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+        
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            
+            sequence.add(rest: Rest(value: .crotchet))
+            sequence.add(rest: Rest(value: .quaver))
+            sequence.add(note: Note(value: .quaver, pitch: .b4))
+            sequence.add(note: Note(value: .crotchet, pitch: .b4))
+            sequence.add(note: Note(value: .quaver, pitch: .c4))
+            sequence.add(note: Note(value: .quaver, pitch: .d4))
+
+
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+        
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            
+            sequence.add(note: Note(value: .crotchet, pitch: .d4))
+            sequence.add(rest: Rest(value: .quaver))
+            sequence.add(note: Note(value: .quaver, pitch: .c4))
+            sequence.add(note: Note(value: .crotchet, pitch: .b4))
+            sequence.add(note: Note(value: .quaver, pitch: .c4))
+            sequence.add(note: Note(value: .quaver, pitch: .d4))
+
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+        
+        
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            
             sequence.add(rest: Rest(value: .dottedQuaver))
             sequence.add(note: Note(value: .semibreve, pitches: [.g3, .b4]).tied())
             sequence.add(note: Note(value: .crotchet, pitches: [.g3, .b4]))
@@ -142,6 +184,57 @@ extension ComponentCompositions {
     private static func makeSecondStave() -> Stave {
         
         let stave = Stave()
+        
+        do {
+            let bar = Bar()
+            
+            let sequence = NoteSequence()
+            sequence.add(note: Note(value: .quaver, pitch: .c3))
+            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitch: .c3))
+            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitch: .c3))
+            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitch: .c3))
+            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+        
+        do {
+            let bar = Bar()
+            
+            let sequence = NoteSequence()
+            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitch: .b4))
+            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitch: .b4))
+            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitch: .b4))
+            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitch: .b4))
+            
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+        
+        do {
+            let bar = Bar()
+            
+            let sequence = NoteSequence()
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .a4))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .a4))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .a4))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .a4))
+            
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
         
         do {
             let bar = Bar()
