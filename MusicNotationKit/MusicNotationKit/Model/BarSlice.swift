@@ -17,6 +17,11 @@ class BarSlice {
         return GroupedHorizontalLayoutItem(items: barlines)
     }()
     
+    lazy var trailingBarlinePositionable: HorizontalLayoutItem = {
+        let barlines = bars.compactMap { $0.trailingBarline }
+        return GroupedHorizontalLayoutItem(items: barlines)
+    }()
+    
     lazy var sequences: [NoteSequence] = {
         bars.map { $0.sequences }.joined().toArray()
     }()

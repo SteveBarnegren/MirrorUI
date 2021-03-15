@@ -14,7 +14,7 @@ class HorizontalLayoutSolver {
     let layoutTimingSolver = LayoutTimingSolver()
     
     func solve(anchors: [LayoutAnchor], layoutWidth: Double) {
-        
+                
         func applyAnchorPositions() {
             anchors.forEach { $0.apply() }
         }

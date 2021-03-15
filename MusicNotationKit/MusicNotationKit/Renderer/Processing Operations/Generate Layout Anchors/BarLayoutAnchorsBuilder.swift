@@ -35,9 +35,14 @@ class GroupedHorizontalLayoutItem: HorizontalLayoutItem {
     var xPosition: Double = 0 {
         didSet {
             // BSL: Doesn't take in to account leading / trailing offsets
+            print("Set GroupedHorizontalLayoutItem: \(xPosition)")
             for i in items.indices {
+                print(" - set child \(i)")
+                let hliClass = items[i] as AnyObject
+                print(Unmanaged.passUnretained(hliClass).toOpaque())
                 items[i].xPosition = xPosition
             }
+            print("---")
         }
     }
     
@@ -84,7 +89,7 @@ class LayoutAnchorsBuilder {
             
             barAnchors += combinedAnchors
             
-            if isLast, let trailingBarline = composition.barSlices.last?.leadingBarlinePositionable {
+            if isLast, let trailingBarline = composition.barSlices.last?.trailingBarlinePositionable {
                 barAnchors.append(makeAnchor(forBarline: trailingBarline, fromPrevious: barAnchors.last))
             }
             
