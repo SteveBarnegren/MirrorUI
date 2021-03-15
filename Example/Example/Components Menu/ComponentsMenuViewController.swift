@@ -115,6 +115,7 @@ private func makeComponentInfos() -> [ComponentInfo] {
     let ties = ComponentInfo(name: "Ties", composition: ComponentCompositions.ties)
     let accents = ComponentInfo(name: "Accents", composition: ComponentCompositions.accents)
     let tuplets = ComponentInfo(name: "Tuplets", composition: ComponentCompositions.tuplets)
+    let multipleVoices = ComponentInfo(name: "Multiple Voices", composition: ComponentCompositions.multipleVoices)
 
-    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents, tuplets]
+    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents, tuplets, multipleVoices]
 }

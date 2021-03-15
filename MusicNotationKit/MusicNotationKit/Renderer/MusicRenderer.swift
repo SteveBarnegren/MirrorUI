@@ -158,15 +158,25 @@ class MusicRenderer {
         CalculateStemLengthsRenderOperation().process(barSlices: barSlices)
         
         // Make paths - Use bars from here, not slices
-        let bars = staveBars.first! // Only render the first stave for now
-        let leadingTies = range
-            .flatMap { composition.barSlices[maybe: $0.startIndex-1] }
-            .flatMap(trailingTies(forBar:)) ?? []
+        var voices = [RenderableVoice]()
+        for (stave, bars) in zip(composition.staves, staveBars) {    
+            let leadingTies = range
+                .flatMap { stave.bars[maybe: $0.startIndex-1] }
+                .flatMap(trailingTies(forBar:)) ?? []
+            
+            let voice = RenderableVoice(bars: bars, leadingTies: leadingTies)
+            voices.append(voice)
+            
+        }
         
-        let paths = CompositionPathsCreator(glyphs: glyphs).paths(fromBars: bars,
-                                                                  canvasWidth: layoutWidth,
-                                                                  staveSpacing: staveSpacing,
-                                                                  leadingTies: leadingTies)
+        let paths = CompositionPathsCreator(glyphs: glyphs).paths(forVoices: voices, 
+                                                                  canvasWidth: layoutWidth, 
+                                                                  staveSpacing: staveSpacing) 
+        
+//        let paths = CompositionPathsCreator(glyphs: glyphs).paths(fromBars: bars,
+//                                                                  canvasWidth: layoutWidth,
+//                                                                  staveSpacing: staveSpacing,
+//                                                                  leadingTies: leadingTies)
         
         var pathBundle = PathBundle(paths: paths)
         
@@ -178,7 +188,7 @@ class MusicRenderer {
         return pathBundle
     }
     
-    private func trailingTies(forBar bar: BarSlice) -> [Tie] {
+    private func trailingTies(forBar bar: Bar) -> [Tie] {
         
         var ties = [Tie]()
         

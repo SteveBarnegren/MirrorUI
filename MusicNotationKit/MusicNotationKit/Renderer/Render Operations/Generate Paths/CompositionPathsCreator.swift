@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct RenderableVoice {
+    var bars: [Bar]
+    var leadingTies: [Tie]
+}
+
 class CompositionPathsCreator {
     
     private let noteRenderer: NoteRenderer
@@ -26,6 +31,30 @@ class CompositionPathsCreator {
         self.naturalRenderer = NaturalRenderer(glyphs: glyphs)
         self.dotRenderer = DotRenderer(glyphs: glyphs)
         self.restRenderer = RestRenderer(glyphs: glyphs)
+    }
+    
+    func paths(forVoices voices: [RenderableVoice], canvasWidth: Double, staveSpacing: Double) -> [Path] {
+        
+        var yOffset = 0.0
+        var allPaths = [Path]()
+        for (index, voice) in voices.enumerated() {
+            
+            var paths = self.paths(fromBars: voice.bars,
+                                   canvasWidth: canvasWidth, 
+                                   staveSpacing: staveSpacing,
+                                   leadingTies: voice.leadingTies)
+            if index != 0 {
+                yOffset += paths.map { $0.maxY }.max() ?? 0
+            }
+            
+            if yOffset != 0 {
+                paths = paths.map { $0.translated(x: 0, y: yOffset)  }
+            }
+            allPaths += paths
+            yOffset += abs( paths.map { $0.minY }.min() ?? 0 )
+        }
+        
+        return allPaths
     }
     
     func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double, leadingTies: [Tie]) -> [Path] {

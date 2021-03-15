@@ -75,6 +75,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-deeplink components/multipleVoices"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-deeplink components/accidentals"
             isEnabled = "NO">
          </CommandLineArgument>
@@ -96,7 +100,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/ties"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/accents"
