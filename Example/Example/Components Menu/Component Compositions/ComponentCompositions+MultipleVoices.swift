@@ -105,9 +105,8 @@ extension ComponentCompositions {
             sequence.add(rest: Rest(value: .quaver))
             sequence.add(note: Note(value: .quaver, pitch: .b4))
             sequence.add(note: Note(value: .crotchet, pitch: .b4))
-            sequence.add(note: Note(value: .quaver, pitch: .c4))
-            sequence.add(note: Note(value: .quaver, pitch: .d4))
-
+            sequence.add(note: Note(value: .dottedQuaver, pitch: .c4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .d4))
 
             bar.add(sequence: sequence)
             stave.add(bar: bar)
@@ -127,7 +126,6 @@ extension ComponentCompositions {
             bar.add(sequence: sequence)
             stave.add(bar: bar)
         }
-        
         
         do {
             let bar = Bar()
@@ -210,10 +208,10 @@ extension ComponentCompositions {
             sequence.add(note: Note(value: .quaver, pitch: .b4))
             sequence.add(note: Note(value: .quaver, pitch: .g3))
             sequence.add(note: Note(value: .quaver, pitch: .b4))
-            sequence.add(note: Note(value: .quaver, pitch: .g3))
+            sequence.add(note: Note(value: .quaver, pitch: .gSharp3))
             sequence.add(note: Note(value: .quaver, pitch: .b4))
-            sequence.add(note: Note(value: .quaver, pitch: .g3))
-            sequence.add(note: Note(value: .quaver, pitch: .b4))
+            sequence.add(note: Note(value: .dottedQuaver, pitch: .g3))
+            sequence.add(note: Note(value: .semiquaver, pitch: .b4))
             
             bar.add(sequence: sequence)
             stave.add(bar: bar)

@@ -10,42 +10,6 @@ import Foundation
 
 private let requiredTieSpace = 2.5
 
-class GroupedHorizontalLayoutItem: HorizontalLayoutItem {
-
-    var items: [HorizontalLayoutItem]
-    
-    var layoutDuration: Time? {
-        items.compactMap { $0.layoutDuration }.max()
-    }
-    
-    var leadingLayoutItems: [AdjacentLayoutItem] {
-        fatalError("Unsupported")
-    }
-    
-    var trailingLayoutItems: [AdjacentLayoutItem] {
-        fatalError("Unsupported")
-    }
-    
-    var horizontalLayoutWidth: HorizontalLayoutWidthType {
-//        items.map { $0.horizontalLayoutWidth }√
-        // BSL: should have the real width
-        return .centered(width: 1)
-    }
-    
-    var xPosition: Double = 0 {
-        didSet {
-            // BSL: Doesn't take in to account leading / trailing offsets
-            for i in items.indices {
-                items[i].xPosition = xPosition
-            }
-        }
-    }
-    
-    init(items: [HorizontalLayoutItem]) {
-        self.items = items
-    }
-}
-
 class LayoutAnchorsBuilder {
     
     func makeAnchors(from composition: Composition) {
@@ -62,7 +26,7 @@ class LayoutAnchorsBuilder {
             
             // Barline
             let previousBarLastAnchor = previousBar?.trailingBarlineAnchor ?? previousBar?.layoutAnchors.last
-            let barlineAnchor = makeAnchor(forBarline: bar.leadingBarlinePositionable, fromPrevious: previousBarLastAnchor)
+            let barlineAnchor = makeAnchor(forBarlines: bar.leadingBarlines, fromPrevious: previousBarLastAnchor)
             previousBar?.trailingBarlineAnchor = barlineAnchor
             barAnchors.append(barlineAnchor)
             
@@ -84,8 +48,9 @@ class LayoutAnchorsBuilder {
             
             barAnchors += combinedAnchors
             
-            if isLast, let trailingBarline = composition.barSlices.last?.trailingBarlinePositionable {
-                barAnchors.append(makeAnchor(forBarline: trailingBarline, fromPrevious: barAnchors.last))
+            let trailingBarlines = composition.barSlices.last!.trailingBarlines
+            if isLast, !trailingBarlines.isEmpty {
+                barAnchors.append(makeAnchor(forBarlines: trailingBarlines, fromPrevious: barAnchors.last))
             }
             
             bar.layoutAnchors = barAnchors
@@ -145,11 +110,16 @@ class LayoutAnchorsBuilder {
     
     // MARK: - Make Anchors
     
-    private func makeAnchor(forBarline barline: HorizontalLayoutItem, fromPrevious previousAnchor: LayoutAnchor?) -> LayoutAnchor {
+    private func makeAnchor(forBarlines barlines: [HorizontalLayoutItem], fromPrevious previousAnchor: LayoutAnchor?) -> LayoutAnchor {
         
-        let anchor = SingleItemLayoutAnchor(item: barline)
-        anchor.leadingWidth = barline.leadingWidth
-        anchor.trailingWidth = barline.trailingWidth
+        let singleItemAnchors = barlines.map { (barline: HorizontalLayoutItem) -> SingleItemLayoutAnchor in
+            let anchor = SingleItemLayoutAnchor(item: barline)
+            anchor.leadingWidth = barline.leadingWidth
+            anchor.trailingWidth = barline.trailingWidth
+            return anchor
+        }
+        
+        let anchor = CombinedItemsLayoutAnchor(anchors: singleItemAnchors)
         
         if let previousAnchor = previousAnchor {
             let constraint = LayoutConstraint()
