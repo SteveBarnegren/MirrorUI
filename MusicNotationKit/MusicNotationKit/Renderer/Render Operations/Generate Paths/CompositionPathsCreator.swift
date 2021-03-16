@@ -8,6 +8,8 @@
 
 import Foundation
 
+private let staveSeparation = 0.8
+
 struct RenderableVoice {
     var bars: [Bar]
     var leadingTies: [Tie]
@@ -41,23 +43,24 @@ class CompositionPathsCreator {
             
             var paths = self.paths(fromBars: voice.bars,
                                    canvasWidth: canvasWidth, 
-                                   staveSpacing: staveSpacing,
                                    leadingTies: voice.leadingTies)
+            
             if index != 0 {
-                yOffset += paths.map { $0.maxY }.max() ?? 0
+                yOffset += abs(paths.minY)
             }
             
             if yOffset != 0 {
                 paths = paths.map { $0.translated(x: 0, y: yOffset)  }
             }
             allPaths += paths
-            yOffset += abs( paths.map { $0.minY }.min() ?? 0 )
+            yOffset += abs(paths.maxY)
+            yOffset += staveSeparation
         }
         
-        return allPaths
+        return allPaths.map { $0.scaled(staveSpacing) }
     }
     
-    func paths(fromBars bars: [Bar], canvasWidth: Double, staveSpacing: Double, leadingTies: [Tie]) -> [Path] {
+    func paths(fromBars bars: [Bar], canvasWidth: Double, leadingTies: [Tie]) -> [Path] {
         
         let barRange = (bars.first!.barNumber)...(bars.last!.barNumber)
         print("Creating paths for bar range \(barRange)")
@@ -72,7 +75,6 @@ class CompositionPathsCreator {
         }
         
         paths += StaveRenderer.stavePaths(withWidth: canvasWidth)
-        paths = paths.map { $0.scaled(staveSpacing) }
         return paths
     }
     
