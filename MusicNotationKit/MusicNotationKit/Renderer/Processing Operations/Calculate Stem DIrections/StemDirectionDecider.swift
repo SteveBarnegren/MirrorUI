@@ -119,7 +119,8 @@ class StemDirectionDecider<N> {
 extension StemDirectionDecider.Transformer {
     
     static var notes: StemDirectionDecider.Transformer<Note> {
-        return StemDirectionDecider.Transformer<Note>(stavePositions: { n in n.pitches.map { $0.stavePosition } },
+        // 
+        return StemDirectionDecider.Transformer<Note>(stavePositions: { n in n.pitches.map { $0.stavePosition(forClef: .treble) } },
                                                       setStemDirection: { $0.stemDirection = $1 })
     }
 }

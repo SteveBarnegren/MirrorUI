@@ -10,16 +10,16 @@ import Foundation
 
 class NoteHeadDescriber {
     
-    func noteHeadDescriptions(forNote note: Note) -> [NoteHead] {
+    func noteHeadDescriptions(forNote note: Note, clef: Clef) -> [NoteHead] {
         
         let headStyle = self.headStyle(forNote: note)
         
         var noteHeadDescriptions = [NoteHead]()
         for pitch in note.pitches {
             let description = NoteHead(style: headStyle)
-            description.staveOffset = pitch.staveOffset
-            description.stavePosition = pitch.stavePosition
-            description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch)
+            description.staveOffset = pitch.staveOffset(forClef: clef)
+            description.stavePosition = pitch.stavePosition(forClef: clef)
+            description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch, clef: clef)
             description.trailingLayoutItems = trailingLayoutItems(forNote: note, pitch: pitch)
             noteHeadDescriptions.append(description)
         }
@@ -40,7 +40,7 @@ class NoteHeadDescriber {
         }
     }
     
-    private func leadingLayoutItems(forNote note: Note, pitch: Pitch) -> [AdjacentLayoutItem] {
+    private func leadingLayoutItems(forNote note: Note, pitch: Pitch, clef: Clef) -> [AdjacentLayoutItem] {
         
         guard let accidental = pitch.accidental else {
             return []
@@ -57,7 +57,8 @@ class NoteHeadDescriber {
             symbolType = .natural
         }
         
-        let item = AccidentalSymbol(type: symbolType, stavePosition: pitch.stavePosition)
+        let stavePosition = pitch.stavePosition(forClef: clef)
+        let item = AccidentalSymbol(type: symbolType, stavePosition: stavePosition)
         return [item]
     }
     

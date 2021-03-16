@@ -21,7 +21,13 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
     
     func process(composition: Composition) {
         
-        composition.forEachNote {
+        composition.forEachBar(process)
+        composition.forEachNote(applyAdjacentItemWidths)
+    }
+    
+    private func process(bar: Bar) {
+        
+        bar.forEachNote {
             
             // Make basic symbol description
             let description = noteSymbolDescriber.symbolDescription(forNote: $0)
@@ -29,11 +35,10 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
             $0.numberOfTails = description.numberOfTails
             
             // Make note head descriptions
-            $0.noteHeads = noteHeadDescriber.noteHeadDescriptions(forNote: $0)
+            $0.noteHeads = noteHeadDescriber.noteHeadDescriptions(forNote: $0, clef: bar.clef)
         }
-        composition.forEachRest { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
         
-        composition.forEachNote(applyAdjacentItemWidths)
+        bar.forEachRest { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
     }
     
     // MARK: - Apply adjacent item widths from font

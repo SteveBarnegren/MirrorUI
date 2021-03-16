@@ -9,6 +9,8 @@
 import Foundation
 
 public class Stave {
+    
+    var clef = Clef.treble
     var bars = [Bar]()
     
     var duration: Time {
@@ -19,5 +21,17 @@ public class Stave {
     
     public func add(bar: Bar) {
         self.bars.append(bar)
+    }
+    
+    func forEachNote(_ handler: (Note) -> Void) {
+        
+        for bar in bars {
+            for noteSequence in bar.sequences {
+                for note in noteSequence.notes {
+                    handler(note)
+                }
+            }
+        }
+        
     }
 }

@@ -17,12 +17,20 @@ public struct Pitch {
         self.accidental = accidental
     }
     
-    var stavePosition: Int {
-        return note.stavePosition
+    var stavePositionForTrebleClef: Int {
+        return note.stavePositionForTrebleClef
     }
     
-    var staveOffset: Double {
-        return note.staveOffset
+    var staveOffsetForTrebleClef: Double {
+        return note.staveOffsetForTrebleClef
+    }
+    
+    func stavePosition(forClef clef: Clef) -> Int {
+        return note.stavePosition(forClef: clef)
+    }
+    
+    func staveOffset(forClef clef: Clef) -> Double {
+        return note.staveOffset(forClef: clef)
     }
     
     // 2
@@ -146,7 +154,23 @@ public extension Pitch {
         case f5
         case g5
         
-        var stavePosition: Int {
+        func stavePosition(forClef clef: Clef) -> Int {
+            let middle = clef.middleNote.stavePositionForTrebleClef
+            let b4 = Note.b4.stavePositionForTrebleClef
+            let offset = b4 - middle
+            
+            return stavePositionForTrebleClef + offset
+        }
+        
+        func staveOffset(forClef clef: Clef) -> Double {
+            let middle = clef.middleNote.staveOffsetForTrebleClef
+            let b4 = Note.b4.staveOffsetForTrebleClef
+            let offset = b4 - middle
+
+            return staveOffsetForTrebleClef + offset
+        }
+
+        var stavePositionForTrebleClef: Int {
             switch self {
             case .a2: return -15
             case .b2: return -14
@@ -179,7 +203,7 @@ public extension Pitch {
             }
         }
         
-        var staveOffset: Double {
+        var staveOffsetForTrebleClef: Double {
             switch self {
             case .a2: return -7.5
             case .b2: return -7

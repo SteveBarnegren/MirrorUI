@@ -11,6 +11,7 @@ import Foundation
 public class Bar {
     
     var barNumber = 0
+    var clef: Clef = .treble
     var sequences = [NoteSequence]()
     let leadingBarline = Barline()
     var trailingBarline: Barline?
@@ -40,6 +41,14 @@ extension Bar {
         for sequence in self.sequences {
             for note in sequence.notes {
                 handler(note)
+            }
+        }
+    }
+    
+    func forEachRest(_ handler: (Rest) -> Void) {
+        for sequence in self.sequences {
+            for rest in sequence.rests {
+                handler(rest)
             }
         }
     }

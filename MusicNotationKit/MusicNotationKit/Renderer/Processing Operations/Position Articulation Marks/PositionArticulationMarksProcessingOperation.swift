@@ -11,10 +11,14 @@ import Foundation
 class PositionArticulationMarksProcessingOperation: CompositionProcessingOperation {
     
     func process(composition: Composition) {
-        composition.forEachNote(self.process)
+        for stave in composition.staves {
+            stave.forEachNote {
+                self.process(note: $0, clef: stave.clef)
+            }
+        }
     }
     
-    private func process(note: Note) {
+    private func process(note: Note, clef: Clef) {
         
         let articulations = note.articulationMarks
         if articulations.isEmpty {
@@ -35,7 +39,8 @@ class PositionArticulationMarksProcessingOperation: CompositionProcessingOperati
             lineRounding = .spaceAbove
         }
         
-        var staveSpace = StaveSpace(stavePosition: pitch.stavePosition, lineRounding: lineRounding)
+        var staveSpace = StaveSpace(stavePosition: pitch.stavePosition(forClef: clef), 
+                                    lineRounding: lineRounding)
         staveSpace = staveSpace.adding(spaces: spaceOffset)
         let stavePosition = staveSpace.stavePosition
         

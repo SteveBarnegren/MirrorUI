@@ -15,11 +15,18 @@ class VerticalPositionerRenderOperation {
     }
     
     func process(barSlice: BarSlice) {
-        
-        barSlice.forEachNote { note in
+        barSlice.bars.forEach(process)
+    }
+    
+    private func process(bar: Bar) {
+        bar.forEachNote { note in
             self.positionNoteHeads(forNote: note)
-            note.leadingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }
-            note.trailingLayoutItems.forEach { self.position(adjacentLayoutItem: $0, forNote: note) }
+            note.leadingLayoutItems.forEach { 
+                self.position(adjacentLayoutItem: $0, forNote: note, clef: bar.clef) 
+            }
+            note.trailingLayoutItems.forEach { 
+                self.position(adjacentLayoutItem: $0, forNote: note, clef: bar.clef) 
+            }
         }
     }
     
@@ -29,11 +36,11 @@ class VerticalPositionerRenderOperation {
         }
     }
     
-    private func position(adjacentLayoutItem: AdjacentLayoutItem, forNote note: Note) {
+    private func position(adjacentLayoutItem: AdjacentLayoutItem, forNote note: Note, clef: Clef) {
                 
         switch adjacentLayoutItem {
         case let dot as DotSymbol:
-            dot.position.y = dot.pitch.staveOffset
+            dot.position.y = dot.pitch.staveOffset(forClef: clef)
         case let accidental as AccidentalSymbol:
             accidental.position.y = StavePositionUtils.staveYOffset(forStavePostion: accidental.stavePosition)
         default:
