@@ -80,6 +80,9 @@ class MusicRenderer {
             // Calculate note times
             CalculatePlayableItemTimesProcessingOperation().process(composition: composition)
             
+            // Set stave positions
+            
+            
             // Populate note beams
             GenerateBeamDescriptionsProcessingOperation().process(composition: composition)
             
