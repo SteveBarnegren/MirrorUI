@@ -12,6 +12,12 @@ class BarSlice {
     
     var bars: [Bar]
     
+    var shouldRenderClef = false {
+        didSet {
+            bars.forEach { $0.shouldRenderClef = shouldRenderClef }
+        }
+    }
+    
     var leadingBarlines: [Barline] {
         bars.map { $0.leadingBarline }
     }
@@ -22,6 +28,10 @@ class BarSlice {
     
     lazy var sequences: [NoteSequence] = {
         bars.map { $0.sequences }.joined().toArray()
+    }()
+    
+    lazy var clefSymbols: [ClefSymbol] = {
+        bars.map { $0.clefSymbol }.toArray()
     }()
     
     var trailingTies: [Tie] {

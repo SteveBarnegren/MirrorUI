@@ -82,6 +82,9 @@ class GlyphStore {
     lazy var accidentalNatural = makeGlyph("accidentalNatural")
     lazy var accidentalSharp = makeGlyph("accidentalSharp")
     
+    // MARK: - Clefs
+    lazy var gClef = makeGlyph("gClef")
+    
     // MARK: - Rests
     lazy var restWhole = makeGlyph("restWhole")
     lazy var restHalf = makeGlyph("restHalf")

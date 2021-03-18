@@ -80,9 +80,6 @@ class MusicRenderer {
             // Calculate note times
             CalculatePlayableItemTimesProcessingOperation().process(composition: composition)
             
-            // Set stave positions
-            
-            
             // Populate note beams
             GenerateBeamDescriptionsProcessingOperation().process(composition: composition)
             
@@ -156,6 +153,20 @@ class MusicRenderer {
         // TODO: Reset the layout anchors just for the bar range?
         composition.barSlices.forEach { $0.resetLayoutAnchors() }
         
+        // Draw just the clef at the start of the range
+        barSlices.first?.shouldRenderClef = true
+        barSlices.dropFirst().forEach { $0.shouldRenderClef = false }
+        for barSlice in barSlices {
+            for anchor in barSlice.layoutAnchors {
+                if anchor.layoutAnchorType == .leadingClef {
+                    anchor.enabled = barSlice.shouldRenderClef
+                } else {
+                    anchor.enabled = true
+                }
+            }
+        }
+        
+        
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(bars: barSlices, layoutWidth: layoutWidth)
         
@@ -165,7 +176,7 @@ class MusicRenderer {
         // Calculate stem lengths
         CalculateStemLengthsRenderOperation().process(barSlices: barSlices)
         
-        // Make paths - Use bars from here, not slices
+        // Make paths - Use [bar]s from here, not slices
         var voices = [RenderableVoice]()
         for (stave, bars) in zip(composition.staves, staveBars) {    
             let leadingTies = range

@@ -43,7 +43,7 @@ class FixedDistanceLayoutSolver {
         
         var leadingEdgePos = Double(0)
         
-        for constraint in anchor.leadingConstraints {
+        for constraint in anchor.leadingConstraints where constraint.isEnabled {
             guard let fromAnchor = constraint.from else {
                 continue
                 // fatalError("All constraints should have a from value")

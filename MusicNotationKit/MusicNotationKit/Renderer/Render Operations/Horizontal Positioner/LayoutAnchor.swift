@@ -17,11 +17,26 @@ class LayoutConstraint {
     weak var from: LayoutAnchor?
     weak var to: LayoutAnchor?
     var value = LayoutConstraintValue.greaterThan(0)
+    
+    var isEnabled: Bool {
+        if from?.enabled == false { return false }
+        if to?.enabled == false { return false }
+        else {
+            return true
+        }
+    }
+}
+
+enum LayoutAnchorType {
+    case unknown
+    case leadingClef
 }
 
 // MARK: - ******* Layout Anchor ********
 
 protocol LayoutAnchor: class {
+    var enabled: Bool { get set }
+    var layoutAnchorType: LayoutAnchorType { get set }
     var leadingWidth: Double { get }
     var trailingWidth: Double { get }
     var leadingConstraints: [LayoutConstraint] { get set }
@@ -49,6 +64,8 @@ extension LayoutAnchor {
 final class SingleItemLayoutAnchor: LayoutAnchor {
   
     // LayoutAnchor
+    var enabled = true
+    var layoutAnchorType = LayoutAnchorType.unknown
     var leadingWidth: Double = 0
     var trailingWidth: Double = 0
     var leadingConstraints = [LayoutConstraint]()
@@ -136,6 +153,8 @@ class AdjacentLayoutAnchor {
 class CombinedItemsLayoutAnchor: LayoutAnchor {
   
     // LayoutAnchor
+    var layoutAnchorType = LayoutAnchorType.unknown
+    var enabled = true
     var leadingWidth: Double { anchors.map { $0.leadingWidth }.max()! }
     var trailingWidth: Double { anchors.map { $0.trailingWidth }.max()! }
     var trailingConstraints: [LayoutConstraint]

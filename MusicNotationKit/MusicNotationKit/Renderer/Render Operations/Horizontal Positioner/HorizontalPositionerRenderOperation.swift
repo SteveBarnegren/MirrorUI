@@ -14,6 +14,7 @@ class HorizontalPositionerRenderOperation {
         
         let anchors = bars.map { $0.layoutAnchors }
             .joined()
+            .filter { $0.enabled }
             .toArray()
             .appending(maybe: bars.last?.trailingBarlineAnchor)
         
