@@ -59,13 +59,11 @@ class MusicRenderer {
                 stave.bars.last?.trailingBarline = Barline()
             }
             
-            // Set the clefs on the bars
-            for stave in composition.staves {
-                stave.bars.forEach { $0.clef = stave.clef }
-            }
-            
             // Set bar numbers
             SetBarNumbersProcessingOperation().process(composition: composition)
+            
+            // Configure Clefs
+            ConfigureClefsProcessingOperation().process(composition: composition)
             
             // Apply tuplet timings
             ApplyTupletTimesProcessingOperation().process(composition: composition)

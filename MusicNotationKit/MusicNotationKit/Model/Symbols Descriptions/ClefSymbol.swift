@@ -10,6 +10,14 @@ import Foundation
 
 class ClefSymbol: HorizontalLayoutItem {
     
+    enum SymbolType {
+        case gClef
+        case fClef
+    }
+    
+    var symbolType = SymbolType.gClef
+    var staveOffset = Double(0)
+    
     // HorizontalLayoutItem
     var layoutDuration: Time? { nil }
     var leadingLayoutItems: [AdjacentLayoutItem] { [] }

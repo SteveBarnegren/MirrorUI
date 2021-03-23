@@ -10,7 +10,7 @@ import Foundation
 
 public class Stave {
     
-    var clef = Clef.treble
+    public var clef = Clef.treble
     var bars = [Bar]()
     
     var duration: Time {
