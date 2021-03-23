@@ -23,20 +23,21 @@ class FixedDistanceLayoutSolver {
             isFirst = false
         }
         
-        // Double stemmed writting may contain notes from different sequences that don't have
-        // constraints between them. In this case we need to nudge the later note ahead of
-        // the first so that they don't appear to be at the same point. The timing layout
-        // solver will increase these distances.
+        // There may be notes from different sequences that don't have constraints between
+        // them. In this case we need to nudge the later note ahead of the first so that
+        // they don't appear to be at the same point. The timing layout solver will
+        // increase these distances.
         // (Disabled this code for now as it was causing an issue with multiple voices)
-//        var nudgeAmount = 0.0
-//        for (anchor, previousAnchor) in anchors.eachWithPrevious() {
-//            guard let prev = previousAnchor else { continue }
-//            if anchor.position <= prev.position {
-//                nudgeAmount += (prev.position - anchor.position) + 0.1
-//            }
-//            
-//            anchor.position += nudgeAmount
-//        }
+        // (Renabled - Turns out this code is required for the tuplets example)
+        var nudgeAmount = 0.0
+        for (anchor, previousAnchor) in anchors.eachWithPrevious() {
+            guard let prev = previousAnchor else { continue }
+            if anchor.position <= prev.position {
+                nudgeAmount += (prev.position - anchor.position) + 0.1
+            }
+            
+            anchor.position += nudgeAmount
+        }
     }
     
     private func solveLeadingConstraints(forAnchor anchor: LayoutAnchor) {

@@ -16,11 +16,16 @@ class NoteHeadDescriber {
         
         var noteHeadDescriptions = [NoteHead]()
         for pitch in note.pitches {
+            let stavePosition = pitch.stavePosition(forClef: clef)
+            let staveOffset = pitch.staveOffset(forClef: clef)
+
             let description = NoteHead(style: headStyle)
-            description.staveOffset = pitch.staveOffset(forClef: clef)
-            description.stavePosition = pitch.stavePosition(forClef: clef)
+            description.staveOffset = staveOffset
+            description.stavePosition = stavePosition
             description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch, clef: clef)
-            description.trailingLayoutItems = trailingLayoutItems(forNote: note, pitch: pitch)
+            description.trailingLayoutItems = trailingLayoutItems(forNote: note, 
+                                                                  stavePosition: stavePosition, 
+                                                                  staveOffset: staveOffset)
             noteHeadDescriptions.append(description)
         }
         
@@ -62,12 +67,13 @@ class NoteHeadDescriber {
         return [item]
     }
     
-    private func trailingLayoutItems(forNote note: Note, pitch: Pitch) -> [AdjacentLayoutItem] {
+    private func trailingLayoutItems(forNote note: Note, stavePosition: Int, staveOffset: Double) -> [AdjacentLayoutItem] {
         
         func makeDotSymbol(forNote note: Note) -> DotSymbol {
-            let symbol = DotSymbol()
-            symbol.pitch = note.highestPitch
-            return symbol
+            let dot = DotSymbol()
+            dot.stavePosition = stavePosition
+            dot.staveOffset = staveOffset
+            return dot
         }
         
         let numberOfDots: Int
