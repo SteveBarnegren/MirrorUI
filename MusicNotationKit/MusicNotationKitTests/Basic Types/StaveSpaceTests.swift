@@ -149,15 +149,15 @@ class StaveSpaceTests: XCTestCase {
     
     func test_ConvertToStavePosition() {
         
-        XCTAssertEqual(StaveSpace(4, .positive).stavePosition, 9)
-        XCTAssertEqual(StaveSpace(3, .positive).stavePosition, 7)
-        XCTAssertEqual(StaveSpace(2, .positive).stavePosition, 5)
-        XCTAssertEqual(StaveSpace(1, .positive).stavePosition, 3)
-        XCTAssertEqual(StaveSpace(0, .positive).stavePosition, 1)
-        XCTAssertEqual(StaveSpace(0, .negative).stavePosition, -1)
-        XCTAssertEqual(StaveSpace(1, .negative).stavePosition, -3)
-        XCTAssertEqual(StaveSpace(2, .negative).stavePosition, -5)
-        XCTAssertEqual(StaveSpace(3, .negative).stavePosition, -7)
-        XCTAssertEqual(StaveSpace(4, .negative).stavePosition, -9)
+        XCTAssertEqual(StaveSpace(4, .positive).stavePosition.location, 9)
+        XCTAssertEqual(StaveSpace(3, .positive).stavePosition.location, 7)
+        XCTAssertEqual(StaveSpace(2, .positive).stavePosition.location, 5)
+        XCTAssertEqual(StaveSpace(1, .positive).stavePosition.location, 3)
+        XCTAssertEqual(StaveSpace(0, .positive).stavePosition.location, 1)
+        XCTAssertEqual(StaveSpace(0, .negative).stavePosition.location, -1)
+        XCTAssertEqual(StaveSpace(1, .negative).stavePosition.location, -3)
+        XCTAssertEqual(StaveSpace(2, .negative).stavePosition.location, -5)
+        XCTAssertEqual(StaveSpace(3, .negative).stavePosition.location, -7)
+        XCTAssertEqual(StaveSpace(4, .negative).stavePosition.location, -9)
     }
 }

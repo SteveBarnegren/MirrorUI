@@ -62,6 +62,10 @@ extension StaveSpace {
         case spaceBelow
     }
     
+    init(stavePosition: StavePosition, lineRounding: LineRounding) {
+        self.init(stavePosition: stavePosition.location, lineRounding: lineRounding)
+    }
+
     init(stavePosition: Int, lineRounding: LineRounding) {
         
         switch lineRounding {
@@ -89,8 +93,9 @@ extension StaveSpace {
         }
     }
     
-    var stavePosition: Int {
-        let position = Int(space)*2 + 1
-        return self.isPositive ? position : -position
+    var stavePosition: StavePosition {
+        let location = Int(space)*2 + 1
+        let signedLocation = self.isPositive ? location : -location
+        return StavePosition(location: signedLocation)
     }
 }

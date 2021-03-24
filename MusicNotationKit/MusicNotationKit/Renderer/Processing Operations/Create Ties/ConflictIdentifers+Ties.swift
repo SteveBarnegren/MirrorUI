@@ -72,6 +72,6 @@ extension ConflictIdentifiers {
     
     private static func makeVector(_ x: Time, _ y: TiePosition) -> Vector2D {
         return Vector2D(Double(x.value) / Double(x.division),
-                        Double(y.space.stavePosition))
+                        Double(y.space.stavePosition.yPosition))
     }
 }

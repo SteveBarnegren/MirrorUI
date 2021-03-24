@@ -42,10 +42,9 @@ class PositionArticulationMarksProcessingOperation: CompositionProcessingOperati
         var staveSpace = StaveSpace(stavePosition: pitch.stavePosition(forClef: clef).location, 
                                     lineRounding: lineRounding)
         staveSpace = staveSpace.adding(spaces: spaceOffset)
-        let stavePosition = staveSpace.stavePosition
         
         for articulation in articulations {
-            articulation.stavePosition = stavePosition
+            articulation.stavePosition = staveSpace.stavePosition
             articulation.note = note
         }
         

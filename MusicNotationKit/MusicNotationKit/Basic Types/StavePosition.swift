@@ -45,4 +45,3 @@ func - (lhs: StavePosition, rhs: StavePosition) -> StavePosition {
 func -= (lhs: inout StavePosition, rhs: StavePosition) {
     lhs = lhs - rhs
 }
-

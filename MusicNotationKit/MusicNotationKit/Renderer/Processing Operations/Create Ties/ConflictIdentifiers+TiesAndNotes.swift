@@ -76,7 +76,7 @@ extension ConflictIdentifiers {
     }
     
     static func startY(forTie tie: Tie) -> Double {
-        let stavePosition = StavePosition(location: tie.startPosition.space.stavePosition)
+        let stavePosition = tie.startPosition.space.stavePosition
         let y = stavePosition.yPosition
         
         let yOffset: Double
@@ -105,7 +105,7 @@ extension ConflictIdentifiers {
     
     static func yRange(forTieMiddle tie: Tie) -> ClosedRange<Double> {
         
-        let stavePosition = StavePosition(location: tie.middlePosition.space.stavePosition)
+        let stavePosition = tie.middlePosition.space.stavePosition
         let y = stavePosition.yPosition
         
         let yOffset: Double

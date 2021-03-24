@@ -17,8 +17,7 @@ class AccentRenderer {
         let height = 0.7
         let lineThickness = 0.15
         
-        let stavePosition = StavePosition(location: accent.stavePosition)
-        let yPos = stavePosition.yPosition
+        let yPos = accent.stavePosition.yPosition
                 
         // Makes a point, taking localised coordinates, and moving to the correct absolute position
         func p(_ x: Double, y: Double) -> Vector2D {

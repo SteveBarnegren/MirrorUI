@@ -369,7 +369,7 @@ class TieRenderer {
     }
     
     private func yPosition(fromTiePosition tiePosition: TiePosition) -> Double {
-        let stavePosition = StavePosition(location: tiePosition.space.stavePosition)
+        let stavePosition = tiePosition.space.stavePosition
         return stavePosition.yPosition
     }
     
