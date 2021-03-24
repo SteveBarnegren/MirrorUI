@@ -60,8 +60,7 @@ class NoteHeadDescriber {
         }
         
         let stavePosition = pitch.stavePosition(forClef: clef)
-        let item = AccidentalSymbol(type: symbolType, 
-                                    stavePosition: stavePosition.location)
+        let item = AccidentalSymbol(type: symbolType, stavePosition: stavePosition)
         return [item]
     }
     

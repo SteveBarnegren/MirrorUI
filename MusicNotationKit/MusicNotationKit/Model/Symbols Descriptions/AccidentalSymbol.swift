@@ -24,9 +24,9 @@ class AccidentalSymbol: AdjacentLayoutItem, Positionable {
     var position = Vector2D.zero
     
     let type: SymbolType
-    let stavePosition: Int
+    var stavePosition = StavePosition.zero
     
-    init(type: SymbolType, stavePosition: Int) {
+    init(type: SymbolType, stavePosition: StavePosition) {
         self.type = type
         self.stavePosition = stavePosition
     }

@@ -42,8 +42,7 @@ class VerticalPositionerRenderOperation {
         case let dot as DotSymbol:
             dot.position.y = dot.stavePosition.yPosition
         case let accidental as AccidentalSymbol:
-            let stavePosition = StavePosition(location: accidental.stavePosition)
-            accidental.position.y = stavePosition.yPosition
+            accidental.position.y = accidental.stavePosition.yPosition
         default:
             fatalError("Unknown item type: \(adjacentLayoutItem)")
         }
