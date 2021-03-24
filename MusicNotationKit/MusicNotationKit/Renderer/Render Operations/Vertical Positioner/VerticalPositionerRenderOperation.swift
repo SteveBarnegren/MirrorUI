@@ -40,7 +40,7 @@ class VerticalPositionerRenderOperation {
                 
         switch adjacentLayoutItem {
         case let dot as DotSymbol:
-            dot.position.y = dot.staveOffset
+            dot.position.y = dot.stavePosition.yPosition
         case let accidental as AccidentalSymbol:
             accidental.position.y = StavePositionUtils.staveYOffset(forStavePostion: accidental.stavePosition)
         default:

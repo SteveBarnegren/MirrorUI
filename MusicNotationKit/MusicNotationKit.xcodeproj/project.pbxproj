@@ -188,6 +188,8 @@
 		67C89FE6255C81D2009B18DF /* GlyphStore+Noteheads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C89FE5255C81D2009B18DF /* GlyphStore+Noteheads.swift */; };
 		67CDC489254CAE6800C70E5B /* ApplyTupletTimesProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CDC488254CAE6800C70E5B /* ApplyTupletTimesProcessingOperation.swift */; };
 		67CDC48F254CBC7600C70E5B /* TupletMarksRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CDC48E254CBC7600C70E5B /* TupletMarksRenderer.swift */; };
+		67CF192A260BD2E1000785AA /* StavePosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CF1929260BD2E1000785AA /* StavePosition.swift */; };
+		67CF192E260BD328000785AA /* StavePositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CF192D260BD328000785AA /* StavePositionTests.swift */; };
 		67D04B7C254F649100297036 /* TextPathCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D04B7B254F649100297036 /* TextPathCreator.swift */; };
 		67E7DE03243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E7DE02243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift */; };
 		67E8304D246C965900E682EF /* VariationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E8304C246C965900E682EF /* VariationSet.swift */; };
@@ -400,6 +402,8 @@
 		67C89FE5255C81D2009B18DF /* GlyphStore+Noteheads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlyphStore+Noteheads.swift"; sourceTree = "<group>"; };
 		67CDC488254CAE6800C70E5B /* ApplyTupletTimesProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyTupletTimesProcessingOperation.swift; sourceTree = "<group>"; };
 		67CDC48E254CBC7600C70E5B /* TupletMarksRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupletMarksRenderer.swift; sourceTree = "<group>"; };
+		67CF1929260BD2E1000785AA /* StavePosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StavePosition.swift; sourceTree = "<group>"; };
+		67CF192D260BD328000785AA /* StavePositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StavePositionTests.swift; sourceTree = "<group>"; };
 		67D04B7B254F649100297036 /* TextPathCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPathCreator.swift; sourceTree = "<group>"; };
 		67E7DE02243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadAlignmentDeciderTests.swift; sourceTree = "<group>"; };
 		67E8304C246C965900E682EF /* VariationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariationSet.swift; sourceTree = "<group>"; };
@@ -623,6 +627,7 @@
 				679855C82460A30F00877129 /* StaveSpaceTests.swift */,
 				6736F2332550B4D600148F6B /* KeyValueCacheTests.swift */,
 				67952403255DD91B005E7A90 /* LazyTests.swift */,
+				67CF192D260BD328000785AA /* StavePositionTests.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -642,6 +647,7 @@
 				6789B86C24635E26002D78A8 /* Direction.swift */,
 				6736F22F2550B47B00148F6B /* KeyValueCache.swift */,
 				6708E3DA255C9230006B8D80 /* Lazy.swift */,
+				67CF1929260BD2E1000785AA /* StavePosition.swift */,
 			);
 			path = "Basic Types";
 			sourceTree = "<group>";
@@ -1369,6 +1375,7 @@
 				67C1A361246DB7FC0036371C /* ConflictIdentifers+Ties.swift in Sources */,
 				670D51B625474B21000B7B36 /* Accent.swift in Sources */,
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
+				67CF192A260BD2E1000785AA /* StavePosition.swift in Sources */,
 				676BB5F623316A1400EA9F9C /* BarLayoutAnchorsBuilder.swift in Sources */,
 				673A3D0E233D4969001CE422 /* JoinBarlinesCompositionProcessingOperation.swift in Sources */,
 				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
@@ -1469,6 +1476,7 @@
 				6728B2C72239975700382D92 /* NoteSequenceTests.swift in Sources */,
 				6736F2342550B4D600148F6B /* KeyValueCacheTests.swift in Sources */,
 				679855C92460A30F00877129 /* StaveSpaceTests.swift in Sources */,
+				67CF192E260BD328000785AA /* StavePositionTests.swift in Sources */,
 				67B1B4BC2426924200E3E484 /* StemDirectionDecider_SingleNoteHeadTests.swift in Sources */,
 				67C1A367246DDF1F0036371C /* CompositionTimeTests.swift in Sources */,
 				67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */,
