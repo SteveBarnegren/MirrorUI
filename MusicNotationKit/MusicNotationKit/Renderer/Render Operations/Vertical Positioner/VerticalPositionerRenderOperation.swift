@@ -32,7 +32,7 @@ class VerticalPositionerRenderOperation {
     
     private func positionNoteHeads(forNote note: Note) {
         for noteHead in note.noteHeads {
-            noteHead.yPosition = noteHead.staveOffset
+            noteHead.yPosition = noteHead.stavePosition.yPosition
         }
     }
     
@@ -42,7 +42,8 @@ class VerticalPositionerRenderOperation {
         case let dot as DotSymbol:
             dot.position.y = dot.stavePosition.yPosition
         case let accidental as AccidentalSymbol:
-            accidental.position.y = StavePositionUtils.staveYOffset(forStavePostion: accidental.stavePosition)
+            let stavePosition = StavePosition(location: accidental.stavePosition)
+            accidental.position.y = stavePosition.yPosition
         default:
             fatalError("Unknown item type: \(adjacentLayoutItem)")
         }

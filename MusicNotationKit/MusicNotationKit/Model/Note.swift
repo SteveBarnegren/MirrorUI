@@ -47,9 +47,9 @@ public class Note: Playable {
         // We always expect there to be at least one note note head
         switch stemDirection {
         case .up:
-            return noteHeads.min(byKey: \.staveOffset)!
+            return noteHeads.min(byKey: \.stavePosition)!
         case .down:
-            return noteHeads.max(byKey: \.staveOffset)!
+            return noteHeads.max(byKey: \.stavePosition)!
         }
     }
     
@@ -57,9 +57,9 @@ public class Note: Playable {
         // We always expect there to be at least one note note head
         switch stemDirection {
         case .up:
-            return noteHeads.max(byKey: \.staveOffset)!
+            return noteHeads.max(byKey: \.stavePosition)!
         case .down:
-            return noteHeads.min(byKey: \.staveOffset)!
+            return noteHeads.min(byKey: \.stavePosition)!
         }
     }
     
@@ -200,8 +200,7 @@ class NoteHead: VerticallyPositionable {
     
     let style: Style
     var alignment = NoteHeadAlignment.center
-    var stavePosition = Int(0)
-    var staveOffset = Double(0)
+    var stavePosition = StavePosition.zero
     var leadingLayoutItems = [AdjacentLayoutItem]()
     var trailingLayoutItems = [AdjacentLayoutItem]()
     var tie: VariationSet<Tie>?

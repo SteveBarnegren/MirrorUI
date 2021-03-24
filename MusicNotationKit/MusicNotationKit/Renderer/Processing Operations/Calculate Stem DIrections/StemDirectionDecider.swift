@@ -120,7 +120,7 @@ extension StemDirectionDecider.Transformer {
     
     static var notes: StemDirectionDecider.Transformer<Note> {
         return StemDirectionDecider.Transformer<Note>(
-            stavePositions: { n in n.noteHeads.map { $0.stavePosition } },
+            stavePositions: { n in n.noteHeads.map { $0.stavePosition.location } },
             setStemDirection: { $0.stemDirection = $1 }
         )
     }

@@ -76,7 +76,8 @@ extension ConflictIdentifiers {
     }
     
     static func startY(forTie tie: Tie) -> Double {
-        let y = StavePositionUtils.staveYOffset(forStavePostion: tie.startPosition.space.stavePosition)
+        let stavePosition = StavePosition(location: tie.startPosition.space.stavePosition)
+        let y = stavePosition.yPosition
         
         let yOffset: Double
         switch tie.endAlignment {
@@ -97,14 +98,15 @@ extension ConflictIdentifiers {
     
     static func yRange(forNoteHead noteHead: NoteHead) -> ClosedRange<Double> {
         
-        let staveOffset = StavePositionUtils.staveYOffset(forStavePostion: noteHead.stavePosition)
+        let staveOffset = noteHead.stavePosition.yPosition
         let noteHeadHeight = 1.0
         return (staveOffset - noteHeadHeight/2)...(staveOffset + noteHeadHeight/2)
     }
     
     static func yRange(forTieMiddle tie: Tie) -> ClosedRange<Double> {
         
-        let y = StavePositionUtils.staveYOffset(forStavePostion: tie.middlePosition.space.stavePosition)
+        let stavePosition = StavePosition(location: tie.middlePosition.space.stavePosition)
+        let y = stavePosition.yPosition
         
         let yOffset: Double
         switch tie.middleAlignment {

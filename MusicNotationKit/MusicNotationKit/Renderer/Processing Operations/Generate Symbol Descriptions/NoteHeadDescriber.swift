@@ -17,11 +17,9 @@ class NoteHeadDescriber {
         var noteHeadDescriptions = [NoteHead]()
         for pitch in note.pitches {
             let stavePosition = pitch.stavePosition(forClef: clef)
-            let staveOffset = pitch.staveOffset(forClef: clef)
 
             let description = NoteHead(style: headStyle)
-            description.staveOffset = staveOffset
-            description.stavePosition = stavePosition
+            description.stavePosition = StavePosition(location: stavePosition) 
             description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch, clef: clef)
             description.trailingLayoutItems = trailingLayoutItems(forNote: note, 
                                                                   stavePosition: stavePosition)

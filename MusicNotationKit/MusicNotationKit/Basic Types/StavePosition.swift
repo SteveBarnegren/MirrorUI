@@ -18,3 +18,10 @@ struct StavePosition {
         Double(location)/2
     }
 }
+
+extension StavePosition: Comparable {
+    
+    static func < (lhs: StavePosition, rhs: StavePosition) -> Bool {
+        return lhs.location < rhs.location
+    }
+}

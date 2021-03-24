@@ -369,9 +369,8 @@ class TieRenderer {
     }
     
     private func yPosition(fromTiePosition tiePosition: TiePosition) -> Double {
-        let stavePosition = tiePosition.space.stavePosition
-        let staveOffset = StavePositionUtils.staveYOffset(forStavePostion: stavePosition)
-        return staveOffset
+        let stavePosition = StavePosition(location: tiePosition.space.stavePosition)
+        return stavePosition.yPosition
     }
     
     private func yOffset(forEndAlignment alignment: TieEndAlignment) -> Double {

@@ -24,4 +24,10 @@ class StavePositionTests: XCTestCase {
         XCTAssertEqual(StavePosition(location: 4).yPosition, 2.0)
         XCTAssertEqual(StavePosition(location: 5).yPosition, 2.5)
     }
+    
+    func test_Comaparable() {
+        XCTAssertLessThan(StavePosition(location: 1), StavePosition(location: 2))
+        XCTAssertEqual(StavePosition(location: 5), StavePosition(location: 5))
+        XCTAssertGreaterThan(StavePosition(location: 2), StavePosition(location: 1))
+    }
 }
