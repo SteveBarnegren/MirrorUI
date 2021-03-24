@@ -25,3 +25,24 @@ extension StavePosition: Comparable {
         return lhs.location < rhs.location
     }
 }
+
+func + (lhs: StavePosition, rhs: StavePosition) -> StavePosition {
+    
+    let newLocation = lhs.location + rhs.location
+    return StavePosition(location: newLocation)
+}
+
+func += (lhs: inout StavePosition, rhs: StavePosition) {
+    lhs = lhs + rhs
+}
+
+func - (lhs: StavePosition, rhs: StavePosition) -> StavePosition {
+    
+    let newLocation = lhs.location - rhs.location
+    return StavePosition(location: newLocation)
+}
+
+func -= (lhs: inout StavePosition, rhs: StavePosition) {
+    lhs = lhs - rhs
+}
+

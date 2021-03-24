@@ -39,7 +39,7 @@ class PositionArticulationMarksProcessingOperation: CompositionProcessingOperati
             lineRounding = .spaceAbove
         }
         
-        var staveSpace = StaveSpace(stavePosition: pitch.stavePosition(forClef: clef), 
+        var staveSpace = StaveSpace(stavePosition: pitch.stavePosition(forClef: clef).location, 
                                     lineRounding: lineRounding)
         staveSpace = staveSpace.adding(spaces: spaceOffset)
         let stavePosition = staveSpace.stavePosition

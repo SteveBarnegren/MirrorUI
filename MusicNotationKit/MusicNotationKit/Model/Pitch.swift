@@ -17,20 +17,12 @@ public struct Pitch {
         self.accidental = accidental
     }
     
-    var stavePositionForTrebleClef: Int {
+    var stavePositionForTrebleClef: StavePosition {
         return note.stavePositionForTrebleClef
     }
     
-    var staveOffsetForTrebleClef: Double {
-        return note.staveOffsetForTrebleClef
-    }
-    
-    func stavePosition(forClef clef: Clef) -> Int {
+    func stavePosition(forClef clef: Clef) -> StavePosition {
         return note.stavePosition(forClef: clef)
-    }
-    
-    func staveOffset(forClef clef: Clef) -> Double {
-        return note.staveOffset(forClef: clef)
     }
     
     // 2
@@ -154,86 +146,50 @@ public extension Pitch {
         case f5
         case g5
         
-        func stavePosition(forClef clef: Clef) -> Int {
+        func stavePosition(forClef clef: Clef) -> StavePosition {
             let middle = clef.middleNote.stavePositionForTrebleClef
             let b4 = Note.b4.stavePositionForTrebleClef
             let offset = b4 - middle
             
             return stavePositionForTrebleClef + offset
         }
-        
-        func staveOffset(forClef clef: Clef) -> Double {
-            let middle = clef.middleNote.staveOffsetForTrebleClef
-            let b4 = Note.b4.staveOffsetForTrebleClef
-            let offset = b4 - middle
 
-            return staveOffsetForTrebleClef + offset
-        }
-
-        var stavePositionForTrebleClef: Int {
+        var stavePositionForTrebleClef: StavePosition {
+            
+            let location: Int
+            
             switch self {
-            case .a2: return -15
-            case .b2: return -14
-            case .c2: return -13
-            case .d2: return -12
-            case .e2: return -11
-            case .f2: return -10
-            case .g2: return -9
-            case .a3: return -8
-            case .b3: return -7
-            case .c3: return -6
-            case .d3: return -5
-            case .e3: return -4
-            case .f3: return -3
-            case .g3: return -2
-            case .a4: return -1 // ↑ Below the middle of the stave
-            case .b4: return 0  // - Middle of the stave
-            case .c4: return 1  // ↓ Above the middle of the stave
-            case .d4: return 2
-            case .e4: return 3
-            case .f4: return 4
-            case .g4: return 5
-            case .a5: return 6
-            case .b5: return 7
-            case .c5: return 8
-            case .d5: return 9
-            case .e5: return 10
-            case .f5: return 11
-            case .g5: return 12
+            case .a2: location = -15
+            case .b2: location = -14
+            case .c2: location = -13
+            case .d2: location = -12
+            case .e2: location = -11
+            case .f2: location = -10
+            case .g2: location = -9
+            case .a3: location = -8
+            case .b3: location = -7
+            case .c3: location = -6
+            case .d3: location = -5
+            case .e3: location = -4
+            case .f3: location = -3
+            case .g3: location = -2
+            case .a4: location = -1 // ↑ Below the middle of the stave
+            case .b4: location = 0  // - Middle of the stave
+            case .c4: location = 1  // ↓ Above the middle of the stave
+            case .d4: location = 2
+            case .e4: location = 3
+            case .f4: location = 4
+            case .g4: location = 5
+            case .a5: location = 6
+            case .b5: location = 7
+            case .c5: location = 8
+            case .d5: location = 9
+            case .e5: location = 10
+            case .f5: location = 11
+            case .g5: location = 12
             }
-        }
-        
-        var staveOffsetForTrebleClef: Double {
-            switch self {
-            case .a2: return -7.5
-            case .b2: return -7
-            case .c2: return -6.5
-            case .d2: return -6
-            case .e2: return -5.5
-            case .f2: return -5
-            case .g2: return -4.5
-            case .a3: return -4
-            case .b3: return -3.5
-            case .c3: return -3
-            case .d3: return -2.5
-            case .e3: return -2
-            case .f3: return -1.5
-            case .g3: return -1
-            case .a4: return -0.5 // ↑ Below the middle of the stave
-            case .b4: return 0    // - Middle of the stave
-            case .c4: return 0.5  // ↓ Above the middle of the stave
-            case .d4: return 1
-            case .e4: return 1.5
-            case .f4: return 2
-            case .g4: return 2.5
-            case .a5: return 3
-            case .b5: return 3.5
-            case .c5: return 4
-            case .d5: return 4.5
-            case .e5: return 5
-            case .f5: return 5.5
-            case .g5: return 6
-            }
+            
+            return StavePosition(location: location)
         }
     }
 }

@@ -30,4 +30,30 @@ class StavePositionTests: XCTestCase {
         XCTAssertEqual(StavePosition(location: 5), StavePosition(location: 5))
         XCTAssertGreaterThan(StavePosition(location: 2), StavePosition(location: 1))
     }
+    
+    func test_addition() {
+        let a = StavePosition(location: 3)
+        let b = StavePosition(location: 2)
+        XCTAssertEqual(a + b, StavePosition(location: 5))
+    }
+    
+    func test_additionInPlace() {
+        var a = StavePosition(location: 3)
+        let b = StavePosition(location: 2)
+        a += b 
+        XCTAssertEqual(a, StavePosition(location: 5))
+    }
+    
+    func test_subtraction() {
+        let a = StavePosition(location: 5)
+        let b = StavePosition(location: 2)
+        XCTAssertEqual(a - b, StavePosition(location: 3))
+    }
+    
+    func test_subtractionInPlace() {
+        var a = StavePosition(location: 5)
+        let b = StavePosition(location: 2)
+        a -= b
+        XCTAssertEqual(a, StavePosition(location: 3))
+    }
 }

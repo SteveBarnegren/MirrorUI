@@ -19,7 +19,7 @@ class NoteHeadDescriber {
             let stavePosition = pitch.stavePosition(forClef: clef)
 
             let description = NoteHead(style: headStyle)
-            description.stavePosition = StavePosition(location: stavePosition) 
+            description.stavePosition = stavePosition 
             description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch, clef: clef)
             description.trailingLayoutItems = trailingLayoutItems(forNote: note, 
                                                                   stavePosition: stavePosition)
@@ -60,15 +60,16 @@ class NoteHeadDescriber {
         }
         
         let stavePosition = pitch.stavePosition(forClef: clef)
-        let item = AccidentalSymbol(type: symbolType, stavePosition: stavePosition)
+        let item = AccidentalSymbol(type: symbolType, 
+                                    stavePosition: stavePosition.location)
         return [item]
     }
     
-    private func trailingLayoutItems(forNote note: Note, stavePosition: Int) -> [AdjacentLayoutItem] {
+    private func trailingLayoutItems(forNote note: Note, stavePosition: StavePosition) -> [AdjacentLayoutItem] {
         
         func makeDotSymbol(forNote note: Note) -> DotSymbol {
             let dot = DotSymbol()
-            dot.stavePosition = StavePosition(location: stavePosition)
+            dot.stavePosition = stavePosition
             return dot
         }
         
