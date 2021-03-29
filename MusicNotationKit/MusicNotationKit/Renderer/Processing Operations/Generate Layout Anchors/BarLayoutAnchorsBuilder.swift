@@ -110,7 +110,7 @@ class LayoutAnchorsBuilder {
     
     private func makeAnchor(forItems items: [HorizontalLayoutItem], 
                             fromPrevious previousAnchor: LayoutAnchor?, 
-                            type: LayoutAnchorType = .unknown) -> LayoutAnchor {
+                            type: LayoutAnchorContent = .unknown) -> LayoutAnchor {
         
         let singleItemAnchors = items.map { (item: HorizontalLayoutItem) -> SingleItemLayoutAnchor in
             let anchor = SingleItemLayoutAnchor(item: item)
