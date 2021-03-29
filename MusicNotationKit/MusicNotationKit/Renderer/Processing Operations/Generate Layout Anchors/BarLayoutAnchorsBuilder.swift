@@ -82,11 +82,8 @@ class LayoutAnchorsBuilder {
             // Create constraints for leading ties
             if leadingTies.contains(where: { $0.toNote === note }) {
                 let constraint = LayoutConstraint()
-                constraint.from = previousBarline
-                constraint.to = anchor
                 constraint.value = .greaterThan(requiredTieSpace / 2)
-                previousBarline.add(trailingConstraint: constraint)
-                anchor.add(leadingConstraint: constraint)
+                constraint.insert(from: previousBarline, to: anchor)
             }
             
             // Create constraints for any ties that end on this note
@@ -95,11 +92,8 @@ class LayoutAnchorsBuilder {
                 let startAnchor = pendingTie.anchor
                 let endAnchor = anchor
                 let constraint = LayoutConstraint()
-                constraint.from = startAnchor
-                constraint.to = endAnchor
                 constraint.value = .greaterThan(requiredTieSpace)
-                startAnchor.add(trailingConstraint: constraint)
-                endAnchor.add(leadingConstraint: constraint)
+                constraint.insert(from: startAnchor, to: endAnchor)
             }
             
             // Create pending ties for any ties that are start on this note
@@ -130,11 +124,8 @@ class LayoutAnchorsBuilder {
         
         if let previousAnchor = previousAnchor {
             let constraint = LayoutConstraint()
-            constraint.from = previousAnchor
-            constraint.to = anchor
             constraint.value = .greaterThan(0.5)
-            previousAnchor.add(trailingConstraint: constraint)
-            anchor.add(leadingConstraint: constraint)
+            constraint.insert(from: previousAnchor, to: anchor)
         }
         
         return anchor
@@ -167,11 +158,8 @@ class LayoutAnchorsBuilder {
         // Assign fixed constraint from the previous anchor
         for prevAnchor in previousAnchors {
             let constraint = LayoutConstraint()
-            constraint.from = prevAnchor
-            constraint.to = anchor
             constraint.value = .greaterThan(0.5)
-            prevAnchor.add(trailingConstraint: constraint)
-            anchor.add(leadingConstraint: constraint)
+            constraint.insert(from: prevAnchor, to: anchor)
         }
         
         return anchor

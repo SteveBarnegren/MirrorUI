@@ -25,6 +25,13 @@ class LayoutConstraint {
             return true
         }
     }
+    
+    func insert(from: LayoutAnchor, to: LayoutAnchor) {
+        self.from = from
+        self.to = to
+        from.add(trailingConstraint: self)
+        to.add(leadingConstraint: self)
+    }
 }
 
 enum LayoutAnchorType {
