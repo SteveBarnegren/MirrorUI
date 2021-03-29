@@ -112,10 +112,10 @@ public class Note: Playable {
     // HorizontalLayoutItem
     var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.4)
 
-    var leadingLayoutItems: [AdjacentLayoutItem] {
+    var leadingChildItems: [AdjacentLayoutItem] {
         return self.noteHeads.map { $0.leadingLayoutItems }.joined().toArray()
     }
-    var trailingLayoutItems: [AdjacentLayoutItem] {
+    var trailingChildItems: [AdjacentLayoutItem] {
         return self.noteHeads.map { $0.trailingLayoutItems }.joined().toArray()
     }
     

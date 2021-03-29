@@ -98,7 +98,7 @@ class CompositionPathsCreator {
                            leadingTies: [Tie]) -> [Path] {
         
         let notePaths = noteRenderer.paths(forNotes: noteSequence.notes)
-        let noteSymbolPaths = noteSequence.notes.map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
+        let noteSymbolPaths = noteSequence.notes.map { $0.trailingChildItems + $0.leadingChildItems }.joined().map(makePaths).joined().toArray()
         let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeads }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
         let restPaths = restRenderer.paths(forRests: noteSequence.rests)
         

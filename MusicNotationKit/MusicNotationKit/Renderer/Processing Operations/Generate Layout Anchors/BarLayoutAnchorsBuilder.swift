@@ -20,35 +20,35 @@ class LayoutAnchorsBuilder {
             stave.bars.last?.trailingBarline = Barline()
         }
         
-        for (bar, previousBar, isLast) in composition.barSlices.eachWithPrevious().eachWithIsLast().unnestTuples() {
+        for (barSlice, previousBarSlice, isLast) in composition.barSlices.eachWithPrevious().eachWithIsLast().unnestTuples() {
             
             var barAnchors = [LayoutAnchor]()
             
             // Barline
-            let previousBarLastAnchor = previousBar?.trailingBarlineAnchor ?? previousBar?.layoutAnchors.last
-            let barlineAnchor = makeAnchor(forItems: bar.leadingBarlines, fromPrevious: previousBarLastAnchor)
-            previousBar?.trailingBarlineAnchor = barlineAnchor
+            let previousBarLastAnchor = previousBarSlice?.trailingBarlineAnchor ?? previousBarSlice?.layoutAnchors.last
+            let barlineAnchor = makeAnchor(forItems: barSlice.leadingBarlines, fromPrevious: previousBarLastAnchor)
+            previousBarSlice?.trailingBarlineAnchor = barlineAnchor
             barAnchors.append(barlineAnchor)
             
             // Clef
-            let clefAnchor = makeAnchor(forItems: bar.clefSymbols, fromPrevious: barlineAnchor, type: .leadingClef)
+            let clefAnchor = makeAnchor(forItems: barSlice.clefSymbols, fromPrevious: barlineAnchor, type: .leadingClef)
             barAnchors.append(clefAnchor)
             
             // Notes
-            let anchorsForSequences = bar.sequences
+            let anchorsForSequences = barSlice.sequences
                 .map { makeAnchors(forNoteSequence: $0, fromPrevious: [barlineAnchor, clefAnchor])}
                 .joined()
                 .toArray()
             
             // Add tie constraints
-            let leadingTies = previousBar?.trailingTies ?? []
+            let leadingTies = previousBarSlice?.trailingTies ?? []
             addTieWidthConstraints(toAnchors: anchorsForSequences,
                                    previousBarline: barlineAnchor,
                                    leadingTies: leadingTies)
             
             // Combine
             let combinedAnchors = sortAndCombine(anchors: anchorsForSequences)
-            applyDurations(toAnchors: combinedAnchors, barDuration: bar.duration)
+            applyDurations(toAnchors: combinedAnchors, barDuration: barSlice.duration)
             
             barAnchors += combinedAnchors
             
@@ -57,7 +57,7 @@ class LayoutAnchorsBuilder {
                 barAnchors.append(makeAnchor(forItems: trailingBarlines, fromPrevious: barAnchors.last))
             }
             
-            bar.layoutAnchors = barAnchors
+            barSlice.layoutAnchors = barAnchors
         }
         
     }
@@ -141,21 +141,6 @@ class LayoutAnchorsBuilder {
     }
     
     // Make from multiple previous anchor (clef and barline)
-    private func makeAnchors(forNoteSequence sequence: NoteSequence, fromPrevious previousAnchors: [LayoutAnchor]) -> [SingleItemLayoutAnchor] {
-        
-        var anchors = [SingleItemLayoutAnchor]()
-        var prevAnchors = previousAnchors
-        
-        for playable in sequence.playables {
-            let anchor = makeAnchor(forPlayable: playable, fromPrevious: prevAnchors)
-            prevAnchors = [anchor]
-            anchors.append(anchor)
-        }
-        
-        return anchors
-    }
-    
-    // Make from multiple previous anchor (clef and barline)
     private func makeAnchor(forPlayable playable: Playable, fromPrevious previousAnchors: [LayoutAnchor]) -> SingleItemLayoutAnchor {
         
         let anchor = SingleItemLayoutAnchor(item: playable)
@@ -164,7 +149,7 @@ class LayoutAnchorsBuilder {
         anchor.time = playable.barTime
         
         // Create leading anchors
-        for item in playable.leadingLayoutItems {
+        for item in playable.leadingChildItems {
             let adjacentAnchor = AdjacentLayoutAnchor(item: item)
             adjacentAnchor.width = item.leadingWidth + item.trailingWidth
             adjacentAnchor.distanceFromAnchor = item.hoizontalLayoutDistanceFromParentItem
@@ -172,7 +157,7 @@ class LayoutAnchorsBuilder {
         }
         
         // Create Adjacent items for dots
-        for dot in playable.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
+        for dot in playable.trailingChildItems.compactMap({ $0 as? DotSymbol }) {
             let adjacentAnchor = AdjacentLayoutAnchor(item: dot)
             adjacentAnchor.width = dot.leadingWidth + dot.trailingWidth
             adjacentAnchor.distanceFromAnchor = dot.hoizontalLayoutDistanceFromParentItem
@@ -192,59 +177,21 @@ class LayoutAnchorsBuilder {
         return anchor
     }
     
-    // Make from one previosu anchor
-    /*
-    private func makeAnchors(forNoteSequence sequence: NoteSequence, fromPrevious startingAnchor: LayoutAnchor?) -> [SingleItemLayoutAnchor] {
+    // Make from multiple previous anchor (clef and barline)
+    private func makeAnchors(forNoteSequence sequence: NoteSequence, fromPrevious previousAnchors: [LayoutAnchor]) -> [SingleItemLayoutAnchor] {
         
         var anchors = [SingleItemLayoutAnchor]()
-        var previousAnchor: LayoutAnchor? = startingAnchor
+        var prevAnchors = previousAnchors
         
         for playable in sequence.playables {
-            let anchor = makeAnchor(forPlayable: playable, fromPrevious: previousAnchor)
-            previousAnchor = anchor
+            let anchor = makeAnchor(forPlayable: playable, fromPrevious: prevAnchors)
+            prevAnchors = [anchor]
             anchors.append(anchor)
         }
         
         return anchors
     }
- */
-    
-    private func makeAnchor(forPlayable playable: Playable, fromPrevious previousAnchor: LayoutAnchor?) -> SingleItemLayoutAnchor {
-        
-        let anchor = SingleItemLayoutAnchor(item: playable)
-        anchor.leadingWidth = playable.leadingWidth
-        anchor.trailingWidth = playable.trailingWidth
-        anchor.time = playable.barTime
-        
-        // Create leading anchors
-        for item in playable.leadingLayoutItems {
-            let adjacentAnchor = AdjacentLayoutAnchor(item: item)
-            adjacentAnchor.width = item.leadingWidth + item.trailingWidth
-            adjacentAnchor.distanceFromAnchor = item.hoizontalLayoutDistanceFromParentItem
-            anchor.add(leadingAnchor: adjacentAnchor)
-        }
-        
-        // Create Adjacent items for dots
-        for dot in playable.trailingLayoutItems.compactMap({ $0 as? DotSymbol }) {
-            let adjacentAnchor = AdjacentLayoutAnchor(item: dot)
-            adjacentAnchor.width = dot.leadingWidth + dot.trailingWidth
-            adjacentAnchor.distanceFromAnchor = dot.hoizontalLayoutDistanceFromParentItem
-            anchor.add(trailingAnchor: adjacentAnchor)
-        }
-        
-        // Assign fixed constraint from the previous anchor
-        if let prevAnchor = previousAnchor {
-            let constraint = LayoutConstraint()
-            constraint.from = prevAnchor
-            constraint.to = anchor
-            constraint.value = .greaterThan(0.5)
-            prevAnchor.add(trailingConstraint: constraint)
-            anchor.add(leadingConstraint: constraint)
-        }
-        
-        return anchor
-    }
-    
+
     // MARK: - Sort / Combine
     
     func sortAndCombine(anchors: [SingleItemLayoutAnchor]) -> [LayoutAnchor] {

@@ -19,8 +19,8 @@ public class Rest: Playable, Positionable {
     // HorizontalLayoutItem
     var barTime = Time.zero
     var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.4)
-    let leadingLayoutItems = [AdjacentLayoutItem]()
-    let trailingLayoutItems = [AdjacentLayoutItem]()
+    let leadingChildItems = [AdjacentLayoutItem]()
+    let trailingChildItems = [AdjacentLayoutItem]()
     
     // Positionable
     var position = Vector2D.zero

@@ -21,10 +21,10 @@ class VerticalPositionerRenderOperation {
     private func process(bar: Bar) {
         bar.forEachNote { note in
             self.positionNoteHeads(forNote: note)
-            note.leadingLayoutItems.forEach { 
+            note.leadingChildItems.forEach { 
                 self.position(adjacentLayoutItem: $0, forNote: note, clef: bar.clef) 
             }
-            note.trailingLayoutItems.forEach { 
+            note.trailingChildItems.forEach { 
                 self.position(adjacentLayoutItem: $0, forNote: note, clef: bar.clef) 
             }
         }

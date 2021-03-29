@@ -20,8 +20,8 @@ class ClefSymbol: HorizontalLayoutItem {
     
     // HorizontalLayoutItem
     var layoutDuration: Time? { nil }
-    var leadingLayoutItems: [AdjacentLayoutItem] { [] }
-    var trailingLayoutItems: [AdjacentLayoutItem] { [] }
+    var leadingChildItems: [AdjacentLayoutItem] { [] }
+    var trailingChildItems: [AdjacentLayoutItem] { [] }
     var horizontalLayoutWidth: HorizontalLayoutWidthType {
         .centered(width: 7)
     }

@@ -45,7 +45,7 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
     
     private func applyAdjacentItemWidths(note: Note) {
         
-        for item in (note.leadingLayoutItems + note.trailingLayoutItems) {
+        for item in (note.leadingChildItems + note.trailingChildItems) {
             applyAdjacentItemWidth(item: item)
         }
     }

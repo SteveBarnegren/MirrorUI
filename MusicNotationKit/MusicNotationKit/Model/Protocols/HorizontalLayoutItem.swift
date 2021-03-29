@@ -41,8 +41,8 @@ extension HorizontalLayoutItemBase {
 
 protocol HorizontalLayoutItem: HorizontalLayoutItemBase {
     var layoutDuration: Time? { get }
-    var leadingLayoutItems: [AdjacentLayoutItem] { get }
-    var trailingLayoutItems: [AdjacentLayoutItem] { get }
+    var leadingChildItems: [AdjacentLayoutItem] { get }
+    var trailingChildItems: [AdjacentLayoutItem] { get }
 }
 
 protocol AdjacentLayoutItem: HorizontalLayoutItemBase {
