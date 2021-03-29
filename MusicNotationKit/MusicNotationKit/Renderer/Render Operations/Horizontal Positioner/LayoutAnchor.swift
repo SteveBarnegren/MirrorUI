@@ -41,24 +41,31 @@ enum LayoutAnchorContent {
 
 // MARK: - ******* Layout Anchor ********
 
-protocol LayoutAnchor: class {
-    var enabled: Bool { get set }
-    var layoutAnchorType: LayoutAnchorContent { get set }
-    var leadingWidth: Double { get }
-    var trailingWidth: Double { get }
-    var leadingConstraints: [LayoutConstraint] { get set }
-    var trailingConstraints: [LayoutConstraint] { get set }
-    var position: Double { get set }
-    var leadingEdgeOffset: Double { get }
-    var trailingEdge: Double { get }
-    var duration: Time? { get set }
-    var time: Time { get }
+class LayoutAnchor {
+    var enabled = true
+    var layoutAnchorType = LayoutAnchorContent.unknown
+    var leadingWidth: Double { 0 }
+    var trailingWidth: Double { 0 }
+    var leadingConstraints = [LayoutConstraint]()
+    var trailingConstraints = [LayoutConstraint]()
+    var position = Double.zero {
+        didSet {
+            assert(!position.isNaN)
+            assert(!position.isInfinite)
+            onPositionUpdated()
+        }
+    }
+    var leadingEdgeOffset: Double { Double.zero }
+    var trailingEdge: Double { Double.zero }
+    var duration: Time?
+    var time: Time { .zero }
     
-    func reset()
-    func apply()
-}
-
-extension LayoutAnchor {
+    // Sublass hooks
+    func onPositionUpdated() {}
+    
+    func reset() {}
+    func apply() {}
+    
     func add(leadingConstraint: LayoutConstraint) {
         self.leadingConstraints.append(leadingConstraint)
     }
@@ -71,25 +78,19 @@ extension LayoutAnchor {
 final class SingleItemLayoutAnchor: LayoutAnchor {
   
     // LayoutAnchor
-    var enabled = true
-    var layoutAnchorType = LayoutAnchorContent.unknown
-    var leadingWidth: Double = 0
-    var trailingWidth: Double = 0
-    var leadingConstraints = [LayoutConstraint]()
-    var trailingConstraints = [LayoutConstraint]()
-    var position: Double = 0 {
-        didSet {
-            assert(!position.isNaN)
-            assert(!position.isInfinite)
-        }
-    }
     var isSolved = false
-    var time: Time = .zero
-    var duration: Time?
     var leadingChildAnchors = [AdjacentLayoutAnchor]()
     var trailingChildAnchors = [AdjacentLayoutAnchor]()
     
-    var leadingEdgeOffset: Double {
+    private var _time: Time
+    override var time: Time { _time }
+    
+    private var _leadingWidth: Double
+    override var leadingWidth: Double { _leadingWidth }
+    private var _trailingWidth: Double
+    override var trailingWidth: Double { _trailingWidth }
+    
+    override var leadingEdgeOffset: Double {
         if let leftMostLeadingAnchor = leadingChildAnchors.last {
             return leftMostLeadingAnchor.offset - leftMostLeadingAnchor.width/2
         } else {
@@ -97,7 +98,7 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
         }
     }
     
-    var trailingEdge: Double {
+    override var trailingEdge: Double {
         if let lastTrailingAnchor = trailingChildAnchors.last {
             return lastTrailingAnchor.trailingEdge(anchorPosition: position)
         } else {
@@ -107,8 +108,12 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
     
     var item: HorizontallyPositionable
     
-    init(item: HorizontallyPositionable) {
+    init(item: HorizontallyPositionable, leadingWidth: Double, trailingWidth: Double, time: Time = .zero) {
         self.item = item
+        self._leadingWidth = leadingWidth
+        self._trailingWidth = trailingWidth
+        self._time = time
+        super.init()
     }
     
     func add(trailingAnchor: AdjacentLayoutAnchor) {
@@ -119,13 +124,13 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
         self.leadingChildAnchors.append(leadingAnchor)
     }
     
-    func apply() {
+    override func apply() {
         self.item.xPosition = self.position
         leadingChildAnchors.forEach { $0.apply(anchorPosition: position) }
         trailingChildAnchors.forEach { $0.apply(anchorPosition: position) }
     }
     
-    func reset() {
+    override func reset() {
         self.isSolved = false
         self.position = .zero
         leadingChildAnchors.forEach { $0.reset() }
@@ -158,25 +163,19 @@ class AdjacentLayoutAnchor {
 }
 
 class CombinedItemsLayoutAnchor: LayoutAnchor {
+    
+    override func onPositionUpdated() {
+        anchors.forEach { $0.position = position }
+    }
   
     // LayoutAnchor
-    var layoutAnchorType = LayoutAnchorContent.unknown
-    var enabled = true
-    var leadingWidth: Double { anchors.map { $0.leadingWidth }.max()! }
-    var trailingWidth: Double { anchors.map { $0.trailingWidth }.max()! }
-    var trailingConstraints: [LayoutConstraint]
-    var leadingConstraints: [LayoutConstraint]
-    var position: Double = 0 {
-        didSet {
-            anchors.forEach { $0.position = position }
-        }
-    }
-    var time: Time {
+    override var leadingWidth: Double { anchors.map { $0.leadingWidth }.max()! }
+    override var trailingWidth: Double { anchors.map { $0.trailingWidth }.max()! }
+    override var time: Time {
         return anchors.first!.time
     }
-    var duration: Time?
     
-    var leadingEdgeOffset: Double {
+    override var leadingEdgeOffset: Double {
         let leftMostAnchors = anchors.compactMap { $0.leadingChildAnchors.last }
         if leftMostAnchors.isEmpty == false {
             return leftMostAnchors.map { $0.offset - $0.width/2 }.min()!
@@ -185,7 +184,7 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
         }
     }
     
-    var trailingEdge: Double {
+    override var trailingEdge: Double {
         let lastAnchors = anchors.compactMap { $0.trailingChildAnchors.last }
         if lastAnchors.isEmpty == false {
             return lastAnchors.map { $0.trailingEdge(anchorPosition: position) }.max()!
@@ -198,18 +197,19 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     
     init(anchors: [SingleItemLayoutAnchor]) {
         self.anchors = anchors
+        super.init()
         self.leadingConstraints = anchors.map { $0.leadingConstraints }.joined().toArray()
         self.trailingConstraints = anchors.map { $0.trailingConstraints }.joined().toArray()
     }
     
-    func apply() {
+    override func apply() {
         for anchor in anchors {
             anchor.position = position
             anchor.apply()
         }
     }
     
-    func reset() {
+    override func reset() {
         self.position = 0
         anchors.forEach { $0.reset() }
     }

@@ -113,10 +113,9 @@ class LayoutAnchorsBuilder {
                             type: LayoutAnchorContent = .unknown) -> LayoutAnchor {
         
         let singleItemAnchors = items.map { (item: HorizontalLayoutItem) -> SingleItemLayoutAnchor in
-            let anchor = SingleItemLayoutAnchor(item: item)
-            anchor.leadingWidth = item.leadingWidth
-            anchor.trailingWidth = item.trailingWidth
-            return anchor
+            return SingleItemLayoutAnchor(item: item, 
+                                          leadingWidth: item.leadingWidth, 
+                                          trailingWidth: item.trailingWidth)
         }
         
         let anchor = CombinedItemsLayoutAnchor(anchors: singleItemAnchors)
@@ -134,10 +133,10 @@ class LayoutAnchorsBuilder {
     // Make from multiple previous anchor (clef and barline)
     private func makeAnchor(forPlayable playable: Playable, fromPrevious previousAnchors: [LayoutAnchor]) -> SingleItemLayoutAnchor {
         
-        let anchor = SingleItemLayoutAnchor(item: playable)
-        anchor.leadingWidth = playable.leadingWidth
-        anchor.trailingWidth = playable.trailingWidth
-        anchor.time = playable.barTime
+        let anchor = SingleItemLayoutAnchor(item: playable, 
+                                            leadingWidth: playable.leadingWidth, 
+                                            trailingWidth: playable.trailingWidth, 
+                                            time: playable.barTime)
         
         // Create leading anchors
         for item in playable.leadingChildItems {
