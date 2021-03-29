@@ -79,11 +79,11 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
     var isSolved = false
     var time: Time = .zero
     var duration: Time?
-    var leadingLayoutAnchors = [AdjacentLayoutAnchor]()
-    var trailingLayoutAnchors = [AdjacentLayoutAnchor]()
+    var leadingChildAnchors = [AdjacentLayoutAnchor]()
+    var trailingChildAnchors = [AdjacentLayoutAnchor]()
     
     var leadingEdgeOffset: Double {
-        if let leftMostLeadingAnchor = leadingLayoutAnchors.last {
+        if let leftMostLeadingAnchor = leadingChildAnchors.last {
             return leftMostLeadingAnchor.offset - leftMostLeadingAnchor.width/2
         } else {
             return -leadingWidth
@@ -91,7 +91,7 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
     }
     
     var trailingEdge: Double {
-        if let lastTrailingAnchor = trailingLayoutAnchors.last {
+        if let lastTrailingAnchor = trailingChildAnchors.last {
             return lastTrailingAnchor.trailingEdge(anchorPosition: position)
         } else {
             return position + trailingWidth
@@ -105,24 +105,24 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
     }
     
     func add(trailingAnchor: AdjacentLayoutAnchor) {
-        self.trailingLayoutAnchors.append(trailingAnchor)
+        self.trailingChildAnchors.append(trailingAnchor)
     }
     
     func add(leadingAnchor: AdjacentLayoutAnchor) {
-        self.leadingLayoutAnchors.append(leadingAnchor)
+        self.leadingChildAnchors.append(leadingAnchor)
     }
     
     func apply() {
         self.item.xPosition = self.position
-        leadingLayoutAnchors.forEach { $0.apply(anchorPosition: position) }
-        trailingLayoutAnchors.forEach { $0.apply(anchorPosition: position) }
+        leadingChildAnchors.forEach { $0.apply(anchorPosition: position) }
+        trailingChildAnchors.forEach { $0.apply(anchorPosition: position) }
     }
     
     func reset() {
         self.isSolved = false
         self.position = .zero
-        leadingLayoutAnchors.forEach { $0.reset() }
-        trailingLayoutAnchors.forEach { $0.reset() }
+        leadingChildAnchors.forEach { $0.reset() }
+        trailingChildAnchors.forEach { $0.reset() }
     }
 }
 
@@ -170,7 +170,7 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     var duration: Time?
     
     var leadingEdgeOffset: Double {
-        let leftMostAnchors = anchors.compactMap { $0.leadingLayoutAnchors.last }
+        let leftMostAnchors = anchors.compactMap { $0.leadingChildAnchors.last }
         if leftMostAnchors.isEmpty == false {
             return leftMostAnchors.map { $0.offset - $0.width/2 }.min()!
         } else {
@@ -179,7 +179,7 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     }
     
     var trailingEdge: Double {
-        let lastAnchors = anchors.compactMap { $0.trailingLayoutAnchors.last }
+        let lastAnchors = anchors.compactMap { $0.trailingChildAnchors.last }
         if lastAnchors.isEmpty == false {
             return lastAnchors.map { $0.trailingEdge(anchorPosition: position) }.max()!
         } else {

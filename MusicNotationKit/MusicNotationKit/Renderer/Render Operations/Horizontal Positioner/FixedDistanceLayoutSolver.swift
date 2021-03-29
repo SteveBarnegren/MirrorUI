@@ -12,15 +12,13 @@ class FixedDistanceLayoutSolver {
     
     func solve(anchors: [LayoutAnchor]) {
         
-        var isFirst = true
-        for anchor in anchors {
+        for (anchor, isFirst) in anchors.eachWithIsFirst() {
             solveAdjacentLayoutAnchorOffsets(forAnchor: anchor)
-            if isFirst == false {
-                solveLeadingConstraints(forAnchor: anchor)
-            } else {
+            if isFirst {
                 anchor.position = -anchor.leadingEdgeOffset
+            } else {
+                solveLeadingConstraints(forAnchor: anchor)
             }
-            isFirst = false
         }
         
         // There may be notes from different sequences that don't have constraints between
@@ -80,7 +78,7 @@ class FixedDistanceLayoutSolver {
         
         var offset = -anchor.leadingWidth
         
-        for leadingAnchor in anchor.leadingLayoutAnchors {
+        for leadingAnchor in anchor.leadingChildAnchors {
             offset -= leadingAnchor.distanceFromAnchor
             offset -= leadingAnchor.width/2
             leadingAnchor.offset = offset
@@ -92,7 +90,7 @@ class FixedDistanceLayoutSolver {
         
         var offset = anchor.trailingWidth
         
-        for trailingAnchor in anchor.trailingLayoutAnchors {
+        for trailingAnchor in anchor.trailingChildAnchors {
             offset += trailingAnchor.distanceFromAnchor
             offset += trailingAnchor.width/2
             trailingAnchor.offset = offset
