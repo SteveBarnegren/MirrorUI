@@ -13,21 +13,89 @@ enum LayoutConstraintValue {
     case greaterThan(Double)
 }
 
+struct Weak<T: AnyObject> {
+    weak var value: T?
+    
+    init(value: T) {
+        self.value = value
+    }
+}
+
+enum LayoutConstraintFromTarget {
+    case anchor(Weak<LayoutAnchor>)
+    case previousAnchor
+    
+    var isEnabled: Bool {
+        switch self {
+        case .anchor(let a):
+            return a.value?.enabled ?? false
+        case .previousAnchor:
+            return true
+        }
+    }
+    
+    var layoutAnchor: LayoutAnchor? {
+        switch self {
+        case .anchor(let anchor):
+            return anchor.value
+        case .previousAnchor:
+            return nil
+        }
+    }
+}
+
+enum LayoutConstraintToTarget {
+    case anchor(Weak<LayoutAnchor>)
+    case nextAnchor
+    
+    var isEnabled: Bool {
+        switch self {
+        case .anchor(let a):
+            return a.value?.enabled ?? false
+        case .nextAnchor:
+            return true
+        }
+    }
+    
+    var layoutAnchor: LayoutAnchor? {
+        switch self {
+        case .anchor(let anchor):
+            return anchor.value
+        case .nextAnchor:
+            return nil
+        }
+    }
+}
+
 class LayoutConstraint {
-    weak var from: LayoutAnchor?
-    weak var to: LayoutAnchor?
+    var from: LayoutConstraintFromTarget
+    var to: LayoutConstraintToTarget
     var value = LayoutConstraintValue.greaterThan(0)
     
     var isEnabled: Bool {
-        if from?.enabled == false { return false }
-        if to?.enabled == false { return false }
-        return true
+        return from.isEnabled && to.isEnabled
     }
     
-    func insert(from: LayoutAnchor, to: LayoutAnchor) {
-        self.from = from
-        self.to = to
-        from.add(trailingConstraint: self)
-        to.add(leadingConstraint: self)
+    init(fromPreviousTo to: LayoutAnchor, value: LayoutConstraintValue) {
+        self.from = .previousAnchor
+        self.to = .anchor(Weak(value: to))
+        self.value = value
+    }
+    
+    init(from: LayoutAnchor, to: LayoutAnchor, value: LayoutConstraintValue) {
+        self.from = .anchor(Weak(value: from))
+        self.to = .anchor(Weak(value: to))
+        self.value = value
+    }
+    
+    func activate() {
+        
+        let fromAnchor = from.layoutAnchor
+        let toAnchor = to.layoutAnchor
+        
+        assert(fromAnchor != nil || toAnchor != nil, "There is no layout anchor to attach this constraint to")
+        
+        fromAnchor?.add(trailingConstraint: self)
+        toAnchor?.add(leadingConstraint: self)
     }
 }

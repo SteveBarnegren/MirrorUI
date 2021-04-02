@@ -12,12 +12,16 @@ class FixedDistanceLayoutSolver {
     
     func solve(anchors: [LayoutAnchor]) {
         
+        var previousAnchor: LayoutAnchor?
         for (anchor, isFirst) in anchors.eachWithIsFirst() {
+            if !anchor.enabled { continue }
+            defer { previousAnchor = anchor }
+            
             solveAdjacentLayoutAnchorOffsets(forAnchor: anchor)
             if isFirst {
                 anchor.position = -anchor.leadingEdgeOffset
             } else {
-                solveLeadingConstraints(forAnchor: anchor)
+                solveLeadingConstraints(forAnchor: anchor, previousAnchor: previousAnchor)
             }
         }
         
@@ -38,14 +42,23 @@ class FixedDistanceLayoutSolver {
         }
     }
     
-    private func solveLeadingConstraints(forAnchor anchor: LayoutAnchor) {
+    private func solveLeadingConstraints(forAnchor anchor: LayoutAnchor, previousAnchor: LayoutAnchor?) {
         
         var leadingEdgePos = Double(0)
         
         for constraint in anchor.leadingConstraints where constraint.isEnabled {
-            guard let fromAnchor = constraint.from else {
-                continue
-                // fatalError("All constraints should have a from value")
+            
+            var trailingEdge = Double(0)
+            
+            switch constraint.from {
+            case .anchor(let a):
+                if let anchor = a.value {
+                    trailingEdge = anchor.trailingEdge
+                }
+            case .previousAnchor:
+                if let prev = previousAnchor {
+                    trailingEdge = prev.trailingEdge
+                }
             }
             
             var constraintDistance: Double
@@ -55,7 +68,7 @@ class FixedDistanceLayoutSolver {
             case .greaterThan(let v):
                 constraintDistance = v
             }
-            leadingEdgePos = max(leadingEdgePos, fromAnchor.trailingEdge + constraintDistance)
+            leadingEdgePos = max(leadingEdgePos, trailingEdge + constraintDistance)
         }
         
         anchor.position = leadingEdgePos - anchor.leadingEdgeOffset

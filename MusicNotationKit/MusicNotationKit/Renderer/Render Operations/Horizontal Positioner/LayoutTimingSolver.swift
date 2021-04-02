@@ -151,7 +151,7 @@ class LayoutTimingSolver {
             if let nextAnchor = spaceable.nextAnchor {
                 spaceable.distanceToNextAnchor = nextAnchor.position - spaceable.anchor.position
             } else {
-                spaceable.distanceToNextAnchor = 0 // layoutWidth - spaceable.anchor.position
+                spaceable.distanceToNextAnchor = (layoutWidth - spaceable.anchor.position).constrained(min: 0.001)
             }
         }
         let totalAnchorDistances = spaceableAnchors.map { $0.distanceToNextAnchor }.sum()

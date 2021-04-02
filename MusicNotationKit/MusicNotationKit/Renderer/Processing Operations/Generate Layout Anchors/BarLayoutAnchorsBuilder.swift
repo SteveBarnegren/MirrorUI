@@ -25,18 +25,17 @@ class LayoutAnchorsBuilder {
             var barAnchors = [LayoutAnchor]()
             
             // Barline
-            let previousBarLastAnchor = previousBarSlice?.trailingBarlineAnchor ?? previousBarSlice?.layoutAnchors.last
-            let barlineAnchor = makeAnchor(forItems: barSlice.leadingBarlines, fromPrevious: previousBarLastAnchor)
-            previousBarSlice?.trailingBarlineAnchor = barlineAnchor
+            let barlineAnchor = makeAnchorFromPrevious(forItems: barSlice.leadingBarlines) 
             barAnchors.append(barlineAnchor)
+            previousBarSlice?.trailingBarlineAnchor = barlineAnchor
             
             // Clef
-            let clefAnchor = makeAnchor(forItems: barSlice.clefSymbols, fromPrevious: barlineAnchor, type: .leadingClef)
+            let clefAnchor = makeAnchorFromPrevious(forItems: barSlice.clefSymbols, type: .leadingClef) 
             barAnchors.append(clefAnchor)
             
             // Notes
             let anchorsForSequences = barSlice.sequences
-                .map { makeAnchors(forNoteSequence: $0, fromPrevious: [barlineAnchor, clefAnchor])}
+                .map { makeAnchors(forNoteSequence: $0)}
                 .joined()
                 .toArray()
             
@@ -54,7 +53,7 @@ class LayoutAnchorsBuilder {
             
             let trailingBarlines = composition.barSlices.last!.trailingBarlines
             if isLast, !trailingBarlines.isEmpty {
-                barAnchors.append(makeAnchor(forItems: trailingBarlines, fromPrevious: barAnchors.last))
+                barAnchors.append(makeAnchorFromPrevious(forItems: trailingBarlines))
             }
             
             barSlice.layoutAnchors = barAnchors
@@ -81,19 +80,19 @@ class LayoutAnchorsBuilder {
             
             // Create constraints for leading ties
             if leadingTies.contains(where: { $0.toNote === note }) {
-                let constraint = LayoutConstraint()
-                constraint.value = .greaterThan(requiredTieSpace / 2)
-                constraint.insert(from: previousBarline, to: anchor)
+                let constraint = LayoutConstraint(from: previousBarline, 
+                                                  to: anchor, 
+                                                  value: .greaterThan(requiredTieSpace / 2))
+                constraint.activate()
             }
             
             // Create constraints for any ties that end on this note
             let pending = pendingTies.extract { $0.tie.toNote === note }
             for pendingTie in pending {
-                let startAnchor = pendingTie.anchor
-                let endAnchor = anchor
-                let constraint = LayoutConstraint()
-                constraint.value = .greaterThan(requiredTieSpace)
-                constraint.insert(from: startAnchor, to: endAnchor)
+                let constraint = LayoutConstraint(from: pendingTie.anchor,
+                                                  to: anchor,
+                                                  value: .greaterThan(requiredTieSpace))
+                constraint.activate()
             }
             
             // Create pending ties for any ties that are start on this note
@@ -122,10 +121,30 @@ class LayoutAnchorsBuilder {
         anchor.layoutAnchorType = type
         
         if let previousAnchor = previousAnchor {
-            let constraint = LayoutConstraint()
-            constraint.value = .greaterThan(0.5)
-            constraint.insert(from: previousAnchor, to: anchor)
+            let constraint = LayoutConstraint(from: previousAnchor, 
+                                              to: anchor,
+                                              value: .greaterThan(0.5))
+            constraint.activate()
         }
+        
+        return anchor
+    }
+    
+    private func makeAnchorFromPrevious(forItems items: [HorizontalLayoutItem], 
+                                        type: LayoutAnchorContent = .unknown) -> LayoutAnchor {
+        
+        let singleItemAnchors = items.map { (item: HorizontalLayoutItem) -> SingleItemLayoutAnchor in
+            return SingleItemLayoutAnchor(item: item, 
+                                          leadingWidth: item.leadingWidth, 
+                                          trailingWidth: item.trailingWidth)
+        }
+        
+        let anchor = CombinedItemsLayoutAnchor(anchors: singleItemAnchors)
+        anchor.layoutAnchorType = type
+        
+        let constraint = LayoutConstraint(fromPreviousTo: anchor, 
+                                          value: .greaterThan(0.5)) 
+        constraint.activate()
         
         return anchor
     }
@@ -156,23 +175,29 @@ class LayoutAnchorsBuilder {
         
         // Assign fixed constraint from the previous anchor
         for prevAnchor in previousAnchors {
-            let constraint = LayoutConstraint()
-            constraint.value = .greaterThan(0.5)
-            constraint.insert(from: prevAnchor, to: anchor)
+            let constraint = LayoutConstraint(from: prevAnchor,
+                                              to: anchor,
+                                              value: .greaterThan(0.5))
+            constraint.activate()
         }
         
         return anchor
     }
     
-    // Make from multiple previous anchor (clef and barline)
-    private func makeAnchors(forNoteSequence sequence: NoteSequence, fromPrevious previousAnchors: [LayoutAnchor]) -> [SingleItemLayoutAnchor] {
+    private func makeAnchors(forNoteSequence sequence: NoteSequence) -> [SingleItemLayoutAnchor] {
         
         var anchors = [SingleItemLayoutAnchor]()
-        var prevAnchors = previousAnchors
+        var prevAnchors = [LayoutAnchor]()
         
-        for playable in sequence.playables {
+        for (playable, isFirst) in sequence.playables.eachWithIsFirst() {
             let anchor = makeAnchor(forPlayable: playable, fromPrevious: prevAnchors)
             prevAnchors = [anchor]
+            
+            if isFirst {
+                let constraint = LayoutConstraint(fromPreviousTo: anchor, value: .greaterThan(0.5))
+                constraint.activate()
+            }
+            
             anchors.append(anchor)
         }
         
