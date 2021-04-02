@@ -21,9 +21,7 @@ class LayoutConstraint {
     var isEnabled: Bool {
         if from?.enabled == false { return false }
         if to?.enabled == false { return false }
-        else {
-            return true
-        }
+        return true
     }
     
     func insert(from: LayoutAnchor, to: LayoutAnchor) {
@@ -58,10 +56,7 @@ class LayoutAnchor {
     var leadingEdgeOffset: Double { Double.zero }
     var trailingEdge: Double { Double.zero }
     var duration: Time?
-    var time: Time { .zero }
-    
-    // Sublass hooks
-    func onPositionUpdated() {}
+    var barTime: Time { .zero }
     
     func reset() {}
     func apply() {}
@@ -73,6 +68,9 @@ class LayoutAnchor {
     func add(trailingConstraint: LayoutConstraint) {
         self.trailingConstraints.append(trailingConstraint)
     }
+    
+    // Sublass hooks
+    func onPositionUpdated() {}
 }
 
 final class SingleItemLayoutAnchor: LayoutAnchor {
@@ -82,8 +80,8 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
     var leadingChildAnchors = [AdjacentLayoutAnchor]()
     var trailingChildAnchors = [AdjacentLayoutAnchor]()
     
-    private var _time: Time
-    override var time: Time { _time }
+    private var _barTime: Time
+    override var barTime: Time { _barTime }
     
     private var _leadingWidth: Double
     override var leadingWidth: Double { _leadingWidth }
@@ -108,11 +106,11 @@ final class SingleItemLayoutAnchor: LayoutAnchor {
     
     var item: HorizontallyPositionable
     
-    init(item: HorizontallyPositionable, leadingWidth: Double, trailingWidth: Double, time: Time = .zero) {
+    init(item: HorizontallyPositionable, leadingWidth: Double, trailingWidth: Double, barTime: Time = .zero) {
         self.item = item
         self._leadingWidth = leadingWidth
         self._trailingWidth = trailingWidth
-        self._time = time
+        self._barTime = barTime
         super.init()
     }
     
@@ -171,8 +169,8 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     // LayoutAnchor
     override var leadingWidth: Double { anchors.map { $0.leadingWidth }.max()! }
     override var trailingWidth: Double { anchors.map { $0.trailingWidth }.max()! }
-    override var time: Time {
-        return anchors.first!.time
+    override var barTime: Time {
+        return anchors.first!.barTime
     }
     
     override var leadingEdgeOffset: Double {

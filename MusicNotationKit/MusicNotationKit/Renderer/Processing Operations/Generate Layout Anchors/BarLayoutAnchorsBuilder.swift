@@ -136,7 +136,7 @@ class LayoutAnchorsBuilder {
         let anchor = SingleItemLayoutAnchor(item: playable, 
                                             leadingWidth: playable.leadingWidth, 
                                             trailingWidth: playable.trailingWidth, 
-                                            time: playable.barTime)
+                                            barTime: playable.barTime)
         
         // Create leading anchors
         for item in playable.leadingChildItems {
@@ -184,8 +184,8 @@ class LayoutAnchorsBuilder {
     func sortAndCombine(anchors: [SingleItemLayoutAnchor]) -> [LayoutAnchor] {
         
         let chunkedAnchors = anchors
-            .sortedAscendingBy { $0.time }
-            .chunked(atChangeTo: { $0.time })
+            .sortedAscendingBy { $0.barTime }
+            .chunked(atChangeTo: { $0.barTime })
         
         var combinedAnchors = [LayoutAnchor]()
         
@@ -210,11 +210,11 @@ class LayoutAnchorsBuilder {
         for (anchor, isLast) in anchors.eachWithIsLast() {
             
             if let previous = previous {
-                previous.duration = anchor.time - previous.time
+                previous.duration = anchor.barTime - previous.barTime
             }
             
             if isLast {
-                anchor.duration = barDuration - anchor.time
+                anchor.duration = barDuration - anchor.barTime
             }
             
             previous = anchor
