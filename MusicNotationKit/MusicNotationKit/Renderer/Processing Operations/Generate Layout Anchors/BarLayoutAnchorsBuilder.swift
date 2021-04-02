@@ -30,7 +30,7 @@ class LayoutAnchorsBuilder {
             previousBarSlice?.trailingBarlineAnchor = barlineAnchor
             
             // Clef
-            let clefAnchor = makeAnchorFromPrevious(forItems: barSlice.clefSymbols, type: .leadingClef) 
+            let clefAnchor = makeAnchorFromPrevious(forItems: barSlice.clefSymbols, content: .leadingClef) 
             barAnchors.append(clefAnchor)
             
             // Notes
@@ -109,7 +109,7 @@ class LayoutAnchorsBuilder {
     
     private func makeAnchor(forItems items: [HorizontalLayoutItem], 
                             fromPrevious previousAnchor: LayoutAnchor?, 
-                            type: LayoutAnchorContent = .unknown) -> LayoutAnchor {
+                            content: LayoutAnchorContent = .unknown) -> LayoutAnchor {
         
         let singleItemAnchors = items.map { (item: HorizontalLayoutItem) -> SingleItemLayoutAnchor in
             return SingleItemLayoutAnchor(item: item, 
@@ -118,7 +118,7 @@ class LayoutAnchorsBuilder {
         }
         
         let anchor = CombinedItemsLayoutAnchor(anchors: singleItemAnchors)
-        anchor.layoutAnchorType = type
+        anchor.content = content
         
         if let previousAnchor = previousAnchor {
             let constraint = LayoutConstraint(from: previousAnchor, 
@@ -131,7 +131,7 @@ class LayoutAnchorsBuilder {
     }
     
     private func makeAnchorFromPrevious(forItems items: [HorizontalLayoutItem], 
-                                        type: LayoutAnchorContent = .unknown) -> LayoutAnchor {
+                                        content: LayoutAnchorContent = .unknown) -> LayoutAnchor {
         
         let singleItemAnchors = items.map { (item: HorizontalLayoutItem) -> SingleItemLayoutAnchor in
             return SingleItemLayoutAnchor(item: item, 
@@ -140,7 +140,7 @@ class LayoutAnchorsBuilder {
         }
         
         let anchor = CombinedItemsLayoutAnchor(anchors: singleItemAnchors)
-        anchor.layoutAnchorType = type
+        anchor.content = content
         
         let constraint = LayoutConstraint(fromPreviousTo: anchor, 
                                           value: .greaterThan(0.5)) 

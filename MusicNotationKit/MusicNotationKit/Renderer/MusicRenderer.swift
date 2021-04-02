@@ -152,18 +152,14 @@ class MusicRenderer {
         composition.barSlices.forEach { $0.resetLayoutAnchors() }
         
         // Draw just the clef at the start of the range
-        barSlices.first?.shouldRenderClef = true
-        barSlices.dropFirst().forEach { $0.shouldRenderClef = false }
+        barSlices.first?.isFirstBarInLine = true
+        barSlices.dropFirst().forEach { $0.isFirstBarInLine = false }
+        
         for barSlice in barSlices {
-            for anchor in barSlice.layoutAnchors {
-                if anchor.layoutAnchorType == .leadingClef {
-                    anchor.enabled = barSlice.shouldRenderClef
-                } else {
-                    anchor.enabled = true
-                }
+            for anchor in barSlice.layoutAnchors where anchor.content.visibleInFirstBarOfLineOnly {
+                anchor.enabled = barSlice.isFirstBarInLine
             }
         }
-        
         
         // Solve X Positions
         HorizontalPositionerRenderOperation().process(bars: barSlices, layoutWidth: layoutWidth)

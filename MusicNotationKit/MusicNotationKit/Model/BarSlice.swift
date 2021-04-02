@@ -12,9 +12,9 @@ class BarSlice {
     
     var bars: [Bar]
     
-    var shouldRenderClef = false {
+    var isFirstBarInLine = false {
         didSet {
-            bars.forEach { $0.shouldRenderClef = shouldRenderClef }
+            bars.forEach { $0.isFirstBarInLine = isFirstBarInLine }
         }
     }
     

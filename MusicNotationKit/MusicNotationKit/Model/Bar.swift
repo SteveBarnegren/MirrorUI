@@ -13,7 +13,7 @@ public class Bar {
     var barNumber = 0
     var clef: Clef = .treble
     var clefSymbol = ClefSymbol()
-    var shouldRenderClef = false
+    var isFirstBarInLine = false
     var sequences = [NoteSequence]()
     let leadingBarline = Barline()
     var trailingBarline: Barline?

@@ -83,7 +83,7 @@ class CompositionPathsCreator {
     private func makePaths(forBar bar: Bar, inRange barRange: ClosedRange<Int>, canvasWidth: Double, leadingTies: [Tie]) -> [Path] {
         
         let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
-        let clefPath = bar.shouldRenderClef ? clefRenderer.paths(forClef: bar.clefSymbol) : []
+        let clefPath = bar.isFirstBarInLine ? clefRenderer.paths(forClef: bar.clefSymbol) : []
         
         let notePaths =  bar.sequences.map {
             makePaths(forNoteSequence: $0, inRange: barRange, canvasWidth: canvasWidth, leadingTies: leadingTies)

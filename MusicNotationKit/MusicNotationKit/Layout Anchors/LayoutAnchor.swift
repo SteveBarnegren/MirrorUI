@@ -11,13 +11,22 @@ import Foundation
 enum LayoutAnchorContent {
     case unknown
     case leadingClef
+    
+    var visibleInFirstBarOfLineOnly: Bool {
+        switch self {
+        case .leadingClef:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 // MARK: - ******* Layout Anchor ********
 
 class LayoutAnchor {
     var enabled = true
-    var layoutAnchorType = LayoutAnchorContent.unknown
+    var content = LayoutAnchorContent.unknown
     var leadingWidth: Double { 0 }
     var trailingWidth: Double { 0 }
     var leadingConstraints = [LayoutConstraint]()
@@ -34,7 +43,9 @@ class LayoutAnchor {
     var duration: Time?
     var barTime: Time { .zero }
     
-    func reset() {}
+    func reset() {
+        enabled = true
+    }
     func apply() {}
     
     func add(leadingConstraint: LayoutConstraint) {
