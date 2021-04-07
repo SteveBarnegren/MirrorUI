@@ -31,3 +31,19 @@ class AccidentalSymbol: AdjacentLayoutItem, Positionable {
         self.stavePosition = stavePosition
     }
 }
+
+// MARK: - Single Glyph Renderable
+
+extension AccidentalSymbol: SingleGlyphRenderable {
+    
+    func glyph(fromStore store: GlyphStore) -> Glyph {
+        switch self.type {
+        case .sharp:
+            return store.accidentalSharp
+        case .flat:
+            return store.accidentalFlat
+        case .natural:
+            return store.accidentalNatural
+        }
+    }
+}

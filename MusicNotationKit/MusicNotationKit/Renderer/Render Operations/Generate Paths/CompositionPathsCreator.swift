@@ -17,22 +17,16 @@ struct RenderableVoice {
 
 class CompositionPathsCreator {
     
+    private let glyphRenderer: GlyphRenderer
     private let noteRenderer: NoteRenderer
     private let tieRenderer: TieRenderer
-    private let sharpRenderer: SharpRenderer
-    private let flatRenderer: FlatRenderer
-    private let naturalRenderer: NaturalRenderer
-    private let dotRenderer: DotRenderer
     private let restRenderer: RestRenderer
     private let clefRenderer: ClefRenderer
     
     init(glyphs: GlyphStore) {
+        self.glyphRenderer = GlyphRenderer(glyphStore: glyphs)
         self.noteRenderer = NoteRenderer(glyphs: glyphs)
         self.tieRenderer = TieRenderer(glyphs: glyphs)
-        self.sharpRenderer = SharpRenderer(glyphs: glyphs)
-        self.flatRenderer = FlatRenderer(glyphs: glyphs)
-        self.naturalRenderer = NaturalRenderer(glyphs: glyphs)
-        self.dotRenderer = DotRenderer(glyphs: glyphs)
         self.restRenderer = RestRenderer(glyphs: glyphs)
         self.clefRenderer = ClefRenderer(glyphs: glyphs)
     }
@@ -144,28 +138,10 @@ class CompositionPathsCreator {
     
     private func makePaths(forSymbol symbol: AdjacentLayoutItem) -> [Path] {
         
-        switch symbol {
-        case let dot as DotSymbol:
-            return dotRenderer.paths(forDot: dot)
-        case let accidental as AccidentalSymbol:
-           return makePaths(forAccidentalSymbol: accidental)
-        default:
+        if let singleGlyphRenderable = symbol as? SingleGlyphRenderable {
+            return glyphRenderer.paths(forRenderable: singleGlyphRenderable)
+        } else {
             fatalError("Unknown symbol type: \(symbol)")
-        }
-    }
-    
-    private func makePaths(forAccidentalSymbol accidentalSymbol: AccidentalSymbol) -> [Path] {
-        
-        let x = accidentalSymbol.xPosition
-        let y = accidentalSymbol.yPosition
-        
-        switch accidentalSymbol.type {
-        case .sharp:
-            return sharpRenderer.paths(forSharpAtX: x, y: y)
-        case .flat:
-            return flatRenderer.paths(forFlatAtX: x, y: y)
-        case .natural:
-            return naturalRenderer.paths(forNaturalAtX: x, y: y)
         }
     }
     

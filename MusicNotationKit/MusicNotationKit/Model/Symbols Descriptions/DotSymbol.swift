@@ -19,3 +19,12 @@ class DotSymbol: AdjacentLayoutItem, Positionable {
     
     var stavePosition = StavePosition.zero
 }
+
+// MARK: - Single Glyph Renderable
+
+extension DotSymbol: SingleGlyphRenderable {
+    
+    func glyph(fromStore store: GlyphStore) -> Glyph {
+        return store.augmentationDot
+    }
+}

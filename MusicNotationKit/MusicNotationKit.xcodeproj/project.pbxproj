@@ -11,7 +11,6 @@
 		670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670ABDAD22C55C3700BFA678 /* Sequence+Sum.swift */; };
 		670ABDB022C55E7000BFA678 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670ABDAF22C55E7000BFA678 /* Sequence+Extensions.swift */; };
 		670ABDB222C562CF00BFA678 /* FixedDistanceLayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670ABDB122C562CF00BFA678 /* FixedDistanceLayoutSolver.swift */; };
-		670ABDB822C6B1D200BFA678 /* SharpRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670ABDB722C6B1D100BFA678 /* SharpRenderer.swift */; };
 		670D51B025474AB1000B7B36 /* ArticulationMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670D51AF25474AB1000B7B36 /* ArticulationMark.swift */; };
 		670D51B625474B21000B7B36 /* Accent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670D51B525474B21000B7B36 /* Accent.swift */; };
 		670D51BE25474D65000B7B36 /* PositionArticulationMarksProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670D51BD25474D65000B7B36 /* PositionArticulationMarksProcessingOperation.swift */; };
@@ -19,7 +18,6 @@
 		671A4D2E22885987002C56E8 /* NoteValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2D22885987002C56E8 /* NoteValueTests.swift */; };
 		671A4D3022885A02002C56E8 /* NoteValue+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */; };
 		671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D34228868B3002C56E8 /* DotSymbol.swift */; };
-		671A4D3922886FBD002C56E8 /* DotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A4D3822886FBD002C56E8 /* DotRenderer.swift */; };
 		6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */; };
 		6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */; };
 		6728B2C72239975700382D92 /* NoteSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6728B2C62239975700382D92 /* NoteSequenceTests.swift */; };
@@ -71,8 +69,6 @@
 		6751A84422357AFA000B0D08 /* Playable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84322357AFA000B0D08 /* Playable.swift */; };
 		6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */; };
 		6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A849223585D5000B0D08 /* RestRenderer.swift */; };
-		6753D0F722D7D31D0052F27F /* FlatRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0F622D7D31D0052F27F /* FlatRenderer.swift */; };
-		6753D0FB22D7D9340052F27F /* NaturalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */; };
 		6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */; };
 		6753D10222DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */; };
 		6756F61723005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6756F61623005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift */; };
@@ -200,6 +196,7 @@
 		67EA89F124264BE70009BE61 /* NoteHeadDescriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89F024264BE70009BE61 /* NoteHeadDescriberTests.swift */; };
 		67EA89F324264CA30009BE61 /* NoteHeadDescription+Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EA89F224264CA30009BE61 /* NoteHeadDescription+Verify.swift */; };
 		67F0DD522471C5370048C718 /* SetBarNumbersProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F0DD512471C5370048C718 /* SetBarNumbersProcessingOperation.swift */; };
+		67F2DB65261E4548001F6275 /* GlyphRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F2DB64261E4548001F6275 /* GlyphRenderer.swift */; };
 		67F5658F254754EC00910487 /* AccentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F5658E254754EC00910487 /* AccentRenderer.swift */; };
 		67F6880421EA6D32003707DD /* HorizontalLayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880321EA6D32003707DD /* HorizontalLayoutItem.swift */; };
 		67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880521EA6E0C003707DD /* Array+Sorting.swift */; };
@@ -223,7 +220,6 @@
 		670ABDAD22C55C3700BFA678 /* Sequence+Sum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Sum.swift"; sourceTree = "<group>"; };
 		670ABDAF22C55E7000BFA678 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
 		670ABDB122C562CF00BFA678 /* FixedDistanceLayoutSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedDistanceLayoutSolver.swift; sourceTree = "<group>"; };
-		670ABDB722C6B1D100BFA678 /* SharpRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharpRenderer.swift; sourceTree = "<group>"; };
 		670D51AF25474AB1000B7B36 /* ArticulationMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticulationMark.swift; sourceTree = "<group>"; };
 		670D51B525474B21000B7B36 /* Accent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accent.swift; sourceTree = "<group>"; };
 		670D51BD25474D65000B7B36 /* PositionArticulationMarksProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionArticulationMarksProcessingOperation.swift; sourceTree = "<group>"; };
@@ -231,7 +227,6 @@
 		671A4D2D22885987002C56E8 /* NoteValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteValueTests.swift; sourceTree = "<group>"; };
 		671A4D2F22885A02002C56E8 /* NoteValue+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteValue+Verify.swift"; sourceTree = "<group>"; };
 		671A4D34228868B3002C56E8 /* DotSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotSymbol.swift; sourceTree = "<group>"; };
-		671A4D3822886FBD002C56E8 /* DotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotRenderer.swift; sourceTree = "<group>"; };
 		6726FB04223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationSymbolDescriptionsRenderOperation.swift; sourceTree = "<group>"; };
 		6728B2BF22358AF000382D92 /* ConstraintsDebugInformationGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsDebugInformationGenerator.swift; sourceTree = "<group>"; };
 		6728B2C62239975700382D92 /* NoteSequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSequenceTests.swift; sourceTree = "<group>"; };
@@ -283,8 +278,6 @@
 		6751A84322357AFA000B0D08 /* Playable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playable.swift; sourceTree = "<group>"; };
 		6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestSymbolDescriber.swift; sourceTree = "<group>"; };
 		6751A849223585D5000B0D08 /* RestRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRenderer.swift; sourceTree = "<group>"; };
-		6753D0F622D7D31D0052F27F /* FlatRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatRenderer.swift; sourceTree = "<group>"; };
-		6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalRenderer.swift; sourceTree = "<group>"; };
 		6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
 		6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateStemDirectionsRenderOperation.swift; sourceTree = "<group>"; };
 		6756F61623005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberFourFourTests.swift; sourceTree = "<group>"; };
@@ -415,6 +408,7 @@
 		67EA89F024264BE70009BE61 /* NoteHeadDescriberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHeadDescriberTests.swift; sourceTree = "<group>"; };
 		67EA89F224264CA30009BE61 /* NoteHeadDescription+Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteHeadDescription+Verify.swift"; sourceTree = "<group>"; };
 		67F0DD512471C5370048C718 /* SetBarNumbersProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBarNumbersProcessingOperation.swift; sourceTree = "<group>"; };
+		67F2DB64261E4548001F6275 /* GlyphRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlyphRenderer.swift; sourceTree = "<group>"; };
 		67F5658E254754EC00910487 /* AccentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentRenderer.swift; sourceTree = "<group>"; };
 		67F6880321EA6D32003707DD /* HorizontalLayoutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLayoutItem.swift; sourceTree = "<group>"; };
 		67F6880521EA6E0C003707DD /* Array+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sorting.swift"; sourceTree = "<group>"; };
@@ -717,13 +711,10 @@
 			isa = PBXGroup;
 			children = (
 				679855D22461FF4100877129 /* Note Renderer */,
+				67F2DB64261E4548001F6275 /* GlyphRenderer.swift */,
 				6751A849223585D5000B0D08 /* RestRenderer.swift */,
 				6749365021CF8861005BA334 /* StaveRenderer.swift */,
 				67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */,
-				671A4D3822886FBD002C56E8 /* DotRenderer.swift */,
-				670ABDB722C6B1D100BFA678 /* SharpRenderer.swift */,
-				6753D0F622D7D31D0052F27F /* FlatRenderer.swift */,
-				6753D0FA22D7D9340052F27F /* NaturalRenderer.swift */,
 				67706498245CC3DC0083037F /* TieRenderer.swift */,
 				67F5658E254754EC00910487 /* AccentRenderer.swift */,
 				67CDC48E254CBC7600C70E5B /* TupletMarksRenderer.swift */,
@@ -1315,7 +1306,6 @@
 				6736F2302550B47B00148F6B /* KeyValueCache.swift in Sources */,
 				67BA7899242FE1E40097806B /* BezierMath.swift in Sources */,
 				6789B86B24620A08002D78A8 /* TieCreator.swift in Sources */,
-				670ABDB822C6B1D200BFA678 /* SharpRenderer.swift in Sources */,
 				6751A8382232FE9F000B0D08 /* CalculatePlayableItemTimesRenderOperation.swift in Sources */,
 				674B9AAD22ECB64E0098D121 /* TimeSignature.swift in Sources */,
 				673A3D15233FC18A001CE422 /* Array+EachWith.swift in Sources */,
@@ -1337,6 +1327,7 @@
 				67678DFA21E250A200E7FD71 /* NoteBeamDescriber.swift in Sources */,
 				6751A8352232FCC4000B0D08 /* GenerateBeamDescriptionsRenderOperation.swift in Sources */,
 				679855CC2460BA2800877129 /* Int+Rounding.swift in Sources */,
+				67F2DB65261E4548001F6275 /* GlyphRenderer.swift in Sources */,
 				67AE184821D9462C00F3545D /* Time.swift in Sources */,
 				670ABDB222C562CF00BFA678 /* FixedDistanceLayoutSolver.swift in Sources */,
 				67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */,
@@ -1419,7 +1410,6 @@
 				678B7DBC2610BDC800346B0E /* Sequence+EachWithIsFirst.swift in Sources */,
 				6736F2392550B65900148F6B /* PathUtils.swift in Sources */,
 				67DBC31926174B8B001B9933 /* LayoutConstraint.swift in Sources */,
-				671A4D3922886FBD002C56E8 /* DotRenderer.swift in Sources */,
 				67BA78AD2430BEB00097806B /* Rect.swift in Sources */,
 				6789B87724689739002D78A8 /* Collection+AllPairs.swift in Sources */,
 				678318692440FCD500FB9784 /* SortMapper.swift in Sources */,
@@ -1440,7 +1430,6 @@
 				6789B86F2465538E002D78A8 /* VariationSelector.swift in Sources */,
 				67F6880621EA6E0C003707DD /* Array+Sorting.swift in Sources */,
 				6751A83E223304E7000B0D08 /* Barline.swift in Sources */,
-				6753D0FB22D7D9340052F27F /* NaturalRenderer.swift in Sources */,
 				674B9AB522EDF6050098D121 /* IncrementingSequence.swift in Sources */,
 				6769B42922BDA52800AAFFF9 /* Array+Extract.swift in Sources */,
 				67C1A365246DDE710036371C /* CompositionTime.swift in Sources */,
@@ -1450,7 +1439,6 @@
 				673A3D212340E6E2001CE422 /* Sequence+UnnestTuples.swift in Sources */,
 				6726FB05223068A6002EFE4D /* GenerationSymbolDescriptionsRenderOperation.swift in Sources */,
 				67494C7C21CC02D40078A575 /* SymbolPaths.swift in Sources */,
-				6753D0F722D7D31D0052F27F /* FlatRenderer.swift in Sources */,
 				6785A9B523315B38004B32B8 /* CompositionPathsCreator.swift in Sources */,
 				6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */,
 				67BB96B823368C7400119953 /* CompositionLayout.swift in Sources */,
