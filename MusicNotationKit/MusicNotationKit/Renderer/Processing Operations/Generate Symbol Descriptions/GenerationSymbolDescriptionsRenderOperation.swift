@@ -55,7 +55,7 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
         if let accidental = item as? AccidentalSymbol {
             applyAccidentalWidth(accidental: accidental)
         } else if let dot = item as? DotSymbol {
-            dot.horizontalLayoutWidth = .centered(width: glyphs.augmentationDot.width)
+            dot.horizontalLayoutWidth = .centered(width: glyphs.glyph(forType: .augmentationDot).width)
         }
     }
     
@@ -65,11 +65,11 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
         
         switch accidental.type {
         case .sharp:
-            glyph = glyphs.accidentalSharp
+            glyph = glyphs.glyph(forType: .accidentalSharp)
         case .flat:
-            glyph = glyphs.accidentalFlat
+            glyph = glyphs.glyph(forType: .accidentalFlat)
         case .natural:
-            glyph = glyphs.accidentalNatural
+            glyph = glyphs.glyph(forType: .accidentalNatural)
         }
         
         accidental.horizontalLayoutWidth = .centered(width: glyph.width)

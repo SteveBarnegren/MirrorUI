@@ -36,14 +36,11 @@ class AccidentalSymbol: AdjacentLayoutItem, Positionable {
 
 extension AccidentalSymbol: SingleGlyphRenderable {
     
-    func glyph(fromStore store: GlyphStore) -> Glyph {
+    var glyph: GlyphType {
         switch self.type {
-        case .sharp:
-            return store.accidentalSharp
-        case .flat:
-            return store.accidentalFlat
-        case .natural:
-            return store.accidentalNatural
+        case .sharp: return .accidentalSharp
+        case .flat: return .accidentalFlat
+        case .natural: return .accidentalNatural
         }
     }
 }

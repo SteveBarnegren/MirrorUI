@@ -24,7 +24,7 @@ class DotSymbol: AdjacentLayoutItem, Positionable {
 
 extension DotSymbol: SingleGlyphRenderable {
     
-    func glyph(fromStore store: GlyphStore) -> Glyph {
-        return store.augmentationDot
+    var glyph: GlyphType {
+        .augmentationDot
     }
 }

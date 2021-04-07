@@ -10,9 +10,7 @@ import Foundation
 
 /// A type that is renderable with a single glyph
 protocol SingleGlyphRenderable: Positionable {
-//    var glyph: Glyph { get }
-    
-    func glyph(fromStore store: GlyphStore) -> Glyph
+    var glyph: GlyphType { get }
 }
 
 class GlyphRenderer {
@@ -25,7 +23,7 @@ class GlyphRenderer {
     
     func paths(forRenderable renderable: SingleGlyphRenderable) -> [Path] {
         
-        let glyph = renderable.glyph(fromStore: glyphStore)
+        let glyph = glyphStore.glyph(forType: renderable.glyph)
         var path = glyph.path.translated(x: renderable.xPosition - glyph.width/2,
                                          y: renderable.yPosition)
         path.drawStyle = .fill

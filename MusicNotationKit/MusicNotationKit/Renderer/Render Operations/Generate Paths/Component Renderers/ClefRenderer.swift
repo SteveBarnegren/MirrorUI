@@ -29,9 +29,9 @@ class ClefRenderer {
         
         switch type {
         case .gClef:
-            return glyphs.gClef
+            return glyphs.glyph(forType: .gClef)
         case .fClef:
-            return glyphs.fClef
+            return glyphs.glyph(forType: .fClef)
         }
     }
 }

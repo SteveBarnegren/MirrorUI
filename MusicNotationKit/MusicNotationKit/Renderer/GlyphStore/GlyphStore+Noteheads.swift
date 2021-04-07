@@ -15,13 +15,13 @@ extension GlyphStore {
         case .none:
             return nil
         case .semibreve:
-            return noteheadWhole
+            return self.glyph(forType: .noteheadWhole)
         case .open:
-            return noteheadHalf
+            return self.glyph(forType: .noteheadHalf)
         case .filled:
-            return noteheadFilled
+            return self.glyph(forType: .noteheadBlack)
         case .cross:
-            return noteheadCross
+            return self.glyph(forType: .noteheadXBlack)
         }
     }
 }

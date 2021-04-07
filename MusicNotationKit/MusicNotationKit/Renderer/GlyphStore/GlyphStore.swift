@@ -8,11 +8,39 @@
 
 import Foundation
 
-/*
- let unicode = FontLoader.shared.glyphs["noteheadBlack"]!.unicode
- return TextPathCreator().path(forString: String(unicode),
-                               font: UIFont(name: "Bravura", size: 4)!)
- */
+enum GlyphType: String {
+    
+    // MARK: - Note Heads
+    case noteheadBlack
+    case noteheadWhole
+    case noteheadHalf
+    case noteheadXBlack
+    
+    // MARK: - Augmentation
+    case augmentationDot
+    
+    // MARK: - Accidentals
+    case accidentalFlat
+    case accidentalNatural
+    case accidentalSharp
+    
+    // MARK: - Clefs
+    case gClef
+    case fClef
+
+    // MARK: - Rests
+    case restWhole
+    case restHalf
+    case restQuarter
+    case rest8th
+    case rest16th
+    case rest32nd
+    case rest64th
+    case rest128th
+    case rest256th
+    case rest512th
+    case rest1024th
+}
 
 class Glyph {
     private var createPath: () -> Path
@@ -59,6 +87,7 @@ class Glyph {
 class GlyphStore {
     
     let font: Font
+    private var glyphs = [GlyphType: Glyph]() 
     
     var metrics: FontMetrics {
         return font.metrics
@@ -68,36 +97,16 @@ class GlyphStore {
         self.font = font
     }
     
-    // MARK: - Note Heads
-    lazy var noteheadFilled = makeGlyph("noteheadBlack")
-    lazy var noteheadWhole = makeGlyph("noteheadWhole")
-    lazy var noteheadHalf = makeGlyph("noteheadHalf")
-    lazy var noteheadCross = makeGlyph("noteheadXBlack")
-    
-    // MARK: - Augmentation
-    lazy var augmentationDot = makeGlyph("augmentationDot")
-    
-    // MARK: - Accidentals
-    lazy var accidentalFlat = makeGlyph("accidentalFlat")
-    lazy var accidentalNatural = makeGlyph("accidentalNatural")
-    lazy var accidentalSharp = makeGlyph("accidentalSharp")
-    
-    // MARK: - Clefs
-    lazy var gClef = makeGlyph("gClef")
-    lazy var fClef = makeGlyph("fClef")
-
-    // MARK: - Rests
-    lazy var restWhole = makeGlyph("restWhole")
-    lazy var restHalf = makeGlyph("restHalf")
-    lazy var restQuarter = makeGlyph("restQuarter")
-    lazy var rest8th = makeGlyph("rest8th")
-    lazy var rest16th = makeGlyph("rest16th")
-    lazy var rest32nd = makeGlyph("rest32nd")
-    lazy var rest64th = makeGlyph("rest64th")
-    lazy var rest128th = makeGlyph("rest128th")
-    lazy var rest256th = makeGlyph("rest256th")
-    lazy var rest512th = makeGlyph("rest512th")
-    lazy var rest1024th = makeGlyph("rest1024th")
+    func glyph(forType type: GlyphType) -> Glyph {
+        
+        if let glyph = self.glyphs[type] {
+            return glyph
+        }
+        
+        let glyph = makeGlyph(type.rawValue)
+        glyphs[type] = glyph
+        return glyph
+    }
 
     private func makeGlyph(_ name: String) -> Glyph {
         
