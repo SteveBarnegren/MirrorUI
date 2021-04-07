@@ -68,7 +68,7 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
         collectionView.frame = view.bounds.inset(by: view.safeAreaInsets)
         
         let barSizes = self.renderer.barSizes()
-        compositionLayout = CompositionLayout(barSizes: barSizes.map { Vector2D($0.preferredWidth, $0.minimumHeight) },
+        compositionLayout = CompositionLayout(barSizes: barSizes,
                                               layoutWidth: Double(collectionView.bounds.width))
         self.collectionView.reloadData()
     }

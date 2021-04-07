@@ -8,6 +8,26 @@
 
 import Foundation
 
+struct BarSize {
+    
+    static let zero = BarSize(minimumWidth: 0, 
+                              preferredWidth: 0, 
+                              minimumWidthAsFirstBar: 0,
+                              preferredWidthAsFirstBar: 0)
+    
+    var minimumWidth = Double(0)
+    var preferredWidth = Double(0)    
+    var minimumWidthAsFirstBar = Double(0)
+    var preferredWidthAsFirstBar = Double(0)
+    
+    func scaled(_ scale: Double) -> BarSize {
+        return BarSize(minimumWidth: minimumWidth * scale,
+                       preferredWidth: preferredWidth * scale,
+                       minimumWidthAsFirstBar: minimumWidthAsFirstBar * scale,
+                       preferredWidthAsFirstBar: preferredWidthAsFirstBar * scale)
+    }
+}
+
 class BarSlice {
     
     var bars: [Bar]
@@ -48,9 +68,7 @@ class BarSlice {
     
     var layoutAnchors = [LayoutAnchor]()
     var trailingBarlineAnchor: LayoutAnchor?
-    
-    var minimumWidth = Double(0)
-    var preferredWidth = Double(0)
+    var size: BarSize = .zero
     
     init(bars: [Bar]) {
         self.bars = bars

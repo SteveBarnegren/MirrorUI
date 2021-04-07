@@ -23,7 +23,7 @@ class CompositionLayout {
     
     // MARK: - Init
     
-    init(barSizes: [Vector2D], layoutWidth: Double) {
+    init(barSizes: [BarSizingInfo], layoutWidth: Double) {
         
         var items = [CompositionItem]()
         
@@ -35,14 +35,19 @@ class CompositionLayout {
         compositionItems = items
     }
     
-    private func nextItem(from barSizes: [Vector2D], layoutWidth: Double, index: inout Int) -> CompositionItem? {
+    private func nextItem(from barSizes: [BarSizingInfo], layoutWidth: Double, index: inout Int) -> CompositionItem? {
         
         var currentWidth = Double(0)
         var currentHeight = Double(0)
         var numBars = 0
         
+        func barWidth() -> Double? {
+            guard let size = barSizes[maybe: index] else { return nil }
+            return numBars == 0 ? size.barSize.preferredWidthAsFirstBar : size.barSize.preferredWidth
+        }
+        
         func canAppendCurrentBar() -> Bool {
-            if let width = barSizes[maybe: index]?.width {
+            if let width = barWidth() {
                 return numBars == 0 || currentWidth + width < layoutWidth
             } else {
                 return false
@@ -52,8 +57,8 @@ class CompositionLayout {
         let rangeStart = index
         
         while canAppendCurrentBar() {
-            currentWidth += barSizes[index].width
-            currentHeight = max(currentHeight, barSizes[index].height)
+            currentWidth += barWidth()!
+            currentHeight = max(currentHeight, barSizes[index].minimumHeight)
             index += 1
             numBars += 1
         }

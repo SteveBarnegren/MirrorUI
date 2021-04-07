@@ -21,20 +21,46 @@ class CalculateMinimumBarWidthsProcessingOperation: CompositionProcessingOperati
     
     private func process(bar: BarSlice) {
         
+        let widths = getWidths(bar: bar, asFirstBar: false)
+        bar.size.minimumWidth = widths.min
+        bar.size.preferredWidth = widths.preferred
+        
+        let firstBarWidths = getWidths(bar: bar, asFirstBar: true)
+        bar.size.minimumWidthAsFirstBar = firstBarWidths.min
+        bar.size.preferredWidthAsFirstBar = firstBarWidths.preferred
+    }
+    
+    private func getWidths(bar: BarSlice, asFirstBar: Bool) -> (min: Double, preferred: Double) {
+        
         bar.resetLayoutAnchors()
         
-        let layoutAnchors = bar.layoutAnchors.appending(maybe: bar.trailingBarlineAnchor)
+        var layoutAnchors = bar.layoutAnchors.appending(maybe: bar.trailingBarlineAnchor)
+        
+        // Disable and remove anchors that are not enabled
+        if !asFirstBar {
+            var firstBarAnchors = [LayoutAnchor]()
+            for anchor in layoutAnchors {
+                if anchor.content.visibleInFirstBarOfLineOnly {
+                    anchor.enabled = false
+                } else {
+                    firstBarAnchors.append(anchor)
+                }
+                layoutAnchors = firstBarAnchors
+            }
+        }
 
         // Get the minimum width
         fixedDistanceLayoutSolver.solve(anchors: layoutAnchors)
-        bar.minimumWidth = getWidth(forBar: bar)
-        assert(bar.minimumWidth > 0, "Bar should have non-zero minimum width")
+        let minWidth = getWidth(forBar: bar)
+        assert(minWidth > 0, "Bar should have non-zero minimum width")
         
         // Get the preferred width
         expandAnchorsToPreferredSize(anchors: layoutAnchors)
-        bar.preferredWidth = getWidth(forBar: bar)
-        assert(bar.preferredWidth > 0, "Bar should have non-zero preferred width")
-        assert(bar.preferredWidth >= bar.minimumWidth, "Bar preferred width should not be less than minimum width")
+        let preferredWidth = getWidth(forBar: bar)
+        assert(preferredWidth > 0, "Bar should have non-zero preferred width")
+        assert(preferredWidth >= minWidth, "Bar preferred width should not be less than minimum width")
+        
+        return (minWidth, preferredWidth)
     }
     
     private func expandAnchorsToPreferredSize(anchors: [LayoutAnchor]) {
