@@ -26,6 +26,12 @@ class TextPath {
 
 class TupletMarksRenderer {
     
+    private let glyphs: GlyphStore
+    
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
+    }
+    
     func paths(forNoteSequence noteSequence: NoteSequence) -> [Path] {
         
         var paths = [Path]()
@@ -93,7 +99,7 @@ class TupletMarksRenderer {
         if let note = playable as? Note {
             return note.stemCenterX - note.stemWidth/2
         } else if let rest = playable as? Rest {
-            return rest.position.x - rest.leadingWidth
+            return rest.position.x - rest.leadingWidth(glyphs: glyphs)
         }
         
         fatalError("Unknown playable type")
@@ -104,7 +110,7 @@ class TupletMarksRenderer {
         if let note = playable as? Note {
             return note.stemCenterX + note.stemWidth/2
         } else if let rest = playable as? Rest {
-            return rest.position.x + rest.trailingWidth
+            return rest.position.x + rest.trailingWidth(glyphs: glyphs)
         }
         
         fatalError("Unknown playable type")

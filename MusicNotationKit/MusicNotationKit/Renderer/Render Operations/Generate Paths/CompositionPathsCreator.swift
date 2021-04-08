@@ -21,12 +21,14 @@ class CompositionPathsCreator {
     private let noteRenderer: NoteRenderer
     private let tieRenderer: TieRenderer
     private let restRenderer: RestRenderer
+    private let tupletMarksRenderer: TupletMarksRenderer
     
     init(glyphs: GlyphStore) {
         self.glyphRenderer = GlyphRenderer(glyphStore: glyphs)
         self.noteRenderer = NoteRenderer(glyphs: glyphs)
         self.tieRenderer = TieRenderer(glyphs: glyphs)
         self.restRenderer = RestRenderer(glyphs: glyphs)
+        self.tupletMarksRenderer = TupletMarksRenderer(glyphs: glyphs)
     }
     
     func paths(forVoices voices: [RenderableVoice], canvasWidth: Double, staveSpacing: Double) -> [Path] {
@@ -98,7 +100,7 @@ class CompositionPathsCreator {
             note.articulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()
         }.joined().toArray()
         
-        let tupletMarkPaths = TupletMarksRenderer().paths(forNoteSequence: noteSequence)
+        let tupletMarkPaths = tupletMarksRenderer.paths(forNoteSequence: noteSequence)
         
         // Draw ties
         var tiePaths = [Path]()

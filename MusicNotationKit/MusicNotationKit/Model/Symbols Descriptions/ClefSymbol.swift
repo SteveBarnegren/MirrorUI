@@ -22,7 +22,7 @@ class ClefSymbol: HorizontalLayoutItem, Positionable {
     var leadingChildItems: [AdjacentLayoutItem] { [] }
     var trailingChildItems: [AdjacentLayoutItem] { [] }
     var horizontalLayoutWidth: HorizontalLayoutWidthType {
-        .centered(width: 7)
+        .centeredOnGlyph(glyph)
     }
     
     // Positionable

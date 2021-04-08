@@ -162,10 +162,10 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
     
     override var leadingEdgeOffset: Double {
         let leftMostAnchors = anchors.compactMap { $0.leadingChildAnchors.last }
-        if leftMostAnchors.isEmpty == false {
+        if !leftMostAnchors.isEmpty {
             return leftMostAnchors.map { $0.offset - $0.width/2 }.min()!
         } else {
-            return -leadingWidth/2
+            return -leadingWidth
         }
     }
     
@@ -174,7 +174,7 @@ class CombinedItemsLayoutAnchor: LayoutAnchor {
         if lastAnchors.isEmpty == false {
             return lastAnchors.map { $0.trailingEdge(anchorPosition: position) }.max()!
         } else {
-            return position + trailingWidth/2
+            return position + trailingWidth
         }
     }
     

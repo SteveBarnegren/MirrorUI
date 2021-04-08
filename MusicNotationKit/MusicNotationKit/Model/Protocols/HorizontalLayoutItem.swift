@@ -13,6 +13,8 @@ enum HorizontalLayoutWidthType {
     case centered(width: Double)
     /// Offset layout, where the 'x anchor' of the item is offset. A leading and trailing with to the anchor can be specified.
     case offset(leading: Double, trailing: Double)
+    /// Centered on glyph
+    case centeredOnGlyph(GlyphType)
 }
 
 protocol HorizontalLayoutItemBase: class, HorizontallyPositionable {
@@ -20,25 +22,29 @@ protocol HorizontalLayoutItemBase: class, HorizontallyPositionable {
 }
 
 extension HorizontalLayoutItemBase {
-    var leadingWidth: Double {
+    func leadingWidth(glyphs: GlyphStore) -> Double {
         switch horizontalLayoutWidth {
         case .centered(let width):
             return width/2
         case .offset(let leading, _):
             return leading
+        case .centeredOnGlyph(let glyphType):
+            return glyphs.glyph(forType: glyphType).width/2
         }
     }
     
-    var trailingWidth: Double {
+    func trailingWidth(glyphs: GlyphStore) -> Double {
         switch horizontalLayoutWidth {
         case .centered(let width):
             return width/2
         case .offset(_, let trailing):
             return trailing
+        case .centeredOnGlyph(let glyphType):
+            return glyphs.glyph(forType: glyphType).width/2
         }
     }
 }
-
+ 
 protocol HorizontalLayoutItem: HorizontalLayoutItemBase {
     var layoutDuration: Time? { get }
     var leadingChildItems: [AdjacentLayoutItem] { get }

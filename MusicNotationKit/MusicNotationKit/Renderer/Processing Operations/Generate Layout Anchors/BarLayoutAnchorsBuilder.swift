@@ -12,6 +12,12 @@ private let requiredTieSpace = 2.5
 
 class LayoutAnchorsBuilder {
     
+    private let glyphs: GlyphStore
+    
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
+    }
+    
     func makeAnchors(from composition: Composition) {
         
         // Add a trailing bar line
@@ -113,8 +119,8 @@ class LayoutAnchorsBuilder {
         
         let singleItemAnchors = items.map { (item: HorizontalLayoutItem) -> SingleItemLayoutAnchor in
             return SingleItemLayoutAnchor(item: item, 
-                                          leadingWidth: item.leadingWidth, 
-                                          trailingWidth: item.trailingWidth)
+                                          leadingWidth: item.leadingWidth(glyphs: glyphs), 
+                                          trailingWidth: item.trailingWidth(glyphs: glyphs))
         }
         
         let anchor = CombinedItemsLayoutAnchor(anchors: singleItemAnchors)
@@ -135,8 +141,8 @@ class LayoutAnchorsBuilder {
         
         let singleItemAnchors = items.map { (item: HorizontalLayoutItem) -> SingleItemLayoutAnchor in
             return SingleItemLayoutAnchor(item: item, 
-                                          leadingWidth: item.leadingWidth, 
-                                          trailingWidth: item.trailingWidth)
+                                          leadingWidth: item.leadingWidth(glyphs: glyphs), 
+                                          trailingWidth: item.trailingWidth(glyphs: glyphs))
         }
         
         let anchor = CombinedItemsLayoutAnchor(anchors: singleItemAnchors)
@@ -153,14 +159,14 @@ class LayoutAnchorsBuilder {
     private func makeAnchor(forPlayable playable: Playable, fromPrevious previousAnchors: [LayoutAnchor]) -> SingleItemLayoutAnchor {
         
         let anchor = SingleItemLayoutAnchor(item: playable, 
-                                            leadingWidth: playable.leadingWidth, 
-                                            trailingWidth: playable.trailingWidth, 
+                                            leadingWidth: playable.leadingWidth(glyphs: glyphs), 
+                                            trailingWidth: playable.trailingWidth(glyphs: glyphs), 
                                             barTime: playable.barTime)
         
         // Create leading anchors
         for item in playable.leadingChildItems {
             let adjacentAnchor = AdjacentLayoutAnchor(item: item)
-            adjacentAnchor.width = item.leadingWidth + item.trailingWidth
+            adjacentAnchor.width = item.leadingWidth(glyphs: glyphs) + item.trailingWidth(glyphs: glyphs)
             adjacentAnchor.distanceFromAnchor = item.hoizontalLayoutDistanceFromParentItem
             anchor.add(leadingAnchor: adjacentAnchor)
         }
@@ -168,7 +174,7 @@ class LayoutAnchorsBuilder {
         // Create Adjacent items for dots
         for dot in playable.trailingChildItems.compactMap({ $0 as? DotSymbol }) {
             let adjacentAnchor = AdjacentLayoutAnchor(item: dot)
-            adjacentAnchor.width = dot.leadingWidth + dot.trailingWidth
+            adjacentAnchor.width = dot.leadingWidth(glyphs: glyphs) + dot.trailingWidth(glyphs: glyphs)
             adjacentAnchor.distanceFromAnchor = dot.hoizontalLayoutDistanceFromParentItem
             anchor.add(trailingAnchor: adjacentAnchor)
         }

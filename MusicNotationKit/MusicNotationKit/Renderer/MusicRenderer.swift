@@ -106,7 +106,8 @@ class MusicRenderer {
             CreateBarSlicesRenderOperation().process(composition: composition)
             
             // Generate bar layout anchors
-            GenerateBarLayoutAnchorsProcessingOperation().process(composition: composition)
+            GenerateBarLayoutAnchorsProcessingOperation(glyphs: glyphs)
+                .process(composition: composition)
             
             // Calculate minimum bar widths
             CalculateMinimumBarWidthsProcessingOperation().process(composition: composition)
