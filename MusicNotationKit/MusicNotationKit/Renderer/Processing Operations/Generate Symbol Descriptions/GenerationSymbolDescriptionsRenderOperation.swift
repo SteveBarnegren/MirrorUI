@@ -54,8 +54,6 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
         
         if let accidental = item as? AccidentalSymbol {
             applyAccidentalWidth(accidental: accidental)
-        } else if let dot = item as? DotSymbol {
-            dot.horizontalLayoutWidth = .centered(width: glyphs.glyph(forType: .augmentationDot).width)
         }
     }
     

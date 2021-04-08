@@ -11,7 +11,7 @@ import Foundation
 class DotSymbol: AdjacentLayoutItem, Positionable {
         
     // AdjacentLayoutItem
-    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.0)
+    var horizontalLayoutWidth: HorizontalLayoutWidthType { .centeredOnGlyph(self.glyph) }
     var hoizontalLayoutDistanceFromParentItem: Double = 0.2
     
     // Positionable
