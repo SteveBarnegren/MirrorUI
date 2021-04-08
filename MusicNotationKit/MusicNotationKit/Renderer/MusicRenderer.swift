@@ -36,6 +36,9 @@ class MusicRenderer {
     private var glyphs: GlyphStore!
     
     var staveSpacing: Double = 8
+    
+    // Debugging
+    var _debugConstraints = true
         
     init(composition: Composition) {
         FontLoader.loadFonts()
@@ -181,22 +184,21 @@ class MusicRenderer {
             
         }
         
-        let paths = CompositionPathsCreator(glyphs: glyphs).paths(forVoices: voices, 
-                                                                  canvasWidth: layoutWidth, 
-                                                                  staveSpacing: staveSpacing) 
-        
-//        let paths = CompositionPathsCreator(glyphs: glyphs).paths(fromBars: bars,
-//                                                                  canvasWidth: layoutWidth,
-//                                                                  staveSpacing: staveSpacing,
-//                                                                  leadingTies: leadingTies)
+        let paths = CompositionPathsCreator(glyphs: glyphs).paths(
+            forVoices: voices, 
+            canvasWidth: layoutWidth, 
+            staveSpacing: staveSpacing
+        ) 
         
         var pathBundle = PathBundle(paths: paths)
         
         // Debug information
-        /*
-        pathBundle.debugDrawCommands += ConstraintsDebugInformationGenerator().debugInformation(fromBars: bars,
-                                                                                                staveSpacing: staveSpacing)
-        */
+        if _debugConstraints {
+            pathBundle.debugDrawCommands += ConstraintsDebugInformationGenerator()
+                .debugInformation(fromBars: barSlices,
+                                  staveSpacing: staveSpacing)
+        }
+        
         return pathBundle
     }
     

@@ -44,14 +44,10 @@ struct DebugDrawHorizontalRegion: DebugDrawCommand {
 
 class ConstraintsDebugInformationGenerator {
     
-    func debugInformation(fromBars bars: [Bar], staveSpacing: Double) -> [DebugDrawCommand] {
-        return []
-
-        // BSL: Reinstate
-        /*
-        let layoutAnchors = bars.map { $0.layoutAnchors }.joined().toArray()
+    func debugInformation(fromBars bars: [BarSlice], staveSpacing: Double) -> [DebugDrawCommand] {
+        let layoutAnchors = bars.map { $0.layoutAnchors }.joined().filter { $0.enabled }.toArray()
         return commands(forLayoutAnchors: layoutAnchors).map { $0.scaled(scale: staveSpacing) }
- */
+ 
     }
     
     private func commands(forLayoutAnchors layoutAnchors: [LayoutAnchor]) -> [DebugDrawCommand] {
@@ -63,6 +59,7 @@ class ConstraintsDebugInformationGenerator {
         var commands = [DebugDrawCommand]()
         
         // Horzontal Region for anchor width
+        
         let widthRegion = DebugDrawHorizontalRegion(startX: anchor.position - anchor.leadingWidth,
                                                     endX: anchor.position + anchor.trailingWidth,
                                                     color: UIColor.blue.withAlphaComponent(0.05))
@@ -73,6 +70,7 @@ class ConstraintsDebugInformationGenerator {
         commands.append(centerLine)
         
         // Dashed line at the start and end of the anchor region
+        /*
         let regionEndColor = UIColor.blue.withAlphaComponent(0.3)
         var regionStart = DebugDrawVerticalLine(xPos: anchor.position - anchor.leadingWidth, color: regionEndColor)
         regionStart.style = .dashed
@@ -81,7 +79,7 @@ class ConstraintsDebugInformationGenerator {
         var regionEnd = DebugDrawVerticalLine(xPos: anchor.position + anchor.trailingWidth, color: regionEndColor)
         regionEnd.style = .dashed
         commands.append(regionEnd)
-        
+        */
         return commands
     }
 }
