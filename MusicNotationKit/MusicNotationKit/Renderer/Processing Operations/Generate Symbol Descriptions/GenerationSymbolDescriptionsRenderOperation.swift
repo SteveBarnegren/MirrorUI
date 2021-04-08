@@ -22,7 +22,6 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
     func process(composition: Composition) {
         
         composition.forEachBar(process)
-        composition.forEachNote(applyAdjacentItemWidths)
     }
     
     private func process(bar: Bar) {
@@ -39,37 +38,5 @@ class GenerateSymbolDescriptionsProcessingOperation: CompositionProcessingOperat
         }
         
         bar.forEachRest { $0.symbolDescription = restSymbolDescriber.symbolDescription(forRest: $0) }
-    }
-    
-    // MARK: - Apply adjacent item widths from font
-    
-    private func applyAdjacentItemWidths(note: Note) {
-        
-        for item in (note.leadingChildItems + note.trailingChildItems) {
-            applyAdjacentItemWidth(item: item)
-        }
-    }
-    
-    private func applyAdjacentItemWidth(item: AdjacentLayoutItem) {
-        
-        if let accidental = item as? AccidentalSymbol {
-            applyAccidentalWidth(accidental: accidental)
-        }
-    }
-    
-    private func applyAccidentalWidth(accidental: AccidentalSymbol) {
-        
-        let glyph: Glyph
-        
-        switch accidental.type {
-        case .sharp:
-            glyph = glyphs.glyph(forType: .accidentalSharp)
-        case .flat:
-            glyph = glyphs.glyph(forType: .accidentalFlat)
-        case .natural:
-            glyph = glyphs.glyph(forType: .accidentalNatural)
-        }
-        
-        accidental.horizontalLayoutWidth = .centered(width: glyph.width)
     }
 }

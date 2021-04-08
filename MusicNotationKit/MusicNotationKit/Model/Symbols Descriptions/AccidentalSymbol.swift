@@ -17,7 +17,7 @@ class AccidentalSymbol: AdjacentLayoutItem, Positionable {
     }
     
     // AdjacentLayoutItem
-    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.0)
+    var horizontalLayoutWidth: HorizontalLayoutWidthType { .centeredOnGlyph(glyph) }
     var hoizontalLayoutDistanceFromParentItem: Double = 0.2
     
     // Positionable
