@@ -20,7 +20,7 @@ class ClefRenderer {
         
         let glyph = self.glyph(forType: clefSymbol.symbolType)
         var path = glyph.path.translated(x: clefSymbol.xPosition - glyph.width/2,
-                                         y: clefSymbol.staveOffset) // to sit the gClef clef on the g line
+                                         y: clefSymbol.yPosition)
         path.drawStyle = .fill
         return [path]
     }

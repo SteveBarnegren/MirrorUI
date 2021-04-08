@@ -21,14 +21,12 @@ class CompositionPathsCreator {
     private let noteRenderer: NoteRenderer
     private let tieRenderer: TieRenderer
     private let restRenderer: RestRenderer
-    private let clefRenderer: ClefRenderer
     
     init(glyphs: GlyphStore) {
         self.glyphRenderer = GlyphRenderer(glyphStore: glyphs)
         self.noteRenderer = NoteRenderer(glyphs: glyphs)
         self.tieRenderer = TieRenderer(glyphs: glyphs)
         self.restRenderer = RestRenderer(glyphs: glyphs)
-        self.clefRenderer = ClefRenderer(glyphs: glyphs)
     }
     
     func paths(forVoices voices: [RenderableVoice], canvasWidth: Double, staveSpacing: Double) -> [Path] {
@@ -77,7 +75,7 @@ class CompositionPathsCreator {
     private func makePaths(forBar bar: Bar, inRange barRange: ClosedRange<Int>, canvasWidth: Double, leadingTies: [Tie]) -> [Path] {
         
         let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
-        let clefPath = bar.isFirstBarInLine ? clefRenderer.paths(forClef: bar.clefSymbol) : []
+        let clefPath = bar.isFirstBarInLine ? glyphRenderer.paths(forRenderable: bar.clefSymbol) : []
         
         let notePaths =  bar.sequences.map {
             makePaths(forNoteSequence: $0, inRange: barRange, canvasWidth: canvasWidth, leadingTies: leadingTies)

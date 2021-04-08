@@ -35,6 +35,6 @@ class ConfigureClefsProcessingOperation: CompositionProcessingOperation {
         }
         
         bar.clefSymbol.symbolType = symbolType
-        bar.clefSymbol.staveOffset = staveOffset
+        bar.clefSymbol.yPosition = staveOffset
     }
 }

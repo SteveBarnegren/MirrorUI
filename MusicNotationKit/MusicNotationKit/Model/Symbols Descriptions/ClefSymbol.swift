@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ClefSymbol: HorizontalLayoutItem {
+class ClefSymbol: HorizontalLayoutItem, Positionable {    
     
     enum SymbolType {
         case gClef
@@ -16,7 +16,6 @@ class ClefSymbol: HorizontalLayoutItem {
     }
     
     var symbolType = SymbolType.gClef
-    var staveOffset = Double(0)
     
     // HorizontalLayoutItem
     var layoutDuration: Time? { nil }
@@ -25,5 +24,22 @@ class ClefSymbol: HorizontalLayoutItem {
     var horizontalLayoutWidth: HorizontalLayoutWidthType {
         .centered(width: 7)
     }
-    var xPosition: Double = 0
+    
+    // Positionable
+    var position = Vector2D.zero
+}
+
+// MARK: - SingleGlyphRenderable
+
+extension ClefSymbol: SingleGlyphRenderable {
+    
+    var glyph: GlyphType {
+        
+        switch self.symbolType {
+        case .gClef:
+            return .gClef
+        case .fClef:
+            return .fClef
+        }
+    }
 }
