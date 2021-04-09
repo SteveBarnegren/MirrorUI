@@ -25,21 +25,5 @@ class CalculatePlayableItemWidthsProcessingOperation: CompositionProcessingOpera
             let result = self.noteWidthCalculator.width(forNote: $0)
             $0.horizontalLayoutWidth = .offset(leading: result.leading, trailing: result.trailing)
         }
-        
-        // Calculate rest widths
-        composition.forEachRest(applyWidth)
-    }
-    
-    // MARK: - Calculate rest widths
-    
-    private func applyWidth(forRest rest: Rest) {
-        
-        var width: Double = 1.0
-        
-        if let glyph = glyphs.glyph(forRestStyle: rest.symbolDescription.style) {
-            width = glyph.width
-        }
-        
-        rest.horizontalLayoutWidth = .centered(width: width)
     }
 }

@@ -20,14 +20,12 @@ class CompositionPathsCreator {
     private let glyphRenderer: GlyphRenderer
     private let noteRenderer: NoteRenderer
     private let tieRenderer: TieRenderer
-    private let restRenderer: RestRenderer
     private let tupletMarksRenderer: TupletMarksRenderer
     
     init(glyphs: GlyphStore) {
         self.glyphRenderer = GlyphRenderer(glyphStore: glyphs)
         self.noteRenderer = NoteRenderer(glyphs: glyphs)
         self.tieRenderer = TieRenderer(glyphs: glyphs)
-        self.restRenderer = RestRenderer(glyphs: glyphs)
         self.tupletMarksRenderer = TupletMarksRenderer(glyphs: glyphs)
     }
     
@@ -94,7 +92,7 @@ class CompositionPathsCreator {
         let notePaths = noteRenderer.paths(forNotes: noteSequence.notes)
         let noteSymbolPaths = noteSequence.notes.map { $0.trailingChildItems + $0.leadingChildItems }.joined().map(makePaths).joined().toArray()
         let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeads }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
-        let restPaths = restRenderer.paths(forRests: noteSequence.rests)
+        let restPaths = noteSequence.rests.map(glyphRenderer.paths).joined()
         
         let articulationMarkPaths = noteSequence.notes.map { note in
             note.articulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()

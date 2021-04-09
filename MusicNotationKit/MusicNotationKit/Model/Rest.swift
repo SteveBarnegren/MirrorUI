@@ -18,7 +18,7 @@ public class Rest: Playable, Positionable {
     
     // HorizontalLayoutItem
     var barTime = Time.zero
-    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.4)
+    var horizontalLayoutWidth: HorizontalLayoutWidthType { .centeredOnGlyph(glyph) }
     let leadingChildItems = [AdjacentLayoutItem]()
     let trailingChildItems = [AdjacentLayoutItem]()
     
@@ -59,12 +59,35 @@ struct TailedRestStyle {
     let numberOfTails: Int
 }
 
-struct BlockRestStyle {
+// MARK: - Single Glyph Renderable
+
+extension Rest: SingleGlyphRenderable {
     
-    // startY should be relative to the line that the rest should be attached to.
-    // eg. A minim rest should start at 0 because it sits on the line
-    // A whole rest should start at 0.5, because it hangs from the line above the one that it's attached to
-    
-    let startY: Double
-    let height: Double
+    var glyph: GlyphType {
+        
+        switch symbolDescription.style {
+        case .none:
+            fatalError("No symbol description")
+        case .whole:
+            return .restWhole
+        case .half:
+            return .restHalf
+        case .crotchet:
+            return .restQuarter
+        case .tailed(let tailedStyle):
+            switch tailedStyle.numberOfTails {
+            case 1: return .rest8th
+            case 2: return .rest16th
+            case 3: return .rest32nd
+            case 4: return .rest64th
+            case 5: return .rest128th
+            case 6: return .rest256th
+            case 7: return .rest512th
+            case 8: return .rest1024th
+            default:
+                print("No available glyph for rest with \(tailedStyle.numberOfTails) tails. Using 1024th note rest glyph")
+                return .rest1024th
+            }
+        }
+    }
 }

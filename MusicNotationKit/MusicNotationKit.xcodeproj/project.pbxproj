@@ -68,7 +68,6 @@
 		6751A84222357AE3000B0D08 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84122357AE3000B0D08 /* Rest.swift */; };
 		6751A84422357AFA000B0D08 /* Playable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84322357AFA000B0D08 /* Playable.swift */; };
 		6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */; };
-		6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6751A849223585D5000B0D08 /* RestRenderer.swift */; };
 		6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */; };
 		6753D10222DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */; };
 		6756F61723005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6756F61623005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift */; };
@@ -277,7 +276,6 @@
 		6751A84122357AE3000B0D08 /* Rest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
 		6751A84322357AFA000B0D08 /* Playable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playable.swift; sourceTree = "<group>"; };
 		6751A84522357EA7000B0D08 /* RestSymbolDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestSymbolDescriber.swift; sourceTree = "<group>"; };
-		6751A849223585D5000B0D08 /* RestRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRenderer.swift; sourceTree = "<group>"; };
 		6753D0FE22D7E8790052F27F /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
 		6753D10122DA5E990052F27F /* CalculateStemDirectionsRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateStemDirectionsRenderOperation.swift; sourceTree = "<group>"; };
 		6756F61623005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBeamDescriberFourFourTests.swift; sourceTree = "<group>"; };
@@ -712,7 +710,6 @@
 			children = (
 				679855D22461FF4100877129 /* Note Renderer */,
 				67F2DB64261E4548001F6275 /* GlyphRenderer.swift */,
-				6751A849223585D5000B0D08 /* RestRenderer.swift */,
 				6749365021CF8861005BA334 /* StaveRenderer.swift */,
 				67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */,
 				67706498245CC3DC0083037F /* TieRenderer.swift */,
@@ -1368,7 +1365,6 @@
 				679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */,
 				67BB96BF2337B9F300119953 /* PathBundleDrawer.swift in Sources */,
 				671A4D35228868B3002C56E8 /* DotSymbol.swift in Sources */,
-				6751A84A223585D5000B0D08 /* RestRenderer.swift in Sources */,
 				674D504221DD5774009E5AFE /* PlayableItemTimeCalculator.swift in Sources */,
 				6756F6192300C2AE003F1F19 /* ElementPopper.swift in Sources */,
 				676BB5F4233169C200EA9F9C /* GenerateLayoutAnchorsRenderOperation.swift in Sources */,
