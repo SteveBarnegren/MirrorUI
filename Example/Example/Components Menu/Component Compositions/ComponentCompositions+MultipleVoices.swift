@@ -26,7 +26,13 @@ extension ComponentCompositions {
             let bar = Bar()
             let sequence = NoteSequence()
             
-            sequence.add(rest: Rest(value: .semibreve))
+            sequence.add(note: Note(value: .crotchet, pitch: .c4).accent())
+            sequence.add(note: Note(value: .crotchet, pitch: .a4).accent())
+
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.add(note: Note(value: .quaver, pitch: .a4))
+            sequence.add(note: Note(value: .quaver, pitch: .c4))
+            sequence.add(note: Note(value: .quaver, pitch: .e4))
             
             bar.add(sequence: sequence)
             stave.add(bar: bar)
@@ -40,8 +46,8 @@ extension ComponentCompositions {
             sequence.add(rest: Rest(value: .quaver))
             sequence.add(note: Note(value: .quaver, pitch: .b4))
             sequence.add(note: Note(value: .crotchet, pitch: .b4))
-            sequence.add(note: Note(value: .dottedQuaver, pitch: .c4))
-            sequence.add(note: Note(value: .semiquaver, pitch: .d4))
+            sequence.add(note: Note(value: .quaver, pitch: .c4))
+            sequence.add(note: Note(value: .quaver, pitch: .d4))
 
             bar.add(sequence: sequence)
             stave.add(bar: bar)
@@ -62,6 +68,36 @@ extension ComponentCompositions {
             stave.add(bar: bar)
         }
         
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            
+            sequence.add(note: Note(value: .crotchet, pitch: .f3))
+            
+            sequence.add(note: Note(value: .semiquaver, pitch: .f3))
+            sequence.add(note: Note(value: .semiquaver, pitch: .a4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+
+            sequence.startTuplet(TupletTime(value: 4, over: 5)) // quintuplet
+            sequence.add(note: Note(value: .semiquaver, pitch: .f3))
+            sequence.add(note: Note(value: .semiquaver, pitch: .a4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.add(note: Note(value: .semiquaver, pitch: .c4))
+            sequence.endTuplet()
+            
+            sequence.startTuplet(TupletTime(value: 2, over: 3))
+            sequence.add(note: Note(value: .quaver, pitch: .e4))
+            sequence.add(rest: Rest(value: .quaver))
+            sequence.add(note: Note(value: .quaver, pitch: .f3))
+            sequence.endTuplet()
+            
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+        
+        /*
         do {
             let bar = Bar()
             let sequence = NoteSequence()
@@ -110,6 +146,7 @@ extension ComponentCompositions {
             bar.add(sequence: sequence)
             stave.add(bar: bar)
         }
+ */
         
         return stave
     }
@@ -173,6 +210,20 @@ extension ComponentCompositions {
         do {
             let bar = Bar()
             
+            let sequence = NoteSequence()
+            sequence.add(note: Note(value: .crotchet, pitch: .c2))
+            sequence.add(note: Note(value: .crotchet, pitch: .b2))
+            sequence.add(note: Note(value: .crotchet, pitch: .c2))
+            sequence.add(note: Note(value: .crotchet, pitch: .g2))
+            
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+        
+        /*
+        do {
+            let bar = Bar()
+            
             let topSequence = NoteSequence()
             topSequence.add(note: Note(value: .quaver, pitch: .g2).tied())
             topSequence.add(note: Note(value: .quaver, pitch: .a2))
@@ -216,6 +267,7 @@ extension ComponentCompositions {
             bar.add(sequence: sequence)
             stave.add(bar: bar)
         }
+ */
 
         return stave
     }
