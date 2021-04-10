@@ -111,9 +111,6 @@ class MusicRenderer {
             
             // Calculate minimum bar widths
             CalculateMinimumBarWidthsProcessingOperation().process(composition: composition)
-            
-            // Stitch bar layout anchors
-            // StitchBarLayoutAnchorsProcessingOperation().process(composition: composition)
         
             composition.isPreprocessed = true
         }
@@ -137,9 +134,10 @@ class MusicRenderer {
             fatalError("Must preprocess composition first")
         }
         
-        // Calculate layout sizes
+        // Calculate layout width
         let layoutWidth = displayWidth / staveSpacing
         
+        // Get bar slices in range
         let barSlices: [BarSlice]
         let staveBars: [[Bar]]
         if let range = range {
@@ -149,10 +147,6 @@ class MusicRenderer {
             barSlices = composition.barSlices
             staveBars = composition.staves.map { $0.bars.toArray() }.toArray()
         }
-        
-        // Reset layout anchors
-        // TODO: Reset the layout anchors just for the bar range?
-        composition.barSlices.forEach { $0.resetLayoutAnchors() }
         
         // Draw just the clef at the start of the range
         barSlices.first?.isFirstBarInLine = true

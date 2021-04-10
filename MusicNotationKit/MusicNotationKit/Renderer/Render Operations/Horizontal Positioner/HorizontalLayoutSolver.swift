@@ -19,6 +19,7 @@ class HorizontalLayoutSolver {
             anchors.forEach { $0.apply() }
         }
         
+        anchors.forEach { $0.reset() }
         fixedDistanceSolver.solve(anchors: anchors)
         layoutTimingSolver.distributeTime(toAnchors: anchors, layoutWidth: layoutWidth)
         applyAnchorPositions()

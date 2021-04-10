@@ -169,7 +169,6 @@
 		67BB96B6233685C700119953 /* MusicCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B5233685C700119953 /* MusicCollectionViewLayout.swift */; };
 		67BB96B823368C7400119953 /* CompositionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B723368C7400119953 /* CompositionLayout.swift */; };
 		67BB96BA2337A82200119953 /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96B92337A82200119953 /* MusicCell.swift */; };
-		67BB96BD2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */; };
 		67BB96BF2337B9F300119953 /* PathBundleDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96BE2337B9F300119953 /* PathBundleDrawer.swift */; };
 		67C1A361246DB7FC0036371C /* ConflictIdentifers+Ties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C1A360246DB7FC0036371C /* ConflictIdentifers+Ties.swift */; };
 		67C1A363246DBB650036371C /* ConflictIdentifiers+TiesAndNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C1A362246DBB650036371C /* ConflictIdentifiers+TiesAndNotes.swift */; };
@@ -380,7 +379,6 @@
 		67BB96B5233685C700119953 /* MusicCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewLayout.swift; sourceTree = "<group>"; };
 		67BB96B723368C7400119953 /* CompositionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionLayout.swift; sourceTree = "<group>"; };
 		67BB96B92337A82200119953 /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
-		67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchBarLayoutAnchorsProcessingOperation.swift; sourceTree = "<group>"; };
 		67BB96BE2337B9F300119953 /* PathBundleDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathBundleDrawer.swift; sourceTree = "<group>"; };
 		67C1A360246DB7FC0036371C /* ConflictIdentifers+Ties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConflictIdentifers+Ties.swift"; sourceTree = "<group>"; };
 		67C1A362246DBB650036371C /* ConflictIdentifiers+TiesAndNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConflictIdentifiers+TiesAndNotes.swift"; sourceTree = "<group>"; };
@@ -1065,7 +1063,6 @@
 				677F1E1725FE85B90078D1B8 /* Create Bar Slices */,
 				6785A9B62331698D004B32B8 /* Generate Layout Anchors */,
 				676BB5FB233178C700EA9F9C /* Calculate Minimum Bar Widths */,
-				67BB96BB2337B19000119953 /* Stitch Bar Layout Anchors */,
 			);
 			path = "Processing Operations";
 			sourceTree = "<group>";
@@ -1087,14 +1084,6 @@
 				67BB96B92337A82200119953 /* MusicCell.swift */,
 			);
 			path = "Scrolling Music View";
-			sourceTree = "<group>";
-		};
-		67BB96BB2337B19000119953 /* Stitch Bar Layout Anchors */ = {
-			isa = PBXGroup;
-			children = (
-				67BB96BC2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift */,
-			);
-			path = "Stitch Bar Layout Anchors";
 			sourceTree = "<group>";
 		};
 		67C89FE4255C8187009B18DF /* GlyphStore */ = {
@@ -1349,7 +1338,6 @@
 				67728784243BB6C80038B142 /* CalculateNoteHeadAlignmentProcessingOperation.swift in Sources */,
 				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
 				67F0DD522471C5370048C718 /* SetBarNumbersProcessingOperation.swift in Sources */,
-				67BB96BD2337B22400119953 /* StitchBarLayoutAnchorsProcessingOperation.swift in Sources */,
 				6758D27126014B3500CFE7F6 /* Array+Path.swift in Sources */,
 				679523FB255DC433005E7A90 /* Font+Bravura.swift in Sources */,
 				67678E0021E2865400E7FD71 /* BidrectionalCollection+EachWithIsLast.swift in Sources */,
