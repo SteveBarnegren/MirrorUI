@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol DebugDrawCommand {
     func scaled(scale: Double) -> Self
