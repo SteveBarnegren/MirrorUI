@@ -9,6 +9,7 @@
 import UIKit
 import MusicNotationKit
 import MirrorUI
+import SBAutoLayout
 
 private class ScrollingMusicSettings {
     @MirrorUI(range: 1...16) var staveSpacing = 8.0
@@ -38,6 +39,7 @@ class ScrollingMusicExampleViewController: UIViewController {
         view.addSubview(musicViewController.view)
         
         configureSettings()
+        addPopupSettings()
     }
     
     private func configureSettings() {
@@ -45,17 +47,20 @@ class ScrollingMusicExampleViewController: UIViewController {
         settings.$staveSpacing.didSet = {
             self.musicViewController.staveSpacing = $0
         }
-        
-        addPopupSettings(settings: settings)
     }
     
-    private func addPopupSettings<T: AnyObject>(settings: T) {
+    private func addPopupSettings() {
         
         let settingsVC = MirrorViewController(object: settings)
         addChild(settingsVC)
         view.addSubview(settingsVC.view)
         self.settingsViewController = settingsVC
         settingsVC.view.backgroundColor = UIColor(white: 0.98, alpha: 1)
+        
+        let stripView = UIView(frame: .zero)
+        stripView.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        settingsVC.view.addSubview(stripView)
+        stripView.pinToSuperviewAsTopStrip(height: 0.5)
     }
     
     override func viewDidLayoutSubviews() {

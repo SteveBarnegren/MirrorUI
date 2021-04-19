@@ -35,6 +35,7 @@
 		67BB96B02336805C00119953 /* ExampleCompositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB96AF2336805C00119953 /* ExampleCompositions.swift */; };
 		67CDC483254CA59D00C70E5B /* ComponentCompositions+Tuplets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CDC482254CA59D00C70E5B /* ComponentCompositions+Tuplets.swift */; };
 		67F440532431049F003DFA63 /* ComponentCompositions+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */; };
+		AA41E4F8262E256B0069B248 /* SBAutoLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AA41E4F7262E256B0069B248 /* SBAutoLayout */; };
 		AA716030262E118F00244CFB /* MirrorUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA71602F262E118F00244CFB /* MirrorUI */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 			files = (
 				677C9C7D21C515FE00C7A16E /* MusicNotationKit.framework in Frameworks */,
 				AA716030262E118F00244CFB /* MirrorUI in Frameworks */,
+				AA41E4F8262E256B0069B248 /* SBAutoLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +262,7 @@
 			name = Example;
 			packageProductDependencies = (
 				AA71602F262E118F00244CFB /* MirrorUI */,
+				AA41E4F7262E256B0069B248 /* SBAutoLayout */,
 			);
 			productName = Example;
 			productReference = 677C9C5C21C5158C00C7A16E /* Example.app */;
@@ -292,6 +295,7 @@
 			mainGroup = 677C9C5321C5158B00C7A16E;
 			packageReferences = (
 				AA71602E262E118F00244CFB /* XCRemoteSwiftPackageReference "MirrorUI" */,
+				AA41E4F6262E256B0069B248 /* XCRemoteSwiftPackageReference "SBAutoLayout" */,
 			);
 			productRefGroup = 677C9C5D21C5158C00C7A16E /* Products */;
 			projectDirPath = "";
@@ -617,6 +621,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AA41E4F6262E256B0069B248 /* XCRemoteSwiftPackageReference "SBAutoLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SteveBarnegren/SBAutoLayout";
+			requirement = {
+				kind = exactVersion;
+				version = 1.3.1;
+			};
+		};
 		AA71602E262E118F00244CFB /* XCRemoteSwiftPackageReference "MirrorUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SteveBarnegren/MirrorUI";
@@ -628,6 +640,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AA41E4F7262E256B0069B248 /* SBAutoLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA41E4F6262E256B0069B248 /* XCRemoteSwiftPackageReference "SBAutoLayout" */;
+			productName = SBAutoLayout;
+		};
 		AA71602F262E118F00244CFB /* MirrorUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA71602E262E118F00244CFB /* XCRemoteSwiftPackageReference "MirrorUI" */;
