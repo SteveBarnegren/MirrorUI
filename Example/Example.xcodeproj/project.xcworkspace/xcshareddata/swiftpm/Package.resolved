@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "MirrorUI",
+        "repositoryURL": "https://github.com/SteveBarnegren/MirrorUI",
+        "state": {
+          "branch": "feature/projected-value",
+          "revision": "a6c2ab507b34a4aece5365c143ac4f9a07b35d42",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

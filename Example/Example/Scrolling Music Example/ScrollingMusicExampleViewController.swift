@@ -8,11 +8,18 @@
 
 import UIKit
 import MusicNotationKit
+import MirrorUI
+
+private class ScrollingMusicSettings {
+    @MirrorUI(range: 1...16) var staveSpacing = 8.0
+}
 
 class ScrollingMusicExampleViewController: UIViewController {
     
+    private var settings = ScrollingMusicSettings()
     private var musicViewController: ScrollingMusicViewController!
     private let composition: Composition
+    private var settingsViewController: MirrorViewController!
     
     init(composition: Composition) {
         self.composition = composition
@@ -30,25 +37,38 @@ class ScrollingMusicExampleViewController: UIViewController {
         addChild(musicViewController)
         view.addSubview(musicViewController.view)
         
-        //addPopupControls()
+        configureSettings()
     }
     
-//    private func addPopupControls() {
-//        
-//        let controls = PopUpControlsViewController.overlay(onViewController: self, initialState: .hidden)
-//        
-//        let staveSpacing = SliderItem(name: "Stave spacing",
-//                                      min: 1,
-//                                      max: 16,
-//                                      getValue: { Float(self.musicViewController.staveSpacing) },
-//                                      setValue: { self.musicViewController.staveSpacing = Double($0) })
-//        
-//        controls.show(items: [staveSpacing])
-//    }
+    private func configureSettings() {
+        settings.staveSpacing = self.musicViewController.staveSpacing
+        settings.$staveSpacing.didSet = {
+            self.musicViewController.staveSpacing = $0
+        }
+        
+        addPopupSettings(settings: settings)
+    }
+    
+    private func addPopupSettings<T: AnyObject>(settings: T) {
+        
+        let settingsVC = MirrorViewController(object: settings)
+        addChild(settingsVC)
+        view.addSubview(settingsVC.view)
+        self.settingsViewController = settingsVC
+        settingsVC.view.backgroundColor = UIColor(white: 0.98, alpha: 1)
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         musicViewController.view.frame = view.bounds
+        
+        let settingsHeight = CGFloat(150)
+        settingsViewController.view.frame = CGRect(
+            x: 0,
+            y: view.bounds.height - settingsHeight,
+            width: view.bounds.width,
+            height: settingsHeight
+        )
     }
 
 }
