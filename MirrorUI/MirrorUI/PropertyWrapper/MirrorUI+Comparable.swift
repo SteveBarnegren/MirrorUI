@@ -38,18 +38,18 @@ extension MirrorUI where T: Comparable {
         }
     }
 
-    public init(wrappedValue: T, min: T? = nil, max: T? = nil) {
+    public convenience init(wrappedValue: T, min: T? = nil, max: T? = nil) {
         self.init(wrappedValue: wrappedValue)
         self.min = min
         self.max = max
     }
 
-    public init(wrappedValue: T, range: ClosedRange<T>) {
+    public convenience init(wrappedValue: T, range: ClosedRange<T>) {
         self.init(wrappedValue: wrappedValue)
         self.range = range
     }
 
-    mutating private func updateMinMaxValueModifier() {
+    private func updateMinMaxValueModifier() {
 
         let minValue = self.min
         let maxValue = self.max

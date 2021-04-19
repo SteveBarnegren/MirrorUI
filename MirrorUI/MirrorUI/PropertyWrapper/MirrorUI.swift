@@ -15,7 +15,7 @@ protocol MirrorControl {
     var name: String? { get }
 }
 
-@propertyWrapper public struct MirrorUI<T> {
+@propertyWrapper public class MirrorUI<T> {
 
     public var name: String?
 
@@ -32,6 +32,8 @@ protocol MirrorControl {
     public var wrappedValue: T {
         ref.value
     }
+    
+    public var projectedValue: MirrorUI<T> { self }
 
     public init(wrappedValue: T) {
         self.ref = PropertyRef(value: wrappedValue)
