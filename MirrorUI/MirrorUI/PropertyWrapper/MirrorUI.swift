@@ -30,7 +30,12 @@ protocol MirrorControl {
     var ref: PropertyRef<T>
     
     public var wrappedValue: T {
-        ref.value
+        get {
+            ref.value
+        }
+        set {
+            ref.value = newValue
+        }
     }
     
     public var projectedValue: MirrorUI<T> { self }
