@@ -1,2 +1,0 @@
-# Use a local project
-git "https://github.com/SteveBarnegren/ControlPanel" "feature/carthage"

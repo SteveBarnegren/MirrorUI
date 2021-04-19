@@ -8,7 +8,6 @@
 
 import UIKit
 import MusicNotationKit
-import PopupControls
 
 class ScrollingMusicExampleViewController: UIViewController {
     
@@ -31,21 +30,21 @@ class ScrollingMusicExampleViewController: UIViewController {
         addChild(musicViewController)
         view.addSubview(musicViewController.view)
         
-        addPopupControls()
+        //addPopupControls()
     }
     
-    private func addPopupControls() {
-        
-        let controls = PopUpControlsViewController.overlay(onViewController: self, initialState: .hidden)
-        
-        let staveSpacing = SliderItem(name: "Stave spacing",
-                                      min: 1,
-                                      max: 16,
-                                      getValue: { Float(self.musicViewController.staveSpacing) },
-                                      setValue: { self.musicViewController.staveSpacing = Double($0) })
-        
-        controls.show(items: [staveSpacing])
-    }
+//    private func addPopupControls() {
+//        
+//        let controls = PopUpControlsViewController.overlay(onViewController: self, initialState: .hidden)
+//        
+//        let staveSpacing = SliderItem(name: "Stave spacing",
+//                                      min: 1,
+//                                      max: 16,
+//                                      getValue: { Float(self.musicViewController.staveSpacing) },
+//                                      setValue: { self.musicViewController.staveSpacing = Double($0) })
+//        
+//        controls.show(items: [staveSpacing])
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
