@@ -21,6 +21,8 @@ class ScrollingMusicExampleViewController: UIViewController {
     private var musicViewController: ScrollingMusicViewController!
     private let composition: Composition
     private var settingsViewController: MirrorViewController!
+    private var settingsVisible = false
+    private var showSettingsButton: UIButton!
     
     init(composition: Composition) {
         self.composition = composition
@@ -39,6 +41,7 @@ class ScrollingMusicExampleViewController: UIViewController {
         view.addSubview(musicViewController.view)
         
         configureSettings()
+        addShowSettingsButton()
         addPopupSettings()
     }
     
@@ -61,6 +64,28 @@ class ScrollingMusicExampleViewController: UIViewController {
         stripView.backgroundColor = UIColor(white: 0.9, alpha: 1)
         settingsVC.view.addSubview(stripView)
         stripView.pinToSuperviewAsTopStrip(height: 0.5)
+        
+        let closeImage = UIImage(systemName: "xmark.circle.fill")
+        let closeButton = UIButton(type: .custom)
+        closeButton.setImage(closeImage, for: .normal)
+        closeButton.imageView?.tintColor = .gray
+        settingsVC.view.addSubview(closeButton)
+        closeButton.pinToSuperviewTop(margin: 8)
+        closeButton.pinToSuperviewRight(margin: 8)
+        closeButton.addTarget(self, action: #selector(closeSettingsPressed), for: .touchUpInside)
+    }
+    
+    private func addShowSettingsButton() {
+        let image = UIImage(systemName: "chevron.up.circle.fill")
+        let button = UIButton(type: .custom)
+        button.setImage(image, for: .normal)
+        button.imageView?.tintColor = .gray
+        view.addSubview(button)
+        button.pinToSuperviewRight(margin: 8)
+        button.pinToSuperviewBottom(margin: 8)
+        button.addTarget(self, action: #selector(openSettingsPressed), for: .touchUpInside)
+        
+        self.showSettingsButton = button
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,12 +93,37 @@ class ScrollingMusicExampleViewController: UIViewController {
         musicViewController.view.frame = view.bounds
         
         let settingsHeight = CGFloat(150)
+        
+        var settingsY = view.bounds.height
+        if settingsVisible {
+            settingsY -= settingsHeight
+        }
+        
         settingsViewController.view.frame = CGRect(
             x: 0,
-            y: view.bounds.height - settingsHeight,
+            y: settingsY,
             width: view.bounds.width,
             height: settingsHeight
         )
     }
-
+    
+    @objc private func openSettingsPressed() {
+        showSettings(true)
+    }
+    
+    @objc private func closeSettingsPressed() {
+        showSettings(false)
+    }
+    
+    private func showSettings(_ show: Bool) {
+        if show == settingsVisible {
+            return
+        }
+        
+        settingsVisible = show
+        view.setNeedsLayout()
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in }
+    }
 }
