@@ -73,7 +73,7 @@ class Settings {
   @MirrorUI var blurEnabled = true
   
   init() {
-    _blurEnabled.didSet = { newValue in
+    $blurEnabled.didSet = { newValue in
       // perform update
     }
   }
@@ -92,8 +92,8 @@ class Settings {
   @MirrorUI var lives = true
 
   init() {
-    _lives.min = 0
-    _lives.max = 99
+    $lives.min = 0
+    $lives.max = 99
   }
 }
 ```
