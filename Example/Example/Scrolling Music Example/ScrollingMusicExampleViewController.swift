@@ -13,6 +13,7 @@ import SBAutoLayout
 
 private class ScrollingMusicSettings {
     @MirrorUI(range: 1...16) var staveSpacing = 8.0
+    @MirrorUI var drawLayoutAnchors = false
 }
 
 class ScrollingMusicExampleViewController: UIViewController {
@@ -47,8 +48,12 @@ class ScrollingMusicExampleViewController: UIViewController {
     
     private func configureSettings() {
         settings.staveSpacing = self.musicViewController.staveSpacing
-        settings.$staveSpacing.didSet = {
+        settings.$staveSpacing.didSet = { [unowned self] in
             self.musicViewController.staveSpacing = $0
+        }
+        
+        settings.$drawLayoutAnchors.didSet = { [unowned self] in
+            self.musicViewController._debugConstraints = $0
         }
     }
     
@@ -70,8 +75,8 @@ class ScrollingMusicExampleViewController: UIViewController {
         closeButton.setImage(closeImage, for: .normal)
         closeButton.imageView?.tintColor = .gray
         settingsVC.view.addSubview(closeButton)
-        closeButton.pinToSuperviewTop(margin: 8)
-        closeButton.pinToSuperviewRight(margin: 8)
+        closeButton.pinToSuperviewTop(8)
+        closeButton.pinToSuperviewRight(8)
         closeButton.addTarget(self, action: #selector(closeSettingsPressed), for: .touchUpInside)
     }
     
@@ -81,8 +86,8 @@ class ScrollingMusicExampleViewController: UIViewController {
         button.setImage(image, for: .normal)
         button.imageView?.tintColor = .gray
         view.addSubview(button)
-        button.pinToSuperviewRight(margin: 8)
-        button.pinToSuperviewBottom(margin: 8)
+        button.pinToSuperviewRight(8)
+        button.pinToSafeAreaBottom(8)
         button.addTarget(self, action: #selector(openSettingsPressed), for: .touchUpInside)
         
         self.showSettingsButton = button

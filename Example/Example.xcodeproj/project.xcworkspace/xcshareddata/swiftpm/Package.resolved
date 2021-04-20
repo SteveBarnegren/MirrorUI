@@ -2,12 +2,21 @@
   "object": {
     "pins": [
       {
+        "package": "MirrorUI",
+        "repositoryURL": "https://github.com/SteveBarnegren/MirrorUI",
+        "state": {
+          "branch": null,
+          "revision": "6040c8a915aa44928a45277327fa72cea3906b22",
+          "version": "1.1.0"
+        }
+      },
+      {
         "package": "SBAutoLayout",
         "repositoryURL": "https://github.com/SteveBarnegren/SBAutoLayout",
         "state": {
           "branch": null,
-          "revision": "82458d5b7a2d58df0e338f78fc2153b8e677b120",
-          "version": "1.3.1"
+          "revision": "bf6989e72fc9d686a52f0442ce6d6e3235673878",
+          "version": "1.4.0"
         }
       }
     ]

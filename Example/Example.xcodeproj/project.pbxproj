@@ -114,7 +114,6 @@
 		67BB96AF2336805C00119953 /* ExampleCompositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCompositions.swift; sourceTree = "<group>"; };
 		67CDC482254CA59D00C70E5B /* ComponentCompositions+Tuplets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Tuplets.swift"; sourceTree = "<group>"; };
 		67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Notes.swift"; sourceTree = "<group>"; };
-		AA658B76262E1E2E00762E48 /* MirrorUI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MirrorUI; path = ../../../MirrorUI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +174,6 @@
 				677C9C6621C5158D00C7A16E /* Assets.xcassets */,
 				677C9C6821C5158D00C7A16E /* LaunchScreen.storyboard */,
 				677C9C6B21C5158D00C7A16E /* Info.plist */,
-				AA658B76262E1E2E00762E48 /* MirrorUI */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -626,15 +624,15 @@
 			repositoryURL = "https://github.com/SteveBarnegren/SBAutoLayout";
 			requirement = {
 				kind = exactVersion;
-				version = 1.3.1;
+				version = 1.4.0;
 			};
 		};
 		AA71602E262E118F00244CFB /* XCRemoteSwiftPackageReference "MirrorUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SteveBarnegren/MirrorUI";
 			requirement = {
-				branch = "feature/projected-value";
-				kind = branch;
+				kind = exactVersion;
+				version = 1.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

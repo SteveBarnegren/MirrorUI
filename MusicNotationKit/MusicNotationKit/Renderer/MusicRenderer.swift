@@ -38,7 +38,7 @@ class MusicRenderer {
     var staveSpacing: Double = 8
     
     // Debugging
-    var _debugConstraints = true
+    var _debugConstraints = false
         
     init(composition: Composition) {
         FontLoader.loadFonts()

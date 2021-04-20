@@ -15,6 +15,11 @@ public class ScrollingMusicViewController: UIViewController, UICollectionViewDat
         set { renderer.staveSpacing = newValue; reload() }
     }
     
+    public var _debugConstraints: Bool {
+        get { renderer._debugConstraints }
+        set { renderer._debugConstraints = newValue; reload() }
+    }
+    
     private let renderer: MusicRenderer
     private var collectionView: UICollectionView!
     private var collectionViewLayout: MusicCollectionViewLayout!
