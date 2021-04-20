@@ -72,21 +72,23 @@ public struct MirrorView: View {
     
     public var body: some View {
         
-        VStack(alignment: .leading, spacing: 10) {
-            
-            ForEach(objectProperties) { property -> AnyView in
+        ScrollView {
+            VStack(alignment: .leading, spacing: 10) {
                 
-                self.makeControlView(
-                    propertyName: property.name,
-                    displayName: property.displayName,
-                    state: property.viewStateStorage
-                )
-        
-            }
-            Spacer()
-        }.padding()
+                ForEach(objectProperties) { property -> AnyView in
+                    
+                    self.makeControlView(
+                        propertyName: property.name,
+                        displayName: property.displayName,
+                        state: property.viewStateStorage
+                    )
+                    
+                }
+                Spacer()
+            }.padding()
+        }
     }
-    
+ 
     private func makeControlView(propertyName: String, displayName: String, state: Ref<[String: Any]>) -> AnyView {
          let value = Mirror(reflecting: object).children
             .first { $0.label == propertyName }
