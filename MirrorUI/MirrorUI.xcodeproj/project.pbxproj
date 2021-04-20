@@ -30,6 +30,7 @@
 		67B8A31525E839B400882274 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8A31425E839B400882274 /* View.swift */; };
 		67B8A31925E8404200882274 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8A31825E8404200882274 /* Ref.swift */; };
 		67C074C425EAC0A6006E144B /* ViewMapping+Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C074C325EAC0A6006E144B /* ViewMapping+Rect.swift */; };
+		AACEC360262E210C00B21F18 /* MirrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACEC35F262E210C00B21F18 /* MirrorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		67B8A31425E839B400882274 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		67B8A31825E8404200882274 /* Ref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
 		67C074C325EAC0A6006E144B /* ViewMapping+Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewMapping+Rect.swift"; sourceTree = "<group>"; };
+		AACEC35F262E210C00B21F18 /* MirrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				676CC66D25B34888008F1378 /* View Mapping */,
 				676CC67325B34888008F1378 /* PropertyWrapper */,
 				676CC66B25B34888008F1378 /* MirrorView */,
+				AA658B7A262E1E6F00762E48 /* UIKit */,
 				676CC62525B34775008F1378 /* MirrorUI.h */,
 				676CC62625B34775008F1378 /* Info.plist */,
 			);
@@ -192,6 +195,14 @@
 				67B8A30A25E82E2400882274 /* StringRepresentable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		AA658B7A262E1E6F00762E48 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				AACEC35F262E210C00B21F18 /* MirrorViewController.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +315,7 @@
 			files = (
 				676CC67E25B348A8008F1378 /* ViewMapping+Bool.swift in Sources */,
 				676CC68425B348AD008F1378 /* MirrorUI.swift in Sources */,
+				AACEC360262E210C00B21F18 /* MirrorViewController.swift in Sources */,
 				676CC67925B348A2008F1378 /* PropertyNameFormatter.swift in Sources */,
 				676CC6A325B34CBC008F1378 /* Dictionary+TypedSubscript.swift in Sources */,
 				676CC68625B348AD008F1378 /* ControlProperties.swift in Sources */,
