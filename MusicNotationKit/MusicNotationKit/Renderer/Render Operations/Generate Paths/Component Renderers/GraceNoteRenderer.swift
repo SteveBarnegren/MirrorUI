@@ -46,6 +46,18 @@ class GraceNoteRenderer {
         return flagGlyph.stemUpNW * scale
     }
 
+    private var slashGliph: Glyph {
+        return glyphs.glyph(forType: .graceNoteSlashStemUp)
+    }
+
+    private var slashPath: Path {
+        return slashGliph.path.scaled(scale)
+    }
+
+    private var slashSW: Vector2D {
+        return flagGlyph.graceNoteSlashSW * scale
+    }
+
     init(glyphs: GlyphStore) {
         self.glyphs = glyphs
     }
@@ -53,7 +65,7 @@ class GraceNoteRenderer {
     func paths(forGraceNotes graceNotes: [GraceNote]) -> [Path] {
         let headPaths = graceNotes.map(headPath).toArray()
         let stemPaths = graceNotes.map(stemPath).toArray()
-        let flagPaths = graceNotes.map(flagPath).toArray()
+        let flagPaths = graceNotes.map(flagPaths).joined().toArray()
         return headPaths + stemPaths + flagPaths
     }
 
@@ -77,16 +89,21 @@ class GraceNoteRenderer {
         return path
     }
 
-    private func flagPath(forGraceNote note: GraceNote) -> Path {
+    private func flagPaths(forGraceNote note: GraceNote) -> [Path] {
 
+        // Flag
         let attatchX = note.xPosition + noteHeadWidth/2 - stemThickness
         let attatchY = note.yPosition + stemHeight
 
-        let path = flagPath
-            .translated(x: attatchX, y: attatchY)
-            .translated(x: -flagStemUpNW.x, y: -flagStemUpNW.y)
+        let flagPos = Vector2D(attatchX - flagStemUpNW.x, attatchY - flagStemUpNW.y)
+        let flagPath = flagPath.translated(flagPos)
 
-        return path
+        // Slash
+        let slashPath = slashPath.translated(flagPos + slashSW)
+
+        return [flagPath, slashPath]
     }
+
+
 
 }

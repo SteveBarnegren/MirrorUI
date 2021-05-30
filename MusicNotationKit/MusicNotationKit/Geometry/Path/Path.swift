@@ -63,6 +63,14 @@ struct Path {
 extension Path {
     
     // MARK: - Translate
+
+    mutating func translate(v: Vector2D) {
+        self.translate(x: v.x, y: v.y)
+    }
+
+    func translated(_ v: Vector2D) -> Path {
+        return self.translated(x: v.x, y: v.y)
+    }
     
     mutating func translate(x xOffset: Double, y yOffset: Double) {
         commands = commands.translated(x: xOffset, y: yOffset)
@@ -155,6 +163,10 @@ extension Array where Element == Path.Command {
         }
         
         return newCommands
+    }
+
+    func translated(_ v: Vector2D) -> [Path.Command] {
+        return self.translated(x: v.x, y: v.y)
     }
     
     func translated(x: Double, y: Double) -> [Path.Command] {

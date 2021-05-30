@@ -21,6 +21,7 @@ enum GlyphType: String {
     
     // MARK: - Augmentation
     case augmentationDot
+    case graceNoteSlashStemUp
     
     // MARK: - Accidentals
     case accidentalFlat
@@ -85,6 +86,9 @@ class Glyph {
     
     fileprivate var _stemDownNW: Lazy<Vector2D>!
     var stemDownNW: Vector2D { _stemDownNW.value }
+
+    fileprivate var _graceNoteSlashSW: Lazy<Vector2D>!
+    var graceNoteSlashSW: Vector2D { _graceNoteSlashSW.value }
 }
 
 class GlyphStore {
@@ -131,6 +135,10 @@ class GlyphStore {
         
         glyph._stemDownNW = Lazy {
             font.anchor(forGlyphName: name, anchorName: "stemDownNW") ?? .zero
+        }
+
+        glyph._graceNoteSlashSW = Lazy {
+            font.anchor(forGlyphName: name, anchorName: "graceNoteSlashSW") ?? .zero
         }
         
         return glyph
