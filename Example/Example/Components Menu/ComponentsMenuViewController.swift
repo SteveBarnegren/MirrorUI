@@ -116,6 +116,8 @@ private func makeComponentInfos() -> [ComponentInfo] {
     let accents = ComponentInfo(name: "Accents", composition: ComponentCompositions.accents)
     let tuplets = ComponentInfo(name: "Tuplets", composition: ComponentCompositions.tuplets)
     let multipleVoices = ComponentInfo(name: "Multiple Voices", composition: ComponentCompositions.multipleVoices)
+    let graceNotes = ComponentInfo(name: "Grace Notes", composition: ComponentCompositions.graceNotes)
 
-    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents, tuplets, multipleVoices]
+
+    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents, tuplets, multipleVoices, graceNotes]
 }

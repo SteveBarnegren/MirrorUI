@@ -201,6 +201,7 @@
 		67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */; };
 		67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */; };
 		67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880F21EB5597003707DD /* Numeric+Constrained.swift */; };
+		AA5972312663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -411,6 +412,7 @@
 		67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
 		67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		67F6880F21EB5597003707DD /* Numeric+Constrained.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Constrained.swift"; sourceTree = "<group>"; };
+		AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateGraceNoteDescriptionsProcessingOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1052,6 +1054,7 @@
 				67CDC487254CAE2500C70E5B /* Apply Tuplet Times */,
 				673A3D0C233D4935001CE422 /* Join Barlines */,
 				6726FB01223067BC002EFE4D /* Generate Symbol Descriptions */,
+				AA59722F2663A44100C516A8 /* Generate Grace Note Descriptions */,
 				6751A8362232FDBF000B0D08 /* Calculate Playable Item Times */,
 				6751A8332232FC96000B0D08 /* Generate Beam Descriptions */,
 				6753D10022DA5E710052F27F /* Calculate Stem DIrections */,
@@ -1145,6 +1148,14 @@
 				6789B868246206AC002D78A8 /* Sequence+ContainsTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AA59722F2663A44100C516A8 /* Generate Grace Note Descriptions */ = {
+			isa = PBXGroup;
+			children = (
+				AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */,
+			);
+			path = "Generate Grace Note Descriptions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1341,6 +1352,7 @@
 				6758D27126014B3500CFE7F6 /* Array+Path.swift in Sources */,
 				679523FB255DC433005E7A90 /* Font+Bravura.swift in Sources */,
 				67678E0021E2865400E7FD71 /* BidrectionalCollection+EachWithIsLast.swift in Sources */,
+				AA5972312663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift in Sources */,
 				670ABDAE22C55C3700BFA678 /* Sequence+Sum.swift in Sources */,
 				67728786243BB7300038B142 /* NoteHeadAlignmentDecider.swift in Sources */,
 				67C7CC1621C6D1B200A020D0 /* Path.swift in Sources */,

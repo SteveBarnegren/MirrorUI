@@ -13,6 +13,21 @@ public enum NoteHeadType {
     case cross
 }
 
+public class GraceNote: AdjacentLayoutItem, Positionable {
+
+    var pitch: Pitch
+    var stavePosition = StavePosition.zero
+    
+    //AdjacentLayoutItem
+    var hoizontalLayoutDistanceFromParentItem: Double = 0
+    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1)
+    var position: Vector2D = .zero
+    
+    public init(pitch: Pitch) {
+        self.pitch = pitch
+    }
+}
+
 public class Note: Playable {
     
     public var noteHeadType = NoteHeadType.standard
@@ -99,6 +114,9 @@ public class Note: Playable {
         }
     }
     
+    // Grace notes
+    var graceNotes = [GraceNote]()
+    
     // Width
     var layoutDuration: Time? {
         return self.duration
@@ -113,7 +131,10 @@ public class Note: Playable {
     var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1.4)
 
     var leadingChildItems: [AdjacentLayoutItem] {
-        return self.noteHeads.map { $0.leadingLayoutItems }.joined().toArray()
+        var items = [AdjacentLayoutItem]()
+        items += graceNotes
+        items += self.noteHeads.map { $0.leadingLayoutItems }.joined().toArray()
+        return items
     }
     var trailingChildItems: [AdjacentLayoutItem] {
         return self.noteHeads.map { $0.trailingLayoutItems }.joined().toArray()
@@ -126,6 +147,8 @@ public class Note: Playable {
             assert(!xPosition.isInfinite)
         }
     }
+    
+    // Beams
     
     var beams = [Beam]()
     
@@ -155,6 +178,13 @@ public class Note: Playable {
     // Accent
     @discardableResult public func accent() -> Note {
         self.articulationMarks.append(Accent())
+        return self
+    }
+    
+    // Grace note
+    @discardableResult public func addGraceNotes(_ graceNotes: [GraceNote]) -> Note {
+        // We store grace notes in reversed order
+        self.graceNotes += graceNotes.reversed()
         return self
     }
 }

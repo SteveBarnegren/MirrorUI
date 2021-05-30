@@ -37,6 +37,7 @@
 		67F440532431049F003DFA63 /* ComponentCompositions+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */; };
 		AA41E4F8262E256B0069B248 /* SBAutoLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AA41E4F7262E256B0069B248 /* SBAutoLayout */; };
 		AA716030262E118F00244CFB /* MirrorUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA71602F262E118F00244CFB /* MirrorUI */; };
+		AAD2AB5E263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD2AB5D263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		67BB96AF2336805C00119953 /* ExampleCompositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCompositions.swift; sourceTree = "<group>"; };
 		67CDC482254CA59D00C70E5B /* ComponentCompositions+Tuplets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Tuplets.swift"; sourceTree = "<group>"; };
 		67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Notes.swift"; sourceTree = "<group>"; };
+		AAD2AB5D263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+GraceNotes.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				670D51B925474B9B000B7B36 /* ComponentCompositions+Accents.swift */,
 				67CDC482254CA59D00C70E5B /* ComponentCompositions+Tuplets.swift */,
 				677F1E1E25FEA6B70078D1B8 /* ComponentCompositions+MultipleVoices.swift */,
+				AAD2AB5D263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift */,
 			);
 			path = "Component Compositions";
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				677C9C6221C5158C00C7A16E /* ViewController.swift in Sources */,
 				67BB96A4233677C200119953 /* MenuViewController.swift in Sources */,
 				677C9C6021C5158C00C7A16E /* AppDelegate.swift in Sources */,
+				AAD2AB5E263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift in Sources */,
 				676BB600233676D000EA9F9C /* MusicExampleViewController.swift in Sources */,
 				67CDC483254CA59D00C70E5B /* ComponentCompositions+Tuplets.swift in Sources */,
 				677287702433C9B00038B142 /* ComponentCompositions+Accidentals.swift in Sources */,

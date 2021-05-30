@@ -76,6 +76,9 @@ class MusicRenderer {
             GenerateSymbolDescriptionsProcessingOperation(glyphs: glyphs)
                 .process(composition: composition)
 
+            // Generate grace note descriptions
+            GenerateGraceNoteDescriptionsProcessingOperation().process(composition: composition)
+
             // Calculate note times
             CalculatePlayableItemTimesProcessingOperation().process(composition: composition)
             

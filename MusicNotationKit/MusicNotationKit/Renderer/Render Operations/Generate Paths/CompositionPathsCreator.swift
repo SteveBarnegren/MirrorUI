@@ -135,6 +135,11 @@ class CompositionPathsCreator {
     // Render Symbols
     
     private func makePaths(forSymbol symbol: AdjacentLayoutItem) -> [Path] {
+
+        // Render grace notes as a dot for now
+        if let gn = symbol as? GraceNote {
+            return [Path(circleWithCenter: gn.position, radius: 0.3)]
+        }
         
         if let singleGlyphRenderable = symbol as? SingleGlyphRenderable {
             return glyphRenderer.paths(forRenderable: singleGlyphRenderable)

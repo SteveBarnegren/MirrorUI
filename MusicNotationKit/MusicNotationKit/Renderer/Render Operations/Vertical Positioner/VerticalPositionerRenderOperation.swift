@@ -37,14 +37,16 @@ class VerticalPositionerRenderOperation {
     }
     
     private func position(adjacentLayoutItem: AdjacentLayoutItem, forNote note: Note, clef: Clef) {
-                
+        
         switch adjacentLayoutItem {
-        case let dot as DotSymbol:
-            dot.position.y = dot.stavePosition.yPosition
-        case let accidental as AccidentalSymbol:
-            accidental.position.y = accidental.stavePosition.yPosition
-        default:
-            fatalError("Unknown item type: \(adjacentLayoutItem)")
+            case let dot as DotSymbol:
+                dot.position.y = dot.stavePosition.yPosition
+            case let accidental as AccidentalSymbol:
+                accidental.position.y = accidental.stavePosition.yPosition
+            case let graceNote as GraceNote:
+                graceNote.position.y = graceNote.stavePosition.yPosition
+            default:
+                fatalError("Unknown item type: \(adjacentLayoutItem)")
         }
     }
     
