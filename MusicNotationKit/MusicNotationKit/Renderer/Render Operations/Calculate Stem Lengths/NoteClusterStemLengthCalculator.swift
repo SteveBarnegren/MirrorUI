@@ -8,7 +8,6 @@
 
 import Foundation
 
-private let preferredStemLength = 3.5 // One octave
 
 class NoteClusterStemLengthCalculator<N> {
     
@@ -24,11 +23,13 @@ class NoteClusterStemLengthCalculator<N> {
     // MARK: - Properties
     
     private let tf: Transformer<N>
-    
+    private let preferredStemLength: Double
+
     // MARK: - Init
     
-    init(transformer: Transformer<N>) {
+    init(transformer: Transformer<N>, preferredStemLength: Double) {
         self.tf = transformer
+        self.preferredStemLength = preferredStemLength
     }
     
     // MARK: - Process
@@ -121,5 +122,12 @@ extension NoteClusterStemLengthCalculator.Transformer {
                                                                  extendingHeadPosition: { Vector2D($0.xPosition, $0.stemExtendingNoteHead.yPosition) },
                                                                  stemDirection: { $0.stemDirection },
                                                                  setStemLength: { note, v in note.stemLength = v })
+    }
+
+    static var graceNotes: NoteClusterStemLengthCalculator.Transformer<GraceNote> {
+        return NoteClusterStemLengthCalculator.Transformer<GraceNote>(connectingHeadPosition: { $0.position },
+                                                                      extendingHeadPosition: { $0.position },
+                                                                      stemDirection: { $0.stemDirection },
+                                                                      setStemLength: { gn, v in gn.stemLength = v })
     }
 }

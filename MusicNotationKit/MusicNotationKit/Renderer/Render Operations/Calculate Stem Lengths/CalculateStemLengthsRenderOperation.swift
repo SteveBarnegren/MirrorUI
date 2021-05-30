@@ -9,8 +9,15 @@
 import Foundation
 
 class CalculateStemLengthsRenderOperation {
-    
-    private let stemLengthCalculator = NoteClusterStemLengthCalculator(transformer: .notes)
+
+    // Note stem heights shoudl be one octave
+    private let notesStemLengthCalculator = NoteClusterStemLengthCalculator(transformer: .notes,
+                                                                            preferredStemLength: 3.5)
+
+    // Behind Bars suggests 2.25 stave spaces for grace note stem height
+    private let graceNotesStemLengthCalculator = NoteClusterStemLengthCalculator(transformer: .graceNotes,
+                                                                                 preferredStemLength: 2.25)
+
     
     func process(barSlices: [BarSlice]) {
         for barSlice in barSlices {
@@ -27,11 +34,19 @@ class CalculateStemLengthsRenderOperation {
     }
     
     private func process(noteSequence: NoteSequence) {
-        
+
+        // Notes
         noteSequence
             .notes
             .clustered()
-            .forEach(stemLengthCalculator.process)
+            .forEach(notesStemLengthCalculator.process)
+
+        // Grace notes
+        for note in noteSequence.notes {
+            if !note.graceNotes.isEmpty {
+                graceNotesStemLengthCalculator.process(noteCluster: note.graceNotes)
+            }
+        }
     }
 }
 

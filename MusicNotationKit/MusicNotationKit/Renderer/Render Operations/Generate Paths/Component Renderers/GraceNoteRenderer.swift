@@ -11,9 +11,6 @@ import Foundation
 private let scale = 0.5
 private let stemThickness = 0.12 * scale
 
-// Behind Bars suggests 2.25 stave spaces for grace note stem height
-private let stemHeight = 2.25
-
 class GraceNoteRenderer {
 
     private let glyphs: GlyphStore
@@ -84,7 +81,7 @@ class GraceNoteRenderer {
         var path = Path(rect: Rect(x: x + stemUpSE.x - stemThickness,
                                    y: y + stemUpSE.y,
                                    width: stemThickness,
-                                   height: stemHeight - stemUpSE.y))
+                                   height: note.stemLength - stemUpSE.y))
         path.drawStyle = .fill
         return path
     }
@@ -93,7 +90,7 @@ class GraceNoteRenderer {
 
         // Flag
         let attatchX = note.xPosition + noteHeadWidth/2 - stemThickness
-        let attatchY = note.yPosition + stemHeight
+        let attatchY = note.yPosition + note.stemLength
 
         let flagPos = Vector2D(attatchX - flagStemUpNW.x, attatchY - flagStemUpNW.y)
         let flagPath = flagPath.translated(flagPos)
@@ -103,7 +100,5 @@ class GraceNoteRenderer {
 
         return [flagPath, slashPath]
     }
-
-
 
 }

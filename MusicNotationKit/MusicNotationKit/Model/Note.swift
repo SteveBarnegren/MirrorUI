@@ -17,7 +17,9 @@ public class GraceNote: AdjacentLayoutItem, Positionable {
 
     var pitch: Pitch
     var stavePosition = StavePosition.zero
-    
+    var stemDirection = StemDirection.up
+    var stemLength: Double = 0
+
     //AdjacentLayoutItem
     var hoizontalLayoutDistanceFromParentItem: Double = 0
     var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1)
