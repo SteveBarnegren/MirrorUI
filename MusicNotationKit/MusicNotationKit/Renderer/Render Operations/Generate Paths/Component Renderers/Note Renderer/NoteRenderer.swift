@@ -58,7 +58,7 @@ class NoteRenderer {
     // MARK: - Isolated Notes
     
     private func makePaths(forNote note: Note) -> [Path] {
-        
+
         var paths = [Path]()
         paths += makeHeadPaths(forNote: note)
         
@@ -70,22 +70,21 @@ class NoteRenderer {
         // Quaver
         if note.numberOfTails == 1 {
             paths.append(maybe: makeStemPath(forNote: note))
-            
-            var path = Path(commands: makeQuaverTailCommands())
-            if note.stemDirection == .down {
-                path.invertY()
+            let isDown = note.stemDirection == .down
+
+            let tailGlyph = glyphs.glyph(forType: isDown ? .flag8thDown : .flag8thUp)
+
+            var pos = Vector2D(note.xPosition + note.stemConnectionPoint.x,
+                               note.stemEndY)
+
+            if isDown {
+                pos -= tailGlyph.stemDownSW
+            } else {
+                pos -= tailGlyph.stemUpNW
+                pos.x -= stemThickness
             }
-            
-            var xOffset = note.stemConnectionPoint.x
-            
-            // x nudge
-            if note.stemDirection == .up {
-                xOffset -= 0.11
-            }
-            
-            let yOffset = 1.30.inverted(if: { note.stemDirection == .down })
-            path.translate(x: note.xPosition + xOffset, y: note.stemConnectingNoteHead.yPosition + yOffset)
-        
+
+            var path = tailGlyph.path.translated(pos)
             path.drawStyle = .fill
             paths.append(path)
         }
@@ -121,17 +120,6 @@ class NoteRenderer {
         }
         
         return paths
-    }
-    
-    private func makeQuaverTailCommands() -> [Path.Command] {
-        // A note tail, anchored to the left
-        let commands: [Path.Command] = [
-            .move(Vector2D(0.028177234195949308, 0.22361714423650725)),
-            .curve(Vector2D(0.1796576688116412, -0.26326044118239594), c1: Vector2D(0.36589881412387104, 0.13806570405953167), c2: Vector2D(0.21003653045372273, -0.15850308628952214)),
-            .curve(Vector2D(0.028177234195949308, 0.5), c1: Vector2D(0.4571075440584742, 0.11569020480229597), c2: Vector2D(0.03196085061274678, 0.27025900632689404)),
-            .close
-        ].scaled(3.5)
-        return commands
     }
     
     // all tails
@@ -300,7 +288,7 @@ class NoteRenderer {
             }
             
             let alignmentOffset = NoteHeadAligner.xOffset(forNoteHead: noteHeadDescription, glyphs: glyphs)
-            
+
             paths.append(
                 glyph.path.translated(x: note.xPosition - glyph.size.width/2 + alignmentOffset,
                                       y: noteHeadDescription.yPosition)

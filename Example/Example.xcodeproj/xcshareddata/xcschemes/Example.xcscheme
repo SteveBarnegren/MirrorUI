@@ -72,7 +72,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-deeplink components/notes"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/multipleVoices"
@@ -112,7 +112,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/graceNotes"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

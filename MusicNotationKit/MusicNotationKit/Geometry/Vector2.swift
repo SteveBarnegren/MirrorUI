@@ -114,6 +114,16 @@ func *= (lhs: inout Vector2D, rhs: Double) {
     lhs.y *= rhs
 }
 
+func += (lhs: inout Vector2D, rhs: Vector2D) {
+    lhs.x += rhs.x
+    lhs.y += rhs.y
+}
+
+func -= (lhs: inout Vector2D, rhs: Vector2D) {
+    lhs.x -= rhs.x
+    lhs.y -= rhs.y
+}
+
 extension Vector2D {
     
     func flipX() -> Vector2D {

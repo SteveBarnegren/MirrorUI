@@ -18,7 +18,8 @@ enum GlyphType: String {
 
     // MARK: - Flags
     case flag8thUp
-    
+    case flag8thDown
+
     // MARK: - Augmentation
     case augmentationDot
     case graceNoteSlashStemUp
@@ -83,6 +84,9 @@ class Glyph {
     
     fileprivate var _stemUpNW: Lazy<Vector2D>!
     var stemUpNW: Vector2D { _stemUpNW.value }
+
+    fileprivate var _stemDownSW: Lazy<Vector2D>!
+    var stemDownSW: Vector2D { _stemDownSW.value }
     
     fileprivate var _stemDownNW: Lazy<Vector2D>!
     var stemDownNW: Vector2D { _stemDownNW.value }
@@ -131,6 +135,10 @@ class GlyphStore {
         
         glyph._stemUpNW = Lazy {
             font.anchor(forGlyphName: name, anchorName: "stemUpNW") ?? .zero
+        }
+
+        glyph._stemDownSW = Lazy {
+            font.anchor(forGlyphName: name, anchorName: "stemDownSW") ?? .zero
         }
         
         glyph._stemDownNW = Lazy {
