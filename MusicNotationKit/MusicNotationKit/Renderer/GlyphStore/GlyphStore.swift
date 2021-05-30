@@ -19,6 +19,20 @@ enum GlyphType: String {
     // MARK: - Flags
     case flag8thUp
     case flag8thDown
+    case flag16thUp
+    case flag16thDown
+    case flag32ndUp
+    case flag32ndDown
+    case flag64thUp
+    case flag64thDown
+    case flag128thUp
+    case flag128thDown
+    case flag256thUp
+    case flag256thDown
+    case flag512thUp
+    case flag512thDown
+    case flag1024thUp
+    case flag1024thDown
 
     // MARK: - Augmentation
     case augmentationDot

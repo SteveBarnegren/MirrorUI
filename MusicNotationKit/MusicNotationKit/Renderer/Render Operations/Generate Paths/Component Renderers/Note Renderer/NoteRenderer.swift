@@ -56,31 +56,29 @@ class NoteRenderer {
     }
     
     // MARK: - Isolated Notes
-    
+
     private func makePaths(forNote note: Note) -> [Path] {
 
         var paths = [Path]()
+
+        // Head
         paths += makeHeadPaths(forNote: note)
-        
-        // Crotchet
-        if note.numberOfTails == 0 {
-            paths.append(maybe: makeStemPath(forNote: note))
-        }
-        
-        // Quaver
-        if note.numberOfTails == 1 {
+
+        // Stem
+        paths.append(maybe: makeStemPath(forNote: note))
+
+        // Tails
+        if note.numberOfTails > 0 {
             paths.append(maybe: makeStemPath(forNote: note))
             let isDown = note.stemDirection == .down
 
-            let tailGlyph = glyphs.glyph(forType: isDown ? .flag8thDown : .flag8thUp)
+            let tailGlyph = glyphs.tailGlyph(forNumTails: note.numberOfTails,
+                                             stemDirection: note.stemDirection)
 
             var pos = Vector2D(note.xPosition + note.stemConnectionPoint.x,
                                note.stemEndY)
 
-            if isDown {
-                pos -= tailGlyph.stemDownSW
-            } else {
-                pos -= tailGlyph.stemUpNW
+            if !isDown {
                 pos.x -= stemThickness
             }
 
@@ -88,64 +86,8 @@ class NoteRenderer {
             path.drawStyle = .fill
             paths.append(path)
         }
-        
-        // Semiquaver or faster
-        if note.numberOfTails >= 2 {
-            
-            let stemDirection = note.stemDirection
-            
-            let bottomOffset = 2.2
-            let eachTailYOffset = 0.5
-            let tailsHeight = eachTailYOffset * Double(note.numberOfTails)
-            let stemHeight = max(note.stemLength, tailsHeight + bottomOffset)
 
-            paths.append(maybe: makeStemPath(forNote: note, to: note.stemConnectingNoteHead.yPosition + stemHeight.inverted(if: { stemDirection == .down })))
-            
-            for (tailNumber, isLast) in (0..<note.numberOfTails).eachWithIsLast() {
-                let xOffset = note.stemConnectionPoint.x
-                let yOffset = (stemHeight - Double(tailNumber) * eachTailYOffset).inverted(if: { note.stemDirection == .down })
-                let commands = isLast ? makeFastNoteBottomTailCommands() : makeFastNoteTailCommands()
-                
-                var path = Path(commands: commands)
-                
-                if note.stemDirection == .down {
-                    path.invertY()
-                }
-                path.translate(x: note.xPosition + xOffset,
-                               y: note.stemConnectingNoteHead.yPosition + yOffset)
-                
-                path.drawStyle = .fill
-                paths.append(path)
-            }
-        }
-        
         return paths
-    }
-    
-    // all tails
-    private func makeFastNoteTailCommands() -> [Path.Command] {
-        let commands: [Path.Command] = [
-            .move(Vector2D(0.008714897856421211, 0.19140708577675658)), // 14
-            .curve(Vector2D(0.2059272997832754, -0.07986761556367605), c1: Vector2D(0.18538248682111114, 0.04105231380363639), c2: Vector2D(0.1846982200696919, 0.07654361989015901)), // 15
-            .line(Vector2D(0.21425213188790243, -0.0930725216606707)), // 3
-            .curve(Vector2D(0.21683570047209705, 0.026919885916367292), c1: Vector2D(0.2210403262938127, -0.04268545684726699), c2: Vector2D(0.2213882927932591, -0.004074871766974408)), // 4
-            .line(Vector2D(0.20363079437510245, 0.07543356266402135)), // 10
-            .curve(Vector2D(0.008714897856421211, 0.3082417984175567), c1: Vector2D(0.16985480329407404, 0.15394531374787002), c2: Vector2D(0.08875637875071873, 0.17787456940425372)), // 11
-            .close
-            ].translated(x: -0.008714897856421211, y: -0.3082417984175567).scaled(4.2)
-        return commands
-    }
-    
-    // last tails
-    private func makeFastNoteBottomTailCommands() -> [Path.Command] {
-        let commands: [Path.Command] = [
-            .move(Vector2D(0.008714897856421211, 0.026058696388302383)), // 1
-            .curve(Vector2D(0.1792304244132646, -0.35229056960819516), c1: Vector2D(0.18226080108967335, -0.08849347359720644), c2: Vector2D(0.2675874595303402, -0.11050336514956877)), // 2
-            .curve(Vector2D(0.21425213188790243, -0.0930725216606707), c1: Vector2D(0.26596924995952503, -0.24026207534583588), c2: Vector2D(0.2597177947976131, -0.16797185136542003)), // 3
-            .line(Vector2D(0.2059272997832754, -0.07986761556367605)), // 15
-            .curve(Vector2D(0.008714897856421211, 0.19140708577675658), c1: Vector2D(0.15769398041585103, -0.0070288758595288825), c2: Vector2D(0.07567144209624721, 0.07066417104630607)) // 16
-            ].translated(x: -0.008714897856421211, y: -0.19140708577675658).scaled(4.2)
-        return commands
     }
     
     // MARK: - Note Clusters (connected with beams)
@@ -232,24 +174,6 @@ class NoteRenderer {
         
         return path
     }
-    
-//    private func makeBeamPath(fromNote: Note, toNote: Note, beamYPosition: Double, beamIndex: Int) -> Path {
-//
-//        let stemDirection = fromNote.symbolDescription.stemDirection
-//
-//        let beamStartX = fromNote.position.x + stemXOffset(for: stemDirection)
-//        let beamEndX = toNote.position.x + stemXOffset(for: stemDirection)
-//        let eachBeamYOffset = (beamSeparation + beamThickness).inverted(if: { stemDirection == .down })
-//        let beamRect = Rect(x: beamStartX,
-//                            y: beamYPosition - beamThickness.inverted(if: { stemDirection == .down }) - (Double(beamIndex) * eachBeamYOffset),
-//                            width: beamEndX - beamStartX,
-//                            height: beamThickness.inverted(if: { stemDirection == .down }))
-//
-//        var path = Path()
-//        path.addRect(beamRect)
-//        path.drawStyle = .fill
-//        return path
-//    }
     
     private func makeCutOffBeamPath(forNote note: Note, beamYPosition: Double, beamIndex: Int, rightSide: Bool) -> Path {
         
