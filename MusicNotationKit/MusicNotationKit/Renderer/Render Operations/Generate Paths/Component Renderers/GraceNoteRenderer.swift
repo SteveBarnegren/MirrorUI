@@ -9,7 +9,7 @@
 import Foundation
 
 private let scale = 0.5
-private let stemThickness = 0.2 * scale
+private let stemThickness = 0.12 * scale
 
 // Behind Bars suggests 2.25 stave spaces for grace note stem height
 private let stemHeight = 2.25
@@ -34,6 +34,18 @@ class GraceNoteRenderer {
         return noteheadGlyph.stemUpSE * scale
     }
 
+    private var flagGlyph: Glyph {
+        return glyphs.glyph(forType: .flag8thUp)
+    }
+
+    private var flagPath: Path {
+        return flagGlyph.path.scaled(scale)
+    }
+
+    private var flagStemUpNW: Vector2D {
+        return flagGlyph.stemUpNW * scale
+    }
+
     init(glyphs: GlyphStore) {
         self.glyphs = glyphs
     }
@@ -41,7 +53,8 @@ class GraceNoteRenderer {
     func paths(forGraceNotes graceNotes: [GraceNote]) -> [Path] {
         let headPaths = graceNotes.map(headPath).toArray()
         let stemPaths = graceNotes.map(stemPath).toArray()
-        return headPaths + stemPaths
+        let flagPaths = graceNotes.map(flagPath).toArray()
+        return headPaths + stemPaths + flagPaths
     }
 
     private func headPath(forGraceNote note: GraceNote) -> Path {
@@ -59,8 +72,20 @@ class GraceNoteRenderer {
         var path = Path(rect: Rect(x: x + stemUpSE.x - stemThickness,
                                    y: y + stemUpSE.y,
                                    width: stemThickness,
-                                   height: stemHeight))
+                                   height: stemHeight - stemUpSE.y))
         path.drawStyle = .fill
+        return path
+    }
+
+    private func flagPath(forGraceNote note: GraceNote) -> Path {
+
+        let attatchX = note.xPosition + noteHeadWidth/2 - stemThickness
+        let attatchY = note.yPosition + stemHeight
+
+        let path = flagPath
+            .translated(x: attatchX, y: attatchY)
+            .translated(x: -flagStemUpNW.x, y: -flagStemUpNW.y)
+
         return path
     }
 

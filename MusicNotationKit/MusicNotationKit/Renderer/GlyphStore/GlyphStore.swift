@@ -15,6 +15,9 @@ enum GlyphType: String {
     case noteheadWhole
     case noteheadHalf
     case noteheadXBlack
+
+    // MARK: - Flags
+    case flag8thUp
     
     // MARK: - Augmentation
     case augmentationDot
