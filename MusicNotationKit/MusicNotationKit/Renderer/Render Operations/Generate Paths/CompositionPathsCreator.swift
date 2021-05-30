@@ -21,12 +21,14 @@ class CompositionPathsCreator {
     private let noteRenderer: NoteRenderer
     private let tieRenderer: TieRenderer
     private let tupletMarksRenderer: TupletMarksRenderer
+    private let graceNoteRenderer: GraceNoteRenderer
     
     init(glyphs: GlyphStore) {
         self.glyphRenderer = GlyphRenderer(glyphStore: glyphs)
         self.noteRenderer = NoteRenderer(glyphs: glyphs)
         self.tieRenderer = TieRenderer(glyphs: glyphs)
         self.tupletMarksRenderer = TupletMarksRenderer(glyphs: glyphs)
+        self.graceNoteRenderer = GraceNoteRenderer(glyphs: glyphs)
     }
     
     func paths(forVoices voices: [RenderableVoice], canvasWidth: Double, staveSpacing: Double) -> [Path] {
@@ -88,10 +90,23 @@ class CompositionPathsCreator {
                            inRange barRange: ClosedRange<Int>,
                            canvasWidth: Double,
                            leadingTies: [Tie]) -> [Path] {
-        
+
+        // Notes
         let notePaths = noteRenderer.paths(forNotes: noteSequence.notes)
-        let noteSymbolPaths = noteSequence.notes.map { $0.trailingChildItems + $0.leadingChildItems }.joined().map(makePaths).joined().toArray()
+
+        // Duplication of below?
+        //let noteSymbolPaths = noteSequence.notes.map { $0.trailingChildItems + $0.leadingChildItems }.joined().map(makePaths).joined().toArray()
+
+        // Grace notes
+        var graceNotePaths = [Path]()
+        for note in noteSequence.notes {
+            graceNotePaths += makeGraceNotesPaths(forNote: note)
+        }
+
+        // Adjacent items
         let noteHeadAdjacentItems = noteSequence.notes.map { $0.noteHeads }.joined().map { $0.trailingLayoutItems + $0.leadingLayoutItems }.joined().map(makePaths).joined().toArray()
+
+        // Rests
         let restPaths = noteSequence.rests.map(glyphRenderer.paths).joined()
         
         let articulationMarkPaths = noteSequence.notes.map { note in
@@ -122,7 +137,8 @@ class CompositionPathsCreator {
         
         var allPaths = [Path]()
         allPaths += notePaths
-        allPaths += noteSymbolPaths
+        allPaths += graceNotePaths
+        //allPaths += noteSymbolPaths
         allPaths += noteHeadAdjacentItems
         allPaths += restPaths
         allPaths += tiePaths
@@ -131,16 +147,17 @@ class CompositionPathsCreator {
         allPaths += tupletMarkPaths
         return allPaths
     }
-    
-    // Render Symbols
+
+    // MARK: - Render Grace Notes
+
+    private func makeGraceNotesPaths(forNote note: Note) -> [Path] {
+        return graceNoteRenderer.paths(forGraceNotes: note.graceNotes)
+    }
+
+    // MARK: - Render Symbols
     
     private func makePaths(forSymbol symbol: AdjacentLayoutItem) -> [Path] {
 
-        // Render grace notes as a dot for now
-        if let gn = symbol as? GraceNote {
-            return [Path(circleWithCenter: gn.position, radius: 0.3)]
-        }
-        
         if let singleGlyphRenderable = symbol as? SingleGlyphRenderable {
             return glyphRenderer.paths(forRenderable: singleGlyphRenderable)
         } else {
