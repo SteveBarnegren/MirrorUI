@@ -19,6 +19,10 @@ public class GraceNote: AdjacentLayoutItem, Positionable {
     var stavePosition = StavePosition.zero
     var stemDirection = StemDirection.up
     var stemLength: Double = 0
+
+    /// The stem connection point, relative to the grace note position
+    var stemConnectionPoint = Vector2D.zero
+
     var beams = [Beam]()
 
     var stemEndY: Double {

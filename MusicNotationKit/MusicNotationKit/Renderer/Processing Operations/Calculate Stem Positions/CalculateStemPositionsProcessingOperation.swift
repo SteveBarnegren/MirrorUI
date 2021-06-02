@@ -8,6 +8,8 @@
 
 import Foundation
 
+private let graceNoteScale = 0.5
+
 class CalculateStemPositionsProcessingOperation: CompositionProcessingOperation {
     
     private let glyphs: GlyphStore
@@ -18,6 +20,9 @@ class CalculateStemPositionsProcessingOperation: CompositionProcessingOperation 
     
     func process(composition: Composition) {
         composition.notes.forEach(process)
+        composition.notes.forEach {
+            $0.graceNotes.forEach(process)
+        }
     }
     
     private func process(note: Note) {
@@ -42,5 +47,23 @@ class CalculateStemPositionsProcessingOperation: CompositionProcessingOperation 
         note.stemConnectionPoint = Vector2D(-glyph.width/2 + anchor.x,
                                             anchor.y)
         note.stemWidth = glyphs.metrics.stemThickness
+    }
+
+    private func process(graceNote: GraceNote) {
+
+        let anchor: Vector2D
+
+        let glyph = glyphs.glyph(forType: .noteheadBlack)
+
+        switch graceNote.stemDirection {
+        case .up:
+            anchor = glyph.stemUpSE * graceNoteScale
+        case .down:
+            anchor = glyph.stemDownNW * graceNoteScale
+        }
+
+        let glyphWidth = (glyph.width * graceNoteScale)
+        graceNote.stemConnectionPoint = Vector2D(-glyphWidth/2 + anchor.x,
+                                                 anchor.y)
     }
 }

@@ -85,13 +85,13 @@ class GraceNoteRenderer {
 
     private func stemPath(forGraceNote note: GraceNote) -> Path {
 
-        let x = note.xPosition - noteHeadWidth/2
+        let x = note.xPosition
         let y = note.yPosition
 
-        var path = Path(rect: Rect(x: x + stemUpSE.x - stemThickness,
-                                   y: y + stemUpSE.y,
+        var path = Path(rect: Rect(x: x + note.stemConnectionPoint.x - stemThickness,
+                                   y: y + note.stemConnectionPoint.y,
                                    width: stemThickness,
-                                   height: note.stemLength - stemUpSE.y))
+                                   height: note.stemLength - note.stemConnectionPoint.y))
         path.drawStyle = .fill
         return path
     }
