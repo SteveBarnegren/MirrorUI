@@ -19,6 +19,11 @@ public class GraceNote: AdjacentLayoutItem, Positionable {
     var stavePosition = StavePosition.zero
     var stemDirection = StemDirection.up
     var stemLength: Double = 0
+    var beams = [Beam]()
+
+    var stemEndY: Double {
+        position.y + stemLength.inverted(if: stemDirection == .down)
+    }
 
     //AdjacentLayoutItem
     var hoizontalLayoutDistanceFromParentItem: Double = 0

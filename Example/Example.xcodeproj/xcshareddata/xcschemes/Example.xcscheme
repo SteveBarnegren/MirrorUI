@@ -100,7 +100,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/ties"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/accents"
@@ -112,7 +112,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/graceNotes"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

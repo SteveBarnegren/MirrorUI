@@ -152,4 +152,13 @@ extension BeamRenderer.Transformer {
                                        stemLeadingEdge: { $0.stemLeadingEdge },
                                        stemTrailingEdge: { $0.stemTrailingEdge })
     }
+
+    static var graceNotes: BeamRenderer<GraceNote>.Transformer {
+        BeamRenderer<GraceNote>.Transformer(beams: { $0.beams },
+                                            stemDirection: { $0.stemDirection },
+                                            stemEndY: { $0.stemEndY },
+                                            stemLeadingEdge: { $0.xPosition + 0.3 }, // TODO: Fix this
+                                            stemTrailingEdge: { $0.xPosition + 0.3 })
+    }
+
 }

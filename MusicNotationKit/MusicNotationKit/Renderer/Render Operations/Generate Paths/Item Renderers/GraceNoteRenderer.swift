@@ -14,6 +14,9 @@ private let stemThickness = 0.12 * scale
 class GraceNoteRenderer {
 
     private let glyphs: GlyphStore
+    private let beamRenderer = BeamRenderer<GraceNote>.init(transformer: .graceNotes,
+                                                            beamSeparation: 0.3 * scale,
+                                                            beamThickness: 0.3 * scale)
 
     private var noteheadGlyph: Glyph {
         return glyphs.glyph(forType: .noteheadBlack)
@@ -60,10 +63,17 @@ class GraceNoteRenderer {
     }
 
     func paths(forGraceNotes graceNotes: [GraceNote]) -> [Path] {
-        let headPaths = graceNotes.map(headPath).toArray()
-        let stemPaths = graceNotes.map(stemPath).toArray()
-        let flagPaths = graceNotes.map(flagPaths).joined().toArray()
-        return headPaths + stemPaths + flagPaths
+        var paths = [Path]()
+
+        paths += graceNotes.map(headPath)
+        paths += graceNotes.map(stemPath)
+        if graceNotes.count > 1 {
+            paths += beamRenderer.beamPaths(forNotes: graceNotes)
+        } else {
+            paths += graceNotes.map(flagPaths).joined()
+        }
+
+        return paths
     }
 
     private func headPath(forGraceNote note: GraceNote) -> Path {

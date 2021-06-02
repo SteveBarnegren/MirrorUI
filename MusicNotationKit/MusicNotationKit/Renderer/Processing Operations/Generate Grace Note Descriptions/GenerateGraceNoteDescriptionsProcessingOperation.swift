@@ -22,12 +22,30 @@ class GenerateGraceNoteDescriptionsProcessingOperation: CompositionProcessingOpe
     }
 
     private func process(note: Note, clef: Clef) {
-        note.graceNotes.forEach {
+        let graceNotes = note.graceNotes
+
+        graceNotes.forEach {
             self.process(graceNote: $0, clef: clef)
         }
+
+        addBeams(toGraceNotes: graceNotes)
     }
 
     private func process(graceNote: GraceNote, clef: Clef) {
         graceNote.stavePosition = graceNote.pitch.stavePosition(forClef: clef)
+    }
+
+    private func addBeams(toGraceNotes graceNotes: [GraceNote]) {
+
+        if graceNotes.count <= 1 {
+            return
+        }
+
+        graceNotes.first?.beams = [.connectedNext, .connectedNext]
+        graceNotes.last?.beams = [.connectedPrevious, .connectedPrevious]
+
+        graceNotes.dropFirst().dropLast().forEach {
+            $0.beams = [.connectedBoth, .connectedBoth]
+        }
     }
 }
