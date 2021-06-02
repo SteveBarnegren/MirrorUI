@@ -204,6 +204,7 @@
 		AA5972312663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */; };
 		AA5972332663AB6700C516A8 /* GraceNoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */; };
 		AA5972352663E12900C516A8 /* GlyphStore+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972342663E12900C516A8 /* GlyphStore+Flags.swift */; };
+		AA5972382663E7E400C516A8 /* BeamRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972372663E7E400C516A8 /* BeamRenderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -417,6 +418,7 @@
 		AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateGraceNoteDescriptionsProcessingOperation.swift; sourceTree = "<group>"; };
 		AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceNoteRenderer.swift; sourceTree = "<group>"; };
 		AA5972342663E12900C516A8 /* GlyphStore+Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlyphStore+Flags.swift"; sourceTree = "<group>"; };
+		AA5972372663E7E400C516A8 /* BeamRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamRenderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -709,7 +711,7 @@
 			path = "Render Operations";
 			sourceTree = "<group>";
 		};
-		67678DFC21E25A1400E7FD71 /* Component Renderers */ = {
+		67678DFC21E25A1400E7FD71 /* Item Renderers */ = {
 			isa = PBXGroup;
 			children = (
 				679855D22461FF4100877129 /* Note Renderer */,
@@ -723,7 +725,7 @@
 				672FB4432603F6A900037DC2 /* ClefRenderer.swift */,
 				AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */,
 			);
-			path = "Component Renderers";
+			path = "Item Renderers";
 			sourceTree = "<group>";
 		};
 		67678E0521E3E9BA00E7FD71 /* Protocols */ = {
@@ -905,6 +907,7 @@
 			isa = PBXGroup;
 			children = (
 				674D504A21E23CD8009E5AFE /* NoteRenderer.swift */,
+				AA5972372663E7E400C516A8 /* BeamRenderer.swift */,
 				679855D32461FF6700877129 /* NoteHeadAligner.swift */,
 			);
 			path = "Note Renderer";
@@ -1031,7 +1034,7 @@
 			isa = PBXGroup;
 			children = (
 				6785A9B423315B38004B32B8 /* CompositionPathsCreator.swift */,
-				67678DFC21E25A1400E7FD71 /* Component Renderers */,
+				67678DFC21E25A1400E7FD71 /* Item Renderers */,
 			);
 			path = "Generate Paths";
 			sourceTree = "<group>";
@@ -1447,6 +1450,7 @@
 				6753D0FF22D7E8790052F27F /* SignedNumeric+Extensions.swift in Sources */,
 				67BB96B823368C7400119953 /* CompositionLayout.swift in Sources */,
 				679855CE2460BC8300877129 /* UInt+Extensions.swift in Sources */,
+				AA5972382663E7E400C516A8 /* BeamRenderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
