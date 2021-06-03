@@ -11,7 +11,7 @@ import Foundation
 class GraceNoteRenderer {
 
     private let glyphs: GlyphStore
-    private lazy var beamRenderer = BeamRenderer<GraceNote>.init(transformer: .graceNotes,
+    private lazy var beamRenderer = BeamRenderer<GraceNote>.init(transformer: .graceNotesBeamRenderer(withMetrics: glyphs.metrics),
                                                                  beamSeparation: 0.3 * scale,
                                                                  beamThickness: 0.3 * scale)
 

@@ -62,6 +62,11 @@ struct FontMetrics {
 
     // Additional values (not in the SMuFL spec)
     var graceNoteScale: Double = 0.5
+
+    // Computed values
+    var graceNoteStemThickness: Double {
+        return stemThickness * graceNoteScale
+    }
     
     fileprivate mutating func configure(dictionary: [String: Any], assertAllValuesPresent: Bool) {
         

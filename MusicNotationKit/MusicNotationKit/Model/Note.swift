@@ -13,32 +13,6 @@ public enum NoteHeadType {
     case cross
 }
 
-public class GraceNote: AdjacentLayoutItem, Positionable {
-
-    var pitch: Pitch
-    var stavePosition = StavePosition.zero
-    var stemDirection = StemDirection.up
-    var stemLength: Double = 0
-
-    /// The stem connection point, relative to the grace note position
-    var stemConnectionPoint = Vector2D.zero
-
-    var beams = [Beam]()
-
-    var stemEndY: Double {
-        position.y + stemLength.inverted(if: stemDirection == .down)
-    }
-
-    //AdjacentLayoutItem
-    var hoizontalLayoutDistanceFromParentItem: Double = 0
-    var horizontalLayoutWidth = HorizontalLayoutWidthType.centered(width: 1)
-    var position: Vector2D = .zero
-    
-    public init(pitch: Pitch) {
-        self.pitch = pitch
-    }
-}
-
 public class Note: Playable {
     
     public var noteHeadType = NoteHeadType.standard

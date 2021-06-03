@@ -201,6 +201,7 @@
 		67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */; };
 		67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */; };
 		67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880F21EB5597003707DD /* Numeric+Constrained.swift */; };
+		AA2F9CF126694D6800467D13 /* GraceNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F9CF026694D6800467D13 /* GraceNote.swift */; };
 		AA5972312663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */; };
 		AA5972332663AB6700C516A8 /* GraceNoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */; };
 		AA5972352663E12900C516A8 /* GlyphStore+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972342663E12900C516A8 /* GlyphStore+Flags.swift */; };
@@ -415,6 +416,7 @@
 		67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
 		67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		67F6880F21EB5597003707DD /* Numeric+Constrained.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Constrained.swift"; sourceTree = "<group>"; };
+		AA2F9CF026694D6800467D13 /* GraceNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceNote.swift; sourceTree = "<group>"; };
 		AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateGraceNoteDescriptionsProcessingOperation.swift; sourceTree = "<group>"; };
 		AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceNoteRenderer.swift; sourceTree = "<group>"; };
 		AA5972342663E12900C516A8 /* GlyphStore+Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlyphStore+Flags.swift"; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 				674B9AAC22ECB64E0098D121 /* TimeSignature.swift */,
 				674D503C21DD50F8009E5AFE /* NoteSequence.swift */,
 				67A15FA321C512E800C3C03F /* Note.swift */,
+				AA2F9CF026694D6800467D13 /* GraceNote.swift */,
 				67706493245CB41E0083037F /* Tie.swift */,
 				6751A84122357AE3000B0D08 /* Rest.swift */,
 				6751A83D223304E7000B0D08 /* Barline.swift */,
@@ -1379,6 +1382,7 @@
 				6756F6192300C2AE003F1F19 /* ElementPopper.swift in Sources */,
 				676BB5F4233169C200EA9F9C /* GenerateLayoutAnchorsRenderOperation.swift in Sources */,
 				674D503921DD50C8009E5AFE /* Composition.swift in Sources */,
+				AA2F9CF126694D6800467D13 /* GraceNote.swift in Sources */,
 				67C1A361246DB7FC0036371C /* ConflictIdentifers+Ties.swift in Sources */,
 				670D51B625474B21000B7B36 /* Accent.swift in Sources */,
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
