@@ -44,7 +44,6 @@ class CalculateStemPositionsProcessingOperation: CompositionProcessingOperation 
                 
         note.stemConnectionPoint = Vector2D(-glyph.width/2 + anchor.x,
                                             anchor.y)
-        note.stemWidth = glyphs.metrics.stemThickness
     }
 
     private func process(graceNote: GraceNote) {

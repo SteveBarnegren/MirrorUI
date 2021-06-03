@@ -145,18 +145,15 @@ class BeamRenderer<N> {
 
 extension BeamRenderer.Transformer {
 
-    static var notes: BeamRenderer<Note>.Transformer {
-        BeamRenderer<Note>.Transformer(beams: { $0.beams },
-                                       stemDirection: { $0.stemDirection },
-                                       stemEndY: { $0.stemEndY },
-                                       stemLeadingEdge: { $0.stemLeadingEdge },
-                                       stemTrailingEdge: { $0.stemTrailingEdge })
+    static func notesBeamRenderer(withMetrics metrics: FontMetrics) -> BeamRenderer<Note>.Transformer {
+        return BeamRenderer<Note>.Transformer(beams: { $0.beams },
+                                              stemDirection: { $0.stemDirection },
+                                              stemEndY: { $0.stemEndY },
+                                              stemLeadingEdge: { $0.stemLeadingEdge(metrics: metrics) },
+                                              stemTrailingEdge: { $0.stemTrailingEdge(metrics: metrics) })
     }
 
     static func graceNotesBeamRenderer(withMetrics metrics: FontMetrics) -> BeamRenderer<GraceNote>.Transformer {
-
-        let stemWidth = metrics.stemThickness * metrics.graceNoteScale
-
         return BeamRenderer<GraceNote>.Transformer(beams: { $0.beams },
                                                    stemDirection: { $0.stemDirection },
                                                    stemEndY: { $0.stemEndY },

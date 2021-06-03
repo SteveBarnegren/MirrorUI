@@ -50,7 +50,7 @@ extension GraceNote {
             case .up:
                 return xPosition + stemConnectionPoint.x
             case .down:
-                return xPosition + stemConnectionPoint.x + metrics.stemThickness
+                return xPosition + stemConnectionPoint.x + metrics.graceNoteStemThickness
         }
     }
 }

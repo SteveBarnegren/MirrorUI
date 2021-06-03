@@ -18,9 +18,9 @@ class NoteRenderer {
     private var stemThickness: Double { glyphs.metrics.stemThickness }
     
     private let glyphs: GlyphStore
-    private let beamRenderer = BeamRenderer<Note>(transformer: .notes,
-                                                  beamSeparation: 0.3,
-                                                  beamThickness: 0.3)
+    private lazy var beamRenderer = BeamRenderer<Note>(transformer: .notesBeamRenderer(withMetrics: glyphs.metrics),
+                                                       beamSeparation: 0.3,
+                                                       beamThickness: 0.3)
     
     init(glyphs: GlyphStore) {
         self.glyphs = glyphs

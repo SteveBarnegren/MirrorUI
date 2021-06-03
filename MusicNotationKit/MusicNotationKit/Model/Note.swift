@@ -66,29 +66,6 @@ public class Note: Playable {
     /// The stem connection point, relative to the note position
     var stemConnectionPoint = Vector2D.zero
     
-    /// The width of the stem, as specified by the font being used to render the note
-    var stemWidth = Double.zero
-    
-    /// The absolute x position of the stem's center
-    var stemCenterX: Double {
-        switch stemDirection {
-        case .up:
-            return xPosition + stemConnectionPoint.x - stemWidth/2
-        case .down:
-            return xPosition + stemConnectionPoint.x + stemWidth/2
-        }
-    }
-    
-    /// The absolute position of the stem's leading edge
-    var stemLeadingEdge: Double {
-        return stemCenterX - stemWidth/2
-    }
-    
-    /// The absolute position of the stem's trailing edge
-    var stemTrailingEdge: Double {
-        return stemCenterX + stemWidth/2
-    }
-    
     /// The y position of the end of the note stem
     var stemEndY: Double {
         switch stemDirection {
@@ -225,5 +202,40 @@ class NoteHead: VerticallyPositionable {
 
     init(style: Style) {
         self.style = style
+    }
+}
+
+// MARK: - Stem position
+
+extension Note {
+
+    /// The absolute x position of the stem's center
+    func stemCenterX(metrics: FontMetrics) -> Double {
+        switch stemDirection {
+        case .up:
+            return xPosition + stemConnectionPoint.x - metrics.stemThickness/2
+        case .down:
+            return xPosition + stemConnectionPoint.x + metrics.stemThickness/2
+        }
+    }
+
+    /// The absolute position of the stem's leading edge
+    func stemLeadingEdge(metrics: FontMetrics) -> Double {
+        switch stemDirection {
+            case .up:
+                return xPosition + stemConnectionPoint.x - metrics.stemThickness
+            case .down:
+                return xPosition + stemConnectionPoint.x
+        }
+    }
+
+    /// The absolute position of the stem's trailing edge
+    func stemTrailingEdge(metrics: FontMetrics) -> Double {
+        switch stemDirection {
+            case .up:
+                return xPosition + stemConnectionPoint.x
+            case .down:
+                return xPosition + stemConnectionPoint.x + metrics.stemThickness
+        }
     }
 }
