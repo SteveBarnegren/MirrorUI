@@ -9,8 +9,15 @@
 import Foundation
 
 /// A type that is renderable with a single glyph
-protocol SingleGlyphRenderable: Positionable {
+protocol SingleGlyphRenderable {
     var glyph: GlyphType { get }
+    var position: Vector2D { get }
+}
+
+extension SingleGlyphRenderable where Self: HorizontallyPositionable {
+    var position: Vector2D {
+        return Vector2D(xPosition, 0)
+    }
 }
 
 class GlyphRenderer {
@@ -24,8 +31,8 @@ class GlyphRenderer {
     func paths(forRenderable renderable: SingleGlyphRenderable) -> [Path] {
         
         let glyph = glyphStore.glyph(forType: renderable.glyph)
-        var path = glyph.path.translated(x: renderable.xPosition - glyph.width/2,
-                                         y: renderable.yPosition)
+        var path = glyph.path.translated(x: renderable.position.x - glyph.width/2,
+                                         y: renderable.position.y)
         path.drawStyle = .fill
         return [path]
     }

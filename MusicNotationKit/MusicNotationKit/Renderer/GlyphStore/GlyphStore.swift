@@ -42,6 +42,9 @@ enum GlyphType: String {
     case accidentalFlat
     case accidentalNatural
     case accidentalSharp
+
+    // MARK: - Barlines
+    case barlineSingle
     
     // MARK: - Clefs
     case gClef
