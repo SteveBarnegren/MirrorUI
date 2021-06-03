@@ -19,8 +19,8 @@ class NoteRenderer {
     
     private let glyphs: GlyphStore
     private lazy var beamRenderer = BeamRenderer<Note>(transformer: .notesBeamRenderer(withMetrics: glyphs.metrics),
-                                                       beamSeparation: 0.3,
-                                                       beamThickness: 0.3)
+                                                       beamSeparation: glyphs.metrics.beamSpacing,
+                                                       beamThickness: glyphs.metrics.beamThickness)
     
     init(glyphs: GlyphStore) {
         self.glyphs = glyphs

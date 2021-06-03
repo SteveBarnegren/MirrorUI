@@ -65,7 +65,15 @@ struct FontMetrics {
 
     // Computed values
     var graceNoteStemThickness: Double {
-        return stemThickness * graceNoteScale
+        stemThickness * graceNoteScale
+    }
+
+    var graceNoteBeamThickness: Double {
+        beamThickness * graceNoteScale
+    }
+
+    var graceNoteBeamBeamSpacing: Double {
+        beamSpacing * graceNoteScale
     }
     
     fileprivate mutating func configure(dictionary: [String: Any], assertAllValuesPresent: Bool) {
