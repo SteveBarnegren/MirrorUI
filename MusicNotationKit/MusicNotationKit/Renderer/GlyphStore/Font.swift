@@ -31,7 +31,7 @@ class Font {
 
 struct FontMetrics {
     
-    // Uses Bravura values as default
+    // SMuFL values. Uses Bravura values as default
     var arrowShaftThickness: Double = 0.16
     var barlineSeparation: Double =  0.4
     var beamSpacing: Double = 0.25
@@ -59,6 +59,9 @@ struct FontMetrics {
     var tieEndpointThickness: Double =  0.1
     var tieMidpointThickness: Double = 0.22
     var tupletBracketThickness: Double =  0.1
+
+    // Additional values (not in the SMuFL spec)
+    var graceNoteScale: Double = 0.5
     
     fileprivate mutating func configure(dictionary: [String: Any], assertAllValuesPresent: Bool) {
         

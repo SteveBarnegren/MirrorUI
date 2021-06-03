@@ -8,8 +8,6 @@
 
 import Foundation
 
-private let graceNoteScale = 0.5
-
 class CalculateStemPositionsProcessingOperation: CompositionProcessingOperation {
     
     private let glyphs: GlyphStore
@@ -50,6 +48,8 @@ class CalculateStemPositionsProcessingOperation: CompositionProcessingOperation 
     }
 
     private func process(graceNote: GraceNote) {
+
+        let graceNoteScale = glyphs.metrics.graceNoteScale
 
         let anchor: Vector2D
 

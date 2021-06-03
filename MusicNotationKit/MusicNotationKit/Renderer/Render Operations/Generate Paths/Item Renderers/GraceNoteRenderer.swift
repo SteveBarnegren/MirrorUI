@@ -8,15 +8,15 @@
 
 import Foundation
 
-private let scale = 0.5
-private let stemThickness = 0.12 * scale
-
 class GraceNoteRenderer {
 
     private let glyphs: GlyphStore
-    private let beamRenderer = BeamRenderer<GraceNote>.init(transformer: .graceNotes,
-                                                            beamSeparation: 0.3 * scale,
-                                                            beamThickness: 0.3 * scale)
+    private lazy var beamRenderer = BeamRenderer<GraceNote>.init(transformer: .graceNotes,
+                                                                 beamSeparation: 0.3 * scale,
+                                                                 beamThickness: 0.3 * scale)
+
+    private lazy var scale = glyphs.metrics.graceNoteScale
+    private lazy var stemThickness = 0.12 * scale
 
     private var noteheadGlyph: Glyph {
         return glyphs.glyph(forType: .noteheadBlack)
