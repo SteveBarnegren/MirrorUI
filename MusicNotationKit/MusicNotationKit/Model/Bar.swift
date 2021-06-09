@@ -18,6 +18,8 @@ public class Bar {
     let leadingBarline = Barline()
     var trailingBarline: Barline?
     public var timeSignature: TimeSignature
+    var timeSignatureSymbol: TimeSignatureSymbol?
+    
     
     var trailingTies: [Tie] {
         return sequences

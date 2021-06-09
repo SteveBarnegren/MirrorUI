@@ -11,6 +11,7 @@ import Foundation
 enum LayoutAnchorContent {
     case unknown
     case leadingClef
+    case timeSignature
     
     var visibleInFirstBarOfLineOnly: Bool {
         switch self {

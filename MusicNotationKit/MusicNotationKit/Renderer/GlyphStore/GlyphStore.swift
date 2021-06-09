@@ -62,6 +62,18 @@ enum GlyphType: String {
     case rest256th
     case rest512th
     case rest1024th
+
+    // MARK: - Time Signatures
+    case timeSig0
+    case timeSig1
+    case timeSig2
+    case timeSig3
+    case timeSig4
+    case timeSig5
+    case timeSig6
+    case timeSig7
+    case timeSig8
+    case timeSig9
 }
 
 class Glyph {

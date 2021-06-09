@@ -22,6 +22,7 @@ class CompositionPathsCreator {
     private let tieRenderer: TieRenderer
     private let tupletMarksRenderer: TupletMarksRenderer
     private let graceNoteRenderer: GraceNoteRenderer
+    private let timeSignatureRenderer: TimeSignatureRenderer
     
     init(glyphs: GlyphStore) {
         self.glyphRenderer = GlyphRenderer(glyphStore: glyphs)
@@ -29,6 +30,7 @@ class CompositionPathsCreator {
         self.tieRenderer = TieRenderer(glyphs: glyphs)
         self.tupletMarksRenderer = TupletMarksRenderer(glyphs: glyphs)
         self.graceNoteRenderer = GraceNoteRenderer(glyphs: glyphs)
+        self.timeSignatureRenderer = TimeSignatureRenderer(glyphs: glyphs)
     }
     
     func paths(forVoices voices: [RenderableVoice], canvasWidth: Double, staveSpacing: Double) -> [Path] {
@@ -78,12 +80,17 @@ class CompositionPathsCreator {
         
         let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
         let clefPath = bar.isFirstBarInLine ? glyphRenderer.paths(forRenderable: bar.clefSymbol) : []
+
+        var timeSigaturePaths = [Path]()
+        if let timeSignatureSymbol = bar.timeSignatureSymbol {
+            timeSigaturePaths = timeSignatureRenderer.paths(forTimeSignatureSymbol: timeSignatureSymbol)
+        }
         
         let notePaths =  bar.sequences.map {
             makePaths(forNoteSequence: $0, inRange: barRange, canvasWidth: canvasWidth, leadingTies: leadingTies)
         }.joined().toArray()
         
-        return barlinePath + clefPath + notePaths
+        return barlinePath + clefPath + timeSigaturePaths + notePaths
     }
     
     private func makePaths(forNoteSequence noteSequence: NoteSequence,
@@ -93,9 +100,6 @@ class CompositionPathsCreator {
 
         // Notes
         let notePaths = noteRenderer.paths(forNotes: noteSequence.notes)
-
-        // Duplication of below?
-        //let noteSymbolPaths = noteSequence.notes.map { $0.trailingChildItems + $0.leadingChildItems }.joined().map(makePaths).joined().toArray()
 
         // Grace notes
         var graceNotePaths = [Path]()
@@ -138,7 +142,6 @@ class CompositionPathsCreator {
         var allPaths = [Path]()
         allPaths += notePaths
         allPaths += graceNotePaths
-        //allPaths += noteSymbolPaths
         allPaths += noteHeadAdjacentItems
         allPaths += restPaths
         allPaths += tiePaths

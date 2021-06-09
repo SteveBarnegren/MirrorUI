@@ -71,6 +71,9 @@ class MusicRenderer {
             
             // Join barlines
             JoinBarlinesCompositionProcessingOperation().process(composition: composition)
+
+            // Generate time signature symbols
+            GenerateTimeSignatureSymbolsProcessingOperation().process(composition: composition)
             
             // Populate note symbols
             GenerateSymbolDescriptionsProcessingOperation(glyphs: glyphs)

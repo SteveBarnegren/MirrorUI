@@ -24,6 +24,8 @@ public struct TimeSignature: Equatable {
             return .straight
         case (6, 8):
             return .triplet
+        case (12, 8):
+            return .triplet
         default:
             fatalError("Unsupported time signature: \(self)")
         }
@@ -186,4 +188,5 @@ public struct TimeSignature: Equatable {
 extension TimeSignature {
     public static let fourFour = TimeSignature(value: 4, division: 4)
     public static let sixEight = TimeSignature(value: 6, division: 8)
+    public static let twelveEight = TimeSignature(value: 12, division: 8)
 }

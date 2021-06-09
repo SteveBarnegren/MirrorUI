@@ -38,6 +38,13 @@ class LayoutAnchorsBuilder {
             // Clef
             let clefAnchor = makeAnchorFromPrevious(forItems: barSlice.clefSymbols, content: .leadingClef) 
             barAnchors.append(clefAnchor)
+
+            // TimeSignature
+            let timeSignatureSymbols = barSlice.timeSignatureSymbols
+            if !timeSignatureSymbols.isEmpty {
+                let timeSignatureAnchor = makeAnchorFromPrevious(forItems: timeSignatureSymbols, content: .timeSignature)
+                barAnchors.append(timeSignatureAnchor)
+            }
             
             // Notes
             let anchorsForSequences = barSlice.sequences

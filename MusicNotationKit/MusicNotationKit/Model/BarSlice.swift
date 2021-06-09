@@ -53,6 +53,10 @@ class BarSlice {
     lazy var clefSymbols: [ClefSymbol] = {
         bars.map { $0.clefSymbol }.toArray()
     }()
+
+    lazy var timeSignatureSymbols: [TimeSignatureSymbol] = {
+        bars.compactMap { $0.timeSignatureSymbol }.toArray()
+    }()
     
     var trailingTies: [Tie] {
         bars.map { $0.trailingTies }.joined().toArray() 
