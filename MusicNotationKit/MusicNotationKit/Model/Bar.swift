@@ -17,7 +17,7 @@ public class Bar {
     var sequences = [NoteSequence]()
     let leadingBarline = Barline()
     var trailingBarline: Barline?
-    public var timeSignature: TimeSignature?
+    public var timeSignature: TimeSignature
     
     var trailingTies: [Tie] {
         return sequences
@@ -30,7 +30,9 @@ public class Bar {
         return sequences.map { $0.duration }.max() ?? .zero
     }
     
-    public init() {}
+    public init(timeSignature: TimeSignature = .fourFour) {
+        self.timeSignature = timeSignature
+    }
     
     public func add(sequence: NoteSequence) {
         self.sequences.append(sequence)
