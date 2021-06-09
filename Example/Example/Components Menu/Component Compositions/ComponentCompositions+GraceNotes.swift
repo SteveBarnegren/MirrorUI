@@ -14,7 +14,7 @@ extension ComponentCompositions {
     static var graceNotes: Composition {
         
         let stave = Stave()
-        let bar = Bar(timeSignature: .twelveEight)
+        let bar = Bar()
         stave.add(bar: bar)
         
         let sequence = NoteSequence()
