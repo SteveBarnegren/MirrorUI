@@ -75,6 +75,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-deeplink components/timeSignatures"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-deeplink components/multipleVoices"
             isEnabled = "NO">
          </CommandLineArgument>
@@ -112,7 +116,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/graceNotes"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

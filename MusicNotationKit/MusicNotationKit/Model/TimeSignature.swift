@@ -20,14 +20,10 @@ public struct TimeSignature: Equatable {
     
     var style: Style {
         switch (self.value, self.division) {
-        case (4, 4):
-            return .straight
-        case (6, 8):
-            return .triplet
-        case (12, 8):
+        case (6, 8), (9, 8), (12, 8):
             return .triplet
         default:
-            fatalError("Unsupported time signature: \(self)")
+            return .straight
         }
     }
     
@@ -87,106 +83,76 @@ public struct TimeSignature: Equatable {
             let times = values.map { Time(value: $0, division: division) }
             return IncrementingSequence(repeatingAdditive: times).toAnySequence()
         }
-        
-        // 4/16
-        if self == TimeSignature(value: 4, division: 16) {
-            return every(Time(semiquavers: 2))
-        }
-        // 5/16
-        else if self == TimeSignature(value: 5, division: 16) {
-            return every(values: [3, 2], division: 16)
-        }
-        // 6/16
-        else if self == TimeSignature(value: 6, division: 16) {
-            return every(Time(semiquavers: 3))
-        }
-        // 8/16
-        else if self == TimeSignature(value: 8, division: 16) {
-            return every(Time(semiquavers: 4))
-        }
-        // 4/8
-        else if self == TimeSignature(value: 4, division: 8) {
-            return every(Time(quavers: 2))
-        }
-        // 9/16
-        else if self == TimeSignature(value: 9, division: 16) {
-            return every(Time(semiquavers: 3))
-        }
-        // 5/8
-        else if self == TimeSignature(value: 5, division: 8) {
-            return every(values: [3, 2], division: 8)
-        }
-        // 12/16
-        else if self == TimeSignature(value: 12, division: 16) {
-            return every(Time(semiquavers: 3))
-        }
-        // 6/8
-        else if self == TimeSignature(value: 6, division: 8) {
-            return every(Time(quavers: 3))
-        }
-        // 7/8
-        else if self == TimeSignature(value: 7, division: 8) {
-            return every(values: [4, 3], division: 8)
-        }
-        // 8/8
-        else if self == TimeSignature(value: 8, division: 8) {
-            return every(values: [3, 3, 2], division: 8)
-        }
-        // 4/4
-        else if self == TimeSignature(value: 4, division: 4) {
-            return every(Time(crotchets: 2))
-        }
-        // 2/2
-        else if self == TimeSignature(value: 2, division: 2) {
-            return every(Time(crotchets: 2))
-        }
-        // 9/8
-        else if self == TimeSignature(value: 9, division: 8) {
-            return every(Time(quavers: 3))
-        }
-        // 10/8
-        else if self == TimeSignature(value: 10, division: 8) {
-            return every(values: [4, 3, 3], division: 8)
-        }
-        // 5/4
-        else if self == TimeSignature(value: 5, division: 4) {
-            return every(values: [3, 2], division: 4)
-        }
-        // 12/8
-        else if self == TimeSignature(value: 12, division: 8) {
-            return every(Time(quavers: 3))
-        }
-        // 6/4
-        else if self == TimeSignature(value: 6, division: 4) {
-            return every(Time(crotchets: 3))
-        }
-        // 3/2
-        else if self == TimeSignature(value: 3, division: 2) {
-            return every(Time(crotchets: 2))
-        }
-        // 7/4
-        else if self == TimeSignature(value: 7, division: 4) {
-            return every(values: [4, 3], division: 4)
-        }
-        // 15/8
-        else if self == TimeSignature(value: 15, division: 8) {
-            return every(Time(quavers: 3))
-        }
-        // 18/8
-        else if self == TimeSignature(value: 18, division: 8) {
-            return every(Time(quavers: 3))
-        }
-        // 9/4
-        else if self == TimeSignature(value: 9, division: 4) {
-            return every(Time(crotchets: 3))
-        } else {
-            return AnySequence([])
+
+        switch (value, division) {
+
+            case (2,2):
+                return every(Time(crotchets: 2))
+            case (3,2):
+                return every(Time(crotchets: 2))
+            case (4,4):
+                return every(Time(crotchets: 2))
+            case (5,4):
+                return every(values: [3, 2], division: 4)
+            case (6,4):
+                return every(Time(crotchets: 3))
+            case (7,4):
+                return every(values: [4, 3], division: 4)
+            case (9,4):
+                return every(Time(crotchets: 3))
+            case (4,8):
+                return every(Time(quavers: 2))
+            case (5,8):
+                return every(values: [3, 2], division: 8)
+            case (6,8):
+                return every(Time(quavers: 3))
+            case (7,8):
+                return every(values: [4, 3], division: 8)
+            case (8,8):
+                return every(values: [3, 3, 2], division: 8)
+            case (9,8):
+                return every(Time(quavers: 3))
+            case (10,8):
+                return every(values: [4, 3, 3], division: 8)
+            case (12,8):
+                return every(Time(quavers: 3))
+            case (15,8):
+                return every(Time(quavers: 3))
+            case (18,8):
+                return every(Time(quavers: 3))
+            case (4, 16):
+                return every(Time(semiquavers: 2))
+            case (5,16):
+                return every(values: [3, 2], division: 16)
+            case (6,16):
+                return every(Time(semiquavers: 3))
+            case (8,16):
+                return every(Time(semiquavers: 4))
+            case (9,16):
+                return every(Time(semiquavers: 3))
+            case (12,16):
+                return every(Time(semiquavers: 3))
+            default:
+                return AnySequence([])
         }
     }
 }
 
 extension TimeSignature {
+
+    // Quarter
+    public static let twoFour = TimeSignature(value: 2, division: 4)
+    public static let threeFour = TimeSignature(value: 3, division: 4)
     public static let fourFour = TimeSignature(value: 4, division: 4)
+    public static let fiveFour = TimeSignature(value: 5, division: 4)
+    public static let sixFour = TimeSignature(value: 6, division: 4)
+    public static let sevenFour = TimeSignature(value: 7, division: 4)
+
+    // Eighth
+    public static let fiveEight = TimeSignature(value: 5, division: 8)
     public static let sixEight = TimeSignature(value: 6, division: 8)
+    public static let sevenEight = TimeSignature(value: 7, division: 8)
+    public static let nineEight = TimeSignature(value: 9, division: 8)
+    public static let elevenEight = TimeSignature(value: 11, division: 8)
     public static let twelveEight = TimeSignature(value: 12, division: 8)
 }
