@@ -59,15 +59,18 @@ public struct TimeSignature: Equatable {
     }
     
     func allowsExtendedBeaming(forDuration duration: Time) -> Bool {
-    
-        switch duration {
-        case Time(quavers: 1):
-            return self == .fourFour || self == .sixEight
-        case Time(semiquavers: 1):
-            return self == .sixEight
-        default:
-            return false
+
+        // Quaver times allow extending until beam breaks
+        if self.beatDuration == 8 {
+            return true
         }
+
+        // Allow quavers to extend beyond crotchets for crotchet times
+        if beatDuration == 4 && duration == Time(quavers: 1) {
+            return true
+        }
+
+        return false
     }
 
     /// The bar times at which beams must not cross
@@ -85,21 +88,23 @@ public struct TimeSignature: Equatable {
         }
 
         switch (value, division) {
-
+            // minim times
             case (2,2):
                 return every(Time(crotchets: 2))
             case (3,2):
                 return every(Time(crotchets: 2))
+            // Crotchet times
             case (4,4):
                 return every(Time(crotchets: 2))
             case (5,4):
                 return every(values: [3, 2], division: 4)
             case (6,4):
-                return every(Time(crotchets: 3))
+                return every(Time(crotchets: 2))
             case (7,4):
                 return every(values: [4, 3], division: 4)
             case (9,4):
                 return every(Time(crotchets: 3))
+            // Quaver times
             case (4,8):
                 return every(Time(quavers: 2))
             case (5,8):
@@ -114,12 +119,15 @@ public struct TimeSignature: Equatable {
                 return every(Time(quavers: 3))
             case (10,8):
                 return every(values: [4, 3, 3], division: 8)
+            case (11,8):
+                return every(values: [4, 4, 3], division: 8)
             case (12,8):
                 return every(Time(quavers: 3))
             case (15,8):
                 return every(Time(quavers: 3))
             case (18,8):
                 return every(Time(quavers: 3))
+            // Semiquaver times
             case (4, 16):
                 return every(Time(semiquavers: 2))
             case (5,16):
