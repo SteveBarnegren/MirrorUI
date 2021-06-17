@@ -45,7 +45,6 @@ class PositionArticulationMarksProcessingOperation: CompositionProcessingOperati
         
         for articulation in articulations {
             articulation.stavePosition = staveSpace.stavePosition
-            articulation.note = note
         }
         
     }

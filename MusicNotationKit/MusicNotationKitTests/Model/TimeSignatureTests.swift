@@ -233,7 +233,7 @@ class TimeSignatureTests: XCTestCase {
     func test_6_4() {
         assert(
             timeSignature: TimeSignature(6, 4),
-            breaks: [Time(crotchets: 3)]
+            breaks: [Time(crotchets: 2), Time(crotchets: 4)]
         )
     }
     

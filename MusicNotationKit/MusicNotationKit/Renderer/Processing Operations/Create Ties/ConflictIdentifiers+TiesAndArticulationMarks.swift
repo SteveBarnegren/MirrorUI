@@ -15,13 +15,12 @@ extension ConflictIdentifiers {
     }
     
     static func isTieAndArticulationCompatible(tie: Tie, articulationMark: ArticulationMark) -> Bool {
-        
-        let articulationNote = articulationMark.note!
+
         let startNote = tie.fromNote!
         let endNote = tie.toNote!
 
         if tie.orientation == .verticallyAlignedWithNote
-            && (articulationNote === startNote || articulationNote === endNote) {
+            && (startNote.articulationMarks.contains(where: { $0 === articulationMark }) || endNote.articulationMarks.contains(where:{ $0 === articulationMark })) {
             return false
         }
         

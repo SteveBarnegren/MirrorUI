@@ -24,6 +24,7 @@ public class Note: Playable {
     
     var noteHeads = [NoteHead]()
     var articulationMarks = [ArticulationMark]()
+
     
     var tiedToNext = false
     

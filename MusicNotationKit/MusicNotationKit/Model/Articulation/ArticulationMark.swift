@@ -10,5 +10,4 @@ import Foundation
 
 class ArticulationMark {
     var stavePosition = StavePosition.zero
-    weak var note: Note?
 }
