@@ -8,6 +8,7 @@
 
 import Foundation
 
-class ArticulationMark {
-    var stavePosition = StavePosition.zero
+protocol ArticulationMark: AnyObject {
+    var stavePosition: StavePosition { get set }
 }
+

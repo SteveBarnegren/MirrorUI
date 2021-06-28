@@ -205,6 +205,9 @@
 		AA5972332663AB6700C516A8 /* GraceNoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */; };
 		AA5972352663E12900C516A8 /* GlyphStore+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972342663E12900C516A8 /* GlyphStore+Flags.swift */; };
 		AA5972382663E7E400C516A8 /* BeamRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972372663E7E400C516A8 /* BeamRenderer.swift */; };
+		AA6D73BD267BDEB500ECCEB2 /* TextArticulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D73BC267BDEB500ECCEB2 /* TextArticulation.swift */; };
+		AA6D73C3267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D73C2267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift */; };
+		AA6D73C5267BE76400ECCEB2 /* TextArticulationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D73C4267BE76400ECCEB2 /* TextArticulationRenderer.swift */; };
 		AADD3CA026714C5000E127B2 /* TimeSignatureSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD3C9F26714C5000E127B2 /* TimeSignatureSymbol.swift */; };
 		AADD3CA32671562500E127B2 /* GenerateTimeSignatureSymbolsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD3CA22671562500E127B2 /* GenerateTimeSignatureSymbolsProcessingOperation.swift */; };
 		AADD3CA5267159E900E127B2 /* TimeSignatureRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD3CA4267159E900E127B2 /* TimeSignatureRenderer.swift */; };
@@ -422,6 +425,9 @@
 		AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceNoteRenderer.swift; sourceTree = "<group>"; };
 		AA5972342663E12900C516A8 /* GlyphStore+Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlyphStore+Flags.swift"; sourceTree = "<group>"; };
 		AA5972372663E7E400C516A8 /* BeamRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeamRenderer.swift; sourceTree = "<group>"; };
+		AA6D73BC267BDEB500ECCEB2 /* TextArticulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArticulation.swift; sourceTree = "<group>"; };
+		AA6D73C2267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingArticulationPlacerRenderOperation.swift; sourceTree = "<group>"; };
+		AA6D73C4267BE76400ECCEB2 /* TextArticulationRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArticulationRenderer.swift; sourceTree = "<group>"; };
 		AADD3C9F26714C5000E127B2 /* TimeSignatureSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSignatureSymbol.swift; sourceTree = "<group>"; };
 		AADD3CA22671562500E127B2 /* GenerateTimeSignatureSymbolsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTimeSignatureSymbolsProcessingOperation.swift; sourceTree = "<group>"; };
 		AADD3CA4267159E900E127B2 /* TimeSignatureRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSignatureRenderer.swift; sourceTree = "<group>"; };
@@ -464,6 +470,7 @@
 			children = (
 				670D51AF25474AB1000B7B36 /* ArticulationMark.swift */,
 				670D51B525474B21000B7B36 /* Accent.swift */,
+				AA6D73BC267BDEB500ECCEB2 /* TextArticulation.swift */,
 			);
 			path = Articulation;
 			sourceTree = "<group>";
@@ -710,6 +717,7 @@
 		67678DFB21E259E500E7FD71 /* Render Operations */ = {
 			isa = PBXGroup;
 			children = (
+				AA6D73C1267BE1C200ECCEB2 /* Floating Articulation Placer */,
 				674D504C21E23D52009E5AFE /* Horizontal Positioner */,
 				6751A83C22330289000B0D08 /* Vertical Positioner */,
 				67A437A122E8F8E4008C00E3 /* Calculate Stem Lengths */,
@@ -731,6 +739,7 @@
 				67D04B7B254F649100297036 /* TextPathCreator.swift */,
 				AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */,
 				AADD3CA4267159E900E127B2 /* TimeSignatureRenderer.swift */,
+				AA6D73C4267BE76400ECCEB2 /* TextArticulationRenderer.swift */,
 			);
 			path = "Item Renderers";
 			sourceTree = "<group>";
@@ -1176,6 +1185,14 @@
 			path = "Generate Grace Note Descriptions";
 			sourceTree = "<group>";
 		};
+		AA6D73C1267BE1C200ECCEB2 /* Floating Articulation Placer */ = {
+			isa = PBXGroup;
+			children = (
+				AA6D73C2267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift */,
+			);
+			path = "Floating Articulation Placer";
+			sourceTree = "<group>";
+		};
 		AADD3CA1267155F000E127B2 /* Generate TimeSignature Symbols */ = {
 			isa = PBXGroup;
 			children = (
@@ -1358,6 +1375,7 @@
 				67AE184C21DA8C9000F3545D /* Collection+Accessors.swift in Sources */,
 				677643F3228E0D18000683FF /* FreeFunctions.swift in Sources */,
 				6770649C245DA2730083037F /* Collection+EachWithRemaining.swift in Sources */,
+				AA6D73C5267BE76400ECCEB2 /* TextArticulationRenderer.swift in Sources */,
 				67678DF621E2420D00E7FD71 /* Collection+Extensions.swift in Sources */,
 				677256132440D9D500954C91 /* NoteWidthCalculator.swift in Sources */,
 				67706494245CB41E0083037F /* Tie.swift in Sources */,
@@ -1415,6 +1433,7 @@
 				6728B2C022358AF000382D92 /* ConstraintsDebugInformationGenerator.swift in Sources */,
 				676BB5FD233178FF00EA9F9C /* CalculateMinimumBarWidthsRenderOperation.swift in Sources */,
 				670D51BE25474D65000B7B36 /* PositionArticulationMarksProcessingOperation.swift in Sources */,
+				AA6D73BD267BDEB500ECCEB2 /* TextArticulation.swift in Sources */,
 				674D503E21DD518F009E5AFE /* StaveRenderer.swift in Sources */,
 				67C1A363246DBB650036371C /* ConflictIdentifiers+TiesAndNotes.swift in Sources */,
 				672FB4402603EF0C00037DC2 /* ClefSymbol.swift in Sources */,
@@ -1431,6 +1450,7 @@
 				67494C8821CD6ECC0078A575 /* Array_Numeric+Extensions.swift in Sources */,
 				673A3D2E2343ECD9001CE422 /* NaturalSpacing.swift in Sources */,
 				67C89FE6255C81D2009B18DF /* GlyphStore+Noteheads.swift in Sources */,
+				AA6D73C3267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift in Sources */,
 				6736F23F2550B68100148F6B /* Path+CGPath.swift in Sources */,
 				67EA89EF242637310009BE61 /* NoteHeadDescriber.swift in Sources */,
 				678B7DBC2610BDC800346B0E /* Sequence+EachWithIsFirst.swift in Sources */,

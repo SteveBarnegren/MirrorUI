@@ -92,6 +92,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/accents"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-deeplink components/textArticulation"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

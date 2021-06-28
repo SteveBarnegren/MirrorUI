@@ -9,4 +9,6 @@
 import Foundation
 
 class Accent: ArticulationMark {
+    // ArticulationMark
+    var stavePosition = StavePosition.zero
 }

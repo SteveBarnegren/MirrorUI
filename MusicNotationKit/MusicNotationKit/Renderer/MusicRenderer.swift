@@ -153,6 +153,11 @@ class MusicRenderer {
             barSlices = composition.barSlices
             staveBars = composition.staves.map { $0.bars.toArray() }.toArray()
         }
+
+        // Place floating articulation
+        for bars in staveBars {
+            FloatingArticulationPlacerRenderOperation().process(bars: bars)
+        }
         
         // Draw just the clef at the start of the range
         barSlices.first?.isFirstBarInLine = true

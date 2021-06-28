@@ -24,7 +24,7 @@ public class Note: Playable {
     
     var noteHeads = [NoteHead]()
     var articulationMarks = [ArticulationMark]()
-
+    var floatingArticulationMarks = [ArticulationMark]()
     
     var tiedToNext = false
     
@@ -141,6 +141,12 @@ public class Note: Playable {
     // Accent
     @discardableResult public func accent() -> Note {
         self.articulationMarks.append(Accent())
+        return self
+    }
+
+    // Text Articulation
+    @discardableResult public func textArticulation(_ text: String) -> Note {
+        self.floatingArticulationMarks.append(TextArticulation(text: text))
         return self
     }
     

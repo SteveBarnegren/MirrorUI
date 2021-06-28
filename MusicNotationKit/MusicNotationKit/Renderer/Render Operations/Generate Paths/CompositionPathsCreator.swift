@@ -116,6 +116,10 @@ class CompositionPathsCreator {
         let articulationMarkPaths = noteSequence.notes.map { note in
             note.articulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()
         }.joined().toArray()
+
+        let floatingArticulationMarkPaths = noteSequence.notes.map { note in
+            note.floatingArticulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()
+        }.joined().toArray()
         
         let tupletMarkPaths = tupletMarksRenderer.paths(forNoteSequence: noteSequence)
         
@@ -148,6 +152,7 @@ class CompositionPathsCreator {
         allPaths += leadingTiePaths
         allPaths += articulationMarkPaths
         allPaths += tupletMarkPaths
+        allPaths += floatingArticulationMarkPaths
         return allPaths
     }
 
@@ -174,6 +179,8 @@ class CompositionPathsCreator {
         
         if let accent = articulation as? Accent {
             return AccentRenderer().paths(forAccent: accent, xPos: xPos)
+        } else if let textArticulation = articulation as? TextArticulation {
+            return TextArticulationRenderer().paths(forTextArticulation: textArticulation, xPos: xPos)
         } else {
             fatalError("Unknown articulation type: \(articulation)")
         }

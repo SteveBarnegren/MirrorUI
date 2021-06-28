@@ -10,7 +10,7 @@ import Foundation
 
 class CalculateStemLengthsRenderOperation {
 
-    // Note stem heights shoudl be one octave
+    // Note stem heights should be one octave
     private let notesStemLengthCalculator = NoteClusterStemLengthCalculator(transformer: .notes,
                                                                             preferredStemLength: 3.5)
 

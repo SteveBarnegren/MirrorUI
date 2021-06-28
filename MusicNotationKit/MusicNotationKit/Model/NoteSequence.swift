@@ -80,3 +80,17 @@ public class NoteSequence {
         self.items.append(.endTuplet)
     }
 }
+
+extension NoteSequence {
+
+    func calculateMaxY() -> Double {
+        return notes.map { $0.calculateMaxY() }.max() ?? 0
+    }
+}
+
+extension Note {
+
+    func calculateMaxY() -> Double {
+        max(stemEndY, stemConnectingNoteHead.yPosition)
+    }
+}
