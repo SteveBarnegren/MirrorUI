@@ -179,7 +179,14 @@ class CompositionPathsCreator {
         
         if let accent = articulation as? Accent {
             return AccentRenderer().paths(forAccent: accent, xPos: xPos)
-        } else if let textArticulation = articulation as? TextArticulation {
+        } else {
+            fatalError("Unknown articulation type: \(articulation)")
+        }
+    }
+
+    private func makePaths(forArticulationMark articulation: FloatingArticulationMark, xPos: Double) -> [Path] {
+
+        if let textArticulation = articulation as? TextArticulation {
             return TextArticulationRenderer().paths(forTextArticulation: textArticulation, xPos: xPos)
         } else {
             fatalError("Unknown articulation type: \(articulation)")

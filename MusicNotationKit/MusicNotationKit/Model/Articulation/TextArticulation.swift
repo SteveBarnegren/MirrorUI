@@ -8,11 +8,11 @@
 
 import Foundation
 
-class TextArticulation: ArticulationMark {
+class TextArticulation: FloatingArticulationMark {
     var text: String
 
     // ArticulationMark
-    var stavePosition = StavePosition.zero
+    var yPosition: Double = 0
 
     init(text: String) {
         self.text = text

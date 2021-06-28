@@ -91,6 +91,7 @@ extension NoteSequence {
 extension Note {
 
     func calculateMaxY() -> Double {
-        max(stemEndY, stemConnectingNoteHead.yPosition)
+        let noteHeadsMax = noteHeads.map { $0.yPosition }.max() ?? 0
+        return max(stemEndY, noteHeadsMax)
     }
 }

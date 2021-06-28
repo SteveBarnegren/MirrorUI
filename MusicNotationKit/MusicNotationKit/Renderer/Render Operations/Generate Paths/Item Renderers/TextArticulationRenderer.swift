@@ -14,7 +14,7 @@ class TextArticulationRenderer {
 
         let textPath = self.textPath(forText: articulation.text)
         let path = textPath.path.translated(x: xPos,
-                                            y: articulation.stavePosition.yPosition)
+                                            y: articulation.yPosition)
         return [path]
     }
 

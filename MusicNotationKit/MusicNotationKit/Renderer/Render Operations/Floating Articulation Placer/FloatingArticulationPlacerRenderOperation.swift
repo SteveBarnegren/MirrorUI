@@ -11,19 +11,24 @@ import Foundation
 class FloatingArticulationPlacerRenderOperation {
 
     func process(bars: [Bar]) {
-        // TODO: This is temporary! Need to be able to figure out the stave position from notes.
+        // Figure out the max Y value of the content
         var maxY = 0.0
 
         for bar in bars {
             for sequence in bar.sequences {
-                maxY = max(maxY, sequence.calculateMaxY())
+                maxY = max(maxY, sequence.calculateMaxY() + 1)
             }
         }
 
+        // Make sure that we're at least above the stave
+        let staveMaxY = StavePosition(location: 6).yPosition
+        maxY = maxY.constrained(min: staveMaxY)
+
+        // Position articulations
         for bar in bars {
             bar.forEachNote { note in
                 for articulationMark in note.floatingArticulationMarks {
-                    articulationMark.stavePosition = StavePosition(location: 6)
+                    articulationMark.yPosition = maxY
                 }
             }
         }

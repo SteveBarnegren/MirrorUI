@@ -153,11 +153,6 @@ class MusicRenderer {
             barSlices = composition.barSlices
             staveBars = composition.staves.map { $0.bars.toArray() }.toArray()
         }
-
-        // Place floating articulation
-        for bars in staveBars {
-            FloatingArticulationPlacerRenderOperation().process(bars: bars)
-        }
         
         // Draw just the clef at the start of the range
         barSlices.first?.isFirstBarInLine = true
@@ -177,6 +172,11 @@ class MusicRenderer {
         
         // Calculate stem lengths
         CalculateStemLengthsRenderOperation().process(barSlices: barSlices)
+
+        // Place floating articulation
+        for bars in staveBars {
+            FloatingArticulationPlacerRenderOperation().process(bars: bars)
+        }
         
         // Make paths - Use [bar]s from here, not slices
         var voices = [RenderableVoice]()
