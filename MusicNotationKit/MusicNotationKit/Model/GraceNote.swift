@@ -15,6 +15,8 @@ public class GraceNote: AdjacentLayoutItem, Positionable {
     var stemDirection = StemDirection.up
     var stemLength: Double = 0
 
+    var floatingArticulationMarks = [FloatingArticulationMark]()
+
     /// The stem connection point, relative to the grace note position
     var stemConnectionPoint = Vector2D.zero
 
@@ -52,5 +54,22 @@ extension GraceNote {
             case .down:
                 return xPosition + stemConnectionPoint.x + metrics.graceNoteStemThickness
         }
+    }
+}
+
+// MARK: - Creation conviniences
+
+extension GraceNote {
+    public func textArticulation(_ text: String) -> GraceNote {
+        let textArticulation = TextArticulation(text: text)
+        floatingArticulationMarks.append(textArticulation)
+        return self
+    }
+}
+
+extension GraceNote {
+
+    func calculateMaxY() -> Double {
+        return max(stemEndY, yPosition)
     }
 }

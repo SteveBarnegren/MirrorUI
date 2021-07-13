@@ -14,18 +14,52 @@ extension ComponentCompositions {
     static var textArticulation: Composition {
 
         let stave = Stave()
-        let bar = Bar()
-        let sequence = NoteSequence()
-        sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
-        sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
-        sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
-        sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
-        sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
-        sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
-        sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
-        sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
-        bar.add(sequence: sequence)
-        stave.add(bar: bar)
+
+        // Paradiddle
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+
+        // Flam / Drag / Ruff
+        do {
+            let bar = Bar()
+            let sequence = NoteSequence()
+            sequence.add(note: Note(value: .crotchet, pitch: .c4)
+                            .addGraceNotes([GraceNote(pitch: .c4).textArticulation("L")])
+                            .textArticulation("R"))
+
+            sequence.add(note: Note(value: .crotchet, pitch: .c4)
+                            .addGraceNotes([GraceNote(pitch: .c4).textArticulation("L"),
+                                            GraceNote(pitch: .c4).textArticulation("L")])
+                            .textArticulation("R"))
+
+            sequence.add(note: Note(value: .crotchet, pitch: .c4)
+                            .addGraceNotes([GraceNote(pitch: .c4).textArticulation("L"),
+                                            GraceNote(pitch: .c4).textArticulation("R"),
+                                            GraceNote(pitch: .c4).textArticulation("L")])
+                            .textArticulation("R"))
+
+            sequence.add(note: Note(value: .quaver, pitch: .c4)
+                            .addGraceNotes([GraceNote(pitch: .c4).textArticulation("R"),
+                                            GraceNote(pitch: .c4).textArticulation("L"),
+                                            GraceNote(pitch: .c4).textArticulation("R")])
+                            .textArticulation("L"))
+
+            bar.add(sequence: sequence)
+            stave.add(bar: bar)
+        }
+
         let composition = Composition()
         composition.add(stave: stave)
         return composition

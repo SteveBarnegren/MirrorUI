@@ -30,6 +30,9 @@ class FloatingArticulationPlacerRenderOperation {
                 for articulationMark in note.floatingArticulationMarks {
                     articulationMark.yPosition = maxY
                 }
+                for articulationMark in note.graceNotes.flatMap({ $0.floatingArticulationMarks }) {
+                    articulationMark.yPosition = maxY
+                }
             }
         }
     }

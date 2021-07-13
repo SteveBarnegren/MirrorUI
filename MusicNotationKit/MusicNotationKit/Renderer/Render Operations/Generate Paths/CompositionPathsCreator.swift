@@ -16,7 +16,8 @@ struct RenderableVoice {
 }
 
 class CompositionPathsCreator {
-    
+
+    private let metrics: FontMetrics
     private let glyphRenderer: GlyphRenderer
     private let noteRenderer: NoteRenderer
     private let tieRenderer: TieRenderer
@@ -25,6 +26,7 @@ class CompositionPathsCreator {
     private let timeSignatureRenderer: TimeSignatureRenderer
     
     init(glyphs: GlyphStore) {
+        self.metrics = glyphs.metrics
         self.glyphRenderer = GlyphRenderer(glyphStore: glyphs)
         self.noteRenderer = NoteRenderer(glyphs: glyphs)
         self.tieRenderer = TieRenderer(glyphs: glyphs)
@@ -117,10 +119,6 @@ class CompositionPathsCreator {
             note.articulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()
         }.joined().toArray()
 
-        let floatingArticulationMarkPaths = noteSequence.notes.map { note in
-            note.floatingArticulationMarks.map { makePaths(forArticulationMark: $0, xPos: note.xPosition) }.joined()
-        }.joined().toArray()
-        
         let tupletMarkPaths = tupletMarksRenderer.paths(forNoteSequence: noteSequence)
         
         // Draw ties
@@ -152,7 +150,7 @@ class CompositionPathsCreator {
         allPaths += leadingTiePaths
         allPaths += articulationMarkPaths
         allPaths += tupletMarkPaths
-        allPaths += floatingArticulationMarkPaths
+        allPaths += makeFloatingArticulationPaths(for: noteSequence)
         return allPaths
     }
 
@@ -174,6 +172,25 @@ class CompositionPathsCreator {
     }
     
     // MARK: - Render Articulation
+
+    private func makeFloatingArticulationPaths(for noteSequence: NoteSequence) -> [Path] {
+        var paths = [Path]()
+
+        for note in noteSequence.notes {
+            for mark in note.floatingArticulationMarks {
+                paths += makePaths(forArticulationMark: mark, xPos: note.xPosition, scale: 1)
+            }
+            for graceNote in note.graceNotes {
+                for mark in graceNote.floatingArticulationMarks {
+                    paths += makePaths(forArticulationMark: mark,
+                                       xPos: graceNote.xPosition,
+                                       scale: metrics.graceNoteScale)
+                }
+            }
+        }
+
+        return paths
+    }
     
     private func makePaths(forArticulationMark articulation: ArticulationMark, xPos: Double) -> [Path] {
         
@@ -184,10 +201,10 @@ class CompositionPathsCreator {
         }
     }
 
-    private func makePaths(forArticulationMark articulation: FloatingArticulationMark, xPos: Double) -> [Path] {
+    private func makePaths(forArticulationMark articulation: FloatingArticulationMark, xPos: Double, scale: Double) -> [Path] {
 
         if let textArticulation = articulation as? TextArticulation {
-            return TextArticulationRenderer().paths(forTextArticulation: textArticulation, xPos: xPos)
+            return TextArticulationRenderer().paths(forTextArticulation: textArticulation, xPos: xPos, scale: scale)
         } else {
             fatalError("Unknown articulation type: \(articulation)")
         }

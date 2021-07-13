@@ -84,14 +84,8 @@ public class NoteSequence {
 extension NoteSequence {
 
     func calculateMaxY() -> Double {
-        return notes.map { $0.calculateMaxY() }.max() ?? 0
-    }
-}
-
-extension Note {
-
-    func calculateMaxY() -> Double {
-        let noteHeadsMax = noteHeads.map { $0.yPosition }.max() ?? 0
-        return max(stemEndY, noteHeadsMax)
+        let notesY = notes.map { $0.calculateMaxY() }
+        let graceNotesY = notes.flatMap { $0.graceNotes }.map { $0.calculateMaxY() }
+        return (notesY + graceNotesY).max() ?? 0
     }
 }

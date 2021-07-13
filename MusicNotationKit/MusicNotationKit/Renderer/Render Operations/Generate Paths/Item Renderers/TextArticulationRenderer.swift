@@ -10,11 +10,12 @@ import Foundation
 
 class TextArticulationRenderer {
 
-    func paths(forTextArticulation articulation: TextArticulation, xPos: Double) -> [Path] {
+    func paths(forTextArticulation articulation: TextArticulation, xPos: Double, scale: Double) -> [Path] {
 
         let textPath = self.textPath(forText: articulation.text)
-        let path = textPath.path.translated(x: xPos,
-                                            y: articulation.yPosition)
+        let path = textPath.path
+            .scaled(scale)
+            .translated(x: xPos, y: articulation.yPosition)
         return [path]
     }
 

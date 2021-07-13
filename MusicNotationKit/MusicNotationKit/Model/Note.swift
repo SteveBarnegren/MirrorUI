@@ -246,3 +246,11 @@ extension Note {
         }
     }
 }
+
+extension Note {
+
+    func calculateMaxY() -> Double {
+        let noteHeadsMax = noteHeads.map { $0.yPosition }.max() ?? 0
+        return max(stemEndY, noteHeadsMax)
+    }
+}
