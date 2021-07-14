@@ -151,6 +151,7 @@ class CompositionPathsCreator {
         allPaths += articulationMarkPaths
         allPaths += tupletMarkPaths
         allPaths += makeFloatingArticulationPaths(for: noteSequence)
+        allPaths += makeStemAugmentationPaths(for: noteSequence)
         return allPaths
     }
 
@@ -169,6 +170,21 @@ class CompositionPathsCreator {
         } else {
             fatalError("Unknown symbol type: \(symbol)")
         }
+    }
+
+    // MARK: - Render stem augmentations
+
+    private func makeStemAugmentationPaths(for noteSequence: NoteSequence) -> [Path] {
+        var paths = [Path]()
+
+        for note in noteSequence.notes {
+            if let stemAugmentation = note.stemAugmentation {
+                let augmentationPaths = glyphRenderer.paths(forGlyph: stemAugmentation.glyphType,
+                                                            position: note.stemAugmentationAttachmentPoint)
+                paths += augmentationPaths
+            }
+        }
+        return paths
     }
     
     // MARK: - Render Articulation

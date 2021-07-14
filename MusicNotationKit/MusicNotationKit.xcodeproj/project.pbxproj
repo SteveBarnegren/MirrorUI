@@ -200,6 +200,7 @@
 		67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */; };
 		67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */; };
 		67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880F21EB5597003707DD /* Numeric+Constrained.swift */; };
+		AA01D413269F7A7D0068AE14 /* StemAugmentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01D412269F7A7D0068AE14 /* StemAugmentation.swift */; };
 		AA2F9CF126694D6800467D13 /* GraceNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F9CF026694D6800467D13 /* GraceNote.swift */; };
 		AA5972312663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */; };
 		AA5972332663AB6700C516A8 /* GraceNoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */; };
@@ -421,6 +422,7 @@
 		67F6880A21EB51D6003707DD /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
 		67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		67F6880F21EB5597003707DD /* Numeric+Constrained.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Constrained.swift"; sourceTree = "<group>"; };
+		AA01D412269F7A7D0068AE14 /* StemAugmentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemAugmentation.swift; sourceTree = "<group>"; };
 		AA2F9CF026694D6800467D13 /* GraceNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceNote.swift; sourceTree = "<group>"; };
 		AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateGraceNoteDescriptionsProcessingOperation.swift; sourceTree = "<group>"; };
 		AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceNoteRenderer.swift; sourceTree = "<group>"; };
@@ -812,6 +814,7 @@
 				67678E0521E3E9BA00E7FD71 /* Protocols */,
 				671A4D332288688C002C56E8 /* Symbols Descriptions */,
 				670D51AE25474A9B000B7B36 /* Articulation */,
+				AA01D411269F79BF0068AE14 /* Stem Augmentation */,
 				674D503821DD50C8009E5AFE /* Composition.swift */,
 				677F1E0F25FE7A350078D1B8 /* Stave.swift */,
 				674D503A21DD50E6009E5AFE /* Bar.swift */,
@@ -1180,6 +1183,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		AA01D411269F79BF0068AE14 /* Stem Augmentation */ = {
+			isa = PBXGroup;
+			children = (
+				AA01D412269F7A7D0068AE14 /* StemAugmentation.swift */,
+			);
+			path = "Stem Augmentation";
+			sourceTree = "<group>";
+		};
 		AA59722F2663A44100C516A8 /* Generate Grace Note Descriptions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1470,6 +1481,7 @@
 				6751A84422357AFA000B0D08 /* Playable.swift in Sources */,
 				67A15FA421C512E800C3C03F /* Note.swift in Sources */,
 				6736F2132550A16200148F6B /* Array+PathCommand.swift in Sources */,
+				AA01D413269F7A7D0068AE14 /* StemAugmentation.swift in Sources */,
 				67BB96B22336854F00119953 /* ScrollingMusicViewController.swift in Sources */,
 				67706499245CC3DC0083037F /* TieRenderer.swift in Sources */,
 				67F6880421EA6D32003707DD /* HorizontalLayoutItem.swift in Sources */,

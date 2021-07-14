@@ -38,7 +38,7 @@ public class Note: Playable {
     var stemDirection = StemDirection.up
     
     var stemLength = Double(0)
-    
+
     var stemEndOffset: Double {
         return stemLength.inverted(if: { stemDirection == .down })
     }
@@ -75,6 +75,11 @@ public class Note: Playable {
         case .down:
             return stemConnectingNoteHead.yPosition - stemLength
         }
+    }
+
+    var stemAugmentation: StemAugmentation?
+    var stemAugmentationAttachmentPoint: Vector2D {
+        Vector2D(xPosition + stemConnectionPoint.x, (stemConnectionPoint.y + stemEndY) / 2)
     }
     
     // Grace notes
@@ -154,6 +159,12 @@ public class Note: Playable {
     @discardableResult public func addGraceNotes(_ graceNotes: [GraceNote]) -> Note {
         // We store grace notes in reversed order
         self.graceNotes += graceNotes.reversed()
+        return self
+    }
+
+    // Stem Augmentation
+    @discardableResult public func stemAugmentation(_ augmentation: StemAugmentation) -> Note {
+        self.stemAugmentation = augmentation
         return self
     }
 }

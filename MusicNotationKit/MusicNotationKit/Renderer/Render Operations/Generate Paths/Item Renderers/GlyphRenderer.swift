@@ -29,10 +29,18 @@ class GlyphRenderer {
     }
     
     func paths(forRenderable renderable: SingleGlyphRenderable) -> [Path] {
-        
+
         let glyph = glyphStore.glyph(forType: renderable.glyph)
         var path = glyph.path.translated(x: renderable.position.x - glyph.width/2,
                                          y: renderable.position.y)
+        path.drawStyle = .fill
+        return [path]
+    }
+
+    func paths(forGlyph glyphType: GlyphType, position: Vector2D) -> [Path] {
+
+        let glyph = glyphStore.glyph(forType: glyphType)
+        var path = glyph.path.translated(x: position.x, y: position.y)
         path.drawStyle = .fill
         return [path]
     }

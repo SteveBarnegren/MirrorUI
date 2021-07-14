@@ -74,6 +74,13 @@ enum GlyphType: String {
     case timeSig7
     case timeSig8
     case timeSig9
+
+    // MARK: - Tremolo
+    case tremolo1
+    case tremolo2
+    case tremolo3
+    case tremolo4
+    case tremolo5
 }
 
 class Glyph {
