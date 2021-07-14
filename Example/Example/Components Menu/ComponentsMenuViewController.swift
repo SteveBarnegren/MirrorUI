@@ -119,6 +119,7 @@ private func makeComponentInfos() -> [ComponentInfo] {
     let graceNotes = ComponentInfo(name: "Grace Notes", composition: ComponentCompositions.graceNotes)
     let timeSignatures = ComponentInfo(name: "Time Signatures", composition: ComponentCompositions.timeSignatures)
     let textArticulation = ComponentInfo(name: "Text Articulation", composition: ComponentCompositions.textArticulation)
+    let rolls = ComponentInfo(name: "Rolls", composition: ComponentCompositions.rolls)
 
-    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents, tuplets, multipleVoices, graceNotes, timeSignatures, textArticulation]
+    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents, tuplets, multipleVoices, graceNotes, timeSignatures, textArticulation, rolls]
 }

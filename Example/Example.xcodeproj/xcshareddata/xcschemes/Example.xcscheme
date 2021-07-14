@@ -87,6 +87,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-deeplink components/rolls"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-deeplink components/rests"
             isEnabled = "NO">
          </CommandLineArgument>
@@ -96,7 +100,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/textArticulation"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/intervalsAndChords"
