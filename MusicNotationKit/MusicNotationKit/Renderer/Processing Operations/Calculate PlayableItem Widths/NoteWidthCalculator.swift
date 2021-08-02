@@ -23,7 +23,25 @@ class NoteWidthCalculator {
     }
     
     func width(forNote note: Note) -> (leading: Double, trailing: Double) {
-        
+        let result = calculateBaseWidth(forNote: note)
+        var leftEdge = -result.leading
+        var rightEdge = result.trailing
+
+        if let augmentation = note.stemAugmentation {
+            let augWidth = glyphs.glyph(forType: augmentation.glyphType).width
+            switch note.stemDirection {
+                case .up:
+                    rightEdge = note.stemConnectionPoint.x + augWidth/2
+                case .down:
+                    leftEdge = note.stemConnectionPoint.x - augWidth/2
+            }
+        }
+        return (-leftEdge, rightEdge)
+    }
+
+
+    private func calculateBaseWidth(forNote note: Note) -> (leading: Double, trailing: Double) {
+
         var centeredNotesWidth = 0.0
         var leftOfStemNotesWidth = 0.0
         var rightOfStemNotesWidth = 0.0
