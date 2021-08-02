@@ -1,5 +1,5 @@
 //
-//  ComponentCompositions+TextArticulation.swift
+//  ComponentCompositions+FloatingTextArticulation.swift
 //  Example
 //
 //  Created by Steven Barnegren on 17/06/2021.
@@ -11,7 +11,7 @@ import MusicNotationKit
 
 extension ComponentCompositions {
 
-    static var textArticulation: Composition {
+    static var floatingTextArticulation: Composition {
 
         let stave = Stave()
 
@@ -19,14 +19,14 @@ extension ComponentCompositions {
         do {
             let bar = Bar()
             let sequence = NoteSequence()
-            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
-            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
-            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
-            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
-            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
-            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("R"))
-            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
-            sequence.add(note: Note(value: .quaver, pitch: .c4).textArticulation("L"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).floatingTextArticulation("R"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).floatingTextArticulation("L"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).floatingTextArticulation("R"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).floatingTextArticulation("R"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).floatingTextArticulation("L"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).floatingTextArticulation("R"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).floatingTextArticulation("L"))
+            sequence.add(note: Note(value: .quaver, pitch: .c4).floatingTextArticulation("L"))
             bar.add(sequence: sequence)
             stave.add(bar: bar)
         }
@@ -37,24 +37,24 @@ extension ComponentCompositions {
             let sequence = NoteSequence()
             sequence.add(note: Note(value: .crotchet, pitch: .c4)
                             .addGraceNotes([GraceNote(pitch: .c4).textArticulation("L")])
-                            .textArticulation("R"))
+                            .floatingTextArticulation("R"))
 
             sequence.add(note: Note(value: .crotchet, pitch: .c4)
                             .addGraceNotes([GraceNote(pitch: .c4).textArticulation("L"),
                                             GraceNote(pitch: .c4).textArticulation("L")])
-                            .textArticulation("R"))
+                            .floatingTextArticulation("R"))
 
             sequence.add(note: Note(value: .crotchet, pitch: .c4)
                             .addGraceNotes([GraceNote(pitch: .c4).textArticulation("L"),
                                             GraceNote(pitch: .c4).textArticulation("R"),
                                             GraceNote(pitch: .c4).textArticulation("L")])
-                            .textArticulation("R"))
+                            .floatingTextArticulation("R"))
 
             sequence.add(note: Note(value: .quaver, pitch: .c4)
                             .addGraceNotes([GraceNote(pitch: .c4).textArticulation("R"),
                                             GraceNote(pitch: .c4).textArticulation("L"),
                                             GraceNote(pitch: .c4).textArticulation("R")])
-                            .textArticulation("L"))
+                            .floatingTextArticulation("L"))
 
             bar.add(sequence: sequence)
             stave.add(bar: bar)

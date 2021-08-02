@@ -37,7 +37,7 @@
 		67F440532431049F003DFA63 /* ComponentCompositions+Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */; };
 		AA01D40F269F78A40068AE14 /* ComponentCompositions+Rolls.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01D40E269F78A40068AE14 /* ComponentCompositions+Rolls.swift */; };
 		AA41E4F8262E256B0069B248 /* SBAutoLayout in Frameworks */ = {isa = PBXBuildFile; productRef = AA41E4F7262E256B0069B248 /* SBAutoLayout */; };
-		AA6D73BF267BDFAB00ECCEB2 /* ComponentCompositions+TextArticulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D73BE267BDFAB00ECCEB2 /* ComponentCompositions+TextArticulation.swift */; };
+		AA6D73BF267BDFAB00ECCEB2 /* ComponentCompositions+FloatingTextArticulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D73BE267BDFAB00ECCEB2 /* ComponentCompositions+FloatingTextArticulation.swift */; };
 		AA716030262E118F00244CFB /* MirrorUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA71602F262E118F00244CFB /* MirrorUI */; };
 		AA8D3AD026793B990023D595 /* ComponentCompositions+TimeSignatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8D3ACF26793B990023D595 /* ComponentCompositions+TimeSignatures.swift */; };
 		AAD2AB5E263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD2AB5D263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift */; };
@@ -119,7 +119,7 @@
 		67CDC482254CA59D00C70E5B /* ComponentCompositions+Tuplets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Tuplets.swift"; sourceTree = "<group>"; };
 		67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Notes.swift"; sourceTree = "<group>"; };
 		AA01D40E269F78A40068AE14 /* ComponentCompositions+Rolls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Rolls.swift"; sourceTree = "<group>"; };
-		AA6D73BE267BDFAB00ECCEB2 /* ComponentCompositions+TextArticulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+TextArticulation.swift"; sourceTree = "<group>"; };
+		AA6D73BE267BDFAB00ECCEB2 /* ComponentCompositions+FloatingTextArticulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+FloatingTextArticulation.swift"; sourceTree = "<group>"; };
 		AA8D3ACF26793B990023D595 /* ComponentCompositions+TimeSignatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+TimeSignatures.swift"; sourceTree = "<group>"; };
 		AAD2AB5D263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+GraceNotes.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,7 +226,7 @@
 				677F1E1E25FEA6B70078D1B8 /* ComponentCompositions+MultipleVoices.swift */,
 				AAD2AB5D263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift */,
 				AA8D3ACF26793B990023D595 /* ComponentCompositions+TimeSignatures.swift */,
-				AA6D73BE267BDFAB00ECCEB2 /* ComponentCompositions+TextArticulation.swift */,
+				AA6D73BE267BDFAB00ECCEB2 /* ComponentCompositions+FloatingTextArticulation.swift */,
 				AA01D40E269F78A40068AE14 /* ComponentCompositions+Rolls.swift */,
 			);
 			path = "Component Compositions";
@@ -396,7 +396,7 @@
 				677F34C12427E48300507156 /* Deeplink.swift in Sources */,
 				677F34BF2427789900507156 /* ComponentsMenuViewController.swift in Sources */,
 				672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */,
-				AA6D73BF267BDFAB00ECCEB2 /* ComponentCompositions+TextArticulation.swift in Sources */,
+				AA6D73BF267BDFAB00ECCEB2 /* ComponentCompositions+FloatingTextArticulation.swift in Sources */,
 				67BA78A52430BB070097806B /* ComponentCompositions+Rests.swift in Sources */,
 				67F440532431049F003DFA63 /* ComponentCompositions+Notes.swift in Sources */,
 				677F1E1F25FEA6B80078D1B8 /* ComponentCompositions+MultipleVoices.swift in Sources */,

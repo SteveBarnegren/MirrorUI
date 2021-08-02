@@ -150,8 +150,8 @@ public class Note: Playable {
     }
 
     // Text Articulation
-    @discardableResult public func textArticulation(_ text: String) -> Note {
-        self.floatingArticulationMarks.append(TextArticulation(text: text))
+    @discardableResult public func floatingTextArticulation(_ text: String) -> Note {
+        self.floatingArticulationMarks.append(FloatingTextArticulation(text: text))
         return self
     }
     

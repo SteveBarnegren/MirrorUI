@@ -1,5 +1,5 @@
 //
-//  TextArticulationRenderer.swift
+//  FloatingTextArticulationRenderer.swift
 //  MusicNotationKit
 //
 //  Created by Steven Barnegren on 17/06/2021.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class TextArticulationRenderer {
+class FloatingTextArticulationRenderer {
 
-    func paths(forTextArticulation articulation: TextArticulation, xPos: Double, scale: Double) -> [Path] {
+    func paths(forTextArticulation articulation: FloatingTextArticulation, xPos: Double, scale: Double) -> [Path] {
 
         let textPath = self.textPath(forText: articulation.text)
         let path = textPath.path

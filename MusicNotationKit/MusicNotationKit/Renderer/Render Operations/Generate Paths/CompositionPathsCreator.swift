@@ -219,8 +219,8 @@ class CompositionPathsCreator {
 
     private func makePaths(forArticulationMark articulation: FloatingArticulationMark, xPos: Double, scale: Double) -> [Path] {
 
-        if let textArticulation = articulation as? TextArticulation {
-            return TextArticulationRenderer().paths(forTextArticulation: textArticulation, xPos: xPos, scale: scale)
+        if let textArticulation = articulation as? FloatingTextArticulation {
+            return FloatingTextArticulationRenderer().paths(forTextArticulation: textArticulation, xPos: xPos, scale: scale)
         } else {
             fatalError("Unknown articulation type: \(articulation)")
         }

@@ -61,7 +61,7 @@ extension GraceNote {
 
 extension GraceNote {
     public func textArticulation(_ text: String) -> GraceNote {
-        let textArticulation = TextArticulation(text: text)
+        let textArticulation = FloatingTextArticulation(text: text)
         floatingArticulationMarks.append(textArticulation)
         return self
     }

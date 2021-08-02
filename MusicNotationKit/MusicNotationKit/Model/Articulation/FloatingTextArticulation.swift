@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TextArticulation: FloatingArticulationMark {
+class FloatingTextArticulation: FloatingArticulationMark {
     var text: String
 
     // ArticulationMark
