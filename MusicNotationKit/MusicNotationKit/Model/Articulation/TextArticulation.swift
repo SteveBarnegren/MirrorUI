@@ -9,6 +9,8 @@
 import Foundation
 
 class TextArticulation: ArticulationMark {
+    var priorty: ArticulationMarkPriority { .text }
+    var orientation: ArticulationMarkOrientation { .above }
     var stavePosition = StavePosition.zero
     var text: String
 
