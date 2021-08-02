@@ -150,11 +150,17 @@ public class Note: Playable {
     }
 
     // Text Articulation
+    @discardableResult public func textArticulation(_ text: String) -> Note {
+        self.articulationMarks.append(TextArticulation(text: text))
+        return self
+    }
+
+    // Floating Text Articulation
     @discardableResult public func floatingTextArticulation(_ text: String) -> Note {
         self.floatingArticulationMarks.append(FloatingTextArticulation(text: text))
         return self
     }
-    
+
     // Grace note
     @discardableResult public func addGraceNotes(_ graceNotes: [GraceNote]) -> Note {
         // We store grace notes in reversed order
