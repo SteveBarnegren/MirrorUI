@@ -15,15 +15,25 @@ class NoteHeadDescriber {
         let headStyle = self.headStyle(forNote: note)
         
         var noteHeadDescriptions = [NoteHead]()
-        for pitch in note.pitches {
-            let stavePosition = pitch.stavePosition(forClef: clef)
+
+        if note.unpitched {
+            let stavePosition = StavePosition.zero
 
             let description = NoteHead(style: headStyle)
-            description.stavePosition = stavePosition 
-            description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch, clef: clef)
-            description.trailingLayoutItems = trailingLayoutItems(forNote: note, 
-                                                                  stavePosition: stavePosition)
+            description.stavePosition = stavePosition
+            description.trailingLayoutItems = trailingLayoutItems(forNote: note, stavePosition: stavePosition)
             noteHeadDescriptions.append(description)
+        } else {
+            for pitch in note.pitches {
+                let stavePosition = pitch.stavePosition(forClef: clef)
+
+                let description = NoteHead(style: headStyle)
+                description.stavePosition = stavePosition
+                description.leadingLayoutItems = leadingLayoutItems(forNote: note, pitch: pitch, clef: clef)
+                description.trailingLayoutItems = trailingLayoutItems(forNote: note,
+                                                                      stavePosition: stavePosition)
+                noteHeadDescriptions.append(description)
+            }
         }
         
         return noteHeadDescriptions

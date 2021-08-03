@@ -21,10 +21,19 @@ public class Note: Playable {
     let pitches: [Pitch]
     var highestPitch: Pitch { return pitches.max()! }
     var lowestPitch: Pitch { return pitches.min()! }
+    var unpitched = false
 
     var noteHeads = [NoteHead]()
     var articulationMarks = [ArticulationMark]()
     var floatingArticulationMarks = [FloatingArticulationMark]()
+
+    var noteHeadStavePositions: [StavePosition] {
+        if unpitched {
+            return [StavePosition.zero]
+        } else {
+            return noteHeads.map { $0.stavePosition }
+        }
+    }
     
     var tiedToNext = false
     
@@ -127,9 +136,15 @@ public class Note: Playable {
     }
     
     public init(value: NoteValue, pitches: [Pitch]) {
-           self.value = value
+        self.value = value
         self.pitches = pitches.sorted()
-       }
+    }
+
+    public init(unpitched value: NoteValue) {
+        self.value = value
+        self.unpitched = true
+        self.pitches = []
+    }
     
     // Tie
     @discardableResult public func tied() -> Note {

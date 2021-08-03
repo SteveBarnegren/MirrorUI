@@ -20,13 +20,13 @@ extension ComponentCompositions {
             let bar = Bar()
             let sequence = NoteSequence()
 
-            sequence.add(note: Note(value: .crotchet, pitch: .c4).accent())
-            sequence.add(note: Note(value: .crotchet, pitch: .a4).accent())
+            sequence.add(note: Note(unpitched: .crotchet).accent())
+            sequence.add(note: Note(unpitched: .crotchet).accent())
 
-            sequence.add(note: Note(value: .quaver, pitch: .f3).accent())
-            sequence.add(note: Note(value: .quaver, pitch: .a4).accent())
-            sequence.add(note: Note(value: .quaver, pitch: .c4).accent())
-            sequence.add(note: Note(value: .quaver, pitch: .e4).accent())
+            sequence.add(note: Note(unpitched: .quaver).accent())
+            sequence.add(note: Note(unpitched: .quaver).accent())
+            sequence.add(note: Note(unpitched: .quaver).accent())
+            sequence.add(note: Note(unpitched: .quaver).accent())
 
             bar.add(sequence: sequence)
             stave.add(bar: bar)
