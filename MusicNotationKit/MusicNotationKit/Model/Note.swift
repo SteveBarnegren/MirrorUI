@@ -21,7 +21,7 @@ public class Note: Playable {
     let pitches: [Pitch]
     var highestPitch: Pitch { return pitches.max()! }
     var lowestPitch: Pitch { return pitches.min()! }
-    
+
     var noteHeads = [NoteHead]()
     var articulationMarks = [ArticulationMark]()
     var floatingArticulationMarks = [FloatingArticulationMark]()

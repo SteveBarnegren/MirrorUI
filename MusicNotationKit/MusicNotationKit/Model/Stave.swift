@@ -8,8 +8,14 @@
 
 import Foundation
 
+public enum StaveStyle {
+    case fiveLine
+    case singleLine
+}
+
 public class Stave {
-    
+
+    public var style = StaveStyle.fiveLine
     public var clef = Clef.treble
     var bars = [Bar]()
     

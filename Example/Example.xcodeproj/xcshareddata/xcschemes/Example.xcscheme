@@ -88,6 +88,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-deeplink components/rolls"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-deeplink components/singleLineStave"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

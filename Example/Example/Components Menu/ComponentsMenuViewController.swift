@@ -120,6 +120,7 @@ private func makeComponentInfos() -> [ComponentInfo] {
     let timeSignatures = ComponentInfo(name: "Time Signatures", composition: ComponentCompositions.timeSignatures)
     let textArticulation = ComponentInfo(name: "Floating Text Articulation", composition: ComponentCompositions.floatingTextArticulation)
     let rolls = ComponentInfo(name: "Rolls", composition: ComponentCompositions.rolls)
+    let singleLineStave = ComponentInfo(name: "Single Line Stave", composition: ComponentCompositions.singleLineStave)
 
-    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents, tuplets, multipleVoices, graceNotes, timeSignatures, textArticulation, rolls]
+    return [notes, rests, intervals, adjacentNoteChords, accidentals, ties, accents, tuplets, multipleVoices, graceNotes, timeSignatures, textArticulation, rolls, singleLineStave]
 }
