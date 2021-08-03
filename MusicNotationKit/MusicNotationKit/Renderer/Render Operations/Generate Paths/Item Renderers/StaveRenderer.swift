@@ -10,9 +10,16 @@ import Foundation
 
 class StaveRenderer {
     
-    static func stavePaths(withWidth staveWidth: Double) -> [Path] {
+    static func stavePaths(withWidth staveWidth: Double, style: StaveStyle) -> [Path] {
      
-        let numberOfLines = 5
+        let numberOfLines: Int
+        switch style {
+            case .fiveLine:
+                numberOfLines = 5
+            case .singleLine:
+                numberOfLines = 1
+        }
+
         let totalStaveHeight = Double(numberOfLines-1)
     
         var paths = [Path]()
@@ -32,6 +39,5 @@ class StaveRenderer {
         }
         
         return paths
-        
     }
 }

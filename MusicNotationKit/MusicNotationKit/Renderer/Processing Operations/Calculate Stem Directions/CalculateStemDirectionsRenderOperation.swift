@@ -13,7 +13,16 @@ class CalculateStemDirectionsProcessingOperation: CompositionProcessingOperation
     private let stemDirectionDecider = StemDirectionDecider(transformer: .notes)
     
     func process(composition: Composition) {
-        composition.forEachBar(process)
+        composition.staves.forEach(process)
+    }
+
+    private func process(stave: Stave) {
+        if let requiredDirection = stave.requiredStemDirection {
+            stave.forEachNote { $0.stemDirection = requiredDirection }
+            return
+        }
+
+        stave.bars.forEach(process)
     }
     
     private func process(bar: Bar) {

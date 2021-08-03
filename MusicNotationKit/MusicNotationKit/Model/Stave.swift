@@ -22,6 +22,15 @@ public class Stave {
     var duration: Time {
         return bars.reduce(Time.zero) { $0 + $1.duration }
     }
+
+    var requiredStemDirection: StemDirection? {
+        switch self.style {
+            case .fiveLine:
+                return nil
+            case .singleLine:
+                return .up
+        }
+    }
     
     public init() {}
     

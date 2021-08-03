@@ -185,7 +185,7 @@ class MusicRenderer {
                 .flatMap { stave.bars[maybe: $0.startIndex-1] }
                 .flatMap(trailingTies(forBar:)) ?? []
             
-            let voice = RenderableVoice(bars: bars, leadingTies: leadingTies)
+            let voice = RenderableVoice(staveStyle: stave.style, bars: bars, leadingTies: leadingTies)
             voices.append(voice)
             
         }
