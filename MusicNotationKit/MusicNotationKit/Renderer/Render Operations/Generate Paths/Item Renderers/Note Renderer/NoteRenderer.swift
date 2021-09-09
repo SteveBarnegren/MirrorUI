@@ -136,10 +136,10 @@ class NoteRenderer {
         
         let stemEndY: Double
         switch (customStemEndY, note.stemDirection) {
-        case let (value?, _):
-            stemEndY = value
-        case (nil, let direction):
-            stemEndY = note.stemConnectingNoteHead.yPosition + note.stemEndOffset
+            case let (value?, _):
+                stemEndY = value
+            case (nil, _):
+                stemEndY = note.stemConnectingNoteHead.yPosition + note.stemEndOffset
         }
         
         guard let stemRect = self.stemRect(fromNote: note, to: stemEndY) else {

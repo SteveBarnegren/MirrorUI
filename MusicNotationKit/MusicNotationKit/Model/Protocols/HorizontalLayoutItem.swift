@@ -11,7 +11,7 @@ enum HorizontalLayoutWidthType {
     case custom((GlyphStore) -> (leading: Double, trailing: Double))
 }
 
-protocol HorizontalLayoutItemBase: class, HorizontallyPositionable {
+protocol HorizontalLayoutItemBase: AnyObject, HorizontallyPositionable {
     var horizontalLayoutWidth: HorizontalLayoutWidthType { get }
 }
 

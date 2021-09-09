@@ -10,10 +10,8 @@ class GenerateBeamDescriptionsProcessingOperation: CompositionProcessingOperatio
     
     func process(stave: Stave) {
         
-        var timeSignature = TimeSignature.fourFour
-        
         for bar in stave.bars {
-            timeSignature = bar.timeSignature ?? timeSignature
+            let timeSignature = bar.timeSignature
             for noteSequence in bar.sequences {
                 noteBeamDescriber.applyBeams(to: noteSequence.notes, timeSignature: timeSignature)
             }

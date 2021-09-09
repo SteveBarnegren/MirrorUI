@@ -15,21 +15,21 @@ extension Array where Element == Path.Command {
         
         for command in self {
             switch command {
-            case .move(let p):
-                process(p)
-            case .line(let p):
-                process(p)
-            case .quadCurve(let p, let c1):
-                process(p)
-            case .curve(let p, let c1, let c2):
-                process(p)
-            case .close:
-                break
-            case .circle(let p, let r):
-                minX = Swift.min(minX, p.x - r)
-                maxX = Swift.max(maxX, p.x + r)
-            case .arc(center: let center, radius: let radius, startAngle: let startAngle, endAngle: let endAngle, clockwise: let clockwise):
-                break
+                case .move(let p):
+                    process(p)
+                case .line(let p):
+                    process(p)
+                case .quadCurve(let p, _):
+                    process(p)
+                case .curve(let p, _, _):
+                    process(p)
+                case .close:
+                    break
+                case .circle(let p, let r):
+                    minX = Swift.min(minX, p.x - r)
+                    maxX = Swift.max(maxX, p.x + r)
+                case .arc(center: _, radius: _, startAngle: _, endAngle: _, clockwise: _):
+                    break
             }
         }
         

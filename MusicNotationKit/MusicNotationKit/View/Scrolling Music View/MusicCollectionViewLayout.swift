@@ -1,6 +1,6 @@
 import UIKit
 
-protocol MusicCollectionViewLayoutDataSource: class {
+protocol MusicCollectionViewLayoutDataSource: AnyObject {
     func compositionLayout(forMusicCollectionViewLayout layout: MusicCollectionViewLayout) -> CompositionLayout
 }
 
