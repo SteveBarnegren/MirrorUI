@@ -1,11 +1,3 @@
-//
-//  CompositionTimeTests.swift
-//  MusicNotationKitTests
-//
-//  Created by Steve Barnegren on 14/05/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import XCTest
 @testable import MusicNotationKit
 

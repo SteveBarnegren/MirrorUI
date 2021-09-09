@@ -1,11 +1,3 @@
-//
-//  MusicCell.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 22/09/2019.
-//  Copyright © 2019 Steve Barnegren. All rights reserved.
-//
-
 import UIKit
 
 class MusicCell: UICollectionViewCell {

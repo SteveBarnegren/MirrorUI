@@ -1,11 +1,3 @@
-//
-//  TieCreator.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 05/05/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 private struct PitchAndPosition {

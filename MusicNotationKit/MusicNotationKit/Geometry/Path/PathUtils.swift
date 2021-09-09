@@ -1,11 +1,3 @@
-//
-//  PathUtils.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 02/11/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 class PathUtils {

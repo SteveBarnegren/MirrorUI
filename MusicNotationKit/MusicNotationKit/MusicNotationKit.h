@@ -1,11 +1,3 @@
-//
-//  MusicNotationKit.h
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 15/12/2018.
-//  Copyright © 2018 Steve Barnegren. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 //! Project version number for MusicNotationKit.

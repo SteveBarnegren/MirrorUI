@@ -1,11 +1,3 @@
-//
-//  TestComposition.swift
-//  Example
-//
-//  Created by Steve Barnegren on 06/10/2019.
-//  Copyright © 2019 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 import MusicNotationKit
 

@@ -1,11 +1,3 @@
-//
-//  StavePositionTests.swift
-//  MusicNotationKitTests
-//
-//  Created by Steve Barnegren on 24/03/2021.
-//  Copyright © 2021 Steve Barnegren. All rights reserved.
-//
-
 import XCTest
 @testable import MusicNotationKit
 

@@ -1,11 +1,3 @@
-//
-//  VariationSet.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 13/05/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 enum VariationSuitability: Int, CaseIterable {

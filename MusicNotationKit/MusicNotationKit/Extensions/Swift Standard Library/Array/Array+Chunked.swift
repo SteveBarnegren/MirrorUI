@@ -1,11 +1,3 @@
-//
-//  Array+Chunked.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 20/06/2019.
-//  Copyright © 2019 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 public extension Array {

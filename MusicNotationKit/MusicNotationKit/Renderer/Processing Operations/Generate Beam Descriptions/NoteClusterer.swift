@@ -1,11 +1,3 @@
-//
-//  NoteClusterer.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 27/07/2019.
-//  Copyright © 2019 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 class NoteClusterer<T> {

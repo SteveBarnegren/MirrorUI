@@ -1,11 +1,3 @@
-//
-//  Clef.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 16/03/2021.
-//  Copyright © 2021 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 public struct Clef {

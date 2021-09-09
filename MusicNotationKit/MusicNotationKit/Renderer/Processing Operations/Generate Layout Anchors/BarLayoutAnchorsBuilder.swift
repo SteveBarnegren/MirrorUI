@@ -1,11 +1,3 @@
-//
-//  LayoutAnchorsBuilder.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 17/09/2019.
-//  Copyright © 2019 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 private let requiredTieSpace = 2.5

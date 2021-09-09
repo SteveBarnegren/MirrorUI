@@ -1,11 +1,3 @@
-//
-//  CompositionPathsCreator.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 17/09/2019.
-//  Copyright © 2019 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 private let staveSeparation = 0.8

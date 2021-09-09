@@ -1,11 +1,3 @@
-//
-//  ComponentCompositions+Ties.swift
-//  Example
-//
-//  Created by Steve Barnegren on 30/04/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 import MusicNotationKit
 

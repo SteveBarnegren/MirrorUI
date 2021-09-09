@@ -1,11 +1,3 @@
-//
-//  NoteWidthCalculator.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 10/04/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 // Can eventually calulate this from the path

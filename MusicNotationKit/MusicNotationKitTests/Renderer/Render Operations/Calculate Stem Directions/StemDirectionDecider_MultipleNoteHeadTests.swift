@@ -1,11 +1,3 @@
-//
-//  StemDirectionDecider_MultipleNoteHeadTests.swift
-//  MusicNotationKitTests
-//
-//  Created by Steve Barnegren on 21/03/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import XCTest
 @testable import MusicNotationKit
 

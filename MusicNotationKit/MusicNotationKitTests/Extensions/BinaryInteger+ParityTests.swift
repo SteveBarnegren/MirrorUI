@@ -1,11 +1,3 @@
-//
-//  BinaryInteger+ParityTests.swift
-//  MusicNotationKitTests
-//
-//  Created by Steve Barnegren on 10/04/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import XCTest
 @testable import MusicNotationKit
 

@@ -1,11 +1,3 @@
-//
-//  Font+Bravura.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 12/11/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 extension Font {

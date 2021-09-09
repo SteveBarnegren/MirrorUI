@@ -1,11 +1,3 @@
-//
-//  ClefSymbol.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 18/03/2021.
-//  Copyright © 2021 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 class ClefSymbol: HorizontalLayoutItem, Positionable {    

@@ -1,11 +1,3 @@
-//
-//  GlyphRenderer.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 07/04/2021.
-//  Copyright © 2021 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 /// A type that is renderable with a single glyph

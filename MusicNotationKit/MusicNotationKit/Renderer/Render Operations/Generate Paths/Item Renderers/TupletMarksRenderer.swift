@@ -1,11 +1,3 @@
-//
-//  TupletMarksRenderer.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 30/10/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 private var textCache = KeyValueCache<String, TextPath>()

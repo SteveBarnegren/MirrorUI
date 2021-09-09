@@ -1,11 +1,3 @@
-//
-//  StemDirectionDecider.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 21/07/2019.
-//  Copyright © 2019 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 class StemDirectionDecider<N> {

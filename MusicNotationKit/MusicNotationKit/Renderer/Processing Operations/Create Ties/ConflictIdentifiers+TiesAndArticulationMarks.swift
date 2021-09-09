@@ -1,11 +1,3 @@
-//
-//  ConflictIdentifiers+TiesAndAccents.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 27/10/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 extension ConflictIdentifiers {

@@ -1,11 +1,3 @@
-//
-//  Lazy.swift
-//  MusicNotationKit
-//
-//  Created by Steve Barnegren on 11/11/2020.
-//  Copyright © 2020 Steve Barnegren. All rights reserved.
-//
-
 import Foundation
 
 public class Lazy<T> {
