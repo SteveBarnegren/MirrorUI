@@ -34,6 +34,4 @@ class TextArticulationRenderer {
         //textCache.set(value: textPath, forKey: string)
         return textPath
     }
-
-
 }

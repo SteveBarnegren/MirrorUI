@@ -12,7 +12,6 @@ public class Bar {
     public var timeSignature: TimeSignature
     var timeSignatureSymbol: TimeSignatureSymbol?
     
-    
     var trailingTies: [Tie] {
         return sequences
             .map { $0.notes }.joined()

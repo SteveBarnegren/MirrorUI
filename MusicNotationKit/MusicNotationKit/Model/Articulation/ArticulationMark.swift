@@ -21,4 +21,3 @@ protocol ArticulationMark: AnyObject {
     var orientation: ArticulationMarkOrientation { get }
     var stavePosition: StavePosition { get set }
 }
-

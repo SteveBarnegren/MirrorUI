@@ -31,7 +31,6 @@ class NoteWidthCalculator {
         return (-leftEdge, rightEdge)
     }
 
-
     private func calculateBaseWidth(forNote note: Note) -> (leading: Double, trailing: Double) {
 
         var centeredNotesWidth = 0.0

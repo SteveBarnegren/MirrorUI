@@ -14,6 +14,8 @@ disabled_rules:
   - unused_closure_parameter
   - force_cast
   - large_tuple
+  - switch_case_alignment
+  - comment_spacing
 
 opt_in_rules:
   - overridden_super_call

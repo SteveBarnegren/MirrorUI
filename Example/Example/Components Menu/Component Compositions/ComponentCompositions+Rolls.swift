@@ -47,10 +47,8 @@ extension ComponentCompositions {
             stave.add(bar: bar)
         }
 
-
         let composition = Composition()
         composition.add(stave: stave)
         return composition
     }
 }
-

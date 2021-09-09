@@ -10,7 +10,6 @@ class CalculateStemLengthsRenderOperation {
     private let graceNotesStemLengthCalculator = NoteClusterStemLengthCalculator(transformer: .graceNotes,
                                                                                  preferredStemLength: 2.25)
 
-    
     func process(barSlices: [BarSlice]) {
         for barSlice in barSlices {
             barSlice.bars.forEach(process)
@@ -34,10 +33,8 @@ class CalculateStemLengthsRenderOperation {
             .forEach(notesStemLengthCalculator.process)
 
         // Grace notes
-        for note in noteSequence.notes {
-            if !note.graceNotes.isEmpty {
-                graceNotesStemLengthCalculator.process(noteCluster: note.graceNotes)
-            }
+        for note in noteSequence.notes where !note.graceNotes.isEmpty {
+            graceNotesStemLengthCalculator.process(noteCluster: note.graceNotes)
         }
     }
 }

@@ -81,56 +81,56 @@ public struct TimeSignature: Equatable {
 
         switch (value, division) {
             // minim times
-            case (2,2):
+            case (2, 2):
                 return every(Time(crotchets: 2))
-            case (3,2):
+            case (3, 2):
                 return every(Time(crotchets: 2))
             // Crotchet times
-            case (4,4):
+            case (4, 4):
                 return every(Time(crotchets: 2))
-            case (5,4):
+            case (5, 4):
                 return every(values: [3, 2], division: 4)
-            case (6,4):
+            case (6, 4):
                 return every(Time(crotchets: 2))
-            case (7,4):
+            case (7, 4):
                 return every(values: [4, 3], division: 4)
-            case (9,4):
+            case (9, 4):
                 return every(Time(crotchets: 3))
             // Quaver times
-            case (4,8):
+            case (4, 8):
                 return every(Time(quavers: 2))
-            case (5,8):
+            case (5, 8):
                 return every(values: [3, 2], division: 8)
-            case (6,8):
+            case (6, 8):
                 return every(Time(quavers: 3))
-            case (7,8):
+            case (7, 8):
                 return every(values: [4, 3], division: 8)
-            case (8,8):
+            case (8, 8):
                 return every(values: [3, 3, 2], division: 8)
-            case (9,8):
+            case (9, 8):
                 return every(Time(quavers: 3))
-            case (10,8):
+            case (10, 8):
                 return every(values: [4, 3, 3], division: 8)
-            case (11,8):
+            case (11, 8):
                 return every(values: [4, 4, 3], division: 8)
-            case (12,8):
+            case (12, 8):
                 return every(Time(quavers: 3))
-            case (15,8):
+            case (15, 8):
                 return every(Time(quavers: 3))
-            case (18,8):
+            case (18, 8):
                 return every(Time(quavers: 3))
             // Semiquaver times
             case (4, 16):
                 return every(Time(semiquavers: 2))
-            case (5,16):
+            case (5, 16):
                 return every(values: [3, 2], division: 16)
-            case (6,16):
+            case (6, 16):
                 return every(Time(semiquavers: 3))
-            case (8,16):
+            case (8, 16):
                 return every(Time(semiquavers: 4))
-            case (9,16):
+            case (9, 16):
                 return every(Time(semiquavers: 3))
-            case (12,16):
+            case (12, 16):
                 return every(Time(semiquavers: 3))
             default:
                 return AnySequence([])

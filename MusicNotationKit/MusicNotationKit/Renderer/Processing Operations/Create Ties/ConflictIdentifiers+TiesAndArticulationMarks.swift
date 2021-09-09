@@ -12,7 +12,7 @@ extension ConflictIdentifiers {
         let endNote = tie.toNote!
 
         if tie.orientation == .verticallyAlignedWithNote
-            && (startNote.articulationMarks.contains(where: { $0 === articulationMark }) || endNote.articulationMarks.contains(where:{ $0 === articulationMark })) {
+            && (startNote.articulationMarks.contains(where: { $0 === articulationMark }) || endNote.articulationMarks.contains(where: { $0 === articulationMark })) {
             return false
         }
         

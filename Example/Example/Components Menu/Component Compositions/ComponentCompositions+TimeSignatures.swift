@@ -108,4 +108,3 @@ extension ComponentCompositions {
         return composition
     }
 }
-
