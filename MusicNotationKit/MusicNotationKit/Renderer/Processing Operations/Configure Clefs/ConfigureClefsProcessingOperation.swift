@@ -18,12 +18,15 @@ class ConfigureClefsProcessingOperation: CompositionProcessingOperation {
         let staveOffset: Double
         
         switch bar.clef.clefType {
-        case .gClef:
-            symbolType = .gClef
-            staveOffset = -1
-        case .fClef:
-            symbolType = .fClef
-            staveOffset = 1
+            case .gClef:
+                symbolType = .gClef
+                staveOffset = -1
+            case .fClef:
+                symbolType = .fClef
+                staveOffset = 1
+            case .percussion:
+                symbolType = .percussion
+                staveOffset = 0
         }
         
         bar.clefSymbol.symbolType = symbolType

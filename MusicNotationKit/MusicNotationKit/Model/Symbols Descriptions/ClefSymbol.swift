@@ -5,6 +5,7 @@ class ClefSymbol: HorizontalLayoutItem, Positionable {
     enum SymbolType {
         case gClef
         case fClef
+        case percussion
     }
     
     var symbolType = SymbolType.gClef
@@ -28,10 +29,12 @@ extension ClefSymbol: SingleGlyphRenderable {
     var glyph: GlyphType {
         
         switch self.symbolType {
-        case .gClef:
-            return .gClef
-        case .fClef:
-            return .fClef
+            case .gClef:
+                return .gClef
+            case .fClef:
+                return .fClef
+            case .percussion:
+                return .unpitchedPercussionClef1
         }
     }
 }

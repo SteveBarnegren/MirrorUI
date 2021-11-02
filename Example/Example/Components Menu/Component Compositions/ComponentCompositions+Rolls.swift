@@ -6,6 +6,7 @@ extension ComponentCompositions {
     static var rolls: Composition {
 
         let stave = Stave()
+        stave.clef = .percussion
 
         do {
             let bar = Bar(timeSignature: .fiveFour)

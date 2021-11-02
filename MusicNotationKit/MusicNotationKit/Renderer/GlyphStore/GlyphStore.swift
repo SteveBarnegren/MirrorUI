@@ -41,6 +41,7 @@ enum GlyphType: String {
     // MARK: - Clefs
     case gClef
     case fClef
+    case unpitchedPercussionClef1
 
     // MARK: - Rests
     case restWhole
