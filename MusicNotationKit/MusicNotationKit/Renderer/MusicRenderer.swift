@@ -47,11 +47,6 @@ class MusicRenderer {
         
         if !composition.isPreprocessed {
             
-            // Add final barline (this should definitely be done somewhere else)
-            for stave in composition.staves {
-                stave.bars.last?.trailingBarline = Barline()
-            }
-            
             // Set bar numbers
             SetBarNumbersProcessingOperation().process(composition: composition)
             
@@ -60,9 +55,9 @@ class MusicRenderer {
             
             // Apply tuplet timings
             ApplyTupletTimesProcessingOperation().process(composition: composition)
-            
-            // Join barlines
-            JoinBarlinesCompositionProcessingOperation().process(composition: composition)
+
+            // Create Barlines
+            CreateBarlinesProcessingOperation().process(composition: composition)
 
             // Generate time signature symbols
             GenerateTimeSignatureSymbolsProcessingOperation().process(composition: composition)

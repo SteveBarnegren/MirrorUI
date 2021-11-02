@@ -1,6 +1,13 @@
 import Foundation
 
 class Barline: HorizontalLayoutItem {
+
+    enum LineType {
+        case single
+        case double
+    }
+
+    var lineType = LineType.single
     
     // HorizontalLayoutItem
     let layoutDuration: Time? = nil

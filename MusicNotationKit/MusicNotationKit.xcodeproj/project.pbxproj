@@ -30,7 +30,6 @@
 		6736F2392550B65900148F6B /* PathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736F2382550B65900148F6B /* PathUtils.swift */; };
 		6736F23F2550B68100148F6B /* Path+CGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6736F23E2550B68100148F6B /* Path+CGPath.swift */; };
 		6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739EEAC22E470EA0050950B /* StemDirectionDecider.swift */; };
-		673A3D0E233D4969001CE422 /* JoinBarlinesCompositionProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D0D233D4969001CE422 /* JoinBarlinesCompositionProcessingOperation.swift */; };
 		673A3D15233FC18A001CE422 /* Array+EachWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D14233FC18A001CE422 /* Array+EachWith.swift */; };
 		673A3D17233FC1BE001CE422 /* Array+EachWithTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D16233FC1BE001CE422 /* Array+EachWithTests.swift */; };
 		673A3D1A233FC1FF001CE422 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673A3D19233FC1FF001CE422 /* Assertions.swift */; };
@@ -212,6 +211,9 @@
 		AA6D73C3267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D73C2267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift */; };
 		AA6D73C5267BE76400ECCEB2 /* FloatingTextArticulationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D73C4267BE76400ECCEB2 /* FloatingTextArticulationRenderer.swift */; };
 		AA8F7CE8268A6FD900AD0754 /* FloatingArticulationMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F7CE7268A6FD900AD0754 /* FloatingArticulationMark.swift */; };
+		AABA2BBA2731D85F00AED392 /* BarlineOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA2BB92731D85F00AED392 /* BarlineOptions.swift */; };
+		AABA2BC02731DC3100AED392 /* CreateBarlinesProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA2BBF2731DC3100AED392 /* CreateBarlinesProcessingOperation.swift */; };
+		AABA2BC22731DC7A00AED392 /* BarlineCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA2BC12731DC7A00AED392 /* BarlineCreator.swift */; };
 		AADD3CA026714C5000E127B2 /* TimeSignatureSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD3C9F26714C5000E127B2 /* TimeSignatureSymbol.swift */; };
 		AADD3CA32671562500E127B2 /* GenerateTimeSignatureSymbolsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD3CA22671562500E127B2 /* GenerateTimeSignatureSymbolsProcessingOperation.swift */; };
 		AADD3CA5267159E900E127B2 /* TimeSignatureRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD3CA4267159E900E127B2 /* TimeSignatureRenderer.swift */; };
@@ -251,7 +253,6 @@
 		6736F2382550B65900148F6B /* PathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathUtils.swift; sourceTree = "<group>"; };
 		6736F23E2550B68100148F6B /* Path+CGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CGPath.swift"; sourceTree = "<group>"; };
 		6739EEAC22E470EA0050950B /* StemDirectionDecider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemDirectionDecider.swift; sourceTree = "<group>"; };
-		673A3D0D233D4969001CE422 /* JoinBarlinesCompositionProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinBarlinesCompositionProcessingOperation.swift; sourceTree = "<group>"; };
 		673A3D14233FC18A001CE422 /* Array+EachWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+EachWith.swift"; sourceTree = "<group>"; };
 		673A3D16233FC1BE001CE422 /* Array+EachWithTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+EachWithTests.swift"; sourceTree = "<group>"; };
 		673A3D19233FC1FF001CE422 /* Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
@@ -436,6 +437,9 @@
 		AA6D73C2267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingArticulationPlacerRenderOperation.swift; sourceTree = "<group>"; };
 		AA6D73C4267BE76400ECCEB2 /* FloatingTextArticulationRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextArticulationRenderer.swift; sourceTree = "<group>"; };
 		AA8F7CE7268A6FD900AD0754 /* FloatingArticulationMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingArticulationMark.swift; sourceTree = "<group>"; };
+		AABA2BB92731D85F00AED392 /* BarlineOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineOptions.swift; sourceTree = "<group>"; };
+		AABA2BBF2731DC3100AED392 /* CreateBarlinesProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBarlinesProcessingOperation.swift; sourceTree = "<group>"; };
+		AABA2BC12731DC7A00AED392 /* BarlineCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineCreator.swift; sourceTree = "<group>"; };
 		AADD3C9F26714C5000E127B2 /* TimeSignatureSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSignatureSymbol.swift; sourceTree = "<group>"; };
 		AADD3CA22671562500E127B2 /* GenerateTimeSignatureSymbolsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTimeSignatureSymbolsProcessingOperation.swift; sourceTree = "<group>"; };
 		AADD3CA4267159E900E127B2 /* TimeSignatureRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSignatureRenderer.swift; sourceTree = "<group>"; };
@@ -609,14 +613,6 @@
 				6758D27026014B3500CFE7F6 /* Array+Path.swift */,
 			);
 			path = Path;
-			sourceTree = "<group>";
-		};
-		673A3D0C233D4935001CE422 /* Join Barlines */ = {
-			isa = PBXGroup;
-			children = (
-				673A3D0D233D4969001CE422 /* JoinBarlinesCompositionProcessingOperation.swift */,
-			);
-			path = "Join Barlines";
 			sourceTree = "<group>";
 		};
 		673A3D18233FC1F2001CE422 /* Assertions */ = {
@@ -830,6 +826,7 @@
 				AA2F9CF026694D6800467D13 /* GraceNote.swift */,
 				67706493245CB41E0083037F /* Tie.swift */,
 				6751A84122357AE3000B0D08 /* Rest.swift */,
+				AABA2BB92731D85F00AED392 /* BarlineOptions.swift */,
 				6751A83D223304E7000B0D08 /* Barline.swift */,
 				67494C8921CD84520078A575 /* Pitch.swift */,
 				6751A83F22350475000B0D08 /* NoteValue.swift */,
@@ -1089,7 +1086,7 @@
 				679EB1B5260A861800043AAD /* Configure Clefs */,
 				67F0DD502471C5160048C718 /* Set Bar Numbers */,
 				67CDC487254CAE2500C70E5B /* Apply Tuplet Times */,
-				673A3D0C233D4935001CE422 /* Join Barlines */,
+				AABA2BBE2731DBEA00AED392 /* Create Barlines */,
 				AADD3CA1267155F000E127B2 /* Generate TimeSignature Symbols */,
 				6726FB01223067BC002EFE4D /* Generate Symbol Descriptions */,
 				AA59722F2663A44100C516A8 /* Generate Grace Note Descriptions */,
@@ -1219,6 +1216,15 @@
 				AA6D73C2267BE1E900ECCEB2 /* FloatingArticulationPlacerRenderOperation.swift */,
 			);
 			path = "Floating Articulation Placer";
+			sourceTree = "<group>";
+		};
+		AABA2BBE2731DBEA00AED392 /* Create Barlines */ = {
+			isa = PBXGroup;
+			children = (
+				AABA2BBF2731DC3100AED392 /* CreateBarlinesProcessingOperation.swift */,
+				AABA2BC12731DC7A00AED392 /* BarlineCreator.swift */,
+			);
+			path = "Create Barlines";
 			sourceTree = "<group>";
 		};
 		AADD3CA1267155F000E127B2 /* Generate TimeSignature Symbols */ = {
@@ -1447,12 +1453,13 @@
 				676BB5F4233169C200EA9F9C /* GenerateLayoutAnchorsRenderOperation.swift in Sources */,
 				674D503921DD50C8009E5AFE /* Composition.swift in Sources */,
 				AA2F9CF126694D6800467D13 /* GraceNote.swift in Sources */,
+				AABA2BBA2731D85F00AED392 /* BarlineOptions.swift in Sources */,
 				67C1A361246DB7FC0036371C /* ConflictIdentifers+Ties.swift in Sources */,
 				670D51B625474B21000B7B36 /* Accent.swift in Sources */,
 				67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */,
+				AABA2BC02731DC3100AED392 /* CreateBarlinesProcessingOperation.swift in Sources */,
 				67CF192A260BD2E1000785AA /* StavePosition.swift in Sources */,
 				676BB5F623316A1400EA9F9C /* BarLayoutAnchorsBuilder.swift in Sources */,
-				673A3D0E233D4969001CE422 /* JoinBarlinesCompositionProcessingOperation.swift in Sources */,
 				67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */,
 				67669E6522EDFEDB004F1927 /* Array+Insertion.swift in Sources */,
 				67669E6122EDF9D9004F1927 /* RepeatingPatternSequence.swift in Sources */,
@@ -1503,6 +1510,7 @@
 				67F6880421EA6D32003707DD /* HorizontalLayoutItem.swift in Sources */,
 				674D504E21E23D72009E5AFE /* HorizontalPositionerRenderOperation.swift in Sources */,
 				670ABDB022C55E7000BFA678 /* Sequence+Extensions.swift in Sources */,
+				AABA2BC22731DC7A00AED392 /* BarlineCreator.swift in Sources */,
 				6772877F24351BFE0038B142 /* AccidentalSymbol.swift in Sources */,
 				678A0CD52561B49000A6EB41 /* GlyphStore+Rests.swift in Sources */,
 				6789B86F2465538E002D78A8 /* VariationSelector.swift in Sources */,

@@ -41,6 +41,7 @@
 		AA6D73BF267BDFAB00ECCEB2 /* ComponentCompositions+FloatingTextArticulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D73BE267BDFAB00ECCEB2 /* ComponentCompositions+FloatingTextArticulation.swift */; };
 		AA716030262E118F00244CFB /* MirrorUI in Frameworks */ = {isa = PBXBuildFile; productRef = AA71602F262E118F00244CFB /* MirrorUI */; };
 		AA8D3AD026793B990023D595 /* ComponentCompositions+TimeSignatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8D3ACF26793B990023D595 /* ComponentCompositions+TimeSignatures.swift */; };
+		AABA2BBC2731D9AE00AED392 /* ComponentCompositions+Barlines.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA2BBB2731D9AE00AED392 /* ComponentCompositions+Barlines.swift */; };
 		AAD2AB5E263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD2AB5D263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 		AA414C1426B9D2E00056FD13 /* ComponentCompositions+SingleLineStave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+SingleLineStave.swift"; sourceTree = "<group>"; };
 		AA6D73BE267BDFAB00ECCEB2 /* ComponentCompositions+FloatingTextArticulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+FloatingTextArticulation.swift"; sourceTree = "<group>"; };
 		AA8D3ACF26793B990023D595 /* ComponentCompositions+TimeSignatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+TimeSignatures.swift"; sourceTree = "<group>"; };
+		AABA2BBB2731D9AE00AED392 /* ComponentCompositions+Barlines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+Barlines.swift"; sourceTree = "<group>"; };
 		AAD2AB5D263D7F4E00F0E5A9 /* ComponentCompositions+GraceNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentCompositions+GraceNotes.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,6 +220,7 @@
 			children = (
 				67BA78A02430B90C0097806B /* ComponentCompositions.swift */,
 				67F440522431049F003DFA63 /* ComponentCompositions+Notes.swift */,
+				AABA2BBB2731D9AE00AED392 /* ComponentCompositions+Barlines.swift */,
 				67BA78A42430BB070097806B /* ComponentCompositions+Rests.swift */,
 				67BA78A22430B92E0097806B /* ComponentCompositions+IntervalsAndChords.swift */,
 				677256142440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift */,
@@ -396,6 +399,7 @@
 				677256152440E16100954C91 /* ComponentCompositions+AdjacentNoteChords.swift in Sources */,
 				679A2EF8234A59A200E157C8 /* TestComposition.swift in Sources */,
 				670D51BA25474B9B000B7B36 /* ComponentCompositions+Accents.swift in Sources */,
+				AABA2BBC2731D9AE00AED392 /* ComponentCompositions+Barlines.swift in Sources */,
 				677F34C12427E48300507156 /* Deeplink.swift in Sources */,
 				677F34BF2427789900507156 /* ComponentsMenuViewController.swift in Sources */,
 				672FA3C021CF8F0F002ECDD6 /* GridOverlayView.swift in Sources */,

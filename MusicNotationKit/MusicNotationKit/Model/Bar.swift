@@ -7,8 +7,9 @@ public class Bar {
     var clefSymbol = ClefSymbol()
     var isFirstBarInLine = false
     var sequences = [NoteSequence]()
-    let leadingBarline = Barline()
-    var trailingBarline: Barline?
+    var barlineOptions = BarlineOptions()
+    var leadingBarline: Barline!
+    var trailingBarline: Barline!
     public var timeSignature: TimeSignature
     var timeSignatureSymbol: TimeSignatureSymbol?
     
@@ -29,6 +30,10 @@ public class Bar {
     
     public func add(sequence: NoteSequence) {
         self.sequences.append(sequence)
+    }
+
+    public func set(barlineOptions: BarlineOptions) {
+        self.barlineOptions = barlineOptions
     }
 }
 
