@@ -1,10 +1,16 @@
 import Foundation
 
 class BarlineRenderer {
+
+    private let thinBarlineWidth: Double
+
+    init(metrics: FontMetrics) {
+        self.thinBarlineWidth = metrics.thinBarlineThickness
+    }
     
     func paths(forBarline barline: Barline) -> [Path] {
         
-        let width = 0.2
+        let width = thinBarlineWidth
         let height = 4.0
         
         let rect = Rect(x: barline.xPosition - width/2,

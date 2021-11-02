@@ -895,6 +895,7 @@
 		6793005525549A5E001AF1E4 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				679523F6255DC40A005E7A90 /* Font.swift */,
 				6793006425549B1A001AF1E4 /* SMuFLSupport.swift */,
 				67C89FDE255C79DF009B18DF /* FontLoader.swift */,
 				6793005F25549ADC001AF1E4 /* Bravura */,
@@ -1129,7 +1130,6 @@
 		67C89FE4255C8187009B18DF /* GlyphStore */ = {
 			isa = PBXGroup;
 			children = (
-				679523F6255DC40A005E7A90 /* Font.swift */,
 				67C89FD8255C731A009B18DF /* GlyphStore.swift */,
 				67C89FE5255C81D2009B18DF /* GlyphStore+Noteheads.swift */,
 				678A0CD42561B49000A6EB41 /* GlyphStore+Rests.swift */,

@@ -17,6 +17,7 @@ class CompositionPathsCreator {
     private let tupletMarksRenderer: TupletMarksRenderer
     private let graceNoteRenderer: GraceNoteRenderer
     private let timeSignatureRenderer: TimeSignatureRenderer
+    private let barlineRenderer: BarlineRenderer
     
     init(glyphs: GlyphStore) {
         self.metrics = glyphs.metrics
@@ -26,6 +27,7 @@ class CompositionPathsCreator {
         self.tupletMarksRenderer = TupletMarksRenderer(glyphs: glyphs)
         self.graceNoteRenderer = GraceNoteRenderer(glyphs: glyphs)
         self.timeSignatureRenderer = TimeSignatureRenderer(glyphs: glyphs)
+        self.barlineRenderer = BarlineRenderer(metrics: glyphs.metrics)
     }
     
     func paths(forVoices voices: [RenderableVoice], canvasWidth: Double, staveSpacing: Double) -> [Path] {
@@ -65,7 +67,7 @@ class CompositionPathsCreator {
         
         // Make the path for the last barline
         if let lastBarline = bars.last?.trailingBarline {
-            paths += BarlineRenderer().paths(forBarline: lastBarline)
+            paths += barlineRenderer.paths(forBarline: lastBarline)
         }
         
         paths += StaveRenderer.stavePaths(withWidth: canvasWidth, style: staveStyle)
@@ -74,7 +76,7 @@ class CompositionPathsCreator {
     
     private func makePaths(forBar bar: Bar, inRange barRange: ClosedRange<Int>, canvasWidth: Double, leadingTies: [Tie]) -> [Path] {
         
-        let barlinePath = BarlineRenderer().paths(forBarline: bar.leadingBarline)
+        let barlinePath = barlineRenderer.paths(forBarline: bar.leadingBarline)
         let clefPath = bar.isFirstBarInLine ? glyphRenderer.paths(forRenderable: bar.clefSymbol) : []
 
         var timeSigaturePaths = [Path]()
