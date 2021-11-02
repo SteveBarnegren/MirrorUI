@@ -6,17 +6,11 @@ class Barline: HorizontalLayoutItem {
     let layoutDuration: Time? = nil
     let leadingChildItems = [AdjacentLayoutItem]()
     let trailingChildItems = [AdjacentLayoutItem]()
-    lazy var horizontalLayoutWidth = HorizontalLayoutWidthType.centeredOnGlyph(glyph)
+    lazy var horizontalLayoutWidth = HorizontalLayoutWidthType.custom { glyphStore in
+        let width = glyphStore.metrics.thinBarlineThickness
+        return (leading: width/2, trailing: width/2)
+    }
     
     // HorizontallyPositionable
     var xPosition = Double(0)
-}
-
-// MARK: - SingleGlyphRenderable
-
-extension Barline: SingleGlyphRenderable {
-
-    var glyph: GlyphType {
-        return .barlineSingle
-    }
 }
