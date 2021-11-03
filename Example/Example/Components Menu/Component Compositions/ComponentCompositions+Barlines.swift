@@ -20,9 +20,11 @@ extension ComponentCompositions {
         }
 
         addBar(options: [])
+        addBar(options: [])
         addBar(options: [.double])
         addBar(options: [])
-        addBar(options: [.final])
+        addBar(options: [.double, .startRepeat])
+        addBar(options: [.endRepeat, .final])
         return composition
     }
 }

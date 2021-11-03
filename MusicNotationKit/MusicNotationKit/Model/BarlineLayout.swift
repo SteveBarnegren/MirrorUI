@@ -4,6 +4,8 @@ import Foundation
 enum BarlineLayoutItem {
     case space(Double)
     case line(width: Double)
+    case repeatLeft(width: Double)
+    case repeatRight(width: Double)
 
     var width: Double {
         switch self {
@@ -11,58 +13,72 @@ enum BarlineLayoutItem {
                 return w
             case .line(width: let w):
                 return w
+            case .repeatLeft(let w):
+                return w
+            case .repeatRight(let w):
+                return w
         }
     }
 }
 
 class BarlineLayout {
 
-    private let lineType: Barline.LineType
-    private let fontMetrics: FontMetrics
     private(set) var items = [BarlineLayoutItem]()
     lazy var width: Double = items.sum(\.width)
 
-    init(lineType: Barline.LineType, fontMetrics: FontMetrics) {
-        self.lineType = lineType
-        self.fontMetrics = fontMetrics
-        self.items = self.createLayoutItems()
+    init(barline: Barline, glyphs: GlyphStore) {
+        self.items = self.createLayoutItems(lineType: barline.lineType,
+                                            repeatleft: barline.repeatLeft,
+                                            repeatRight: barline.repeatRight,
+                                            glyphs: glyphs)
     }
 
-    private func createLayoutItems() -> [BarlineLayoutItem] {
+    private func createLayoutItems(lineType: Barline.LineType,
+                                   repeatleft: Bool,
+                                   repeatRight: Bool,
+                                   glyphs: GlyphStore) -> [BarlineLayoutItem] {
+        let metrics = glyphs.metrics
+
         var items = [BarlineLayoutItem]()
+
+        // Repeat left
+        if repeatleft {
+            items.append(
+                .repeatLeft(width: glyphs.glyph(forType: .repeatDots).width),
+                .space(metrics.repeatBarlineDotSeparation)
+            )
+
+        }
+
+        // Lines
+        let thinBarline = BarlineLayoutItem.line(width: metrics.thinBarlineThickness)
+        let thickBarline = BarlineLayoutItem.line(width: metrics.thickBarlineThickness)
+
         switch lineType {
             case .single:
-                items.append(makeThinBarline())
+                items.append(thinBarline)
             case .double:
                 items.append(
-                    makeThinBarline(),
-                    .space(fontMetrics.barlineSeparation),
-                    makeThinBarline()
+                    thinBarline,
+                    .space(metrics.barlineSeparation),
+                    thinBarline
                 )
             case .final:
                 items.append(
-                    makeThinBarline(),
-                    .space(fontMetrics.barlineSeparation),
-                    makeThickBarline()
+                    thinBarline,
+                    .space(metrics.barlineSeparation),
+                    thickBarline
                 )
         }
+
+        // Repeat right
+        if repeatRight {
+            items.append(
+                .space(metrics.repeatBarlineDotSeparation),
+                .repeatRight(width: glyphs.glyph(forType: .repeatDots).width)
+            )
+        }
+
         return items
-    }
-
-    private func makeThinBarline() -> BarlineLayoutItem {
-        return .line(width: fontMetrics.thinBarlineThickness)
-    }
-
-    private func makeThickBarline() -> BarlineLayoutItem {
-        return .line(width: fontMetrics.thickBarlineThickness)
-    }
-}
-
-extension BarlineLayout {
-
-    static func layout(forBarline barline: Barline,
-                fontMetrics: FontMetrics) -> BarlineLayout {
-        return BarlineLayout(lineType: barline.lineType,
-                             fontMetrics: fontMetrics)
     }
 }

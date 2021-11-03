@@ -9,14 +9,15 @@ class Barline: HorizontalLayoutItem {
     }
 
     var lineType = LineType.single
-    
+    var repeatLeft = false
+    var repeatRight = false
+         
     // HorizontalLayoutItem
     let layoutDuration: Time? = nil
     let leadingChildItems = [AdjacentLayoutItem]()
     let trailingChildItems = [AdjacentLayoutItem]()
     lazy var horizontalLayoutWidth = HorizontalLayoutWidthType.custom { [weak self] glyphStore in
-        let width = BarlineLayout(lineType: self?.lineType ?? .single,
-                                  fontMetrics: glyphStore.metrics).width
+        let width = self.flatMap { BarlineLayout(barline: $0, glyphs: glyphStore) }?.width ?? 0
         return (leading: width/2, trailing: width/2)
     }
     

@@ -83,7 +83,7 @@
 		67678E0021E2865400E7FD71 /* BidrectionalCollection+EachWithIsLast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678DFF21E2865400E7FD71 /* BidrectionalCollection+EachWithIsLast.swift */; };
 		67678E0221E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0121E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift */; };
 		67678E0721E3E9CB00E7FD71 /* Positionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0621E3E9CB00E7FD71 /* Positionable.swift */; };
-		67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */; };
+		67678E0921E3EF7E00E7FD71 /* BarlineRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67678E0821E3EF7E00E7FD71 /* BarlineRenderer.swift */; };
 		6767E320229F143D00E9964D /* HorizontalLayoutSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6767E31F229F143D00E9964D /* HorizontalLayoutSolver.swift */; };
 		6767E322229F182E00E9964D /* BarLayoutAnchorsStitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6767E321229F182E00E9964D /* BarLayoutAnchorsStitcher.swift */; };
 		6769B42722BDA0BC00AAFFF9 /* LayoutTimingSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6769B42622BDA0BC00AAFFF9 /* LayoutTimingSolver.swift */; };
@@ -310,7 +310,7 @@
 		67678DFF21E2865400E7FD71 /* BidrectionalCollection+EachWithIsLast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidrectionalCollection+EachWithIsLast.swift"; sourceTree = "<group>"; };
 		67678E0121E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumeratedWithLastItemFlagBidirectionalCollection.swift; sourceTree = "<group>"; };
 		67678E0621E3E9CB00E7FD71 /* Positionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positionable.swift; sourceTree = "<group>"; };
-		67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineRender.swift; sourceTree = "<group>"; };
+		67678E0821E3EF7E00E7FD71 /* BarlineRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineRenderer.swift; sourceTree = "<group>"; };
 		6767E31F229F143D00E9964D /* HorizontalLayoutSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLayoutSolver.swift; sourceTree = "<group>"; };
 		6767E321229F182E00E9964D /* BarLayoutAnchorsStitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarLayoutAnchorsStitcher.swift; sourceTree = "<group>"; };
 		6769B42622BDA0BC00AAFFF9 /* LayoutTimingSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTimingSolver.swift; sourceTree = "<group>"; };
@@ -745,7 +745,7 @@
 				679855D22461FF4100877129 /* Note Renderer */,
 				67F2DB64261E4548001F6275 /* GlyphRenderer.swift */,
 				6749365021CF8861005BA334 /* StaveRenderer.swift */,
-				67678E0821E3EF7E00E7FD71 /* BarlineRender.swift */,
+				67678E0821E3EF7E00E7FD71 /* BarlineRenderer.swift */,
 				67706498245CC3DC0083037F /* TieRenderer.swift */,
 				67F5658E254754EC00910487 /* AccentRenderer.swift */,
 				67CDC48E254CBC7600C70E5B /* TupletMarksRenderer.swift */,
@@ -1447,7 +1447,7 @@
 				677C9C8121C5172100C7A16E /* MusicView.swift in Sources */,
 				6751A84622357EA7000B0D08 /* RestSymbolDescriber.swift in Sources */,
 				67494C7E21CC04550078A575 /* MusicRenderer.swift in Sources */,
-				67678E0921E3EF7E00E7FD71 /* BarlineRender.swift in Sources */,
+				67678E0921E3EF7E00E7FD71 /* BarlineRenderer.swift in Sources */,
 				67728784243BB6C80038B142 /* CalculateNoteHeadAlignmentProcessingOperation.swift in Sources */,
 				67F6880B21EB51D6003707DD /* FloatingPoint+Extensions.swift in Sources */,
 				67F0DD522471C5370048C718 /* SetBarNumbersProcessingOperation.swift in Sources */,

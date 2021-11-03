@@ -27,7 +27,7 @@ class CompositionPathsCreator {
         self.tupletMarksRenderer = TupletMarksRenderer(glyphs: glyphs)
         self.graceNoteRenderer = GraceNoteRenderer(glyphs: glyphs)
         self.timeSignatureRenderer = TimeSignatureRenderer(glyphs: glyphs)
-        self.barlineRenderer = BarlineRenderer(metrics: glyphs.metrics)
+        self.barlineRenderer = BarlineRenderer(glyphs: glyphs)
     }
     
     func paths(forVoices voices: [RenderableVoice], canvasWidth: Double, staveSpacing: Double) -> [Path] {

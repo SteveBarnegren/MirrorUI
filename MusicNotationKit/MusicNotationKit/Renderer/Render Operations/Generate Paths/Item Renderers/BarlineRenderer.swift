@@ -2,15 +2,15 @@ import Foundation
 
 class BarlineRenderer {
 
-    private let metrics: FontMetrics
+    private let glyphs: GlyphStore
 
-    init(metrics: FontMetrics) {
-        self.metrics = metrics
+    init(glyphs: GlyphStore) {
+        self.glyphs = glyphs
     }
     
     func paths(forBarline barline: Barline) -> [Path] {
 
-        let layout = BarlineLayout.layout(forBarline: barline, fontMetrics: metrics)
+        let layout = BarlineLayout(barline: barline, glyphs: glyphs)
         var paths = [Path]()
 
         let height = 4.0 // Full stave height
@@ -27,6 +27,16 @@ class BarlineRenderer {
                                     height: height)
                     var path = Path(rect: rect)
                     path.drawStyle = .fill
+                    paths.append(path)
+                    xPos += width
+                case .repeatLeft(width: let width):
+                    var path = glyphs.glyph(forType: .repeatDots).path
+                    path.translate(x: xPos, y: -2) // Origin is below dots, so they need to be centered
+                    paths.append(path)
+                    xPos += width
+                case .repeatRight(width: let width):
+                    var path = glyphs.glyph(forType: .repeatDots).path
+                    path.translate(x: xPos, y: -2) // Origin is below dots, so they need to be centered
                     paths.append(path)
                     xPos += width
             }

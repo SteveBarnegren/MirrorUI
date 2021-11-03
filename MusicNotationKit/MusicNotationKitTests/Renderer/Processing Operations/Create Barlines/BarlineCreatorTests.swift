@@ -46,6 +46,38 @@ class BarlineCreatorTests: XCTestCase {
                trailingOptions: [.double],
                expectedLineType: .final)
     }
+
+    // MARK: - Repeats
+
+    func test_StartRepeat() {
+        verify(preceedingOptions: [],
+               trailingOptions: [.startRepeat],
+               expectedLineType: .single,
+               expectRepeatRight: true)
+    }
+
+    func test_EndRepeat() {
+        verify(preceedingOptions: [.endRepeat],
+               trailingOptions: [],
+               expectedLineType: .single,
+               expectRepeatLeft: true)
+    }
+
+    func test_PreceedingStartRepeatIgnored() {
+        verify(preceedingOptions: [.startRepeat],
+               trailingOptions: [],
+               expectedLineType: .single,
+               expectRepeatLeft: false,
+               expectRepeatRight: false)
+    }
+
+    func test_TrailingEndRepeatIgnored() {
+        verify(preceedingOptions: [],
+               trailingOptions: [.endRepeat],
+               expectedLineType: .single,
+               expectRepeatLeft: false,
+               expectRepeatRight: false)
+    }
 }
 
 // MARK: - Verification
@@ -55,12 +87,16 @@ extension BarlineCreatorTests {
     private func verify(preceedingOptions: BarlineOptions,
                         trailingOptions: BarlineOptions,
                         expectedLineType: Barline.LineType,
+                        expectRepeatLeft: Bool = false,
+                        expectRepeatRight: Bool = false,
                         file: StaticString = #file,
                         line: UInt = #line) {
 
         let barline = barlineCreator.createBarline(leadingOptions: preceedingOptions,
                                                    trailingOptions: trailingOptions)
         XCTAssertEqual(barline.lineType, expectedLineType, file: file, line: line)
+        XCTAssertEqual(barline.repeatLeft, expectRepeatLeft, file: file, line: line)
+        XCTAssertEqual(barline.repeatRight, expectRepeatRight, file: file, line: line)
     }
 
 }
