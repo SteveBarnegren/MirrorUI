@@ -11,7 +11,7 @@ class Barline: HorizontalLayoutItem {
     var lineType = LineType.single
     var repeatLeft = false
     var repeatRight = false
-         
+
     // HorizontalLayoutItem
     let layoutDuration: Time? = nil
     let leadingChildItems = [AdjacentLayoutItem]()
