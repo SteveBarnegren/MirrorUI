@@ -20,8 +20,9 @@ extension ComponentCompositions {
         }
 
         addBar(options: [])
-        addBar(options: [])
         addBar(options: [.double])
+        addBar(options: [])
+        addBar(options: [.final])
         return composition
     }
 }

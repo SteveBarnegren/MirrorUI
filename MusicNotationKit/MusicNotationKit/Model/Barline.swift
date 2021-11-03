@@ -5,6 +5,7 @@ class Barline: HorizontalLayoutItem {
     enum LineType {
         case single
         case double
+        case final
     }
 
     var lineType = LineType.single

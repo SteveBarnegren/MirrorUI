@@ -39,12 +39,22 @@ class BarlineLayout {
                     .space(fontMetrics.barlineSeparation),
                     makeThinBarline()
                 )
+            case .final:
+                items.append(
+                    makeThinBarline(),
+                    .space(fontMetrics.barlineSeparation),
+                    makeThickBarline()
+                )
         }
         return items
     }
 
     private func makeThinBarline() -> BarlineLayoutItem {
         return .line(width: fontMetrics.thinBarlineThickness)
+    }
+
+    private func makeThickBarline() -> BarlineLayoutItem {
+        return .line(width: fontMetrics.thickBarlineThickness)
     }
 }
 
