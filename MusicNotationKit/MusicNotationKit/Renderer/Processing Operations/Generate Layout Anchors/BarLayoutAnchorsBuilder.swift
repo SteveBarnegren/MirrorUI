@@ -12,12 +12,6 @@ class LayoutAnchorsBuilder {
     
     func makeAnchors(from composition: Composition) {
         
-        // Add a trailing bar line
-        // TODO: this should definitely not be done here!
-        for stave in composition.staves {
-            stave.bars.last?.trailingBarline = Barline()
-        }
-        
         for (barSlice, previousBarSlice, isLast) in composition.barSlices.eachWithPrevious().eachWithIsLast().unnestTuples() {
             
             var barAnchors = [LayoutAnchor]()

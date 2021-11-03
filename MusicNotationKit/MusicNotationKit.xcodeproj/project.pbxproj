@@ -203,6 +203,9 @@
 		AA1F308E26B887BF0037EA3D /* TextArticulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F308D26B887BF0037EA3D /* TextArticulation.swift */; };
 		AA1F309026B888EA0037EA3D /* TextArticulationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F308F26B888EA0037EA3D /* TextArticulationRenderer.swift */; };
 		AA2F9CF126694D6800467D13 /* GraceNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F9CF026694D6800467D13 /* GraceNote.swift */; };
+		AA412D202733097700E1F8AD /* BarlineLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA412D1F2733097700E1F8AD /* BarlineLayout.swift */; };
+		AA412D2227330C0B00E1F8AD /* Array+Append.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA412D2127330C0B00E1F8AD /* Array+Append.swift */; };
+		AA412D2427330D0E00E1F8AD /* Array+AppendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA412D2327330D0E00E1F8AD /* Array+AppendTests.swift */; };
 		AA5972312663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */; };
 		AA5972332663AB6700C516A8 /* GraceNoteRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */; };
 		AA5972352663E12900C516A8 /* GlyphStore+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5972342663E12900C516A8 /* GlyphStore+Flags.swift */; };
@@ -429,6 +432,9 @@
 		AA1F308D26B887BF0037EA3D /* TextArticulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArticulation.swift; sourceTree = "<group>"; };
 		AA1F308F26B888EA0037EA3D /* TextArticulationRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArticulationRenderer.swift; sourceTree = "<group>"; };
 		AA2F9CF026694D6800467D13 /* GraceNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceNote.swift; sourceTree = "<group>"; };
+		AA412D1F2733097700E1F8AD /* BarlineLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineLayout.swift; sourceTree = "<group>"; };
+		AA412D2127330C0B00E1F8AD /* Array+Append.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Append.swift"; sourceTree = "<group>"; };
+		AA412D2327330D0E00E1F8AD /* Array+AppendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+AppendTests.swift"; sourceTree = "<group>"; };
 		AA5972302663A46200C516A8 /* GenerateGraceNoteDescriptionsProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateGraceNoteDescriptionsProcessingOperation.swift; sourceTree = "<group>"; };
 		AA5972322663AB6700C516A8 /* GraceNoteRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceNoteRenderer.swift; sourceTree = "<group>"; };
 		AA5972342663E12900C516A8 /* GlyphStore+Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlyphStore+Flags.swift"; sourceTree = "<group>"; };
@@ -828,6 +834,7 @@
 				6751A84122357AE3000B0D08 /* Rest.swift */,
 				AABA2BB92731D85F00AED392 /* BarlineOptions.swift */,
 				6751A83D223304E7000B0D08 /* Barline.swift */,
+				AA412D1F2733097700E1F8AD /* BarlineLayout.swift */,
 				67494C8921CD84520078A575 /* Pitch.swift */,
 				6751A83F22350475000B0D08 /* NoteValue.swift */,
 				6758D27426014FF000CFE7F6 /* Clef.swift */,
@@ -950,6 +957,7 @@
 		679EB93722BC3AA400A22778 /* Array */ = {
 			isa = PBXGroup;
 			children = (
+				AA412D2127330C0B00E1F8AD /* Array+Append.swift */,
 				67494C8721CD6ECC0078A575 /* Array_Numeric+Extensions.swift */,
 				67F6880521EA6E0C003707DD /* Array+Sorting.swift */,
 				679EB93822BC3AB800A22778 /* Array+Chunked.swift */,
@@ -1172,6 +1180,7 @@
 			isa = PBXGroup;
 			children = (
 				67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */,
+				AA412D2327330D0E00E1F8AD /* Array+AppendTests.swift */,
 				6769B42A22BDA77C00AAFFF9 /* Array+ExtractTests.swift */,
 				673A3D16233FC1BE001CE422 /* Array+EachWithTests.swift */,
 				673A3D1D233FC566001CE422 /* Array+MaybeTests.swift */,
@@ -1388,6 +1397,7 @@
 				6786968B256044F10007214C /* CalculateStemPositionsProcessingOperation.swift in Sources */,
 				678318652440E73100FB9784 /* BinaryInteger+Parity.swift in Sources */,
 				6767E320229F143D00E9964D /* HorizontalLayoutSolver.swift in Sources */,
+				AA412D2227330C0B00E1F8AD /* Array+Append.swift in Sources */,
 				AADD3CA026714C5000E127B2 /* TimeSignatureSymbol.swift in Sources */,
 				670D51B025474AB1000B7B36 /* ArticulationMark.swift in Sources */,
 				677F1E1925FE85E20078D1B8 /* CreateBarSlicesRenderOperation.swift in Sources */,
@@ -1480,6 +1490,7 @@
 				679855C72460A1DB00877129 /* StaveSpace.swift in Sources */,
 				AA1F309026B888EA0037EA3D /* TextArticulationRenderer.swift in Sources */,
 				677F1E1025FE7A350078D1B8 /* Stave.swift in Sources */,
+				AA412D202733097700E1F8AD /* BarlineLayout.swift in Sources */,
 				67BA789B2430AF100097806B /* SingleValueCache.swift in Sources */,
 				674D504021DD5242009E5AFE /* NoteSymbolDescriber.swift in Sources */,
 				67494C8021CC06740078A575 /* Vector2.swift in Sources */,
@@ -1557,6 +1568,7 @@
 				67678E0221E28ADF00E7FD71 /* EnumeratedWithLastItemFlagBidirectionalCollection.swift in Sources */,
 				67A1EF7D22999974009CF58C /* NoteBeamDescriberTests.swift in Sources */,
 				67E7DE03243BBC4A006D7476 /* NoteHeadAlignmentDeciderTests.swift in Sources */,
+				AA412D2427330D0E00E1F8AD /* Array+AppendTests.swift in Sources */,
 				674B9AB322ECC9DF0098D121 /* TimeSignatureTests.swift in Sources */,
 				6769B42B22BDA77C00AAFFF9 /* Array+ExtractTests.swift in Sources */,
 				6756F61723005D7A003F1F19 /* NoteBeamDescriberFourFourTests.swift in Sources */,
