@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 private var textCache = KeyValueCache<String, TextPath>()
 
