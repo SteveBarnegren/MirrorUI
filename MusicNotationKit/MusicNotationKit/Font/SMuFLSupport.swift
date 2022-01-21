@@ -37,7 +37,7 @@ class SMuFLSupport {
     }
     
     private func loadJson(name: String) -> [String: Any] {
-        let bundle = Bundle(for: SMuFLSupport.self)
+        let bundle = Bundle.framework
         
         guard let fileURL = bundle.url(forResource: name, withExtension: "json") else {
             fatalError("Unable to find \(name).json")

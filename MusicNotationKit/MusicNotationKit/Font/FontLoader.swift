@@ -15,7 +15,7 @@ class FontLoader {
     }
     
     private static func registerFont(withName name: String, fileExtension: String) {
-        let frameworkBundle = Bundle(for: SMuFLSupport.self)
+        let frameworkBundle = Bundle.framework
         let pathForResourceString = frameworkBundle.path(forResource: name, ofType: fileExtension)
         let fontData = NSData(contentsOfFile: pathForResourceString!)
         let dataProvider = CGDataProvider(data: fontData!)

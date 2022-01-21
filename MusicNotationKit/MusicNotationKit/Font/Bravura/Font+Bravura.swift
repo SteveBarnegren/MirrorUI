@@ -4,7 +4,7 @@ extension Font {
     
     static let bravura: Font = {
        
-        guard let url = Bundle(for: Font.self).url(forResource: "bravura_metadata", withExtension: "json") else {
+        guard let url = Bundle.framework.url(forResource: "bravura_metadata", withExtension: "json") else {
             fatalError("Unable to find Bravura metadata")
         }
         

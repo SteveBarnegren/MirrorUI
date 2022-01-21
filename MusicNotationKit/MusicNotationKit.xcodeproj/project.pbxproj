@@ -200,6 +200,7 @@
 		67F6880E21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */; };
 		67F6881021EB5597003707DD /* Numeric+Constrained.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6880F21EB5597003707DD /* Numeric+Constrained.swift */; };
 		AA01D413269F7A7D0068AE14 /* StemAugmentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01D412269F7A7D0068AE14 /* StemAugmentation.swift */; };
+		AA1BE803279A095500E82291 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1BE802279A095500E82291 /* Bundle+Extensions.swift */; };
 		AA1F308E26B887BF0037EA3D /* TextArticulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F308D26B887BF0037EA3D /* TextArticulation.swift */; };
 		AA1F309026B888EA0037EA3D /* TextArticulationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F308F26B888EA0037EA3D /* TextArticulationRenderer.swift */; };
 		AA1F9CEE2733181E00D4069E /* BarlineCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1F9CED2733181E00D4069E /* BarlineCreatorTests.swift */; };
@@ -430,6 +431,7 @@
 		67F6880D21EB52B9003707DD /* FloatingPoint+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		67F6880F21EB5597003707DD /* Numeric+Constrained.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Constrained.swift"; sourceTree = "<group>"; };
 		AA01D412269F7A7D0068AE14 /* StemAugmentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemAugmentation.swift; sourceTree = "<group>"; };
+		AA1BE802279A095500E82291 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		AA1F308D26B887BF0037EA3D /* TextArticulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArticulation.swift; sourceTree = "<group>"; };
 		AA1F308F26B888EA0037EA3D /* TextArticulationRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArticulationRenderer.swift; sourceTree = "<group>"; };
 		AA1F9CED2733181E00D4069E /* BarlineCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarlineCreatorTests.swift; sourceTree = "<group>"; };
@@ -862,6 +864,7 @@
 				6728B2CD22399C0800382D92 /* Swift Standard Library */,
 				677C9C8321C5192900C7A16E /* UIBezierPath+Extensions.swift */,
 				67C7CC1A21C6D5CD00A020D0 /* CGPoint+Extensions.swift */,
+				AA1BE802279A095500E82291 /* Bundle+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1462,6 +1465,7 @@
 				674D503B21DD50E6009E5AFE /* Bar.swift in Sources */,
 				67C480B5246B38BB00899F5A /* VectorMath.swift in Sources */,
 				674B9AAB22EA49B70098D121 /* NoteClusterStemLengthCalculator.swift in Sources */,
+				AA1BE803279A095500E82291 /* Bundle+Extensions.swift in Sources */,
 				AA1F308E26B887BF0037EA3D /* TextArticulation.swift in Sources */,
 				6739EEAD22E470EA0050950B /* StemDirectionDecider.swift in Sources */,
 				6793006525549B1A001AF1E4 /* SMuFLSupport.swift in Sources */,
