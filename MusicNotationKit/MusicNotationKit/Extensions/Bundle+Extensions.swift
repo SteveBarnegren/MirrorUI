@@ -1,3 +1,5 @@
+import Foundation
+
 extension Bundle {
     static var framework: Bundle {
 #if SWIFT_PACKAGE

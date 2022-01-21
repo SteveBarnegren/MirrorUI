@@ -146,7 +146,6 @@
 		679EB93622BC1AF300A22778 /* LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93522BC1AF300A22778 /* LayoutAnchor.swift */; };
 		679EB93922BC3AB800A22778 /* Array+Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679EB93822BC3AB800A22778 /* Array+Chunked.swift */; };
 		67A15F9321C5129500C3C03F /* MusicNotationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A15F8921C5129500C3C03F /* MusicNotationKit.framework */; };
-		67A15F9A21C5129500C3C03F /* MusicNotationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 67A15F8C21C5129500C3C03F /* MusicNotationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67A15FA421C512E800C3C03F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A15FA321C512E800C3C03F /* Note.swift */; };
 		67A1EF7B22999143009CF58C /* PlayableItemTimeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1EF7A22999143009CF58C /* PlayableItemTimeCalculatorTests.swift */; };
 		67A1EF7D22999974009CF58C /* NoteBeamDescriberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1EF7C22999974009CF58C /* NoteBeamDescriberTests.swift */; };
@@ -374,7 +373,6 @@
 		679EB93522BC1AF300A22778 /* LayoutAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutAnchor.swift; sourceTree = "<group>"; };
 		679EB93822BC3AB800A22778 /* Array+Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunked.swift"; sourceTree = "<group>"; };
 		67A15F8921C5129500C3C03F /* MusicNotationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicNotationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		67A15F8C21C5129500C3C03F /* MusicNotationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicNotationKit.h; sourceTree = "<group>"; };
 		67A15F8D21C5129500C3C03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67A15F9221C5129500C3C03F /* MusicNotationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicNotationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A15F9921C5129500C3C03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -996,7 +994,6 @@
 		67A15F8B21C5129500C3C03F /* MusicNotationKit */ = {
 			isa = PBXGroup;
 			children = (
-				67A15F8C21C5129500C3C03F /* MusicNotationKit.h */,
 				67494C7B21CC02D40078A575 /* SymbolPaths.swift */,
 				673A3D2D2343ECD9001CE422 /* NaturalSpacing.swift */,
 				674D503721DD50B2009E5AFE /* Basic Types */,
@@ -1265,7 +1262,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67A15F9A21C5129500C3C03F /* MusicNotationKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
