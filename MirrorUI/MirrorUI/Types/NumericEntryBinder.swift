@@ -14,12 +14,13 @@ class NumericEntryBinder {
     let textBinding: Binding<String>
 
     private let _commit: () -> Void
+    private let _clear: () -> Void
 
     convenience init<T>(state: Ref<[String: Any]>, ref: PropertyRef<T>) where T: StringRepresentable {
 
         self.init(state: state,
                   get: { ref.value },
-                  set: {  ref.value = $0 },
+                  set: { ref.value = $0 },
                   stateKey: "text")
     }
 
@@ -49,11 +50,19 @@ class NumericEntryBinder {
             editText = nil
         }
 
+        _clear = {
+            editText = nil
+        }
+
         textBinding = Binding(get: { editText ?? "" },
                               set: { editText = $0 })
     }
 
     func commit() {
         _commit()
+    }
+
+    func clear() {
+        _clear()
     }
 }

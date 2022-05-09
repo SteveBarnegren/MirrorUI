@@ -87,7 +87,7 @@ fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: Vi
     let stack = VStack(alignment: .leading) {
         Text(context.propertyName)
         HStack {
-            Slider(value: numericBinding, in: range)
+            Slider(value: numericBinding, in: range, onEditingChanged: { _ in textBinder.clear() })
             Button() {
                 editing = !editing
             } label: {
