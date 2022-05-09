@@ -104,6 +104,6 @@ public class PropertyRef<T>: InternalDidSetCaller {
     }
 }
 
-protocol InternalDidSetCaller: class {
+protocol InternalDidSetCaller: AnyObject {
     var internalDidSet: () -> Void { get set }
 }

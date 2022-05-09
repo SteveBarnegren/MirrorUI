@@ -77,6 +77,7 @@ extension ViewMapping {
                 Text(context.propertyName)
                 TextField("Value", text: textBinding, onCommit: { commitEditText() })
                 Button {
+                    editText = nil
                     if ref.value.subtractingReportingOverflow(1).overflow == false {
                         ref.value -= 1
                     }
@@ -84,6 +85,7 @@ extension ViewMapping {
                     Image(systemName: "minus")
                 }
                 Button {
+                    editText = nil
                     if ref.value.addingReportingOverflow(1).overflow == false {
                         ref.value += 1
                     }
