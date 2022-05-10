@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,14 @@
 		678C305C25B350400060D708 /* MirrorUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC66525B3484B008F1378 /* MirrorUI.framework */; };
 		678C305D25B350400060D708 /* MirrorUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC66525B3484B008F1378 /* MirrorUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		678C306525B3528C0060D708 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC69125B34933008F1378 /* Settings.swift */; };
+		AA332BB4282A723A00A0DA4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA332BB3282A723A00A0DA4E /* AppDelegate.swift */; };
+		AA332BB6282A723A00A0DA4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA332BB5282A723A00A0DA4E /* ViewController.swift */; };
+		AA332BB9282A723A00A0DA4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA332BB7282A723A00A0DA4E /* Main.storyboard */; };
+		AA332BBB282A723B00A0DA4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA332BBA282A723B00A0DA4E /* Assets.xcassets */; };
+		AA332BBE282A723B00A0DA4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA332BBC282A723B00A0DA4E /* LaunchScreen.storyboard */; };
+		AA332BC4282A733800A0DA4E /* MirrorUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC66525B3484B008F1378 /* MirrorUI.framework */; platformFilter = ios; };
+		AA332BC5282A733800A0DA4E /* MirrorUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 676CC66525B3484B008F1378 /* MirrorUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AACDD47C282A96E100CCC654 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CC69125B34933008F1378 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +73,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA332BC6282A733800A0DA4E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AA332BC5282A733800A0DA4E /* MirrorUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +104,12 @@
 		678C305025B34EEA0060D708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		678C305225B34EEA0060D708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		678C305325B34EEA0060D708 /* MirrorUIExample_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MirrorUIExample_macOS.entitlements; sourceTree = "<group>"; };
+		AA332BB1282A723A00A0DA4E /* MirrorUIExample_tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MirrorUIExample_tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA332BB3282A723A00A0DA4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA332BB5282A723A00A0DA4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AA332BB8282A723A00A0DA4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AA332BBA282A723B00A0DA4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA332BBD282A723B00A0DA4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +129,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA332BAE282A723A00A0DA4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA332BC4282A733800A0DA4E /* MirrorUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -114,6 +147,7 @@
 				676CC69125B34933008F1378 /* Settings.swift */,
 				676CC64925B347E6008F1378 /* MirrorUIExample */,
 				678C304825B34EE80060D708 /* MirrorUIExample_macOS */,
+				AA332BB2282A723A00A0DA4E /* MirrorUIExample_tvOS */,
 				676CC64825B347E6008F1378 /* Products */,
 				676CC69425B34B17008F1378 /* Frameworks */,
 			);
@@ -124,6 +158,7 @@
 			children = (
 				676CC64725B347E6008F1378 /* MirrorUIExample.app */,
 				678C304725B34EE80060D708 /* MirrorUIExample_macOS.app */,
+				AA332BB1282A723A00A0DA4E /* MirrorUIExample_tvOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +206,18 @@
 			path = MirrorUIExample_macOS;
 			sourceTree = "<group>";
 		};
+		AA332BB2282A723A00A0DA4E /* MirrorUIExample_tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				AA332BB3282A723A00A0DA4E /* AppDelegate.swift */,
+				AA332BB5282A723A00A0DA4E /* ViewController.swift */,
+				AA332BB7282A723A00A0DA4E /* Main.storyboard */,
+				AA332BBA282A723B00A0DA4E /* Assets.xcassets */,
+				AA332BBC282A723B00A0DA4E /* LaunchScreen.storyboard */,
+			);
+			path = MirrorUIExample_tvOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -210,13 +257,31 @@
 			productReference = 678C304725B34EE80060D708 /* MirrorUIExample_macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AA332BB0282A723A00A0DA4E /* MirrorUIExample_tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA332BC3282A723B00A0DA4E /* Build configuration list for PBXNativeTarget "MirrorUIExample_tvOS" */;
+			buildPhases = (
+				AA332BAD282A723A00A0DA4E /* Sources */,
+				AA332BAE282A723A00A0DA4E /* Frameworks */,
+				AA332BAF282A723A00A0DA4E /* Resources */,
+				AA332BC6282A733800A0DA4E /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MirrorUIExample_tvOS;
+			productName = MirrorUIExample_tvOS;
+			productReference = AA332BB1282A723A00A0DA4E /* MirrorUIExample_tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		676CC63F25B347E6008F1378 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					676CC64625B347E6008F1378 = {
@@ -224,6 +289,9 @@
 					};
 					678C304625B34EE80060D708 = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					AA332BB0282A723A00A0DA4E = {
+						CreatedOnToolsVersion = 13.2.1;
 					};
 				};
 			};
@@ -248,6 +316,7 @@
 			targets = (
 				676CC64625B347E6008F1378 /* MirrorUIExample */,
 				678C304625B34EE80060D708 /* MirrorUIExample_macOS */,
+				AA332BB0282A723A00A0DA4E /* MirrorUIExample_tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -289,6 +358,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA332BAF282A723A00A0DA4E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA332BBE282A723B00A0DA4E /* LaunchScreen.storyboard in Resources */,
+				AA332BBB282A723B00A0DA4E /* Assets.xcassets in Resources */,
+				AA332BB9282A723A00A0DA4E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -310,6 +389,16 @@
 				678C306525B3528C0060D708 /* Settings.swift in Sources */,
 				678C304C25B34EE80060D708 /* ViewController.swift in Sources */,
 				678C304A25B34EE80060D708 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA332BAD282A723A00A0DA4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACDD47C282A96E100CCC654 /* Settings.swift in Sources */,
+				AA332BB6282A723A00A0DA4E /* ViewController.swift in Sources */,
+				AA332BB4282A723A00A0DA4E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +427,22 @@
 				678C305025B34EEA0060D708 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AA332BB7282A723A00A0DA4E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA332BB8282A723A00A0DA4E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AA332BBC282A723B00A0DA4E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA332BBD282A723B00A0DA4E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -545,6 +650,62 @@
 			};
 			name = Release;
 		};
+		AA332BBF282A723B00A0DA4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VAA3W4LPY2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stevebarnegren.MirrorUIExample-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.2;
+			};
+			name = Debug;
+		};
+		AA332BC0282A723B00A0DA4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VAA3W4LPY2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stevebarnegren.MirrorUIExample-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -571,6 +732,15 @@
 			buildConfigurations = (
 				678C305425B34EEA0060D708 /* Debug */,
 				678C305525B34EEA0060D708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA332BC3282A723B00A0DA4E /* Build configuration list for PBXNativeTarget "MirrorUIExample_tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA332BBF282A723B00A0DA4E /* Debug */,
+				AA332BC0282A723B00A0DA4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -76,7 +76,10 @@ fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: Vi
                                                                      numericBinding: Binding<T>,
                                                                      textBinder: NumericEntryBinder,
                                                                      range: ClosedRange<T>) -> some View where T.Stride: BinaryFloatingPoint {
-    
+
+    #if os(iOS) || os(macOS)
+    // On iOS and macOS, show the slider
+
     // State accessors
     let state = context.state
     var editing: Bool {
@@ -103,4 +106,16 @@ fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: Vi
     }
     
     return stack
+    #else
+    // On tvOS, just edit via a textfield
+    let stack = VStack(alignment: .leading) {
+        Text(context.propertyName)
+        HStack {
+            TextField("Value", text: textBinder.textBinding, onCommit: { textBinder.commit() })
+            Spacer()
+        }
+    }
+
+    return stack
+    #endif
 }

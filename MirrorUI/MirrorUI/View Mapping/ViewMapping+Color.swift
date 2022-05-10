@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+#if os(iOS) || os(macOS)
+
 extension ViewMapping {
 
     static let color: ViewMapping = {
@@ -22,3 +24,5 @@ extension ViewMapping {
         return mapping
     }()
 }
+
+#endif

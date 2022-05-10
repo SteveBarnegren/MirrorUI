@@ -96,7 +96,7 @@ extension ViewMapping {
         }.pickerStyle(MenuPickerStyle())
         return AnyView(picker)
         
-        #else
+        #elseif os(iOS)
         
         let picker = Picker(selection: selectionBinding, label: Text(ref.selectedCase.name)) {
             ForEach(0..<cases.count) { index in
@@ -112,6 +112,21 @@ extension ViewMapping {
         
         return AnyView(pickerAndTitle)
         
+        #else // tvOS
+
+        let picker = Picker(selection: selectionBinding, label: Text(ref.selectedCase.name)) {
+            ForEach(0..<cases.count) { index in
+                let aCase = cases[index]
+                Text("\(aCase.name)")
+            }
+        }
+
+        let pickerAndTitle = HStack {
+            Text(context.propertyName)
+            picker
+        }
+
+        return AnyView(pickerAndTitle)
         #endif
     }
 }
