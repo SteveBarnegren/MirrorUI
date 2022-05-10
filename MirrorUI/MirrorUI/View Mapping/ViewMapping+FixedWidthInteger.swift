@@ -71,27 +71,39 @@ extension ViewMapping {
                 }
                 editText = nil
             }
-            
+
+            // On tvOS, text input is shown modally, so we need to display the title on the
+            // modal screen. On iOS it's shown inline in the text field next to the title
+            // label, so we don't need to repeat it.
+            let textFieldTitle: String
+            #if os(tvOS)
+            textFieldTitle = context.propertyName
+            #else
+            textFieldTitle = "Value"
+            #endif
+
             // Create view
             return HStack {
                 Text(context.propertyName)
-                TextField("Value", text: textBinding, onCommit: { commitEditText() })
+                    .frame(maxHeight: .infinity)
+                TextField(textFieldTitle, text: textBinding, onCommit: { commitEditText() })
+                    .frame(maxHeight: .infinity)
                 Button {
                     editText = nil
                     if ref.value.subtractingReportingOverflow(1).overflow == false {
                         ref.value -= 1
                     }
                 } label: {
-                    Image(systemName: "minus")
-                }
+                    Image(systemName: "minus").frame(maxHeight: .infinity)
+                }.frame(maxHeight: .infinity)
                 Button {
                     editText = nil
                     if ref.value.addingReportingOverflow(1).overflow == false {
                         ref.value += 1
                     }
                 } label: {
-                    Image(systemName: "plus")
-                }
+                    Image(systemName: "plus").frame(maxHeight: .infinity)
+                }.frame(maxHeight: .infinity)
             }.asAnyView()
         }
     }

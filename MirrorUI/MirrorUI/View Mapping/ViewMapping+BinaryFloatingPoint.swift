@@ -65,10 +65,20 @@ extension ViewMapping {
 
 fileprivate func makeFloatingPointView(context: ViewMappingContext,
                                        binder: NumericEntryBinder) -> some View {
-    
+
+    // On tvOS, text input is shown modally, so we need to display the title on the
+    // modal screen. On iOS it's shown inline in the text field next to the title
+    // label, so we don't need to repeat it.
+    let textFieldTitle: String
+    #if os(tvOS)
+    textFieldTitle = context.propertyName
+    #else
+    textFieldTitle = "Value"
+    #endif
+
     return HStack {
         Text(context.propertyName)
-        TextField("Value", text: binder.textBinding, onCommit: { binder.commit() })
+        TextField(textFieldTitle, text: binder.textBinding, onCommit: { binder.commit() })
     }
 }
 
@@ -111,7 +121,7 @@ fileprivate func makeRangedFloatingPointView<T: BinaryFloatingPoint>(context: Vi
     let stack = VStack(alignment: .leading) {
         Text(context.propertyName)
         HStack {
-            TextField("Value", text: textBinder.textBinding, onCommit: { textBinder.commit() })
+            TextField(context.propertyName, text: textBinder.textBinding, onCommit: { textBinder.commit() })
             Spacer()
         }
     }
