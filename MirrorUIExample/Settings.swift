@@ -23,7 +23,9 @@ class Settings {
     @MirrorUI var startingHealth = CGFloat(4.6)
     @MirrorUI(range: 0...20) var damage = 5.3
     @MirrorUI var level = Level.low
+    #if os(iOS) || os(macOS)
     @MirrorUI var bgColor = Color.red
+    #endif
     @MirrorUI var startPoint = CGPoint(x: 3, y: 5)
     @MirrorUI var endPoint = CGPoint(x: 3, y: 5)
     @MirrorUI var box = CGRect(x: 0, y: 1, width: 2, height: 3)

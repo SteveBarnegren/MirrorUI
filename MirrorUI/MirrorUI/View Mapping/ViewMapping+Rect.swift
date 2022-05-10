@@ -105,9 +105,7 @@ extension ViewMapping {
                         TextField("h", text: hBinder.textBinding, onCommit: { hBinder.commit() }).frame(maxWidth: 100)
                     }
                 }
-
-
-            }
+            }.focusSection()
 
             return view.asAnyView()
         }

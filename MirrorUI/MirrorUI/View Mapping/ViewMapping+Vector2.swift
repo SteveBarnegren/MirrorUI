@@ -88,7 +88,7 @@ extension ViewMapping {
                 TextField(xName, text: xBinder.textBinding, onCommit: { xBinder.commit() }).frame(maxWidth: 100)
                 Text("\(yName):")
                 TextField(yName, text: yBinder.textBinding, onCommit: { yBinder.commit() }).frame(maxWidth: 100)
-            }
+            }.focusSection()
 
             return AnyView(view)
         }
