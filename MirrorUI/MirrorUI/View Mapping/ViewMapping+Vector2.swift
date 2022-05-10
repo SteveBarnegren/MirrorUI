@@ -99,11 +99,16 @@ extension ViewMapping {
                 Text("\(yName):")
                 TextField(makeTitle(component: yName), text: yBinder.textBinding, onCommit: { yBinder.commit() }).frame(maxWidth: 100)
             }
-            #if os(tvOS)
-                .focusSection()
-            #endif
 
-            return AnyView(view)
+            #if os(tvOS)
+            if #available(tvOS 15.0, *) {
+                return view.focusSection().asAnyView()
+            } else {
+                return view.asAnyView()
+            }
+            #else
+            return view.asAnyView()
+            #endif
         }
         return mapping
     }

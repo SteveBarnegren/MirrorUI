@@ -116,11 +116,16 @@ extension ViewMapping {
                     }
                 }
             }
-            #if os(tvOS)
-                .focusSection()
-            #endif
 
+            #if os(tvOS)
+            if #available(tvOS 15.0, *) {
+                return view.focusSection().asAnyView()
+            } else {
+                return view.asAnyView()
+            }
+            #else
             return view.asAnyView()
+            #endif
         }
         return mapping
     }()
