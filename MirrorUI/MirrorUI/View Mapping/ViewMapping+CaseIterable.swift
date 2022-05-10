@@ -114,20 +114,37 @@ extension ViewMapping {
         
         #else // tvOS
 
-        let picker = Picker(selection: selectionBinding, label: Text(ref.selectedCase.name)) {
-            ForEach(0..<cases.count) { index in
-                let aCase = cases[index]
-                Text("\(aCase.name)")
+        let view = HStack {
+            Text(context.propertyName)
+            NavigationLink("\(cases[ref.valueIndex].name)") {
+                self.makeSeparateScreenPicker(ref: ref, context: context)
             }
         }
 
-        let pickerAndTitle = HStack {
-            Text(context.propertyName)
-            picker
-        }
-
-        return AnyView(pickerAndTitle)
+        return view.asAnyView()
         #endif
     }
+
+    #if os(tvOS)
+    private static func makeSeparateScreenPicker(ref: CaseIterableRef, context: ViewMappingContext) -> some View {
+
+        let cases = ref.allCases
+
+        return List(Array(cases.enumerated()), id: \.element.name) { index, aCase in
+            HStack {
+                Button(aCase.name) {
+                    ref.valueIndex = index
+                }
+                if index == ref.valueIndex {
+                    Image(systemName: "checkmark").foregroundColor(.primary)
+                }
+            }
+
+        }
+        .navigationTitle(context.propertyName)
+        .navigationBarHidden(false)
+    }
+    #endif
 }
+
 

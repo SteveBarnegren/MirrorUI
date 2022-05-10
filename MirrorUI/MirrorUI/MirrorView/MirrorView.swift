@@ -71,18 +71,29 @@ public struct MirrorView: View {
     }
     
     public var body: some View {
-        
+        // tvOS pushes additional views for editing, so we need to wrap the body in a
+        // NavigationView
+        #if os(tvOS)
+            return  NavigationView {
+                makeBody()
+            }
+        #else
+            return makeBody()
+        #endif
+    }
+
+    private func makeBody() -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                
+
                 ForEach(objectProperties) { property -> AnyView in
-                    
+
                     self.makeControlView(
                         propertyName: property.name,
                         displayName: property.displayName,
                         state: property.viewStateStorage
                     )
-                    
+
                 }
                 Spacer()
             }.padding()
