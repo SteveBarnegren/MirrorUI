@@ -81,14 +81,27 @@ extension ViewMapping {
             let xBinder = NumericEntryBinder(state: state, ref: ref, fieldPath: xPath)
             let yBinder = NumericEntryBinder(state: state, ref: ref, fieldPath: yPath)
 
+            // tvOS shows editing screens modally, so we need the component name to also
+            // display in the modal.
+            func makeTitle(component: String) -> String {
+                #if os(tvOS)
+                return context.propertyName + "." + component
+                #else
+                return component
+                #endif
+            }
+
             let view = HStack {
                 Text(context.propertyName)
                 Spacer()
                 Text("\(xName):")
-                TextField(xName, text: xBinder.textBinding, onCommit: { xBinder.commit() }).frame(maxWidth: 100)
+                TextField(makeTitle(component: xName), text: xBinder.textBinding, onCommit: { xBinder.commit() }).frame(maxWidth: 100)
                 Text("\(yName):")
-                TextField(yName, text: yBinder.textBinding, onCommit: { yBinder.commit() }).frame(maxWidth: 100)
-            }.focusSection()
+                TextField(makeTitle(component: yName), text: yBinder.textBinding, onCommit: { yBinder.commit() }).frame(maxWidth: 100)
+            }
+            #if os(tvOS)
+                .focusSection()
+            #endif
 
             return AnyView(view)
         }

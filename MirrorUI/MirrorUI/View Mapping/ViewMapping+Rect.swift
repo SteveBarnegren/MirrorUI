@@ -88,24 +88,37 @@ extension ViewMapping {
                                              set: { ref.value.setHeight($0) },
                                              stateKey: "heightText")
 
+            // tvOS shows editing screens modally, so we need the component name to also
+            // display in the modal.
+            func makeTitle(component: String) -> String {
+                #if os(tvOS)
+                return context.propertyName + "." + component
+                #else
+                return component
+                #endif
+            }
+
             let view = HStack(alignment: .top) {
                 Text(context.propertyName)
                 Spacer()
                 VStack(spacing: 4) {
                     HStack {
                         Text("x: ")
-                        TextField("x", text: xBinder.textBinding, onCommit: { xBinder.commit() }).frame(maxWidth: 100)
+                        TextField(makeTitle(component: "x"), text: xBinder.textBinding, onCommit: { xBinder.commit() }).frame(maxWidth: 100)
                         Text("y: ")
-                        TextField("y", text: yBinder.textBinding, onCommit: { yBinder.commit() }).frame(maxWidth: 100)
+                        TextField(makeTitle(component: "y"), text: yBinder.textBinding, onCommit: { yBinder.commit() }).frame(maxWidth: 100)
                     }
                     HStack {
                         Text("w: ")
-                        TextField("w", text: wBinder.textBinding, onCommit: { wBinder.commit() }).frame(maxWidth: 100)
+                        TextField(makeTitle(component: "w"), text: wBinder.textBinding, onCommit: { wBinder.commit() }).frame(maxWidth: 100)
                         Text("h: ")
-                        TextField("h", text: hBinder.textBinding, onCommit: { hBinder.commit() }).frame(maxWidth: 100)
+                        TextField(makeTitle(component: "h"), text: hBinder.textBinding, onCommit: { hBinder.commit() }).frame(maxWidth: 100)
                     }
                 }
-            }.focusSection()
+            }
+            #if os(tvOS)
+                .focusSection()
+            #endif
 
             return view.asAnyView()
         }
