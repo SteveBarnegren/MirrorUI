@@ -89,7 +89,7 @@ Comparable types can be given minimum and maximum values:
 
 ```swift
 class Settings {
-  @MirrorUI var lives = true
+  @MirrorUI var lives = 10
 
   init() {
     $lives.min = 0
