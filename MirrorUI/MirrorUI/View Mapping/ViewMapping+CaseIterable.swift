@@ -118,7 +118,7 @@ extension ViewMapping {
             Text(context.propertyName)
             NavigationLink("\(cases[ref.valueIndex].name)") {
                 self.makeSeparateScreenPicker(ref: ref, context: context)
-            }
+            }.fixedSize(horizontal: true, vertical: false)
         }
 
         return view.asAnyView()
