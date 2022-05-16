@@ -12,6 +12,10 @@ Simply add the `@MirrorUI` property wrapper and MirrorUI will construct a UI for
 
 ![macOS](https://user-images.githubusercontent.com/6288713/109872686-a9aa0d80-7c64-11eb-84d4-2bea36bd6fdd.png)
 
+### tvOS:
+
+![tvOS](https://user-images.githubusercontent.com/6288713/168620598-887766a2-98e5-4473-87b9-a0f772b1b61c.png)
+
 ## Integration
 
 The easiest way to integrate MirrorUI into your project is through the Swift Package Manager.
