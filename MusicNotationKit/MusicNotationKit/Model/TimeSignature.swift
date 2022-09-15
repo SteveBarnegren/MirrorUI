@@ -36,7 +36,7 @@ public struct TimeSignature: Equatable {
         }
     }
     
-    init(value: Int, division: Int) {
+    public init(value: Int, division: Int) {
         
         guard division == 4 || division == 8 || division == 16 || division == 2 else {
             fatalError("Invalid time signature division: \(division)")
