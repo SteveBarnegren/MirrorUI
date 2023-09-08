@@ -65,7 +65,11 @@ To be able to present UI to edit a type, MirrorUI needs to have a 'mapping' to a
 
 *Enums must conform to `CaseIterable`. Enums that contain cases with associated values will require bespoke view mappings.
 
-## Callbacks
+## Observing changes
+
+If using `SwiftUI` or `Combine`, simply conform your object to `ObservableObject` and `MirrorUI` will publish changes for `@MirrorUI` properties in the same way that `@Published` does.
+
+## Change callbacks
 
 Properties using the `@MirrorUI` property wrapper will not trigger callbacks through property observers such as `didSet`.
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ObjectProperty: Identifiable {
     var id: String { name }
@@ -40,8 +41,13 @@ public struct MirrorView: View {
                 reloadTrigger.reload()
             }
             if let didSetCaller = property.objectRef as? InternalDidSetCaller {
-                didSetCaller.internalDidSet = {
+                didSetCaller.internalDidSet = { [weak object] in
                     reloadTrigger.reload()
+
+                    /// If the passed object is an ObservableObject, call send() on the publisher when values are updated.
+                    if let observableObject = object as? (any ObservableObject) {
+                        (observableObject.objectWillChange as any Publisher as? ObservableObjectPublisher)?.send()
+                    }
                 }
             }
         }
