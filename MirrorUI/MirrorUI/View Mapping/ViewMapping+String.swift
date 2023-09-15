@@ -12,25 +12,29 @@ extension ViewMapping {
 
     static let string: ViewMapping = {
         let mapping = ViewMapping(for: String.self) { ref, context in
-
-            var partial: String {
-                get { context.state.value["text"] as? String ?? ref.value }
-                set { context.state.value["text"] = newValue }
-            }
-
-            let binding = Binding(get: { partial },
-                                  set: { partial = $0 })
-
-            let view = HStack {
-                Text("\(context.propertyName):")
-                TextField(context.propertyName, text: binding, onCommit: {
-                    ref.value = partial
-                    context.state.value["text"] = nil
-                })
-            }
-
-            return AnyView(view)
+            return AnyView(StringEditView(ref: ref, context: context))
         }
         return mapping
     }()
+}
+
+private struct StringEditView: View {
+
+    private let ref: PropertyRef<String>
+    private let context: ViewMappingContext
+    @State private var text: String
+
+    init(ref: PropertyRef<String>, context: ViewMappingContext) {
+        self.ref = ref
+        self.context = context
+        self.text = ref.value
+    }
+
+    @ViewBuilder
+    var body: some View {
+        Text("\(context.propertyName):")
+        TextField(context.propertyName, text: $text, onCommit: {
+            ref.value = text
+        })
+    }
 }
